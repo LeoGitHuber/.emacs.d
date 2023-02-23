@@ -1,13 +1,17 @@
 #TITLE: Emacs Configuration File
 #+STARTUP: OVERVIEW
 * Basic Setting
+
 #+begin_src emacs-lisp
   ;; -*- lexical-binding: t; -*-
+  (require 'benchmark-init)
+  (add-hook 'after-init-hook 'benchmark-init/deactivate)
+
   (let ((normal-gc-cons-threshold (* 32 1024 1024))
-	(init-gc-cons-threshold (* 256 1024 1024)))
-  (progn (setq gc-cons-threshold init-gc-cons-threshold)
-  (add-hook 'emacs-startup-hook
-		(lambda () (setq gc-cons-threshold normal-gc-cons-threshold)))))
+		(init-gc-cons-threshold (* 256 1024 1024)))
+	;; (progn (setq gc-cons-threshold init-gc-cons-threshold)
+	(add-hook 'emacs-startup-hook
+			  (lambda () (setq gc-cons-threshold normal-gc-cons-threshold))))
 
   ;; (setq frame-title-format
   ;; 	  '((:eval (if (buffer-file-name)
@@ -22,138 +26,248 @@
   (setq confirm-kill-processes t)  ; 退出自动杀线程
 
   (setq inhibit-compacting-font-caches t)
-  (setq scroll-step 1
-		scroll-conservatively 10000)
+
+  (setq scroll-step 1)
+  ;; scroll-conservatively 10000)
 
   (prefer-coding-system 'utf-8)
-  (electric-pair-mode 1)
+
+  (add-hook 'after-init-hook 'electric-pair-mode)
+  (setq electric-pair-inhibit-predicate 'electric-pair-conservative-inhibit)
+
   (pixel-scroll-precision-mode 1)
-  (display-time-mode 1)
-  (setq display-time-day-and-date t)
+
+  ;; (display-time-mode 1)
+  ;; (setq display-time-day-and-date t)
+
+  (setq show-paren-when-point-inside-paren t
+		show-paren-when-point-in-periphery t
+		show-paren-context-when-offscreen 'child-frame)
+
+  (add-hook 'after-init-hook 'delete-selection-mode)
 
   ;; (setq make-backup-files nil)			; 设置是否生成备份文件，例如 configuration.org~
 
   (recentf-mode t)
-  (setq recentf-max-menu-items 10)
-
-  (global-set-key (kbd "C-x b") 'consult-buffer)
+  (setq recentf-max-menu-items 5)
 
   (setq-default tab-width 4)
-  (setq ring-bell-function 'ignore)
+
+  (setq ring-bell-function 'ignore
+		indent-tabs-mode nil
+		isearch-lazy-count t)
 
   (setq garbage-collection-messages t)
   (defvar k-gc-timer
 	(run-with-idle-timer 15 t 'garbage-collect))
 
-  (dolist (mode '(text-mode-hook
-	prog-mode-hook
-	conf-mode-hook))
-  (add-hook mode (lambda () (display-line-numbers-mode 1))))
+  (dolist (mode '(prog-mode-hook tex-mode))
+	(add-hook mode (lambda () (display-line-numbers-mode 1))))
 
   (require 'package)
   (add-to-list 'package-archives '("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/") t)
   (add-to-list 'package-archives '("elpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/") t)
   (add-to-list 'package-archives '("non-elpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/nongnu/") t)
   (add-to-list 'package-archives '("melpa-stable" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/stable-melpa/") t)
-  (add-to-list 'package-archives '("org" . "http://mirrors.tuan.tsinghua.edu.cn/elpa/org"))
+  ;; (add-to-list 'package-archives '("melpa-en" . "http://melpa.org/packages") t)
+  (add-to-list 'package-archives '("org" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/org"))
   (package-initialize)
 
-  (global-set-key (kbd "C-x C-r") 'restart-emacs)
+  (keymap-global-set "C-x C-r" 'restart-emacs)
 
   ;; (setq desktop-path (list user-emacs-directory)
   ;; 	desktop-auto-save-timeout 600)
   ;; (desktop-save-mode 1)
 #+end_src
 
-* UI
-#+begin_src emacs-lisp
-  (when (display-graphic-p)
-	  (set-face-attribute
-	  'default nil
-	  :font (font-spec :name "Input Mono"
-			  :weight 'normal
-			  :slant 'normal
-			  :size 12.0))
-	  (dolist (charset '(kana han cjk-misc bopomofo))
-	  (set-fontset-font
-	  (frame-parameter nil 'font)
-	  charset
-	  (font-spec :name "Source Han Sans SC" :height 100))))
-
-  ;; (when (display-graphic-p)
-	  ;; (set-face-attribute
-	  ;; 'default nil
-	  ;; :font (font-spec :name "Iosevka Fixed"
-			  ;; :weight 'normal
-			  ;; :slant 'normal
-			  ;; :size 13.0))
-	  ;; (dolist (charset '(kana han cjk-misc bopomofo))
-	  ;; (set-fontset-font
-	  ;; (frame-parameter nil 'font)
-	  ;; charset
-	  ;; (font-spec :name "Source Han Sans SC" :height 100))))
-
-  ;; (add-to-list 'load-path "~/.emacs.d/site-lisp/awesome-tab")
-  ;; (require 'awesome-tab)
-  ;; (awesome-tab-mode t)
-
-  (add-to-list 'load-path "~/.emacs.d/site-lisp/sort-tab")
-  (require 'sort-tab)
-  (sort-tab-mode t)
-
-  (require 'all-the-icons)
-
-  ;; (doom-modeline-mode 1)
-  (add-hook 'after-init-hook #'doom-modeline-mode)
-  (setq doom-modeline-height 1)
-	;; (defun +win-num ()
-	;; (let ((n (window-numbering-get-number)))
-	;; 	  (alist-get
-	;; 	  n
-	;; 	  '((0 . "🄌")
-	;; 	  (1 . "❶")
-	;; 	  (2 . "❷")
-	;; 	  (3 . "❸")
-	;; 	  (4 . "❹")
-	;; 	  (5 . "❺")
-	;; 	  (6 . "❻")
-	;; 	  (7 . "❼")
-	;; 	  (8 . "❽")
-	;; 	  (9 . "❾")))))
-
-	;; (defun +format-mode-line ()
-	;; (let* ((lhs '((:eval (when (bound-and-true-p window-numbering-mode) (concat " " (+win-num))))
-	;; 				  (:eval (when (fboundp 'rime-lighter) (rime-lighter)))
-	;; 				  (:eval (when (bound-and-true-p meow-mode) (meow-indicator)))
-	;; 				  (:eval " L%l C%C")
-	;; 				  (:eval (when (bound-and-true-p flycheck-mode) flycheck-mode-line))
-	;; 				  (:eval (when (bound-and-true-p flymake-mode) flymake-mode-line-format))))
-	;; 		  (rhs '((:eval (+smart-file-name-cached))
-	;; 				  " "
-	;; 				  (:eval mode-name)))
-	;; 		  (ww (window-width))
-	;; 		  (lhs-str (format-mode-line lhs))
-	;; 		  (rhs-str (format-mode-line rhs))
-	;; 		  (rhs-w (string-width rhs-str)))
-	;; 	  (format "%s%s%s"
-	;; 			  lhs-str
-	;; 			  (propertize " " 'display `((space :align-to (- (+ right right-fringe right-margin) (+ 1 ,rhs-w)))))
-	;; 			  rhs-str)))
-
-	;; (setq-default mode-line-format '((:eval (+format-mode-line))))
-	;; (setq-default header-line-format nil)
-#+end_src
-
-* Minibuffer Setting
-#+begin_src emacs-lisp
-  ;;(ivy-mode 1)
-  (vertico-mode t)
-  (setq-default completion-styles '(orderless))
-  (marginalia-mode t)
-#+end_src
-
 * Efficiency
+
 #+begin_src emacs-lisp
+  (electric-indent-mode -1)
+  (follow-mode 1)
+
+  ;; (global-aggressive-indent-mode t)
+  (add-hook 'prog-mode-hook #'aggressive-indent-mode)
+
+  ;; (global-set-key [remap kill-ring-save] 'easy-kill)
+  ;; (global-set-key [remap mark-sexp] 'easy-mark)
+
+  (add-hook 'prog-mode-hook #'puni-mode)
+  (add-hook 'term-mode-hook #'puni-disable-puni-mode)
+
+  (keymap-global-set "C-c k" 'browse-kill-ring)
+  (add-hook 'after-init-hook 'browse-kill-ring-default-keybindings)
+  (with-eval-after-load 'browse-kill-ring (setq browse-kill-ring-separator "------------------------------"
+												browse-kill-ring-separator-face 'shadow))
+
+  (add-hook 'prog-mode-hook 'hs-minor-mode)
+
+  (keymap-set minibuffer-mode-map "C-w" 'backward-kill-word)
+
+  ;; 这里额外启用了 :box t 属性使得提示更加明显
+  (defconst hideshow-folded-face '(:inherit font-lock-comment-face :box t))
+
+  (defun hideshow-folded-overlay-fn (ov)
+	(when (eq 'code (overlay-get ov 'hs))
+	  (let* ((nlines (count-lines (overlay-start ov) (overlay-end ov)))
+			 (info (format " ... #%d " nlines)))
+		(overlay-put ov 'display (propertize info 'face hideshow-folded-face)))))
+
+  (setq hs-set-up-overlay 'hideshow-folded-overlay-fn)
+
+  ;; (require 'avy)
+  (avy-setup-default)
+
+  (defhydra hydra-avy (global-map "M-g" :exit t :hint nil)
+	"
+   Line^^       Region^^        Goto
+  ----------------------------------------------------------
+   [_y_] yank   [_Y_] yank      [_c_] timed char  [_C_] char
+   [_m_] move   [_M_] move      [_w_] word        [_W_] any word
+   [_k_] kill   [_K_] kill      [_l_] line        [_L_] end of line"
+	("c" avy-goto-char-timer)
+	("C" avy-goto-char)
+	("w" avy-goto-word-1)
+	("W" avy-goto-word-0)
+	("l" avy-goto-line)
+	("L" avy-goto-end-of-line)
+	("m" avy-move-line)
+	("M" avy-move-region)
+	("k" avy-kill-whole-line)
+	("K" avy-kill-region)
+	("y" avy-copy-line)
+	("Y" avy-copy-region))
+
+  (defhydra hydra-zoom (global-map "<f2>")
+	"zoom"
+	("g" text-scale-increase "in")
+	("l" text-scale-decrease "out")
+	("q" nil "quit"))
+
+  (defhydra hydra-eMove ()
+	"
+   Line^^           char^^              word^^		          Page^^
+  ---------------------------------------------------------------------
+   [_j_] next       [_l_] forward       [_F_] Forward         [_v_] up
+   [_k_] previous   [_h_] backward      [_B_] Backward        [_V_] down
+   "
+	("j" next-line nil)
+	("k" previous-line nil)
+	("v" scroll-up nil)
+	("V" scroll-down nil)
+	("l" forward-char nil)
+	("h" backward-char nil)
+	("F" forward-word nil)
+	("B" backward-word nil)
+	("q" nil "quit")
+	)
+
+  (keymap-global-set "C-M-;" 'hydra-eMove/body)
+
+  (require 'rect)
+
+  (defhydra hydra-rectangle (:body-pre (rectangle-mark-mode 1)
+									   :color pink
+									   :post (deactivate-mark))
+	"
+	^_k_^     _d_elete    _s_tring
+  _h_   _l_   _o_k        _y_ank
+	^_j_^     _n_ew-copy  _r_eset
+  ^^^^        _e_xchange  _u_ndo
+  ^^^^        ^ ^         _p_aste
+  "
+	("h" rectangle-backward-char nil)
+	("l" rectangle-forward-char nil)
+	("k" rectangle-previous-line nil)
+	("j" rectangle-next-line nil)
+	("e" hydra-ex-point-mark nil)
+	("n" copy-rectangle-as-kill nil)
+	("d" delete-rectangle nil)
+	("r" (if (region-active-p)
+			 (deactivate-mark)
+		   (rectangle-mark-mode 1)) nil)
+	("y" yank-rectangle nil)
+	("u" undo nil)
+	("s" string-rectangle nil)
+	("p" kill-rectangle nil)
+	("o" nil nil))
+
+  (keymap-global-set "C-x SPC" 'hydra-rectangle/body)
+
+  (with-eval-after-load 'avy
+	(keymap-set isearch-mode-map "M-j" 'avy-isearch)
+	(keymap-global-set "C-'" 'avy-goto-char-in-line)
+	;; (global-set-key (kbd "C-:") 'avy-goto-char)
+	;; (global-set-key (kbd "M-g c") 'avy-goto-char-timer)
+	;; (global-set-key (kbd "M-g w") 'avy-goto-word-1)
+	;; (global-set-key (kbd "M-g e") 'avy-goto-word-0)
+	;; (global-set-key (kbd "M-g f") 'avy-goto-line)
+	;; (global-set-key (kbd "C-c C-j") 'avy-resume)
+	)
+
+  ;; (require 'expand-region)
+  ;; (with-eval-after-load 'expand-region (global-set-key (kbd "C-=") 'er/expand-region))
+
+
+  ;; (require 'multiple-cursors)
+  (with-eval-after-load 'multiple-cursors
+	(keymap-global-set "C-S-c C-S-c" 'mc/edit-lines)
+	(keymap-global-set "C->" 'mc/mark-next-like-this)
+	(keymap-set mc/keymap (kbd "<return>") nil)
+	)
+
+  (global-set-key [remap move-beginning-of-line] 'mwim-beginning-of-code-or-line)
+  (global-set-key [remap move-end-of-line] 'mwim-end-of-code-or-line)
+
+  (require 'emacsql-sqlite-builtin)
+
+  (flycheck-define-checker c/c++-gcc
+	"A C/C++ syntax checker using GCC.
+
+	Requires GCC 4.4 or newer.  See URL `https://gcc.gnu.org/'."
+	:command ("gcc"
+			  "-fshow-column"
+			  "-iquote" (eval (flycheck-c/c++-quoted-include-directory))
+			  (option "-std=" flycheck-gcc-language-standard concat)
+			  (option-flag "-pedantic" flycheck-gcc-pedantic)
+			  (option-flag "-pedantic-errors" flycheck-gcc-pedantic-errors)
+			  (option-flag "-fno-exceptions" flycheck-gcc-no-exceptions)
+			  (option-flag "-fno-rtti" flycheck-gcc-no-rtti)
+			  (option-flag "-fopenmp" flycheck-gcc-openmp)
+			  (option-list "-include" flycheck-gcc-includes)
+			  (option-list "-W" flycheck-gcc-warnings concat)
+			  (option-list "-D" flycheck-gcc-definitions concat)
+			  (option-list "-I" flycheck-gcc-include-path)
+			  (eval flycheck-gcc-args)
+			  "-x" (eval
+					(pcase major-mode
+					  (`c-mode "c")
+					  (`c++-mode "c++")
+					  (`c-ts-mode "c")
+					  (`c++-ts-mode "c++")))
+			  ;; GCC performs full checking only when actually compiling, so
+			  ;; `-fsyntax-only' is not enough. Just let it generate assembly
+			  ;; code.
+			  "-S" "-o" null-device
+			  ;; Read from standard input
+			  "-")
+	:standard-input t
+	:error-patterns
+	((info line-start (or "<stdin>" (file-name))
+		   ":" line (optional ":" column)
+		   ": note: " (message) line-end)
+	 (warning line-start (or "<stdin>" (file-name))
+			  ":" line (optional ":" column)
+			  ": warning: " (message (one-or-more (not (any "\n["))))
+			  (optional "[" (id (one-or-more not-newline)) "]") line-end)
+	 (error line-start (or "<stdin>" (file-name))
+			":" line (optional ":" column)
+			": " (or "fatal error" "error") ": " (message) line-end))
+	:modes (c-mode c++-mode c-ts-mode c++-ts-mode)
+	:next-checkers ((warning . c/c++-cppcheck)))
+
+  (add-hook 'after-init-hook 'global-flycheck-mode)
+
   (add-to-list 'treesit-extra-load-path "/usr/local/lib")
 
   (c-add-style "microsoft"
@@ -166,34 +280,27 @@
 				  (arglist-cont-nonempty . +)
 				  (template-args-cont . +))))
 
-  ;; (c-add-style "c-style"
-  ;; 		   '("stroustrup"
-  ;; 			(indent-tabs-mode . nil)
-  ;; 			(c-basic-offset . 4)
-  ;; 			(c-offsets-alist
-  ;; 			(innamespace . -))
-  ;; 			))
-
   (add-to-list 'c-default-style '(c-ts-mode . "stroustrup"))
   (add-to-list 'c-default-style '(c-mode . "stroustrup"))
   (add-to-list 'c-default-style '(c++-mode . "stroustrup"))
   (add-to-list 'c-default-style '(c++-ts-mode . "stroustrup"))
 
-  ;; (when (treesit-available-p)
-	;; (setq major-mode-remap-alist
-		  ;; '((c-mode          . c-ts-mode)
-			;; (c++-mode        . c++-ts-mode)
-			;; (conf-toml-mode  . toml-ts-mode)
-			;; (csharp-mode     . csharp-ts-mode)
-			;; (css-mode        . css-ts-mode)
-			;; (java-mode       . java-ts-mode)
-			;; (js-mode         . js-ts-mode)
-			;; (javascript-mode . js-ts-mode)
-			;; (js-json-mode    . json-ts-mode)
-			;; (python-mode     . python-ts-mode)
-			;; (ruby-mode       . ruby-ts-mode)
-			;; (sh-mode         . bash-ts-mode))))
+  (when (treesit-available-p)
+	(setq major-mode-remap-alist
+		  '((c-mode          . c-ts-mode)
+			(c++-mode        . c++-ts-mode)
+			(conf-toml-mode  . toml-ts-mode)
+			(csharp-mode     . csharp-ts-mode)
+			(css-mode        . css-ts-mode)
+			(java-mode       . java-ts-mode)
+			(js-mode         . js-ts-mode)
+			(javascript-mode . js-ts-mode)
+			(js-json-mode    . json-ts-mode)
+			(python-mode     . python-ts-mode)
+			(ruby-mode       . ruby-ts-mode)
+			(sh-mode         . bash-ts-mode))))
 
+  (add-hook 'c-ts-mode-hook (lambda () (setq c-ts-mode-indent-offset 4)))
 
   (defun insert-tab-char()
 	"insert a tab char. (ASCII 9, \t)"
@@ -204,63 +311,224 @@
 							   (fset 'yes-or-no-p 'y-or-n-p)
 							   (savehist-mode t)
 							   (save-place-mode t)))
-  ;; (require 'savehist)
-  ;; (require 'saveplace)
-  ;; (save-place-mode t)
 
-  (evil-mode t)
+  (setq history-delete-duplicates t)
+
+  ;; (evil-mode t)
   (with-eval-after-load 'evil
 	(evil-set-undo-system 'undo-redo)
 	(setq-default evil-want-abbrev-expand-on-insert-exit nil)
 	(setq-default evil-want-keybinding nil)
-	(evil-define-key 'normal org-mode-map (kbd "TAB") 'org-cycle)
 	(evil-define-key 'normal sort-tab-mode-map (kbd "[ b") 'sort-tab-select-prev-tab)
 	(evil-define-key 'normal sort-tab-mode-map (kbd "] b") 'sort-tab-select-next-tab)
 	(evil-define-key 'normal sort-tab-mode-map (kbd "[ B") 'sort-tab-select-first-tab)
 	(evil-define-key 'normal sort-tab-mode-map (kbd "] B") 'sort-tab-select-last-tab)
 	(require 'evil-nerd-commenter)
-	(global-set-key "\M-/" 'evilnc-comment-or-uncomment-lines)
-	(evil-global-set-key 'insert (kbd "TAB") 'insert-tab-char))
+	(keymap-global-set "M-/" 'evilnc-comment-or-uncomment-lines)
+	;; (evil-define-key 'insert 'prog-mode-map (kbd "TAB") 'insert-tab-char)
+	(evil-define-key '(insert normal) org-mode-map (kbd "TAB") 'org-cycle)	
+	(require 'evil-nerd-commenter))
 
-  ;; (require 'evil-nerd-commenter)
 
+  (keymap-global-set "M-'" 'help-command)
+  (keymap-global-set "C-h" 'delete-backward-char)
 
-  ;; (evil-global-set-key 'insert "\M-?" 'help-command)
-  ;; (evil-global-set-key 'insert "\C-h" 'delete-backward-char)
-  (global-set-key (kbd "C-;") 'help-command)
-  (global-set-key "\C-h" 'delete-backward-char)
+  ;; (dirvish-override-dired-mode)
 
-  (dirvish-override-dired-mode)
-
-  (require 'which-key)
-  (which-key-mode 1)
+  ;; (require 'which-key)
+  ;; (which-key-mode 1)
 
   (require 'consult)
-  (global-set-key (kbd "C-s") 'consult-line)
+  (keymap-global-set "C-s" 'consult-line)
+  (keymap-global-set "C-x b" 'consult-buffer)
+  (consult-customize
+   consult-buffer
+   :preview-key '(:debounce 0.4 "M-."))
+
+  (require 'orderless)
+
 #+end_src
 
-* Coding Related
+* Theme
+
 #+begin_src emacs-lisp
-  ;; (require 'yasnippet)
-  ;; (yas-global-mode 1)
+  ;;; Code:
 
-  (add-to-list 'load-path "/home/leo/.emacs.d/lsp-bridge")
-  (require 'lsp-bridge)
-  (require 'orderless)
-   (load "/home/leo/.emacs.d/lsp-bridge/lsp-bridge")
-   (setq lsp-bridge-enable-profile t)
-   ;; (setq acm-enable-tabnine nil)
+  (add-hook 'prog-mode-hook #'rainbow-mode)
+  (add-hook 'text-mode-hook #'rainbow-mode)
 
-  ;; (when (treesit-available-p)
-    ;; (let ((lsp-bridge-temp-list lsp-bridge-default-mode-hooks))
-  	;; (dolist (hook lsp-bridge-temp-list)
-  	  ;; (add-to-list 'lsp-bridge-default-mode-hooks (intern (string-replace "mode" "ts-mode" (symbol-name hook)))))))
+  (setq custom-safe-themes t)
 
-  (add-hook 'lsp-bridge-mode-hook '(lambda () (yas/minor-mode t)))
-  (setq lsp-bridge-c-lsp-server "ccls")
-  (global-lsp-bridge-mode)
-  (evil-define-key 'insert lsp-bridge-mode-map (kbd "C-n") #'acm-select-next)
-  (evil-define-key 'insert lsp-bridge-mode-map (kbd "C-p") #'acm-select-prev)
+  (add-to-list 'load-path "~/.emacs.d/site-lisp/doom-themes")
+
+
+  (defvar themes_chosen
+	'(doom-gruvbox-light doom-gruvbox)
+	"Set for themes for dark and light mode")
+
+
+  (if (>= (string-to-number (substring (current-time-string) 11 13)) 16)
+	  ;; (load-theme 'modus-vivendi t)
+	  ;; (load-theme 'modus-operandi t)
+	  (load-theme (car (cdr themes_chosen)) t)
+	(load-theme (car themes_chosen) t)
+	)
+
+  ;; (require 'color-theme-sanityinc-tomorrow)
+  ;; (color-theme-sanityinc-tomorrow-bright)
+  ;; (color-theme-sanityinc-tomorrow-bright)
+
+
+  (add-to-list 'custom-theme-load-path "~/.emacs.d/site-lisp/third-party-themes")
+  ;; (load-theme 'paperlike t)
+
+#+end_src
+
+* Minibuffer Setting
+
+#+begin_src emacs-lisp
+  ;;(ivy-mode 1)
+  (vertico-mode t)
+  (setq-default completion-styles '(orderless basic))
+  (marginalia-mode t)
+#+end_src
+
+* Windows Control
+
+#+begin_src emacs-lisp
+
+
+
+
+#+end_src
+
+* Emacs-Chinese
+
+#+begin_src emacs-lisp
+  (add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-chinese-word-segmentation")
+  (setq cns-prog "~/.emacs.d/site-lisp/emacs-chinese-word-segmentation/cnws")
+  (setq cns-dict-directory "~/.emacs.d/site-lisp/emacs-chinese-word-segmentation/cppjieba/dict")
+  ;; To use other program for word segmentation, set cns-process-shell-command:
+  ;; (setq cns-process-shell-command "word_segmentation_program arg1 arg2...")
+  (setq cns-debug nil) ; disable debug output, default is t
+  (require 'cns)
+  (when (featurep 'cns)
+	(add-hook 'find-file-hook 'cns-auto-enable))
+  (global-cns-mode)
+#+end_src
+
+* Coding Relpated
+
+#+begin_src emacs-lisp
+  ;;; Code:
+
+  (with-eval-after-load 'lsp-bridge
+	(when (treesit-available-p)
+	  (let ((lsp-bridge-temp-list lsp-bridge-default-mode-hooks))
+		(dolist (hook lsp-bridge-temp-list)
+		  (add-to-list 'lsp-bridge-default-mode-hooks (intern (string-replace "mode" "ts-mode" (symbol-name hook))))))))
+
+  (add-hook 'lsp-bridge-mode-hook '(lambda ()
+									 (yas/minor-mode t)
+									 (setq lsp-bridge-enable-diagnostics nil)
+									 (setq lsp-bridge-c-lsp-server "ccls")
+									 (setq acm-backend-lsp-candidate-min-length 3)
+									 ;; (evil-define-key 'insert lsp-bridge-mode-map (kbd "C-n") #'acm-select-next)
+									 ;; (evil-define-key 'insert lsp-bridge-mode-map (kbd "C-p") #'acm-select-prev)
+									 ))
+
+  (require 'lsp-mode)
+
+  (add-hook 'prog-mode-hook '(lambda ()
+							   (unless (derived-mode-p 'emacs-lisp-mode 'lisp-mode 'makefile-mode 'snippet-mode)
+								 (lsp-deferred))))
+
+  (add-hook 'prog-mode-hook 'yas-minor-mode)
+
+  (dolist (hook '(markdown-mode-hook yaml-ts-mode yaml-mode))
+	(add-hook 'hook #'lsp-deferred))
+
+  (keymap-set lsp-mode-map "C-c C-d" #'lsp-describe-thing-at-point)
+
+  (with-eval-after-load 'lsp-mode (setq lsp-keymap-prefix "C-c l"
+										;; lsp-keep-workspace-alive nil
+										;; lsp-signature-auto-activate nil
+										lsp-modeline-code-actions-enable nil
+										lsp-modeline-diagnostics-enable nil
+										lsp-modeline-workspace-status-enable nil
+										lsp-headerline-breadcrumb-enable t
+
+										lsp-semantic-tokens-enable t
+										;; lsp-progress-spinner-type 'progress-bar-filled
+
+										lsp-enable-file-watchers nil
+										lsp-enable-folding nil
+										lsp-enable-symbol-highlighting nil
+										lsp-enable-text-document-color nil
+
+										lsp-enable-indentation nil
+										lsp-enable-on-type-formatting nil
+
+										;; For diagnostics
+										;; lsp-diagnostics-disabled-modes '(markdown-mode gfm-mode)
+
+										;; Reference Lens
+										lsp-lens-enable nil
+
+										;; ui
+										lsp-ui-doc-show-with-cursor nil
+										)
+						)
+
+  (add-hook 'lsp-mode-hook #'(lambda ()
+							 (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
+							 (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
+
+							 ;; For diagnostics
+							 (lsp-diagnostics-mode -1)
+							 ))
+
+
+
+  (let ((hls '(emacs-lisp-mode-hook lisp-mode-hook)))
+	(dolist (mode hls)
+	  (add-hook mode #'company-mode))
+	)
+
+
+  (add-hook 'company-mode-hook
+			(lambda ()
+			  (setq company-tooltip-align-annotations t
+					company-tooltip-limit 12
+					company-idle-delay 0
+					company-echo-delay (if (display-graphic-p) nil 0)
+					company-minimum-prefix-length 1
+					company-icon-margin 3
+					company-require-match nil
+					company-dabbrev-ignore-case nil
+					company-dabbrev-downcase nil
+					company-global-modes '(not erc-mode message-mode help-mode
+											   gud-mode eshell-mode shell-mode)
+					company-backends '((company-capf :with company-yasnippet)
+									   (company-dabbrev-code company-keywords company-files)
+									   company-dabbrev))
+
+			  (define-key company-active-map (kbd "C-h") 'delete-backward-char)
+			  (define-key company-active-map (kbd "<tab>") 'company-complete-selection)
+			  ;; (setq company-box-icons-alist 'company-box-icons-idea)
+			  (setq company-box-scrollbar 'inherit)
+			  (company-box-mode t)
+			  )
+			)
+
+  ;; (add-to-list 'load-path "/home/leo/.emacs.d/site-lisp/lsp-bridge")
+  ;; (require 'lsp-bridge)
+
+  ;; (add-hook 'emacs-lisp-mode-hook '(lambda () (lsp-bridge-mode)))
+
+  ;; (setq lsp-bridge-enable-profile t)
+
+  ;; (setq acm-enable-tabnine nil)
 
   ;; (setq acm-candidate-match-function 'orderless-flex
   ;; 	  acm-enable-icon t
@@ -276,41 +544,72 @@
   ;; 	  lsp-bridge-enable-diagnostics t
   ;; 	  lsp-bridge-complete-manually nil
   ;; 	  lsp-bridge-multi-lang-server-mode-list nil)
+
 #+end_src
 
-* Pyim
+* Input Method
+
 #+begin_src emacs-lisp
   (require 'posframe)
-  (require 'pyim-wbdict)
-  (require 'pyim)
-  (setq default-input-method "pyim")
-  (setq pyim-page-length 7)
-  (setq pyim-page-posframe-border-width 3)
-  (pyim-default-scheme 'wubi)
-  (setq pyim-page-tooltip 'posframe)
-  (if (string-equal (symbol-name (car custom-enabled-themes)) "modus-operandi")
-	  (progn
-		(set-face-attribute 'pyim-page nil :inherit 'default :background "#EEE1B3" :foreground "#000000")
-		(set-face-attribute 'pyim-page-border nil :inherit 'pyim-page :background "#000000"))
-	(set-face-attribute 'pyim-page-border nil :inherit 'pyim-page :background "#D7DCC8"))
 
+  (require 'rime)
+  (setq default-input-method "rime"
+		rime-show-candidate 'posframe
+		rime-show-preedit 't
+		rime-translate-keybindings '("C-f" "C-b" "C-n" "C-p" "C-g" "<left>" "<right>" "<up>" "<down>" "<prior>" "<next>" "<delete>")
+		rime-posframe-properties
+		(list :font "Sarasa UI SC"
+			  :background-color "#333333"
+			  :internal-border-width 10)
+		rime-disable-predicates
+		'(;; rime-predicate-evil-mode-p
+		  rime-predicate-space-after-cc-p
+		  rime-predicate-current-uppercase-letter-p
+		  rime-predicate-after-alphabet-char-p
+		  rime-predicate-prog-in-code-p
+		  rime-predicate-tex-math-or-command-p)
+		rime-deactivate-when-exit-minibuffer nil)
+  (with-eval-after-load 'rime (define-key rime-mode-map (kbd "C-`" ) 'rime-send-keybinding)
+						;; (define-key rime-mode-map (kbd "Shift") 'rime-send-keybinding)
+						(define-key rime-mode-map (kbd "M-j") 'rime-inline-ascii)
+						(setq rime-inline-ascii-trigger 'shift-l)
+						;; (set-face-attribute 'rime-comment-face nil :foreground "#dcdccc")
+						)
+
+  (keymap-global-set "C-\\" 'rime-commit-and-toggle-input-method)
+
+  
+
+
+  ;; (require 'pyim-wbdict)
+  ;; (require 'pyim)
+  ;; (setq default-input-method "pyim")
+  ;; (setq pyim-page-length 7)
+  ;; (setq pyim-page-posframe-border-width 3)
+  ;; (pyim-default-scheme 'wubi)
+  ;; (setq pyim-page-tooltip 'posframe)
+  ;; (if (string-equal (symbol-name (car custom-enabled-themes)) "modus-operandi")
+	  ;; (progn
+		  ;; (set-face-attribute 'pyim-page nil :inherit 'default :background "#EEE1B3" :foreground "#000000")
+		  ;; (set-face-attribute 'pyim-page-border nil :inherit 'pyim-page :background "#000000"))
+	  ;; (set-face-attribute 'pyim-page-border nil :inherit 'pyim-page :background "#D7DCC8"))
+  ;; 
+  ;; ;; (pyim-wbdict-v86-single-enable)
   ;; (pyim-wbdict-v98-morphe-enable)
-  (pyim-wbdict-v86-single-enable)
+  ;; (setq-default pyim-english-input-switch-functions
+		  ;; '(pyim-probe-isearch-mode
+		  ;; pyim-probe-dynamic-english
+		  ;; pyim-probe-programe-mode
+		  ;; pyim-probe-org-structure-template))
+  ;; (global-set-key "\C-\\" 'toggle-input-method)
+  ;; (global-set-key "\M-i" #'pyim-convert-string-at-point)
 
-  (setq-default pyim-english-input-switch-functions
-		  '(pyim-probe-isearch-mode
-		  pyim-probe-dynamic-english
-		  pyim-probe-programe-mode
-		  pyim-probe-org-structure-template))
-
-  (global-set-key "\C-\\" 'toggle-input-method)
-  (global-set-key "\M-i" #'pyim-convert-string-at-point)
-  (global-set-key "\M-p" 'pyim-process-toggle-input-ascii)
+  ;; (global-set-key "\M-p" 'pyim-process-toggle-input-ascii)
   ;; (global-set-key "\M-j" 'pyim-toggle-input-ascii)
-  ;; (global-set-key (kbd "\C-;") 'pyim-toggle-assistant-scheme)
 #+end_src
 
 * Emacs-application-framework
+
 #+begin_src emacs-lisp
   (add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-application-framework")
   (require 'eaf)
@@ -322,41 +621,83 @@
 #+end_src
 
 * Eshell
+
 #+begin_src emacs-lisp
-  (add-to-list 'load-path "~/.emacs.d/site-lisp/aweshell")
-  (require 'aweshell)
+  ;; (add-to-list 'load-path "~/.emacs.d/site-lisp/aweshell")
+  ;; (require 'aweshell)
 #+end_src
 
 * Org Mode
+
 #+begin_src emacs-lisp
-		(add-hook 'org-mode-hook 'org-superstar-mode)
-		(add-to-list 'load-path "~/.emacs.d/site-lisp/org-roam")
-		(setq org-roam-directory "~/Documents/org-roam") ; 设置 org-roam 笔记的默认目录，缺省值 /home/leo/org-roam
-		(require 'org-roam)
-		(add-hook 'org-mode-hook (lambda ()
-								   (setq-local time-stamp-active t
-											   time-stamp-start "#\\+MODIFIED: [ \t]*"
-											   time-stamp-end "$"
-											   time-stamp-format "\[%Y-%m-%d %3a %H:%M\]")
-								   (add-hook 'before-save-hook 'time-stamp nil 'local)))
+  (custom-theme-set-faces
+   'user
+   '(fixed-pitch ((t (:family "Essential PragmataPro" :height 1.0))))
+   '(variable-pitch ((t (:family "Bookerly" :height 1.0))))
+   ;; '(org-table ((t (:inherit fixed-pitch))))
+   '(org-tag ((t (:inherit fixed-pitch))))
+   '(org-verbatim ((t (:inherit fixed-pitch))))
+   '(org-src ((t (:inherit fixed-pitch)))))
 
-		(with-eval-after-load 'org-roam
-		  (add-hook 'org-roam-mode-hook 'turn-on-visual-line-mode)
-		  (add-hook 'org-roam-mode-hook 'word-wrap-whitespace-mode)
+  (with-eval-after-load 'org
+	;; (set-face-attribute 'org-table nil :font (font-spec :name "Sarasa Mono SC" ; LXGW WenKai
+	;; 													  :weight 'semibold
+	;; 													  :size 13.0)
+	;;  )
+	(setq org-hide-emphasis-markers t))
 
-		  (org-roam-db-autosync-mode)
+  (add-hook 'org-mode-hook 'variable-pitch-mode)
+  ;; (with-eval-after-load 'org
+	;; (defun org-buffer-face-mode-variable ()
+	  ;; (interactive)
+	  ;; (make-face 'width-font-face)
+	  ;; (set-face-attribute 'width-font-face nil :font (font-spec :name "LXGW WenKai Mono";; :name "Sarasa Mono SC"
+						  ;; ;; :weight 'semibold
+						  ;; :size 13.0))  ;; 等距更纱黑体
+	  ;; (setq buffer-face-mode-face 'width-font-face)
+	  ;; (buffer-face-mode))
+	;; (add-hook 'org-mode-hook 'org-buffer-face-mode-variable)
 
-		  (setq org-roam-db-gc-threshold most-positive-fixnum)
+   ;; (setq org-hide-emphasis-markers t))
 
-		  (setq org-roam-mode-sections '(org-roam-backlinks-section
-										 org-roam-reflinks-section
-										 org-roam-unlinked-references-section))
+  ;; (require 'valign)
+  ;; (add-hook 'org-mode-hook #'valign-mode)
 
-		  (add-to-list 'display-buffer-alist
-					   '("\\*org-roam*\\*"
-						 (display-buffer-in-side-window)
-						 (side . right)
-						 (window-width . 0.25))))
+  ;; (add-hook 'org-mode-hook 'org-superstar-mode)
+  (add-hook 'org-mode-hook 'org-modern-mode)
+  (add-hook 'org-agenda-finalize-hook 'org-modern-agenda)
+  (add-hook 'org-mode-hook 'visual-line-mode)
+  (add-hook 'org-mode-hook 'word-wrap-whitespace-mode)
+
+  (add-to-list 'load-path "~/.emacs.d/site-lisp/org-roam")
+  (setq org-roam-directory "~/Personal/org-roam") ; 设置 org-roam 笔记的默认目录，缺省值 /home/leo/org-roam
+
+  (require 'org-roam)
+  (add-hook 'org-mode-hook (lambda ()
+						   (setq-local time-stamp-active t
+									   time-stamp-start "#\\+MODIFIED: [ \t]*"
+									   time-stamp-end "$"
+									   time-stamp-format "\[%Y-%m-%d %3a %H:%M\]")
+						   (add-hook 'before-save-hook 'time-stamp nil 'local)))
+
+  (with-eval-after-load 'org-roam
+	  (add-hook 'org-roam-mode-hook 'turn-on-visual-line-mode)
+	  (add-hook 'org-roam-mode-hook 'word-wrap-whitespace-mode)
+
+	  (org-roam-db-autosync-mode)
+
+	  (setq org-roam-db-gc-threshold most-positive-fixnum)
+
+	  (setq org-roam-mode-sections '(org-roam-backlinks-section
+									 org-roam-reflinks-section
+									 org-roam-unlinked-references-section))
+
+	  (add-to-list 'display-buffer-alist
+				   '("\\*org-roam*\\*"
+					 (display-buffer-in-side-window)
+					 (side . right)
+					 (window-width . 0.2)))
+	  )
 
   (with-eval-after-load 'org-roam
 	;; Auto toggle org-roam-buffer.
@@ -372,39 +713,74 @@
 	(org-roam-buffer-toggle)))
 	(add-hook 'window-buffer-change-functions 'my/org-roam-buffer-show))
 
+  ;; (with-eval-after-load 'org-roam
+	;; (setq org-roam-database-connector 'sqlite-builtin)
+	;; (setq org-roam-node-display-template
+		  ;; (concat "${title:*} "
+				  ;; (propertize "${tags:10}" 'face 'org-tag))))
+
   (with-eval-after-load 'org-roam
 	(setq org-roam-capture-templates
 		'(("d" "default" plain "%?"
 		   :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
 							  "#+title: ${title}\n")
 		   :unnarrowed t)
-		  ("b" "Programming Books" plain "* Related Information\n\nAuthor: %^{Author}\nVersion: %^{Version}\n\n* Notes\n%?"
+		  ("b" "Books" plain "* Related Information\n\nAuthor: %^{Author}\nVersion: %^{Version}\n\n* Notes\n%?"
 		   :target (file+head "books/${slug}.org"
-							  "#+TITLE: ${title}\n#+CREATED: %U\n#+MODIFIED: \n")
+							  "#+TITLE: ${title}\n#+FILETAGS: %^{}\n#+CREATED: %U\n#+MODIFIED: \n\n")
+		   :unnarrowed t)
+		  ("t" "Trifles" entry "* Notes:\n%?"
+		   :target (file+head "Trifles/${slug}.org"
+							  "#+TITLE: ${title}\n#+FILETAGS: %^g\n#+CREATED: %U\n#+MODIFIED: \n\n")
+		   :unnarrowed t)
+		  ("p" "Programming" entry "* Notes:\n%?"
+		   :target (file+head "Programming/${slug}.org"
+							  "#+TITLE: ${title}\n#+FILETAGS: %^g\n#+CREATED: %U\n#+MODIFIED: \n\n")
 		   :unnarrowed t))))
 
-  (global-set-key (kbd "C-c n f") 'org-roam-node-find)
+  (keymap-global-set "C-c n f" 'org-roam-node-find)
+#+end_src
+
+* LaTeX
+
+#+begin_src emacs-lisp
+  (setq TeX-auto-save t)
+  (setq TeX-parse-self t)
+  (setq-default TeX-master nil)
+
+  ;; 设置xelatex为默认编辑命令，evince为pdf文件阅读器
+  (setq TeX-output-view-style (quote (("^pdf$" "." "evince %o %(outpage)"))))
+
+  (add-hook 'LaTeX-mode-hook (lambda()
+							   (add-to-list 'TeX-command-list '("XeLaTeX" "%`xelatex%(mode)%' %t" TeX-run-TeX nil t))
+							   (setq TeX-command-default "XeLaTeX"))
+			'turn-on-cdlatex  ;; 设置cdlatex
+  )
 #+end_src
 
 * Ebook Reader
+
 #+begin_src emacs-lisp
-  (add-to-list 'load-path "~/.emacs.d/site-lisp/nov-xwidget")
-  (require 'nov-xwidget)
-  (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
-  ;; (evil-set-initial-state 'nov-mode 'emacs)
-  ;; (add-hook 'nov-mode-hook '(lambda() (turn-off-evil-mode)))
-  ;; (define-key nov-mode-map (kbd "o") 'nov-xwidget-view)
-  (evil-define-key 'normal nov-mode-map (kbd "o") 'nov-xwidget-view)
-  (add-hook 'nov-mode-hook 'nov-xwidget-inject-all-files)
-  (add-hook 'nov-xwidget-webkit-mode-hook '(lambda() (xwidget-webkit-zoom (xwidget-webkit-current-session) 1.5)))
-  (setq nov-text-width t)
-  (setq visual-fill-column-center-text t)
-  ;; (add-hook 'nov-mode-hook 'visual-line-mode)
-  ;; (add-hook 'nov-mode-hook 'visual-fill-column-mode)
-  ;; (add-hook 'nov-mode-hook '(lambda() (set-fill-column 100)))
+  (require 'calibredb)
+
+  ;; (add-to-list 'load-path "~/.emacs.d/site-lisp/nov-xwidget")
+  ;; (require 'nov-xwidget)
+  ;; (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
+  ;; ;; (evil-set-initial-state 'nov-mode 'emacs)
+  ;; ;; (add-hook 'nov-mode-hook '(lambda() (turn-off-evil-mode)))
+  ;; ;; (define-key nov-mode-map (kbd "o") 'nov-xwidget-view)
+  ;; (evil-define-key 'normal nov-mode-map (kbd "o") 'nov-xwidget-view)
+  ;; (add-hook 'nov-mode-hook 'nov-xwidget-inject-all-files)
+  ;; (add-hook 'nov-xwidget-webkit-mode-hook '(lambda() (xwidget-webkit-zoom (xwidget-webkit-current-session) 1.5)))
+  ;; (setq nov-text-width t)
+  ;; (setq visual-fill-column-center-text t)
+  ;; ;; (add-hook 'nov-mode-hook 'visual-line-mode)
+  ;; ;; (add-hook 'nov-mode-hook 'visual-fill-column-mode)
+  ;; ;; (add-hook 'nov-mode-hook '(lambda() (set-fill-column 100)))
 #+end_src
 
 * Helpful
+
 #+begin_src emacs-lisp
   (require 'helpful)
   (define-key global-map [remap describe-function] 'helpful-function)
@@ -413,8 +789,369 @@
   (define-key global-map [remap describe-command] 'helpful-command)
 #+end_src
 
-* Abandoned Setting
+* Emacs Default Setting
+
 #+begin_src emacs-lisp
+;; (global-set-key [M-l] 'downcase-word)
+;; (global-set-key [M-u] 'upcase-word)
+;; (global-set-key [M-c] 'capitalize-word)
+#+end_src
+
+* UI
+
+#+begin_src emacs-lisp
+   (when (display-graphic-p)
+	 (set-face-attribute
+	  'default nil
+	  :font (font-spec :name "PragmataPro"
+					   ;; :weight 'normal
+					   ;; :slant 'normal
+					   :size 13.0)))
+
+   ;; (when (display-graphic-p)
+   ;; (set-face-attribute
+   ;; 'default nil
+   ;; :font (font-spec :name "Iosevka Fixed"    ;; Input Mono
+   ;; :weight 'normal
+   ;; :slant 'normal
+   ;; :size 13.0))
+   ;; (dolist (charset '(kana han cjk-misc bopomofo))
+   ;; (set-fontset-font
+   ;; (frame-parameter nil 'font)
+   ;; charset
+   ;; (font-spec :name "Source Han Sans SC" :height 100))))
+
+   ;; (add-to-list 'load-path "~/.emacs.d/site-lisp/awesome-tab")
+   ;; (require 'awesome-tab)
+   ;; (awesome-tab-mode t)
+
+
+
+   (add-to-list 'load-path "~/.emacs.d/site-lisp/sort-tab")
+   (require 'sort-tab)
+   (sort-tab-mode t)
+   (define-key sort-tab-mode-map (kbd "C-]") 'sort-tab-select-next-tab)
+   (require 'all-the-icons)
+
+   ;;  (setq-default mode-line-format (list "%e" mode-line-front-space
+   ;; 							  '(:eval (:propertize
+   ;; 							   ("" mode-line-mule-info mode-line-client mode-line-modified mode-line-remote)
+   ;; 							   display (min-width (5.0))))
+   ;; 							  mode-line-frame-identification mode-line-buffer-identification "   "
+   ;; 							  mode-line-position evil-mode-line-tag
+   ;; 							  (vc-mode vc-mode)
+   ;; 							  "  " mode-line-modes mode-line-misc-info mode-line-end-spaces))
+
+
+   (add-hook 'completion-list-mode-hook #'hide-mode-line-mode)
+   (add-hook 'completion-in-region-mode-hook #'hide-mode-line-mode)
+   (add-hook 'term-mode-hook #'hide-mode-line-mode)
+   (add-hook 'shell-mode-hook #'hide-mode-line-mode)
+   (add-hook 'messages-buffer-mode-hook #'hide-mode-line-mode)
+   (add-hook 'org-roam-mode-hook #'hide-mode-line-mode)
+
+   (winum-mode 1)
+   (setq winum-ignored-buffers '(
+								 "*sort-tab*"
+								 ))
+
+   (with-eval-after-load 'winum (defun +win-num ()
+								  (let ((n (winum-get-number)))
+									(alist-get
+									 n
+									 '((0 . "🄌")
+									   (1 . "❶")
+									   (2 . "❷")
+									   (3 . "❸")
+									   (4 . "❹")
+									   (5 . "❺")
+									   (6 . "❻")
+									   (7 . "❼")
+									   (8 . "❽")
+									   (9 . "❾"))))))
+
+   (add-hook 'winum-mode-hook '(lambda () (setq winum-auto-setup-mode-line nil)))
+
+   (defun ml-fill-space (right-format)
+	 "Return empty space using FACE and leaving RESERVE space on the right."
+	 (propertize " "
+				 ;; 'display `((space :align-to (- (+ right right-fringe right-margin),(/ (string-pixel-width (format-mode-line right-format)) (window-font-width nil 'mode-line) 1.0))))
+				 'display `((space :align-to (- (+ right right-fringe right-margin),(/ (string-pixel-width (format-mode-line right-format)) 13.5 1.0))))
+				 ;; 'display `((space :align-to (- right, (string-width (format-mode-line right-format)))))
+				 ;; 'display `((space :align-to (- (+ right right-fringe right-margin)
+				 ;; 							 (,(string-pixel-width (format-mode-line right-format))))))
+				 )
+	 )
+
+   (defun target-all-the-icons-icon-for-mode (mode &rest arg-overrides)
+	 "Similar to Func all-the-icons-icon-for-mode."
+	 (let* ((icon (cdr (or (assoc mode all-the-icons-mode-icon-alist)
+						   (assoc (get mode 'derived-mode-parent) all-the-icons-mode-icon-alist))))
+			(args (cdr icon)))
+	   (when arg-overrides (if (member :face arg-overrides)
+							   (if (member :foreground (nth 1 (member :face arg-overrides)))
+								   (setq args (append `(,(car args)) arg-overrides (seq-subseq args 0 (- (safe-length args) 2))))
+								 (progn
+								   (let* ((args-temp (member :face arg-overrides))
+										  (args-rest (car (cdr args-temp))))
+									 (setq arg-overrides (butlast arg-overrides (safe-length args-temp)))
+									 (setq args-temp (nthcdr 2 args-temp))
+									 (if args-temp
+										 (progn
+										   (setq args-rest (append (append args-rest (list :foreground)) (list (face-foreground (nth (- (safe-length icon) 1) icon)))))
+										   (setq args-temp (append (list args-rest) args-temp))
+										   )
+									   (setq args-temp (list (append (append args-rest (list :foreground)) (list (face-foreground (nth (- (safe-length icon) 1) icon))))))
+									   )
+									 (setq arg-overrides (append arg-overrides '(:face) args-temp))
+									 )
+								   (setq args (append `(,(car args)) arg-overrides (butlast (cdr args) 2))))
+								 )
+							 (setq args (append `(,(car args)) arg-overrides (cdr args)))
+							 ))
+	   (if icon (apply (car icon) args) mode)))
+
+   (defun target-all-the-icons-icon-for-file (file &rest arg-overrides)
+	 "Get the formatted icon for FILE.
+	   ARG-OVERRIDES should be a plist containining `:height',
+	   `:v-adjust' or `:face' properties like in the normal icon
+	   inserting functions."
+	 (let* ((ext (file-name-extension file))
+			(icon (or (all-the-icons-match-to-alist file all-the-icons-regexp-icon-alist)
+					  (and ext
+						   (cdr (assoc (downcase ext)
+									   all-the-icons-extension-icon-alist)))
+					  all-the-icons-default-file-icon))
+			(args (cdr icon)))
+	   (when arg-overrides (if (member :face arg-overrides)
+							   (if (member :foreground (nth 1 (member :face arg-overrides)))
+								   (setq args (append `(,(car args)) arg-overrides (seq-subseq args 0 (- (safe-length args) 2))))
+								 (progn
+								   (let* ((args-temp (member :face arg-overrides))
+										  (args-rest (car (cdr args-temp))))
+									 (setq arg-overrides (butlast arg-overrides (safe-length args-temp)))
+									 (setq args-temp (nthcdr 2 args-temp))
+									 (if args-temp
+										 (progn
+										   (setq args-rest (append (append args-rest (list :foreground)) (list (face-foreground (nth (- (safe-length icon) 1) icon)))))
+										   (setq args-temp (append (list args-rest) args-temp))
+										   )
+									   (setq args-temp (list (append (append args-rest (list :foreground)) (list (face-foreground (nth (- (safe-length icon) 1) icon))))))
+									   )
+									 (setq arg-overrides (append arg-overrides '(:face) args-temp))
+									 )
+								   (setq args (append `(,(car args)) arg-overrides (butlast (cdr args) 2))))
+								 )
+							 (setq args (append `(,(car args)) arg-overrides (cdr args)))
+							 ))
+	   (apply (car icon) args)))
+
+   (defgroup mode-line-personal nil
+	 "Personal Mode Line Setting"
+	 :prefix "mode-line-area-"
+	 :group 'basic-faces
+	 :group 'appearance)
+
+   (defface mode-line-area-0
+	 '((((background dark)) :background "#665c54")
+	   (((background light)) :background "#ebdbb2"))
+	 "Face for default background of personal mode line"
+	 :group 'mode-line-personal)
+
+   (defface mode-line-area-1
+	 '((((background dark)) :background "#83a598" :foreground "#1d2021")
+	   (((background light)) :background "#076678" :foreground "#f9f5d7"))
+	 "Face for personal mode line setting area 1"
+	 :group 'mode-line-personal)
+
+   (defface mode-line-area-2
+	 '((((background dark)) :background "#504945" :foreground "#d5c4a1")
+	   (((background light)) :background "#bdae93" :foreground "#665c54"))
+	 "Face for personal mode line setting area 2"
+	 :group 'mode-line-personal)
+
+   (defface mode-line-area-3
+	 '((((background dark)) :background "#3c3836" :foreground "#ebdbb2")
+	   (((background light)) :background "#d5c4a1" :foreground "#504945"))
+	 "Face for personal mode line setting area 3"
+	 :group 'mode-line-personal)
+
+   (defface input-method-indicator-face
+	 '((((background dark)) :foreground "#d65d0e")
+	   (((background light)) :foreground "#af3a03"))
+	 "Face for personal mode line setting area 2"
+	 :group 'mode-line-personal)
+
+   (defface mode-line-area-4
+	 '((((background dark)) :foreground "#d5c4a1")
+	   (((background light)) :foreground "#504945"))
+	 "Face fore personal mode line setting area 5"
+	 :group 'mode-line-personal)
+
+   (defface mode-line-area-5
+	 '((((background dark)) :background "#8ec07c" :foreground "#1d2021")
+	   (((background light)) :background "#427b58" :foreground "#f9f5d7"))
+	 "Face for personal mode line setting area 5"
+	 :group 'mode-line-personal)
+
+   (defface mode-line-seperator
+	 '((((background dark)) :foreground "#83a598")
+	   (((background light)) :foreground "#076678"))
+	 "Face for personal mode lien setting separator"
+	 :group 'mode-line-personal)
+
+   (set-face-attribute 'mode-line nil
+					   :inherit 'mode-line-area-0
+					   :font (font-spec
+							  ;; :name "JetBrains Mono"
+							  :name "Berkeley Mono"
+							  :weight 'normal
+							  :size 15))
+   ;; :height 95)
+
+   (set-face-attribute 'mode-line-inactive nil :inherit 'mode-line)
+
+   (setq-default mode-line-format '((:eval (concat
+											(propertize " " 'face 'mode-line-area-1)
+											(cond (buffer-read-only (propertize (all-the-icons-faicon "lock" :height 1.0 :v-adjust 0.02 :face 'mode-line-area-1) 'help-echo "Read Only"))
+												  ((buffer-modified-p) (propertize (all-the-icons-faicon "chain-broken" :height 1.0 :v-adjust -0.0 :face 'mode-line-area-1) 'help-echo "Buffer Modified"))
+												  ((equal (buffer-modified-p) nil) (propertize (all-the-icons-faicon "link" :height 1.0 :v-adjust -0.0 :face 'mode-line-area-1) 'help-echo "Buffer Safe")))
+											;; " | "
+											(propertize " " 'face `(:height 1.2 :inherit mode-line-area-1))
+											(propertize (when (bound-and-true-p winum-mode) (concat (+win-num) " ")) 'face `(:height 1.2 :inherit mode-line-area-1) 'help-echo "Windows Numbering" 'display '(raise 0.0))
+											(propertize " ")
+											;;  (propertize (all-the-icons-alltheicon "arrow-right" :face `(:foreground "#83a598" :background "#504945" :height 1.5) :v-adjust -0.04))
+											(if (buffer-file-name)
+												(concat
+												 (propertize (format "%s " (abbreviate-file-name (file-name-directory (buffer-file-name)))) 'face `(:weight bold :inherit mode-line-area-2) 'display '(raise 0.11) 'help-echo "Current Directory")
+												 (propertize "=>" 'face `(:weight bold :height 1.2))))
+											(propertize " " 'face `(:inherit mode-line-area-3))
+											(propertize (if (or (buffer-file-name) (all-the-icons-auto-mode-match?))
+															(if (equal (car custom-enabled-themes) (car themes_chosen))
+																(target-all-the-icons-icon-for-file (buffer-name) :height 1.1 :v-adjust 0.0 :face `(:background "#d5c4a1"))
+															  (target-all-the-icons-icon-for-file (buffer-name) :height 1.1 :v-adjust 0.0 :face `(:background "#3c3836"))
+															  )
+														  (if (equal (car custom-enabled-themes) (car themes_chosen))
+															  (target-all-the-icons-icon-for-mode major-mode :height 1.1 :v-adjust 0.0 :face `(:background "#d5c4a1"))
+															(target-all-the-icons-icon-for-mode major-mode :height 1.1 :v-adjust 0.0 :face `(:background "#3c3836"))
+															))    ;; 'face `(:family ,(all-the-icons-fileicon-family) :background "#504945")
+														'display '(raise -0.08)
+														'help-echo (symbol-name (symbol-value 'major-mode)))
+											(propertize " %b" 'face `(:weight bold :inherit mode-line-area-3) 'display '(raise 0.11) 'help-echo "Current Buffer Name")
+											(propertize " " 'face `(:inherit mode-line-area-3))    ;;  (:eval (propertize (all-the-icons-alltheicon "arrow-right" :face `(:foreground "#504945" :height 1.5) :v-adjust -0.04)))
+											(let* ((right-part '(
+																 ;; Git
+																 (:eval (concat (when vc-mode
+																				  (cond ((string-match "Git[:-]" vc-mode)
+																						 (let ((branch (mapconcat 'concat (cdr (split-string vc-mode "[:-]")) "-")))
+																						   (concat
+																							(propertize (all-the-icons-alltheicon "git" :height 1.1 :v-adjust 0.05))
+																							" "    ;; " · "
+																							(propertize (all-the-icons-octicon "primitive-dot" :height 0.6) 'display '(raise 0.35))
+																							" "
+																							(propertize (all-the-icons-octicon "git-branch" :height 1.1 :v-adjust 0.05))
+																							(propertize (format " %s" branch) 'face `(:weight bold) 'display '(raise 0.2))
+																							(propertize " |" 'face `(:weight bold :inherit mode-line-seperator) 'display '(raise 0.1)))))
+																						((string-match "SVN-" vc-mode)
+																						 (let ((revision (cadr (split-string vc-mode "-"))))
+																						   (concat
+																							(propertize (format " %s" (all-the-icons-faicon "cloud")) 'face `(:height 1.1) 'display '(raise -0.0))
+																							(propertize (format " · %s" revision) 'face `(:height 0.9)))))
+																						(t (format "%s" vc-mode))))
+																				(propertize " ")
+																				;; Flycheck Information
+																				(pcase flycheck-last-status-change
+																				  (`finished (if flycheck-current-errors
+																								 (let-alist (flycheck-count-errors flycheck-current-errors)
+																								   (let ((i (or .info 0))
+																										 (w (or .warning 0))
+																										 (e (or .error 0)))
+																									 (concat (propertize (all-the-icons-faicon "info" :v-adjust 0.05)
+																														 'help-echo "Show Flycheck Error"
+																														 'local-map (make-mode-line-mouse-map
+																																	 'mouse-1 (lambda() (interactive) (flycheck-list-errors))))
+																											 (propertize (concat " " (number-to-string i)) 'face 'bold 'display '(raise 0.1)
+																														 'help-echo "Show Flycheck Error"
+																														 'local-map (make-mode-line-mouse-map
+																																	 'mouse-1 (lambda() (interactive) (flycheck-list-errors))))
+																											 (propertize (concat " " (all-the-icons-octicon "primitive-dot" :height 0.6 :v-adjust 0.0) " ") 'display '(raise 0.3))
+																											 (propertize (all-the-icons-faicon "odnoklassniki" :height 0.8 :v-adjust 0.12)
+																														 'help-echo "Show Flycheck Error"
+																														 'local-map (make-mode-line-mouse-map
+																																	 'mouse-1 (lambda() (interactive) (flycheck-list-errors))))
+																											 (propertize (concat  " " (number-to-string w)) 'face 'bold 'display '(raise 0.1)
+																														 'help-echo "Show Flycheck Error"
+																														 'local-map (make-mode-line-mouse-map
+																																	 'mouse-1 (lambda() (interactive) (flycheck-list-errors))))
+																											 (propertize (concat " " (all-the-icons-octicon "primitive-dot" :height 0.6 :v-adjust 0.0) " ") 'display '(raise 0.3))
+																											 (propertize (all-the-icons-faicon "bug" :height 0.9 :v-adjust 0.04)
+																														 'help-echo "Show Flycheck Error"
+																														 'local-map (make-mode-line-mouse-map
+																																	 'mouse-1 (lambda() (interactive) (flycheck-list-errors))))
+																											 (propertize (concat " " (number-to-string e)) 'face 'bold 'display '(raise 0.1)
+																														 'help-echo "Show Flycheck Error"
+																														 'local-map (make-mode-line-mouse-map
+																																	 'mouse-1 (lambda() (interactive) (flycheck-list-errors))))
+																											 )))
+																							   (propertize "✔ No Issues" 'face `(:weight bold) 'display '(raise 0.12)))
+																							 )
+																				  (`running    (propertize "⟲ Running" 'face `(:weight bold)))
+																				  (`no-checker (concat (propertize (all-the-icons-octicon "alert") 'display '(raise 0.07))
+																									   (propertize " No Checker" 'display '(raise 0.12) 'face `(:weight bold))))
+																				  ;; (`no-checker "⚠ No Checker")
+																				  (`not-checked (concat (propertize (all-the-icons-material "visibility_off" :v-adjust -0.1))
+																										(propertize " Disabled" 'face 'bold 'display '(raise 0.1))))
+																				  ;; (`not-checked "⚠ Disabled")
+																				  (`errored    (propertize "✖ Error" 'face `(:weight bold)))
+																				  ;; (`interrupted "⛔ Interrupted")
+																				  (`interrupted (concat (propertize (all-the-icons-octicon "circle-slash"))
+																										(propertize " Interrupted")))
+																				  (`suspinnnncious (concat (propertize (all-the-icons-faicon "question"))
+																										   (propertize " Suspicious"))))
+																				;;  (propertize " "))
+																				;;  (propertize "%-"))
+
+																				;; Input Method
+																				(if (not (equal (rime-lighter) ""))
+																					(concat
+																					 (propertize " | " 'face `(:inherit mode-line-seperator :weight bold) 'display '(raise 0.1))
+																					 (propertize (format "%s" (rime-lighter))
+																								 'face `(:weight bold :inherit input-method-indicator-face)
+																								 'display '(raise 0.13)))
+																				  )
+																				(propertize " | " 'face `(:inherit mode-line-seperator :weight bold) 'display '(raise 0.1))
+																				;; System && Encoding
+																				(propertize (let ((buf-coding (format "%s" buffer-file-coding-system)))
+																							  (if (string-match "\\(dos\\|unix\\|mac\\)" buf-coding)
+																								  (upcase (concat (string-trim-right buf-coding (concat "-" (match-string 1 buf-coding))) (format "[%s]" system-type)))
+																								(upcase (concat buf-coding (format "[%s]" system-type))))) 'face `(:weight bold :inherit mode-line-area-4) 'display '(raise 0.10))
+																				;;  (propertize (all-the-icons-alltheicon "slant-left") 'face `(:height 1.85 :foreground "#32302f" :background "#8ec07c") 'display '(raise -0.05))
+																				;;  (propertize " " 'face `(:weight bold))
+																				;;  (propertize " %3l:%3c " 'face '(:weight bold :background "#928374" :faceground "#fbf1c7") 'display '(raise 0.1))
+																				(propertize " " 'face 'bold)
+																				;; Time
+																				(let* ((hour (string-to-number (format-time-string "%I")))
+																					   (icon (all-the-icons-wicon (format "time-%s" hour) :height 1.1 :v-adjust 0.0)))
+																				  (concat
+																				   ;; (propertize (all-the-icons-alltheicon "slant-right" :height 1.3) 'display '(raise -0.0))
+																				   (propertize (format-time-string " %H:%M") 'face `(:weight bold :inherit mode-line-area-5) 'display '(raise 0.1))
+																				   (propertize " " 'face `(:height 1.2 :inherit mode-line-area-5))
+																				   (propertize (all-the-icons-wicon (format "time-%s" hour) :height 1.1 :v-adjust 0.0 :face `(:inherit mode-line-area-5)))
+																				   ))
+																				(propertize " " 'face `(:weight bold :inherit mode-line-area-5) 'display '(raise 0.0))
+																				(propertize (all-the-icons-octicon "primitive-dot" :height 0.6 :face `(:inherit mode-line-area-5)) 'display '(raise 0.4))
+																				;; File Line
+																				(propertize (format " %s" (car (buffer-line-statistics))) 'face `(:height 1.0 :weight bold :inherit mode-line-area-5) 'display '(raise 0.13) 'help-echo
+  "Buffer Line Length")
+																				(propertize " " 'face `(:inherit mode-line-area-5)))))))
+											  (concat (ml-fill-space right-part)
+													  (format-mode-line right-part)))))))
+#+end_src
+
+* Abandoned Setting
+
+#+begin_src emacs-lisp
+
   ;; (require 'eglot)
   ;; (add-to-list 'eglot-server-programs '((c++-mode c-mode) "clangd-14"))
   ;; (add-hook 'c-mode-hook 'eglot-ensure)
@@ -435,13 +1172,11 @@
   ;; (add-hook 'emacs-lisp-mode 'company-mode)
   ;; (add-hook 'company-mode-hook 'company-box-mode)
   ;; (add-hook 'lsp-mode-hook 'company-mode)
-#+end_src
 
-* Theme
-#+begin_src emacs-lisp
-  (if (> (string-to-number (substring (current-time-string) 11 13)) 19)
-	  (load-theme 'modus-vivendi t)
-	(load-theme 'modus-operandi t))
-  ;; (add-to-list 'custom-theme-load-path "~/.emacs.d/site-lisp/third-party-themes")
-  ;; (load-theme 'paperlike t)
+  ;; (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
+
+  ;; (setq highlight-indent-guides-method 'character
+  ;;	  highlight-indent-guides-responsive 'top
+  ;;	  highlight-indent-guides-suppress-auto-error t)
+
 #+end_src

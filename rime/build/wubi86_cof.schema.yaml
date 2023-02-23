@@ -1,0 +1,400 @@
+Utf16_code:
+  opencc_config: Utf16_code.json
+  option_name: Utf16_code
+  show_in_comment: true
+  tips: char
+__build_info:
+  rime_version: 1.7.3
+  timestamps:
+    default: 1635007600
+    default.custom: 1674571701
+    key_bindings: 1674565337
+    key_bindings.custom: 0
+    punctuation: 1674565255
+    punctuation.custom: 0
+    wubi86_cof.custom: 0
+    wubi86_cof.schema: 1674571500
+ascii_composer:
+  good_old_caps_lock: true
+  switch_key:
+    Caps_Lock: clear
+    Control_L: noop
+    Control_R: noop
+    Eisu_toggle: clear
+    Shift_L: commit_code
+    Shift_R: commit_code
+cof_trans:
+  comment_format:
+    - |
+      xform/<br>//
+  opencc_config: cof_trans.json
+  option_name: cof_trans
+  show_in_comment: true
+  tags:
+    - abc
+  tips: all
+dic_4w_en:
+  comment_format:
+    - |
+      xform/<br>//
+    - "xform/&nbsp/ /"
+  opencc_config: dic_4w_en.json
+  option_name: dic_4w_en
+  show_in_comment: true
+  tags:
+    - abc
+  tips: all
+engine:
+  filters:
+    - "simplifier@cof_trans"
+    - simplifier
+    - "simplifier@pinyin"
+    - "simplifier@gbk_code"
+    - "simplifier@Utf16_code"
+    - "simplifier@tongyong"
+    - "charset_filter@gbk"
+    - "simplifier@dic_4w_en"
+    - "simplifier@punct"
+    - "lua_filter@charset_comment_filter"
+    - uniquifier
+  processors:
+    - ascii_composer
+    - recognizer
+    - chord_composer
+    - key_binder
+    - speller
+    - punctuator
+    - selector
+    - navigator
+    - express_editor
+  segmentors:
+    - ascii_segmentor
+    - matcher
+    - abc_segmentor
+    - punct_segmentor
+    - fallback_segmentor
+  translators:
+    - punct_translator
+    - reverse_lookup_translator
+    - table_translator
+    - history_translator
+    - "table_translator@english"
+    - "lua_translator@date_translator"
+    - "lua_translator@week_translator"
+english:
+  dictionary: easy_en
+  enable_completion: true
+  enable_sentence: false
+  initial_quality: "-1"
+  spelling_hints: 9
+gbk_code:
+  opencc_config: gbk_code.json
+  option_name: gbk_code
+  show_in_comment: true
+  tips: char
+history:
+  input: z
+  size: 1
+key_binder:
+  bindings:
+    - {accept: semicolon, send: 2, when: has_menu}
+    - {accept: apostrophe, send: 3, when: has_menu}
+    - {accept: space, send: space, when: has_menu}
+    - {accept: space, send: Escape, when: composing}
+    - {accept: Tab, send: Escape, when: has_menu}
+    - {accept: Tab, send: Escape, when: composing}
+    - {accept: "Shift+space", send: Down, when: has_menu}
+    - {accept: "Control+e", toggle: cof_trans, when: has_menu}
+    - {accept: "Control+f", toggle: zh_trad, when: has_menu}
+    - {accept: "Control+g", toggle: gbk_code, when: has_menu}
+    - {accept: "Control+u", toggle: Utf16_code, when: has_menu}
+    - {accept: "Control+p", toggle: pinyin, when: has_menu}
+    - {accept: "Control+t", toggle: tongyong, when: has_menu}
+    - {accept: "Control+w", toggle: dic_4w_en, when: has_menu}
+    - {accept: "Control+q", toggle: punct, when: has_menu}
+    - {accept: minus, send: Page_Up, when: has_menu}
+    - {accept: equal, send: Page_Down, when: has_menu}
+    - {accept: Return, send: "Control+Shift+Return", when: has_menu}
+menu:
+  alternative_select_labels:
+    - "🐷"
+    - "🐭"
+    - "🐰"
+    - "👽"
+    - "🐸"
+    - "🐷"
+    - "🐭"
+    - "🐰"
+    - "👽"
+    - "🐸"
+  page_size: 5
+pinyin:
+  opencc_config: pinyin.json
+  option_name: pinyin
+  show_in_comment: true
+  tips: char
+punct:
+  comment_format:
+    - |
+      xform/<br>//
+    - "xform/&nbsp/ /"
+  opencc_config: punct.json
+  option_name: punct
+  show_in_comment: true
+  tips: all
+punctuator:
+  full_shape:
+    " ": {commit: " "}
+    "!": {commit: "！"}
+    "\"": {pair: ["“", "”"]}
+    "#": {commit: "#"}
+    "$": ["$", "¥", "€", "£", "￥", "¢", "¤"]
+    "%": ["%", "°", "℃", "℉", "％"]
+    "&": {commit: "&"}
+    "'": {pair: ["‘", "’"]}
+    "(": "（"
+    ")": "）"
+    "*": ["*", "＊", "·", "・", "×", "※", "❂"]
+    "+": {commit: "+"}
+    ",": {commit: "，"}
+    "-": {commit: "-"}
+    .: {commit: "。"}
+    "/": ["/"]
+    ":": {commit: "："}
+    ";": {commit: "；"}
+    "<": ["《", "『", "【", "〈", "«", "‹"]
+    "=": {commit: "="}
+    ">": ["》", "』", "】", "〉", "»", "›"]
+    "?": {commit: "？"}
+    "@": ["＠", "@", "☯"]
+    "[": ["「", "【", "〔", "［"]
+    "\\": ["\\", "＼", "、"]
+    "]": ["」", "】", "〕", "］"]
+    "^": ["^", "……", "…"]
+    _: [_, "——"]
+    "`": ["`", "｀"]
+    "{": ["『", "〖", "｛"]
+    "|": ["·", "｜", "§", "¦"]
+    "}": ["』", "〗", "｝"]
+    "~": ["~", "～"]
+  half_shape:
+    " ": {commit: " "}
+    "!": {commit: "！"}
+    "\"": {pair: ["“", "”"]}
+    "#": {commit: "#"}
+    "$": ["$", "¥", "€", "£", "￥", "¢", "¤"]
+    "%": ["%", "°", "℃", "℉", "％"]
+    "&": {commit: "&"}
+    "'": {pair: ["‘", "’"]}
+    "(": "（"
+    ")": "）"
+    "*": ["*", "＊", "·", "・", "×", "※", "❂"]
+    "+": {commit: "+"}
+    ",": {commit: "，"}
+    "-": {commit: "-"}
+    .: {commit: "。"}
+    "/": ["/"]
+    ":": {commit: "："}
+    ";": {commit: "；"}
+    "<": ["《", "『", "【", "〈", "«", "‹"]
+    "=": {commit: "="}
+    ">": ["》", "』", "】", "〉", "»", "›"]
+    "?": {commit: "？"}
+    "@": ["＠", "@", "☯"]
+    "[": ["「", "【", "〔", "［"]
+    "\\": ["\\", "＼", "、"]
+    "]": ["」", "】", "〕", "］"]
+    "^": ["^", "……", "…"]
+    _: [_, "——"]
+    "`": ["`", "｀"]
+    "{": ["『", "〖", "｛"]
+    "|": ["·", "｜", "§", "¦"]
+    "}": ["』", "〗", "｝"]
+    "~": ["~", "～"]
+  symbols:
+    "/0": ["⑩", "⑽", "㈩"]
+    "/1": ["①", "⑴", "㈠"]
+    "/2": ["②", "⑵", "㈡"]
+    "/3": ["③", "⑶", "㈢"]
+    "/4": ["④", "⑷", "㈣"]
+    "/5": ["⑤", "⑸", "㈤"]
+    "/6": ["⑥", "⑹", "㈥"]
+    "/7": ["⑦", "⑺", "㈦"]
+    "/8": ["⑧", "⑻", "㈧"]
+    "/9": ["⑨", "⑼", "㈨"]
+    "/A": [""]
+    "/B": ["爿"]
+    "/D": [""]
+    "/E": [""]
+    "/G": [""]
+    "/I": [""]
+    "/J": ["", ""]
+    "/O": ["", ""]
+    "/Q": ["釒"]
+    "/S": [""]
+    "/T": [""]
+    "/V": ["", "⺻"]
+    "/W": ["飠", "⻞", ""]
+    "/X": ["糹"]
+    "/a": ["丌", "卄", "艹", "龷", "⼶", "⼷", "𫠠", "匚", "", "", "", "", "", ""]
+    "/b": ["凵", "卩", "孑", "巜", "阝", "⻏", "⺋", "𠄐"]
+    "/bh": "屮"
+    "/bt": "⼬"
+    "/c": ["厶", "龴", "ㅈ", "ㄡ", ""]
+    "/d": ["丆", "⻒", "𠂇", "", "", ""]
+    "/dn": "⺐"
+    "/dw": "𡗗"
+    "/e": ["彡", "爫", "豕", "⺝", "冃", "𧘇", "𧰨", "", "", "", "", "", "", ""]
+    "/ee": "豸"
+    "/f": ["⻗", "𬺰", ""]
+    "/fj": "龺"
+    "/ft": "耂"
+    "/g": ["龶", "⺩", "⼀", "㇀"]
+    "/h": ["亅", "龰", "⺊", "⼁", "", "", ""]
+    "/ha": "⾌"
+    "/i": ["氵", "⺌", "⺍", "𭕄", "氺", "⺢", "𣥂", "", "", "", ""]
+    "/ip": "龸"
+    "/iw": "𫤬"
+    "/j": ["刂", "⺜", "〢", "𫩏", ""]
+    "/k": ["〣"]
+    "/kh": "⻊"
+    "/l": ["罒", "⼞", "𡆧", "㇣", "", "", ""]
+    "/lq": "龱"
+    "/m": ["冂", "⺆", "⺇", "", "", "", ""]
+    "/n": ["⼄", "乁", "𠃜", "乚", "㇟", "乛", "㇕", "忄", "⺄", "㇝", "⺒", "", "⺗", "㇁", "㇂", "㇃", "㇄", "㇗", "㇅", "㇆", "㇇", "㇈", "㇉", "㇞", "㇊", "㇋", "㇌", "㇍", "㇎", "㇙", "㇛", "㇜", "㇡", "㇢", "ㄣ", "ㄅ", "ㄟ", "ㄱ", "ㄴ", " ", "", "", ""]
+    "/nd": "夬"
+    "/nh": "⺪"
+    "/o": ["灬", "", ""]
+    "/oc": "℃"
+    "/of": "℉"
+    "/oop": "𤇾"
+    "/p": ["冖", "宀", "辶", "⻍", "⻎", "⼵", ""]
+    "/pu": "衤"
+    "/pw": "⺳"
+    "/py": "礻"
+    "/q": ["〤", "乂", "勹", "钅", "⺈", "𫶧", "", "", "", "", ""]
+    "/qd": "厃"
+    "/qn": "饣"
+    "/qt": "⺨"
+    "/r": ["龵", "⺁", "⺘", "", "", ""]
+    "/s": ["覀", "朩", ""]
+    "/t": ["丿", "㇒", "夂", "夊", "攵", "〩", "彳", "⺮", "𠂉"]
+    "/tf": "⺧"
+    "/tr": "牜"
+    "/u": ["丬", "丷", "冫", "疒", "⺀", "䒑", "", ""]
+    "/ud": "龹"
+    "/ug": "⺷"
+    "/v": ["巛", "彐", "⺽", "⼹", ""]
+    "/vh": "肀"
+    "/w": ["亻", "癶", "ㅅ", "𠆢", "", ""]
+    "/x": ["纟", "⺓", "⼔", "𠤎", "", "", "", "", ""]
+    "/xf": "毌"
+    "/xyx": "龻"
+    "/y": ["丶", "亠", "訁", "讠", "㇏", "", ""]
+recognizer:
+  patterns:
+    punct: "^/([0-9]0?|[A-Za-z]+)$"
+    reverse_lookup: "^z[a-zA-Z0-9/]*"
+reverse_lookup:
+  dictionary: cof_punctuator
+  enable_completion: true
+  enable_sentence: true
+  prefix: z
+  tips: "〔cof_punct〕"
+schema:
+  author:
+    - "发明人 王永民先生"
+  dependencies:
+    - easy_en
+  description: |
+    五笔86版 cof扩展版
+    码表源自 ibus-table 删除4字及以上词
+    扩充了大写字母繁体部件字根
+    开头大写字母进入日文假名输入模式
+    按下小写 z 键进入cof符号输入法
+    按下z键时，会提示上次输入的字/词
+    按下Tab键可取消当前输入
+    按下Shift+space 向下选择
+    扩展人：Cof-Lee 2020-09-07
+
+  name: "五笔86_cof"
+  schema_id: wubi86_cof
+  version: 1.3
+simplifier:
+  opencc_config: s2t.json
+  option_name: zh_trad
+  show_in_comment: true
+  tips: all
+speller:
+  alphabet: abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
+  delimiter: "/"
+style:
+  color_scheme: cof_color
+  font_face: Serif_Cof
+  font_point: 18
+  label_format: "%s "
+  layout:
+    border_width: 3
+    candidate_spacing: 5
+    hilite_padding: 1
+    hilite_spacing: 5
+    margin_x: 10
+    margin_y: 10
+    min_height: 0
+    min_width: 160
+    round_corner: 15
+    spacing: 10
+switches:
+  - name: ascii_mode
+    reset: 1
+    states: ["中", "英"]
+  - name: extended_charset
+    reset: 1
+  - options: [gbk, utf8]
+    reset: 1
+    states: [Gbk, Utf8]
+  - name: ascii_punct
+    reset: 0
+  - name: cof_trans
+    reset: 0
+    states: ["关", "🐷颜"]
+  - name: zh_trad
+    reset: 0
+    states: ["关", "繁s2t"]
+  - name: pinyin
+    reset: 0
+    states: ["关", "拼音"]
+  - name: gbk_code
+    reset: 0
+    states: ["关", "国gbk"]
+  - name: Utf16_code
+    reset: 0
+    states: ["关", "统u16"]
+  - name: tongyong
+    reset: 0
+    states: ["关", "通用规范"]
+  - name: dic_4w_en
+    reset: 0
+    states: ["关", "en英t汉"]
+  - name: punct
+    reset: 0
+    states: ["关", "符号"]
+tongyong:
+  opencc_config: cn_stand_char.json
+  option_name: tongyong
+  show_in_comment: true
+  tips: char
+translator:
+  comment_format:
+    - "xform/~/ -/"
+  dictionary: wubi86_cof
+  disable_user_dict_for_patterns:
+    - "^z.*$"
+  enable_charset_filter: true
+  enable_completion: true
+  enable_encoder: false
+  enable_sentence: true
+  enable_user_dict: false
+  encode_commit_history: false
+  max_phrase_length: 12
+  prism: wubi86_cof

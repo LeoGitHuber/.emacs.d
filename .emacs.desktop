@@ -1,0 +1,43 @@
+;; -*- mode: emacs-lisp; lexical-binding:t; coding: utf-8-emacs; -*-
+;; --------------------------------------------------------------------------
+;; Desktop File for Emacs
+;; --------------------------------------------------------------------------
+;; Created Wed Jan  4 12:27:11 2023
+;; Desktop file format version 208
+;; Emacs version 29.0.60
+
+;; Global section:
+(setq desktop-saved-frameset [frameset 1 (25525 31 144678 592000) (desktop . "208") "leo@leo-Lenovo-Legion-Y7000P-2020" nil nil ((((minibuffer . t) (undecorated) (override-redirect) (font . "-UKWN-Iosevka Fixed-regular-normal-normal-*-35-*-*-*-m-0-iso10646-1") (border-width . 0) (internal-border-width . 0) (child-frame-border-width) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars . right) (horizontal-scroll-bars) (foreground-color . "#ffffff") (background-color . "#000000") (mouse-color . "black") (border-color . "black") (screen-gamma) (line-spacing) (left-fringe . 8) (right-fringe . 8) (no-special-glyphs) (scroll-bar-foreground) (scroll-bar-background) (menu-bar-lines . 0) (tab-bar-lines . 0) (tool-bar-lines . 0) (title) (wait-for-wm . t) (tool-bar-position . top) (inhibit-double-buffering) (icon-type . t) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 32) (scroll-bar-height . 32) (alpha) (alpha-background) (no-focus-on-map) (no-accept-focus) (fullscreen . maximized) (visibility . t) (use-frame-synchronization) (skip-taskbar) (z-group) (display-type . color) (background-mode . dark) (cursor-color . "#ffffff") (font-parameter) (sticky) (shaded) (environment) (dnd-root-window-position) (last-focus-update . t) (frameset--id . "792E-5ED1-8BD6-BF37") (frameset--mini t . t) (modeline . t) (unsplittable) (icon-name) (display . ":1") (explicit-name) (tabs (current-tab (name . "emacs.d") (explicit-name))) (height . 49) (width . 224) (left + -2) (top . 52)) ((min-height . 4) (min-width . 10) (min-height-ignore . 4) (min-width-ignore . 5) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 176) (min-pixel-width . 180) (min-pixel-height-ignore . 176) (min-pixel-width-ignore . 90) (min-pixel-height-safe . 44) (min-pixel-width-safe . 36)) leaf (pixel-width . 4096) (pixel-height . 2132) (total-width . 228) (total-height . 48) (normal-height . 1.0) (normal-width . 1.0) (buffer "configuration.org" (selected . t) (hscroll . 0) (fringes 8 8 nil nil) (margins nil) (scroll-bars nil 2 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 2055) (start . 1)) (prev-buffers ("init.el" 1 1) ("configuration.org" 1 2055) ("*Messages*" 1 1614) ("*eaf-epc con 4*" 1 1) ("*eaf*" 1 1) ("*lsp-bridge-epc con 4*" 1 1) ("*lsp-bridge*" 1 1) ("*scratch*" 1 1))))])
+(setq desktop-missing-file-warning nil)
+(setq tags-file-name nil)
+(setq tags-table-list nil)
+(setq search-ring nil)
+(setq regexp-search-ring '(#("help" 0 4 (isearch-case-fold-search t))))
+(setq register-alist nil)
+(setq file-name-history '("~/.emacs.d/init.el" "~/Downloads/emacs.d/" "~/.emacs.d/configuration.org" "~/.emacs.d/configuration.el"))
+
+;; Buffer section -- buffers listed in same order as in buffer list:
+(desktop-create-buffer 208
+  "/home/leo/.emacs.d/configuration.org"
+  "configuration.org"
+  'org-mode
+  '(display-line-numbers-mode org-superstar-mode yas-minor-mode lsp-bridge-mode evil-local-mode font-lock-mode)
+  2055
+  '(2055 nil)
+  nil
+  nil
+  '((buffer-display-time 25525 25 902305 846000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines . t))
+  '((mark-ring (1437 1437 1437 1496 73))))
+
+(desktop-create-buffer 208
+  "/home/leo/.emacs.d/init.el"
+  "init.el"
+  'emacs-lisp-mode
+  '(font-lock-mode eldoc-mode evil-local-mode yas-minor-mode lsp-bridge-mode display-line-numbers-mode)
+  1
+  '(1 nil)
+  nil
+  nil
+  '((buffer-display-time 25525 9 255631 828000) (buffer-file-coding-system . prefer-utf-8-unix) (overwrite-mode))
+  '((mark-ring nil)))
+

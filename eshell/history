@@ -1,0 +1,88 @@
+cd ..
+git clone https://github.com/redguardtoo/emacs.d.git
+git clone https://github.com/redguardtoo/emacs.d.git
+git clone https://github.com/redguardtoo/emacs.d.git
+git clone https://github.com/redguardtoo/emacs.d.git
+exit
+cd Downloads/
+exit
+git clone https://github.com/daviwil/emacs-from-scratch.git
+ls -a
+cd Documents
+ls -a
+git clone https://github.com/manateelazycat/lsp-bridge.git
+exit
+cd ..
+exit
+cd ..
+cd ~/.emacs.d
+cd site-lisp
+cd ~/Downloads/
+ls -a
+git clone https://github.com/EvanMeek/.emacs.d.git ~/Downloads/EvanMeek.emacs
+exit
+ls -a /usr/local/lib
+gcc 2005_1.c
+ls -a
+./a.out
+a.out
+.\a.out
+./a.out
+gcc 2005_1.c
+./a.out
+gcc 2005_1.c
+./a.out
+gcc 2005_1.c
+./a.out
+gcc 2005_1.c
+./a.out
+exit
+gcc temp.c
+./a.out
+gcc temp.c
+./a.out
+gcc temp.c
+./a.out
+gcc 2005_1.c
+./a.out
+gcc 2005_1.c
+./a.out
+gcc 2005_1.c
+./a.out
+gcc 2005_1.c
+./a.out
+gcc 2005_1.c
+./a.out
+./a.out
+./a.out
+./a.out
+clean
+cls
+clc
+gcc temp.c
+./a.out
+gcc temp.c
+./a.out
+gcc temp.c
+./a.out
+gcc temp.c
+gcc temp.c
+gcc temp.c
+./a.out
+gcc temp.c
+./a.out
+gcc 2005_2.c
+./a.out
+gcc 2005_2.c
+./a.out
+gcc 2005_2.c
+gcc 2005_2.c
+./a.out
+gcc 2005_2.c
+./a.out
+exit
+gcc PAT_basic.c 
+ls -a
+git --help
+git log
+exit

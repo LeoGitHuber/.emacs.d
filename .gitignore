@@ -8,7 +8,6 @@ eshell/
 elpa/
 .emacs.desktop
 eln-cache/
-history/
 .lsp-session-v1/
 .mc-lists.el
 nov-places
@@ -19,4 +18,7 @@ tramp
 transient/
 snippets/
 tutorial/
-*~
+.lsp-session-v1
+configuration.el
+history
+*\~

@@ -61,15 +61,15 @@
   (defvar k-gc-timer
 	(run-with-idle-timer 15 t 'garbage-collect))
 
-  (dolist (mode '(prog-mode-hook tex-mode))
+  (dolist (mode '(prog-mode-hook TeX-mode-hook))
 	(add-hook mode (lambda () (display-line-numbers-mode 1))))
 
   (require 'package)
   (add-to-list 'package-archives '("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/") t)
   (add-to-list 'package-archives '("elpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/") t)
   (add-to-list 'package-archives '("non-elpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/nongnu/") t)
-  (add-to-list 'package-archives '("melpa-stable" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/stable-melpa/") t)
-  ;; (add-to-list 'package-archives '("melpa-en" . "http://melpa.org/packages") t)
+  ;; (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+  ;; (add-to-list 'package-archives '("melpa-stable" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/stable-melpa/") t)
   (add-to-list 'package-archives '("org" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/org"))
   (package-initialize)
 
@@ -324,7 +324,7 @@
 	(evil-define-key 'normal sort-tab-mode-map (kbd "[ B") 'sort-tab-select-first-tab)
 	(evil-define-key 'normal sort-tab-mode-map (kbd "] B") 'sort-tab-select-last-tab)
 	(require 'evil-nerd-commenter)
-	(keymap-global-set "M-/" 'evilnc-comment-or-uncomment-lines)
+	(keymap-global-set "M-/" 'evil-comment-or-uncomment-lines)
 	;; (evil-define-key 'insert 'prog-mode-map (kbd "TAB") 'insert-tab-char)
 	(evil-define-key '(insert normal) org-mode-map (kbd "TAB") 'org-cycle)	
 	(require 'evil-nerd-commenter))
@@ -389,7 +389,7 @@
 #+begin_src emacs-lisp
   ;;(ivy-mode 1)
   (vertico-mode t)
-  (setq-default completion-styles '(orderless basic))
+  (setq-default completion-styles '(substring orderless))
   (marginalia-mode t)
 #+end_src
 
@@ -444,6 +444,7 @@
 								 (lsp-deferred))))
 
   (add-hook 'prog-mode-hook 'yas-minor-mode)
+  (add-hook 'TeX-mode-hook 'yas-minor-mode)
 
   (dolist (hook '(markdown-mode-hook yaml-ts-mode yaml-mode))
 	(add-hook 'hook #'lsp-deferred))
@@ -490,7 +491,7 @@
 
 
 
-  (let ((hls '(emacs-lisp-mode-hook lisp-mode-hook)))
+  (let ((hls '(emacs-lisp-mode-hook lisp-mode-hook TeX-mode-hook)))
 	(dolist (mode hls)
 	  (add-hook mode #'company-mode))
 	)
@@ -800,352 +801,355 @@
 * UI
 
 #+begin_src emacs-lisp
-   (when (display-graphic-p)
-	 (set-face-attribute
-	  'default nil
-	  :font (font-spec :name "PragmataPro"
-					   ;; :weight 'normal
-					   ;; :slant 'normal
-					   :size 13.0)))
+  (when (display-graphic-p)
+	(set-face-attribute
+	 'default nil
+	 :font (font-spec :name "PragmataPro"
+					  ;; :weight 'normal
+					  ;; :slant 'normal
+					  :size 12.5)))
 
-   ;; (when (display-graphic-p)
-   ;; (set-face-attribute
-   ;; 'default nil
-   ;; :font (font-spec :name "Iosevka Fixed"    ;; Input Mono
-   ;; :weight 'normal
-   ;; :slant 'normal
-   ;; :size 13.0))
-   ;; (dolist (charset '(kana han cjk-misc bopomofo))
-   ;; (set-fontset-font
-   ;; (frame-parameter nil 'font)
-   ;; charset
-   ;; (font-spec :name "Source Han Sans SC" :height 100))))
+  ;; (when (display-graphic-p)
+  ;; (set-face-attribute
+  ;; 'default nil
+  ;; :font (font-spec :name "Iosevka Fixed"    ;; Input Mono
+  ;; :weight 'normal
+  ;; :slant 'normal
+  ;; :size 13.0))
+  ;; (dolist (charset '(kana han cjk-misc bopomofo))
+  ;; (set-fontset-font
+  ;; (frame-parameter nil 'font)
+  ;; charset
+  ;; (font-spec :name "Source Han Sans SC" :height 100))))
 
-   ;; (add-to-list 'load-path "~/.emacs.d/site-lisp/awesome-tab")
-   ;; (require 'awesome-tab)
-   ;; (awesome-tab-mode t)
+  ;; (add-to-list 'load-path "~/.emacs.d/site-lisp/awesome-tab")
+  ;; (require 'awesome-tab)
+  ;; (awesome-tab-mode t)
 
-
-
-   (add-to-list 'load-path "~/.emacs.d/site-lisp/sort-tab")
-   (require 'sort-tab)
-   (sort-tab-mode t)
-   (define-key sort-tab-mode-map (kbd "C-]") 'sort-tab-select-next-tab)
-   (require 'all-the-icons)
-
-   ;;  (setq-default mode-line-format (list "%e" mode-line-front-space
-   ;; 							  '(:eval (:propertize
-   ;; 							   ("" mode-line-mule-info mode-line-client mode-line-modified mode-line-remote)
-   ;; 							   display (min-width (5.0))))
-   ;; 							  mode-line-frame-identification mode-line-buffer-identification "   "
-   ;; 							  mode-line-position evil-mode-line-tag
-   ;; 							  (vc-mode vc-mode)
-   ;; 							  "  " mode-line-modes mode-line-misc-info mode-line-end-spaces))
+  (set-face-attribute 'minibuffer-prompt nil :font (font-spec :name "PragmataPro" :weight 'normal :size 12.0))
+  ;; (set-face-attribute 'vertico-current nil :font (font-spec :name "PragmataPro" :weight 'normal :size 12.0))
+  ;; (set-face-attribute 'vertico-multiline nil :font (font-spec :name "PragmataPro" :weight 'normal :size 12.0))
 
 
-   (add-hook 'completion-list-mode-hook #'hide-mode-line-mode)
-   (add-hook 'completion-in-region-mode-hook #'hide-mode-line-mode)
-   (add-hook 'term-mode-hook #'hide-mode-line-mode)
-   (add-hook 'shell-mode-hook #'hide-mode-line-mode)
-   (add-hook 'messages-buffer-mode-hook #'hide-mode-line-mode)
-   (add-hook 'org-roam-mode-hook #'hide-mode-line-mode)
+  (add-to-list 'load-path "~/.emacs.d/site-lisp/sort-tab")
+  (require 'sort-tab)
+  (sort-tab-mode t)
+  (define-key sort-tab-mode-map (kbd "C-]") 'sort-tab-select-next-tab)
+  (require 'all-the-icons)
 
-   (winum-mode 1)
-   (setq winum-ignored-buffers '(
-								 "*sort-tab*"
-								 ))
+  ;;  (setq-default mode-line-format (list "%e" mode-line-front-space
+  ;; 							  '(:eval (:propertize
+  ;; 							   ("" mode-line-mule-info mode-line-client mode-line-modified mode-line-remote)
+  ;; 							   display (min-width (5.0))))
+  ;; 							  mode-line-frame-identification mode-line-buffer-identification "   "
+  ;; 							  mode-line-position evil-mode-line-tag
+  ;; 							  (vc-mode vc-mode)
+  ;; 							  "  " mode-line-modes mode-line-misc-info mode-line-end-spaces))
 
-   (with-eval-after-load 'winum (defun +win-num ()
-								  (let ((n (winum-get-number)))
-									(alist-get
-									 n
-									 '((0 . "🄌")
-									   (1 . "❶")
-									   (2 . "❷")
-									   (3 . "❸")
-									   (4 . "❹")
-									   (5 . "❺")
-									   (6 . "❻")
-									   (7 . "❼")
-									   (8 . "❽")
-									   (9 . "❾"))))))
 
-   (add-hook 'winum-mode-hook '(lambda () (setq winum-auto-setup-mode-line nil)))
+  (add-hook 'completion-list-mode-hook #'hide-mode-line-mode)
+  (add-hook 'completion-in-region-mode-hook #'hide-mode-line-mode)
+  (add-hook 'term-mode-hook #'hide-mode-line-mode)
+  (add-hook 'shell-mode-hook #'hide-mode-line-mode)
+  (add-hook 'messages-buffer-mode-hook #'hide-mode-line-mode)
+  (add-hook 'org-roam-mode-hook #'hide-mode-line-mode)
 
-   (defun ml-fill-space (right-format)
-	 "Return empty space using FACE and leaving RESERVE space on the right."
-	 (propertize " "
-				 ;; 'display `((space :align-to (- (+ right right-fringe right-margin),(/ (string-pixel-width (format-mode-line right-format)) (window-font-width nil 'mode-line) 1.0))))
-				 'display `((space :align-to (- (+ right right-fringe right-margin),(/ (string-pixel-width (format-mode-line right-format)) 13.5 1.0))))
-				 ;; 'display `((space :align-to (- right, (string-width (format-mode-line right-format)))))
-				 ;; 'display `((space :align-to (- (+ right right-fringe right-margin)
-				 ;; 							 (,(string-pixel-width (format-mode-line right-format))))))
-				 )
-	 )
+  (winum-mode 1)
+  (setq winum-ignored-buffers '(
+								"*sort-tab*"
+								))
 
-   (defun target-all-the-icons-icon-for-mode (mode &rest arg-overrides)
-	 "Similar to Func all-the-icons-icon-for-mode."
-	 (let* ((icon (cdr (or (assoc mode all-the-icons-mode-icon-alist)
-						   (assoc (get mode 'derived-mode-parent) all-the-icons-mode-icon-alist))))
-			(args (cdr icon)))
-	   (when arg-overrides (if (member :face arg-overrides)
-							   (if (member :foreground (nth 1 (member :face arg-overrides)))
-								   (setq args (append `(,(car args)) arg-overrides (seq-subseq args 0 (- (safe-length args) 2))))
-								 (progn
-								   (let* ((args-temp (member :face arg-overrides))
-										  (args-rest (car (cdr args-temp))))
-									 (setq arg-overrides (butlast arg-overrides (safe-length args-temp)))
-									 (setq args-temp (nthcdr 2 args-temp))
-									 (if args-temp
-										 (progn
-										   (setq args-rest (append (append args-rest (list :foreground)) (list (face-foreground (nth (- (safe-length icon) 1) icon)))))
-										   (setq args-temp (append (list args-rest) args-temp))
-										   )
-									   (setq args-temp (list (append (append args-rest (list :foreground)) (list (face-foreground (nth (- (safe-length icon) 1) icon))))))
-									   )
-									 (setq arg-overrides (append arg-overrides '(:face) args-temp))
-									 )
-								   (setq args (append `(,(car args)) arg-overrides (butlast (cdr args) 2))))
-								 )
-							 (setq args (append `(,(car args)) arg-overrides (cdr args)))
-							 ))
-	   (if icon (apply (car icon) args) mode)))
+  (with-eval-after-load 'winum (defun +win-num ()
+								 (let ((n (winum-get-number)))
+								   (alist-get
+									n
+									'((0 . "🄌")
+									  (1 . "❶")
+									  (2 . "❷")
+									  (3 . "❸")
+									  (4 . "❹")
+									  (5 . "❺")
+									  (6 . "❻")
+									  (7 . "❼")
+									  (8 . "❽")
+									  (9 . "❾"))))))
 
-   (defun target-all-the-icons-icon-for-file (file &rest arg-overrides)
-	 "Get the formatted icon for FILE.
+  (add-hook 'winum-mode-hook '(lambda () (setq winum-auto-setup-mode-line nil)))
+
+  (defun ml-fill-space (right-format)
+	"Return empty space using FACE and leaving RESERVE space on the right."
+	(propertize " "
+				;; 'display `((space :align-to (- (+ right right-fringe right-margin),(/ (string-pixel-width (format-mode-line right-format)) (window-font-width nil 'mode-line) 1.0))))
+				'display `((space :align-to (- (+ right right-fringe right-margin),(/ (string-pixel-width (format-mode-line right-format)) 13.5 1.0))))
+				;; 'display `((space :align-to (- right, (string-width (format-mode-line right-format)))))
+				;; 'display `((space :align-to (- (+ right right-fringe right-margin)
+				;; 							 (,(string-pixel-width (format-mode-line right-format))))))
+				)
+	)
+
+  (defun target-all-the-icons-icon-for-mode (mode &rest arg-overrides)
+	"Similar to Func all-the-icons-icon-for-mode."
+	(let* ((icon (cdr (or (assoc mode all-the-icons-mode-icon-alist)
+						  (assoc (get mode 'derived-mode-parent) all-the-icons-mode-icon-alist))))
+		   (args (cdr icon)))
+	  (when arg-overrides (if (member :face arg-overrides)
+							  (if (member :foreground (nth 1 (member :face arg-overrides)))
+								  (setq args (append `(,(car args)) arg-overrides (seq-subseq args 0 (- (safe-length args) 2))))
+								(progn
+								  (let* ((args-temp (member :face arg-overrides))
+										 (args-rest (car (cdr args-temp))))
+									(setq arg-overrides (butlast arg-overrides (safe-length args-temp)))
+									(setq args-temp (nthcdr 2 args-temp))
+									(if args-temp
+										(progn
+										  (setq args-rest (append (append args-rest (list :foreground)) (list (face-foreground (nth (- (safe-length icon) 1) icon)))))
+										  (setq args-temp (append (list args-rest) args-temp))
+										  )
+									  (setq args-temp (list (append (append args-rest (list :foreground)) (list (face-foreground (nth (- (safe-length icon) 1) icon))))))
+									  )
+									(setq arg-overrides (append arg-overrides '(:face) args-temp))
+									)
+								  (setq args (append `(,(car args)) arg-overrides (butlast (cdr args) 2))))
+								)
+							(setq args (append `(,(car args)) arg-overrides (cdr args)))
+							))
+	  (if icon (apply (car icon) args) mode)))
+
+  (defun target-all-the-icons-icon-for-file (file &rest arg-overrides)
+	"Get the formatted icon for FILE.
 	   ARG-OVERRIDES should be a plist containining `:height',
 	   `:v-adjust' or `:face' properties like in the normal icon
 	   inserting functions."
-	 (let* ((ext (file-name-extension file))
-			(icon (or (all-the-icons-match-to-alist file all-the-icons-regexp-icon-alist)
-					  (and ext
-						   (cdr (assoc (downcase ext)
-									   all-the-icons-extension-icon-alist)))
-					  all-the-icons-default-file-icon))
-			(args (cdr icon)))
-	   (when arg-overrides (if (member :face arg-overrides)
-							   (if (member :foreground (nth 1 (member :face arg-overrides)))
-								   (setq args (append `(,(car args)) arg-overrides (seq-subseq args 0 (- (safe-length args) 2))))
-								 (progn
-								   (let* ((args-temp (member :face arg-overrides))
-										  (args-rest (car (cdr args-temp))))
-									 (setq arg-overrides (butlast arg-overrides (safe-length args-temp)))
-									 (setq args-temp (nthcdr 2 args-temp))
-									 (if args-temp
-										 (progn
-										   (setq args-rest (append (append args-rest (list :foreground)) (list (face-foreground (nth (- (safe-length icon) 1) icon)))))
-										   (setq args-temp (append (list args-rest) args-temp))
-										   )
-									   (setq args-temp (list (append (append args-rest (list :foreground)) (list (face-foreground (nth (- (safe-length icon) 1) icon))))))
-									   )
-									 (setq arg-overrides (append arg-overrides '(:face) args-temp))
-									 )
-								   (setq args (append `(,(car args)) arg-overrides (butlast (cdr args) 2))))
-								 )
-							 (setq args (append `(,(car args)) arg-overrides (cdr args)))
-							 ))
-	   (apply (car icon) args)))
+	(let* ((ext (file-name-extension file))
+		   (icon (or (all-the-icons-match-to-alist file all-the-icons-regexp-icon-alist)
+					 (and ext
+						  (cdr (assoc (downcase ext)
+									  all-the-icons-extension-icon-alist)))
+					 all-the-icons-default-file-icon))
+		   (args (cdr icon)))
+	  (when arg-overrides (if (member :face arg-overrides)
+							  (if (member :foreground (nth 1 (member :face arg-overrides)))
+								  (setq args (append `(,(car args)) arg-overrides (seq-subseq args 0 (- (safe-length args) 2))))
+								(progn
+								  (let* ((args-temp (member :face arg-overrides))
+										 (args-rest (car (cdr args-temp))))
+									(setq arg-overrides (butlast arg-overrides (safe-length args-temp)))
+									(setq args-temp (nthcdr 2 args-temp))
+									(if args-temp
+										(progn
+										  (setq args-rest (append (append args-rest (list :foreground)) (list (face-foreground (nth (- (safe-length icon) 1) icon)))))
+										  (setq args-temp (append (list args-rest) args-temp))
+										  )
+									  (setq args-temp (list (append (append args-rest (list :foreground)) (list (face-foreground (nth (- (safe-length icon) 1) icon))))))
+									  )
+									(setq arg-overrides (append arg-overrides '(:face) args-temp))
+									)
+								  (setq args (append `(,(car args)) arg-overrides (butlast (cdr args) 2))))
+								)
+							(setq args (append `(,(car args)) arg-overrides (cdr args)))
+							))
+	  (apply (car icon) args)))
 
-   (defgroup mode-line-personal nil
-	 "Personal Mode Line Setting"
-	 :prefix "mode-line-area-"
-	 :group 'basic-faces
-	 :group 'appearance)
+  (defgroup mode-line-personal nil
+	"Personal Mode Line Setting"
+	:prefix "mode-line-area-"
+	:group 'basic-faces
+	:group 'appearance)
 
-   (defface mode-line-area-0
-	 '((((background dark)) :background "#665c54")
-	   (((background light)) :background "#ebdbb2"))
-	 "Face for default background of personal mode line"
-	 :group 'mode-line-personal)
+  (defface mode-line-area-0
+	'((((background dark)) :background "#665c54")
+	  (((background light)) :background "#ebdbb2"))
+	"Face for default background of personal mode line"
+	:group 'mode-line-personal)
 
-   (defface mode-line-area-1
-	 '((((background dark)) :background "#83a598" :foreground "#1d2021")
-	   (((background light)) :background "#076678" :foreground "#f9f5d7"))
-	 "Face for personal mode line setting area 1"
-	 :group 'mode-line-personal)
+  (defface mode-line-area-1
+	'((((background dark)) :background "#83a598" :foreground "#1d2021")
+	  (((background light)) :background "#076678" :foreground "#f9f5d7"))
+	"Face for personal mode line setting area 1"
+	:group 'mode-line-personal)
 
-   (defface mode-line-area-2
-	 '((((background dark)) :background "#504945" :foreground "#d5c4a1")
-	   (((background light)) :background "#bdae93" :foreground "#665c54"))
-	 "Face for personal mode line setting area 2"
-	 :group 'mode-line-personal)
+  (defface mode-line-area-2
+	'((((background dark)) :background "#504945" :foreground "#d5c4a1")
+	  (((background light)) :background "#bdae93" :foreground "#665c54"))
+	"Face for personal mode line setting area 2"
+	:group 'mode-line-personal)
 
-   (defface mode-line-area-3
-	 '((((background dark)) :background "#3c3836" :foreground "#ebdbb2")
-	   (((background light)) :background "#d5c4a1" :foreground "#504945"))
-	 "Face for personal mode line setting area 3"
-	 :group 'mode-line-personal)
+  (defface mode-line-area-3
+	'((((background dark)) :background "#3c3836" :foreground "#ebdbb2")
+	  (((background light)) :background "#d5c4a1" :foreground "#504945"))
+	"Face for personal mode line setting area 3"
+	:group 'mode-line-personal)
 
-   (defface input-method-indicator-face
-	 '((((background dark)) :foreground "#d65d0e")
-	   (((background light)) :foreground "#af3a03"))
-	 "Face for personal mode line setting area 2"
-	 :group 'mode-line-personal)
+  (defface input-method-indicator-face
+	'((((background dark)) :foreground "#d65d0e")
+	  (((background light)) :foreground "#af3a03"))
+	"Face for personal mode line setting area 2"
+	:group 'mode-line-personal)
 
-   (defface mode-line-area-4
-	 '((((background dark)) :foreground "#d5c4a1")
-	   (((background light)) :foreground "#504945"))
-	 "Face fore personal mode line setting area 5"
-	 :group 'mode-line-personal)
+  (defface mode-line-area-4
+	'((((background dark)) :foreground "#d5c4a1")
+	  (((background light)) :foreground "#504945"))
+	"Face fore personal mode line setting area 5"
+	:group 'mode-line-personal)
 
-   (defface mode-line-area-5
-	 '((((background dark)) :background "#8ec07c" :foreground "#1d2021")
-	   (((background light)) :background "#427b58" :foreground "#f9f5d7"))
-	 "Face for personal mode line setting area 5"
-	 :group 'mode-line-personal)
+  (defface mode-line-area-5
+	'((((background dark)) :background "#8ec07c" :foreground "#1d2021")
+	  (((background light)) :background "#427b58" :foreground "#f9f5d7"))
+	"Face for personal mode line setting area 5"
+	:group 'mode-line-personal)
 
-   (defface mode-line-seperator
-	 '((((background dark)) :foreground "#83a598")
-	   (((background light)) :foreground "#076678"))
-	 "Face for personal mode lien setting separator"
-	 :group 'mode-line-personal)
+  (defface mode-line-seperator
+	'((((background dark)) :foreground "#83a598")
+	  (((background light)) :foreground "#076678"))
+	"Face for personal mode lien setting separator"
+	:group 'mode-line-personal)
 
-   (set-face-attribute 'mode-line nil
-					   :inherit 'mode-line-area-0
-					   :font (font-spec
-							  ;; :name "JetBrains Mono"
-							  :name "Berkeley Mono"
-							  :weight 'normal
-							  :size 15))
-   ;; :height 95)
+  (set-face-attribute 'mode-line nil
+					  :inherit 'mode-line-area-0
+					  :font (font-spec
+							 ;; :name "JetBrains Mono"
+							 :name "Berkeley Mono"
+							 :weight 'normal
+							 :size 15))
+  ;; :height 95)
 
-   (set-face-attribute 'mode-line-inactive nil :inherit 'mode-line)
+  (set-face-attribute 'mode-line-inactive nil :inherit 'mode-line)
 
-   (setq-default mode-line-format '((:eval (concat
-											(propertize " " 'face 'mode-line-area-1)
-											(cond (buffer-read-only (propertize (all-the-icons-faicon "lock" :height 1.0 :v-adjust 0.02 :face 'mode-line-area-1) 'help-echo "Read Only"))
-												  ((buffer-modified-p) (propertize (all-the-icons-faicon "chain-broken" :height 1.0 :v-adjust -0.0 :face 'mode-line-area-1) 'help-echo "Buffer Modified"))
-												  ((equal (buffer-modified-p) nil) (propertize (all-the-icons-faicon "link" :height 1.0 :v-adjust -0.0 :face 'mode-line-area-1) 'help-echo "Buffer Safe")))
-											;; " | "
-											(propertize " " 'face `(:height 1.2 :inherit mode-line-area-1))
-											(propertize (when (bound-and-true-p winum-mode) (concat (+win-num) " ")) 'face `(:height 1.2 :inherit mode-line-area-1) 'help-echo "Windows Numbering" 'display '(raise 0.0))
-											(propertize " ")
-											;;  (propertize (all-the-icons-alltheicon "arrow-right" :face `(:foreground "#83a598" :background "#504945" :height 1.5) :v-adjust -0.04))
-											(if (buffer-file-name)
-												(concat
-												 (propertize (format "%s " (abbreviate-file-name (file-name-directory (buffer-file-name)))) 'face `(:weight bold :inherit mode-line-area-2) 'display '(raise 0.11) 'help-echo "Current Directory")
-												 (propertize "=>" 'face `(:weight bold :height 1.2))))
-											(propertize " " 'face `(:inherit mode-line-area-3))
-											(propertize (if (or (buffer-file-name) (all-the-icons-auto-mode-match?))
-															(if (equal (car custom-enabled-themes) (car themes_chosen))
-																(target-all-the-icons-icon-for-file (buffer-name) :height 1.1 :v-adjust 0.0 :face `(:background "#d5c4a1"))
-															  (target-all-the-icons-icon-for-file (buffer-name) :height 1.1 :v-adjust 0.0 :face `(:background "#3c3836"))
-															  )
-														  (if (equal (car custom-enabled-themes) (car themes_chosen))
-															  (target-all-the-icons-icon-for-mode major-mode :height 1.1 :v-adjust 0.0 :face `(:background "#d5c4a1"))
-															(target-all-the-icons-icon-for-mode major-mode :height 1.1 :v-adjust 0.0 :face `(:background "#3c3836"))
-															))    ;; 'face `(:family ,(all-the-icons-fileicon-family) :background "#504945")
-														'display '(raise -0.08)
-														'help-echo (symbol-name (symbol-value 'major-mode)))
-											(propertize " %b" 'face `(:weight bold :inherit mode-line-area-3) 'display '(raise 0.11) 'help-echo "Current Buffer Name")
-											(propertize " " 'face `(:inherit mode-line-area-3))    ;;  (:eval (propertize (all-the-icons-alltheicon "arrow-right" :face `(:foreground "#504945" :height 1.5) :v-adjust -0.04)))
-											(let* ((right-part '(
-																 ;; Git
-																 (:eval (concat (when vc-mode
-																				  (cond ((string-match "Git[:-]" vc-mode)
-																						 (let ((branch (mapconcat 'concat (cdr (split-string vc-mode "[:-]")) "-")))
-																						   (concat
-																							(propertize (all-the-icons-alltheicon "git" :height 1.1 :v-adjust 0.05))
-																							" "    ;; " · "
-																							(propertize (all-the-icons-octicon "primitive-dot" :height 0.6) 'display '(raise 0.35))
-																							" "
-																							(propertize (all-the-icons-octicon "git-branch" :height 1.1 :v-adjust 0.05))
-																							(propertize (format " %s" branch) 'face `(:weight bold) 'display '(raise 0.2))
-																							(propertize " |" 'face `(:weight bold :inherit mode-line-seperator) 'display '(raise 0.1)))))
-																						((string-match "SVN-" vc-mode)
-																						 (let ((revision (cadr (split-string vc-mode "-"))))
-																						   (concat
-																							(propertize (format " %s" (all-the-icons-faicon "cloud")) 'face `(:height 1.1) 'display '(raise -0.0))
-																							(propertize (format " · %s" revision) 'face `(:height 0.9)))))
-																						(t (format "%s" vc-mode))))
-																				(propertize " ")
-																				;; Flycheck Information
-																				(pcase flycheck-last-status-change
-																				  (`finished (if flycheck-current-errors
-																								 (let-alist (flycheck-count-errors flycheck-current-errors)
-																								   (let ((i (or .info 0))
-																										 (w (or .warning 0))
-																										 (e (or .error 0)))
-																									 (concat (propertize (all-the-icons-faicon "info" :v-adjust 0.05)
-																														 'help-echo "Show Flycheck Error"
-																														 'local-map (make-mode-line-mouse-map
-																																	 'mouse-1 (lambda() (interactive) (flycheck-list-errors))))
-																											 (propertize (concat " " (number-to-string i)) 'face 'bold 'display '(raise 0.1)
-																														 'help-echo "Show Flycheck Error"
-																														 'local-map (make-mode-line-mouse-map
-																																	 'mouse-1 (lambda() (interactive) (flycheck-list-errors))))
-																											 (propertize (concat " " (all-the-icons-octicon "primitive-dot" :height 0.6 :v-adjust 0.0) " ") 'display '(raise 0.3))
-																											 (propertize (all-the-icons-faicon "odnoklassniki" :height 0.8 :v-adjust 0.12)
-																														 'help-echo "Show Flycheck Error"
-																														 'local-map (make-mode-line-mouse-map
-																																	 'mouse-1 (lambda() (interactive) (flycheck-list-errors))))
-																											 (propertize (concat  " " (number-to-string w)) 'face 'bold 'display '(raise 0.1)
-																														 'help-echo "Show Flycheck Error"
-																														 'local-map (make-mode-line-mouse-map
-																																	 'mouse-1 (lambda() (interactive) (flycheck-list-errors))))
-																											 (propertize (concat " " (all-the-icons-octicon "primitive-dot" :height 0.6 :v-adjust 0.0) " ") 'display '(raise 0.3))
-																											 (propertize (all-the-icons-faicon "bug" :height 0.9 :v-adjust 0.04)
-																														 'help-echo "Show Flycheck Error"
-																														 'local-map (make-mode-line-mouse-map
-																																	 'mouse-1 (lambda() (interactive) (flycheck-list-errors))))
-																											 (propertize (concat " " (number-to-string e)) 'face 'bold 'display '(raise 0.1)
-																														 'help-echo "Show Flycheck Error"
-																														 'local-map (make-mode-line-mouse-map
-																																	 'mouse-1 (lambda() (interactive) (flycheck-list-errors))))
-																											 )))
-																							   (propertize "✔ No Issues" 'face `(:weight bold) 'display '(raise 0.12)))
-																							 )
-																				  (`running    (propertize "⟲ Running" 'face `(:weight bold)))
-																				  (`no-checker (concat (propertize (all-the-icons-octicon "alert") 'display '(raise 0.07))
-																									   (propertize " No Checker" 'display '(raise 0.12) 'face `(:weight bold))))
-																				  ;; (`no-checker "⚠ No Checker")
-																				  (`not-checked (concat (propertize (all-the-icons-material "visibility_off" :v-adjust -0.1))
-																										(propertize " Disabled" 'face 'bold 'display '(raise 0.1))))
-																				  ;; (`not-checked "⚠ Disabled")
-																				  (`errored    (propertize "✖ Error" 'face `(:weight bold)))
-																				  ;; (`interrupted "⛔ Interrupted")
-																				  (`interrupted (concat (propertize (all-the-icons-octicon "circle-slash"))
-																										(propertize " Interrupted")))
-																				  (`suspinnnncious (concat (propertize (all-the-icons-faicon "question"))
-																										   (propertize " Suspicious"))))
-																				;;  (propertize " "))
-																				;;  (propertize "%-"))
+  (setq-default mode-line-format '((:eval (concat
+										   (propertize " " 'face 'mode-line-area-1)
+										   (cond (buffer-read-only (propertize (all-the-icons-faicon "lock" :height 1.0 :v-adjust 0.02 :face 'mode-line-area-1) 'help-echo "Read Only"))
+												 ((buffer-modified-p) (propertize (all-the-icons-faicon "chain-broken" :height 1.0 :v-adjust -0.0 :face 'mode-line-area-1) 'help-echo "Buffer Modified"))
+												 ((equal (buffer-modified-p) nil) (propertize (all-the-icons-faicon "link" :height 1.0 :v-adjust -0.0 :face 'mode-line-area-1) 'help-echo "Buffer Safe")))
+										   ;; " | "
+										   (propertize " " 'face `(:height 1.2 :inherit mode-line-area-1))
+										   (propertize (when (bound-and-true-p winum-mode) (concat (+win-num) " ")) 'face `(:height 1.2 :inherit mode-line-area-1) 'help-echo "Windows Numbering" 'display '(raise 0.0))
+										   (propertize " ")
+										   ;;  (propertize (all-the-icons-alltheicon "arrow-right" :face `(:foreground "#83a598" :background "#504945" :height 1.5) :v-adjust -0.04))
+										   (if (buffer-file-name)
+											   (concat
+												(propertize (format "%s " (abbreviate-file-name (file-name-directory (buffer-file-name)))) 'face `(:weight bold :inherit mode-line-area-2) 'display '(raise 0.11) 'help-echo "Current Directory")
+												(propertize "=>" 'face `(:weight bold :height 1.2))))
+										   (propertize " " 'face `(:inherit mode-line-area-3))
+										   (propertize (if (or (buffer-file-name) (all-the-icons-auto-mode-match?))
+														   (if (equal (car custom-enabled-themes) (car themes_chosen))
+															   (target-all-the-icons-icon-for-file (buffer-name) :height 1.1 :v-adjust 0.0 :face `(:background "#d5c4a1"))
+															 (target-all-the-icons-icon-for-file (buffer-name) :height 1.1 :v-adjust 0.0 :face `(:background "#3c3836"))
+															 )
+														 (if (equal (car custom-enabled-themes) (car themes_chosen))
+															 (target-all-the-icons-icon-for-mode major-mode :height 1.1 :v-adjust 0.0 :face `(:background "#d5c4a1"))
+														   (target-all-the-icons-icon-for-mode major-mode :height 1.1 :v-adjust 0.0 :face `(:background "#3c3836"))
+														   ))    ;; 'face `(:family ,(all-the-icons-fileicon-family) :background "#504945")
+													   'display '(raise -0.08)
+													   'help-echo (symbol-name (symbol-value 'major-mode)))
+										   (propertize " %b" 'face `(:weight bold :inherit mode-line-area-3) 'display '(raise 0.11) 'help-echo "Current Buffer Name")
+										   (propertize " " 'face `(:inherit mode-line-area-3))    ;;  (:eval (propertize (all-the-icons-alltheicon "arrow-right" :face `(:foreground "#504945" :height 1.5) :v-adjust -0.04)))
+										   (let* ((right-part '(
+																;; Git
+																(:eval (concat (when vc-mode
+																				 (cond ((string-match "Git[:-]" vc-mode)
+																						(let ((branch (mapconcat 'concat (cdr (split-string vc-mode "[:-]")) "-")))
+																						  (concat
+																						   (propertize (all-the-icons-alltheicon "git" :height 1.1 :v-adjust 0.05))
+																						   " "    ;; " · "
+																						   (propertize (all-the-icons-octicon "primitive-dot" :height 0.6) 'display '(raise 0.35))
+																						   " "
+																						   (propertize (all-the-icons-octicon "git-branch" :height 1.1 :v-adjust 0.05))
+																						   (propertize (format " %s" branch) 'face `(:weight bold) 'display '(raise 0.2))
+																						   (propertize " |" 'face `(:weight bold :inherit mode-line-seperator) 'display '(raise 0.1)))))
+																					   ((string-match "SVN-" vc-mode)
+																						(let ((revision (cadr (split-string vc-mode "-"))))
+																						  (concat
+																						   (propertize (format " %s" (all-the-icons-faicon "cloud")) 'face `(:height 1.1) 'display '(raise -0.0))
+																						   (propertize (format " · %s" revision) 'face `(:height 0.9)))))
+																					   (t (format "%s" vc-mode))))
+																			   (propertize " ")
+																			   ;; Flycheck Information
+																			   (pcase flycheck-last-status-change
+																				 (`finished (if flycheck-current-errors
+																								(let-alist (flycheck-count-errors flycheck-current-errors)
+																								  (let ((i (or .info 0))
+																										(w (or .warning 0))
+																										(e (or .error 0)))
+																									(concat (propertize (all-the-icons-faicon "info" :v-adjust 0.05)
+																														'help-echo "Show Flycheck Error"
+																														'local-map (make-mode-line-mouse-map
+																																	'mouse-1 (lambda() (interactive) (flycheck-list-errors))))
+																											(propertize (concat " " (number-to-string i)) 'face 'bold 'display '(raise 0.1)
+																														'help-echo "Show Flycheck Error"
+																														'local-map (make-mode-line-mouse-map
+																																	'mouse-1 (lambda() (interactive) (flycheck-list-errors))))
+																											(propertize (concat " " (all-the-icons-octicon "primitive-dot" :height 0.6 :v-adjust 0.0) " ") 'display '(raise 0.3))
+																											(propertize (all-the-icons-faicon "odnoklassniki" :height 0.8 :v-adjust 0.12)
+																														'help-echo "Show Flycheck Error"
+																														'local-map (make-mode-line-mouse-map
+																																	'mouse-1 (lambda() (interactive) (flycheck-list-errors))))
+																											(propertize (concat  " " (number-to-string w)) 'face 'bold 'display '(raise 0.1)
+																														'help-echo "Show Flycheck Error"
+																														'local-map (make-mode-line-mouse-map
+																																	'mouse-1 (lambda() (interactive) (flycheck-list-errors))))
+																											(propertize (concat " " (all-the-icons-octicon "primitive-dot" :height 0.6 :v-adjust 0.0) " ") 'display '(raise 0.3))
+																											(propertize (all-the-icons-faicon "bug" :height 0.9 :v-adjust 0.04)
+																														'help-echo "Show Flycheck Error"
+																														'local-map (make-mode-line-mouse-map
+																																	'mouse-1 (lambda() (interactive) (flycheck-list-errors))))
+																											(propertize (concat " " (number-to-string e)) 'face 'bold 'display '(raise 0.1)
+																														'help-echo "Show Flycheck Error"
+																														'local-map (make-mode-line-mouse-map
+																																	'mouse-1 (lambda() (interactive) (flycheck-list-errors))))
+																											)))
+																							  (propertize "✔ No Issues" 'face `(:weight bold) 'display '(raise 0.12)))
+																							)
+																				 (`running    (propertize "⟲ Running" 'face `(:weight bold)))
+																				 (`no-checker (concat (propertize (all-the-icons-octicon "alert") 'display '(raise 0.07))
+																									  (propertize " No Checker" 'display '(raise 0.12) 'face `(:weight bold))))
+																				 ;; (`no-checker "⚠ No Checker")
+																				 (`not-checked (concat (propertize (all-the-icons-material "visibility_off" :v-adjust -0.1))
+																									   (propertize " Disabled" 'face 'bold 'display '(raise 0.1))))
+																				 ;; (`not-checked "⚠ Disabled")
+																				 (`errored    (propertize "✖ Error" 'face `(:weight bold)))
+																				 ;; (`interrupted "⛔ Interrupted")
+																				 (`interrupted (concat (propertize (all-the-icons-octicon "circle-slash"))
+																									   (propertize " Interrupted")))
+																				 (`suspinnnncious (concat (propertize (all-the-icons-faicon "question"))
+																										  (propertize " Suspicious"))))
+																			   ;;  (propertize " "))
+																			   ;;  (propertize "%-"))
 
-																				;; Input Method
-																				(if (not (equal (rime-lighter) ""))
-																					(concat
-																					 (propertize " | " 'face `(:inherit mode-line-seperator :weight bold) 'display '(raise 0.1))
-																					 (propertize (format "%s" (rime-lighter))
-																								 'face `(:weight bold :inherit input-method-indicator-face)
-																								 'display '(raise 0.13)))
-																				  )
-																				(propertize " | " 'face `(:inherit mode-line-seperator :weight bold) 'display '(raise 0.1))
-																				;; System && Encoding
-																				(propertize (let ((buf-coding (format "%s" buffer-file-coding-system)))
-																							  (if (string-match "\\(dos\\|unix\\|mac\\)" buf-coding)
-																								  (upcase (concat (string-trim-right buf-coding (concat "-" (match-string 1 buf-coding))) (format "[%s]" system-type)))
-																								(upcase (concat buf-coding (format "[%s]" system-type))))) 'face `(:weight bold :inherit mode-line-area-4) 'display '(raise 0.10))
-																				;;  (propertize (all-the-icons-alltheicon "slant-left") 'face `(:height 1.85 :foreground "#32302f" :background "#8ec07c") 'display '(raise -0.05))
-																				;;  (propertize " " 'face `(:weight bold))
-																				;;  (propertize " %3l:%3c " 'face '(:weight bold :background "#928374" :faceground "#fbf1c7") 'display '(raise 0.1))
-																				(propertize " " 'face 'bold)
-																				;; Time
-																				(let* ((hour (string-to-number (format-time-string "%I")))
-																					   (icon (all-the-icons-wicon (format "time-%s" hour) :height 1.1 :v-adjust 0.0)))
-																				  (concat
-																				   ;; (propertize (all-the-icons-alltheicon "slant-right" :height 1.3) 'display '(raise -0.0))
-																				   (propertize (format-time-string " %H:%M") 'face `(:weight bold :inherit mode-line-area-5) 'display '(raise 0.1))
-																				   (propertize " " 'face `(:height 1.2 :inherit mode-line-area-5))
-																				   (propertize (all-the-icons-wicon (format "time-%s" hour) :height 1.1 :v-adjust 0.0 :face `(:inherit mode-line-area-5)))
-																				   ))
-																				(propertize " " 'face `(:weight bold :inherit mode-line-area-5) 'display '(raise 0.0))
-																				(propertize (all-the-icons-octicon "primitive-dot" :height 0.6 :face `(:inherit mode-line-area-5)) 'display '(raise 0.4))
-																				;; File Line
-																				(propertize (format " %s" (car (buffer-line-statistics))) 'face `(:height 1.0 :weight bold :inherit mode-line-area-5) 'display '(raise 0.13) 'help-echo
-  "Buffer Line Length")
-																				(propertize " " 'face `(:inherit mode-line-area-5)))))))
-											  (concat (ml-fill-space right-part)
-													  (format-mode-line right-part)))))))
+																			   ;; Input Method
+																			   (if (not (equal (rime-lighter) ""))
+																				   (concat
+																					(propertize " | " 'face `(:inherit mode-line-seperator :weight bold) 'display '(raise 0.1))
+																					(propertize (format "%s" (rime-lighter))
+																								'face `(:weight bold :inherit input-method-indicator-face)
+																								'display '(raise 0.13)))
+																				 )
+																			   (propertize " | " 'face `(:inherit mode-line-seperator :weight bold) 'display '(raise 0.1))
+																			   ;; System && Encoding
+																			   (propertize (let ((buf-coding (format "%s" buffer-file-coding-system)))
+																							 (if (string-match "\\(dos\\|unix\\|mac\\)" buf-coding)
+																								 (upcase (concat (string-trim-right buf-coding (concat "-" (match-string 1 buf-coding))) (format "[%s]" system-type)))
+																							   (upcase (concat buf-coding (format "[%s]" system-type))))) 'face `(:weight bold :inherit mode-line-area-4) 'display '(raise 0.10))
+																			   ;;  (propertize (all-the-icons-alltheicon "slant-left") 'face `(:height 1.85 :foreground "#32302f" :background "#8ec07c") 'display '(raise -0.05))
+																			   ;;  (propertize " " 'face `(:weight bold))
+																			   ;;  (propertize " %3l:%3c " 'face '(:weight bold :background "#928374" :faceground "#fbf1c7") 'display '(raise 0.1))
+																			   (propertize " " 'face 'bold)
+																			   ;; Time
+																			   (let* ((hour (string-to-number (format-time-string "%I")))
+																					  (icon (all-the-icons-wicon (format "time-%s" hour) :height 1.1 :v-adjust 0.0)))
+																				 (concat
+																				  ;; (propertize (all-the-icons-alltheicon "slant-right" :height 1.3) 'display '(raise -0.0))
+																				  (propertize (format-time-string " %H:%M") 'face `(:weight bold :inherit mode-line-area-5) 'display '(raise 0.1))
+																				  (propertize " " 'face `(:height 1.2 :inherit mode-line-area-5))
+																				  (propertize (all-the-icons-wicon (format "time-%s" hour) :height 1.1 :v-adjust 0.0 :face `(:inherit mode-line-area-5)))
+																				  ))
+																			   (propertize " " 'face `(:weight bold :inherit mode-line-area-5) 'display '(raise 0.0))
+																			   (propertize (all-the-icons-octicon "primitive-dot" :height 0.6 :face `(:inherit mode-line-area-5)) 'display '(raise 0.4))
+																			   ;; File Line
+																			   (propertize (format " %s" (car (buffer-line-statistics))) 'face `(:height 1.0 :weight bold :inherit mode-line-area-5) 'display '(raise 0.13) 'help-echo
+																						   "Buffer Line Length")
+																			   (propertize " " 'face `(:inherit mode-line-area-5)))))))
+											 (concat (ml-fill-space right-part)
+													 (format-mode-line right-part)))))))
 #+end_src
 
 * Abandoned Setting

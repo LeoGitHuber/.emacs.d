@@ -1,0 +1,165 @@
+;;; tooltip-box.el --- Tooltip Box -*- lexical-binding: t -*-
+
+;;; Commentary:
+
+;;; Code:
+
+(defgroup tooltip-box nil
+  "Customization group for the `tooltip' package."
+  :group 'help
+  :group 'mouse
+  :group 'tools
+  :tag "Tool Tips Box")
+
+(defvar tooltip-box--frame-parameters
+  '((title . "tooltip-box")
+	(fullscreen . nil)
+	(no-accept-focus . t)
+    (no-focus-on-map . t)
+    (min-width . 0)
+    (min-height . 0)
+    (border-width . 2)
+    (child-frame-border-width . 2)
+    (left-fringe . 2)
+    (right-fringe . 2)
+    (vertical-scroll-bars . nil)
+    (horizontal-scroll-bars . nil)
+    (menu-bar-lines . 0)
+    (tool-bar-lines . 0)
+    (tab-bar-lines . 0)
+	;; (line-spacing . 0)
+    (no-other-frame . t)
+    (unsplittable . t)
+    (undecorated . t)
+	(visibility . t)
+    (cursor-type . nil)
+	(minibuffer . nil)
+    (no-special-glyphs . t)
+	(skip-taskbar . t)
+	(inhibit-double-buffering . nil)
+    (frame-resize-pixelwise . t)
+	(desktop-dont-save . t))
+  "Default child frame parameters.")
+
+(defvar tooltip-box--buffer-parameters
+  '((mode-line-format . nil)
+    (header-line-format . nil)
+    (tab-line-format . nil)
+    (tab-bar-format . nil) ;; Emacs 28 tab-bar-format
+    (frame-title-format . "")
+    (truncate-lines . t)
+    (cursor-in-non-selected-windows . nil)
+	(cursor-type . nil)
+    (show-trailing-whitespace . nil)
+    (display-line-numbers . nil)
+    (left-fringe-width . nil)
+    (right-fringe-width . nil)
+    (left-margin-width . 0)
+    (right-margin-width . 0)
+    (fringes-outside-margins . 0)
+    (fringe-indicator-alist . nil)
+    (indicate-empty-lines . nil)
+    (indicate-buffer-boundaries . nil)
+    (buffer-read-only . t))
+  "Default child frame buffer parameters.")
+
+(defface tooltip-box
+  '((default ;; :font "Sans Serif-11"
+	 :inherit tooltip)
+	;; (((background dark)) :box "white")
+	;; (((background light)) :box "black")
+	)
+  "Face for Tooltip Box.")
+
+(defface tooltip-box-border
+  '((((background dark)) :background "white")
+	(((background light)) :background "black"))
+  "Face for Tooltip Box Border.")
+
+(defun tooltip-box--make-buffer (name)
+  "Create buffer with NAME."
+  (let (;; (ls line-spacing)
+        (buffer (get-buffer-create name)))
+    (with-current-buffer buffer
+      ;;; XXX HACK install mouse ignore map
+      (dolist (var tooltip-box--buffer-parameters)
+        (set (make-local-variable (car var)) (cdr var)))
+      ;; (setq-local face-remapping-alist (copy-tree fr)
+      ;;             line-spacing ls)
+      ;; (cl-pushnew 'corfu-default (alist-get 'default face-remapping-alist))
+      buffer)))
+
+(defun tooltip-box--create-frame (buffer)
+  "Create and return a child frame with BUFFER."
+  ;; (tooltip-box--make-buffer " *tooltip-box*")
+  (let (;; (buffer (get-buffer-create " *tooltip-box*"))
+		(position (cdr (mouse-pixel-position)))
+		(parent-frame (window-frame (selected-window))))
+	(with-current-buffer buffer
+	  (dolist (var tooltip-box--buffer-parameters)
+        (set (make-local-variable (car var)) (cdr var)))
+	  (buffer-face-set 'tooltip-box))
+	(setq-local box-frame
+				(make-frame
+				 `(
+				   ;; (foreground-color . ,(face-attribute 'tooltip-box :foreground))
+				   ;; (background-color . ,(face-attribute 'tooltip-box :background))
+				   ;; (child-frame-border . ,(face-attribute 'tooltip-box :box))
+				   (parent-frame . ,parent-frame)
+                   ;; (keep-ratio ,keep-ratio)
+                   ;; (min-width  . 10)
+                   ;; (min-height . 10)
+                   (left-fringe . 10)
+                   (right-fringe . 10)
+                   (line-spacing . 0)
+                   (left . ,(car position))
+                   (top . ,(cdr position))
+				   ;; (width . 10)
+                   ;; (height . 10)
+                   ,@tooltip-box--frame-parameters)))
+	;; (set-face-attribute 'default box-frame :font (face-attribute 'tooltip-box :font))
+	(set-window-buffer (frame-root-window box-frame) buffer)
+	(set-window-dedicated-p (frame-root-window box-frame) t)
+	box-frame))
+
+(defun tooltip-box-show (msg)
+  "Create a tooltip box of MSG."
+  (let* ((buffer (get-buffer-create " *tooltip-box*")))
+	(setq tooltip-box-frame (tooltip-box--create-frame buffer))
+	(set-face-attribute 'fringe tooltip-box-frame :background 'unspecified :inherit 'tooltip-box)
+	(set-face-background 'child-frame-border (face-attribute 'tooltip :foreground) tooltip-box-frame)
+	(with-current-buffer buffer
+	  (buffer-face-set 'tooltip-box)
+	  (with-silent-modifications
+		(erase-buffer)
+		(insert msg)))
+
+	(let* ((size (window-text-pixel-size (frame-selected-window tooltip-box-frame)))
+		   (width (+ (car size)))
+		   (height (cdr size))
+		   (frame-resize-pixelwise t))
+	  (set-frame-size tooltip-box-frame width height t)
+	  ;; (fit-frame-to-buffer tooltip-frame)
+	  ;; (let* ((ch (default-line-height))
+	  ;; (cw (default-font-width))
+	  ;; (ml (ceiling (* cw corfu-left-margin-width)))
+	  ;; (mr (ceiling (* cw corfu-right-margin-width)))
+	  ;; (bw (ceiling (min mr (* cw corfu-bar-width))))
+	  ;;(marginl (and (> ml 0) (propertize " " 'display `(space :width (,ml)))))
+	  ;;  (marginr (and (> mr 0) (propertize " " 'display `(space :align-to right)))))
+	  ;; (width (+ (* width cw) )))
+	  )))
+
+(defun tooltip-box-help-tips (_event)
+  "Hook function to display a help tooltip box.
+This is installed on the hook `tooltip-functions', which
+is run when the timer with id `tooltip-timeout-id' fires.
+Value is non-nil if this function handled the tip."
+  (when (stringp tooltip-help-message)
+    (tooltip-box-show tooltip-help-message)))
+
+;; (tooltip-box-show "This is a test.\nThis is a test.\nThis is a test.\nThis is more than a test.\nYes.")
+;; (tooltip-box-show "This is a test.")
+(setq tooltip-functions '(tooltip-box-show))
+;; (provide 'tooltip-box)
+;;; tooltip-box.el ends here

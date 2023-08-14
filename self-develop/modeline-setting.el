@@ -14,7 +14,7 @@
   :group 'appearance)
 
 (defface buffer-status
-  '((default :font "JetBrainsMono Nerd Font-12")
+  '(;; (default :font "JetBrainsMono Nerd Font-12")
 	(((background dark)) :foreground "#9CC0E8")
     (((background light)) :foreground "#194374"))
   "Face for foreground of buffer status.")
@@ -43,7 +43,8 @@
 
 (defface mode-line-area-1-separator-3
   '(
-	(((background dark)) :foreground "#1C2F45" :inherit mode-line-area-3)
+	;; (((background dark)) :foreground "#1C2F45" :inherit mode-line-area-3)
+    (((background dark)) :foreground "#1C2F45" :inherit mode-line)
 	(((background light)) :foreground "#CEE1F8" :inherit mode-line-area-3))
   "Face for personal mode line setting area 1."
   :group 'mode-line-personal)
@@ -67,13 +68,17 @@
 
 (defface mode-line-area-3
   '(
-	;; (((background dark)) :background "#3c3836" :foreground "#ebdbb2")
-	;; (((background dark)) :background "#244032" :foreground "#4CCA64")
-	(((background dark)) :background "#341A00" :foreground "#E3B341")
-	;; (((background light)) :background "#d5c4a1" :foreground "#504945")
-	;; (((background light)) :background "#FFF5B1" :foreground "#CDA71C")
+    (((background dark)) :background "#341A00" :foreground "#E3B341")
+    ;; (((background light)) :background "#FFF5B1" :foreground "#CDA71C")
 	(((background light)) :foreground "#1A478D" :inherit 'mode-line))
   "Face for personal mode line setting area 3."
+  :group 'mode-line-personal)
+
+(defface mode-line-buffer
+  '(
+    (((background dark)) :foreground "#174287")
+    (((background light)) :foreground "#455C9A"))
+  "Face for personal mode line buffer part."
   :group 'mode-line-personal)
 
 (with-eval-after-load 'rime
@@ -107,6 +112,13 @@
 	(((background light)) :background "#0969DA" :foreground "#E1FDFF")
 	)
   "Face for personal mode line setting area 5."
+  :group 'mode-line-personal)
+
+(defface mode-line-right-1
+  '((((background dark)) :background "#71B7FF" :foreground "black")
+    (((background light)) :background "#0969DA" :foreground "#E1FDFF")
+	)
+  "Face for personal mode line setting right area 1."
   :group 'mode-line-personal)
 
 (defface mode-line-seperator
@@ -150,12 +162,38 @@
   :group 'flycheck-mode-line
   )
 
+(with-eval-after-load 'winum
+  (setq winum-ignored-buffers '("*sort-tab*")
+		winum-auto-setup-mode-line nil)
+  (defun +win-num ()
+	(let ((n (winum-get-number)))
+  	  (alist-get
+  	   n
+  	   '(
+		 (0 . "🄌")
+		 (1 . "❶")
+		 (2 . "❷")
+  		 (3 . "❸")
+  		 (4 . "❹")
+  		 (5 . "❺")
+  		 (6 . "❻")
+  		 (7 . "❼")
+  		 (8 . "❽")
+  		 (9 . "❾")
+		 ))))
+  (add-hook 'winum-mode-hook '(lambda () (setq winum-auto-setup-mode-line nil))))
+
 (defvar sys-type
   (let ((st (format "%s" system-type)))
-	(cond ((string-equal "gnu" st) (nerd-icons-devicon "nf-dev-gnu" :face `(:inherit mode-line-area-4)))
-		  ((string-match "linux" st) (nerd-icons-devicon "nf-dev-linux" :face `(:inherit mode-line-area-4)))
-		  ((string-match "ms-dos" st) (nerd-icons-devicon "nf-dev-windows" :face `(:inherit mode-line-area-4)))
-		  ((string-match "darwin" st) (nerd-icons-devicon "nf-dev-apple" :face `(:inherit mode-line-area-4)))))
+	;; (cond ((string-equal "gnu" st) (nerd-icons-devicon "nf-dev-gnu" :face `(:inherit mode-line-area-4)))
+	;; 	  ((string-match "linux" st) (nerd-icons-devicon "nf-dev-linux" :face `(:inherit mode-line-area-4)))
+	;; 	  ((string-match "ms-dos" st) (nerd-icons-devicon "nf-dev-windows" :face `(:inherit mode-line-area-4)))
+	;; 	  ((string-match "darwin" st) (nerd-icons-devicon "nf-dev-apple" :face `(:inherit mode-line-area-4))))
+    (format " %s "
+            (cond ((string-equal "gnu" st) (nerd-icons-devicon "nf-dev-gnu"))
+		          ((string-match "linux" st) (nerd-icons-devicon "nf-dev-linux"))
+		          ((string-match "ms-dos" st) (nerd-icons-devicon "nf-dev-windows"))
+		          ((string-match "darwin" st) (nerd-icons-devicon "nf-dev-apple")))))
   "Get the icon for current `system-type'.")
 
 (defvar mode-line-sep
@@ -176,13 +214,13 @@
 
 (defvar Read-only
   ;; (propertize (nerd-icons-faicon "nf-fa-minus_square") 'face '(:inherit buffer-status))
-  (nerd-icons-faicon "nf-fa-minus_square" :face `(:inherit buffer-status))
+  (nerd-icons-faicon "nf-fa-minus_square" :face '(:inherit buffer-status))
   "Set icon for read-only buffer.")
 
-  (defvar Buffer-modified
-	;; (propertize (nerd-icons-faicon "nf-fa-plus_square") 'face '(:inherit buffer-status))
-	(nerd-icons-faicon "nf-fa-plus_square" :face `(:inherit buffer-status))
-	"Set icon for modified buffer.")
+(defvar Buffer-modified
+  ;; (propertize (nerd-icons-faicon "nf-fa-plus_square") 'face '(:inherit buffer-status))
+  (nerd-icons-faicon "nf-fa-plus_square" :face '(:inherit buffer-status))
+  "Set icon for modified buffer.")
 
 ;; (defvar winum-list
 ;;   (list (cons 0 (propertize "🄌" 'face '(:inherit mode-line-area-1)))
@@ -207,8 +245,163 @@
 		(cons 6 (concat (propertize " " 'face 'mode-line-area-1) (propertize (nerd-icons-mdicon "nf-md-numeric_6_circle" :face '(:inherit mode-line-area-1)) 'help-echo "Windows Number") (propertize " " 'face 'mode-line-area-1)))
 		(cons 7 (concat (propertize " " 'face 'mode-line-area-1) (propertize (nerd-icons-mdicon "nf-md-numeric_7_circle" :face '(:inherit mode-line-area-1)) 'help-echo "Windows Number") (propertize " " 'face 'mode-line-area-1)))
 		(cons 8 (concat (propertize " " 'face 'mode-line-area-1) (propertize (nerd-icons-mdicon "nf-md-numeric_8_circle" :face '(:inherit mode-line-area-1)) 'help-echo "Windows Number") (propertize " " 'face 'mode-line-area-1)))
-		(cons 9 (concat (propertize " " 'face 'mode-line-area-1) (propertize (nerd-icons-mdicon "nf-md-numeric_9_circle" :face '(:inherit mode-line-area-1)) 'help-echo "Windows Number") (propertize " " 'face 'mode-line-area-1))))
+		(cons 9 (concat (propertize " " 'face 'mode-line-area-1) (propertize (nerd-icons-mdicon "nf-md-numeric_9_circle" :face '(:inherit mode-line-area-1)) 'help-echo "Windows Number") (propertize " " 'face 'mode-line-area-1)))
+        )
   "Set 0-9 icons for winum mdoe.")
+
+;; (setq-default
+;;  mode-line-format
+;;  '((:eval
+;; 	(concat
+;; 	 (when (and (bound-and-true-p winum-mode) (winum-get-number))
+;; 	   (concat (alist-get (winum-get-number) winum-list)
+;; 			   (if (buffer-file-name)
+;; 				   (propertize mode-line-sep 'face '(:inherit mode-line-area-1-separator-2))
+;; 				 (propertize mode-line-sep 'face '(:inherit mode-line-area-1-separator-3)))))
+
+;; 	 ;; Directory
+;; 	 (if (buffer-file-name)
+;; 		 (concat
+;; 		  (propertize (format " %s " (abbreviate-file-name (file-name-directory (buffer-file-name)))) 'face `(:inherit mode-line-area-2) 'help-echo "Current Directory")
+;; 		  (propertize mode-line-sep 'face '(:inherit mode-line-area-2-separator))
+;; 		  ))
+;; 	 (propertize " " 'face `(:inherit mode-line-area-3))
+
+;; 	 ;; Buffer Icon
+;; 	 (propertize (if (or (buffer-file-name) (nerd-icons-auto-mode-match?))
+;; 					 (emacs-nf-diy-for-file (buffer-name) :face `(:background ,(face-attribute 'mode-line-area-3 :background)))
+;; 				   (emacs-nf-diy-for-mode major-mode :face `(:background ,(face-attribute 'mode-line-area-3 :background)))
+;; 				   )
+;; 				 'help-echo (symbol-name (symbol-value 'major-mode)))
+;; 	 ;; Buffer Name
+;; 	 (propertize " %b " 'face `(:inherit mode-line-area-3) 'help-echo "Current Buffer Name")
+;; 	 " "
+;; 	 (cond (buffer-read-only Read-only)
+;; 		   ((buffer-modified-p) Buffer-modified))
+;; 	 (let*
+;; 		 ((right-part
+;; 		   '(
+;; 			 ;; Git
+;; 			 (:eval
+;; 			  (concat
+;; 			   (when vc-mode
+;; 				 (cond
+;; 				  ((string-match "Git[:-]" vc-mode)
+;; 				   (let ((branch (mapconcat 'concat (cdr (split-string vc-mode "[:-]")) "-")))
+;; 					 (concat
+;; 					  (nerd-icons-devicon "nf-dev-git")
+;; 					  " · "
+;; 					  (nerd-icons-octicon "nf-oct-git_branch")
+;; 					  (propertize (format " %s" branch) 'face `(:inherit mode-line))
+;; 					  (propertize " |" 'face `(:inherit mode-line-seperator)))))
+;; 				  ((string-match "SVN-" vc-mode)
+;; 				   (let ((revision (cadr (split-string vc-mode "-"))))
+;; 					 (concat
+;; 					  (format " %s" (nerd-icons-faicon "nf-fa-cloud"))
+;; 					  (format " · %s" revision))))
+;; 				  (t (format "%s" vc-mode))))
+;; 			   " "
+
+;; 			   ;; Flycheck Information
+;; 			   (when (bound-and-true-p flycheck-mode)
+;;                  (pcase flycheck-last-status-change
+;; 				   (`finished
+;; 				    (if flycheck-current-errors
+;; 					    (let-alist (flycheck-count-errors flycheck-current-errors)
+;; 						  (let ((i (or .info 0))
+;; 							    (w (or .warning 0))
+;; 							    (e (or .error 0)))
+;; 						    (concat
+;; 						     (propertize fc-info
+;; 									     'help-echo "Show Flycheck Error"
+;; 									     'local-map (make-mode-line-mouse-map
+;; 												     'mouse-1 (lambda() (interactive) (flycheck-list-errors))))
+;; 						     (propertize (concat " " (number-to-string i) " ")
+;; 									     'help-echo "Show Flycheck Error"
+;; 									     'local-map (make-mode-line-mouse-map
+;; 												     'mouse-1 (lambda() (interactive) (flycheck-list-errors)))
+;; 									     'face '(:inherit flycheck-info-my))
+;; 						     (propertize
+;; 							  fc-warning
+;; 							  'help-echo "Show Flycheck Error"
+;; 							  'local-map (make-mode-line-mouse-map
+;; 										  'mouse-1 (lambda() (interactive) (flycheck-list-errors))))
+;; 						     (propertize (concat  " " (number-to-string w) " ")
+;; 									     'help-echo "Show Flycheck Error"
+;; 									     'local-map (make-mode-line-mouse-map
+;; 												     'mouse-1 (lambda() (interactive) (flycheck-list-errors)))
+;; 									     'face '(:inherit flycheck-warn))
+;; 						     (propertize fc-error
+;; 									     'help-echo "Show Flycheck Error"
+;; 									     'local-map (make-mode-line-mouse-map 'mouse-1 (lambda() (interactive) (flycheck-list-errors))))
+;; 						     (propertize (concat " " (number-to-string e))
+;; 									     'help-echo "Show Flycheck Error"
+;; 									     'local-map (make-mode-line-mouse-map 'mouse-1 (lambda() (interactive) (flycheck-list-errors)))
+;; 									     'face '(:inherit flycheck-error-my))
+;; 						     (propertize " | " 'face `(:inherit mode-line-seperator)))))
+;; 					  (concat (propertize "✔ No Issues")
+;; 							  (propertize " | " 'face `(:inherit mode-line-seperator)))))
+;; 				   (`running (concat (propertize "⟲ Running")
+;; 								     (propertize " | " 'face `(:inherit mode-line-seperator))))
+;; 				   (`no-checker "")
+;; 				   ;; (`no-checker "⚠ No Checker")
+;; 				   (`not-checked (concat
+;; 								  (propertize (nerd-icons-mdicon "nf-md-eye_off"))
+;; 								  (propertize " Disabled")
+;; 								  (propertize " | " 'face `(:inherit mode-line-seperator))))
+;; 				   ;; (`not-checked "⚠ Disabled")
+;; 				   (`errored  (concat (propertize "✖ Error" 'face `())
+;; 									  (propertize " | " 'face `(:inherit mode-line-seperator))))
+;; 				   ;; (`interrupted "⛔ Interrupted")
+;; 				   (`interrupted (concat
+;; 								  (propertize (nerd-icons-octicon "nf-oct-circle_slash"))
+;; 								  (propertize " Interrupted")))
+;; 				   (`suspinnnncious (concat
+;; 								     (propertize (nerd-icons-faicon "nf-fa-question"))
+;; 								     (propertize " Suspicious")
+;; 								     (propertize " | " 'face `(:inherit mode-line-seperator))))))
+
+;; 			   ;; Input Method
+;; 			   (if (and (equal current-input-method "rime")
+;; 						(bound-and-true-p rime-mode))
+;; 				   (if (and (rime--should-enable-p)
+;; 							(not (rime--should-inline-ascii-p)))
+;; 					   (format "%s%s"
+;; 							   (propertize (format "%s-CN" (rime-lighter))
+;; 										   'face `(:inherit input-method-indicator-cn-face))
+;; 							   (propertize " | " 'face `(:inherit mode-line-seperator)))
+;; 					 (format "%s%s"
+;; 							 (propertize (format "%s-EN" (rime-lighter))
+;; 										 'face `(:inherit input-method-indicator-en-face))
+;; 							 (propertize " | " 'face `(:inherit mode-line-seperator)))))
+;; 			   ;; System && Encoding
+;; 			   ;; (propertize (let ((buf-coding (format "%s" buffer-file-coding-system)))
+;; 			   ;; 				(if (string-match "\\(dos\\|unix\\|mac\\)" buf-coding)
+;; 			   ;; 					(upcase (concat (string-trim-right buf-coding (concat "-" (match-string 1 buf-coding))) (format "[%s] " system-type)))
+;; 			   ;; 				  (upcase (concat buf-coding (format "[%s] " system-type))))) 'face `(:inherit mode-line-area-4))
+;; 			   (propertize (let ((buf-coding (format "%s" buffer-file-coding-system)))
+;; 							 (if (string-match "\\(dos\\|unix\\|mac\\)" buf-coding)
+;; 								 (string-trim-right buf-coding (concat "-" (match-string 1 buf-coding)))
+;; 							   buf-coding)) 'face `(:inherit mode-line-area-4))
+;; 			   "  "
+;; 			   sys-type
+;; 			   " "
+;; 			   ;;  (propertize " %3l:%3c " 'face '(:background "#928374" :faceground "#fbf1c7"))
+
+;; 			   ;; Time
+;; 			   ;; (let* ((hour (string-to-number (format-time-string "%I")))
+;; 			   ;; 		  (icon (nerd-icons-wicon (format "nf-weather-time_%s" hour))))
+;; 			   ;; 	 (concat
+;; 			   ;; 	  (propertize (format-time-string " %H:%M") 'face `(:inherit mode-line-area-5))
+;; 			   ;; 	  (propertize " " 'face `(:inherit mode-line-area-5))
+;; 			   ;; 	  (propertize (nerd-icons-wicon (format "nf-weather-time_%s" hour) :face '(:inherit mode-line-area-5)))))
+
+;; 			   ;; File Line
+;; 			   (propertize (format " %s" (car (buffer-line-statistics))) 'face `(:inherit mode-line-area-5)
+;; 						   'help-echo "Buffer Line Length")
+;; 			   (propertize " " 'face `(:inherit mode-line-area-5)))))))
+;; 	   (concat (ml-fill-space right-part)
+;; 			   (format-mode-line right-part)))))))
 
 (setq-default
  mode-line-format
@@ -216,152 +409,176 @@
 	(concat
 	 (when (and (bound-and-true-p winum-mode) (winum-get-number))
 	   (concat (alist-get (winum-get-number) winum-list)
-			   (if (buffer-file-name)
-				   (propertize mode-line-sep 'face '(:inherit mode-line-area-1-separator-2))
-				 (propertize mode-line-sep 'face '(:inherit mode-line-area-1-separator-3)))))
+               (propertize mode-line-sep 'face '(:inherit mode-line-area-1-separator-3))
+	           ;; (if (buffer-file-name)
+	           ;;     (propertize mode-line-sep 'face '(:inherit mode-line-area-1-separator-2))
+	           ;;   (propertize mode-line-sep 'face '(:inherit mode-line-area-1-separator-3)))
+               ))
+     ;; Git
+     (when vc-mode
+	   (cond
+	    ((string-match "Git[:-]" vc-mode)
+	     (let ((branch (mapconcat 'concat (cdr (split-string vc-mode "[:-]")) "-")))
+		   (format "%s %s"
+		           ;; (nerd-icons-devicon "nf-dev-git")
+		           ;; " · "
+		           (nerd-icons-octicon "nf-oct-git_branch")
+                   branch
+		           ;; (propertize branch 'face `(:inherit mode-line))
+		           )))
+	    ((string-match "SVN-" vc-mode)
+	     (let ((revision (cadr (split-string vc-mode "-"))))
+		   (format " %s · %s" (nerd-icons-faicon "nf-fa-cloud") revision)))
+	    (t (format "%s" vc-mode))))
 
 	 ;; Directory
-	 (if (buffer-file-name)
-		 (concat
-		  (propertize (format " %s " (abbreviate-file-name (file-name-directory (buffer-file-name)))) 'face `(:inherit mode-line-area-2) 'help-echo "Current Directory")
-		  (propertize mode-line-sep 'face '(:inherit mode-line-area-2-separator))
-		  ))
-	 (propertize " " 'face `(:inherit mode-line-area-3))
+	 ;; (if (buffer-file-name)
+	 ;;     (concat
+	 ;;      (propertize (format " %s " (abbreviate-file-name (file-name-directory (buffer-file-name)))) 'face `(:inherit mode-line-area-2) 'help-echo "Current Directory")
+	 ;;      (propertize mode-line-sep 'face '(:inherit mode-line-area-2-separator))
+	 ;;      ))
+	 ;; (propertize " " 'face `(:inherit mode-line-area-3))
 
-	 ;; Buffer Icon
-	 (propertize (if (or (buffer-file-name) (nerd-icons-auto-mode-match?))
-					 (emacs-nf-diy-for-file (buffer-name) :face `(:background ,(face-attribute 'mode-line-area-3 :background)))
-				   (emacs-nf-diy-for-mode major-mode :face `(:background ,(face-attribute 'mode-line-area-3 :background)))
-				   )
-				 'help-echo (symbol-name (symbol-value 'major-mode)))
-	 ;; Buffer Name
-	 (propertize " %b " 'face `(:inherit mode-line-area-3) 'help-echo "Current Buffer Name")
-	 " "
+	 ;; ;; Buffer Name
+	 ;; (propertize " %b " 'face `(:inherit mode-line-area-3) 'help-echo "Current Buffer Name")
+	 ;; " "
+     (if buffer-file-name
+         (propertize (format " %s " buffer-file-truename) 'face '(:inherit mode-line-buffer) 'help-echo "Current Editing File")
+       (propertize " %b " 'face '(:inherit mode-line-buffer) 'help-echo "Current Editing Buffer"))
 	 (cond (buffer-read-only Read-only)
-		   ((buffer-modified-p) Buffer-modified))
-	 (let*
-		 ((right-part
-		   '(
-			 ;; Git
-			 (:eval
-			  (concat
-			   (when vc-mode
-				 (cond
-				  ((string-match "Git[:-]" vc-mode)
-				   (let ((branch (mapconcat 'concat (cdr (split-string vc-mode "[:-]")) "-")))
-					 (concat
-					  (nerd-icons-devicon "nf-dev-git")
-					  " · "
-					  (nerd-icons-octicon "nf-oct-git_branch")
-					  (propertize (format " %s" branch) 'face `(:inherit mode-line))
-					  (propertize " |" 'face `(:inherit mode-line-seperator)))))
-				  ((string-match "SVN-" vc-mode)
-				   (let ((revision (cadr (split-string vc-mode "-"))))
-					 (concat
-					  (format " %s" (nerd-icons-faicon "nf-fa-cloud"))
-					  (format " · %s" revision))))
-				  (t (format "%s" vc-mode))))
-			   " "
+		   ((buffer-modified-p) Buffer-modified))))
+   mode-line-format-right-align
 
-			   ;; Flycheck Information
-			   (pcase flycheck-last-status-change
-				 (`finished
-				  (if flycheck-current-errors
-					  (let-alist (flycheck-count-errors flycheck-current-errors)
-						(let ((i (or .info 0))
-							  (w (or .warning 0))
-							  (e (or .error 0)))
-						  (concat
-						   (propertize fc-info
-									   'help-echo "Show Flycheck Error"
-									   'local-map (make-mode-line-mouse-map
-												   'mouse-1 (lambda() (interactive) (flycheck-list-errors))))
-						   (propertize (concat " " (number-to-string i) " ")
-									   'help-echo "Show Flycheck Error"
-									   'local-map (make-mode-line-mouse-map
-												   'mouse-1 (lambda() (interactive) (flycheck-list-errors)))
-									   'face '(:inherit flycheck-info-my))
-						   (propertize
-							fc-warning
-							'help-echo "Show Flycheck Error"
-							'local-map (make-mode-line-mouse-map
-										'mouse-1 (lambda() (interactive) (flycheck-list-errors))))
-						   (propertize (concat  " " (number-to-string w) " ")
-									   'help-echo "Show Flycheck Error"
-									   'local-map (make-mode-line-mouse-map
-												   'mouse-1 (lambda() (interactive) (flycheck-list-errors)))
-									   'face '(:inherit flycheck-warn))
-						   (propertize fc-error
-									   'help-echo "Show Flycheck Error"
-									   'local-map (make-mode-line-mouse-map 'mouse-1 (lambda() (interactive) (flycheck-list-errors))))
-						   (propertize (concat " " (number-to-string e))
-									   'help-echo "Show Flycheck Error"
-									   'local-map (make-mode-line-mouse-map 'mouse-1 (lambda() (interactive) (flycheck-list-errors)))
-									   'face '(:inherit flycheck-error-my))
-						   (propertize " | " 'face `(:inherit mode-line-seperator)))))
-					(concat (propertize "✔ No Issues")
-							(propertize " | " 'face `(:inherit mode-line-seperator)))))
-				 (`running (concat (propertize "⟲ Running")
-								   (propertize " | " 'face `(:inherit mode-line-seperator))))
-				 (`no-checker "")
-				 ;; (`no-checker "⚠ No Checker")
-				 (`not-checked (concat
-								(propertize (nerd-icons-mdicon "nf-mdi-eye_off"))
-								(propertize " Disabled")
-								(propertize " | " 'face `(:inherit mode-line-seperator))))
-				 ;; (`not-checked "⚠ Disabled")
-				 (`errored  (concat (propertize "✖ Error" 'face `())
-									(propertize " | " 'face `(:inherit mode-line-seperator))))
-				 ;; (`interrupted "⛔ Interrupted")
-				 (`interrupted (concat
-								(propertize (nerd-icons-octicon "nf-oct-circle_slash"))
-								(propertize " Interrupted")))
-				 (`suspinnnncious (concat
-								   (propertize (nerd-icons-faicon "nf-fa-question"))
-								   (propertize " Suspicious")
-								   (propertize " | " 'face `(:inherit mode-line-seperator)))))
 
-			   ;; Input Method
-			   (if (and (equal current-input-method "rime")
-						(bound-and-true-p rime-mode))
-				   (if (and (rime--should-enable-p)
-							(not (rime--should-inline-ascii-p)))
-					   (format "%s%s"
-							   (propertize (format "%s-CN" (rime-lighter))
-										   'face `(:inherit input-method-indicator-cn-face))
-							   (propertize " | " 'face `(:inherit mode-line-seperator)))
-					 (format "%s%s"
-							 (propertize (format "%s-EN" (rime-lighter))
-										 'face `(:inherit input-method-indicator-en-face))
-							 (propertize " | " 'face `(:inherit mode-line-seperator)))))
-			   ;; System && Encoding
-			   ;; (propertize (let ((buf-coding (format "%s" buffer-file-coding-system)))
-			   ;; 				(if (string-match "\\(dos\\|unix\\|mac\\)" buf-coding)
-			   ;; 					(upcase (concat (string-trim-right buf-coding (concat "-" (match-string 1 buf-coding))) (format "[%s] " system-type)))
-			   ;; 				  (upcase (concat buf-coding (format "[%s] " system-type))))) 'face `(:inherit mode-line-area-4))
-			   (propertize (let ((buf-coding (format "%s" buffer-file-coding-system)))
-							 (if (string-match "\\(dos\\|unix\\|mac\\)" buf-coding)
-								 (string-trim-right buf-coding (concat "-" (match-string 1 buf-coding)))
-							   buf-coding)) 'face `(:inherit mode-line-area-4))
-			   "  "
-			   sys-type
-			   " "
-			   ;;  (propertize " %3l:%3c " 'face '(:background "#928374" :faceground "#fbf1c7"))
+   (:eval
+    (concat
+     ;; ;; Git
+     ;;   (when vc-mode
+     ;;     (cond
+     ;;      ((string-match "Git[:-]" vc-mode)
+     ;;       (let ((branch (mapconcat 'concat (cdr (split-string vc-mode "[:-]")) "-")))
+     ;;  	   (concat
+     ;;  	    (nerd-icons-devicon "nf-dev-git")
+     ;;  	    " · "
+     ;;  	    (nerd-icons-octicon "nf-oct-git_branch")
+     ;;  	    (propertize (format " %s" branch) 'face `(:inherit mode-line))
+     ;;  	    (propertize " |" 'face `(:inherit mode-line-seperator)))))
+     ;;      ((string-match "SVN-" vc-mode)
+     ;;       (let ((revision (cadr (split-string vc-mode "-"))))
+     ;;  	   (concat
+     ;;  	    (format " %s" (nerd-icons-faicon "nf-fa-cloud"))
+     ;;  	    (format " · %s" revision))))
+     ;;      (t (format "%s" vc-mode))))
+     ;;   " "
 
-			   ;; Time
-			   ;; (let* ((hour (string-to-number (format-time-string "%I")))
-			   ;; 		  (icon (nerd-icons-wicon (format "nf-weather-time_%s" hour))))
-			   ;; 	 (concat
-			   ;; 	  (propertize (format-time-string " %H:%M") 'face `(:inherit mode-line-area-5))
-			   ;; 	  (propertize " " 'face `(:inherit mode-line-area-5))
-			   ;; 	  (propertize (nerd-icons-wicon (format "nf-weather-time_%s" hour) :face '(:inherit mode-line-area-5)))))
+     ;; Flycheck Information
+     (when (bound-and-true-p flycheck-mode)
+       (pcase flycheck-last-status-change
+	     (`finished
+		  (if flycheck-current-errors
+			  (let-alist (flycheck-count-errors flycheck-current-errors)
+			    (let ((i (or .info 0))
+					  (w (or .warning 0))
+					  (e (or .error 0)))
+				  (concat
+				   (propertize fc-info
+							   'help-echo "Show Flycheck Error"
+							   'local-map (make-mode-line-mouse-map
+										   'mouse-1 (lambda() (interactive) (flycheck-list-errors))))
+				   (propertize (concat " " (number-to-string i) " ")
+							   'help-echo "Show Flycheck Error"
+							   'local-map (make-mode-line-mouse-map
+										   'mouse-1 (lambda() (interactive) (flycheck-list-errors)))
+							   'face '(:inherit flycheck-info-my))
+				   (propertize
+				    fc-warning
+				    'help-echo "Show Flycheck Error"
+				    'local-map (make-mode-line-mouse-map
+							    'mouse-1 (lambda() (interactive) (flycheck-list-errors))))
+				   (propertize (concat  " " (number-to-string w) " ")
+							   'help-echo "Show Flycheck Error"
+							   'local-map (make-mode-line-mouse-map
+										   'mouse-1 (lambda() (interactive) (flycheck-list-errors)))
+							   'face '(:inherit flycheck-warn))
+				   (propertize fc-error
+							   'help-echo "Show Flycheck Error"
+							   'local-map (make-mode-line-mouse-map 'mouse-1 (lambda() (interactive) (flycheck-list-errors))))
+				   (propertize (concat " " (number-to-string e))
+							   'help-echo "Show Flycheck Error"
+							   'local-map (make-mode-line-mouse-map 'mouse-1 (lambda() (interactive) (flycheck-list-errors)))
+							   'face '(:inherit flycheck-error-my))
+				   (propertize " | " 'face `(:inherit mode-line-seperator)))))
+		    (concat (propertize "✔ No Issues")
+				    (propertize " | " 'face `(:inherit mode-line-seperator)))))
+	     (`running (concat (propertize "⟲ Running")
+						   (propertize " | " 'face `(:inherit mode-line-seperator))))
+	     (`no-checker "")
+	     ;; (`no-checker "⚠ No Checker")
+	     (`not-checked (concat
+					    (propertize (nerd-icons-mdicon "nf-md-eye_off"))
+					    (propertize " Disabled")
+					    (propertize " | " 'face `(:inherit mode-line-seperator))))
+	     ;; (`not-checked "⚠ Disabled")
+	     (`errored  (concat (propertize "✖ Error" 'face `())
+						    (propertize " | " 'face `(:inherit mode-line-seperator))))
+	     ;; (`interrupted "⛔ Interrupted")
+	     (`interrupted (concat
+					    (propertize (nerd-icons-octicon "nf-oct-circle_slash"))
+					    (propertize " Interrupted")))
+	     (`suspinnnncious (concat
+						   (propertize (nerd-icons-faicon "nf-fa-question"))
+						   (propertize " Suspicious")
+						   (propertize " | " 'face `(:inherit mode-line-seperator))))))
 
-			   ;; File Line
-			   (propertize (format " %s" (car (buffer-line-statistics))) 'face `(:inherit mode-line-area-5)
-						   'help-echo "Buffer Line Length")
-			   (propertize " " 'face `(:inherit mode-line-area-5)))))))
-	   (concat (ml-fill-space right-part)
-			   (format-mode-line right-part)))))))
+     ;; Input Method
+     (if (and (equal current-input-method "rime")
+			  (bound-and-true-p rime-mode))
+	     (if (and (rime--should-enable-p)
+				  (not (rime--should-inline-ascii-p)))
+		     (format "%s%s"
+				     (propertize (format "%s-CN" (rime-lighter))
+							     'face `(:inherit input-method-indicator-cn-face))
+				     (propertize " | " 'face `(:inherit mode-line-seperator)))
+		   (format "%s%s"
+				   (propertize (format "%s-EN" (rime-lighter))
+							   'face `(:inherit input-method-indicator-en-face))
+				   (propertize " | " 'face `(:inherit mode-line-seperator)))))
+     ;; System && Encoding
+     ;; (propertize (let ((buf-coding (format "%s" buffer-file-coding-system)))
+     ;; 				(if (string-match "\\(dos\\|unix\\|mac\\)" buf-coding)
+     ;; 					(upcase (concat (string-trim-right buf-coding (concat "-" (match-string 1 buf-coding))) (format "[%s] " system-type)))
+     ;; 				  (upcase (concat buf-coding (format "[%s] " system-type))))) 'face `(:inherit mode-line-area-4))
+     (propertize (let ((buf-coding (format "%s" buffer-file-coding-system)))
+				   (if (string-match "\\(dos\\|unix\\|mac\\)" buf-coding)
+					   (string-trim-right buf-coding (concat "-" (match-string 1 buf-coding)))
+				     buf-coding))
+                 'face '(:inherit mode-line-area-4))
+     sys-type
+     ;;  (propertize " %3l:%3c " 'face '(:background "#928374" :faceground "#fbf1c7"))
+
+     ;; Major Mode
+     (format-mode-line mode-name)
+     (format " %s "
+	         (propertize (if (or (buffer-file-name) (nerd-icons-auto-mode-match?))
+	    			         (emacs-nf-diy-for-file (buffer-name)
+                                                    :face `(:background ,(face-attribute 'mode-line-area-3 :background)))
+	    		           (emacs-nf-diy-for-mode major-mode
+                                                  :face `(:background ,(face-attribute 'mode-line-area-3 :background))))
+	    		         'help-echo (symbol-name (symbol-value 'major-mode))))
+     ;; Time
+     ;; (let* ((hour (string-to-number (format-time-string "%I")))
+     ;; 		  (icon (nerd-icons-wicon (format "nf-weather-time_%s" hour))))
+     ;; 	 (concat
+     ;; 	  (propertize (format-time-string " %H:%M") 'face `(:inherit mode-line-area-5))
+     ;; 	  (propertize " " 'face `(:inherit mode-line-area-5))
+     ;; 	  (propertize (nerd-icons-wicon (format "nf-weather-time_%s" hour) :face '(:inherit mode-line-area-5)))))
+
+     ;; File Line
+     (propertize (format " %s " (car (buffer-line-statistics))) 'face `(:inherit mode-line-area-1)
+			     'help-echo "Buffer Line Length")
+
+     ;; Range
+     ))))
 
 (provide 'modeline-setting)
 ;;; modeline-setting.el ends here

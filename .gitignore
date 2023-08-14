@@ -2,3 +2,11 @@ custom.el
 history
 places
 recentf
+var/*
+elpa/*
+eln-cache/*
+tree-sitter/*
+dirvish/*
+org-roam.db
+transient
+*~

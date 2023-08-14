@@ -5,8 +5,6 @@
 
 ;;; Code:
 
-;; (require 'nerd-icons)
-
 (defun emacs-nf-diy-for-mode (mode &rest arg-overrides)
   "Get the formatted icon for MODE.
 ARG-OVERRIDES should be a plist containining `:height',

@@ -1,0 +1,159 @@
+[submodule "site-lisp/benchmark-init-el"]
+	path = site-lisp/benchmark-init-el
+	url = https://github.com/dholm/benchmark-init-el.git
+[submodule "site-lisp/lsp-bridge"]
+	path = site-lisp/lsp-bridge
+	url = https://github.com/manateelazycat/lsp-bridge.git
+[submodule "site-lisp/citre"]
+	path = site-lisp/citre
+	url = https://github.com/universal-ctags/citre.git
+[submodule "site-lisp/emacs-application-framework"]
+	path = site-lisp/emacs-application-framework
+	url = https://github.com/emacs-eaf/emacs-application-framework.git
+[submodule "site-lisp/hydra"]
+	path = site-lisp/hydra
+	url = https://github.com/abo-abo/hydra.git
+[submodule "site-lisp/vundo"]
+	path = site-lisp/vundo
+	url = https://github.com/casouri/vundo.git
+[submodule "site-lisp/emacs-chinese-word-segmentation"]
+	path = site-lisp/emacs-chinese-word-segmentation
+	url = https://github.com/kanglmf/emacs-chinese-word-segmentation.git
+[submodule "site-lisp/no-littering"]
+	path = site-lisp/no-littering
+	url = https://github.com/emacscollective/no-littering.git
+[submodule "site-lisp/iscroll"]
+	path = site-lisp/iscroll
+	url = https://github.com/casouri/iscroll.git
+[submodule "site-lisp/avy"]
+	path = site-lisp/avy
+	url = https://github.com/abo-abo/avy.git
+[submodule "site-lisp/flycheck"]
+	path = site-lisp/flycheck
+	url = https://github.com/flycheck/flycheck.git
+[submodule "site-lisp/magit"]
+	path = site-lisp/magit
+	url = https://github.com/magit/magit.git
+[submodule "site-lisp/consult"]
+	path = site-lisp/consult
+	url = https://github.com/minad/consult.git
+[submodule "site-lisp/vertico"]
+	path = site-lisp/vertico
+	url = https://github.com/minad/vertico.git
+[submodule "site-lisp/marginalia"]
+	path = site-lisp/marginalia
+	url = https://github.com/minad/marginalia.git
+[submodule "site-lisp/orderless"]
+	path = site-lisp/orderless
+	url = https://github.com/oantolin/orderless.git
+[submodule "site-lisp/emacs-winum"]
+	path = site-lisp/emacs-winum
+	url = https://github.com/deb0ch/emacs-winum.git
+[submodule "site-lisp/nerd-icons.el"]
+	path = site-lisp/nerd-icons.el
+	url = https://github.com/rainstormstudio/nerd-icons.el.git
+[submodule "site-lisp/nerd-icons-dired"]
+	path = site-lisp/nerd-icons-dired
+	url = https://github.com/rainstormstudio/nerd-icons-dired.git
+[submodule "site-lisp/treemacs-nerd-icons"]
+	path = site-lisp/treemacs-nerd-icons
+	url = https://github.com/rainstormstudio/treemacs-nerd-icons.git
+[submodule "site-lisp/emacs-rime"]
+	path = site-lisp/emacs-rime
+	url = https://github.com/DogLooksGood/emacs-rime.git
+[submodule "site-lisp/emacs-which-key"]
+	path = site-lisp/emacs-which-key
+	url = https://github.com/justbur/emacs-which-key.git
+[submodule "site-lisp/org-modern-indent"]
+	path = site-lisp/org-modern-indent
+	url = https://github.com/jdtsmith/org-modern-indent.git
+[submodule "site-lisp/helpful"]
+	path = site-lisp/helpful
+	url = https://github.com/Wilfred/helpful.git
+[submodule "site-lisp/rainbow-delimiters"]
+	path = site-lisp/rainbow-delimiters
+	url = https://github.com/Fanael/rainbow-delimiters.git
+[submodule "site-lisp/aggressive-indent-mode"]
+	path = site-lisp/aggressive-indent-mode
+	url = https://github.com/Malabarba/aggressive-indent-mode.git
+[submodule "site-lisp/markdown-mode"]
+	path = site-lisp/markdown-mode
+	url = https://github.com/jrblevin/markdown-mode.git
+[submodule "site-lisp/yasnippet"]
+	path = site-lisp/yasnippet
+	url = https://github.com/joaotavora/yasnippet.git
+[submodule "site-lisp/puni"]
+	path = site-lisp/puni
+	url = https://github.com/AmaiKinono/puni.git
+[submodule "site-lisp/browse-kill-ring"]
+	path = site-lisp/browse-kill-ring
+	url = https://github.com/browse-kill-ring/browse-kill-ring.git
+[submodule "site-lisp/diredfl"]
+	path = site-lisp/diredfl
+	url = https://github.com/purcell/diredfl.git
+[submodule "site-lisp/highlight-indent-guides"]
+	path = site-lisp/highlight-indent-guides
+	url = https://github.com/DarthFennec/highlight-indent-guides.git
+[submodule "site-lisp/dirvish"]
+	path = site-lisp/dirvish
+	url = https://github.com/alexluigit/dirvish.git
+[submodule "site-lisp/combobulate"]
+	path = site-lisp/combobulate
+	url = https://github.com/mickeynp/combobulate.git
+[submodule "site-lisp/fingertip"]
+	path = site-lisp/fingertip
+	url = https://github.com/manateelazycat/fingertip.git
+[submodule "site-lisp/treesit-auto"]
+	path = site-lisp/treesit-auto
+	url = https://github.com/renzmann/treesit-auto.git
+[submodule "site-lisp/org-roam"]
+	path = site-lisp/org-roam
+	url = https://github.com/org-roam/org-roam.git
+[submodule "site-lisp/dired-preview"]
+	path = site-lisp/dired-preview
+	url = https://git.sr.ht/~protesilaos/dired-preview
+[submodule "site-lisp/doom-modeline"]
+	path = site-lisp/doom-modeline
+	url = https://github.com/seagle0128/doom-modeline.git
+[submodule "site-lisp/org-visual-outline"]
+	path = site-lisp/org-visual-outline
+	url = https://github.com/legalnonsense/org-visual-outline.git
+[submodule "site-lisp/symbol-overlay"]
+	path = site-lisp/symbol-overlay
+	url = https://github.com/wolray/symbol-overlay.git
+[submodule "site-lisp/emacsql"]
+	path = site-lisp/emacsql
+	url = https://github.com/magit/emacsql.git
+[submodule "site-lisp/org-modern"]
+	path = site-lisp/org-modern
+	url = https://github.com/minad/org-modern.git
+[submodule "site-lisp/org-appear"]
+	path = site-lisp/org-appear
+	url = https://github.com/awth13/org-appear.git
+[submodule "site-lisp/org-bars"]
+	path = site-lisp/org-bars
+	url = https://github.com/tonyaldon/org-bars.git
+[submodule "site-lisp/holo-layer"]
+	path = site-lisp/holo-layer
+	url = https://github.com/manateelazycat/holo-layer.git
+[submodule "site-lisp/dash.el"]
+	path = site-lisp/dash.el
+	url = https://github.com/magnars/dash.el.git
+[submodule "site-lisp/compat"]
+	path = site-lisp/compat
+	url = https://github.com/emacs-compat/compat.git
+[submodule "site-lisp/f.el"]
+	path = site-lisp/f.el
+	url = https://github.com/rejeep/f.el.git
+[submodule "site-lisp/mwim.el"]
+	path = site-lisp/mwim.el
+	url = https://github.com/alezost/mwim.el.git
+[submodule "site-lisp/with-editor"]
+	path = site-lisp/with-editor
+	url = https://github.com/magit/with-editor.git
+[submodule "site-lisp/emacs-immersive-translate"]
+	path = site-lisp/emacs-immersive-translate
+	url = https://github.com/Elilif/emacs-immersive-translate.git
+[submodule "site-lisp/valign"]
+	path = site-lisp/valign
+	url = https://github.com/casouri/valign.git

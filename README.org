@@ -1,0 +1,2 @@
+* Emacs Configuration
+This is a fine-tuned Emacs configuration. It's fast enough to boot up and powerful enough to work.

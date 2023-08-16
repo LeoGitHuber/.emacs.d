@@ -1,4 +1,9 @@
-;; -*- lexical-binding: t; -*-
+;;; early-init --- Early Init ---  -*- lexical-binding: t; -*-
+
+;;; Commentary:
+
+;;; Code:
+
 (add-to-list 'default-frame-alist '(menu-bar-lines . 0))
 (add-to-list 'default-frame-alist '(tool-bar-lines . 0))
 ;; 以下方式与上面相同
@@ -13,6 +18,7 @@
 
 (setq gc-cons-threshold most-positive-fixnum
       gc-cons-percentage 0.6
+      ;; garbage-collection-messages t ;; for debug
       package-quickstart nil
       ;; package-enable-at-startup nil
       ;; package--init-file-ensure t
@@ -34,6 +40,8 @@
 	  scroll-conservatively 1000
       scroll-up-aggressively 0.01
       scroll-down-aggressively 0.01
+      ;; 让窗口启动更平滑
+      frame-inhibit-implied-resize t
 	  ;; Don't popup dialog
 	  use-dialog-box nil
 	  ;; 粘贴于光标处,而不是鼠标指针处
@@ -51,3 +59,5 @@
       )
 (setq-default pgtk-wait-for-event-timeout 0
               mode-line-format nil)
+
+;;; early-init.el ends here.

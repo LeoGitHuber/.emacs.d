@@ -161,6 +161,16 @@ mode.
 (register-definition-prefixes "../site-lisp/aggressive-indent-mode/aggressive-indent" '("aggressive-indent-"))
 
 
+;;; Generated autoloads from ../site-lisp/company-mode/test/all.el
+
+(register-definition-prefixes "../site-lisp/company-mode/test/all" '("company-test-path"))
+
+
+;;; Generated autoloads from ../site-lisp/company-mode/test/async-tests.el
+
+(register-definition-prefixes "../site-lisp/company-mode/test/async-tests" '("company-async-backend"))
+
+
 ;;; Generated autoloads from ../site-lisp/avy/avy.el
 
 (autoload 'avy-process "../site-lisp/avy/avy" "\
@@ -402,6 +412,20 @@ Show durations in call-tree." t)
 (register-definition-prefixes "../site-lisp/benchmark-init-el/benchmark-init-modes" '("benchmark-init/"))
 
 
+;;; Generated autoloads from ../site-lisp/auctex/bib-cite.el
+
+(autoload 'bib-cite-minor-mode "../site-lisp/auctex/bib-cite" "\
+Toggle bib-cite mode.
+When bib-cite mode is enabled, citations, labels and refs are highlighted
+when the mouse is over them.  Clicking on these highlights with [mouse-2]
+runs `bib-find', and [mouse-3] runs `bib-display'.
+
+(fn ARG)" t)
+(autoload 'turn-on-bib-cite "../site-lisp/auctex/bib-cite" "\
+Unconditionally turn on Bib Cite mode.")
+(register-definition-prefixes "../site-lisp/auctex/bib-cite" '("LaTeX-find-label-hist-alist" "bib-" "create-alist-from-list" "member-cis" "psg-" "search-directory-tree"))
+
+
 ;;; Generated autoloads from ../site-lisp/browse-kill-ring/browse-kill-ring.el
 
 (autoload 'browse-kill-ring-default-keybindings "../site-lisp/browse-kill-ring/browse-kill-ring" "\
@@ -412,6 +436,11 @@ behavior.  This function sets things up so that M-y will invoke
 (autoload 'browse-kill-ring "../site-lisp/browse-kill-ring/browse-kill-ring" "\
 Display items in the `kill-ring' in another buffer." t)
 (register-definition-prefixes "../site-lisp/browse-kill-ring/browse-kill-ring" '("browse-kill-ring-"))
+
+
+;;; Generated autoloads from ../site-lisp/company-mode/test/capf-tests.el
+
+(register-definition-prefixes "../site-lisp/company-mode/test/capf-tests" '("company-"))
 
 
 ;;; Generated autoloads from ../site-lisp/markdown-mode/tests/checkdoc-batch.el
@@ -755,6 +784,350 @@ highlighting and node completion." t)
 ;;; Generated autoloads from ../site-lisp/citre/tests/common.el
 
 (register-definition-prefixes "../site-lisp/citre/tests/common" '("default-tags" "expand-test-file" "get-file-content" "map-get-field" "set-equal" "tags-get-definitions"))
+
+
+;;; Generated autoloads from ../site-lisp/company-mode/company.el
+
+(autoload 'company-mode "../site-lisp/company-mode/company" "\
+\"complete anything\"; is an in-buffer completion framework.
+
+Completion starts automatically, depending on the values
+`company-idle-delay' and `company-minimum-prefix-length'.
+
+Completion can be controlled with the commands:
+`company-complete-common', `company-complete-selection', `company-complete',
+`company-select-next', `company-select-previous'.  If these commands are
+called before `company-idle-delay', completion will also start.
+
+Completions can be searched with `company-search-candidates' or
+`company-filter-candidates'.  These can be used while completion is
+inactive, as well.
+
+The completion data is retrieved using `company-backends' and displayed
+using `company-frontends'.  If you want to start a specific backend, call
+it interactively or use `company-begin-backend'.
+
+By default, the completions list is sorted alphabetically, unless the
+backend chooses otherwise, or `company-transformers' changes it later.
+
+regular keymap (`company-mode-map'):
+
+\\{company-mode-map}
+keymap during active completions (`company-active-map'):
+
+\\{company-active-map}
+
+This is a minor mode.  If called interactively, toggle the
+`Company mode' mode.  If the prefix argument is positive, enable
+the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `company-mode'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t)
+(put 'global-company-mode 'globalized-minor-mode t)
+(defvar global-company-mode nil "\
+Non-nil if Global Company mode is enabled.
+See the `global-company-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `global-company-mode'.")
+(custom-autoload 'global-company-mode "../site-lisp/company-mode/company" nil)
+(autoload 'global-company-mode "../site-lisp/company-mode/company" "\
+Toggle Company mode in all buffers.
+With prefix ARG, enable Global Company mode if ARG is positive;
+otherwise, disable it.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.
+Enable the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+Company mode is enabled in all buffers where `company-mode-on' would
+do it.
+
+See `company-mode' for more information on Company mode.
+
+(fn &optional ARG)" t)
+(autoload 'company-manual-begin "../site-lisp/company-mode/company" nil t)
+(autoload 'company-complete "../site-lisp/company-mode/company" "\
+Insert the common part of all candidates or the current selection.
+The first time this is called, the common part is inserted, the second
+time, or when the selection has been changed, the selected candidate is
+inserted." t)
+(register-definition-prefixes "../site-lisp/company-mode/company" '("company-"))
+
+
+;;; Generated autoloads from ../site-lisp/company-mode/company-abbrev.el
+
+(autoload 'company-abbrev "../site-lisp/company-mode/company-abbrev" "\
+`company-mode' completion backend for abbrev.
+
+(fn COMMAND &optional ARG &rest IGNORED)" t)
+(register-definition-prefixes "../site-lisp/company-mode/company-abbrev" '("company-abbrev-insert"))
+
+
+;;; Generated autoloads from ../site-lisp/company-mode/company-bbdb.el
+
+(autoload 'company-bbdb "../site-lisp/company-mode/company-bbdb" "\
+`company-mode' completion backend for BBDB.
+
+(fn COMMAND &optional ARG &rest IGNORE)" t)
+(register-definition-prefixes "../site-lisp/company-mode/company-bbdb" '("company-bbdb-"))
+
+
+;;; Generated autoloads from ../site-lisp/company-box/company-box.el
+
+(autoload 'company-box-mode "../site-lisp/company-box/company-box" "\
+Company-box minor mode.
+
+This is a minor mode.  If called interactively, toggle the
+`company-box mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `company-box-mode'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t)
+(register-definition-prefixes "../site-lisp/company-box/company-box" '("company-box-"))
+
+
+;;; Generated autoloads from ../site-lisp/company-box/company-box-doc.el
+
+(register-definition-prefixes "../site-lisp/company-box/company-box-doc" '("company-box-"))
+
+
+;;; Generated autoloads from ../site-lisp/company-box/company-box-icons.el
+
+(register-definition-prefixes "../site-lisp/company-box/company-box-icons" '("company-box-icons-"))
+
+
+;;; Generated autoloads from ../site-lisp/company-mode/company-capf.el
+
+(register-definition-prefixes "../site-lisp/company-mode/company-capf" '("company-"))
+
+
+;;; Generated autoloads from ../site-lisp/company-mode/company-clang.el
+
+(register-definition-prefixes "../site-lisp/company-mode/company-clang" '("company-clang"))
+
+
+;;; Generated autoloads from ../site-lisp/company-mode/company-cmake.el
+
+(register-definition-prefixes "../site-lisp/company-mode/company-cmake" '("company-cmake"))
+
+
+;;; Generated autoloads from ../site-lisp/company-mode/company-css.el
+
+(autoload 'company-css "../site-lisp/company-mode/company-css" "\
+`company-mode' completion backend for `css-mode'.
+
+(fn COMMAND &optional ARG &rest IGNORED)" t)
+(register-definition-prefixes "../site-lisp/company-mode/company-css" '("company-css-"))
+
+
+;;; Generated autoloads from ../site-lisp/company-mode/company-dabbrev.el
+
+(autoload 'company-dabbrev "../site-lisp/company-mode/company-dabbrev" "\
+dabbrev-like `company-mode' completion backend.
+
+(fn COMMAND &optional ARG &rest IGNORED)" t)
+(register-definition-prefixes "../site-lisp/company-mode/company-dabbrev" '("company-dabbrev-"))
+
+
+;;; Generated autoloads from ../site-lisp/company-mode/company-dabbrev-code.el
+
+(autoload 'company-dabbrev-code "../site-lisp/company-mode/company-dabbrev-code" "\
+dabbrev-like `company-mode' backend for code.
+The backend looks for all symbols in the current buffer that aren't in
+comments or strings.
+
+(fn COMMAND &optional ARG &rest IGNORED)" t)
+(register-definition-prefixes "../site-lisp/company-mode/company-dabbrev-code" '("company-dabbrev-code-"))
+
+
+;;; Generated autoloads from ../site-lisp/company-mode/company-elisp.el
+
+(autoload 'company-elisp "../site-lisp/company-mode/company-elisp" "\
+`company-mode' completion backend for Emacs Lisp.
+
+(fn COMMAND &optional ARG &rest IGNORED)" t)
+(register-definition-prefixes "../site-lisp/company-mode/company-elisp" '("company-elisp-"))
+
+
+;;; Generated autoloads from ../site-lisp/company-mode/company-etags.el
+
+(autoload 'company-etags "../site-lisp/company-mode/company-etags" "\
+`company-mode' completion backend for etags.
+
+(fn COMMAND &optional ARG &rest IGNORED)" t)
+(register-definition-prefixes "../site-lisp/company-mode/company-etags" '("company-etags-"))
+
+
+;;; Generated autoloads from ../site-lisp/company-mode/company-files.el
+
+(autoload 'company-files "../site-lisp/company-mode/company-files" "\
+`company-mode' completion backend existing file names.
+Completions works for proper absolute and relative files paths.
+File paths with spaces are only supported inside strings.
+
+(fn COMMAND &optional ARG &rest IGNORED)" t)
+(register-definition-prefixes "../site-lisp/company-mode/company-files" '("company-file"))
+
+
+;;; Generated autoloads from ../site-lisp/company-mode/company-gtags.el
+
+(autoload 'company-gtags "../site-lisp/company-mode/company-gtags" "\
+`company-mode' completion backend for GNU Global.
+
+(fn COMMAND &optional ARG &rest IGNORED)" t)
+(register-definition-prefixes "../site-lisp/company-mode/company-gtags" '("company-gtags-"))
+
+
+;;; Generated autoloads from ../site-lisp/company-mode/company-ispell.el
+
+(autoload 'company-ispell "../site-lisp/company-mode/company-ispell" "\
+`company-mode' completion backend using Ispell.
+
+(fn COMMAND &optional ARG &rest IGNORED)" t)
+(register-definition-prefixes "../site-lisp/company-mode/company-ispell" '("company-ispell-"))
+
+
+;;; Generated autoloads from ../site-lisp/company-mode/company-keywords.el
+
+(autoload 'company-keywords "../site-lisp/company-mode/company-keywords" "\
+`company-mode' backend for programming language keywords.
+
+(fn COMMAND &optional ARG &rest IGNORED)" t)
+(register-definition-prefixes "../site-lisp/company-mode/company-keywords" '("company-keywords-"))
+
+
+;;; Generated autoloads from ../site-lisp/company-mode/company-nxml.el
+
+(autoload 'company-nxml "../site-lisp/company-mode/company-nxml" "\
+`company-mode' completion backend for `nxml-mode'.
+
+(fn COMMAND &optional ARG &rest IGNORED)" t)
+(register-definition-prefixes "../site-lisp/company-mode/company-nxml" '("company-nxml-"))
+
+
+;;; Generated autoloads from ../site-lisp/company-mode/company-oddmuse.el
+
+(autoload 'company-oddmuse "../site-lisp/company-mode/company-oddmuse" "\
+`company-mode' completion backend for `oddmuse-mode'.
+
+(fn COMMAND &optional ARG &rest IGNORED)" t)
+(register-definition-prefixes "../site-lisp/company-mode/company-oddmuse" '("company-oddmuse-"))
+
+
+;;; Generated autoloads from ../site-lisp/company-mode/company-semantic.el
+
+(autoload 'company-semantic "../site-lisp/company-mode/company-semantic" "\
+`company-mode' completion backend using CEDET Semantic.
+
+(fn COMMAND &optional ARG &rest IGNORED)" t)
+(register-definition-prefixes "../site-lisp/company-mode/company-semantic" '("company-semantic-"))
+
+
+;;; Generated autoloads from ../site-lisp/company-mode/company-template.el
+
+(register-definition-prefixes "../site-lisp/company-mode/company-template" '("company-template-"))
+
+
+;;; Generated autoloads from ../site-lisp/company-mode/company-tempo.el
+
+(autoload 'company-tempo "../site-lisp/company-mode/company-tempo" "\
+`company-mode' completion backend for tempo.
+
+(fn COMMAND &optional ARG &rest IGNORED)" t)
+(register-definition-prefixes "../site-lisp/company-mode/company-tempo" '("company-tempo-"))
+
+
+;;; Generated autoloads from ../site-lisp/company-mode/company-tests.el
+
+(register-definition-prefixes "../site-lisp/company-mode/company-tests" '("company-"))
+
+
+;;; Generated autoloads from ../site-lisp/company-mode/company-tng.el
+
+(autoload 'company-tng-frontend "../site-lisp/company-mode/company-tng" "\
+When the user changes the selection at least once, this
+frontend will display the candidate in the buffer as if it's
+already there and any key outside of `company-active-map' will
+confirm the selection and finish the completion.
+
+(fn COMMAND)")
+(define-obsolete-function-alias 'company-tng-configure-default 'company-tng-mode "0.9.14" "Applies the default configuration to enable company-tng.")
+(defvar company-tng-mode nil "\
+Non-nil if Company-Tng mode is enabled.
+See the `company-tng-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `company-tng-mode'.")
+(custom-autoload 'company-tng-mode "../site-lisp/company-mode/company-tng" nil)
+(autoload 'company-tng-mode "../site-lisp/company-mode/company-tng" "\
+This minor mode enables `company-tng-frontend'.
+
+This is a global minor mode.  If called interactively, toggle the
+`Company-Tng mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `(default-value \\='company-tng-mode)'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t)
+(register-definition-prefixes "../site-lisp/company-mode/company-tng" '("company-tng-"))
+
+
+;;; Generated autoloads from ../site-lisp/company-mode/company-yasnippet.el
+
+(autoload 'company-yasnippet "../site-lisp/company-mode/company-yasnippet" "\
+`company-mode' backend for `yasnippet'.
+
+This backend should be used with care, because as long as there are
+snippets defined for the current major mode, this backend will always
+shadow backends that come after it.  Recommended usages:
+
+* In a buffer-local value of `company-backends', grouped with a backend or
+  several that provide actual text completions.
+
+  (add-hook \\='js-mode-hook
+            (lambda ()
+              (set (make-local-variable \\='company-backends)
+                   \\='((company-dabbrev-code company-yasnippet)))))
+
+* After keyword `:with', grouped with other backends.
+
+  (push \\='(company-semantic :with company-yasnippet) company-backends)
+
+* Not in `company-backends', just bound to a key.
+
+  (global-set-key (kbd \"C-c y\") \\='company-yasnippet)
+
+(fn COMMAND &optional ARG &rest IGNORE)" t)
+(register-definition-prefixes "../site-lisp/company-mode/company-yasnippet" '("company-yasnippet-"))
 
 
 ;;; Generated autoloads from ../site-lisp/compat/compat.el
@@ -1191,6 +1564,54 @@ FETCHER and ALIST arguments.
 
 (fn FETCHER &optional ALIST)")
 (register-definition-prefixes "../site-lisp/consult/consult-xref" '("consult-xref--"))
+
+
+;;; Generated autoloads from ../site-lisp/auctex/context.el
+
+(defalias 'ConTeXt-mode #'context-mode)
+(autoload 'context-mode "../site-lisp/auctex/context" "\
+Major mode in AUCTeX for editing ConTeXt files.
+
+Special commands:
+\\{ConTeXt-mode-map}
+
+Entering `context-mode' calls the value of `text-mode-hook',
+then the value of `TeX-mode-hook', and then the value
+of `ConTeXt-mode-hook'." t)
+(register-definition-prefixes "../site-lisp/auctex/context" '("ConTeXt-" "TeX-ConTeXt-sentinel" "context-guess-current-interface"))
+
+
+;;; Generated autoloads from ../site-lisp/auctex/context-en.el
+
+(autoload 'context-en-mode "../site-lisp/auctex/context-en" "\
+Major mode for editing files for ConTeXt using its english interface.
+
+Special commands:
+\\{ConTeXt-mode-map}
+
+Entering `context-mode' calls the value of `text-mode-hook',
+then the value of `TeX-mode-hook', and then the value
+of `ConTeXt-mode-hook'." t)
+(register-definition-prefixes "../site-lisp/auctex/context-en" '("ConTeXt-"))
+
+
+;;; Generated autoloads from ../site-lisp/auctex/context-nl.el
+
+(autoload 'context-nl-mode "../site-lisp/auctex/context-nl" "\
+Major mode for editing files for ConTeXt using its dutch interface.
+
+Special commands:
+\\{ConTeXt-mode-map}
+
+Entering `context-mode' calls the value of `text-mode-hook',
+then the value of `TeX-mode-hook', and then the value
+of `ConTeXt-mode-hook'." t)
+(register-definition-prefixes "../site-lisp/auctex/context-nl" '("ConTeXt-"))
+
+
+;;; Generated autoloads from ../site-lisp/company-mode/test/core-tests.el
+
+(register-definition-prefixes "../site-lisp/company-mode/test/core-tests" '("ct-"))
 
 
 ;;; Generated autoloads from ../site-lisp/dash.el/dash.el
@@ -1876,6 +2297,11 @@ In that way the corresponding function will be called to retrieve the HTML
 (register-definition-prefixes "../site-lisp/emacs-application-framework/extension/eaf-org" '("eaf-org-"))
 
 
+;;; Generated autoloads from ../site-lisp/company-mode/test/elisp-tests.el
+
+(register-definition-prefixes "../site-lisp/company-mode/test/elisp-tests" '("company-elisp-with-buffer"))
+
+
 ;;; Generated autoloads from ../site-lisp/emacsql/emacsql.el
 
 (autoload 'emacsql-show-last-sql "../site-lisp/emacsql/emacsql" "\
@@ -1951,6 +2377,8 @@ evaluate `fingertip-mode'.
 
 The mode's hook is called both when the mode is enabled and when
 it is disabled.
+
+\\{fingertip-mode-map}
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "../site-lisp/fingertip/fingertip" '("fingertip-"))
@@ -2241,6 +2669,31 @@ SYMBOL with `flycheck-def-executable-var'.
 (register-definition-prefixes "../site-lisp/flycheck/maint/flycheck-maint" '("flycheck/"))
 
 
+;;; Generated autoloads from ../site-lisp/flymake-flycheck/flymake-flycheck.el
+
+(autoload 'flymake-flycheck-all-available-diagnostic-functions "../site-lisp/flymake-flycheck/flymake-flycheck" "\
+Return a list of diagnostic functions for all usable checkers.
+These might end up providing duplicate functionality, e.g. both
+dash and bash might be used to check a `sh-mode' buffer if both are
+found to be installed.
+
+Usually you will want to use `flymake-flycheck-all-chained-diagnostic-functions' instead.")
+(autoload 'flymake-flycheck-all-chained-diagnostic-functions "../site-lisp/flymake-flycheck/flymake-flycheck" "\
+Return a list of diagnostic functions for the current checker chain.")
+(autoload 'flymake-flycheck-diagnostic-function-for "../site-lisp/flymake-flycheck/flymake-flycheck" "\
+Wrap CHECKER to make a `flymake-diagnostics-functions' backend.
+
+(fn CHECKER)")
+(register-definition-prefixes "../site-lisp/flymake-flycheck/flymake-flycheck" '("flymake-flycheck-"))
+
+
+;;; Generated autoloads from ../site-lisp/auctex/font-latex.el
+
+(autoload 'font-latex-setup "../site-lisp/auctex/font-latex" "\
+Setup this buffer for LaTeX font-lock.  Usually called from a hook.")
+(register-definition-prefixes "../site-lisp/auctex/font-latex" '("font-latex-"))
+
+
 ;;; Generated autoloads from ../site-lisp/magit/lisp/git-commit.el
 
 (put 'git-commit-major-mode 'safe-local-variable
@@ -2518,10 +2971,86 @@ evaluate `iscroll-mode'.
 The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
-\\{iscroll-mode-map}
-
 (fn &optional ARG)" t)
 (register-definition-prefixes "../site-lisp/iscroll/iscroll" '("iscroll-"))
+
+
+;;; Generated autoloads from ../site-lisp/auctex/latex.el
+
+(autoload 'BibTeX-auto-store "../site-lisp/auctex/latex" "\
+This function should be called from `bibtex-mode-hook'.
+It will setup BibTeX to store keys in an auto file.")
+(add-to-list 'auto-mode-alist '("\\.drv\\'" . latex-mode) t)
+(add-to-list 'auto-mode-alist '("\\.hva\\'" . latex-mode))
+(autoload 'TeX-latex-mode "../site-lisp/auctex/latex" "\
+Major mode in AUCTeX for editing LaTeX files.
+See info under AUCTeX for full documentation.
+
+Special commands:
+\\{LaTeX-mode-map}
+
+Entering LaTeX mode calls the value of `text-mode-hook',
+then the value of `TeX-mode-hook', and then the value
+of `LaTeX-mode-hook'." t)
+(add-to-list 'auto-mode-alist '("\\.dtx\\'" . doctex-mode))
+(autoload 'docTeX-mode "../site-lisp/auctex/latex" "\
+Major mode in AUCTeX for editing .dtx files derived from `LaTeX-mode'.
+Runs `LaTeX-mode', sets a few variables and
+runs the hooks in `docTeX-mode-hook'.
+
+(fn)" t)
+(defalias 'TeX-doctex-mode #'docTeX-mode)
+(register-definition-prefixes "../site-lisp/auctex/latex" '("Bib" "LaTeX-" "TeX-" "docTeX-" "latex-math-mode"))
+
+
+;;; Generated autoloads from ../site-lisp/auctex/latex-flymake.el
+
+(register-definition-prefixes "../site-lisp/auctex/latex-flymake" '("LaTeX-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-actionscript.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-actionscript" '("lsp-actionscript-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-ada.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-ada" '("lsp-ada-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-angular.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-angular" '("lsp-client"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-ansible.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-ansible" '("lsp-ansible-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-astro.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-astro" '("lsp-astro--get-initialization-options"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-awk.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-awk" '("lsp-awk-executable"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-bash.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-bash" '("lsp-bash-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-beancount.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-beancount" '("lsp-beancount-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/test/lsp-benchmarks.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/test/lsp-benchmarks" '("lsp-benchmark"))
 
 
 ;;; Generated autoloads from ../site-lisp/lsp-bridge/lsp-bridge.el
@@ -2598,6 +3127,968 @@ it is disabled.
 ;;; Generated autoloads from ../site-lisp/lsp-bridge/test/lsp-bridge-test.el
 
 (register-definition-prefixes "../site-lisp/lsp-bridge/test/lsp-bridge-test" '("lsp-bridge-start-test"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-camel.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-camel" '("lsp-camel-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-clangd.el
+
+(autoload 'lsp-cpp-flycheck-clang-tidy-error-explainer "../site-lisp/lsp-mode/clients/lsp-clangd" "\
+Explain a clang-tidy ERROR by scraping documentation from llvm.org.
+
+(fn ERROR)")
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-clangd" '("lsp-c"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/test/lsp-clangd-test.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/test/lsp-clangd-test" '("lsp-in-sample-cpp-project"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-clojure.el
+
+(autoload 'lsp-clojure-show-test-tree "../site-lisp/lsp-mode/clients/lsp-clojure" "\
+Show a test tree and focus on it if IGNORE-FOCUS? is nil.
+
+(fn IGNORE-FOCUS?)" t)
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-clojure" '("lsp-clojure-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/test/lsp-common-test.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/test/lsp-common-test" '("lsp-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/lsp-completion.el
+
+(define-obsolete-variable-alias 'lsp-prefer-capf 'lsp-completion-provider "\
+lsp-mode 7.0.1")
+(define-obsolete-variable-alias 'lsp-enable-completion-at-point 'lsp-completion-enable "\
+lsp-mode 7.0.1")
+(autoload 'lsp-completion-at-point "../site-lisp/lsp-mode/lsp-completion" "\
+Get lsp completions.")
+(autoload 'lsp-completion--enable "../site-lisp/lsp-mode/lsp-completion" "\
+Enable LSP completion support.")
+(autoload 'lsp-completion-mode "../site-lisp/lsp-mode/lsp-completion" "\
+Toggle LSP completion support.
+
+This is a minor mode.  If called interactively, toggle the
+`Lsp-Completion mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `lsp-completion-mode'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t)
+(add-hook 'lsp-configure-hook (lambda nil (when (and lsp-auto-configure lsp-completion-enable) (lsp-completion--enable))))
+(register-definition-prefixes "../site-lisp/lsp-mode/lsp-completion" '("lsp-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-credo.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-credo" '("lsp-credo-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-crystal.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-crystal" '("lsp-clients-crystal-executable"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-csharp.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-csharp" '("lsp-csharp-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-css.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-css" '("lsp-css-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/lsp-diagnostics.el
+
+(define-obsolete-variable-alias 'lsp-diagnostic-package 'lsp-diagnostics-provider "\
+lsp-mode 7.0.1")
+(define-obsolete-variable-alias 'lsp-flycheck-default-level 'lsp-diagnostics-flycheck-default-level "\
+lsp-mode 7.0.1")
+(autoload 'lsp-diagnostics-lsp-checker-if-needed "../site-lisp/lsp-mode/lsp-diagnostics")
+(autoload 'lsp-diagnostics--enable "../site-lisp/lsp-mode/lsp-diagnostics" "\
+Enable LSP checker support.")
+(autoload 'lsp-diagnostics-mode "../site-lisp/lsp-mode/lsp-diagnostics" "\
+Toggle LSP diagnostics integration.
+
+This is a minor mode.  If called interactively, toggle the
+`Lsp-Diagnostics mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `lsp-diagnostics-mode'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t)
+(add-hook 'lsp-configure-hook (lambda nil (when lsp-auto-configure (lsp-diagnostics--enable))))
+(register-definition-prefixes "../site-lisp/lsp-mode/lsp-diagnostics" '("lsp-diagnostics-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/lsp-dired.el
+
+(defvar lsp-dired-mode nil "\
+Non-nil if Lsp-Dired mode is enabled.
+See the `lsp-dired-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `lsp-dired-mode'.")
+(custom-autoload 'lsp-dired-mode "../site-lisp/lsp-mode/lsp-dired" nil)
+(autoload 'lsp-dired-mode "../site-lisp/lsp-mode/lsp-dired" "\
+Display `lsp-mode' icons for each file in a dired buffer.
+
+This is a global minor mode.  If called interactively, toggle the
+`Lsp-Dired mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `(default-value \\='lsp-dired-mode)'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t)
+(register-definition-prefixes "../site-lisp/lsp-mode/lsp-dired" '("lsp-dired-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/docs/lsp-doc.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/docs/lsp-doc" '("lsp-doc-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-dockerfile.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-dockerfile" '("lsp-dockerfile-language-server-command"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-dot.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-dot" '("lsp-dot--dot-ls-server-command"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-elixir.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-elixir" '("lsp-elixir-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-elm.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-elm" '("lsp-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-emmet.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-emmet" '("lsp-emmet-ls-command"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-erlang.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-erlang" '("lsp-erlang-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-eslint.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-eslint" '("lsp-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/test/lsp-file-watch-test.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/test/lsp-file-watch-test" '("lsp-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-fortran.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-fortran" '("lsp-clients-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-fsharp.el
+
+(autoload 'lsp-fsharp--workspace-load "../site-lisp/lsp-mode/clients/lsp-fsharp" "\
+Load all of the provided PROJECTS.
+
+(fn PROJECTS)")
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-fsharp" '("lsp-fsharp-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-gdscript.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-gdscript" '("lsp-gdscript-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/scripts/lsp-generate-settings.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/scripts/lsp-generate-settings" '("lsp-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-gleam.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-gleam" '("lsp-gleam-executable"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-glsl.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-glsl" '("lsp-glsl-executable"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-go.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-go" '("lsp-go-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-graphql.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-graphql" '("lsp-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-groovy.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-groovy" '("lsp-groovy-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-hack.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-hack" '("lsp-clients-hack-command"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-haxe.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-haxe" '("lsp-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/lsp-headerline.el
+
+(autoload 'lsp-headerline-breadcrumb-mode "../site-lisp/lsp-mode/lsp-headerline" "\
+Toggle breadcrumb on headerline.
+
+This is a minor mode.  If called interactively, toggle the
+`Lsp-Headerline-Breadcrumb mode' mode.  If the prefix argument is
+positive, enable the mode, and if it is zero or negative, disable
+the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `lsp-headerline-breadcrumb-mode'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t)
+(autoload 'lsp-breadcrumb-go-to-symbol "../site-lisp/lsp-mode/lsp-headerline" "\
+Go to the symbol on breadcrumb at SYMBOL-POSITION.
+
+(fn SYMBOL-POSITION)" t)
+(autoload 'lsp-breadcrumb-narrow-to-symbol "../site-lisp/lsp-mode/lsp-headerline" "\
+Narrow to the symbol range on breadcrumb at SYMBOL-POSITION.
+
+(fn SYMBOL-POSITION)" t)
+(register-definition-prefixes "../site-lisp/lsp-mode/lsp-headerline" '("lsp-headerline-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-html.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-html" '("lsp-html-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/lsp-icons.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/lsp-icons" '("lsp-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/lsp-ido.el
+
+(autoload 'lsp-ido-workspace-symbol "../site-lisp/lsp-mode/lsp-ido" "\
+`ido' for lsp workspace/symbol.
+When called with prefix ARG the default selection will be symbol at point.
+
+(fn ARG)" t)
+(register-definition-prefixes "../site-lisp/lsp-mode/lsp-ido" '("lsp-ido-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-idris.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-idris" '("lsp-idris2-lsp-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/lsp-iedit.el
+
+(autoload 'lsp-iedit-highlights "../site-lisp/lsp-mode/lsp-iedit" "\
+Start an `iedit' operation on the documentHighlights at point.
+This can be used as a primitive `lsp-rename' replacement if the
+language server doesn't support renaming.
+
+See also `lsp-enable-symbol-highlighting'." t)
+(autoload 'lsp-iedit-linked-ranges "../site-lisp/lsp-mode/lsp-iedit" "\
+Start an `iedit' for `textDocument/linkedEditingRange'" t)
+(autoload 'lsp-evil-multiedit-highlights "../site-lisp/lsp-mode/lsp-iedit" "\
+Start an `evil-multiedit' operation on the documentHighlights at point.
+This can be used as a primitive `lsp-rename' replacement if the
+language server doesn't support renaming.
+
+See also `lsp-enable-symbol-highlighting'." t)
+(autoload 'lsp-evil-multiedit-linked-ranges "../site-lisp/lsp-mode/lsp-iedit" "\
+Start an `evil-multiedit' for `textDocument/linkedEditingRange'" t)
+(autoload 'lsp-evil-state-highlights "../site-lisp/lsp-mode/lsp-iedit" "\
+Start `iedit-mode'. for `textDocument/documentHighlight'" t)
+(autoload 'lsp-evil-state-linked-ranges "../site-lisp/lsp-mode/lsp-iedit" "\
+Start `iedit-mode'. for `textDocument/linkedEditingRange'" t)
+(register-definition-prefixes "../site-lisp/lsp-mode/lsp-iedit" '("lsp-iedit--on-ranges"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/test/lsp-integration-test.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/test/lsp-integration-test" '("deferred::nextc" "lsp-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/test/lsp-io-test.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/test/lsp-io-test" '("lsp--"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-javascript.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-javascript" '("lsp-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/test/lsp-javascript-test.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/test/lsp-javascript-test" '("lsp-flow-" "test-location"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-json.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-json" '("lsp-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-kotlin.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-kotlin" '("lsp-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/lsp-lens.el
+
+(autoload 'lsp-lens--enable "../site-lisp/lsp-mode/lsp-lens" "\
+Enable lens mode.")
+(autoload 'lsp-lens-show "../site-lisp/lsp-mode/lsp-lens" "\
+Display lenses in the buffer." t)
+(autoload 'lsp-lens-hide "../site-lisp/lsp-mode/lsp-lens" "\
+Delete all lenses." t)
+(autoload 'lsp-lens-mode "../site-lisp/lsp-mode/lsp-lens" "\
+Toggle code-lens overlays.
+
+This is a minor mode.  If called interactively, toggle the
+`Lsp-Lens mode' mode.  If the prefix argument is positive, enable
+the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `lsp-lens-mode'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t)
+(autoload 'lsp-avy-lens "../site-lisp/lsp-mode/lsp-lens" "\
+Click lsp lens using `avy' package." t)
+(register-definition-prefixes "../site-lisp/lsp-mode/lsp-lens" '("lsp-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-lua.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-lua" '("lsp-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-magik.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-magik" '("lsp-magik-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-markdown.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-markdown" '("lsp-markdown-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-marksman.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-marksman" '("lsp-marksman-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/test/lsp-methods-test.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/test/lsp-methods-test" '("lsp-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-mint.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-mint" '("lsp-clients-mint-executable"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/lsp-mode.el
+
+(put 'lsp-enable-file-watchers 'safe-local-variable #'booleanp)
+(put 'lsp-file-watch-ignored-directories 'safe-local-variable 'lsp--string-listp)
+(put 'lsp-file-watch-ignored-files 'safe-local-variable 'lsp--string-listp)
+(put 'lsp-file-watch-threshold 'safe-local-variable (lambda (i) (or (numberp i) (not i))))
+(autoload 'lsp--string-listp "../site-lisp/lsp-mode/lsp-mode" "\
+Return t if all elements of SEQUENCE are strings, else nil.
+
+(fn SEQUENCE)")
+(autoload 'lsp-load-vscode-workspace "../site-lisp/lsp-mode/lsp-mode" "\
+Load vscode workspace from FILE
+
+(fn FILE)" t)
+(autoload 'lsp-save-vscode-workspace "../site-lisp/lsp-mode/lsp-mode" "\
+Save vscode workspace to FILE
+
+(fn FILE)" t)
+(autoload 'lsp-install-server "../site-lisp/lsp-mode/lsp-mode" "\
+Interactively install or re-install server.
+When prefix UPDATE? is t force installation even if the server is present.
+
+(fn UPDATE? &optional SERVER-ID)" t)
+(autoload 'lsp-uninstall-server "../site-lisp/lsp-mode/lsp-mode" "\
+Delete a LSP server from `lsp-server-install-dir'.
+
+(fn DIR)" t)
+(autoload 'lsp-uninstall-servers "../site-lisp/lsp-mode/lsp-mode" "\
+Uninstall all installed servers." t)
+(autoload 'lsp-update-server "../site-lisp/lsp-mode/lsp-mode" "\
+Interactively update (reinstall) a server.
+
+(fn &optional SERVER-ID)" t)
+(autoload 'lsp-update-servers "../site-lisp/lsp-mode/lsp-mode" "\
+Update (reinstall) all installed servers." t)
+(autoload 'lsp-ensure-server "../site-lisp/lsp-mode/lsp-mode" "\
+Ensure server SERVER-ID
+
+(fn SERVER-ID)")
+(autoload 'lsp "../site-lisp/lsp-mode/lsp-mode" "\
+Entry point for the server startup.
+When ARG is t the lsp mode will start new language server even if
+there is language server which can handle current language. When
+ARG is nil current file will be opened in multi folder language
+server if there is such. When `lsp' is called with prefix
+argument ask the user to select which language server to start.
+
+(fn &optional ARG)" t)
+(autoload 'lsp-deferred "../site-lisp/lsp-mode/lsp-mode" "\
+Entry point that defers server startup until buffer is visible.
+`lsp-deferred' will wait until the buffer is visible before invoking `lsp'.
+This avoids overloading the server with many files when starting Emacs.")
+(autoload 'lsp-start-plain "../site-lisp/lsp-mode/lsp-mode" "\
+Start `lsp-mode' using minimal configuration using the latest `melpa' version
+of the packages.
+
+In case the major-mode that you are using for " t)
+(register-definition-prefixes "../site-lisp/lsp-mode/lsp-mode" '("defcustom-lsp" "lsp-" "make-lsp-client" "when-lsp-workspace" "with-lsp-workspace"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/test/lsp-mode-test.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/test/lsp-mode-test" '("lsp-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/lsp-modeline.el
+
+(define-obsolete-variable-alias 'lsp-diagnostics-modeline-scope 'lsp-modeline-diagnostics-scope "\
+lsp-mode 7.0.1")
+(autoload 'lsp-modeline-code-actions-mode "../site-lisp/lsp-mode/lsp-modeline" "\
+Toggle code actions on modeline.
+
+This is a minor mode.  If called interactively, toggle the
+`Lsp-Modeline-Code-Actions mode' mode.  If the prefix argument is
+positive, enable the mode, and if it is zero or negative, disable
+the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `lsp-modeline-code-actions-mode'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t)
+(define-obsolete-function-alias 'lsp-diagnostics-modeline-mode 'lsp-modeline-diagnostics-mode "lsp-mode 7.0.1")
+(autoload 'lsp-modeline-diagnostics-mode "../site-lisp/lsp-mode/lsp-modeline" "\
+Toggle diagnostics modeline.
+
+This is a minor mode.  If called interactively, toggle the
+`Lsp-Modeline-Diagnostics mode' mode.  If the prefix argument is
+positive, enable the mode, and if it is zero or negative, disable
+the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `lsp-modeline-diagnostics-mode'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t)
+(autoload 'lsp-modeline-workspace-status-mode "../site-lisp/lsp-mode/lsp-modeline" "\
+Toggle workspace status on modeline.
+
+This is a minor mode.  If called interactively, toggle the
+`Lsp-Modeline-Workspace-Status mode' mode.  If the prefix
+argument is positive, enable the mode, and if it is zero or
+negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `lsp-modeline-workspace-status-mode'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t)
+(register-definition-prefixes "../site-lisp/lsp-mode/lsp-modeline" '("lsp-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-nginx.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-nginx" '("lsp-nginx-server-command"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-nim.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-nim" '("lsp-nim-l"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-nix.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-nix" '("lsp-nix-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-ocaml.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-ocaml" '("lsp-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-openscad.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-openscad" '("lsp-openscad-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-perl.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-perl" '("lsp-perl-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-perlnavigator.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-perlnavigator" '("lsp-perlnavigator-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-php.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-php" '("lsp-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-pls.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-pls" '("lsp-pls-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-prolog.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-prolog" '("lsp-prolog-server-command"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/lsp-protocol.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/lsp-protocol" '("dash-expand:&RangeToPoint" "lsp"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-purescript.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-purescript" '("lsp-purescript-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-pwsh.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-pwsh" '("lsp-pwsh-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-pyls.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-pyls" '("lsp-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-pylsp.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-pylsp" '("lsp-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-r.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-r" '("lsp-clients-r-server-command"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-racket.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-racket" '("lsp-racket-lang"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-remark.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-remark" '("lsp-remark-server-command"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-rf.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-rf" '("expand-start-command" "lsp-rf-language-server-" "parse-rf-language-server-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-ruby-lsp.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-ruby-lsp" '("lsp-ruby-lsp-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-ruby-syntax-tree.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-ruby-syntax-tree" '("lsp-ruby-syntax-tree-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-ruff-lsp.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-ruff-lsp" '("lsp-ruff-lsp-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-rust.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-rust" '("lsp-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/lsp-semantic-tokens.el
+
+(defvar-local semantic-token-modifier-cache (make-hash-table) "\
+A cache of modifier values to the selected fonts.
+This allows whole-bitmap lookup instead of checking each bit. The
+expectation is that usage of modifiers will tend to cluster, so
+we will not have the full range of possible usages, hence a
+tractable hash map.
+
+This is set as buffer-local. It should probably be shared in a
+given workspace/language-server combination.
+
+This cache should be flushed every time any modifier
+configuration changes.")
+(autoload 'lsp--semantic-tokens-initialize-buffer "../site-lisp/lsp-mode/lsp-semantic-tokens" "\
+Initialize the buffer for semantic tokens.
+IS-RANGE-PROVIDER is non-nil when server supports range requests.")
+(autoload 'lsp--semantic-tokens-initialize-workspace "../site-lisp/lsp-mode/lsp-semantic-tokens" "\
+Initialize semantic tokens for WORKSPACE.
+
+(fn WORKSPACE)")
+(autoload 'lsp-semantic-tokens--warn-about-deprecated-setting "../site-lisp/lsp-mode/lsp-semantic-tokens" "\
+Warn about deprecated semantic highlighting variable.")
+(autoload 'lsp-semantic-tokens--enable "../site-lisp/lsp-mode/lsp-semantic-tokens" "\
+Enable semantic tokens mode.")
+(autoload 'lsp-semantic-tokens-mode "../site-lisp/lsp-mode/lsp-semantic-tokens" "\
+Toggle semantic-tokens support.
+
+This is a minor mode.  If called interactively, toggle the
+`Lsp-Semantic-Tokens mode' mode.  If the prefix argument is
+positive, enable the mode, and if it is zero or negative, disable
+the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `lsp-semantic-tokens-mode'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t)
+(register-definition-prefixes "../site-lisp/lsp-mode/lsp-semantic-tokens" '("lsp-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-semgrep.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-semgrep" '("lsp-semgrep-" "semgrep-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-sml.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-sml" '("lsp-sml-millet-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-solargraph.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-solargraph" '("lsp-solargraph-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-sorbet.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-sorbet" '("lsp-sorbet-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-sqls.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-sqls" '("lsp-sql"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-steep.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-steep" '("lsp-steep-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-svelte.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-svelte" '("lsp-svelte-plugin-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-terraform.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-terraform" '("construct-tf-package" "lsp-t"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-tex.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-tex" '("lsp-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-toml.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-toml" '("lsp-toml-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-treemacs/lsp-treemacs.el
+
+(autoload 'lsp-treemacs-symbols "../site-lisp/lsp-treemacs/lsp-treemacs" "\
+Show symbols view." t)
+(autoload 'lsp-treemacs-java-deps-list "../site-lisp/lsp-treemacs/lsp-treemacs" "\
+Display java dependencies." t)
+(autoload 'lsp-treemacs-java-deps-follow "../site-lisp/lsp-treemacs/lsp-treemacs" nil t)
+(defvar lsp-treemacs-sync-mode nil "\
+Non-nil if Lsp-Treemacs-Sync mode is enabled.
+See the `lsp-treemacs-sync-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `lsp-treemacs-sync-mode'.")
+(custom-autoload 'lsp-treemacs-sync-mode "../site-lisp/lsp-treemacs/lsp-treemacs" nil)
+(autoload 'lsp-treemacs-sync-mode "../site-lisp/lsp-treemacs/lsp-treemacs" "\
+Global minor mode for synchronizing lsp-mode workspace folders and treemacs projects.
+
+This is a global minor mode.  If called interactively, toggle the
+`Lsp-Treemacs-Sync mode' mode.  If the prefix argument is
+positive, enable the mode, and if it is zero or negative, disable
+the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `(default-value \\='lsp-treemacs-sync-mode)'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t)
+(autoload 'lsp-treemacs-references "../site-lisp/lsp-treemacs/lsp-treemacs" "\
+Show the references for the symbol at point.
+With a prefix argument, select the new window and expand the tree of references automatically.
+
+(fn ARG)" t)
+(autoload 'lsp-treemacs-implementations "../site-lisp/lsp-treemacs/lsp-treemacs" "\
+Show the implementations for the symbol at point.
+With a prefix argument, select the new window expand the tree of implementations automatically.
+
+(fn ARG)" t)
+(autoload 'lsp-treemacs-call-hierarchy "../site-lisp/lsp-treemacs/lsp-treemacs" "\
+Show the incoming call hierarchy for the symbol at point.
+With a prefix argument, show the outgoing call hierarchy.
+
+(fn OUTGOING)" t)
+(autoload 'lsp-treemacs-type-hierarchy "../site-lisp/lsp-treemacs/lsp-treemacs" "\
+Show the type hierarchy for the symbol at point.
+With prefix 0 show sub-types.
+With prefix 1 show super-types.
+With prefix 2 show both.
+
+(fn DIRECTION)" t)
+(autoload 'lsp-treemacs-errors-list "../site-lisp/lsp-treemacs/lsp-treemacs" nil t)
+(register-definition-prefixes "../site-lisp/lsp-treemacs/lsp-treemacs" '("lsp-treemacs-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-treemacs/lsp-treemacs-generic.el
+
+(register-definition-prefixes "../site-lisp/lsp-treemacs/lsp-treemacs-generic" '("lsp-treemacs-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-treemacs/lsp-treemacs-themes.el
+
+(register-definition-prefixes "../site-lisp/lsp-treemacs/lsp-treemacs-themes" '("lsp-treemacs-theme"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-ttcn3.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-ttcn3" '("lsp-ttcn3-lsp-server-command"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-typeprof.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-typeprof" '("lsp-typeprof-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-ui/lsp-ui.el
+
+(autoload 'lsp-ui-mode "../site-lisp/lsp-ui/lsp-ui" "\
+Toggle language server UI mode on or off.
+‘lsp-ui-mode’ is a minor mode that contains a series of useful UI
+integrations for ‘lsp-mode’.  With a prefix argument ARG, enable
+language server UI mode if ARG is positive, and disable it
+otherwise.  If called from Lisp, enable the mode if ARG is
+omitted or nil, and toggle it if ARG is ‘toggle’.
+
+(fn &optional ARG)" t)
+(register-definition-prefixes "../site-lisp/lsp-ui/lsp-ui" '("lsp-ui-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-ui/lsp-ui-doc.el
+
+(register-definition-prefixes "../site-lisp/lsp-ui/lsp-ui-doc" '("lsp-ui-doc-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-ui/lsp-ui-flycheck.el
+
+(register-definition-prefixes "../site-lisp/lsp-ui/lsp-ui-flycheck" '("lsp-ui-flycheck-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-ui/lsp-ui-imenu.el
+
+(register-definition-prefixes "../site-lisp/lsp-ui/lsp-ui-imenu" '("lsp-ui-imenu" "overlay-priority"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-ui/lsp-ui-peek.el
+
+(register-definition-prefixes "../site-lisp/lsp-ui/lsp-ui-peek" '("lsp-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-ui/lsp-ui-sideline.el
+
+(register-definition-prefixes "../site-lisp/lsp-ui/lsp-ui-sideline" '("lsp-ui-sideline"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-ui/lsp-ui-util.el
+
+(register-definition-prefixes "../site-lisp/lsp-ui/lsp-ui-util" '("lsp-ui-util-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/use-package/lsp-use-package.el
+
+(autoload 'use-package-normalize-ensure-servers "../site-lisp/lsp-mode/use-package/lsp-use-package" "\
+Normalize the arguments to diminish down to a list of symbols.
+LABEL - the label for the section.
+ARG - keyword value to normalize.
+
+(fn NAME LABEL ARG &optional RECURSED)")
+(autoload 'use-package-normalize/:ensure-servers "../site-lisp/lsp-mode/use-package/lsp-use-package" "\
+Normalize ARGS under KEYWORD section.
+NAME is the name of the section.
+
+(fn NAME KEYWORD ARGS)")
+(with-eval-after-load 'use-package (add-to-list 'use-package-keywords :ensure-servers t))
+(register-definition-prefixes "../site-lisp/lsp-mode/use-package/lsp-use-package" '("use-package-handler/:ensure-servers"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-v.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-v" '("lsp-v-vls-executable"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-vala.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-vala" '("lsp-clients-vala-ls-executable"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-verilog.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-verilog" '("lsp-clients-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-vetur.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-vetur" '("lsp-vetur-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-vhdl.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-vhdl" '("ghdl-ls-bin-name" "hdl-checker-bin-name" "lsp-vhdl-" "vhdl-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-vimscript.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-vimscript" '("lsp-clients-vim-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-volar.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-volar" '("lsp-volar-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/scripts/lsp-vscode-snippets.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/scripts/lsp-vscode-snippets" '("lsp-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-xml.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-xml" '("lsp-xml-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-yaml.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-yaml" '("lsp-yaml-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-zig.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-zig" '("lsp-zig-zls-executable"))
 
 
 ;;; Generated autoloads from ../site-lisp/hydra/lv.el
@@ -4882,6 +6373,37 @@ it is disabled.
 (register-definition-prefixes "../site-lisp/markdown-mode/tests/markdown-test" '("markdown-"))
 
 
+;;; Generated autoloads from ../site-lisp/auctex/multi-prompt.el
+
+(autoload 'multi-prompt "../site-lisp/auctex/multi-prompt" "\
+Completing prompt for a list of strings.
+The first argument SEPARATOR should be the string (of length 1) to
+separate the elements in the list.  The second argument UNIQUE should
+be non-nil, if each element must be unique.  The remaining elements
+are the arguments to `completing-read'.  See that.
+
+(fn SEPARATOR UNIQUE PROMPT TABLE &optional MP-PREDICATE REQUIRE-MATCH INITIAL HISTORY)")
+(autoload 'multi-prompt-key-value "../site-lisp/auctex/multi-prompt" "\
+Read multiple strings, with completion and key=value support.
+PROMPT is a string to prompt with, usually ending with a colon
+and a space.
+
+TABLE is an alist where each entry is a list.  The first element
+of each list is a string representing a key and the optional
+second element is a list with strings to be used as values for
+the key.  The second element can also be a variable returning a
+list of strings.
+
+See the documentation for `completing-read' for details on the
+other arguments: PREDICATE, REQUIRE-MATCH, INITIAL-INPUT, HIST,
+DEF, and INHERIT-INPUT-METHOD.
+
+The return value is the string as entered in the minibuffer.
+
+(fn PROMPT TABLE &optional PREDICATE REQUIRE-MATCH INITIAL-INPUT HIST DEF INHERIT-INPUT-METHOD)")
+(register-definition-prefixes "../site-lisp/auctex/multi-prompt" '("multi-prompt-"))
+
+
 ;;; Generated autoloads from ../site-lisp/mwim.el/mwim.el
 
  (autoload 'mwim-beginning-of-line-or-code "mwim" nil t)
@@ -5563,6 +7085,59 @@ it is disabled.
 (register-definition-prefixes "../site-lisp/org-visual-outline/org-visual-indent" '("org-visual-indent-"))
 
 
+;;; Generated autoloads from ../site-lisp/auctex/plain-tex.el
+
+(autoload 'TeX-plain-tex-mode "../site-lisp/auctex/plain-tex" "\
+Major mode in AUCTeX for editing plain TeX files.
+See info under AUCTeX for documentation.
+
+Special commands:
+\\{plain-TeX-mode-map}
+
+Entering `plain-tex-mode' calls the value of `text-mode-hook',
+then the value of `TeX-mode-hook', and then the value
+of `plain-TeX-mode-hook'." t)
+(autoload 'ams-tex-mode "../site-lisp/auctex/plain-tex" "\
+Major mode in AUCTeX for editing AmS-TeX files.
+See info under AUCTeX for documentation.
+
+Special commands:
+\\{AmSTeX-mode-map}
+
+Entering `ams-tex-mode' calls the value of `text-mode-hook',
+then the value of `TeX-mode-hook', and then the value
+of `AmS-TeX-mode-hook'." t)
+(register-definition-prefixes "../site-lisp/auctex/plain-tex" '("AmS" "plain-TeX-"))
+
+
+;;; Generated autoloads from ../site-lisp/auctex/preview.el
+
+(autoload 'desktop-buffer-preview "../site-lisp/auctex/preview" "\
+Hook function for restoring persistent previews into a buffer.
+
+(fn FILE-NAME BUFFER-NAME MISC)")
+(add-to-list 'desktop-buffer-mode-handlers '(latex-mode . desktop-buffer-preview))
+(autoload 'preview-install-styles "../site-lisp/auctex/preview" "\
+Installs the TeX style files into a permanent location.
+This must be in the TeX search path.  If FORCE-OVERWRITE is greater
+than 1, files will get overwritten without query, if it is less
+than 1 or nil, the operation will fail.  The default of 1 for interactive
+use will query.
+
+Similarly FORCE-SAVE can be used for saving
+`preview-TeX-style-dir' to record the fact that the uninstalled
+files are no longer needed in the search path.
+
+(fn DIR &optional FORCE-OVERWRITE FORCE-SAVE)" t)
+(autoload 'LaTeX-preview-setup "../site-lisp/auctex/preview" "\
+Hook function for embedding the preview package into AUCTeX.
+This is called by `LaTeX-mode-hook' and changes AUCTeX variables
+to add the preview functionality.")
+(autoload 'preview-report-bug "../site-lisp/auctex/preview" "\
+Report a bug in the preview-latex package." t)
+(register-definition-prefixes "../site-lisp/auctex/preview" '("TeX-" "desktop-buffer-preview-misc-data" "preview-"))
+
+
 ;;; Generated autoloads from ../site-lisp/puni/puni.el
 
 (autoload 'puni-delete-active-region "../site-lisp/puni/puni" "\
@@ -5896,6 +7471,11 @@ Argument NAME ignored.
 (register-definition-prefixes "../site-lisp/emacs-rime/rime-predicates" '("rime-predicate-"))
 
 
+;;; Generated autoloads from ../site-lisp/shrink-path.el/shrink-path.el
+
+(register-definition-prefixes "../site-lisp/shrink-path.el/shrink-path" '("shrink-path-"))
+
+
 ;;; Generated autoloads from ../site-lisp/symbol-overlay/symbol-overlay.el
 
 (autoload 'symbol-overlay-mode "../site-lisp/symbol-overlay/symbol-overlay" "\
@@ -5956,6 +7536,21 @@ Rename symbol at point on all its occurrences." t)
 (register-definition-prefixes "../site-lisp/symbol-overlay/symbol-overlay" '("symbol-overlay-"))
 
 
+;;; Generated autoloads from ../site-lisp/company-mode/test/template-tests.el
+
+(register-definition-prefixes "../site-lisp/company-mode/test/template-tests" '("company-template-field-assert-text"))
+
+
+;;; Generated autoloads from ../site-lisp/shrink-path.el/test/test-helper.el
+
+(register-definition-prefixes "../site-lisp/shrink-path.el/test/test-helper" '("with-"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-ui/test/test-helper.el
+
+(register-definition-prefixes "../site-lisp/lsp-ui/test/test-helper" '("lsp-ui-test-"))
+
+
 ;;; Generated autoloads from ../site-lisp/combobulate/tests/test-navigation.el
 
 (register-definition-prefixes "../site-lisp/combobulate/tests/test-navigation" '("combobulate-test"))
@@ -5964,6 +7559,129 @@ Rename symbol at point on all its occurrences." t)
 ;;; Generated autoloads from ../site-lisp/combobulate/tests/test-prelude.el
 
 (register-definition-prefixes "../site-lisp/combobulate/tests/test-prelude" '("combobulate-test-"))
+
+
+;;; Generated autoloads from ../site-lisp/auctex/tex.el
+
+(autoload 'TeX-tex-mode "../site-lisp/auctex/tex" "\
+Major mode in AUCTeX for editing TeX or LaTeX files.
+Tries to guess whether this file is for plain TeX or LaTeX.
+
+The algorithm is as follows:
+
+   1) if the file is empty or `TeX-force-default-mode' is not set to nil,
+      `TeX-default-mode' is chosen
+   2) If \\documentstyle or \\begin{, \\section{, \\part{ or \\chapter{ is
+      found, `latex-mode' is selected.
+   3) Otherwise, use `plain-tex-mode'" t)
+(autoload 'TeX-auto-generate "../site-lisp/auctex/tex" "\
+Generate style file for TEX and store it in AUTO.
+If TEX is a directory, generate style files for all files in the directory.
+
+(fn TEX AUTO)" t)
+(autoload 'TeX-auto-generate-global "../site-lisp/auctex/tex" "\
+Create global auto directory for global TeX macro definitions." t)
+(autoload 'TeX-submit-bug-report "../site-lisp/auctex/tex" "\
+Submit a bug report on AUCTeX via mail.
+
+Don't hesitate to report any problems or inaccurate documentation.
+
+If you don't have setup sending mail from Emacs, please copy the
+output buffer into your mail program, as it gives us important
+information about your AUCTeX version and AUCTeX configuration." t)
+(register-definition-prefixes "../site-lisp/auctex/tex" '("Bib" "ConTeXt-" "LaTeX-" "TeX-" "VirTeX-common-initialization" "docTeX-default-extension" "plain-TeX-auto-regexp-list" "tex-"))
+
+
+;;; Generated autoloads from ../site-lisp/auctex/tex-bar.el
+
+(autoload 'TeX-install-toolbar "../site-lisp/auctex/tex-bar" "\
+Install toolbar buttons for TeX mode." t)
+(autoload 'LaTeX-install-toolbar "../site-lisp/auctex/tex-bar" "\
+Install toolbar buttons for LaTeX mode." t)
+(register-definition-prefixes "../site-lisp/auctex/tex-bar" '("TeX-bar-"))
+
+
+;;; Generated autoloads from ../site-lisp/auctex/tex-fold.el
+
+(autoload 'TeX-fold-mode "../site-lisp/auctex/tex-fold" "\
+Minor mode for hiding and revealing macros and environments.
+
+Called interactively, with no prefix argument, toggle the mode.
+With universal prefix ARG (or if ARG is nil) turn mode on.
+With zero or negative ARG turn mode off.
+
+(fn &optional ARG)" t)
+(defalias 'tex-fold-mode #'TeX-fold-mode)
+(register-definition-prefixes "../site-lisp/auctex/tex-fold" '("TeX-fold-"))
+
+
+;;; Generated autoloads from ../site-lisp/auctex/tex-font.el
+
+(autoload 'tex-font-setup "../site-lisp/auctex/tex-font" "\
+Setup font lock support for TeX.")
+(register-definition-prefixes "../site-lisp/auctex/tex-font" '("tex-"))
+
+
+;;; Generated autoloads from ../site-lisp/auctex/tex-info.el
+
+(defalias 'Texinfo-mode #'texinfo-mode)
+(autoload 'TeX-texinfo-mode "../site-lisp/auctex/tex-info" "\
+Major mode in AUCTeX for editing Texinfo files.
+
+Special commands:
+\\{Texinfo-mode-map}
+
+Entering Texinfo mode calls the value of `text-mode-hook' and then the
+value of `Texinfo-mode-hook'." t)
+(register-definition-prefixes "../site-lisp/auctex/tex-info" '("Texinfo-" "texinfo-environment-regexp"))
+
+
+;;; Generated autoloads from ../site-lisp/auctex/tex-ispell.el
+
+(register-definition-prefixes "../site-lisp/auctex/tex-ispell" '("TeX-ispell-"))
+
+
+;;; Generated autoloads from ../site-lisp/auctex/tex-jp.el
+
+(autoload 'japanese-plain-tex-mode "../site-lisp/auctex/tex-jp" "\
+Major mode in AUCTeX for editing Japanese plain TeX files.
+Set `japanese-TeX-mode' to t, and enter `TeX-plain-tex-mode'." t)
+(autoload 'japanese-latex-mode "../site-lisp/auctex/tex-jp" "\
+Major mode in AUCTeX for editing Japanese LaTeX files.
+Set `japanese-TeX-mode' to t, and enter `TeX-latex-mode'." t)
+(register-definition-prefixes "../site-lisp/auctex/tex-jp" '("TeX-" "japanese-"))
+
+
+;;; Generated autoloads from ../site-lisp/auctex/tex-style.el
+
+(register-definition-prefixes "../site-lisp/auctex/tex-style" '("LaTeX-" "TeX-TikZ-point-name-regexp"))
+
+
+;;; Generated autoloads from ../site-lisp/auctex/tex-wizard.el
+
+(register-definition-prefixes "../site-lisp/auctex/tex-wizard" '("TeX-wizard"))
+
+
+;;; Generated autoloads from ../site-lisp/auctex/texmathp.el
+
+(autoload 'texmathp "../site-lisp/auctex/texmathp" "\
+Determine if point is inside (La)TeX math mode.
+Returns t or nil.  Additional info is placed into `texmathp-why'.
+The functions assumes that you have (almost) syntactically correct (La)TeX in
+the buffer.
+See the variable `texmathp-tex-commands' about which commands are checked." t)
+(autoload 'texmathp-match-switch "../site-lisp/auctex/texmathp" "\
+Search backward for any of the math switches.
+Limit searched to BOUND.
+
+(fn BOUND)")
+(register-definition-prefixes "../site-lisp/auctex/texmathp" '("texmathp-"))
+
+
+;;; Generated autoloads from ../site-lisp/auctex/toolbar-x.el
+
+ (autoload 'toolbarx-install-toolbar "toolbar-x")
+(register-definition-prefixes "../site-lisp/auctex/toolbar-x" '("toolbarx-"))
 
 
 ;;; Generated autoloads from ../site-lisp/treemacs-nerd-icons/treemacs-nerd-icons.el

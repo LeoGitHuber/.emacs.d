@@ -144,6 +144,29 @@ Dot-directories and directories contain `.nosearch' will be skipped."
                                (file-exists-p (expand-file-name ".nosearch"
                                                                 d))))))
 
+(defun get-pure-cons (list1 list2)
+  "Combine LIST1 and LIST2.
+The resulting list contains all items that appear in LIST1 but not LIST2."
+  (let ((result '())
+        (num1 (length list1))
+        (num2 (length list2))
+        (compute 0)
+        (n1 0)
+        (n2 0))
+    (while (<= n1 num1)
+      (while (<= n2 num2)
+        (if (eq (nth n1 list1) (nth n2 list2))
+            (progn
+              (setq n2 (+ 1 num2))
+              (setq compute 1))
+          (setq n2 (+ n2 1))))
+      (when (equal compute 0)
+        (setq result (cons (nth n1 list1) result)))
+      (setq n1 (+ n1 1))
+      (setq n2 0)
+      (setq compute 0))
+    result))
+
 (defun find-dir-recursively (dir)
   "Find all `.el' files in DIR and its subdirectories."
   (let ((subdir (find-subdir-recursively dir)))

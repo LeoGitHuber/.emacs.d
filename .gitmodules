@@ -157,3 +157,27 @@
 [submodule "site-lisp/valign"]
 	path = site-lisp/valign
 	url = https://github.com/casouri/valign.git
+[submodule "site-lisp/flymake-flycheck"]
+	path = site-lisp/flymake-flycheck
+	url = https://github.com/purcell/flymake-flycheck.git
+[submodule "site-lisp/shrink-path.el"]
+	path = site-lisp/shrink-path.el
+	url = https://gitlab.com/bennya/shrink-path.el.git
+[submodule "site-lisp/auctex"]
+	path = site-lisp/auctex
+	url = https://git.savannah.gnu.org/git/auctex.git
+[submodule "site-lisp/lsp-mode"]
+	path = site-lisp/lsp-mode
+	url = https://github.com/emacs-lsp/lsp-mode.git
+[submodule "site-lisp/company-mode"]
+	path = site-lisp/company-mode
+	url = https://github.com/company-mode/company-mode.git
+[submodule "site-lisp/lsp-treemacs"]
+	path = site-lisp/lsp-treemacs
+	url = https://github.com/emacs-lsp/lsp-treemacs.git
+[submodule "site-lisp/lsp-ui"]
+	path = site-lisp/lsp-ui
+	url = https://github.com/emacs-lsp/lsp-ui.git
+[submodule "site-lisp/company-box"]
+	path = site-lisp/company-box
+	url = https://github.com/sebastiencs/company-box.git

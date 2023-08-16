@@ -1,5 +1,4 @@
-;;; package --- Sumary
-;; -*- lexical-binding: t; -*-
+;;; package --- Sumary -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 
@@ -26,38 +25,102 @@
   :group 'mode-line-personal)
 
 (defface mode-line-area-1
-  '(
-	;; (((background dark)) :background "#83a598" :foreground "#1d2021")
+  '(;; (((background dark)) :background "#83a598" :foreground "#1d2021")
 	;; (((background light)) :background "#076678" :foreground "#f9f5d7")
-	(((background dark)) :background "#1C2F45" :foreground "#589EDD")
-	(((background light)) :background "#CEE1F8" :foreground "#20396A"))
+	;; (((background dark)) :background "#1C2F45" :foreground "#589EDD")
+	;; (((background light)) :background "#CEE1F8" :foreground "#20396A")
+    (((background dark)) :background "#71B7FF" :foreground "#251113")
+    (((background light)) :background "#0349B4" :foreground "#E0FDFF")
+    )
   "Face for personal mode line setting area 1."
   :group 'mode-line-personal)
 
 (defface mode-line-area-1-separator-2
-  '(
-	(((background dark)) :foreground "#1C2F45" :inherit mode-line-area-2)
-	(((background light)) :foreground "#CEE1F8" :inherit mode-line-area-2))
+  '(;; (((background dark)) :foreground "#1C2F45" :inherit mode-line-area-2)
+	;; (((background light)) :foreground "#CEE1F8" :inherit mode-line-area-2)
+    (((background dark)) :foreground "#71B7FF" :inherit mode-line-area-2)
+	(((background light)) :foreground "#0349B4" :inherit mode-line-area-2)
+    )
   "Face for personal mode line setting area 1."
   :group 'mode-line-personal)
 
 (defface mode-line-area-1-separator-3
-  '(
-	;; (((background dark)) :foreground "#1C2F45" :inherit mode-line-area-3)
-    (((background dark)) :foreground "#1C2F45" :inherit mode-line)
-	(((background light)) :foreground "#CEE1F8" :inherit mode-line-area-3))
+  '(;; (((background dark)) :foreground "#1C2F45" :inherit mode-line-area-3)
+    ;; (((background dark)) :foreground "#1C2F45" :inherit mode-line)
+	;; (((background light)) :foreground "#CEE1F8" :inherit mode-line-area-3)
+    (((background dark)) :foreground "#71B7FF" :inherit mode-line)
+	(((background light)) :foreground "#0349B4" :inherit mode-line-area-2)
+    )
   "Face for personal mode line setting area 1."
   :group 'mode-line-personal)
 
-(defface mode-line-area-2
-  '(
-	;; (((background dark)) :background "#504945" :foreground "#d5c4a1")
-	;; (((background dark)) :background "#1C2F45" :foreground "#589EDD")
-	(((background dark)) :background "#244032" :foreground "#4CCA64")
-    ;; (((background light)) :background "#bdae93" :foreground "#665c54")
-	(((background light)) :background "#D4F8DB" :foreground "#809E3E"))
-  "Face for personal mode line setting area 2."
+(defface mode-line-area-1-separator-2
+  '(;; (((background dark)) :foreground "#1C2F45" :inherit mode-line-area-2)
+	;; (((background light)) :foreground "#CEE1F8" :inherit mode-line-area-2)
+    (((background dark)) :foreground "#71B7FF" :inherit mode-line-area-2)
+	(((background light)) :foreground "#0349B4" :inherit mode-line-area-2)
+    )
+  "Face for personal mode line setting area 1."
   :group 'mode-line-personal)
+
+(defface mode-line-git
+  '((((background dark)) :background "#1F2E40" :foreground "#4788CD")
+    (((background light)) :background "#CDDBF0" :foreground "#5074C3"))
+  "Face for personal mode line setting git."
+  :group 'mode-line-personal)
+
+(defface ml-git-insert
+  '(
+	(((background dark)) :background "#0A2516" :foreground "#09B239")
+    (((background light)) :background "#DAF7E0" :foreground "#285F25")
+	)
+  "Face for personal mode line setting git."
+  :group 'mode-line-personal)
+
+(defface ml-git-delete
+  '(
+    (((background dark)) :background "#2F1A1D" :foreground "#FF6A69")
+    (((background light)) :background "#FFECEB" :foreground "#D22844"))
+  "Face for personal mode line setting git."
+  :group 'mode-line-personal)
+
+(defface diagnostic-error-face
+  '((default :inherit mode-line-git)
+    (((background dark)) :foreground "#FF6A69")
+    (((background light)) :foreground "#D12954"))
+  "Face for personal mode line setting diagnostic error."
+  :group 'mode-line-personal)
+
+(defface diagnostic-warning-face
+  '((default :inherit mode-line-git)
+    (((background dark)) :foreground "#C09914")
+    (((background light)) :foreground "#834707"))
+  "Face for personal mode line setting diagnostic warning."
+  :group 'mode-line-personal)
+
+(defface diagnostic-info-face
+  '((default :inherit mode-line-git)
+    (((background dark)) :foreground "#409eff")  ;; "#0a0c10"
+    (((background light)) :foreground "#0349b4") ;; "#0e1116"
+    )
+  "Face for personal mode line setting diagnostic info."
+  :group 'mode-line-personal)
+
+(defvar diagnostic-error
+  "󰅚 "
+  "Icon for diagnostic error.")
+
+(defvar diagnostic-warning
+  "󰀪 "
+  "Icon for diagnostic warning.")
+
+(defvar diagnostic-info
+  "󰋽 "
+  "Icon for diagnostic info.")
+
+(defvar diagnostic-hint
+  "󰌶 "
+  "Icon for diagnostic hint.")
 
 (defface mode-line-area-2-separator
   '(
@@ -68,9 +131,10 @@
 
 (defface mode-line-area-3
   '(
-    (((background dark)) :background "#341A00" :foreground "#E3B341")
-    ;; (((background light)) :background "#FFF5B1" :foreground "#CDA71C")
-	(((background light)) :foreground "#1A478D" :inherit 'mode-line))
+    ;; (((background dark)) :background "#341A00" :foreground "#E3B341")
+    (((background dakr)) :inherit 'mode-line)
+    (((background light)) :foreground "#1A478D" :inherit 'mode-line)
+    )
   "Face for personal mode line setting area 3."
   :group 'mode-line-personal)
 
@@ -84,8 +148,7 @@
 (with-eval-after-load 'rime
   (set-face-attribute 'rime-indicator-face nil
 					  :font (font-spec
-							 :name "JetBrainsMono Nerd Font"
-							 :size 11.0))
+							 :name "JetBrainsMono Nerd Font"))
   (defface input-method-indicator-cn-face
 	'(
 	  (((background dark)) :foreground "#d65d0e" :inherit rime-indicator-face)
@@ -140,8 +203,7 @@
 	(((background light)) :foreground "#cb2431")
 	)
   "Face for flycheck Error."
-  :group 'flycheck-mode-line
-  )
+  :group 'flycheck-mode-line)
 
 (defface flycheck-warn
   '(
@@ -150,8 +212,7 @@
 	(((background light)) :foreground "#bf8803")
 	)
   "Face for flycheck Warn."
-  :group 'flycheck-mode-line
-  )
+  :group 'flycheck-mode-line)
 
 (defface flycheck-info-my
   '((((background dark)) :background "#090c10" :foreground "#75beff")
@@ -159,8 +220,7 @@
 	(((background light)) :foreground "#75beff")
 	)
   "Face for flycheck Info."
-  :group 'flycheck-mode-line
-  )
+  :group 'flycheck-mode-line)
 
 (with-eval-after-load 'winum
   (setq winum-ignored-buffers '("*sort-tab*")
@@ -181,7 +241,7 @@
   		 (8 . "❽")
   		 (9 . "❾")
 		 ))))
-  (add-hook 'winum-mode-hook '(lambda () (setq winum-auto-setup-mode-line nil))))
+  (add-hook 'winum-mode-hook (lambda () (setq winum-auto-setup-mode-line nil))))
 
 (defvar sys-type
   (let ((st (format "%s" system-type)))
@@ -281,7 +341,7 @@
 ;; 	 (let*
 ;; 		 ((right-part
 ;; 		   '(
-;; 			 ;; Git
+;; 			 ;; Git\
 ;; 			 (:eval
 ;; 			  (concat
 ;; 			   (when vc-mode
@@ -408,45 +468,146 @@
  '((:eval
 	(concat
 	 (when (and (bound-and-true-p winum-mode) (winum-get-number))
-	   (concat (alist-get (winum-get-number) winum-list)
-               (propertize mode-line-sep 'face '(:inherit mode-line-area-1-separator-3))
-	           ;; (if (buffer-file-name)
-	           ;;     (propertize mode-line-sep 'face '(:inherit mode-line-area-1-separator-2))
-	           ;;   (propertize mode-line-sep 'face '(:inherit mode-line-area-1-separator-3)))
-               ))
+	   (alist-get (winum-get-number) winum-list)
+	   ;; (if (buffer-file-name)
+	   ;;     (propertize mode-line-sep 'face '(:inherit mode-line-area-1-separator-2))
+	   ;;   (propertize mode-line-sep 'face '(:inherit mode-line-area-1-separator-3)))
+       )
      ;; Git
      (when vc-mode
-	   (cond
-	    ((string-match "Git[:-]" vc-mode)
-	     (let ((branch (mapconcat 'concat (cdr (split-string vc-mode "[:-]")) "-")))
-		   (format "%s %s"
-		           ;; (nerd-icons-devicon "nf-dev-git")
-		           ;; " · "
-		           (nerd-icons-octicon "nf-oct-git_branch")
-                   branch
-		           ;; (propertize branch 'face `(:inherit mode-line))
-		           )))
-	    ((string-match "SVN-" vc-mode)
-	     (let ((revision (cadr (split-string vc-mode "-"))))
-		   (format " %s · %s" (nerd-icons-faicon "nf-fa-cloud") revision)))
-	    (t (format "%s" vc-mode))))
+       (concat
+        (propertize mode-line-sep
+                    'face
+                    `(:background ,(face-background 'mode-line-git)
+                                  :foreground ,(face-background 'mode-line-area-1)))
+        (propertize
+	     (cond
+	      ((string-match "Git[:-]" vc-mode)
+	       (let ((branch (mapconcat 'concat (cdr (split-string vc-mode "[:-]")) "-")))
+		     (format " %s %s "
+		             "" ;; (nerd-icons-powerline "nf-pl-branch")
+                     branch)))
+	      ((string-match "SVN-" vc-mode)
+	       (let ((revision (cadr (split-string vc-mode "-"))))
+		     (format " %s · %s" (nerd-icons-faicon "nf-fa-cloud") revision)))
+	      (t (format "%s" vc-mode)))
+         'face '(:inherit mode-line-git))
+        (let* ((stat (car
+                      (process-lines "git"
+                                     "diff" "--numstat" buffer-file-name))))
+          (if stat
+              (let ((stat (string-split stat)))
+                (concat (propertize (format " +%s " (car stat)) 'face '(:inherit ml-git-insert))
+                        (propertize (format "-%s " (cadr stat)) 'face '(:inherit ml-git-delete))))
+            ""))))
 
-	 ;; Directory
-	 ;; (if (buffer-file-name)
-	 ;;     (concat
-	 ;;      (propertize (format " %s " (abbreviate-file-name (file-name-directory (buffer-file-name)))) 'face `(:inherit mode-line-area-2) 'help-echo "Current Directory")
-	 ;;      (propertize mode-line-sep 'face '(:inherit mode-line-area-2-separator))
-	 ;;      ))
-	 ;; (propertize " " 'face `(:inherit mode-line-area-3))
+     (if (bound-and-true-p flymake-mode)
+         (let* ((known (hash-table-keys flymake--state))
+                (running (flymake-running-backends))
+                (disabled (flymake-disabled-backends))
+                (reported (flymake-reporting-backends))
+                (all-disabled (and disabled (null running)))
+                ;; (some-waiting (get-pure-cons running reported))  ;; Affect performance
+                (icon
+                 (format "%s"
+                         (cond
+                          ;; (some-waiting
+                          ;;  (propertize "⟲ " 'face '(:inherit font-lock-doc-face)))
+                          ((null known)
+                           (propertize "󰳤 " 'face '(:inherit error)))
+                          (all-disabled
+                           (propertize "󰀧 " 'face '(:inherit warning)))
+                          (t (let ((.error 0)
+                                   (.warning 0)
+                                   (.note 0))
+                               (progn
+                                 (let* ((warning-level (warning-numeric-level :warning))
+                                        (note-level (warning-numeric-level :debug))
+                                        (error-level (warning-numeric-level :error))
+                                        (states (hash-table-values flymake--state)))
+                                   (dolist (state states)
+                                     (dolist (diag (flymake--state-diags state))
+                                       (let ((severity (flymake--lookup-type-property
+                                                        (flymake--diag-type diag)
+                                                        'severity
+                                                        error-level)))
+                                         (cond ((> severity warning-level)
+                                                (setq .error (+ 1 .error)))
+                                               ((> severity note-level)
+                                                (setq .warning (+ 1 .warning)))
+                                               (t (setq .note (+ 1 .note))))))))
+                                 (if (> (+ .error .warning .note) 0)
+                                     (concat
+                                      (unless vc-mode
+                                        (propertize mode-line-sep
+                                                    'face
+                                                    `(:background
+                                                      ,(face-background 'mode-line-git)
+                                                      :foreground
+                                                      ,(face-background 'mode-line-area-1))))
+                                      (propertize " "
+                                                  'face '(:inherit mode-line-git))
+                                      (if (= .error 0)
+                                          ""
+                                        (propertize
+                                         (format "%s%d " diagnostic-error .error)
+                                         'face '(:inherit diagnostic-error-face)))
+                                      (if (= .warning 0)
+                                          ""
+                                        (propertize
+                                         (format "%s%d " diagnostic-warning .warning)
+                                         'face '(:inherit diagnostic-warning-face)))
+                                      (if (= .note 0)
+                                          ""
+                                        (propertize
+                                         (format "%s%d " diagnostic-info .note)
+                                         'face '(:inherit diagnostic-info-face)))
+                                      (propertize mode-line-sep
+                                                  'face
+                                                  `(:foreground
+                                                    ,(face-background 'mode-line-git))))
+                                   ;; (nerd-icons-mdicon "nf-md-check_circle_outline"
+                                   ;;                    :face '(:inherit success))
+                                   (unless vc-mode
+                                     (propertize mode-line-sep 'face '(:inherit mode-line-area-1-separator-3)))
+                                   ))))))))
+           (propertize
+            icon
+            'help-echo (concat "Flymake\n"
+                               (cond
+                                ;; (some-waiting "Checking...")
+                                ((null known) "No Checker")
+                                (all-disabled "All Checkers Disabled")
+                                (t (format "%d/%d backends running
+           mouse-1: Display minor mode menu
+           mouse-2: Show help for minor mode"
+                                           (length running) (length known)))))
+            'mouse-face 'mode-line-highlight
+            'local-map (let ((map (make-sparse-keymap)))
+                         (define-key map [mode-line down-mouse-1]
+                                     flymake-menu)
+                         (define-key map [mode-line mouse-2]
+                                     (lambda ()
+                                       (interactive)
+                                       (describe-function 'flymake-mode)))
+                         map)))
+       (propertize mode-line-sep 'face '(:inherit mode-line-area-1-separator-3)))
 
-	 ;; ;; Buffer Name
-	 ;; (propertize " %b " 'face `(:inherit mode-line-area-3) 'help-echo "Current Buffer Name")
-	 ;; " "
+     ;; Directory
+     ;; (if (buffer-file-name)
+     ;;     (concat
+     ;;      (propertize (format " %s " (abbreviate-file-name (file-name-directory (buffer-file-name)))) 'face `(:inherit mode-line-area-2) 'help-echo "Current Directory")
+     ;;      (propertize mode-line-sep 'face '(:inherit mode-line-area-2-separator))
+     ;;      ))
+     ;; (propertize " " 'face `(:inherit mode-line-area-3))
+
+     ;; Buffer Name
      (if buffer-file-name
          (propertize (format " %s " buffer-file-truename) 'face '(:inherit mode-line-buffer) 'help-echo "Current Editing File")
        (propertize " %b " 'face '(:inherit mode-line-buffer) 'help-echo "Current Editing Buffer"))
-	 (cond (buffer-read-only Read-only)
-		   ((buffer-modified-p) Buffer-modified))))
+     (cond (buffer-read-only Read-only)
+	       ((buffer-modified-p) Buffer-modified))))
+
    mode-line-format-right-align
 
 

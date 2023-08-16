@@ -80,12 +80,12 @@
 		  (lambda ()
             (electric-indent-local-mode)
 		    (setq-local company-backends '(company-files company-keywords))
+            (setq org-appear-autolinks t)
 		    (org-appear-mode)
 		    ;; (company-mode)
 		    ;; (corfu-mode)
 		    (visual-line-mode)
-            (valign-mode)
-		    ))
+            (valign-mode)))
 
 ;; (with-eval-after-load 'org
 ;; (defun org-buffer-face-mode-variable ()

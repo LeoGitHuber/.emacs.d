@@ -4,6 +4,7 @@
 
 ;;; Puni
 (add-to-list 'load-path "~/.emacs.d/site-lisp/puni")
+;; (add-to-list 'load-path "~/.emacs.d/site-lisp/combobulate")
 ;; (require 'puni)
 
 (if (bound-and-true-p meow-mode)
@@ -58,6 +59,42 @@
     ;; (global-set-key (kbd "C-c C-j") 'avy-resume)
     ))
 
+;;; Fingertip
+(dolist (hook '(emacs-lisp-mode-hook c-mode-hook lisp-mode-hook))
+  (add-hook hook 'fingertip-mode))
+(with-eval-after-load 'fingertip
+  ;; 移动
+  ;; ("M-n" . fingertip-jump-left)
+  ;; ("M-p" . fingertip-jump-right)
+  ;; 符号插入
+  (keymap-set fingertip-mode-map "%" 'fingertip-match-paren)       ;括号跳转
+  (keymap-set fingertip-mode-map "(" 'fingertip-open-round)        ;智能 (
+  (keymap-set fingertip-mode-map "[" 'fingertip-open-bracket)      ;智能 [
+  (keymap-set fingertip-mode-map "{" 'fingertip-open-curly)        ;智能 {
+  (keymap-set fingertip-mode-map ")" 'fingertip-close-round)       ;智能 )
+  (keymap-set fingertip-mode-map "]" 'fingertip-close-bracket)     ;智能 ]
+  (keymap-set fingertip-mode-map "}" 'fingertip-close-curly)       ;智能 }
+  (keymap-set fingertip-mode-map "\"" 'fingertip-double-quote)     ;智能 "
+  (keymap-set fingertip-mode-map "'" 'fingertip-single-quote)      ;智能 '
+  (keymap-set fingertip-mode-map "=" 'fingertip-equal)             ;智能 =
+  (keymap-set fingertip-mode-map "SPC" 'fingertip-space)           ;智能 space
+  (keymap-set fingertip-mode-map "RET" 'fingertip-newline)         ;智能 newline
+  ;; 删除
+  ;; ("M-o" . fingertip-backward-delete) ;向后删除
+  ;; ("C-d" . fingertip-forward-delete)  ;向前删除
+  ;; ("C-k" . fingertip-kill)            ;向前kill
+  ;; 包围
+  ;; ("M-\"" . fingertip-wrap-double-quote) ;用 " " 包围对象, 或跳出字符串
+  ;; ("M-'" . fingertip-wrap-single-quote) ;用 ' ' 包围对象, 或跳出字符串
+  ;; ("M-[" . fingertip-wrap-bracket)      ;用 [ ] 包围对象
+  ;; ("M-{" . fingertip-wrap-curly)        ;用 { } 包围对象
+  ;; ("M-(" . fingertip-wrap-round)        ;用 ( ) 包围对象
+  ;; ("M-)" . fingertip-unwrap)            ;去掉包围对象
+  ;; 跳出并换行缩进
+  ;; ("M-:" . fingertip-jump-out-pair-and-newline) ;跳出括号并换行
+  ;; 向父节点跳动
+  ;; ("C-j" . fingertip-jump-up)
+  )
 ;;; Helpful
 (keymap-global-set "M-?" 'help-command)
 (with-eval-after-load 'help

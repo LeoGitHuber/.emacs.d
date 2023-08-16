@@ -1,10 +1,8 @@
-;; -*- lexical-binding: t; -*-
-;;; Config.el --- Emacs configuration file
+;;; Config.el --- Emacs configuration file -*- lexical-binding: t; -*-
+
 ;;; Commentary:
 
 ;;; Code:
-
-;;; Basic
 
 ;; (require 'package)
 ;; (package-initialize)
@@ -30,10 +28,25 @@
 (add-to-list 'load-path "~/.emacs.d/site-lisp/compat")
 (add-to-list 'load-path "~/.emacs.d/site-lisp/f.el")
 
-(dolist
-    (file (cddr (directory-files "~/.emacs.d/lisp" t nil nil nil)))
-  (or (string-match "abandoned" file)
-      (load file)))
+(load "~/.emacs.d/lisp/init-gc.el")
+(load "~/.emacs.d/lisp/loaddefs.el")
+(load "~/.emacs.d/lisp/init-func.el")
+(load "~/.emacs.d/lisp/init-diagnostic.el")
+(load "~/.emacs.d/lisp/init-icons.el")
+(load "~/.emacs.d/lisp/init-keybindings.el")
+(load "~/.emacs.d/lisp/init-lsp.el")
+(load "~/.emacs.d/lisp/init-dired.el")
+(load "~/.emacs.d/lisp/init-chinese.el")
+(load "~/.emacs.d/lisp/init-hydra.el")
+(load "~/.emacs.d/lisp/init-input.el")
+(load "~/.emacs.d/lisp/init-org.el")
+(load "~/.emacs.d/lisp/init-reader.el")
+
+
+;; (dolist
+;;     (file (cddr (directory-files "~/.emacs.d/lisp" t nil nil nil)))
+;;   (or (string-match "abandoned" file)
+;;       (load file)))
 
 (when (display-graphic-p)
   (set-en_cn-font "Input Mono" "HarmonyOS Sans SC" 12.0)
@@ -52,36 +65,16 @@
   ;; (setq x-gtk-use-system-tooltips nil)
   )
 
-;; (let ((normal-gc-cons-threshold (* 32 1024 1024))
-;;   	  (init-gc-cons-threshold (* 256 1024 1024)))
-;;   ;; (progn (setq gc-cons-threshold init-gc-cons-threshold)
-;;   (add-hook 'emacs-startup-hook
-;;   			(lambda () (setq gc-cons-threshold normal-gc-cons-threshold))))
+(add-hook 'emacs-startup-hook
+  		  (lambda () (setq gc-cons-threshold better-gc-cons-threshold)))
 
-;; (setq frame-title-format
-;; 	  '((:eval (if (buffer-file-name)
-;; 				   (abbreviate-file-name (buffer-file-name))
-;; 				 "%b"))))
+(setq frame-title-format
+	  '((:eval (if (buffer-file-name)
+				   (abbreviate-file-name (buffer-file-name))
+				 "%b"))))
 
-;; (setq garbage-collection-messages t)
-;; (defvar k-gc-timer
-;;   (run-with-idle-timer 15 t 'garbage-collect))
-
-;; (defvar better-gc-cons-threshold most-positive-fixnum ; 128mb
-;;   "The default value to use for `gc-cons-threshold'.
-;; If you experience freezing, decrease this.  If you experience stuttering, increase this.")
-
-
-;; 开启 minibuffer 的时候不要 gc
-;; (defun gc-minibuffer-setup-hook ()
-;;   (setq gc-cons-threshold (* better-gc-cons-threshold 2)))
-
-;; (defun gc-minibuffer-exit-hook ()
-;;   (garbage-collect)
-;;   (setq gc-cons-threshold better-gc-cons-threshold))
-
-;; (add-hook 'minibuffer-setup-hook #'gc-minibuffer-setup-hook)
-;; (add-hook 'minibuffer-exit-hook #'gc-minibuffer-exit-hook)
+(add-hook 'minibuffer-setup-hook 'gc-minibuffer-setup-hook)
+(add-hook 'minibuffer-exit-hook 'gc-minibuffer-exit-hook)
 
 ;; Emacs 28 后不再需要设置系统编码，以下是以前的设置
 ;; UTF-8 as default encoding
@@ -95,7 +88,7 @@
 (electric-pair-mode)
 (pixel-scroll-precision-mode)
 (global-subword-mode)
-;; (global-auto-revert-mode)
+(global-auto-revert-mode)
 
 ;; (setq hl-line-range-function 'hl-current-line-range)
 (global-hl-line-mode)
@@ -110,7 +103,8 @@
       'electric-pair-conservative-inhibit
 	  scroll-preserve-screen-position t
 	  scroll-margin 0
-	  scroll-conservatively 97)
+	  scroll-conservatively 97
+      eldoc-idle-delay 0.2)
 
 (delete-selection-mode)
 
@@ -132,46 +126,59 @@
 		     (file-name-extension (buffer-name)) t)))))
 
 (auto-save-visited-mode)
-(setq auto-save-visited-interval 3)
+(setq auto-save-timeout 5
+      ;; auto-save-visited-interval 3
+      )
 (add-hook 'before-save-hook
           (lambda ()
-            (delete-trailing-whitespace (point-min)
-                                        (- (line-beginning-position) 1))
-            (delete-trailing-whitespace (+ (line-end-position) 1)
-                                        (point-max))))
+            (delete-trailing-whitespace
+             (point-min)
+             (- (line-beginning-position) 1))
+            (delete-trailing-whitespace
+             (+ (point) 1)
+             (point-max))))
 
-;; (add-to-list 'load-path "~/.emacs.d/site-lisp/no-littering")
-;; (require 'no-littering)
-
-(add-hook 'minibuffer-mode-hook ;; 'after-init-hook
-          (lambda ()
-            (unless (bound-and-true-p recentf-mode)
-              (recentf-mode t)
-              (setq recentf-max-saved-items 1000
-		            recentf-exclude `("/tmp/" "/ssh:"
-                                      ,(concat user-emacs-directory
-                                               "lib/.*-autoloads\\.el\\'"))))
-            (unless (boundp 'no-littering-etc-directory)
-              (load "~/.emacs.d/site-lisp/no-littering/no-littering.el")
-              (with-eval-after-load 'no-littering
-	            (add-to-list 'recentf-exclude no-littering-var-directory)
-	            (add-to-list 'recentf-exclude no-littering-etc-directory)))
-            ;; (fset 'yes-or-no-p 'y-or-n-p)
-            (unless (bound-and-true-p save-place-mode)
-              (save-place-mode t))
-            (unless (bound-and-true-p savehist-mode)
-              (setq history-length 10000
-		            history-delete-duplicates t
-		            savehist-save-minibuffer-history t)
-              (savehist-mode t))
-            ))
-
-;; (add-hook 'minibuffer-setup-hook
+;; (add-hook 'emacs-startup-hook ;; 'after-init-hook
 ;;           (lambda ()
-;;             (setq history-length 10000
-;; 				  history-delete-duplicates t
-;; 				  savehist-save-minibuffer-history t)
-;;             (savehist-mode t)))
+;;             (unless (bound-and-true-p recentf-mode)
+;;               (recentf-mode t)
+;;               (setq recentf-max-saved-items 1000
+;; 		            recentf-exclude `("/tmp/" "/ssh:"
+;;                                       ,(concat user-emacs-directory
+;;                                                "lib/.*-autoloads\\.el\\'"))))
+;;             (unless (boundp 'no-littering-etc-directory)
+;;               ;; (add-to-list 'load-path "~/.emacs.d/site-lisp/no-littering")
+;;               ;; (rquire 'no-littering)
+;;               (load "~/.emacs.d/site-lisp/no-littering/no-littering.el")
+;;               (with-eval-after-load 'no-littering
+;; 	            (add-to-list 'recentf-exclude no-littering-var-directory)
+;; 	            (add-to-list 'recentf-exclude no-littering-etc-directory)))
+;;             ;; (fset 'yes-or-no-p 'y-or-n-p)
+;;             (unless (bound-and-true-p save-place-mode)
+;;               (save-place-mode t))
+;;             (unless (bound-and-true-p savehist-mode)
+;;               (setq history-length 10000
+;; 		            history-delete-duplicates t
+;; 		            savehist-save-minibuffer-history t)
+;;               (savehist-mode t))))
+
+
+(recentf-mode t)
+(setq recentf-max-saved-items 1000
+	  recentf-exclude `("/tmp/" "/ssh:"
+                        ,(concat user-emacs-directory
+                                 "lib/.*-autoloads\\.el\\'")))
+;; (add-to-list 'load-path "~/.emacs.d/site-lisp/no-littering")
+;; (rquire 'no-littering)
+(load "~/.emacs.d/site-lisp/no-littering/no-littering.el")
+(with-eval-after-load 'no-littering
+  (add-to-list 'recentf-exclude no-littering-var-directory)
+  (add-to-list 'recentf-exclude no-littering-etc-directory))
+(save-place-mode t)
+(setq history-length 10000
+	  history-delete-duplicates t
+	  savehist-save-minibuffer-history t)
+(savehist-mode t)
 
 (setq history-delete-duplicates t
 	  recentf-max-menu-items 5
@@ -308,7 +315,9 @@
           (js-json-mode    . json-ts-mode)
           (python-mode     . python-ts-mode)
           (ruby-mode       . ruby-ts-mode)
-          (sh-mode         . bash-ts-mode))))
+          (sh-mode         . bash-ts-mode)))
+  (add-hook 'emacs-lisp-mode-hook (lambda () (treesit-parser-create 'elisp))))
+
 
 ;; (add-hook 'c-ts-mode-hook (lambda () (setq c-ts-mode-indent-offset 4)))
 
@@ -342,8 +351,8 @@
 		xref-show-definitions-function #'consult-xref))
 
 ;;; Theme
-;; (dolist (hook '(prog-mode-hook text-mode-hook cuda-mode-hook))
-;;   (add-hook hook 'rainbow-mode))
+(dolist (hook '(prog-mode-hook text-mode-hook cuda-mode-hook))
+  (add-hook hook 'rainbow-mode))
 ;; (load "~/.emacs.d/site-lisp/rainbow-delimiters/rainbow-delimiters.el")
 (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 
@@ -363,11 +372,11 @@
 (add-hook 'pre-command-hook
           (lambda ()
             (vertico-mode t)
-            (marginalia-mode)))
+            (marginalia-mode t)
+            (if (bound-and-true-p vertico-mode)
+                (keymap-set vertico-map "C-w" 'vertico-directory-delete-word)
+              (keymap-set minibuffer-mode-map "C-w" 'backward-kill-word))))
 (with-eval-after-load 'vertico (setq vertico-cycle t))
-(if (bound-and-true-p vertico-mode)
-    (keymap-set vertico-map "C-w" 'vertico-directory-delete-word)
-  (keymap-set minibuffer-mode-map "C-w" 'backward-kill-word))
 (setq-default completion-styles '(orderless basic))
 (setq completion-styles '(basic partial-completion orderless)
       completion-category-overrides
@@ -394,7 +403,7 @@
   "Set for themes for dark and light mode.")
 
 (if (or
-     (>= (string-to-number (substring (current-time-string) 11 13)) 19)
+     (>= (string-to-number (substring (current-time-string) 11 13)) 18)
      (<= (string-to-number (substring (current-time-string) 11 13))
          6))
 	(progn
@@ -406,7 +415,8 @@
             (load-theme (car (cdr themes_chosen)) t))
         (when (equal (cadr themes_chosen) 'manoj-dark)
           (load-theme (car (cdr themes_chosen)) t)
-          (set-face-foreground 'hl-line 'unspecified)))
+          (set-face-foreground 'hl-line 'unspecified)
+          (set-face-background 'fringe 'unspecified)))
       (set-face-attribute 'mode-line nil
   					      ;; :background "#0A0E12"
                           :background "black"
@@ -417,7 +427,7 @@
 							     "JetBrainsMono Nerd Font"
 							     ;; :weight 'normal
   						  	     :size
-							     12.0))
+							     11.0))
       ;; (unless (symbol-value x-gtk-use-system-tooltips)
       ;; 	(set-face-attribute 'tooltip nil))
       )
@@ -427,6 +437,7 @@
       ;; (set-face-bold 'font-lock-keyword-face t)
       ;; (set-face-bold 'font-lock-builtin-face t)
       (set-face-background 'highlight "#DFEAEC")
+      (set-face-background 'fringe 'unspecified)
       (set-face-attribute 'line-number-current-line nil :foreground
                           "#000000" :background "#C4C4C4" :weight
                           'bold))
@@ -440,11 +451,11 @@
 					    :font (font-spec
   							   :name
 							   "JetBrainsMono Nerd Font"
-							   :size 12.0))))
-(set-face-attribute 'mode-line-inactive nil :inherit 'mode-line :box
-                    nil)
-;; (set-face-attribute 'fringe nil :background 'unspecified)
-;; (set-face-attribute 'line-number nil :background 'unspecified)
+							   :size 11.0))))
+(set-face-attribute
+ 'mode-line-inactive nil
+ :inherit 'mode-line
+ :box nil)
 
 (setq x-underline-at-descent-line t)
 

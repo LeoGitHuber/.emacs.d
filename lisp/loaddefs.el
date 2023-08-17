@@ -12,6 +12,11 @@
 
 
 
+;;; Generated autoloads from ../site-lisp/verilog-mode/0test.el
+
+(register-definition-prefixes "../site-lisp/verilog-mode/0test" '("diff-flags" "global-replace-regexp" "verilog-test" "vl-"))
+
+
 ;;; Generated autoloads from ../site-lisp/lsp-bridge/acm/acm.el
 
 (register-definition-prefixes "../site-lisp/lsp-bridge/acm/acm" '("acm-"))
@@ -394,6 +399,11 @@ The window scope is determined by `avy-all-windows' (ARG negates it).
 (autoload 'avy-transpose-lines-in-region "../site-lisp/avy/avy" "\
 Transpose lines in the active region." t)
 (register-definition-prefixes "../site-lisp/avy/avy" '("avy-"))
+
+
+;;; Generated autoloads from ../site-lisp/verilog-mode/batch_prof.el
+
+(register-definition-prefixes "../site-lisp/verilog-mode/batch_prof" '("t-"))
 
 
 ;;; Generated autoloads from ../site-lisp/benchmark-init-el/benchmark-init.el
@@ -1487,6 +1497,28 @@ Macros containing mouse clicks are omitted.
 (register-definition-prefixes "../site-lisp/consult/consult-kmacro" '("consult-kmacro--"))
 
 
+;;; Generated autoloads from ../site-lisp/consult-lsp/consult-lsp.el
+
+(autoload 'consult-lsp-diagnostics "../site-lisp/consult-lsp/consult-lsp" "\
+Query LSP-mode diagnostics.
+
+When ARG is set through prefix, query all workspaces.
+
+(fn ARG)" t)
+(autoload 'consult-lsp-symbols "../site-lisp/consult-lsp/consult-lsp" "\
+Query workspace symbols. When ARG is set through prefix, query all workspaces.
+
+(fn ARG)" t)
+(autoload 'consult-lsp-file-symbols "../site-lisp/consult-lsp/consult-lsp" "\
+Search symbols defined in current file in a manner similar to `consult-line'.
+
+If the prefix argument GROUP-RESULTS is specified, symbols are grouped by their
+kind; otherwise they are returned in the order that they appear in the file.
+
+(fn GROUP-RESULTS)" t)
+(register-definition-prefixes "../site-lisp/consult-lsp/consult-lsp" '("consult-lsp-"))
+
+
 ;;; Generated autoloads from ../site-lisp/consult/consult-org.el
 
 (autoload 'consult-org-heading "../site-lisp/consult/consult-org" "\
@@ -1609,9 +1641,201 @@ of `ConTeXt-mode-hook'." t)
 (register-definition-prefixes "../site-lisp/auctex/context-nl" '("ConTeXt-"))
 
 
+;;; Generated autoloads from ../site-lisp/auctex/tests/context/context-test.el
+
+(register-definition-prefixes "../site-lisp/auctex/tests/context/context-test" '("ConTeXt-mode-common-initialization"))
+
+
 ;;; Generated autoloads from ../site-lisp/company-mode/test/core-tests.el
 
 (register-definition-prefixes "../site-lisp/company-mode/test/core-tests" '("ct-"))
+
+
+;;; Generated autoloads from ../site-lisp/corfu/corfu.el
+
+(autoload 'corfu-mode "../site-lisp/corfu/corfu" "\
+COmpletion in Region FUnction.
+
+This is a minor mode.  If called interactively, toggle the `Corfu
+mode' mode.  If the prefix argument is positive, enable the mode,
+and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `corfu-mode'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t)
+(put 'global-corfu-mode 'globalized-minor-mode t)
+(defvar global-corfu-mode nil "\
+Non-nil if Global Corfu mode is enabled.
+See the `global-corfu-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `global-corfu-mode'.")
+(custom-autoload 'global-corfu-mode "../site-lisp/corfu/corfu" nil)
+(autoload 'global-corfu-mode "../site-lisp/corfu/corfu" "\
+Toggle Corfu mode in all buffers.
+With prefix ARG, enable Global Corfu mode if ARG is positive;
+otherwise, disable it.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.
+Enable the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+Corfu mode is enabled in all buffers where `corfu--on' would do it.
+
+See `corfu-mode' for more information on Corfu mode.
+
+(fn &optional ARG)" t)
+(register-definition-prefixes "../site-lisp/corfu/corfu" '("corfu-" "global-corfu-modes"))
+
+
+;;; Generated autoloads from ../site-lisp/corfu/extensions/corfu-echo.el
+
+(defvar corfu-echo-mode nil "\
+Non-nil if Corfu-Echo mode is enabled.
+See the `corfu-echo-mode' command
+for a description of this minor mode.")
+(custom-autoload 'corfu-echo-mode "../site-lisp/corfu/extensions/corfu-echo" nil)
+(autoload 'corfu-echo-mode "../site-lisp/corfu/extensions/corfu-echo" "\
+Show candidate documentation in echo area.
+
+This is a global minor mode.  If called interactively, toggle the
+`Corfu-Echo mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `(default-value \\='corfu-echo-mode)'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t)
+(register-definition-prefixes "../site-lisp/corfu/extensions/corfu-echo" '("corfu-echo-"))
+
+
+;;; Generated autoloads from ../site-lisp/corfu/extensions/corfu-history.el
+
+(defvar corfu-history-mode nil "\
+Non-nil if Corfu-History mode is enabled.
+See the `corfu-history-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `corfu-history-mode'.")
+(custom-autoload 'corfu-history-mode "../site-lisp/corfu/extensions/corfu-history" nil)
+(autoload 'corfu-history-mode "../site-lisp/corfu/extensions/corfu-history" "\
+Update Corfu history and sort completions by history.
+
+This is a global minor mode.  If called interactively, toggle the
+`Corfu-History mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `(default-value \\='corfu-history-mode)'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t)
+(register-definition-prefixes "../site-lisp/corfu/extensions/corfu-history" '("corfu-history"))
+
+
+;;; Generated autoloads from ../site-lisp/corfu/extensions/corfu-indexed.el
+
+(defvar corfu-indexed-mode nil "\
+Non-nil if Corfu-Indexed mode is enabled.
+See the `corfu-indexed-mode' command
+for a description of this minor mode.")
+(custom-autoload 'corfu-indexed-mode "../site-lisp/corfu/extensions/corfu-indexed" nil)
+(autoload 'corfu-indexed-mode "../site-lisp/corfu/extensions/corfu-indexed" "\
+Prefix candidates with indices.
+
+This is a global minor mode.  If called interactively, toggle the
+`Corfu-Indexed mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `(default-value \\='corfu-indexed-mode)'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t)
+(register-definition-prefixes "../site-lisp/corfu/extensions/corfu-indexed" '("corfu-indexed-"))
+
+
+;;; Generated autoloads from ../site-lisp/corfu/extensions/corfu-info.el
+
+(autoload 'corfu-info-documentation "../site-lisp/corfu/extensions/corfu-info" "\
+Show documentation of current candidate.
+If called with a prefix ARG, the buffer is persistent.
+
+(fn &optional ARG)" t)
+(autoload 'corfu-info-location "../site-lisp/corfu/extensions/corfu-info" "\
+Show location of current candidate.
+If called with a prefix ARG, the buffer is persistent.
+
+(fn &optional ARG)" t)
+(register-definition-prefixes "../site-lisp/corfu/extensions/corfu-info" '("corfu-info--"))
+
+
+;;; Generated autoloads from ../site-lisp/corfu/extensions/corfu-popupinfo.el
+
+(defvar corfu-popupinfo-mode nil "\
+Non-nil if Corfu-Popupinfo mode is enabled.
+See the `corfu-popupinfo-mode' command
+for a description of this minor mode.")
+(custom-autoload 'corfu-popupinfo-mode "../site-lisp/corfu/extensions/corfu-popupinfo" nil)
+(autoload 'corfu-popupinfo-mode "../site-lisp/corfu/extensions/corfu-popupinfo" "\
+Corfu info popup minor mode.
+
+This is a global minor mode.  If called interactively, toggle the
+`Corfu-Popupinfo mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `(default-value \\='corfu-popupinfo-mode)'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t)
+(register-definition-prefixes "../site-lisp/corfu/extensions/corfu-popupinfo" '("corfu-popupinfo-"))
+
+
+;;; Generated autoloads from ../site-lisp/corfu/extensions/corfu-quick.el
+
+(autoload 'corfu-quick-jump "../site-lisp/corfu/extensions/corfu-quick" "\
+Jump to candidate using quick keys." t)
+(autoload 'corfu-quick-insert "../site-lisp/corfu/extensions/corfu-quick" "\
+Insert candidate using quick keys." t)
+(autoload 'corfu-quick-complete "../site-lisp/corfu/extensions/corfu-quick" "\
+Complete candidate using quick keys." t)
+(register-definition-prefixes "../site-lisp/corfu/extensions/corfu-quick" '("corfu-quick"))
 
 
 ;;; Generated autoloads from ../site-lisp/dash.el/dash.el
@@ -2201,6 +2425,38 @@ For a full `install-eaf.py' experience, refer to `--help' and run in a terminal.
 (register-definition-prefixes "../site-lisp/emacs-application-framework/extension/eaf-all-the-icons" '("eaf-all-the-icons-"))
 
 
+;;; Generated autoloads from ../site-lisp/emacs-application-framework/app/browser/eaf-browser.el
+
+(autoload 'eaf-open-browser-in-background "../site-lisp/emacs-application-framework/app/browser/eaf-browser" "\
+Open browser with the specified URL and optional ARGS in background.
+
+(fn URL &optional ARGS)")
+(autoload 'eaf-open-browser-with-history "../site-lisp/emacs-application-framework/app/browser/eaf-browser" "\
+A wrapper around `eaf-open-browser' that provides browser history candidates.
+
+If URL is an invalid URL, it will use `eaf-browser-default-search-engine' to search URL as string literal.
+
+This function works best if paired with a fuzzy search package." t)
+(autoload 'eaf-search-it "../site-lisp/emacs-application-framework/app/browser/eaf-browser" "\
+Use SEARCH-ENGINE search SEARCH-STRING.
+
+If called interactively, SEARCH-STRING is defaulted to symbol or region string.
+The user can enter a customized SEARCH-STRING. SEARCH-ENGINE is defaulted
+to `eaf-browser-default-search-engine' with a prefix arg, the user is able to
+choose a search engine defined in `eaf-browser-search-engines'
+
+(fn &optional SEARCH-STRING SEARCH-ENGINE)" t)
+(autoload 'eaf-open-browser "../site-lisp/emacs-application-framework/app/browser/eaf-browser" "\
+Open EAF browser application given a URL and ARGS.
+
+(fn URL &optional ARGS)" t)
+(autoload 'eaf-open-browser-other-window "../site-lisp/emacs-application-framework/app/browser/eaf-browser" "\
+Open EAF browser application given a URL and ARGS in other window.
+
+(fn URL &optional ARGS)" t)
+(register-definition-prefixes "../site-lisp/emacs-application-framework/app/browser/eaf-browser" '("eaf-"))
+
+
 ;;; Generated autoloads from ../site-lisp/emacs-application-framework/core/eaf-epc.el
 
 (register-definition-prefixes "../site-lisp/emacs-application-framework/core/eaf-epc" '("eaf-"))
@@ -2280,6 +2536,12 @@ file will have a .org extension instead of .pdf).")
 (register-definition-prefixes "../site-lisp/emacs-application-framework/extension/eaf-interleave" '("eaf-interleave-"))
 
 
+;;; Generated autoloads from ../site-lisp/emacs-application-framework/app/jupyter/eaf-jupyter.el
+
+(autoload 'eaf-jupyter-read-data "../site-lisp/emacs-application-framework/app/jupyter/eaf-jupyter")
+(register-definition-prefixes "../site-lisp/emacs-application-framework/app/jupyter/eaf-jupyter" '("eaf-"))
+
+
 ;;; Generated autoloads from ../site-lisp/emacs-application-framework/extension/eaf-mail.el
 
 (autoload 'eaf-open-mail-as-html "../site-lisp/emacs-application-framework/extension/eaf-mail" "\
@@ -2292,9 +2554,100 @@ In that way the corresponding function will be called to retrieve the HTML
 (register-definition-prefixes "../site-lisp/emacs-application-framework/extension/eaf-mail" '("eaf-"))
 
 
+;;; Generated autoloads from ../site-lisp/emacs-application-framework/app/markdown-previewer/eaf-markdown-previewer.el
+
+(register-definition-prefixes "../site-lisp/emacs-application-framework/app/markdown-previewer/eaf-markdown-previewer" '("eaf-"))
+
+
+;;; Generated autoloads from ../site-lisp/emacs-application-framework/app/markmap/eaf-markmap.el
+
+(autoload 'eaf-open-markmap "../site-lisp/emacs-application-framework/app/markmap/eaf-markmap" "\
+Open EAF vue demo" t)
+(register-definition-prefixes "../site-lisp/emacs-application-framework/app/markmap/eaf-markmap" '("eaf-"))
+
+
+;;; Generated autoloads from ../site-lisp/emacs-application-framework/app/mindmap/eaf-mindmap.el
+
+(autoload 'eaf-open-mindmap "../site-lisp/emacs-application-framework/app/mindmap/eaf-mindmap" "\
+Open a given Mindmap FILE.
+
+(fn FILE)" t)
+(register-definition-prefixes "../site-lisp/emacs-application-framework/app/mindmap/eaf-mindmap" '("eaf-" "json-read-r" "org-json-"))
+
+
 ;;; Generated autoloads from ../site-lisp/emacs-application-framework/extension/eaf-org.el
 
 (register-definition-prefixes "../site-lisp/emacs-application-framework/extension/eaf-org" '("eaf-org-"))
+
+
+;;; Generated autoloads from ../site-lisp/emacs-application-framework/app/org-previewer/eaf-org-previewer.el
+
+(register-definition-prefixes "../site-lisp/emacs-application-framework/app/org-previewer/eaf-org-previewer" '("eaf-"))
+
+
+;;; Generated autoloads from ../site-lisp/emacs-application-framework/app/pdf-viewer/eaf-pdf-viewer.el
+
+(autoload 'eaf-open-office "../site-lisp/emacs-application-framework/app/pdf-viewer/eaf-pdf-viewer" "\
+View Microsoft Office FILE as READ-ONLY PDF.
+
+(fn FILE)" t)
+(register-definition-prefixes "../site-lisp/emacs-application-framework/app/pdf-viewer/eaf-pdf-viewer" '("eaf-"))
+
+
+;;; Generated autoloads from ../site-lisp/elisp-refs/elisp-refs.el
+
+(autoload 'elisp-refs-function "../site-lisp/elisp-refs/elisp-refs" "\
+Display all the references to function SYMBOL, in all loaded
+elisp files.
+
+If called with a prefix, prompt for a directory to limit the search.
+
+This searches for functions, not macros. For that, see
+`elisp-refs-macro'.
+
+(fn SYMBOL &optional PATH-PREFIX)" t)
+(autoload 'elisp-refs-macro "../site-lisp/elisp-refs/elisp-refs" "\
+Display all the references to macro SYMBOL, in all loaded
+elisp files.
+
+If called with a prefix, prompt for a directory to limit the search.
+
+This searches for macros, not functions. For that, see
+`elisp-refs-function'.
+
+(fn SYMBOL &optional PATH-PREFIX)" t)
+(autoload 'elisp-refs-special "../site-lisp/elisp-refs/elisp-refs" "\
+Display all the references to special form SYMBOL, in all loaded
+elisp files.
+
+If called with a prefix, prompt for a directory to limit the search.
+
+(fn SYMBOL &optional PATH-PREFIX)" t)
+(autoload 'elisp-refs-variable "../site-lisp/elisp-refs/elisp-refs" "\
+Display all the references to variable SYMBOL, in all loaded
+elisp files.
+
+If called with a prefix, prompt for a directory to limit the search.
+
+(fn SYMBOL &optional PATH-PREFIX)" t)
+(autoload 'elisp-refs-symbol "../site-lisp/elisp-refs/elisp-refs" "\
+Display all the references to SYMBOL in all loaded elisp files.
+
+If called with a prefix, prompt for a directory to limit the
+search.
+
+(fn SYMBOL &optional PATH-PREFIX)" t)
+(register-definition-prefixes "../site-lisp/elisp-refs/elisp-refs" '("elisp-"))
+
+
+;;; Generated autoloads from ../site-lisp/elisp-refs/elisp-refs-bench.el
+
+(register-definition-prefixes "../site-lisp/elisp-refs/elisp-refs-bench" '("elisp-refs-"))
+
+
+;;; Generated autoloads from ../site-lisp/elisp-refs/test/elisp-refs-unit-test.el
+
+(register-definition-prefixes "../site-lisp/elisp-refs/test/elisp-refs-unit-test" '("with-temp-backed-buffer"))
 
 
 ;;; Generated autoloads from ../site-lisp/company-mode/test/elisp-tests.el
@@ -2350,6 +2703,11 @@ A prefix argument causes the SQL to be printed into the current buffer.
 ;;; Generated autoloads from ../site-lisp/emacsql/emacsql-sqlite-module.el
 
 (register-definition-prefixes "../site-lisp/emacsql/emacsql-sqlite-module" '("emacsql-sqlite-module-connection"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/features/support/env.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/features/support/env" '("lsp-mode-"))
 
 
 ;;; Generated autoloads from ../site-lisp/f.el/f.el
@@ -2694,6 +3052,11 @@ Setup this buffer for LaTeX font-lock.  Usually called from a hook.")
 (register-definition-prefixes "../site-lisp/auctex/font-latex" '("font-latex-"))
 
 
+;;; Generated autoloads from ../site-lisp/auctex/tests/latex/font-latex-test.el
+
+(register-definition-prefixes "../site-lisp/auctex/tests/latex/font-latex-test" '("LaTeX-common-initialization"))
+
+
 ;;; Generated autoloads from ../site-lisp/magit/lisp/git-commit.el
 
 (put 'git-commit-major-mode 'safe-local-variable
@@ -2816,6 +3179,16 @@ it is disabled.
 ;;; Generated autoloads from ../site-lisp/holo-layer/holo-layer-epc.el
 
 (register-definition-prefixes "../site-lisp/holo-layer/holo-layer-epc" '("holo-layer-"))
+
+
+;;; Generated autoloads from ../site-lisp/ht.el/ht.el
+
+(register-definition-prefixes "../site-lisp/ht.el/ht" 'nil)
+
+
+;;; Generated autoloads from ../site-lisp/ht.el/test/ht-test.el
+
+(register-definition-prefixes "../site-lisp/ht.el/test/ht-test" '("ht-run-tests"))
 
 
 ;;; Generated autoloads from ../site-lisp/hydra/hydra.el
@@ -2975,6 +3348,29 @@ it is disabled.
 (register-definition-prefixes "../site-lisp/iscroll/iscroll" '("iscroll-"))
 
 
+;;; Generated autoloads from ../site-lisp/kind-icon/kind-icon.el
+
+(autoload 'kind-icon-margin-formatter "../site-lisp/kind-icon/kind-icon" "\
+Return a margin-formatter function which produces kind icons.
+METADATA is the completion metadata supplied by the caller (see
+info node `(elisp)Programmed Completion').  To use, add this
+function to the relevant margin-formatters list.
+
+(fn METADATA)")
+(autoload 'kind-icon-enhance-completion "../site-lisp/kind-icon/kind-icon" "\
+A wrapper for `completion-in-region-functions'.
+This wrapper sets a custom `affixation-function' on
+COMPLETION-FUNCTION, which places an icon in the prefix slot.  Use
+it like:
+
+  (setq completion-in-region-function
+     (kind-icon-enhance-completion
+       completion-in-region-function))
+
+(fn COMPLETION-FUNCTION)")
+(register-definition-prefixes "../site-lisp/kind-icon/kind-icon" '("kind-icon-"))
+
+
 ;;; Generated autoloads from ../site-lisp/auctex/latex.el
 
 (autoload 'BibTeX-auto-store "../site-lisp/auctex/latex" "\
@@ -3006,6 +3402,11 @@ runs the hooks in `docTeX-mode-hook'.
 ;;; Generated autoloads from ../site-lisp/auctex/latex-flymake.el
 
 (register-definition-prefixes "../site-lisp/auctex/latex-flymake" '("LaTeX-"))
+
+
+;;; Generated autoloads from ../site-lisp/auctex/tests/latex/latex-test.el
+
+(register-definition-prefixes "../site-lisp/auctex/tests/latex/latex-test" '("LaTeX-common-initialization"))
 
 
 ;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-actionscript.el
@@ -3611,6 +4012,11 @@ of the packages.
 
 In case the major-mode that you are using for " t)
 (register-definition-prefixes "../site-lisp/lsp-mode/lsp-mode" '("defcustom-lsp" "lsp-" "make-lsp-client" "when-lsp-workspace" "with-lsp-workspace"))
+
+
+;;; Generated autoloads from ../site-lisp/lsp-mode/features/step-definitions/lsp-mode-steps.el
+
+(register-definition-prefixes "../site-lisp/lsp-mode/features/step-definitions/lsp-mode-steps" '("lsp-"))
 
 
 ;;; Generated autoloads from ../site-lisp/lsp-mode/test/lsp-mode-test.el
@@ -6440,6 +6846,11 @@ Interactively, with prefix argument, move to the previous position.
 (register-definition-prefixes "../site-lisp/mwim.el/tests/mwim-tests" '("mwim-test-"))
 
 
+;;; Generated autoloads from ../site-lisp/auctex/tests/tex/navigation.el
+
+(register-definition-prefixes "../site-lisp/auctex/tests/tex/navigation" '("TeX-check-f-m-"))
+
+
 ;;; Generated autoloads from ../site-lisp/nerd-icons.el/nerd-icons.el
 
 (autoload 'nerd-icons-install-fonts "../site-lisp/nerd-icons.el/nerd-icons" "\
@@ -7085,6 +7496,563 @@ it is disabled.
 (register-definition-prefixes "../site-lisp/org-visual-outline/org-visual-indent" '("org-visual-indent-"))
 
 
+;;; Generated autoloads from ../site-lisp/pdf-tools/lisp/pdf-annot.el
+
+(autoload 'pdf-annot-minor-mode "../site-lisp/pdf-tools/lisp/pdf-annot" "\
+Support for PDF Annotations.
+
+\\{pdf-annot-minor-mode-map}
+
+This is a minor mode.  If called interactively, toggle the
+`Pdf-Annot minor mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `pdf-annot-minor-mode'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t)
+(register-definition-prefixes "../site-lisp/pdf-tools/lisp/pdf-annot" '("pdf-annot-"))
+
+
+;;; Generated autoloads from ../site-lisp/pdf-tools/lisp/pdf-cache.el
+
+(register-definition-prefixes "../site-lisp/pdf-tools/lisp/pdf-cache" '("boundingbox" "define-pdf-cache-function" "page" "pdf-cache-" "textregions"))
+
+
+;;; Generated autoloads from ../site-lisp/pdf-tools/lisp/pdf-dev.el
+
+(register-definition-prefixes "../site-lisp/pdf-tools/lisp/pdf-dev" '("pdf-dev-"))
+
+
+;;; Generated autoloads from ../site-lisp/pdf-tools/lisp/pdf-history.el
+
+(autoload 'pdf-history-minor-mode "../site-lisp/pdf-tools/lisp/pdf-history" "\
+Keep a history of previously visited pages.
+
+This is a simple stack-based history.  Turning the page or
+following a link pushes the left-behind page on the stack, which
+may be navigated with the following keys.
+
+\\{pdf-history-minor-mode-map}
+
+This is a minor mode.  If called interactively, toggle the
+`Pdf-History minor mode' mode.  If the prefix argument is
+positive, enable the mode, and if it is zero or negative, disable
+the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `pdf-history-minor-mode'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t)
+(register-definition-prefixes "../site-lisp/pdf-tools/lisp/pdf-history" '("pdf-history-"))
+
+
+;;; Generated autoloads from ../site-lisp/pdf-tools/lisp/pdf-info.el
+
+(register-definition-prefixes "../site-lisp/pdf-tools/lisp/pdf-info" '("pdf-info-"))
+
+
+;;; Generated autoloads from ../site-lisp/pdf-tools/lisp/pdf-isearch.el
+
+(autoload 'pdf-isearch-minor-mode "../site-lisp/pdf-tools/lisp/pdf-isearch" "\
+Isearch mode for PDF buffer.
+
+When this mode is enabled \\[isearch-forward], among other keys,
+starts an incremental search in this PDF document.  Since this mode
+uses external programs to highlight found matches via
+image-processing, proceeding to the next match may be slow.
+
+Therefore two isearch behaviours have been defined: Normal isearch and
+batch mode.  The later one is a minor mode
+(`pdf-isearch-batch-mode'), which when activated inhibits isearch
+from stopping at and highlighting every single match, but rather
+display them batch-wise.  Here a batch means a number of matches
+currently visible in the selected window.
+
+The kind of highlighting is determined by three faces
+`pdf-isearch-match' (for the current match), `pdf-isearch-lazy'
+(for all other matches) and `pdf-isearch-batch' (when in batch
+mode), which see.
+
+Colors may also be influenced by the minor-mode
+`pdf-view-dark-minor-mode'.  If this is minor mode enabled, each face's
+dark colors, are used (see e.g. `frame-background-mode'), instead
+of the light ones.
+
+\\{pdf-isearch-minor-mode-map}
+While in `isearch-mode' the following keys are available. Note
+that not every isearch command work as expected.
+
+\\{pdf-isearch-active-mode-map}
+
+This is a minor mode.  If called interactively, toggle the
+`Pdf-Isearch minor mode' mode.  If the prefix argument is
+positive, enable the mode, and if it is zero or negative, disable
+the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `pdf-isearch-minor-mode'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t)
+(register-definition-prefixes "../site-lisp/pdf-tools/lisp/pdf-isearch" '("pdf-isearch-"))
+
+
+;;; Generated autoloads from ../site-lisp/pdf-tools/lisp/pdf-links.el
+
+(autoload 'pdf-links-minor-mode "../site-lisp/pdf-tools/lisp/pdf-links" "\
+Handle links in PDF documents.\\<pdf-links-minor-mode-map>
+
+If this mode is enabled, most links in the document may be
+activated by clicking on them or by pressing \\[pdf-links-action-perform] and selecting
+one of the displayed keys, or by using isearch limited to
+links via \\[pdf-links-isearch-link].
+
+\\{pdf-links-minor-mode-map}
+
+This is a minor mode.  If called interactively, toggle the
+`Pdf-Links minor mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `pdf-links-minor-mode'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t)
+(autoload 'pdf-links-action-perform "../site-lisp/pdf-tools/lisp/pdf-links" "\
+Follow LINK, depending on its type.
+
+This may turn to another page, switch to another PDF buffer or
+invoke `pdf-links-browse-uri-function'.
+
+Interactively, link is read via `pdf-links-read-link-action'.
+This function displays characters around the links in the current
+page and starts reading characters (ignoring case).  After a
+sufficient number of characters have been read, the corresponding
+link's link is invoked.  Additionally, SPC may be used to
+scroll the current page.
+
+(fn LINK)" t)
+(register-definition-prefixes "../site-lisp/pdf-tools/lisp/pdf-links" '("pdf-links-"))
+
+
+;;; Generated autoloads from ../site-lisp/pdf-tools/lisp/pdf-loader.el
+
+(autoload 'pdf-loader-install "../site-lisp/pdf-tools/lisp/pdf-loader" "\
+Prepare Emacs for using PDF Tools.
+
+This function acts as a replacement for `pdf-tools-install' and
+makes Emacs load and use PDF Tools as soon as a PDF file is
+opened, but not sooner.
+
+The arguments are passed verbatim to `pdf-tools-install', which
+see.
+
+(fn &optional NO-QUERY-P SKIP-DEPENDENCIES-P NO-ERROR-P FORCE-DEPENDENCIES-P)")
+(register-definition-prefixes "../site-lisp/pdf-tools/lisp/pdf-loader" '("pdf-loader--"))
+
+
+;;; Generated autoloads from ../site-lisp/pdf-tools/lisp/pdf-macs.el
+
+(register-definition-prefixes "../site-lisp/pdf-tools/lisp/pdf-macs" '("pdf-view-"))
+
+
+;;; Generated autoloads from ../site-lisp/pdf-tools/lisp/pdf-misc.el
+
+(autoload 'pdf-misc-minor-mode "../site-lisp/pdf-tools/lisp/pdf-misc" "\
+FIXME:  Not documented.
+
+This is a minor mode.  If called interactively, toggle the
+`Pdf-Misc minor mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `pdf-misc-minor-mode'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t)
+(autoload 'pdf-misc-size-indication-minor-mode "../site-lisp/pdf-tools/lisp/pdf-misc" "\
+Provide a working size indication in the mode-line.
+
+This is a minor mode.  If called interactively, toggle the
+`Pdf-Misc-Size-Indication minor mode' mode.  If the prefix
+argument is positive, enable the mode, and if it is zero or
+negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `pdf-misc-size-indication-minor-mode'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t)
+(autoload 'pdf-misc-menu-bar-minor-mode "../site-lisp/pdf-tools/lisp/pdf-misc" "\
+Display a PDF Tools menu in the menu-bar.
+
+This is a minor mode.  If called interactively, toggle the
+`Pdf-Misc-Menu-Bar minor mode' mode.  If the prefix argument is
+positive, enable the mode, and if it is zero or negative, disable
+the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `pdf-misc-menu-bar-minor-mode'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t)
+(autoload 'pdf-misc-context-menu-minor-mode "../site-lisp/pdf-tools/lisp/pdf-misc" "\
+Provide a right-click context menu in PDF buffers.
+
+\\{pdf-misc-context-menu-minor-mode-map}
+
+This is a minor mode.  If called interactively, toggle the
+`Pdf-Misc-Context-Menu minor mode' mode.  If the prefix argument
+is positive, enable the mode, and if it is zero or negative,
+disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `pdf-misc-context-menu-minor-mode'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t)
+(register-definition-prefixes "../site-lisp/pdf-tools/lisp/pdf-misc" '("pdf-misc-"))
+
+
+;;; Generated autoloads from ../site-lisp/pdf-tools/lisp/pdf-occur.el
+
+(autoload 'pdf-occur "../site-lisp/pdf-tools/lisp/pdf-occur" "\
+List lines matching STRING or PCRE.
+
+Interactively search for a regexp. Unless a prefix arg was given,
+in which case this functions performs a string search.
+
+If `pdf-occur-prefer-string-search' is non-nil, the meaning of
+the prefix-arg is inverted.
+
+(fn STRING &optional REGEXP-P)" t)
+(autoload 'pdf-occur-multi-command "../site-lisp/pdf-tools/lisp/pdf-occur" "\
+Perform `pdf-occur' on multiple buffer.
+
+For a programmatic search of multiple documents see
+`pdf-occur-search'." t)
+(defvar pdf-occur-global-minor-mode nil "\
+Non-nil if Pdf-Occur-Global minor mode is enabled.
+See the `pdf-occur-global-minor-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `pdf-occur-global-minor-mode'.")
+(custom-autoload 'pdf-occur-global-minor-mode "../site-lisp/pdf-tools/lisp/pdf-occur" nil)
+(autoload 'pdf-occur-global-minor-mode "../site-lisp/pdf-tools/lisp/pdf-occur" "\
+Enable integration of Pdf Occur with other modes.
+
+This global minor mode enables (or disables)
+`pdf-occur-ibuffer-minor-mode' and `pdf-occur-dired-minor-mode'
+in all current and future ibuffer/dired buffer.
+
+This is a global minor mode.  If called interactively, toggle the
+`Pdf-Occur-Global minor mode' mode.  If the prefix argument is
+positive, enable the mode, and if it is zero or negative, disable
+the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `(default-value \\='pdf-occur-global-minor-mode)'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t)
+(autoload 'pdf-occur-ibuffer-minor-mode "../site-lisp/pdf-tools/lisp/pdf-occur" "\
+Hack into ibuffer's do-occur binding.
+
+This mode remaps `ibuffer-do-occur' to
+`pdf-occur-ibuffer-do-occur', which will start the PDF Tools
+version of `occur', if all marked buffer's are in `pdf-view-mode'
+and otherwise fallback to `ibuffer-do-occur'.
+
+This is a minor mode.  If called interactively, toggle the
+`Pdf-Occur-Ibuffer minor mode' mode.  If the prefix argument is
+positive, enable the mode, and if it is zero or negative, disable
+the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `pdf-occur-ibuffer-minor-mode'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t)
+(autoload 'pdf-occur-dired-minor-mode "../site-lisp/pdf-tools/lisp/pdf-occur" "\
+Hack into dired's `dired-do-search' binding.
+
+This mode remaps `dired-do-search' to
+`pdf-occur-dired-do-search', which will start the PDF Tools
+version of `occur', if all marked buffer's are in `pdf-view-mode'
+and otherwise fallback to `dired-do-search'.
+
+This is a minor mode.  If called interactively, toggle the
+`Pdf-Occur-Dired minor mode' mode.  If the prefix argument is
+positive, enable the mode, and if it is zero or negative, disable
+the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `pdf-occur-dired-minor-mode'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t)
+(register-definition-prefixes "../site-lisp/pdf-tools/lisp/pdf-occur" '("pdf-occur-"))
+
+
+;;; Generated autoloads from ../site-lisp/pdf-tools/lisp/pdf-outline.el
+
+(autoload 'pdf-outline-minor-mode "../site-lisp/pdf-tools/lisp/pdf-outline" "\
+Display an outline of a PDF document.
+
+This provides a PDF's outline on the menu bar via imenu.
+Additionally the same outline may be viewed in a designated
+buffer.
+
+\\{pdf-outline-minor-mode-map}
+
+This is a minor mode.  If called interactively, toggle the
+`Pdf-Outline minor mode' mode.  If the prefix argument is
+positive, enable the mode, and if it is zero or negative, disable
+the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `pdf-outline-minor-mode'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t)
+(autoload 'pdf-outline "../site-lisp/pdf-tools/lisp/pdf-outline" "\
+Display an PDF outline of BUFFER.
+
+BUFFER defaults to the current buffer.  Select the outline
+buffer, unless NO-SELECT-WINDOW-P is non-nil.
+
+(fn &optional BUFFER NO-SELECT-WINDOW-P)" t)
+(autoload 'pdf-outline-imenu-enable "../site-lisp/pdf-tools/lisp/pdf-outline" "\
+Enable imenu in the current PDF buffer." t)
+(register-definition-prefixes "../site-lisp/pdf-tools/lisp/pdf-outline" '("pdf-outline"))
+
+
+;;; Generated autoloads from ../site-lisp/pdf-tools/lisp/pdf-sync.el
+
+(autoload 'pdf-sync-minor-mode "../site-lisp/pdf-tools/lisp/pdf-sync" "\
+Correlate a PDF position with the TeX file.
+
+\\<pdf-sync-minor-mode-map>
+This works via SyncTeX, which means the TeX sources need to have
+been compiled with `--synctex=1'.  In AUCTeX this can be done by
+setting `TeX-source-correlate-method' to `synctex' (before AUCTeX
+is loaded) and enabling `TeX-source-correlate-mode'.
+
+Then \\[pdf-sync-backward-search-mouse] in the PDF buffer will
+open the corresponding TeX location.
+
+If AUCTeX is your preferred tex-mode, this library arranges to
+bind `pdf-sync-forward-display-pdf-key' (the default is `C-c C-g')
+to `pdf-sync-forward-search' in `TeX-source-correlate-map'.  This
+function displays the PDF page corresponding to the current
+position in the TeX buffer.  This function only works together
+with AUCTeX.
+
+This is a minor mode.  If called interactively, toggle the
+`Pdf-Sync minor mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `pdf-sync-minor-mode'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t)
+(register-definition-prefixes "../site-lisp/pdf-tools/lisp/pdf-sync" '("pdf-sync-"))
+
+
+;;; Generated autoloads from ../site-lisp/pdf-tools/lisp/pdf-tools.el
+
+(defvar pdf-tools-handle-upgrades t "\
+Whether PDF Tools should handle upgrading itself.")
+(custom-autoload 'pdf-tools-handle-upgrades "../site-lisp/pdf-tools/lisp/pdf-tools" t)
+(autoload 'pdf-tools-install "../site-lisp/pdf-tools/lisp/pdf-tools" "\
+Install PDF-Tools in all current and future PDF buffers.
+
+If the `pdf-info-epdfinfo-program' is not running or does not
+appear to be working, attempt to rebuild it.  If this build
+succeeded, continue with the activation of the package.
+Otherwise fail silently, i.e. no error is signaled.
+
+Build the program (if necessary) without asking first, if
+NO-QUERY-P is non-nil.
+
+Don't attempt to install system packages, if SKIP-DEPENDENCIES-P
+is non-nil.
+
+Do not signal an error in case the build failed, if NO-ERROR-P is
+non-nil.
+
+Attempt to install system packages (even if it is deemed
+unnecessary), if FORCE-DEPENDENCIES-P is non-nil.
+
+Note that SKIP-DEPENDENCIES-P and FORCE-DEPENDENCIES-P are
+mutually exclusive.
+
+Note further, that you can influence the installation directory
+by setting `pdf-info-epdfinfo-program' to an appropriate
+value (e.g. ~/bin/epdfinfo) before calling this function.
+
+See `pdf-view-mode' and `pdf-tools-enabled-modes'.
+
+(fn &optional NO-QUERY-P SKIP-DEPENDENCIES-P NO-ERROR-P FORCE-DEPENDENCIES-P)" t)
+(autoload 'pdf-tools-enable-minor-modes "../site-lisp/pdf-tools/lisp/pdf-tools" "\
+Enable MODES in the current buffer.
+
+MODES defaults to `pdf-tools-enabled-modes'.
+
+(fn &optional MODES)" t)
+(autoload 'pdf-tools-help "../site-lisp/pdf-tools/lisp/pdf-tools" "\
+Show a Help buffer for `pdf-tools'." t)
+(register-definition-prefixes "../site-lisp/pdf-tools/lisp/pdf-tools" '("pdf-tools-"))
+
+
+;;; Generated autoloads from ../site-lisp/pdf-tools/lisp/pdf-util.el
+
+(register-definition-prefixes "../site-lisp/pdf-tools/lisp/pdf-util" '("display-buffer-split-below-and-attach" "pdf-util-"))
+
+
+;;; Generated autoloads from ../site-lisp/pdf-tools/lisp/pdf-view.el
+
+(autoload 'pdf-view-bookmark-jump-handler "../site-lisp/pdf-tools/lisp/pdf-view" "\
+The bookmark handler-function interface for bookmark BMK.
+
+See also `pdf-view-bookmark-make-record'.
+
+(fn BMK)")
+(register-definition-prefixes "../site-lisp/pdf-tools/lisp/pdf-view" '("cua-copy-region--pdf-view-advice" "pdf-view-"))
+
+
+;;; Generated autoloads from ../site-lisp/pdf-tools/lisp/pdf-virtual.el
+
+(autoload 'pdf-virtual-edit-mode "../site-lisp/pdf-tools/lisp/pdf-virtual" "\
+Major mode when editing a virtual PDF buffer.
+
+(fn)" t)
+(autoload 'pdf-virtual-view-mode "../site-lisp/pdf-tools/lisp/pdf-virtual" "\
+Major mode in virtual PDF buffers.
+
+(fn)" t)
+(defvar pdf-virtual-global-minor-mode nil "\
+Non-nil if Pdf-Virtual-Global minor mode is enabled.
+See the `pdf-virtual-global-minor-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `pdf-virtual-global-minor-mode'.")
+(custom-autoload 'pdf-virtual-global-minor-mode "../site-lisp/pdf-tools/lisp/pdf-virtual" nil)
+(autoload 'pdf-virtual-global-minor-mode "../site-lisp/pdf-tools/lisp/pdf-virtual" "\
+Enable recognition and handling of VPDF files.
+
+This is a global minor mode.  If called interactively, toggle the
+`Pdf-Virtual-Global minor mode' mode.  If the prefix argument is
+positive, enable the mode, and if it is zero or negative, disable
+the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `(default-value \\='pdf-virtual-global-minor-mode)'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t)
+(autoload 'pdf-virtual-buffer-create "../site-lisp/pdf-tools/lisp/pdf-virtual" "\
+
+
+(fn &optional FILENAMES BUFFER-NAME DISPLAY-P)" t)
+(register-definition-prefixes "../site-lisp/pdf-tools/lisp/pdf-virtual" '("pdf-virtual-"))
+
+
+;;; Generated autoloads from ../site-lisp/pdf-tools/test/pdf-virtual-test.el
+
+(register-definition-prefixes "../site-lisp/pdf-tools/test/pdf-virtual-test" '("pdf-virtual-test-document" "with-pdf-virtual-test-"))
+
+
 ;;; Generated autoloads from ../site-lisp/auctex/plain-tex.el
 
 (autoload 'TeX-plain-tex-mode "../site-lisp/auctex/plain-tex" "\
@@ -7108,6 +8076,229 @@ Entering `ams-tex-mode' calls the value of `text-mode-hook',
 then the value of `TeX-mode-hook', and then the value
 of `AmS-TeX-mode-hook'." t)
 (register-definition-prefixes "../site-lisp/auctex/plain-tex" '("AmS" "plain-TeX-"))
+
+
+;;; Generated autoloads from ../site-lisp/posframe/posframe.el
+
+(autoload 'posframe-workable-p "../site-lisp/posframe/posframe" "\
+Test posframe workable status.")
+(autoload 'posframe-show "../site-lisp/posframe/posframe" "\
+Pop up a posframe to show STRING at POSITION.
+
+ (1) POSITION
+
+POSITION can be:
+1. An integer, meaning point position.
+2. A cons of two integers, meaning absolute X and Y coordinates.
+3. Other type, in which case the corresponding POSHANDLER should be
+   provided.
+
+ (2) POSHANDLER
+
+POSHANDLER is a function of one argument returning an actual
+position.  Its argument is a plist of the following form:
+
+  (:position xxx
+   :poshandler xxx
+   :font-height xxx
+   :font-width xxx
+   :posframe xxx
+   :posframe-width xxx
+   :posframe-height xxx
+   :posframe-buffer xxx
+   :parent-frame xxx
+   :parent-window-start xxx
+   :parent-window-end xxx
+   :parent-window-left xxx
+   :parent-window-top xxx
+   :parent-frame-width xxx
+   :parent-frame-height xxx
+   :parent-window xxx
+   :parent-window-width  xxx
+   :parent-window-height xxx
+   :mouse-x xxx
+   ;mouse-y xxx
+   :minibuffer-height xxx
+   :mode-line-height  xxx
+   :header-line-height xxx
+   :tab-line-height xxx
+   :x-pixel-offset xxx
+   :y-pixel-offset xxx)
+
+By default, poshandler is auto-selected based on the type of POSITION,
+but the selection can be overridden using the POSHANDLER argument.
+
+The builtin poshandler functions are listed below:
+
+1.  `posframe-poshandler-frame-center'
+2.  `posframe-poshandler-frame-top-center'
+3.  `posframe-poshandler-frame-top-left-corner'
+4.  `posframe-poshandler-frame-top-right-corner'
+5.  `posframe-poshandler-frame-top-left-or-right-other-corner'
+6.  `posframe-poshandler-frame-bottom-center'
+7.  `posframe-poshandler-frame-bottom-left-corner'
+8.  `posframe-poshandler-frame-bottom-right-corner'
+9.  `posframe-poshandler-window-center'
+10.  `posframe-poshandler-window-top-center'
+11. `posframe-poshandler-window-top-left-corner'
+12. `posframe-poshandler-window-top-right-corner'
+13. `posframe-poshandler-window-bottom-center'
+14. `posframe-poshandler-window-bottom-left-corner'
+15. `posframe-poshandler-window-bottom-right-corner'
+16. `posframe-poshandler-point-top-left-corner'
+17. `posframe-poshandler-point-bottom-left-corner'
+18. `posframe-poshandler-point-bottom-left-corner-upward'
+19. `posframe-poshandler-point-window-center'
+20. `posframe-poshandler-point-frame-center'
+
+ (3) POSHANDLER-EXTRA-INFO
+
+POSHANDLER-EXTRA-INFO is a plist, which will prepend to the
+argument of poshandler function: `info', it will *OVERRIDE* the
+exist key in `info'.
+
+ (4) BUFFER-OR-NAME
+
+This posframe's buffer is BUFFER-OR-NAME, which can be a buffer
+or a name of a (possibly nonexistent) buffer.
+
+buffer name can prefix with space, for example \" *mybuffer*\", so
+the buffer name will hide for ibuffer and `list-buffers'.
+
+ (5) NO-PROPERTIES
+
+If NO-PROPERTIES is non-nil, The STRING's properties will
+be removed before being shown in posframe.
+
+ (6) HEIGHT, MAX-HEIGHT, MIN-HEIGHT, WIDTH, MAX-WIDTH and MIN-WIDTH
+
+These arguments are specified in the canonical character width
+and height of posframe, more details can be found in docstring of
+function `fit-frame-to-buffer',
+
+ (7) LEFT-FRINGE and RIGHT-FRINGE
+
+If LEFT-FRINGE or RIGHT-FRINGE is a number, left fringe or
+right fringe with be shown with the specified width.
+
+ (8) BORDER-WIDTH, BORDER-COLOR, INTERNAL-BORDER-WIDTH and INTERNAL-BORDER-COLOR
+
+By default, posframe shows no borders, but users can specify
+borders by setting BORDER-WIDTH to a positive number.  Border
+color can be specified by BORDER-COLOR.
+
+INTERNAL-BORDER-WIDTH and INTERNAL-BORDER-COLOR are same as
+BORDER-WIDTH and BORDER-COLOR, but do not suggest to use for the
+reason:
+
+   Add distinct controls for child frames' borders (Bug#45620)
+   http://git.savannah.gnu.org/cgit/emacs.git/commit/?id=ff7b1a133bfa7f2614650f8551824ffaef13fadc
+
+ (9) FONT, FOREGROUND-COLOR and BACKGROUND-COLOR
+
+Posframe's font as well as foreground and background colors are
+derived from the current frame by default, but can be overridden
+using the FONT, FOREGROUND-COLOR and BACKGROUND-COLOR arguments,
+respectively.
+
+ (10) CURSOR and WINDOW-POINT
+
+By default, cursor is not showed in posframe, user can let cursor
+showed with this argument help by set its value to a `cursor-type'.
+
+When cursor need to be showed in posframe, user may need to set
+WINDOW-POINT to the point of BUFFER, which can let cursor showed
+at this point.
+
+ (11) RESPECT-HEADER-LINE and RESPECT-MODE-LINE
+
+By default, posframe will display no header-line, mode-line and
+tab-line.  In case a header-line, mode-line or tab-line is
+desired, users can set RESPECT-HEADER-LINE and RESPECT-MODE-LINE
+to t.
+
+ (12) INITIALIZE
+
+INITIALIZE is a function with no argument.  It will run when
+posframe buffer is first selected with `with-current-buffer'
+in `posframe-show', and only run once (for performance reasons).
+
+ (13) LINES-TRUNCATE
+
+If LINES-TRUNCATE is non-nil, then lines will truncate in the
+posframe instead of wrap.
+
+ (14) OVERRIDE-PARAMETERS
+
+OVERRIDE-PARAMETERS is very powful, *all* the valid frame parameters
+used by posframe's frame can be overridden by it.
+
+NOTE: some `posframe-show' arguments are not frame parameters, so they
+can not be overrided by this argument.
+
+ (15) TIMEOUT
+
+TIMEOUT can specify the number of seconds after which the posframe
+will auto-hide.
+
+ (15) REFRESH
+
+If REFRESH is a number, posframe's frame-size will be re-adjusted
+every REFRESH seconds.
+
+ (17) ACCEPT-FOCUS
+
+When ACCEPT-FOCUS is non-nil, posframe will accept focus.
+be careful, you may face some bugs when set it to non-nil.
+
+ (18) HIDEHANDLER
+
+HIDEHANDLER is a function, when it return t, posframe will be
+hide, this function has a plist argument:
+
+  (:posframe-buffer xxx
+   :posframe-parent-buffer xxx)
+
+The builtin hidehandler functions are listed below:
+
+1. `posframe-hidehandler-when-buffer-switch'
+
+ (19) REFPOSHANDLER
+
+REFPOSHANDLER is a function, a reference position (most is
+top-left of current frame) will be returned when call this
+function.
+
+when it is nil or it return nil, child-frame feature will be used
+and reference position will be deal with in Emacs.
+
+The user case I know at the moment is let ivy-posframe work well
+in EXWM environment (let posframe show on the other application
+window).
+
+         DO NOT USE UNLESS NECESSARY!!!
+
+An example parent frame poshandler function is:
+
+1. `posframe-refposhandler-xwininfo'
+
+ (19) Others
+
+You can use `posframe-delete-all' to delete all posframes.
+
+(fn BUFFER-OR-NAME &key STRING POSITION POSHANDLER POSHANDLER-EXTRA-INFO WIDTH HEIGHT MAX-WIDTH MAX-HEIGHT MIN-WIDTH MIN-HEIGHT X-PIXEL-OFFSET Y-PIXEL-OFFSET LEFT-FRINGE RIGHT-FRINGE BORDER-WIDTH BORDER-COLOR INTERNAL-BORDER-WIDTH INTERNAL-BORDER-COLOR FONT CURSOR WINDOW-POINT FOREGROUND-COLOR BACKGROUND-COLOR RESPECT-HEADER-LINE RESPECT-MODE-LINE INITIALIZE NO-PROPERTIES KEEP-RATIO LINES-TRUNCATE OVERRIDE-PARAMETERS TIMEOUT REFRESH ACCEPT-FOCUS HIDEHANDLER REFPOSHANDLER &allow-other-keys)")
+(autoload 'posframe-hide-all "../site-lisp/posframe/posframe" "\
+Hide all posframe frames." t)
+(autoload 'posframe-delete-all "../site-lisp/posframe/posframe" "\
+Delete all posframe frames and buffers." t)
+(register-definition-prefixes "../site-lisp/posframe/posframe" '("posframe-"))
+
+
+;;; Generated autoloads from ../site-lisp/posframe/posframe-benchmark.el
+
+(autoload 'posframe-benchmark "../site-lisp/posframe/posframe-benchmark" "\
+Benchmark tool for posframe." t)
+(register-definition-prefixes "../site-lisp/posframe/posframe-benchmark" '("posframe-benchmark-alist"))
 
 
 ;;; Generated autoloads from ../site-lisp/auctex/preview.el
@@ -7447,6 +8638,31 @@ Disable `rainbow-delimiters-mode'.")
 (register-definition-prefixes "../site-lisp/rainbow-delimiters/rainbow-delimiters-test" '("fontify-" "highlights-matching-" "should-do-nothing" "with-"))
 
 
+;;; Generated autoloads from ../site-lisp/rainbow-mode/rainbow-mode.el
+
+(autoload 'rainbow-mode "../site-lisp/rainbow-mode/rainbow-mode" "\
+Colorize strings that represent colors.
+
+This will fontify with colors the string like \"#aabbcc\" or \"blue\".
+
+This is a minor mode.  If called interactively, toggle the
+`Rainbow mode' mode.  If the prefix argument is positive, enable
+the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `rainbow-mode'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t)
+(register-definition-prefixes "../site-lisp/rainbow-mode/rainbow-mode" '("rainbow-"))
+
+
 ;;; Generated autoloads from ../site-lisp/emacs-rime/rime.el
 
 (defvar rime-title (char-to-string 12563) "\
@@ -7471,9 +8687,68 @@ Argument NAME ignored.
 (register-definition-prefixes "../site-lisp/emacs-rime/rime-predicates" '("rime-predicate-"))
 
 
+;;; Generated autoloads from ../site-lisp/s.el/s.el
+
+(register-definition-prefixes "../site-lisp/s.el/s" '("s-"))
+
+
 ;;; Generated autoloads from ../site-lisp/shrink-path.el/shrink-path.el
 
 (register-definition-prefixes "../site-lisp/shrink-path.el/shrink-path" '("shrink-path-"))
+
+
+;;; Generated autoloads from ../site-lisp/spinner.el/spinner.el
+
+(autoload 'spinner-create "../site-lisp/spinner.el/spinner" "\
+Create a spinner of the given TYPE.
+The possible TYPEs are described in `spinner--type-to-frames'.
+
+FPS, if given, is the number of desired frames per second.
+Default is `spinner-frames-per-second'.
+
+If BUFFER-LOCAL is non-nil, the spinner will be automatically
+deactivated if the buffer is killed.  If BUFFER-LOCAL is a
+buffer, use that instead of current buffer.
+
+When started, in order to function properly, the spinner runs a
+timer which periodically calls `force-mode-line-update' in the
+current buffer.  If BUFFER-LOCAL was set at creation time, then
+`force-mode-line-update' is called in that buffer instead.  When
+the spinner is stopped, the timer is deactivated.
+
+DELAY, if given, is the number of seconds to wait after starting
+the spinner before actually displaying it. It is safe to cancel
+the spinner before this time, in which case it won't display at
+all.
+
+(fn &optional TYPE BUFFER-LOCAL FPS DELAY)")
+(autoload 'spinner-start "../site-lisp/spinner.el/spinner" "\
+Start a mode-line spinner of given TYPE-OR-OBJECT.
+If TYPE-OR-OBJECT is an object created with `make-spinner',
+simply activate it.  This method is designed for minor modes, so
+they can use the spinner as part of their lighter by doing:
+    \\='(:eval (spinner-print THE-SPINNER))
+To stop this spinner, call `spinner-stop' on it.
+
+If TYPE-OR-OBJECT is anything else, a buffer-local spinner is
+created with this type, and it is displayed in the
+`mode-line-process' of the buffer it was created it.  Both
+TYPE-OR-OBJECT and FPS are passed to `make-spinner' (which see).
+To stop this spinner, call `spinner-stop' in the same buffer.
+
+Either way, the return value is a function which can be called
+anywhere to stop this spinner.  You can also call `spinner-stop'
+in the same buffer where the spinner was created.
+
+FPS, if given, is the number of desired frames per second.
+Default is `spinner-frames-per-second'.
+
+DELAY, if given, is the number of seconds to wait until actually
+displaying the spinner. It is safe to cancel the spinner before
+this time, in which case it won't display at all.
+
+(fn &optional TYPE-OR-OBJECT FPS DELAY)")
+(register-definition-prefixes "../site-lisp/spinner.el/spinner" '("spinner-"))
 
 
 ;;; Generated autoloads from ../site-lisp/symbol-overlay/symbol-overlay.el
@@ -7541,14 +8816,39 @@ Rename symbol at point on all its occurrences." t)
 (register-definition-prefixes "../site-lisp/company-mode/test/template-tests" '("company-template-field-assert-text"))
 
 
+;;; Generated autoloads from ../site-lisp/citre/tests/tags-lang-c/test.el
+
+(register-definition-prefixes "../site-lisp/citre/tests/tags-lang-c/test" '("defs-to-xref"))
+
+
+;;; Generated autoloads from ../site-lisp/citre/tests/global/test.el
+
+(register-definition-prefixes "../site-lisp/citre/tests/global/test" '("delete-global-database" "generate-global-database" "with-clean-global-envs"))
+
+
+;;; Generated autoloads from ../site-lisp/citre/tests/common-process/test.el
+
+(register-definition-prefixes "../site-lisp/citre/tests/common-process/test" '("poll-process"))
+
+
 ;;; Generated autoloads from ../site-lisp/shrink-path.el/test/test-helper.el
 
 (register-definition-prefixes "../site-lisp/shrink-path.el/test/test-helper" '("with-"))
 
 
+;;; Generated autoloads from ../site-lisp/pdf-tools/test/test-helper.el
+
+(register-definition-prefixes "../site-lisp/pdf-tools/test/test-helper" '("cask-elpa" "pdf-t"))
+
+
 ;;; Generated autoloads from ../site-lisp/lsp-ui/test/test-helper.el
 
 (register-definition-prefixes "../site-lisp/lsp-ui/test/test-helper" '("lsp-ui-test-"))
+
+
+;;; Generated autoloads from ../site-lisp/ht.el/test/test-helper.el
+
+(register-definition-prefixes "../site-lisp/ht.el/test/test-helper" '("ht-test/"))
 
 
 ;;; Generated autoloads from ../site-lisp/combobulate/tests/test-navigation.el
@@ -7694,6 +8994,11 @@ Limit searched to BOUND.
 (register-definition-prefixes "../site-lisp/treesit-auto/treesit-auto" '("global-treesit-auto-mode" "treesit-auto-"))
 
 
+;;; Generated autoloads from ../site-lisp/auctex/tests/tex/utility.el
+
+(register-definition-prefixes "../site-lisp/auctex/tests/tex/utility" '("TeX-dummy-alist"))
+
+
 ;;; Generated autoloads from ../site-lisp/valign/valign.el
 
 (autoload 'valign-table "../site-lisp/valign/valign" "\
@@ -7717,6 +9022,509 @@ it is disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "../site-lisp/valign/valign" '("valign-"))
+
+
+;;; Generated autoloads from ../site-lisp/verilog-mode/attic/verilog-lex.el
+
+(register-definition-prefixes "../site-lisp/verilog-mode/attic/verilog-lex" '("verilog-"))
+
+
+;;; Generated autoloads from ../site-lisp/verilog-mode/x/verilog-mode.el
+
+(autoload 'verilog-mode "../site-lisp/verilog-mode/x/verilog-mode" "\
+Major mode for editing Verilog code.
+\\<verilog-mode-map>
+See \\[describe-function] verilog-auto (\\[verilog-auto]) for details on how
+AUTOs can improve coding efficiency.
+
+Use \\[verilog-faq] for a pointer to frequently asked questions.
+
+NEWLINE, TAB indents for Verilog code.
+Delete converts tabs to spaces as it moves back.
+
+Supports highlighting.
+
+Turning on Verilog mode calls the value of the variable `verilog-mode-hook'
+with no args, if that value is non-nil.
+
+Variables controlling indentation/edit style:
+
+ variable `verilog-indent-level'      (default 3)
+   Indentation of Verilog statements with respect to containing block.
+ `verilog-indent-level-module'        (default 3)
+   Absolute indentation of Module level Verilog statements.
+   Set to 0 to get initial and always statements lined up
+   on the left side of your screen.
+ `verilog-indent-level-declaration'   (default 3)
+   Indentation of declarations with respect to containing block.
+   Set to 0 to get them list right under containing block.
+ `verilog-indent-level-behavioral'    (default 3)
+   Indentation of first begin in a task or function block
+   Set to 0 to get such code to lined up underneath the task or
+   function keyword.
+ `verilog-indent-level-directive'     (default 1)
+   Indentation of \\=`ifdef/\\=`endif blocks.
+ `verilog-indent-ignore-multiline-defines' (default t)
+   Non-nil means ignore indentation on lines that are part of a multiline
+   define.
+ `verilog-indent-ignore-regexp'     (default nil
+   Regexp that matches lines that should be ignored for indentation.
+ `verilog-cexp-indent'              (default 1)
+   Indentation of Verilog statements broken across lines i.e.:
+      if (a)
+        begin
+ `verilog-case-indent'              (default 2)
+   Indentation for case statements.
+ `verilog-auto-newline'             (default nil)
+   Non-nil means automatically newline after semicolons and the punctuation
+   mark after an end.
+ `verilog-auto-indent-on-newline'   (default t)
+   Non-nil means automatically indent line after newline.
+ `verilog-tab-always-indent'        (default t)
+   Non-nil means TAB in Verilog mode should always reindent the current line,
+   regardless of where in the line point is when the TAB command is used.
+ `verilog-indent-begin-after-if'    (default t)
+   Non-nil means to indent begin statements following a preceding
+   if, else, while, for and repeat statements, if any.  Otherwise,
+   the begin is lined up with the preceding token.  If t, you get:
+      if (a)
+         begin // amount of indent based on `verilog-cexp-indent'
+   otherwise you get:
+      if (a)
+      begin
+ `verilog-indent-class-inside-pkg'  (default t)
+   Non-nil means indent classes inside packages.
+   Otherwise, classes have zero indentation.
+ `verilog-auto-endcomments'         (default t)
+   Non-nil means a comment /* ... */ is set after the ends which ends
+   cases, tasks, functions and modules.
+   The type and name of the object will be set between the braces.
+ `verilog-minimum-comment-distance' (default 10)
+   Minimum distance (in lines) between begin and end required before a comment
+   will be inserted.  Setting this variable to zero results in every
+   end acquiring a comment; the default avoids too many redundant
+   comments in tight quarters.
+ `verilog-align-decl-expr-comments' (default t)
+   Non-nil means align declaration and expressions comments.
+ `verilog-align-comment-distance'   (default 1)
+   Distance (in spaces) between longest declaration and comments.
+   Only works if `verilog-align-decl-expr-comments' is non-nil.
+ `verilog-align-assign-expr'        (default nil)
+   Non-nil means align expressions of continuous assignments.
+ `verilog-align-typedef-regexp'     (default nil)
+   Regexp that matches user typedefs for declaration alignment.
+ `verilog-align-typedef-words'      (default nil)
+   List of words that match user typedefs for declaration alignment.
+ `verilog-auto-lineup'              (default `declarations')
+   List of contexts where auto lineup of code should be done.
+
+Variables controlling other actions:
+
+ `verilog-linter'                   (default `none')
+   Unix program to call to run the lint checker.  This is the default
+   command for \\[compile-command] and \\[verilog-auto-save-compile].
+
+See \\[customize] for the complete list of variables.
+
+AUTO expansion functions are, in part:
+
+    \\[verilog-auto]  Expand AUTO statements.
+    \\[verilog-delete-auto]  Remove the AUTOs.
+    \\[verilog-inject-auto]  Insert AUTOs for the first time.
+
+Some other functions are:
+
+    \\[completion-at-point]    Complete word with appropriate possibilities.
+    \\[verilog-mark-defun]  Mark function.
+    \\[verilog-beg-of-defun]  Move to beginning of current function.
+    \\[verilog-end-of-defun]  Move to end of current function.
+    \\[verilog-label-be]  Label matching begin ... end, fork ... join, etc
+                          statements.
+
+    \\[verilog-comment-region]  Put marked area in a comment.
+    \\[verilog-uncomment-region]  Uncomment an area commented with
+                                  \\[verilog-comment-region].
+    \\[verilog-insert-block]  Insert begin ... end.
+    \\[verilog-star-comment]    Insert /* ... */.
+
+    \\[verilog-sk-always]  Insert an always @(AS) begin .. end block.
+    \\[verilog-sk-begin]  Insert a begin .. end block.
+    \\[verilog-sk-case]  Insert a case block, prompting for details.
+    \\[verilog-sk-for]  Insert a for (...) begin .. end block, prompting for
+                        details.
+    \\[verilog-sk-generate]  Insert a generate .. endgenerate block.
+    \\[verilog-sk-header]  Insert a header block at the top of file.
+    \\[verilog-sk-initial]  Insert an initial begin .. end block.
+    \\[verilog-sk-fork]  Insert a fork begin .. end .. join block.
+    \\[verilog-sk-module]  Insert a module .. (/*AUTOARG*/);.. endmodule block.
+    \\[verilog-sk-ovm-class]  Insert an OVM Class block.
+    \\[verilog-sk-uvm-object]  Insert an UVM Object block.
+    \\[verilog-sk-uvm-component]  Insert an UVM Component block.
+    \\[verilog-sk-primitive]  Insert a primitive .. (.. );.. endprimitive block.
+    \\[verilog-sk-repeat]  Insert a repeat (..) begin .. end block.
+    \\[verilog-sk-specify]  Insert a specify .. endspecify block.
+    \\[verilog-sk-task]  Insert a task .. begin .. end endtask block.
+    \\[verilog-sk-while]  Insert a while (...) begin .. end block,
+                       prompting for details.
+    \\[verilog-sk-casex]  Insert a casex (...) item: begin.. end endcase block,
+                       prompting for details.
+    \\[verilog-sk-casez]  Insert a casez (...) item: begin.. end endcase block,
+                       prompting for details.
+    \\[verilog-sk-if]  Insert an if (..) begin .. end block.
+    \\[verilog-sk-else-if]  Insert an else if (..) begin .. end block.
+    \\[verilog-sk-comment]  Insert a comment block.
+    \\[verilog-sk-assign]  Insert an assign .. = ..; statement.
+    \\[verilog-sk-function]  Insert a function .. begin .. end endfunction
+                             block.
+    \\[verilog-sk-input]  Insert an input declaration, prompting for details.
+    \\[verilog-sk-output]  Insert an output declaration, prompting for details.
+    \\[verilog-sk-state-machine]  Insert a state machine definition, prompting
+                                  for details.
+    \\[verilog-sk-inout]  Insert an inout declaration, prompting for details.
+    \\[verilog-sk-wire]  Insert a wire declaration, prompting for details.
+    \\[verilog-sk-reg]  Insert a register declaration, prompting for details.
+    \\[verilog-sk-define-signal]  Define signal under point as a register at
+                                  the top of the module.
+
+All key bindings can be seen in a Verilog-buffer with \\[describe-bindings].
+Key bindings specific to `verilog-mode-map' are:
+
+\\{verilog-mode-map}
+
+(fn)" t)
+(register-definition-prefixes "../site-lisp/verilog-mode/x/verilog-mode" '("electric-verilog-" "verilog-" "vl-"))
+
+
+;;; Generated autoloads from ../site-lisp/verilog-mode/e/verilog-mode.el
+
+(autoload 'verilog-mode "../site-lisp/verilog-mode/e/verilog-mode" "\
+Major mode for editing Verilog code.
+\\<verilog-mode-map>
+See \\[describe-function] verilog-auto (\\[verilog-auto]) for details on how
+AUTOs can improve coding efficiency.
+
+Use \\[verilog-faq] for a pointer to frequently asked questions.
+
+NEWLINE, TAB indents for Verilog code.
+Delete converts tabs to spaces as it moves back.
+
+Supports highlighting.
+
+Turning on Verilog mode calls the value of the variable `verilog-mode-hook'
+with no args, if that value is non-nil.
+
+Variables controlling indentation/edit style:
+
+ variable `verilog-indent-level'      (default 3)
+   Indentation of Verilog statements with respect to containing block.
+ `verilog-indent-level-module'        (default 3)
+   Absolute indentation of Module level Verilog statements.
+   Set to 0 to get initial and always statements lined up
+   on the left side of your screen.
+ `verilog-indent-level-declaration'   (default 3)
+   Indentation of declarations with respect to containing block.
+   Set to 0 to get them list right under containing block.
+ `verilog-indent-level-behavioral'    (default 3)
+   Indentation of first begin in a task or function block
+   Set to 0 to get such code to lined up underneath the task or
+   function keyword.
+ `verilog-indent-level-directive'     (default 1)
+   Indentation of \\=`ifdef/\\=`endif blocks.
+ `verilog-indent-ignore-multiline-defines' (default t)
+   Non-nil means ignore indentation on lines that are part of a multiline
+   define.
+ `verilog-indent-ignore-regexp'     (default nil
+   Regexp that matches lines that should be ignored for indentation.
+ `verilog-cexp-indent'              (default 1)
+   Indentation of Verilog statements broken across lines i.e.:
+      if (a)
+        begin
+ `verilog-case-indent'              (default 2)
+   Indentation for case statements.
+ `verilog-auto-newline'             (default nil)
+   Non-nil means automatically newline after semicolons and the punctuation
+   mark after an end.
+ `verilog-auto-indent-on-newline'   (default t)
+   Non-nil means automatically indent line after newline.
+ `verilog-tab-always-indent'        (default t)
+   Non-nil means TAB in Verilog mode should always reindent the current line,
+   regardless of where in the line point is when the TAB command is used.
+ `verilog-indent-begin-after-if'    (default t)
+   Non-nil means to indent begin statements following a preceding
+   if, else, while, for and repeat statements, if any.  Otherwise,
+   the begin is lined up with the preceding token.  If t, you get:
+      if (a)
+         begin // amount of indent based on `verilog-cexp-indent'
+   otherwise you get:
+      if (a)
+      begin
+ `verilog-indent-class-inside-pkg'  (default t)
+   Non-nil means indent classes inside packages.
+   Otherwise, classes have zero indentation.
+ `verilog-auto-endcomments'         (default t)
+   Non-nil means a comment /* ... */ is set after the ends which ends
+   cases, tasks, functions and modules.
+   The type and name of the object will be set between the braces.
+ `verilog-minimum-comment-distance' (default 10)
+   Minimum distance (in lines) between begin and end required before a comment
+   will be inserted.  Setting this variable to zero results in every
+   end acquiring a comment; the default avoids too many redundant
+   comments in tight quarters.
+ `verilog-align-decl-expr-comments' (default t)
+   Non-nil means align declaration and expressions comments.
+ `verilog-align-comment-distance'   (default 1)
+   Distance (in spaces) between longest declaration and comments.
+   Only works if `verilog-align-decl-expr-comments' is non-nil.
+ `verilog-align-assign-expr'        (default nil)
+   Non-nil means align expressions of continuous assignments.
+ `verilog-align-typedef-regexp'     (default nil)
+   Regexp that matches user typedefs for declaration alignment.
+ `verilog-align-typedef-words'      (default nil)
+   List of words that match user typedefs for declaration alignment.
+ `verilog-auto-lineup'              (default `declarations')
+   List of contexts where auto lineup of code should be done.
+
+Variables controlling other actions:
+
+ `verilog-linter'                   (default `none')
+   Unix program to call to run the lint checker.  This is the default
+   command for \\[compile-command] and \\[verilog-auto-save-compile].
+
+See \\[customize] for the complete list of variables.
+
+AUTO expansion functions are, in part:
+
+    \\[verilog-auto]  Expand AUTO statements.
+    \\[verilog-delete-auto]  Remove the AUTOs.
+    \\[verilog-inject-auto]  Insert AUTOs for the first time.
+
+Some other functions are:
+
+    \\[completion-at-point]    Complete word with appropriate possibilities.
+    \\[verilog-mark-defun]  Mark function.
+    \\[verilog-beg-of-defun]  Move to beginning of current function.
+    \\[verilog-end-of-defun]  Move to end of current function.
+    \\[verilog-label-be]  Label matching begin ... end, fork ... join, etc
+                          statements.
+
+    \\[verilog-comment-region]  Put marked area in a comment.
+    \\[verilog-uncomment-region]  Uncomment an area commented with
+                                  \\[verilog-comment-region].
+    \\[verilog-insert-block]  Insert begin ... end.
+    \\[verilog-star-comment]    Insert /* ... */.
+
+    \\[verilog-sk-always]  Insert an always @(AS) begin .. end block.
+    \\[verilog-sk-begin]  Insert a begin .. end block.
+    \\[verilog-sk-case]  Insert a case block, prompting for details.
+    \\[verilog-sk-for]  Insert a for (...) begin .. end block, prompting for
+                        details.
+    \\[verilog-sk-generate]  Insert a generate .. endgenerate block.
+    \\[verilog-sk-header]  Insert a header block at the top of file.
+    \\[verilog-sk-initial]  Insert an initial begin .. end block.
+    \\[verilog-sk-fork]  Insert a fork begin .. end .. join block.
+    \\[verilog-sk-module]  Insert a module .. (/*AUTOARG*/);.. endmodule block.
+    \\[verilog-sk-ovm-class]  Insert an OVM Class block.
+    \\[verilog-sk-uvm-object]  Insert an UVM Object block.
+    \\[verilog-sk-uvm-component]  Insert an UVM Component block.
+    \\[verilog-sk-primitive]  Insert a primitive .. (.. );.. endprimitive block.
+    \\[verilog-sk-repeat]  Insert a repeat (..) begin .. end block.
+    \\[verilog-sk-specify]  Insert a specify .. endspecify block.
+    \\[verilog-sk-task]  Insert a task .. begin .. end endtask block.
+    \\[verilog-sk-while]  Insert a while (...) begin .. end block,
+                       prompting for details.
+    \\[verilog-sk-casex]  Insert a casex (...) item: begin.. end endcase block,
+                       prompting for details.
+    \\[verilog-sk-casez]  Insert a casez (...) item: begin.. end endcase block,
+                       prompting for details.
+    \\[verilog-sk-if]  Insert an if (..) begin .. end block.
+    \\[verilog-sk-else-if]  Insert an else if (..) begin .. end block.
+    \\[verilog-sk-comment]  Insert a comment block.
+    \\[verilog-sk-assign]  Insert an assign .. = ..; statement.
+    \\[verilog-sk-function]  Insert a function .. begin .. end endfunction
+                             block.
+    \\[verilog-sk-input]  Insert an input declaration, prompting for details.
+    \\[verilog-sk-output]  Insert an output declaration, prompting for details.
+    \\[verilog-sk-state-machine]  Insert a state machine definition, prompting
+                                  for details.
+    \\[verilog-sk-inout]  Insert an inout declaration, prompting for details.
+    \\[verilog-sk-wire]  Insert a wire declaration, prompting for details.
+    \\[verilog-sk-reg]  Insert a register declaration, prompting for details.
+    \\[verilog-sk-define-signal]  Define signal under point as a register at
+                                  the top of the module.
+
+All key bindings can be seen in a Verilog-buffer with \\[describe-bindings].
+Key bindings specific to `verilog-mode-map' are:
+
+\\{verilog-mode-map}
+
+(fn)" t)
+(register-definition-prefixes "../site-lisp/verilog-mode/e/verilog-mode" '("electric-verilog-" "verilog-" "vl-"))
+
+
+;;; Generated autoloads from ../site-lisp/verilog-mode/verilog-mode.el
+
+(autoload 'verilog-mode "../site-lisp/verilog-mode/verilog-mode" "\
+Major mode for editing Verilog code.
+\\<verilog-mode-map>
+See \\[describe-function] verilog-auto (\\[verilog-auto]) for details on how
+AUTOs can improve coding efficiency.
+
+Use \\[verilog-faq] for a pointer to frequently asked questions.
+
+NEWLINE, TAB indents for Verilog code.
+Delete converts tabs to spaces as it moves back.
+
+Supports highlighting.
+
+Turning on Verilog mode calls the value of the variable `verilog-mode-hook'
+with no args, if that value is non-nil.
+
+Variables controlling indentation/edit style:
+
+ variable `verilog-indent-level'      (default 3)
+   Indentation of Verilog statements with respect to containing block.
+ `verilog-indent-level-module'        (default 3)
+   Absolute indentation of Module level Verilog statements.
+   Set to 0 to get initial and always statements lined up
+   on the left side of your screen.
+ `verilog-indent-level-declaration'   (default 3)
+   Indentation of declarations with respect to containing block.
+   Set to 0 to get them list right under containing block.
+ `verilog-indent-level-behavioral'    (default 3)
+   Indentation of first begin in a task or function block
+   Set to 0 to get such code to lined up underneath the task or
+   function keyword.
+ `verilog-indent-level-directive'     (default 1)
+   Indentation of \\=`ifdef/\\=`endif blocks.
+ `verilog-indent-ignore-multiline-defines' (default t)
+   Non-nil means ignore indentation on lines that are part of a multiline
+   define.
+ `verilog-indent-ignore-regexp'     (default nil
+   Regexp that matches lines that should be ignored for indentation.
+ `verilog-cexp-indent'              (default 1)
+   Indentation of Verilog statements broken across lines i.e.:
+      if (a)
+        begin
+ `verilog-case-indent'              (default 2)
+   Indentation for case statements.
+ `verilog-auto-newline'             (default nil)
+   Non-nil means automatically newline after semicolons and the punctuation
+   mark after an end.
+ `verilog-auto-indent-on-newline'   (default t)
+   Non-nil means automatically indent line after newline.
+ `verilog-tab-always-indent'        (default t)
+   Non-nil means TAB in Verilog mode should always reindent the current line,
+   regardless of where in the line point is when the TAB command is used.
+ `verilog-indent-begin-after-if'    (default t)
+   Non-nil means to indent begin statements following a preceding
+   if, else, while, for and repeat statements, if any.  Otherwise,
+   the begin is lined up with the preceding token.  If t, you get:
+      if (a)
+         begin // amount of indent based on `verilog-cexp-indent'
+   otherwise you get:
+      if (a)
+      begin
+ `verilog-indent-class-inside-pkg'  (default t)
+   Non-nil means indent classes inside packages.
+   Otherwise, classes have zero indentation.
+ `verilog-auto-endcomments'         (default t)
+   Non-nil means a comment /* ... */ is set after the ends which ends
+   cases, tasks, functions and modules.
+   The type and name of the object will be set between the braces.
+ `verilog-minimum-comment-distance' (default 10)
+   Minimum distance (in lines) between begin and end required before a comment
+   will be inserted.  Setting this variable to zero results in every
+   end acquiring a comment; the default avoids too many redundant
+   comments in tight quarters.
+ `verilog-align-decl-expr-comments' (default t)
+   Non-nil means align declaration and expressions comments.
+ `verilog-align-comment-distance'   (default 1)
+   Distance (in spaces) between longest declaration and comments.
+   Only works if `verilog-align-decl-expr-comments' is non-nil.
+ `verilog-align-assign-expr'        (default nil)
+   Non-nil means align expressions of continuous assignments.
+ `verilog-align-typedef-regexp'     (default nil)
+   Regexp that matches user typedefs for declaration alignment.
+ `verilog-align-typedef-words'      (default nil)
+   List of words that match user typedefs for declaration alignment.
+ `verilog-auto-lineup'              (default `declarations')
+   List of contexts where auto lineup of code should be done.
+
+Variables controlling other actions:
+
+ `verilog-linter'                   (default `none')
+   Unix program to call to run the lint checker.  This is the default
+   command for \\[compile-command] and \\[verilog-auto-save-compile].
+
+See \\[customize] for the complete list of variables.
+
+AUTO expansion functions are, in part:
+
+    \\[verilog-auto]  Expand AUTO statements.
+    \\[verilog-delete-auto]  Remove the AUTOs.
+    \\[verilog-inject-auto]  Insert AUTOs for the first time.
+
+Some other functions are:
+
+    \\[completion-at-point]    Complete word with appropriate possibilities.
+    \\[verilog-mark-defun]  Mark function.
+    \\[verilog-beg-of-defun]  Move to beginning of current function.
+    \\[verilog-end-of-defun]  Move to end of current function.
+    \\[verilog-label-be]  Label matching begin ... end, fork ... join, etc
+                          statements.
+
+    \\[verilog-comment-region]  Put marked area in a comment.
+    \\[verilog-uncomment-region]  Uncomment an area commented with
+                                  \\[verilog-comment-region].
+    \\[verilog-insert-block]  Insert begin ... end.
+    \\[verilog-star-comment]    Insert /* ... */.
+
+    \\[verilog-sk-always]  Insert an always @(AS) begin .. end block.
+    \\[verilog-sk-begin]  Insert a begin .. end block.
+    \\[verilog-sk-case]  Insert a case block, prompting for details.
+    \\[verilog-sk-for]  Insert a for (...) begin .. end block, prompting for
+                        details.
+    \\[verilog-sk-generate]  Insert a generate .. endgenerate block.
+    \\[verilog-sk-header]  Insert a header block at the top of file.
+    \\[verilog-sk-initial]  Insert an initial begin .. end block.
+    \\[verilog-sk-fork]  Insert a fork begin .. end .. join block.
+    \\[verilog-sk-module]  Insert a module .. (/*AUTOARG*/);.. endmodule block.
+    \\[verilog-sk-ovm-class]  Insert an OVM Class block.
+    \\[verilog-sk-uvm-object]  Insert an UVM Object block.
+    \\[verilog-sk-uvm-component]  Insert an UVM Component block.
+    \\[verilog-sk-primitive]  Insert a primitive .. (.. );.. endprimitive block.
+    \\[verilog-sk-repeat]  Insert a repeat (..) begin .. end block.
+    \\[verilog-sk-specify]  Insert a specify .. endspecify block.
+    \\[verilog-sk-task]  Insert a task .. begin .. end endtask block.
+    \\[verilog-sk-while]  Insert a while (...) begin .. end block,
+                       prompting for details.
+    \\[verilog-sk-casex]  Insert a casex (...) item: begin.. end endcase block,
+                       prompting for details.
+    \\[verilog-sk-casez]  Insert a casez (...) item: begin.. end endcase block,
+                       prompting for details.
+    \\[verilog-sk-if]  Insert an if (..) begin .. end block.
+    \\[verilog-sk-else-if]  Insert an else if (..) begin .. end block.
+    \\[verilog-sk-comment]  Insert a comment block.
+    \\[verilog-sk-assign]  Insert an assign .. = ..; statement.
+    \\[verilog-sk-function]  Insert a function .. begin .. end endfunction
+                             block.
+    \\[verilog-sk-input]  Insert an input declaration, prompting for details.
+    \\[verilog-sk-output]  Insert an output declaration, prompting for details.
+    \\[verilog-sk-state-machine]  Insert a state machine definition, prompting
+                                  for details.
+    \\[verilog-sk-inout]  Insert an inout declaration, prompting for details.
+    \\[verilog-sk-wire]  Insert a wire declaration, prompting for details.
+    \\[verilog-sk-reg]  Insert a register declaration, prompting for details.
+    \\[verilog-sk-define-signal]  Define signal under point as a register at
+                                  the top of the module.
+
+All key bindings can be seen in a Verilog-buffer with \\[describe-bindings].
+Key bindings specific to `verilog-mode-map' are:
+
+\\{verilog-mode-map}
+
+(fn)" t)
+(register-definition-prefixes "../site-lisp/verilog-mode/verilog-mode" '("electric-verilog-" "verilog-" "vl-"))
 
 
 ;;; Generated autoloads from ../site-lisp/vertico/vertico.el

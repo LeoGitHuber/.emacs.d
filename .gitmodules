@@ -181,3 +181,36 @@
 [submodule "site-lisp/company-box"]
 	path = site-lisp/company-box
 	url = https://github.com/sebastiencs/company-box.git
+[submodule "site-lisp/verilog-mode"]
+	path = site-lisp/verilog-mode
+	url = https://github.com/veripool/verilog-mode.git
+[submodule "site-lisp/corfu"]
+	path = site-lisp/corfu
+	url = https://github.com/minad/corfu
+[submodule "site-lisp/ht.el"]
+	path = site-lisp/ht.el
+	url = https://github.com/Wilfred/ht.el.git
+[submodule "site-lisp/spinner.el"]
+	path = site-lisp/spinner.el
+	url = https://github.com/Malabarba/spinner.el.git
+[submodule "site-lisp/posframe"]
+	path = site-lisp/posframe
+	url = https://github.com/tumashu/posframe.git
+[submodule "site-lisp/kind-icon"]
+	path = site-lisp/kind-icon
+	url = https://github.com/jdtsmith/kind-icon.git
+[submodule "site-lisp/consult-lsp"]
+	path = site-lisp/consult-lsp
+	url = https://github.com/gagbo/consult-lsp.git
+[submodule "site-lisp/rainbow-mode"]
+	path = site-lisp/rainbow-mode
+	url = https://github.com/emacsmirror/rainbow-mode.git
+[submodule "site-lisp/elisp-refs"]
+	path = site-lisp/elisp-refs
+	url = https://github.com/Wilfred/elisp-refs.git
+[submodule "site-lisp/s.el"]
+	path = site-lisp/s.el
+	url = https://github.com/magnars/s.el.git
+[submodule "site-lisp/pdf-tools"]
+	path = site-lisp/pdf-tools
+	url = https://github.com/vedang/pdf-tools.git

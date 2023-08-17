@@ -2,6 +2,8 @@
 ;;; Commentary:
 ;;; Code:
 
+(require 'subr-x)
+
 ;;;###autoload
 (defun kill-or-save (arg)
   "Kill or save ARG words."
@@ -171,7 +173,7 @@ The resulting list contains all items that appear in LIST1 but not LIST2."
   "Find all `.el' files in DIR and its subdirectories."
   (let ((subdir (find-subdir-recursively dir)))
     (nconc subdir
-           (mapcan #'find-subdir-recursively subdir))))
+           (mapcan #'find-dir-recursively subdir))))
 
 (defvar autoloads-file "~/.emacs.d/lisp/loaddefs.el"
   "File with all of autoload setting.")

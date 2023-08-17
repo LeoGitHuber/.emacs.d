@@ -23,14 +23,14 @@
       package-check-signature nil)
 
 ;;; Emacs Default Setting
+(load "~/.emacs.d/lisp/init-func.el")
+
+(let ((packages (find-subdir-recursively "~/.emacs.d/site-lisp")))
+  (setq load-path (append load-path packages)))
 (add-to-list 'load-path "~/.emacs.d/lisp")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/mwim.el")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/compat")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/f.el")
 
 (load "~/.emacs.d/lisp/init-gc.el")
 (load "~/.emacs.d/lisp/loaddefs.el")
-(load "~/.emacs.d/lisp/init-func.el")
 (load "~/.emacs.d/lisp/init-diagnostic.el")
 (load "~/.emacs.d/lisp/init-icons.el")
 (load "~/.emacs.d/lisp/init-keybindings.el")
@@ -126,7 +126,7 @@
 		     (file-name-extension (buffer-name)) t)))))
 
 (auto-save-visited-mode)
-(setq auto-save-timeout 5
+(setq auto-save-timeout 3
       ;; auto-save-visited-interval 3
       )
 (add-hook 'before-save-hook
@@ -163,15 +163,15 @@
 ;;               (savehist-mode t))))
 
 
-(recentf-mode t)
-(setq recentf-max-saved-items 1000
-	  recentf-exclude `("/tmp/" "/ssh:"
-                        ,(concat user-emacs-directory
-                                 "lib/.*-autoloads\\.el\\'")))
 ;; (add-to-list 'load-path "~/.emacs.d/site-lisp/no-littering")
 ;; (rquire 'no-littering)
 (load "~/.emacs.d/site-lisp/no-littering/no-littering.el")
 (with-eval-after-load 'no-littering
+  (recentf-mode t)
+  (setq recentf-max-saved-items 1000
+	    recentf-exclude `("/tmp/" "/ssh:"
+                          ,(concat user-emacs-directory
+                                   "lib/.*-autoloads\\.el\\'")))
   (add-to-list 'recentf-exclude no-littering-var-directory)
   (add-to-list 'recentf-exclude no-littering-etc-directory))
 (save-place-mode t)

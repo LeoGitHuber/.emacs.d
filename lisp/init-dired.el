@@ -19,6 +19,7 @@
         dired-dwim-target t
         dired-mouse-drag-files t
         dired-auto-revert-buffer t
+        dired-do-revert-buffer t
         mouse-drag-and-drop-region-cross-program t
         dired-kill-when-opening-new-dired-buffer t
         dired-recursive-copies 'always

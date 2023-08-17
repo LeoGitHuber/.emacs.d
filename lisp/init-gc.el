@@ -12,11 +12,11 @@ If you experience stuttering, increase this.")
 ;; 开启 minibuffer 的时候不要 gc
 (defun gc-minibuffer-setup-hook ()
   "Turn off garbage collection during setup minibuffer."
-  (setq-default gc-cons-threshold (* better-gc-cons-threshold 2)))
+  (setq gc-cons-threshold (* better-gc-cons-threshold 2)))
 
 (defun gc-minibuffer-exit-hook ()
   "Turn on garbage collection after minibuffer exit."
   (garbage-collect)
-  (setq-default gc-cons-threshold better-gc-cons-threshold))
+  (setq gc-cons-threshold better-gc-cons-threshold))
 
 ;;; init-gc.el ends here.

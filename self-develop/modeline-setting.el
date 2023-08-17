@@ -506,7 +506,7 @@
                 (running (flymake-running-backends))
                 (disabled (flymake-disabled-backends))
                 (reported (flymake-reporting-backends))
-                (all-disabled (and disabled (null running)))
+                ;; (all-disabled (and disabled (null running)))
                 ;; (some-waiting (get-pure-cons running reported))  ;; Affect performance
                 (icon
                  (format "%s"
@@ -515,8 +515,8 @@
                           ;;  (propertize "⟲ " 'face '(:inherit font-lock-doc-face)))
                           ((null known)
                            (propertize "󰳤 " 'face '(:inherit error)))
-                          (all-disabled
-                           (propertize "󰀧 " 'face '(:inherit warning)))
+                          ;; (all-disabled
+                          ;;  (propertize "󰀧 " 'face '(:inherit warning)))
                           (t (let ((.error 0)
                                    (.warning 0)
                                    (.note 0))
@@ -577,7 +577,7 @@
                                (cond
                                 ;; (some-waiting "Checking...")
                                 ((null known) "No Checker")
-                                (all-disabled "All Checkers Disabled")
+                                ;; (all-disabled "All Checkers Disabled")
                                 (t (format "%d/%d backends running
            mouse-1: Display minor mode menu
            mouse-2: Show help for minor mode"

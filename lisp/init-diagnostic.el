@@ -66,8 +66,6 @@
                 (seq-uniq (append flymake-diagnostic-functions
                                   (flymake-flycheck-all-chained-diagnostic-functions))))))
 
-(add-to-list 'load-path "~/.emacs.d/site-lisp/flymake-flycheck")
-
 (dolist (hook '(prog-mode-hook text-mode-hook))
   (add-hook hook 'flymake-mode))
 

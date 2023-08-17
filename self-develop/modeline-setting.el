@@ -25,9 +25,7 @@
   :group 'mode-line-personal)
 
 (defface mode-line-area-1
-  '(;; (((background dark)) :background "#83a598" :foreground "#1d2021")
-	;; (((background light)) :background "#076678" :foreground "#f9f5d7")
-	;; (((background dark)) :background "#1C2F45" :foreground "#589EDD")
+  '(;; (((background dark)) :background "#1C2F45" :foreground "#589EDD")
 	;; (((background light)) :background "#CEE1F8" :foreground "#20396A")
     (((background dark)) :background "#71B7FF" :foreground "#251113")
     (((background light)) :background "#0349B4" :foreground "#E0FDFF")
@@ -140,7 +138,7 @@
 
 (defface mode-line-buffer
   '(
-    (((background dark)) :foreground "#174287")
+    (((background dark)) :foreground "#48739F")
     (((background light)) :foreground "#455C9A"))
   "Face for personal mode line buffer part."
   :group 'mode-line-personal)
@@ -259,6 +257,10 @@
 (defvar mode-line-sep
   (nerd-icons-powerline "nf-pl-left_hard_divider")
   "Set the separator icon for mode-line area.")
+
+(defvar mode-line-right-sep
+  (nerd-icons-powerline "nf-pl-right_hard_divider")
+  "Set the separator right icon for mode-line area.")
 
 (defvar fc-info
   (nerd-icons-codicon "nf-cod-question" :face '(:inherit flycheck-info-my))
@@ -501,7 +503,8 @@
                         (propertize (format "-%s " (cadr stat)) 'face '(:inherit ml-git-delete))))
             ""))))
 
-     (if (bound-and-true-p flymake-mode)
+     (if (and (bound-and-true-p flymake-mode)
+              flymake--state)
          (let* ((known (hash-table-keys flymake--state))
                 (running (flymake-running-backends))
                 (disabled (flymake-disabled-backends))
@@ -521,10 +524,10 @@
                                    (.warning 0)
                                    (.note 0))
                                (progn
-                                 (let* ((warning-level (warning-numeric-level :warning))
-                                        (note-level (warning-numeric-level :debug))
-                                        (error-level (warning-numeric-level :error))
-                                        (states (hash-table-values flymake--state)))
+                                 (let ((warning-level (warning-numeric-level :warning))
+                                       (note-level (warning-numeric-level :debug))
+                                       (error-level (warning-numeric-level :error))
+                                       (states (hash-table-values flymake--state)))
                                    (dolist (state states)
                                      (dolist (diag (flymake--state-diags state))
                                        (let ((severity (flymake--lookup-type-property
@@ -539,14 +542,16 @@
                                  (if (> (+ .error .warning .note) 0)
                                      (concat
                                       (unless vc-mode
-                                        (propertize mode-line-sep
-                                                    'face
-                                                    `(:background
-                                                      ,(face-background 'mode-line-git)
-                                                      :foreground
-                                                      ,(face-background 'mode-line-area-1))))
-                                      (propertize " "
-                                                  'face '(:inherit mode-line-git))
+                                        (propertize
+                                         mode-line-sep
+                                         'face
+                                         `(:background
+                                           ,(face-background 'mode-line-git)
+                                           :foreground
+                                           ,(face-background 'mode-line-area-1))))
+                                      (propertize
+                                       " "
+                                       'face '(:inherit mode-line-git))
                                       (if (= .error 0)
                                           ""
                                         (propertize
@@ -562,14 +567,17 @@
                                         (propertize
                                          (format "%s%d " diagnostic-info .note)
                                          'face '(:inherit diagnostic-info-face)))
-                                      (propertize mode-line-sep
-                                                  'face
-                                                  `(:foreground
-                                                    ,(face-background 'mode-line-git))))
+                                      (propertize
+                                       mode-line-sep
+                                       'face
+                                       `(:foreground
+                                         ,(face-background 'mode-line-git))))
                                    ;; (nerd-icons-mdicon "nf-md-check_circle_outline"
                                    ;;                    :face '(:inherit success))
                                    (unless vc-mode
-                                     (propertize mode-line-sep 'face '(:inherit mode-line-area-1-separator-3)))
+                                     (propertize
+                                      mode-line-sep
+                                      'face '(:inherit mode-line-area-1-separator-3)))
                                    ))))))))
            (propertize
             icon
@@ -633,7 +641,8 @@
      ;;   " "
 
      ;; Flycheck Information
-     (when (bound-and-true-p flycheck-mode)
+     (when (and (bound-and-true-p flycheck-mode)
+                (not (bound-and-true-p flymake-mode)))
        (pcase flycheck-last-status-change
 	     (`finished
 		  (if flycheck-current-errors
@@ -735,7 +744,9 @@
      ;; 	  (propertize (nerd-icons-wicon (format "nf-weather-time_%s" hour) :face '(:inherit mode-line-area-5)))))
 
      ;; File Line
-     (propertize (format " %s " (car (buffer-line-statistics))) 'face `(:inherit mode-line-area-1)
+     (propertize mode-line-right-sep 'face `(:foreground ,(face-background 'mode-line-area-1)))
+     (propertize (format " %s " (car (buffer-line-statistics)))
+                 'face '(:inherit mode-line-area-1)
 			     'help-echo "Buffer Line Length")
 
      ;; Range

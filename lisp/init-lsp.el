@@ -4,24 +4,14 @@
 
 ;;; Coding Relpated
 
-(add-to-list 'load-path "~/.emacs.d/site-lisp/ht.el")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/spinner.el")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/lsp-ui")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/posframe")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/company-box")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/company")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/kind-icon")
-(add-to-list 'load-path (expand-file-name "site-lisp/lsp-mode" user-emacs-directory))
-(add-to-list 'load-path (expand-file-name "site-lisp/lsp-mode/clients" user-emacs-directory))
-
 (dolist (hook '(prog-mdoe-hook cuda-mode-hook TeX-mode-hook verilog-mode-hook))
   (add-hook hook (lambda ()
                    (unless (derived-mode-p 'emacs-lisp-mode 'lisp-mode
                                            'makefile-mode 'snippet-mode)
                      (require 'lsp-mode)
-                     (require 'lsp-ui)
+                     ;; (require 'lsp-ui)
 		             ;; (lsp-deferred)
-                     (lsp)
+                     ;; (lsp)
                      ))))
 
 (with-eval-after-load 'lsp-mode
@@ -130,8 +120,6 @@
 ;; (require 'cape)
 (with-eval-after-load 'cape (add-to-list 'completion-at-point-functions #'cape-file))
 
-(add-hook 'prog-mode-hook 'toggle-truncate-lines)
-
 (defun company-completion-styles (capf-fn &rest args)
   (let ((completion-styles '(basic partial-completion)))
     (apply capf-fn args)))
@@ -143,7 +131,7 @@
 (add-to-list 'load-path "~/.emacs.d/site-lisp/lsp-bridge/")
 
 (require 'lsp-bridge)
-;; (global-lsp-bridge-mode)
+(global-lsp-bridge-mode)
 
 ;; (with-eval-after-load 'lsp-bridge
 ;;   (when (treesit-available-p)

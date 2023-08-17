@@ -58,6 +58,7 @@
       auto-mode-case-fold nil
       )
 (setq-default pgtk-wait-for-event-timeout 0
+              truncate-lines t
               mode-line-format nil)
 
 ;;; early-init.el ends here.

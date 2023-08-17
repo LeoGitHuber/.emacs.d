@@ -33,8 +33,8 @@
   (dirvish-override-dired-mode)
   (dirvish-side-follow-mode)
   ;; (add-hook 'dirvish-setup-hook 'dirvish-emerge-mode)
-  (setq dirvish-attributes '(vc-state nerd-icons git-msg file-size subtree-state collapse file-time)
-		dirvish-side-width 30
+  (setq dirvish-attributes '(vc-state nerd-icons file-size subtree-state collapse file-time)
+		dirvish-side-width 35
         dirvish-emerge-groups '(("Recent files" (predicate . recent-files-2h))
                                 ("Video" (extensions "mp4" "mkv" "webm"))
                                 ("Pictures" (extensions "jpg" "png" "jpeg" "svg" "gif"))

@@ -214,3 +214,24 @@
 [submodule "site-lisp/pdf-tools"]
 	path = site-lisp/pdf-tools
 	url = https://github.com/vedang/pdf-tools.git
+[submodule "site-lisp/tablist"]
+	path = site-lisp/tablist
+	url = https://github.com/politza/tablist.git
+[submodule "site-lisp/treemacs"]
+	path = site-lisp/treemacs
+	url = https://github.com/Alexander-Miller/treemacs.git
+[submodule "site-lisp/pfuture"]
+	path = site-lisp/pfuture
+	url = https://github.com/Alexander-Miller/pfuture.git
+[submodule "site-lisp/frame-local"]
+	path = site-lisp/frame-local
+	url = https://github.com/sebastiencs/frame-local.git
+[submodule "site-lisp/nov.el"]
+	path = site-lisp/nov.el
+	url = https://depp.brause.cc/nov.el.git
+[submodule "site-lisp/nov-xwidget"]
+	path = site-lisp/nov-xwidget
+	url = https://github.com/chenyanming/nov-xwidget.git
+[submodule "site-lisp/visual-regexp.el"]
+	path = site-lisp/visual-regexp.el
+	url = https://github.com/benma/visual-regexp.el.git

@@ -3,120 +3,115 @@
 
 ;; This file is part of GNU Emacs.
 
-;;; Commentary:
-
-;; This file will be copied to ldefs-boot.el and checked in
-;; periodically.
-
 ;;; Code:
 
 
 
-;;; Generated autoloads from ../site-lisp/verilog-mode/0test.el
+;;; Generated autoloads from verilog-mode/0test.el
 
-(register-definition-prefixes "../site-lisp/verilog-mode/0test" '("diff-flags" "global-replace-regexp" "verilog-test" "vl-"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-bridge/acm/acm.el
-
-(register-definition-prefixes "../site-lisp/lsp-bridge/acm/acm" '("acm-"))
+(register-definition-prefixes "verilog-mode/0test" '("diff-flags" "global-replace-regexp" "verilog-test" "vl-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-bridge/acm/acm-backend-citre.el
+;;; Generated autoloads from lsp-bridge/acm/acm.el
 
-(register-definition-prefixes "../site-lisp/lsp-bridge/acm/acm-backend-citre" '("acm-"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-bridge/acm/acm-backend-codeium.el
-
-(register-definition-prefixes "../site-lisp/lsp-bridge/acm/acm-backend-codeium" '("acm-"))
+(register-definition-prefixes "lsp-bridge/acm/acm" '("acm-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-bridge/acm/acm-backend-copilot.el
+;;; Generated autoloads from lsp-bridge/acm/acm-backend-citre.el
 
-(register-definition-prefixes "../site-lisp/lsp-bridge/acm/acm-backend-copilot" '("acm-"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-bridge/acm/acm-backend-elisp.el
-
-(register-definition-prefixes "../site-lisp/lsp-bridge/acm/acm-backend-elisp" '("acm-backend-elisp-"))
+(register-definition-prefixes "lsp-bridge/acm/acm-backend-citre" '("acm-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-bridge/acm/acm-backend-lsp.el
+;;; Generated autoloads from lsp-bridge/acm/acm-backend-codeium.el
 
-(register-definition-prefixes "../site-lisp/lsp-bridge/acm/acm-backend-lsp" '("acm-backend-lsp-"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-bridge/acm/acm-backend-path.el
-
-(register-definition-prefixes "../site-lisp/lsp-bridge/acm/acm-backend-path" '("acm-"))
+(register-definition-prefixes "lsp-bridge/acm/acm-backend-codeium" '("acm-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-bridge/acm/acm-backend-search-file-words.el
+;;; Generated autoloads from lsp-bridge/acm/acm-backend-copilot.el
 
-(register-definition-prefixes "../site-lisp/lsp-bridge/acm/acm-backend-search-file-words" '("acm-"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-bridge/acm/acm-backend-search-sdcv-words.el
-
-(register-definition-prefixes "../site-lisp/lsp-bridge/acm/acm-backend-search-sdcv-words" '("acm-"))
+(register-definition-prefixes "lsp-bridge/acm/acm-backend-copilot" '("acm-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-bridge/acm/acm-backend-tabnine.el
+;;; Generated autoloads from lsp-bridge/acm/acm-backend-elisp.el
 
-(register-definition-prefixes "../site-lisp/lsp-bridge/acm/acm-backend-tabnine" '("acm-"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-bridge/acm/acm-backend-tailwind.el
-
-(register-definition-prefixes "../site-lisp/lsp-bridge/acm/acm-backend-tailwind" '("acm-backend-tailwind-"))
+(register-definition-prefixes "lsp-bridge/acm/acm-backend-elisp" '("acm-backend-elisp-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-bridge/acm/acm-backend-telega.el
+;;; Generated autoloads from lsp-bridge/acm/acm-backend-lsp.el
 
-(register-definition-prefixes "../site-lisp/lsp-bridge/acm/acm-backend-telega" '("acm-"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-bridge/acm/acm-backend-tempel.el
-
-(register-definition-prefixes "../site-lisp/lsp-bridge/acm/acm-backend-tempel" '("acm-"))
+(register-definition-prefixes "lsp-bridge/acm/acm-backend-lsp" '("acm-backend-lsp-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-bridge/acm/acm-backend-yas.el
+;;; Generated autoloads from lsp-bridge/acm/acm-backend-path.el
 
-(register-definition-prefixes "../site-lisp/lsp-bridge/acm/acm-backend-yas" '("acm-"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-bridge/acm/acm-frame.el
-
-(register-definition-prefixes "../site-lisp/lsp-bridge/acm/acm-frame" '("acm-frame-"))
+(register-definition-prefixes "lsp-bridge/acm/acm-backend-path" '("acm-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-bridge/acm/acm-icon.el
+;;; Generated autoloads from lsp-bridge/acm/acm-backend-search-file-words.el
 
-(register-definition-prefixes "../site-lisp/lsp-bridge/acm/acm-icon" '("acm-icon"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-bridge/acm/acm-quick-access.el
-
-(register-definition-prefixes "../site-lisp/lsp-bridge/acm/acm-quick-access" '("acm-"))
+(register-definition-prefixes "lsp-bridge/acm/acm-backend-search-file-words" '("acm-"))
 
 
-;;; Generated autoloads from ../site-lisp/aggressive-indent-mode/aggressive-indent.el
+;;; Generated autoloads from lsp-bridge/acm/acm-backend-search-sdcv-words.el
 
-(autoload 'aggressive-indent-indent-defun "../site-lisp/aggressive-indent-mode/aggressive-indent" "\
+(register-definition-prefixes "lsp-bridge/acm/acm-backend-search-sdcv-words" '("acm-"))
+
+
+;;; Generated autoloads from lsp-bridge/acm/acm-backend-tabnine.el
+
+(register-definition-prefixes "lsp-bridge/acm/acm-backend-tabnine" '("acm-"))
+
+
+;;; Generated autoloads from lsp-bridge/acm/acm-backend-tailwind.el
+
+(register-definition-prefixes "lsp-bridge/acm/acm-backend-tailwind" '("acm-backend-tailwind-"))
+
+
+;;; Generated autoloads from lsp-bridge/acm/acm-backend-telega.el
+
+(register-definition-prefixes "lsp-bridge/acm/acm-backend-telega" '("acm-"))
+
+
+;;; Generated autoloads from lsp-bridge/acm/acm-backend-tempel.el
+
+(register-definition-prefixes "lsp-bridge/acm/acm-backend-tempel" '("acm-"))
+
+
+;;; Generated autoloads from lsp-bridge/acm/acm-backend-yas.el
+
+(register-definition-prefixes "lsp-bridge/acm/acm-backend-yas" '("acm-"))
+
+
+;;; Generated autoloads from lsp-bridge/acm/acm-frame.el
+
+(register-definition-prefixes "lsp-bridge/acm/acm-frame" '("acm-frame-"))
+
+
+;;; Generated autoloads from lsp-bridge/acm/acm-icon.el
+
+(register-definition-prefixes "lsp-bridge/acm/acm-icon" '("acm-icon"))
+
+
+;;; Generated autoloads from lsp-bridge/acm/acm-quick-access.el
+
+(register-definition-prefixes "lsp-bridge/acm/acm-quick-access" '("acm-"))
+
+
+;;; Generated autoloads from aggressive-indent-mode/aggressive-indent.el
+
+(autoload 'aggressive-indent-indent-defun "aggressive-indent-mode/aggressive-indent" "\
 Indent current defun.
 Throw an error if parentheses are unbalanced.
 If L and R are provided, use them for finding the start and end of defun.
 
 (fn &optional L R)" t)
-(autoload 'aggressive-indent-indent-region-and-on "../site-lisp/aggressive-indent-mode/aggressive-indent" "\
+(autoload 'aggressive-indent-indent-region-and-on "aggressive-indent-mode/aggressive-indent" "\
 Indent region between L and R, and then some.
 Call `aggressive-indent-region-function' between L and R, and
 then keep indenting until nothing more happens.
 
 (fn L R)" t)
-(autoload 'aggressive-indent-mode "../site-lisp/aggressive-indent-mode/aggressive-indent" "\
+(autoload 'aggressive-indent-mode "aggressive-indent-mode/aggressive-indent" "\
 Minor mode to keep your code always indented.
 
 This is a minor mode.  If called interactively, toggle the
@@ -145,8 +140,8 @@ for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `global-aggressive-indent-mode'.")
-(custom-autoload 'global-aggressive-indent-mode "../site-lisp/aggressive-indent-mode/aggressive-indent" nil)
-(autoload 'global-aggressive-indent-mode "../site-lisp/aggressive-indent-mode/aggressive-indent" "\
+(custom-autoload 'global-aggressive-indent-mode "aggressive-indent-mode/aggressive-indent" nil)
+(autoload 'global-aggressive-indent-mode "aggressive-indent-mode/aggressive-indent" "\
 Toggle Aggressive-Indent mode in all buffers.
 With prefix ARG, enable Global Aggressive-Indent mode if ARG is
 positive; otherwise, disable it.
@@ -163,45 +158,45 @@ mode.
 
 (fn &optional ARG)" t)
 (defalias 'aggressive-indent-global-mode #'global-aggressive-indent-mode)
-(register-definition-prefixes "../site-lisp/aggressive-indent-mode/aggressive-indent" '("aggressive-indent-"))
+(register-definition-prefixes "aggressive-indent-mode/aggressive-indent" '("aggressive-indent-"))
 
 
-;;; Generated autoloads from ../site-lisp/company-mode/test/all.el
+;;; Generated autoloads from company-mode/test/all.el
 
-(register-definition-prefixes "../site-lisp/company-mode/test/all" '("company-test-path"))
-
-
-;;; Generated autoloads from ../site-lisp/company-mode/test/async-tests.el
-
-(register-definition-prefixes "../site-lisp/company-mode/test/async-tests" '("company-async-backend"))
+(register-definition-prefixes "company-mode/test/all" '("company-test-path"))
 
 
-;;; Generated autoloads from ../site-lisp/avy/avy.el
+;;; Generated autoloads from company-mode/test/async-tests.el
 
-(autoload 'avy-process "../site-lisp/avy/avy" "\
+(register-definition-prefixes "company-mode/test/async-tests" '("company-async-backend"))
+
+
+;;; Generated autoloads from avy/avy.el
+
+(autoload 'avy-process "avy/avy" "\
 Select one of CANDIDATES using `avy-read'.
 Use OVERLAY-FN to visualize the decision overlay.
 CLEANUP-FN should take no arguments and remove the effects of
 multiple OVERLAY-FN invocations.
 
 (fn CANDIDATES &optional OVERLAY-FN CLEANUP-FN)")
-(autoload 'avy-goto-char "../site-lisp/avy/avy" "\
+(autoload 'avy-goto-char "avy/avy" "\
 Jump to the currently visible CHAR.
 The window scope is determined by `avy-all-windows' (ARG negates it).
 
 (fn CHAR &optional ARG)" t)
-(autoload 'avy-goto-char-in-line "../site-lisp/avy/avy" "\
+(autoload 'avy-goto-char-in-line "avy/avy" "\
 Jump to the currently visible CHAR in the current line.
 
 (fn CHAR)" t)
-(autoload 'avy-goto-char-2 "../site-lisp/avy/avy" "\
+(autoload 'avy-goto-char-2 "avy/avy" "\
 Jump to the currently visible CHAR1 followed by CHAR2.
 The window scope is determined by `avy-all-windows'.
 When ARG is non-nil, do the opposite of `avy-all-windows'.
 BEG and END narrow the scope where candidates are searched.
 
 (fn CHAR1 CHAR2 &optional ARG BEG END)" t)
-(autoload 'avy-goto-char-2-above "../site-lisp/avy/avy" "\
+(autoload 'avy-goto-char-2-above "avy/avy" "\
 Jump to the currently visible CHAR1 followed by CHAR2.
 This is a scoped version of `avy-goto-char-2', where the scope is
 the visible part of the current buffer up to point.
@@ -209,7 +204,7 @@ The window scope is determined by `avy-all-windows'.
 When ARG is non-nil, do the opposite of `avy-all-windows'.
 
 (fn CHAR1 CHAR2 &optional ARG)" t)
-(autoload 'avy-goto-char-2-below "../site-lisp/avy/avy" "\
+(autoload 'avy-goto-char-2-below "avy/avy" "\
 Jump to the currently visible CHAR1 followed by CHAR2.
 This is a scoped version of `avy-goto-char-2', where the scope is
 the visible part of the current buffer following point.
@@ -217,23 +212,23 @@ The window scope is determined by `avy-all-windows'.
 When ARG is non-nil, do the opposite of `avy-all-windows'.
 
 (fn CHAR1 CHAR2 &optional ARG)" t)
-(autoload 'avy-isearch "../site-lisp/avy/avy" "\
+(autoload 'avy-isearch "avy/avy" "\
 Jump to one of the current isearch candidates." t)
-(autoload 'avy-goto-word-0 "../site-lisp/avy/avy" "\
+(autoload 'avy-goto-word-0 "avy/avy" "\
 Jump to a word start.
 The window scope is determined by `avy-all-windows'.
 When ARG is non-nil, do the opposite of `avy-all-windows'.
 BEG and END narrow the scope where candidates are searched.
 
 (fn ARG &optional BEG END)" t)
-(autoload 'avy-goto-whitespace-end "../site-lisp/avy/avy" "\
+(autoload 'avy-goto-whitespace-end "avy/avy" "\
 Jump to the end of a whitespace sequence.
 The window scope is determined by `avy-all-windows'.
 When ARG is non-nil, do the opposite of `avy-all-windows'.
 BEG and END narrow the scope where candidates are searched.
 
 (fn ARG &optional BEG END)" t)
-(autoload 'avy-goto-word-1 "../site-lisp/avy/avy" "\
+(autoload 'avy-goto-word-1 "avy/avy" "\
 Jump to the currently visible CHAR at a word start.
 The window scope is determined by `avy-all-windows'.
 When ARG is non-nil, do the opposite of `avy-all-windows'.
@@ -241,7 +236,7 @@ BEG and END narrow the scope where candidates are searched.
 When SYMBOL is non-nil, jump to symbol start instead of word start.
 
 (fn CHAR &optional ARG BEG END SYMBOL)" t)
-(autoload 'avy-goto-word-1-above "../site-lisp/avy/avy" "\
+(autoload 'avy-goto-word-1-above "avy/avy" "\
 Jump to the currently visible CHAR at a word start.
 This is a scoped version of `avy-goto-word-1', where the scope is
 the visible part of the current buffer up to point.
@@ -249,7 +244,7 @@ The window scope is determined by `avy-all-windows'.
 When ARG is non-nil, do the opposite of `avy-all-windows'.
 
 (fn CHAR &optional ARG)" t)
-(autoload 'avy-goto-word-1-below "../site-lisp/avy/avy" "\
+(autoload 'avy-goto-word-1-below "avy/avy" "\
 Jump to the currently visible CHAR at a word start.
 This is a scoped version of `avy-goto-word-1', where the scope is
 the visible part of the current buffer following point.
@@ -257,13 +252,13 @@ The window scope is determined by `avy-all-windows'.
 When ARG is non-nil, do the opposite of `avy-all-windows'.
 
 (fn CHAR &optional ARG)" t)
-(autoload 'avy-goto-symbol-1 "../site-lisp/avy/avy" "\
+(autoload 'avy-goto-symbol-1 "avy/avy" "\
 Jump to the currently visible CHAR at a symbol start.
 The window scope is determined by `avy-all-windows'.
 When ARG is non-nil, do the opposite of `avy-all-windows'.
 
 (fn CHAR &optional ARG)" t)
-(autoload 'avy-goto-symbol-1-above "../site-lisp/avy/avy" "\
+(autoload 'avy-goto-symbol-1-above "avy/avy" "\
 Jump to the currently visible CHAR at a symbol start.
 This is a scoped version of `avy-goto-symbol-1', where the scope is
 the visible part of the current buffer up to point.
@@ -271,7 +266,7 @@ The window scope is determined by `avy-all-windows'.
 When ARG is non-nil, do the opposite of `avy-all-windows'.
 
 (fn CHAR &optional ARG)" t)
-(autoload 'avy-goto-symbol-1-below "../site-lisp/avy/avy" "\
+(autoload 'avy-goto-symbol-1-below "avy/avy" "\
 Jump to the currently visible CHAR at a symbol start.
 This is a scoped version of `avy-goto-symbol-1', where the scope is
 the visible part of the current buffer following point.
@@ -279,7 +274,7 @@ The window scope is determined by `avy-all-windows'.
 When ARG is non-nil, do the opposite of `avy-all-windows'.
 
 (fn CHAR &optional ARG)" t)
-(autoload 'avy-goto-subword-0 "../site-lisp/avy/avy" "\
+(autoload 'avy-goto-subword-0 "avy/avy" "\
 Jump to a word or subword start.
 The window scope is determined by `avy-all-windows' (ARG negates it).
 
@@ -289,16 +284,16 @@ should return true.
 BEG and END narrow the scope where candidates are searched.
 
 (fn &optional ARG PREDICATE BEG END)" t)
-(autoload 'avy-goto-subword-1 "../site-lisp/avy/avy" "\
+(autoload 'avy-goto-subword-1 "avy/avy" "\
 Jump to the currently visible CHAR at a subword start.
 The window scope is determined by `avy-all-windows' (ARG negates it).
 The case of CHAR is ignored.
 
 (fn CHAR &optional ARG)" t)
-(autoload 'avy-goto-word-or-subword-1 "../site-lisp/avy/avy" "\
+(autoload 'avy-goto-word-or-subword-1 "avy/avy" "\
 Forward to `avy-goto-subword-1' or `avy-goto-word-1'.
 Which one depends on variable `subword-mode'." t)
-(autoload 'avy-goto-line "../site-lisp/avy/avy" "\
+(autoload 'avy-goto-line "avy/avy" "\
 Jump to a line start in current buffer.
 
 When ARG is 1, jump to lines currently visible, with the option
@@ -310,57 +305,57 @@ When ARG is 4, negate the window scope determined by
 Otherwise, forward to `goto-line' with ARG.
 
 (fn &optional ARG)" t)
-(autoload 'avy-goto-line-above "../site-lisp/avy/avy" "\
+(autoload 'avy-goto-line-above "avy/avy" "\
 Goto visible line above the cursor.
 OFFSET changes the distance between the closest key to the cursor and
 the cursor
 When BOTTOM-UP is non-nil, display avy candidates from top to bottom
 
 (fn &optional OFFSET BOTTOM-UP)" t)
-(autoload 'avy-goto-line-below "../site-lisp/avy/avy" "\
+(autoload 'avy-goto-line-below "avy/avy" "\
 Goto visible line below the cursor.
 OFFSET changes the distance between the closest key to the cursor and
 the cursor
 When BOTTOM-UP is non-nil, display avy candidates from top to bottom
 
 (fn &optional OFFSET BOTTOM-UP)" t)
-(autoload 'avy-goto-end-of-line "../site-lisp/avy/avy" "\
+(autoload 'avy-goto-end-of-line "avy/avy" "\
 Call `avy-goto-line' and move to the end of the line.
 
 (fn &optional ARG)" t)
-(autoload 'avy-copy-line "../site-lisp/avy/avy" "\
+(autoload 'avy-copy-line "avy/avy" "\
 Copy a selected line above the current line.
 ARG lines can be used.
 
 (fn ARG)" t)
-(autoload 'avy-move-line "../site-lisp/avy/avy" "\
+(autoload 'avy-move-line "avy/avy" "\
 Move a selected line above the current line.
 ARG lines can be used.
 
 (fn ARG)" t)
-(autoload 'avy-copy-region "../site-lisp/avy/avy" "\
+(autoload 'avy-copy-region "avy/avy" "\
 Select two lines and copy the text between them to point.
 
 The window scope is determined by `avy-all-windows' or
 `avy-all-windows-alt' when ARG is non-nil.
 
 (fn ARG)" t)
-(autoload 'avy-move-region "../site-lisp/avy/avy" "\
+(autoload 'avy-move-region "avy/avy" "\
 Select two lines and move the text between them above the current line." t)
-(autoload 'avy-kill-region "../site-lisp/avy/avy" "\
+(autoload 'avy-kill-region "avy/avy" "\
 Select two lines and kill the region between them.
 
 The window scope is determined by `avy-all-windows' or
 `avy-all-windows-alt' when ARG is non-nil.
 
 (fn ARG)" t)
-(autoload 'avy-kill-ring-save-region "../site-lisp/avy/avy" "\
+(autoload 'avy-kill-ring-save-region "avy/avy" "\
 Select two lines and save the region between them to the kill ring.
 The window scope is determined by `avy-all-windows'.
 When ARG is non-nil, do the opposite of `avy-all-windows'.
 
 (fn ARG)" t)
-(autoload 'avy-kill-whole-line "../site-lisp/avy/avy" "\
+(autoload 'avy-kill-whole-line "avy/avy" "\
 Select line and kill the whole selected line.
 
 With a numerical prefix ARG, kill ARG line(s) starting from the
@@ -376,7 +371,7 @@ starting from the selected line.  \\[universal-argument] -3
 selected line.
 
 (fn ARG)" t)
-(autoload 'avy-kill-ring-save-whole-line "../site-lisp/avy/avy" "\
+(autoload 'avy-kill-ring-save-whole-line "avy/avy" "\
 Select line and save the whole selected line as if killed, but don’t kill it.
 
 This command is similar to `avy-kill-whole-line', except that it
@@ -389,101 +384,280 @@ If ARG is zero, kill the selected line but exclude the trailing
 newline.
 
 (fn ARG)" t)
-(autoload 'avy-setup-default "../site-lisp/avy/avy" "\
+(autoload 'avy-setup-default "avy/avy" "\
 Setup the default shortcuts.")
-(autoload 'avy-goto-char-timer "../site-lisp/avy/avy" "\
+(autoload 'avy-goto-char-timer "avy/avy" "\
 Read one or many consecutive chars and jump to the first one.
 The window scope is determined by `avy-all-windows' (ARG negates it).
 
 (fn &optional ARG)" t)
-(autoload 'avy-transpose-lines-in-region "../site-lisp/avy/avy" "\
+(autoload 'avy-transpose-lines-in-region "avy/avy" "\
 Transpose lines in the active region." t)
-(register-definition-prefixes "../site-lisp/avy/avy" '("avy-"))
+(register-definition-prefixes "avy/avy" '("avy-"))
 
 
-;;; Generated autoloads from ../site-lisp/verilog-mode/batch_prof.el
+;;; Generated autoloads from verilog-mode/batch_prof.el
 
-(register-definition-prefixes "../site-lisp/verilog-mode/batch_prof" '("t-"))
+(register-definition-prefixes "verilog-mode/batch_prof" '("t-"))
 
 
-;;; Generated autoloads from ../site-lisp/benchmark-init-el/benchmark-init.el
+;;; Generated autoloads from benchmark-init-el/benchmark-init.el
 
-(autoload 'benchmark-init/activate "../site-lisp/benchmark-init-el/benchmark-init" "\
+(autoload 'benchmark-init/activate "benchmark-init-el/benchmark-init" "\
 Activate benchmark-init and start collecting data." t)
-(register-definition-prefixes "../site-lisp/benchmark-init-el/benchmark-init" '("benchmark-init/"))
+(register-definition-prefixes "benchmark-init-el/benchmark-init" '("benchmark-init/"))
 
 
-;;; Generated autoloads from ../site-lisp/benchmark-init-el/benchmark-init-modes.el
+;;; Generated autoloads from benchmark-init-el/benchmark-init-modes.el
 
-(autoload 'benchmark-init/show-durations-tabulated "../site-lisp/benchmark-init-el/benchmark-init-modes" "\
+(autoload 'benchmark-init/show-durations-tabulated "benchmark-init-el/benchmark-init-modes" "\
 Show the benchmark results in a sorted table." t)
-(autoload 'benchmark-init/show-durations-tree "../site-lisp/benchmark-init-el/benchmark-init-modes" "\
+(autoload 'benchmark-init/show-durations-tree "benchmark-init-el/benchmark-init-modes" "\
 Show durations in call-tree." t)
-(register-definition-prefixes "../site-lisp/benchmark-init-el/benchmark-init-modes" '("benchmark-init/"))
+(register-definition-prefixes "benchmark-init-el/benchmark-init-modes" '("benchmark-init/"))
 
 
-;;; Generated autoloads from ../site-lisp/auctex/bib-cite.el
+;;; Generated autoloads from auctex/bib-cite.el
 
-(autoload 'bib-cite-minor-mode "../site-lisp/auctex/bib-cite" "\
+(autoload 'bib-cite-minor-mode "auctex/bib-cite" "\
 Toggle bib-cite mode.
 When bib-cite mode is enabled, citations, labels and refs are highlighted
 when the mouse is over them.  Clicking on these highlights with [mouse-2]
 runs `bib-find', and [mouse-3] runs `bib-display'.
 
 (fn ARG)" t)
-(autoload 'turn-on-bib-cite "../site-lisp/auctex/bib-cite" "\
+(autoload 'turn-on-bib-cite "auctex/bib-cite" "\
 Unconditionally turn on Bib Cite mode.")
-(register-definition-prefixes "../site-lisp/auctex/bib-cite" '("LaTeX-find-label-hist-alist" "bib-" "create-alist-from-list" "member-cis" "psg-" "search-directory-tree"))
+(register-definition-prefixes "auctex/bib-cite" '("LaTeX-find-label-hist-alist" "bib-" "create-alist-from-list" "member-cis" "psg-" "search-directory-tree"))
 
 
-;;; Generated autoloads from ../site-lisp/browse-kill-ring/browse-kill-ring.el
+;;; Generated autoloads from browse-kill-ring/browse-kill-ring.el
 
-(autoload 'browse-kill-ring-default-keybindings "../site-lisp/browse-kill-ring/browse-kill-ring" "\
+(autoload 'browse-kill-ring-default-keybindings "browse-kill-ring/browse-kill-ring" "\
 Set up M-y (`yank-pop') so that it can invoke `browse-kill-ring'.
 Normally, if M-y was not preceeded by C-y, then it has no useful
 behavior.  This function sets things up so that M-y will invoke
 `browse-kill-ring'." t)
-(autoload 'browse-kill-ring "../site-lisp/browse-kill-ring/browse-kill-ring" "\
+(autoload 'browse-kill-ring "browse-kill-ring/browse-kill-ring" "\
 Display items in the `kill-ring' in another buffer." t)
-(register-definition-prefixes "../site-lisp/browse-kill-ring/browse-kill-ring" '("browse-kill-ring-"))
+(register-definition-prefixes "browse-kill-ring/browse-kill-ring" '("browse-kill-ring-"))
 
 
-;;; Generated autoloads from ../site-lisp/company-mode/test/capf-tests.el
+;;; Generated autoloads from cape/cape.el
 
-(register-definition-prefixes "../site-lisp/company-mode/test/capf-tests" '("company-"))
+(autoload 'cape-history "cape/cape" "\
+Complete from Eshell, Comint or minibuffer history.
+See also `consult-history' for a more flexible variant based on
+`completing-read'.  If INTERACTIVE is nil the function acts like a Capf.
+
+(fn &optional INTERACTIVE)" t)
+(autoload 'cape-file "cape/cape" "\
+Complete file name at point.
+See the user option `cape-file-directory-must-exist'.
+If INTERACTIVE is nil the function acts like a Capf.
+
+(fn &optional INTERACTIVE)" t)
+(autoload 'cape-symbol "cape/cape" "\
+Complete Elisp symbol at point.
+If INTERACTIVE is nil the function acts like a Capf.
+
+(fn &optional INTERACTIVE)" t)
+(autoload 'cape-elisp-block "cape/cape" "\
+Complete Elisp in Org or Markdown code block.
+This Capf is particularly useful for literate Emacs configurations.
+If INTERACTIVE is nil the function acts like a Capf.
+
+(fn &optional INTERACTIVE)" t)
+(autoload 'cape-dabbrev "cape/cape" "\
+Complete with Dabbrev at point.
+
+If INTERACTIVE is nil the function acts like a Capf.  In case you
+observe a performance issue with autocompletion and `cape-dabbrev'
+it is strongly recommended to disable scanning in other buffers.
+See the user options `cape-dabbrev-min-length' and
+`cape-dabbrev-check-other-buffers'.
+
+(fn &optional INTERACTIVE)" t)
+(autoload 'cape-dict "cape/cape" "\
+Complete word from dictionary at point.
+This completion function works best if the dictionary is sorted
+by frequency.  See the custom option `cape-dict-file'.  If
+INTERACTIVE is nil the function acts like a Capf.
+
+(fn &optional INTERACTIVE)" t)
+(autoload 'cape-abbrev "cape/cape" "\
+Complete abbreviation at point.
+If INTERACTIVE is nil the function acts like a Capf.
+
+(fn &optional INTERACTIVE)" t)
+(autoload 'cape-line "cape/cape" "\
+Complete current line from other lines.
+The buffers returned by `cape-line-buffer-function' are scanned for lines.
+If INTERACTIVE is nil the function acts like a Capf.
+
+(fn &optional INTERACTIVE)" t)
+(autoload 'cape-super-capf "cape/cape" "\
+Merge CAPFS and return new Capf which includes all candidates.
+The function `cape-super-capf' is experimental.
+
+(fn &rest CAPFS)")
+(autoload 'cape-company-to-capf "cape/cape" "\
+Convert Company BACKEND function to Capf.
+VALID is a function taking the old and new input string.  It
+should return nil if the cached candidates became invalid.  The
+default value for VALID is `string-prefix-p' such that the
+candidates are only fetched again if the input prefix
+changed.  The function `cape-company-to-capf' is experimental.
+
+(fn BACKEND &optional VALID)")
+(autoload 'cape-interactive "cape/cape" "\
+Complete interactively with the given CAPFS.
+
+(fn &rest CAPFS)")
+(autoload 'cape-interactive-capf "cape/cape" "\
+Create interactive completion function from CAPF.
+
+(fn CAPF)")
+(autoload 'cape-wrap-buster "cape/cape" "\
+Call CAPF and return a completion table with cache busting.
+This function can be used as an advice around an existing Capf.
+The cache is busted when the input changes.  The argument VALID
+can be a function taking the old and new input string.  It should
+return nil if the new input requires that the completion table is
+refreshed.  The default value for VALID is `equal', such that the
+completion table is refreshed on every input change.
+
+(fn CAPF &optional VALID)")
+(autoload 'cape-wrap-properties "cape/cape" "\
+Call CAPF and add additional completion PROPERTIES.
+Completion properties include for example :exclusive, :annotation-function and
+the various :company-* extensions.  Furthermore a boolean :sort flag and a
+completion :category symbol can be specified.
+
+(fn CAPF &rest PROPERTIES)")
+(autoload 'cape-wrap-nonexclusive "cape/cape" "\
+Call CAPF and ensure that it is marked as non-exclusive.
+This function can be used as an advice around an existing Capf.
+
+(fn CAPF)")
+(autoload 'cape-wrap-predicate "cape/cape" "\
+Call CAPF and add an additional candidate PREDICATE.
+The PREDICATE is passed the candidate symbol or string.
+
+(fn CAPF PREDICATE)")
+(autoload 'cape-wrap-silent "cape/cape" "\
+Call CAPF and silence it (no messages, no errors).
+This function can be used as an advice around an existing Capf.
+
+(fn CAPF)")
+(autoload 'cape-wrap-case-fold "cape/cape" "\
+Call CAPF and return a case-insensitive completion table.
+If DONT-FOLD is non-nil return a case sensitive table instead.
+This function can be used as an advice around an existing Capf.
+
+(fn CAPF &optional DONT-FOLD)")
+(autoload 'cape-wrap-noninterruptible "cape/cape" "\
+Call CAPF and return a non-interruptible completion table.
+This function can be used as an advice around an existing Capf.
+
+(fn CAPF)")
+(autoload 'cape-wrap-prefix-length "cape/cape" "\
+Call CAPF and ensure that prefix length is greater or equal than LENGTH.
+If the prefix is long enough, enforce auto completion.
+
+(fn CAPF LENGTH)")
+(autoload 'cape-wrap-inside-comment "cape/cape" "\
+Call CAPF only if inside comment.
+This function can be used as an advice around an existing Capf.
+
+(fn CAPF)")
+(autoload 'cape-wrap-inside-string "cape/cape" "\
+Call CAPF only if inside string.
+This function can be used as an advice around an existing Capf.
+
+(fn CAPF)")
+(autoload 'cape-wrap-purify "cape/cape" "\
+Call CAPF and ensure that it does not illegally modify the buffer.
+This function can be used as an advice around an existing
+Capf.  It has been introduced mainly to fix the broken
+`pcomplete-completions-at-point' function in Emacs versions < 29.
+
+(fn CAPF)")
+(autoload 'cape-wrap-accept-all "cape/cape" "\
+Call CAPF and return a completion table which accepts every input.
+This function can be used as an advice around an existing Capf.
+
+(fn CAPF)")
+ (autoload 'cape-capf-accept-all "cape")
+ (autoload 'cape-capf-buster "cape")
+ (autoload 'cape-capf-case-fold "cape")
+ (autoload 'cape-capf-inside-comment "cape")
+ (autoload 'cape-capf-inside-string "cape")
+ (autoload 'cape-capf-noninterruptible "cape")
+ (autoload 'cape-capf-nonexclusive "cape")
+ (autoload 'cape-capf-predicate "cape")
+ (autoload 'cape-capf-prefix-length "cape")
+ (autoload 'cape-capf-properties "cape")
+ (autoload 'cape-capf-purify "cape")
+ (autoload 'cape-capf-silent "cape")
+(register-definition-prefixes "cape/cape" '("cape-"))
 
 
-;;; Generated autoloads from ../site-lisp/markdown-mode/tests/checkdoc-batch.el
+;;; Generated autoloads from cape/cape-char.el
 
-(register-definition-prefixes "../site-lisp/markdown-mode/tests/checkdoc-batch" '("markdown-test--checkdoc-file"))
-
-
-;;; Generated autoloads from ../site-lisp/puni/scripts/checkdoc-hack.el
-
-(register-definition-prefixes "../site-lisp/puni/scripts/checkdoc-hack" '("puni-checkdoc-create-error"))
+ (autoload 'cape-tex "cape-char" nil t)
+ (autoload 'cape-sgml "cape-char" nil t)
+ (autoload 'cape-rfc1345 "cape-char" nil t)
+(register-definition-prefixes "cape/cape-char" '("cape-char--define"))
 
 
-;;; Generated autoloads from ../site-lisp/treemacs/test/checkdock.el
+;;; Generated autoloads from cape/cape-keyword.el
 
-(register-definition-prefixes "../site-lisp/treemacs/test/checkdock" '("all-el-files" "checkdoc-buffer" "get-errors" "valid-doc-words"))
+(autoload 'cape-keyword "cape/cape-keyword" "\
+Complete programming language keyword at point.
+See the variable `cape-keyword-list'.
+If INTERACTIVE is nil the function acts like a capf.
+
+(fn &optional INTERACTIVE)" t)
+(register-definition-prefixes "cape/cape-keyword" '("cape-"))
 
 
-;;; Generated autoloads from ../site-lisp/citre/citre.el
+;;; Generated autoloads from company-mode/test/capf-tests.el
+
+(register-definition-prefixes "company-mode/test/capf-tests" '("company-"))
+
+
+;;; Generated autoloads from markdown-mode/tests/checkdoc-batch.el
+
+(register-definition-prefixes "markdown-mode/tests/checkdoc-batch" '("markdown-test--checkdoc-file"))
+
+
+;;; Generated autoloads from puni/scripts/checkdoc-hack.el
+
+(register-definition-prefixes "puni/scripts/checkdoc-hack" '("puni-checkdoc-create-error"))
+
+
+;;; Generated autoloads from treemacs/test/checkdock.el
+
+(register-definition-prefixes "treemacs/test/checkdock" '("all-el-files" "checkdoc-buffer" "get-errors" "valid-doc-words"))
+
+
+;;; Generated autoloads from citre/citre.el
 
 (put 'citre-enable-xref-integration 'safe-local-variable #'booleanp)
 (put 'citre-enable-capf-integration 'safe-local-variable #'booleanp)
 (put 'citre-enable-imenu-integration 'safe-local-variable #'booleanp)
-(autoload 'citre-jump "../site-lisp/citre/citre" "\
+(autoload 'citre-jump "citre/citre" "\
 Jump to the definition of the symbol at point.
 When there's multiple definitions, it lets you pick one using the
 `completing-read' UI, or you could use your own UI by customizing
 `citre-select-definition-function'." t)
-(autoload 'citre-jump-to-reference "../site-lisp/citre/citre" "\
+(autoload 'citre-jump-to-reference "citre/citre" "\
 Jump to the definition of the symbol at point.
 When there's multiple definitions, it lets you pick one using the
 `completing-read' UI, or you could use your own UI by customizing
 `citre-select-definition-function'." t)
-(autoload 'citre-peek "../site-lisp/citre/citre" "\
+(autoload 'citre-peek "citre/citre" "\
 Peek the definition of symbol at pointthe symbol in BUF at POINT.
 Or, When BUF or POINT is non-nil, peek the symbol at POINT (or
 current point) in BUF (or the current buffer).
@@ -491,7 +665,7 @@ current point) in BUF (or the current buffer).
 When REFERENCE is non-nil, peek the references.
 
 (fn &optional BUF POINT REFERENCE)" t)
-(autoload 'citre-ace-peek "../site-lisp/citre/citre" "\
+(autoload 'citre-ace-peek "citre/citre" "\
 Peek the definition of a symbol on screen using ace jump.
 Press a key in `citre-peek-ace-pick-symbol-at-point-keys' to pick
 the symbol under point.
@@ -501,19 +675,19 @@ function while filling its arglist.  When REFERENCE is non-nil,
 peek the references.
 
 (fn &optional REFERENCE)" t)
-(autoload 'citre-peek-through "../site-lisp/citre/citre" "\
+(autoload 'citre-peek-through "citre/citre" "\
 Peek through a symbol in current peek window.
 If REFERENCE is non-nil, peek its references, otherwise peek its
 definitions.
 
 (fn &optional REFERENCE)" t)
-(autoload 'citre-peek-reference "../site-lisp/citre/citre" "\
+(autoload 'citre-peek-reference "citre/citre" "\
 Peek the definitions of the symbol at point." t)
-(autoload 'citre-ace-peek-reference "../site-lisp/citre/citre" "\
+(autoload 'citre-ace-peek-reference "citre/citre" "\
 Peek the references of a symbol on screen using ace jump." t)
-(autoload 'citre-peek-through-reference "../site-lisp/citre/citre" "\
+(autoload 'citre-peek-through-reference "citre/citre" "\
 Peek through a symbol in current peek window for references." t)
-(autoload 'citre-mode "../site-lisp/citre/citre" "\
+(autoload 'citre-mode "citre/citre" "\
 Enable `completion-at-point', xref and imenu integration.
 
 This is a minor mode.  If called interactively, toggle the `Citre
@@ -531,7 +705,7 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(autoload 'citre-auto-enable-citre-mode "../site-lisp/citre/citre" "\
+(autoload 'citre-auto-enable-citre-mode "citre/citre" "\
 Enable `citre-mode' if appropriate.
 This means the current major mode satisfies
 `citre-auto-enable-citre-mode-modes', and one of
@@ -539,28 +713,28 @@ This means the current major mode satisfies
 
 Put this in `find-file-hook' to automatically enable `citre-mode'
 when opening a file.")
-(register-definition-prefixes "../site-lisp/citre/citre" '("citre-"))
+(register-definition-prefixes "citre/citre" '("citre-"))
 
 
-;;; Generated autoloads from ../site-lisp/citre/citre-backend-interface.el
+;;; Generated autoloads from citre/citre-backend-interface.el
 
-(register-definition-prefixes "../site-lisp/citre/citre-backend-interface" '("citre-"))
-
-
-;;; Generated autoloads from ../site-lisp/citre/citre-common-tag.el
-
-(register-definition-prefixes "../site-lisp/citre/citre-common-tag" '("citre-"))
+(register-definition-prefixes "citre/citre-backend-interface" '("citre-"))
 
 
-;;; Generated autoloads from ../site-lisp/citre/citre-common-util.el
+;;; Generated autoloads from citre/citre-common-tag.el
 
-(register-definition-prefixes "../site-lisp/citre/citre-common-util" '("citre-"))
+(register-definition-prefixes "citre/citre-common-tag" '("citre-"))
 
 
-;;; Generated autoloads from ../site-lisp/citre/citre-ctags.el
+;;; Generated autoloads from citre/citre-common-util.el
+
+(register-definition-prefixes "citre/citre-common-util" '("citre-"))
+
+
+;;; Generated autoloads from citre/citre-ctags.el
 
 (put 'citre-tags-file-alist 'safe-local-variable #'listp)
-(autoload 'citre-update-tags-file "../site-lisp/citre/citre-ctags" "\
+(autoload 'citre-update-tags-file "citre/citre-ctags" "\
 Update TAGSFILE.
 When called interactively, ask the user to pick a tags file.
 
@@ -571,7 +745,7 @@ When SYNC is non-nil, update TAGSFILE synchronously if it
 contains a recipe.
 
 (fn &optional TAGSFILE SYNC)" t)
-(autoload 'citre-update-this-tags-file "../site-lisp/citre/citre-ctags" "\
+(autoload 'citre-update-this-tags-file "citre/citre-ctags" "\
 Update the currently used tags file.
 When no such tags file is found, ask the user to create one.
 
@@ -582,7 +756,7 @@ the tags file.
 When SYNC is non-nil, update the tags file synchronously.
 
 (fn &optional SYNC)" t)
-(autoload 'citre-edit-tags-file-recipe "../site-lisp/citre/citre-ctags" "\
+(autoload 'citre-edit-tags-file-recipe "citre/citre-ctags" "\
 Edit the recipe of TAGSFILE.
 When called interactively, ask the user to select a tags file.
 
@@ -595,66 +769,66 @@ When NOCONFIRM is non-nil, don't ask the user whether to update
 the tags file now (update it directly instead).
 
 (fn &optional TAGSFILE CMD-PTAG CWD NOCONFIRM)" t)
-(autoload 'citre-create-tags-file "../site-lisp/citre/citre-ctags" "\
+(autoload 'citre-create-tags-file "citre/citre-ctags" "\
 Create a new tags file.
 An updating recipe is written to it so later it can be updated by
 `citre-update-tags-file'." t)
-(register-definition-prefixes "../site-lisp/citre/citre-ctags" '("citre-"))
+(register-definition-prefixes "citre/citre-ctags" '("citre-"))
 
 
-;;; Generated autoloads from ../site-lisp/citre/citre-global.el
+;;; Generated autoloads from citre/citre-global.el
 
-(autoload 'citre-global-create-database "../site-lisp/citre/citre-global" "\
+(autoload 'citre-global-create-database "citre/citre-global" "\
 Create gtags database." t)
-(autoload 'citre-global-update-database "../site-lisp/citre/citre-global" "\
+(autoload 'citre-global-update-database "citre/citre-global" "\
 Update the gtags database in use.
 If no database is found, prompt the user to create one." t)
-(register-definition-prefixes "../site-lisp/citre/citre-global" '("citre-"))
+(register-definition-prefixes "citre/citre-global" '("citre-"))
 
 
-;;; Generated autoloads from ../site-lisp/citre/citre-lang-c.el
+;;; Generated autoloads from citre/citre-lang-c.el
 
-(register-definition-prefixes "../site-lisp/citre/citre-lang-c" '("citre-lang-c-"))
-
-
-;;; Generated autoloads from ../site-lisp/citre/citre-lang-fileref.el
-
-(register-definition-prefixes "../site-lisp/citre/citre-lang-fileref" '("citre-lang-fileref-"))
+(register-definition-prefixes "citre/citre-lang-c" '("citre-lang-c-"))
 
 
-;;; Generated autoloads from ../site-lisp/citre/citre-lang-verilog.el
+;;; Generated autoloads from citre/citre-lang-fileref.el
 
-(register-definition-prefixes "../site-lisp/citre/citre-lang-verilog" '("citre-lang-verilog-"))
-
-
-;;; Generated autoloads from ../site-lisp/citre/citre-readtags.el
-
-(register-definition-prefixes "../site-lisp/citre/citre-readtags" '("citre-readtags-"))
+(register-definition-prefixes "citre/citre-lang-fileref" '("citre-lang-fileref-"))
 
 
-;;; Generated autoloads from ../site-lisp/citre/citre-readtags-tables.el
+;;; Generated autoloads from citre/citre-lang-verilog.el
 
-(register-definition-prefixes "../site-lisp/citre/citre-readtags-tables" '("citre-readtags--"))
-
-
-;;; Generated autoloads from ../site-lisp/citre/citre-tags.el
-
-(register-definition-prefixes "../site-lisp/citre/citre-tags" '("citre-tags-"))
+(register-definition-prefixes "citre/citre-lang-verilog" '("citre-lang-verilog-"))
 
 
-;;; Generated autoloads from ../site-lisp/citre/citre-ui-jump.el
+;;; Generated autoloads from citre/citre-readtags.el
 
-(register-definition-prefixes "../site-lisp/citre/citre-ui-jump" '("citre-jump-"))
-
-
-;;; Generated autoloads from ../site-lisp/citre/citre-ui-peek.el
-
-(register-definition-prefixes "../site-lisp/citre/citre-ui-peek" '("citre-"))
+(register-definition-prefixes "citre/citre-readtags" '("citre-readtags-"))
 
 
-;;; Generated autoloads from ../site-lisp/emacs-chinese-word-segmentation/cns.el
+;;; Generated autoloads from citre/citre-readtags-tables.el
 
-(autoload 'cns-mode "../site-lisp/emacs-chinese-word-segmentation/cns" "\
+(register-definition-prefixes "citre/citre-readtags-tables" '("citre-readtags--"))
+
+
+;;; Generated autoloads from citre/citre-tags.el
+
+(register-definition-prefixes "citre/citre-tags" '("citre-tags-"))
+
+
+;;; Generated autoloads from citre/citre-ui-jump.el
+
+(register-definition-prefixes "citre/citre-ui-jump" '("citre-jump-"))
+
+
+;;; Generated autoloads from citre/citre-ui-peek.el
+
+(register-definition-prefixes "citre/citre-ui-peek" '("citre-"))
+
+
+;;; Generated autoloads from emacs-chinese-word-segmentation/cns.el
+
+(autoload 'cns-mode "emacs-chinese-word-segmentation/cns" "\
 Toggle Chinese word segmentation mode in current buffer (Cns mode).
 With prefix ARG, enable Chinese word segmentation mode if ARG is
 positive; otherwise, disable it.  If called from Lisp, enable the
@@ -677,8 +851,8 @@ for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `global-cns-mode'.")
-(custom-autoload 'global-cns-mode "../site-lisp/emacs-chinese-word-segmentation/cns" nil)
-(autoload 'global-cns-mode "../site-lisp/emacs-chinese-word-segmentation/cns" "\
+(custom-autoload 'global-cns-mode "emacs-chinese-word-segmentation/cns" nil)
+(autoload 'global-cns-mode "emacs-chinese-word-segmentation/cns" "\
 Toggle Cns mode in all buffers.
 With prefix ARG, enable Global Cns mode if ARG is positive; otherwise,
 disable it.
@@ -693,117 +867,117 @@ would do it.
 See `cns-mode' for more information on Cns mode.
 
 (fn &optional ARG)" t)
-(register-definition-prefixes "../site-lisp/emacs-chinese-word-segmentation/cns" '("cns-"))
+(register-definition-prefixes "emacs-chinese-word-segmentation/cns" '("cns-"))
 
 
-;;; Generated autoloads from ../site-lisp/combobulate/combobulate.el
+;;; Generated autoloads from combobulate/combobulate.el
 
-(register-definition-prefixes "../site-lisp/combobulate/combobulate" '("combobulate-"))
-
-
-;;; Generated autoloads from ../site-lisp/combobulate/combobulate-contrib.el
-
-(register-definition-prefixes "../site-lisp/combobulate/combobulate-contrib" '("combobulate-"))
+(register-definition-prefixes "combobulate/combobulate" '("combobulate-"))
 
 
-;;; Generated autoloads from ../site-lisp/combobulate/combobulate-css.el
+;;; Generated autoloads from combobulate/combobulate-contrib.el
 
-(register-definition-prefixes "../site-lisp/combobulate/combobulate-css" '("combobulate-css-"))
-
-
-;;; Generated autoloads from ../site-lisp/combobulate/combobulate-debug.el
-
-(register-definition-prefixes "../site-lisp/combobulate/combobulate-debug" '("combobulate--"))
+(register-definition-prefixes "combobulate/combobulate-contrib" '("combobulate-"))
 
 
-;;; Generated autoloads from ../site-lisp/combobulate/combobulate-display.el
+;;; Generated autoloads from combobulate/combobulate-css.el
 
-(register-definition-prefixes "../site-lisp/combobulate/combobulate-display" '("combobulate-"))
-
-
-;;; Generated autoloads from ../site-lisp/combobulate/combobulate-envelope.el
-
-(register-definition-prefixes "../site-lisp/combobulate/combobulate-envelope" '("combobulate-envelope-"))
+(register-definition-prefixes "combobulate/combobulate-css" '("combobulate-css-"))
 
 
-;;; Generated autoloads from ../site-lisp/combobulate/combobulate-html.el
+;;; Generated autoloads from combobulate/combobulate-debug.el
 
-(register-definition-prefixes "../site-lisp/combobulate/combobulate-html" '("combobulate-"))
-
-
-;;; Generated autoloads from ../site-lisp/combobulate/combobulate-interface.el
-
-(register-definition-prefixes "../site-lisp/combobulate/combobulate-interface" '("combobulate-"))
+(register-definition-prefixes "combobulate/combobulate-debug" '("combobulate--"))
 
 
-;;; Generated autoloads from ../site-lisp/combobulate/combobulate-js-ts.el
+;;; Generated autoloads from combobulate/combobulate-display.el
 
-(register-definition-prefixes "../site-lisp/combobulate/combobulate-js-ts" '("combobulate-j"))
-
-
-;;; Generated autoloads from ../site-lisp/combobulate/combobulate-json.el
-
-(register-definition-prefixes "../site-lisp/combobulate/combobulate-json" '("combobulate-json-"))
+(register-definition-prefixes "combobulate/combobulate-display" '("combobulate-"))
 
 
-;;; Generated autoloads from ../site-lisp/combobulate/combobulate-manipulation.el
+;;; Generated autoloads from combobulate/combobulate-envelope.el
 
-(register-definition-prefixes "../site-lisp/combobulate/combobulate-manipulation" '("combobulate-"))
-
-
-;;; Generated autoloads from ../site-lisp/combobulate/combobulate-misc.el
-
-(register-definition-prefixes "../site-lisp/combobulate/combobulate-misc" '("combobulate-"))
+(register-definition-prefixes "combobulate/combobulate-envelope" '("combobulate-envelope-"))
 
 
-;;; Generated autoloads from ../site-lisp/combobulate/combobulate-navigation.el
+;;; Generated autoloads from combobulate/combobulate-html.el
 
-(register-definition-prefixes "../site-lisp/combobulate/combobulate-navigation" '("combobulate-" "with-argument-repetition"))
-
-
-;;; Generated autoloads from ../site-lisp/combobulate/combobulate-python.el
-
-(register-definition-prefixes "../site-lisp/combobulate/combobulate-python" '("combobulate-python-"))
+(register-definition-prefixes "combobulate/combobulate-html" '("combobulate-"))
 
 
-;;; Generated autoloads from ../site-lisp/combobulate/combobulate-query.el
+;;; Generated autoloads from combobulate/combobulate-interface.el
 
-(autoload 'combobulate-query-builder "../site-lisp/combobulate/combobulate-query" "\
+(register-definition-prefixes "combobulate/combobulate-interface" '("combobulate-"))
+
+
+;;; Generated autoloads from combobulate/combobulate-js-ts.el
+
+(register-definition-prefixes "combobulate/combobulate-js-ts" '("combobulate-j"))
+
+
+;;; Generated autoloads from combobulate/combobulate-json.el
+
+(register-definition-prefixes "combobulate/combobulate-json" '("combobulate-json-"))
+
+
+;;; Generated autoloads from combobulate/combobulate-manipulation.el
+
+(register-definition-prefixes "combobulate/combobulate-manipulation" '("combobulate-"))
+
+
+;;; Generated autoloads from combobulate/combobulate-misc.el
+
+(register-definition-prefixes "combobulate/combobulate-misc" '("combobulate-"))
+
+
+;;; Generated autoloads from combobulate/combobulate-navigation.el
+
+(register-definition-prefixes "combobulate/combobulate-navigation" '("combobulate-" "with-argument-repetition"))
+
+
+;;; Generated autoloads from combobulate/combobulate-python.el
+
+(register-definition-prefixes "combobulate/combobulate-python" '("combobulate-python-"))
+
+
+;;; Generated autoloads from combobulate/combobulate-query.el
+
+(autoload 'combobulate-query-builder "combobulate/combobulate-query" "\
 Open an interactive query builder buffer.
 
 Design and test tree-sitter queries interactively with syntax
 highlighting and node completion." t)
-(register-definition-prefixes "../site-lisp/combobulate/combobulate-query" '("combobulate-"))
+(register-definition-prefixes "combobulate/combobulate-query" '("combobulate-"))
 
 
-;;; Generated autoloads from ../site-lisp/combobulate/combobulate-rules.el
+;;; Generated autoloads from combobulate/combobulate-rules.el
 
-(register-definition-prefixes "../site-lisp/combobulate/combobulate-rules" '("combobulate-rules-"))
-
-
-;;; Generated autoloads from ../site-lisp/combobulate/combobulate-settings.el
-
-(register-definition-prefixes "../site-lisp/combobulate/combobulate-settings" '("combobulate-"))
+(register-definition-prefixes "combobulate/combobulate-rules" '("combobulate-rules-"))
 
 
-;;; Generated autoloads from ../site-lisp/combobulate/combobulate-yaml.el
+;;; Generated autoloads from combobulate/combobulate-settings.el
 
-(register-definition-prefixes "../site-lisp/combobulate/combobulate-yaml" '("combobulate-yaml-setup"))
-
-
-;;; Generated autoloads from ../site-lisp/combobulate/combobulate-ztree.el
-
-(register-definition-prefixes "../site-lisp/combobulate/combobulate-ztree" '("combobulate-ztree-"))
+(register-definition-prefixes "combobulate/combobulate-settings" '("combobulate-"))
 
 
-;;; Generated autoloads from ../site-lisp/citre/tests/common.el
+;;; Generated autoloads from combobulate/combobulate-yaml.el
 
-(register-definition-prefixes "../site-lisp/citre/tests/common" '("default-tags" "expand-test-file" "get-file-content" "map-get-field" "set-equal" "tags-get-definitions"))
+(register-definition-prefixes "combobulate/combobulate-yaml" '("combobulate-yaml-setup"))
 
 
-;;; Generated autoloads from ../site-lisp/company-mode/company.el
+;;; Generated autoloads from combobulate/combobulate-ztree.el
 
-(autoload 'company-mode "../site-lisp/company-mode/company" "\
+(register-definition-prefixes "combobulate/combobulate-ztree" '("combobulate-ztree-"))
+
+
+;;; Generated autoloads from citre/tests/common.el
+
+(register-definition-prefixes "citre/tests/common" '("default-tags" "expand-test-file" "get-file-content" "map-get-field" "set-equal" "tags-get-definitions"))
+
+
+;;; Generated autoloads from company-mode/company.el
+
+(autoload 'company-mode "company-mode/company" "\
 \"complete anything\"; is an in-buffer completion framework.
 
 Completion starts automatically, depending on the values
@@ -855,8 +1029,8 @@ for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `global-company-mode'.")
-(custom-autoload 'global-company-mode "../site-lisp/company-mode/company" nil)
-(autoload 'global-company-mode "../site-lisp/company-mode/company" "\
+(custom-autoload 'global-company-mode "company-mode/company" nil)
+(autoload 'global-company-mode "company-mode/company" "\
 Toggle Company mode in all buffers.
 With prefix ARG, enable Global Company mode if ARG is positive;
 otherwise, disable it.
@@ -871,36 +1045,36 @@ do it.
 See `company-mode' for more information on Company mode.
 
 (fn &optional ARG)" t)
-(autoload 'company-manual-begin "../site-lisp/company-mode/company" nil t)
-(autoload 'company-complete "../site-lisp/company-mode/company" "\
+(autoload 'company-manual-begin "company-mode/company" nil t)
+(autoload 'company-complete "company-mode/company" "\
 Insert the common part of all candidates or the current selection.
 The first time this is called, the common part is inserted, the second
 time, or when the selection has been changed, the selected candidate is
 inserted." t)
-(register-definition-prefixes "../site-lisp/company-mode/company" '("company-"))
+(register-definition-prefixes "company-mode/company" '("company-"))
 
 
-;;; Generated autoloads from ../site-lisp/company-mode/company-abbrev.el
+;;; Generated autoloads from company-mode/company-abbrev.el
 
-(autoload 'company-abbrev "../site-lisp/company-mode/company-abbrev" "\
+(autoload 'company-abbrev "company-mode/company-abbrev" "\
 `company-mode' completion backend for abbrev.
 
 (fn COMMAND &optional ARG &rest IGNORED)" t)
-(register-definition-prefixes "../site-lisp/company-mode/company-abbrev" '("company-abbrev-insert"))
+(register-definition-prefixes "company-mode/company-abbrev" '("company-abbrev-insert"))
 
 
-;;; Generated autoloads from ../site-lisp/company-mode/company-bbdb.el
+;;; Generated autoloads from company-mode/company-bbdb.el
 
-(autoload 'company-bbdb "../site-lisp/company-mode/company-bbdb" "\
+(autoload 'company-bbdb "company-mode/company-bbdb" "\
 `company-mode' completion backend for BBDB.
 
 (fn COMMAND &optional ARG &rest IGNORE)" t)
-(register-definition-prefixes "../site-lisp/company-mode/company-bbdb" '("company-bbdb-"))
+(register-definition-prefixes "company-mode/company-bbdb" '("company-bbdb-"))
 
 
-;;; Generated autoloads from ../site-lisp/company-box/company-box.el
+;;; Generated autoloads from company-box/company-box.el
 
-(autoload 'company-box-mode "../site-lisp/company-box/company-box" "\
+(autoload 'company-box-mode "company-box/company-box" "\
 Company-box minor mode.
 
 This is a minor mode.  If called interactively, toggle the
@@ -918,168 +1092,168 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(register-definition-prefixes "../site-lisp/company-box/company-box" '("company-box-"))
+(register-definition-prefixes "company-box/company-box" '("company-box-"))
 
 
-;;; Generated autoloads from ../site-lisp/company-box/company-box-doc.el
+;;; Generated autoloads from company-box/company-box-doc.el
 
-(register-definition-prefixes "../site-lisp/company-box/company-box-doc" '("company-box-"))
-
-
-;;; Generated autoloads from ../site-lisp/company-box/company-box-icons.el
-
-(register-definition-prefixes "../site-lisp/company-box/company-box-icons" '("company-box-icons-"))
+(register-definition-prefixes "company-box/company-box-doc" '("company-box-"))
 
 
-;;; Generated autoloads from ../site-lisp/company-mode/company-capf.el
+;;; Generated autoloads from company-box/company-box-icons.el
 
-(register-definition-prefixes "../site-lisp/company-mode/company-capf" '("company-"))
-
-
-;;; Generated autoloads from ../site-lisp/company-mode/company-clang.el
-
-(register-definition-prefixes "../site-lisp/company-mode/company-clang" '("company-clang"))
+(register-definition-prefixes "company-box/company-box-icons" '("company-box-icons-"))
 
 
-;;; Generated autoloads from ../site-lisp/company-mode/company-cmake.el
+;;; Generated autoloads from company-mode/company-capf.el
 
-(register-definition-prefixes "../site-lisp/company-mode/company-cmake" '("company-cmake"))
+(register-definition-prefixes "company-mode/company-capf" '("company-"))
 
 
-;;; Generated autoloads from ../site-lisp/company-mode/company-css.el
+;;; Generated autoloads from company-mode/company-clang.el
 
-(autoload 'company-css "../site-lisp/company-mode/company-css" "\
+(register-definition-prefixes "company-mode/company-clang" '("company-clang"))
+
+
+;;; Generated autoloads from company-mode/company-cmake.el
+
+(register-definition-prefixes "company-mode/company-cmake" '("company-cmake"))
+
+
+;;; Generated autoloads from company-mode/company-css.el
+
+(autoload 'company-css "company-mode/company-css" "\
 `company-mode' completion backend for `css-mode'.
 
 (fn COMMAND &optional ARG &rest IGNORED)" t)
-(register-definition-prefixes "../site-lisp/company-mode/company-css" '("company-css-"))
+(register-definition-prefixes "company-mode/company-css" '("company-css-"))
 
 
-;;; Generated autoloads from ../site-lisp/company-mode/company-dabbrev.el
+;;; Generated autoloads from company-mode/company-dabbrev.el
 
-(autoload 'company-dabbrev "../site-lisp/company-mode/company-dabbrev" "\
+(autoload 'company-dabbrev "company-mode/company-dabbrev" "\
 dabbrev-like `company-mode' completion backend.
 
 (fn COMMAND &optional ARG &rest IGNORED)" t)
-(register-definition-prefixes "../site-lisp/company-mode/company-dabbrev" '("company-dabbrev-"))
+(register-definition-prefixes "company-mode/company-dabbrev" '("company-dabbrev-"))
 
 
-;;; Generated autoloads from ../site-lisp/company-mode/company-dabbrev-code.el
+;;; Generated autoloads from company-mode/company-dabbrev-code.el
 
-(autoload 'company-dabbrev-code "../site-lisp/company-mode/company-dabbrev-code" "\
+(autoload 'company-dabbrev-code "company-mode/company-dabbrev-code" "\
 dabbrev-like `company-mode' backend for code.
 The backend looks for all symbols in the current buffer that aren't in
 comments or strings.
 
 (fn COMMAND &optional ARG &rest IGNORED)" t)
-(register-definition-prefixes "../site-lisp/company-mode/company-dabbrev-code" '("company-dabbrev-code-"))
+(register-definition-prefixes "company-mode/company-dabbrev-code" '("company-dabbrev-code-"))
 
 
-;;; Generated autoloads from ../site-lisp/company-mode/company-elisp.el
+;;; Generated autoloads from company-mode/company-elisp.el
 
-(autoload 'company-elisp "../site-lisp/company-mode/company-elisp" "\
+(autoload 'company-elisp "company-mode/company-elisp" "\
 `company-mode' completion backend for Emacs Lisp.
 
 (fn COMMAND &optional ARG &rest IGNORED)" t)
-(register-definition-prefixes "../site-lisp/company-mode/company-elisp" '("company-elisp-"))
+(register-definition-prefixes "company-mode/company-elisp" '("company-elisp-"))
 
 
-;;; Generated autoloads from ../site-lisp/company-mode/company-etags.el
+;;; Generated autoloads from company-mode/company-etags.el
 
-(autoload 'company-etags "../site-lisp/company-mode/company-etags" "\
+(autoload 'company-etags "company-mode/company-etags" "\
 `company-mode' completion backend for etags.
 
 (fn COMMAND &optional ARG &rest IGNORED)" t)
-(register-definition-prefixes "../site-lisp/company-mode/company-etags" '("company-etags-"))
+(register-definition-prefixes "company-mode/company-etags" '("company-etags-"))
 
 
-;;; Generated autoloads from ../site-lisp/company-mode/company-files.el
+;;; Generated autoloads from company-mode/company-files.el
 
-(autoload 'company-files "../site-lisp/company-mode/company-files" "\
+(autoload 'company-files "company-mode/company-files" "\
 `company-mode' completion backend existing file names.
 Completions works for proper absolute and relative files paths.
 File paths with spaces are only supported inside strings.
 
 (fn COMMAND &optional ARG &rest IGNORED)" t)
-(register-definition-prefixes "../site-lisp/company-mode/company-files" '("company-file"))
+(register-definition-prefixes "company-mode/company-files" '("company-file"))
 
 
-;;; Generated autoloads from ../site-lisp/company-mode/company-gtags.el
+;;; Generated autoloads from company-mode/company-gtags.el
 
-(autoload 'company-gtags "../site-lisp/company-mode/company-gtags" "\
+(autoload 'company-gtags "company-mode/company-gtags" "\
 `company-mode' completion backend for GNU Global.
 
 (fn COMMAND &optional ARG &rest IGNORED)" t)
-(register-definition-prefixes "../site-lisp/company-mode/company-gtags" '("company-gtags-"))
+(register-definition-prefixes "company-mode/company-gtags" '("company-gtags-"))
 
 
-;;; Generated autoloads from ../site-lisp/company-mode/company-ispell.el
+;;; Generated autoloads from company-mode/company-ispell.el
 
-(autoload 'company-ispell "../site-lisp/company-mode/company-ispell" "\
+(autoload 'company-ispell "company-mode/company-ispell" "\
 `company-mode' completion backend using Ispell.
 
 (fn COMMAND &optional ARG &rest IGNORED)" t)
-(register-definition-prefixes "../site-lisp/company-mode/company-ispell" '("company-ispell-"))
+(register-definition-prefixes "company-mode/company-ispell" '("company-ispell-"))
 
 
-;;; Generated autoloads from ../site-lisp/company-mode/company-keywords.el
+;;; Generated autoloads from company-mode/company-keywords.el
 
-(autoload 'company-keywords "../site-lisp/company-mode/company-keywords" "\
+(autoload 'company-keywords "company-mode/company-keywords" "\
 `company-mode' backend for programming language keywords.
 
 (fn COMMAND &optional ARG &rest IGNORED)" t)
-(register-definition-prefixes "../site-lisp/company-mode/company-keywords" '("company-keywords-"))
+(register-definition-prefixes "company-mode/company-keywords" '("company-keywords-"))
 
 
-;;; Generated autoloads from ../site-lisp/company-mode/company-nxml.el
+;;; Generated autoloads from company-mode/company-nxml.el
 
-(autoload 'company-nxml "../site-lisp/company-mode/company-nxml" "\
+(autoload 'company-nxml "company-mode/company-nxml" "\
 `company-mode' completion backend for `nxml-mode'.
 
 (fn COMMAND &optional ARG &rest IGNORED)" t)
-(register-definition-prefixes "../site-lisp/company-mode/company-nxml" '("company-nxml-"))
+(register-definition-prefixes "company-mode/company-nxml" '("company-nxml-"))
 
 
-;;; Generated autoloads from ../site-lisp/company-mode/company-oddmuse.el
+;;; Generated autoloads from company-mode/company-oddmuse.el
 
-(autoload 'company-oddmuse "../site-lisp/company-mode/company-oddmuse" "\
+(autoload 'company-oddmuse "company-mode/company-oddmuse" "\
 `company-mode' completion backend for `oddmuse-mode'.
 
 (fn COMMAND &optional ARG &rest IGNORED)" t)
-(register-definition-prefixes "../site-lisp/company-mode/company-oddmuse" '("company-oddmuse-"))
+(register-definition-prefixes "company-mode/company-oddmuse" '("company-oddmuse-"))
 
 
-;;; Generated autoloads from ../site-lisp/company-mode/company-semantic.el
+;;; Generated autoloads from company-mode/company-semantic.el
 
-(autoload 'company-semantic "../site-lisp/company-mode/company-semantic" "\
+(autoload 'company-semantic "company-mode/company-semantic" "\
 `company-mode' completion backend using CEDET Semantic.
 
 (fn COMMAND &optional ARG &rest IGNORED)" t)
-(register-definition-prefixes "../site-lisp/company-mode/company-semantic" '("company-semantic-"))
+(register-definition-prefixes "company-mode/company-semantic" '("company-semantic-"))
 
 
-;;; Generated autoloads from ../site-lisp/company-mode/company-template.el
+;;; Generated autoloads from company-mode/company-template.el
 
-(register-definition-prefixes "../site-lisp/company-mode/company-template" '("company-template-"))
+(register-definition-prefixes "company-mode/company-template" '("company-template-"))
 
 
-;;; Generated autoloads from ../site-lisp/company-mode/company-tempo.el
+;;; Generated autoloads from company-mode/company-tempo.el
 
-(autoload 'company-tempo "../site-lisp/company-mode/company-tempo" "\
+(autoload 'company-tempo "company-mode/company-tempo" "\
 `company-mode' completion backend for tempo.
 
 (fn COMMAND &optional ARG &rest IGNORED)" t)
-(register-definition-prefixes "../site-lisp/company-mode/company-tempo" '("company-tempo-"))
+(register-definition-prefixes "company-mode/company-tempo" '("company-tempo-"))
 
 
-;;; Generated autoloads from ../site-lisp/company-mode/company-tests.el
+;;; Generated autoloads from company-mode/company-tests.el
 
-(register-definition-prefixes "../site-lisp/company-mode/company-tests" '("company-"))
+(register-definition-prefixes "company-mode/company-tests" '("company-"))
 
 
-;;; Generated autoloads from ../site-lisp/company-mode/company-tng.el
+;;; Generated autoloads from company-mode/company-tng.el
 
-(autoload 'company-tng-frontend "../site-lisp/company-mode/company-tng" "\
+(autoload 'company-tng-frontend "company-mode/company-tng" "\
 When the user changes the selection at least once, this
 frontend will display the candidate in the buffer as if it's
 already there and any key outside of `company-active-map' will
@@ -1094,8 +1268,8 @@ for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `company-tng-mode'.")
-(custom-autoload 'company-tng-mode "../site-lisp/company-mode/company-tng" nil)
-(autoload 'company-tng-mode "../site-lisp/company-mode/company-tng" "\
+(custom-autoload 'company-tng-mode "company-mode/company-tng" nil)
+(autoload 'company-tng-mode "company-mode/company-tng" "\
 This minor mode enables `company-tng-frontend'.
 
 This is a global minor mode.  If called interactively, toggle the
@@ -1113,12 +1287,12 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(register-definition-prefixes "../site-lisp/company-mode/company-tng" '("company-tng-"))
+(register-definition-prefixes "company-mode/company-tng" '("company-tng-"))
 
 
-;;; Generated autoloads from ../site-lisp/company-mode/company-yasnippet.el
+;;; Generated autoloads from company-mode/company-yasnippet.el
 
-(autoload 'company-yasnippet "../site-lisp/company-mode/company-yasnippet" "\
+(autoload 'company-yasnippet "company-mode/company-yasnippet" "\
 `company-mode' backend for `yasnippet'.
 
 This backend should be used with care, because as long as there are
@@ -1142,27 +1316,27 @@ shadow backends that come after it.  Recommended usages:
   (global-set-key (kbd \"C-c y\") \\='company-yasnippet)
 
 (fn COMMAND &optional ARG &rest IGNORE)" t)
-(register-definition-prefixes "../site-lisp/company-mode/company-yasnippet" '("company-yasnippet-"))
+(register-definition-prefixes "company-mode/company-yasnippet" '("company-yasnippet-"))
 
 
-;;; Generated autoloads from ../site-lisp/compat/compat.el
+;;; Generated autoloads from compat/compat.el
 
-(register-definition-prefixes "../site-lisp/compat/compat" '("compat-"))
-
-
-;;; Generated autoloads from ../site-lisp/compat/compat-macs.el
-
-(register-definition-prefixes "../site-lisp/compat/compat-macs" '("compat-"))
+(register-definition-prefixes "compat/compat" '("compat-"))
 
 
-;;; Generated autoloads from ../site-lisp/compat/compat-tests.el
+;;; Generated autoloads from compat/compat-macs.el
 
-(register-definition-prefixes "../site-lisp/compat/compat-tests" '("compat-tests--" "should-equal"))
+(register-definition-prefixes "compat/compat-macs" '("compat-"))
 
 
-;;; Generated autoloads from ../site-lisp/consult/consult.el
+;;; Generated autoloads from compat/compat-tests.el
 
-(autoload 'consult-completion-in-region "../site-lisp/consult/consult" "\
+(register-definition-prefixes "compat/compat-tests" '("compat-tests--" "should-equal"))
+
+
+;;; Generated autoloads from consult/consult.el
+
+(autoload 'consult-completion-in-region "consult/consult" "\
 Use minibuffer completion as the UI for `completion-at-point'.
 
 The function is called with 4 arguments: START END COLLECTION PREDICATE.
@@ -1183,26 +1357,26 @@ These configuration options are supported:
     * :prompt - The prompt string shown in the minibuffer
 
 (fn START END COLLECTION &optional PREDICATE)")
-(autoload 'consult-outline "../site-lisp/consult/consult" "\
+(autoload 'consult-outline "consult/consult" "\
 Jump to an outline heading, obtained by matching against `outline-regexp'.
 
 This command supports narrowing to a heading level and candidate preview.
 The symbol at point is added to the future history." t)
-(autoload 'consult-mark "../site-lisp/consult/consult" "\
+(autoload 'consult-mark "consult/consult" "\
 Jump to a marker in MARKERS list (defaults to buffer-local `mark-ring').
 
 The command supports preview of the currently selected marker position.
 The symbol at point is added to the future history.
 
 (fn &optional MARKERS)" t)
-(autoload 'consult-global-mark "../site-lisp/consult/consult" "\
+(autoload 'consult-global-mark "consult/consult" "\
 Jump to a marker in MARKERS list (defaults to `global-mark-ring').
 
 The command supports preview of the currently selected marker position.
 The symbol at point is added to the future history.
 
 (fn &optional MARKERS)" t)
-(autoload 'consult-line "../site-lisp/consult/consult" "\
+(autoload 'consult-line "consult/consult" "\
 Search for a matching line.
 
 Depending on the setting `consult-point-placement' the command
@@ -1214,7 +1388,7 @@ changed if the START prefix argument is set.  The symbol at point
 and the last `isearch-string' is added to the future history.
 
 (fn &optional INITIAL START)" t)
-(autoload 'consult-line-multi "../site-lisp/consult/consult" "\
+(autoload 'consult-line-multi "consult/consult" "\
 Search for a matching line in multiple buffers.
 
 By default search across all project buffers.  If the prefix
@@ -1225,7 +1399,7 @@ search a subset of buffers, QUERY can be set to a plist according
 to `consult--buffer-query'.
 
 (fn QUERY &optional INITIAL)" t)
-(autoload 'consult-keep-lines "../site-lisp/consult/consult" "\
+(autoload 'consult-keep-lines "consult/consult" "\
 Select a subset of the lines in the current buffer with live preview.
 
 The selected lines are kept and the other lines are deleted.  When called
@@ -1238,7 +1412,7 @@ FILTER is the filter function.
 INITIAL is the initial input.
 
 (fn FILTER &optional INITIAL)" t)
-(autoload 'consult-focus-lines "../site-lisp/consult/consult" "\
+(autoload 'consult-focus-lines "consult/consult" "\
 Hide or show lines using overlays.
 
 The selected lines are shown and the other lines hidden.  When called
@@ -1252,7 +1426,7 @@ FILTER is the filter function.
 INITIAL is the initial input.
 
 (fn FILTER &optional SHOW INITIAL)" t)
-(autoload 'consult-goto-line "../site-lisp/consult/consult" "\
+(autoload 'consult-goto-line "consult/consult" "\
 Read line number and jump to the line with preview.
 
 Enter either a line number to jump to the first column of the
@@ -1262,15 +1436,15 @@ command respects narrowing and the settings
 `consult-goto-line-numbers' and `consult-line-numbers-widen'.
 
 (fn &optional ARG)" t)
-(autoload 'consult-recent-file "../site-lisp/consult/consult" "\
+(autoload 'consult-recent-file "consult/consult" "\
 Find recent file using `completing-read'." t)
-(autoload 'consult-mode-command "../site-lisp/consult/consult" "\
+(autoload 'consult-mode-command "consult/consult" "\
 Run a command from any of the given MODES.
 
 If no MODES are specified, use currently active major and minor modes.
 
 (fn &rest MODES)" t)
-(autoload 'consult-yank-from-kill-ring "../site-lisp/consult/consult" "\
+(autoload 'consult-yank-from-kill-ring "consult/consult" "\
 Select STRING from the kill ring and insert it.
 With prefix ARG, put point at beginning, and mark at end, like `yank' does.
 
@@ -1279,7 +1453,7 @@ a `completing-read' interface to the `kill-ring'.  Additionally the Consult
 version supports preview of the selected string.
 
 (fn STRING &optional ARG)" t)
-(autoload 'consult-yank-pop "../site-lisp/consult/consult" "\
+(autoload 'consult-yank-pop "consult/consult" "\
 If there is a recent yank act like `yank-pop'.
 
 Otherwise select string from the kill ring and insert it.
@@ -1290,7 +1464,7 @@ This command behaves like `yank-pop' in Emacs 28, which also offers a
 version supports preview of the selected string.
 
 (fn &optional ARG)" t)
-(autoload 'consult-yank-replace "../site-lisp/consult/consult" "\
+(autoload 'consult-yank-replace "consult/consult" "\
 Select STRING from the kill ring.
 
 If there was no recent yank, insert the string.
@@ -1299,18 +1473,18 @@ Otherwise replace the just-yanked string with the selected string.
 There exists no equivalent of this command in Emacs 28.
 
 (fn STRING)" t)
-(autoload 'consult-bookmark "../site-lisp/consult/consult" "\
+(autoload 'consult-bookmark "consult/consult" "\
 If bookmark NAME exists, open it, otherwise create a new bookmark with NAME.
 
 The command supports preview of file bookmarks and narrowing.  See the
 variable `consult-bookmark-narrow' for the narrowing configuration.
 
 (fn NAME)" t)
-(autoload 'consult-complex-command "../site-lisp/consult/consult" "\
+(autoload 'consult-complex-command "consult/consult" "\
 Select and evaluate command from the command history.
 
 This command can act as a drop-in replacement for `repeat-complex-command'." t)
-(autoload 'consult-history "../site-lisp/consult/consult" "\
+(autoload 'consult-history "consult/consult" "\
 Insert string from HISTORY of current buffer.
 In order to select from a specific HISTORY, pass the history
 variable as argument.  INDEX is the name of the index variable to
@@ -1318,22 +1492,22 @@ update, if any.  BOL is the function which jumps to the beginning
 of the prompt.  See also `cape-history' from the Cape package.
 
 (fn &optional HISTORY INDEX BOL)" t)
-(autoload 'consult-isearch-history "../site-lisp/consult/consult" "\
+(autoload 'consult-isearch-history "consult/consult" "\
 Read a search string with completion from the Isearch history.
 
 This replaces the current search string if Isearch is active, and
 starts a new Isearch session otherwise." t)
-(autoload 'consult-minor-mode-menu "../site-lisp/consult/consult" "\
+(autoload 'consult-minor-mode-menu "consult/consult" "\
 Enable or disable minor mode.
 
 This is an alternative to `minor-mode-menu-from-indicator'." t)
-(autoload 'consult-theme "../site-lisp/consult/consult" "\
+(autoload 'consult-theme "consult/consult" "\
 Disable current themes and enable THEME from `consult-themes'.
 
 The command supports previewing the currently selected theme.
 
 (fn THEME)" t)
-(autoload 'consult-buffer "../site-lisp/consult/consult" "\
+(autoload 'consult-buffer "consult/consult" "\
 Enhanced `switch-to-buffer' command with support for virtual buffers.
 
 The command supports recent files, bookmarks, views and project files as
@@ -1345,15 +1519,15 @@ default to `consult-buffer-sources'.  See `consult--multi' for the
 configuration of the virtual buffer sources.
 
 (fn &optional SOURCES)" t)
-(autoload 'consult-project-buffer "../site-lisp/consult/consult" "\
+(autoload 'consult-project-buffer "consult/consult" "\
 Enhanced `project-switch-to-buffer' command with support for virtual buffers.
 The command may prompt you for a project directory if it is invoked from
 outside a project.  See `consult-buffer' for more details." t)
-(autoload 'consult-buffer-other-window "../site-lisp/consult/consult" "\
+(autoload 'consult-buffer-other-window "consult/consult" "\
 Variant of `consult-buffer' which opens in other window." t)
-(autoload 'consult-buffer-other-frame "../site-lisp/consult/consult" "\
+(autoload 'consult-buffer-other-frame "consult/consult" "\
 Variant of `consult-buffer' which opens in other frame." t)
-(autoload 'consult-grep "../site-lisp/consult/consult" "\
+(autoload 'consult-grep "consult/consult" "\
 Search with `grep' for files in DIR where the content matches a regexp.
 
 The initial input is given by the INITIAL argument.  DIR can be
@@ -1398,23 +1572,23 @@ Here we give a few example inputs:
 The symbol at point is added to the future history.
 
 (fn &optional DIR INITIAL)" t)
-(autoload 'consult-git-grep "../site-lisp/consult/consult" "\
+(autoload 'consult-git-grep "consult/consult" "\
 Search with `git grep' for files in DIR with INITIAL input.
 See `consult-grep' for details.
 
 (fn &optional DIR INITIAL)" t)
-(autoload 'consult-ripgrep "../site-lisp/consult/consult" "\
+(autoload 'consult-ripgrep "consult/consult" "\
 Search with `rg' for files in DIR with INITIAL input.
 See `consult-grep' for details.
 
 (fn &optional DIR INITIAL)" t)
-(autoload 'consult-find "../site-lisp/consult/consult" "\
+(autoload 'consult-find "consult/consult" "\
 Search for files in DIR matching input regexp given INITIAL input.
 See `consult-grep' for details regarding the asynchronous search
 and the arguments.
 
 (fn &optional DIR INITIAL)" t)
-(autoload 'consult-locate "../site-lisp/consult/consult" "\
+(autoload 'consult-locate "consult/consult" "\
 Search with `locate' for files which match input given INITIAL input.
 
 The input is treated literally such that locate can take advantage of
@@ -1424,7 +1598,7 @@ asynchronously, similar to `consult-grep'.  See `consult-grep' for more
 details regarding the asynchronous search.
 
 (fn &optional INITIAL)" t)
-(autoload 'consult-man "../site-lisp/consult/consult" "\
+(autoload 'consult-man "consult/consult" "\
 Search for man page given INITIAL input.
 
 The input string is not preprocessed and passed literally to the
@@ -1433,34 +1607,34 @@ similar to `consult-grep'.  See `consult-grep' for more details regarding
 the asynchronous search.
 
 (fn &optional INITIAL)" t)
-(register-definition-prefixes "../site-lisp/consult/consult" '("consult-"))
+(register-definition-prefixes "consult/consult" '("consult-"))
 
 
-;;; Generated autoloads from ../site-lisp/consult/consult-compile.el
+;;; Generated autoloads from consult/consult-compile.el
 
-(autoload 'consult-compile-error "../site-lisp/consult/consult-compile" "\
+(autoload 'consult-compile-error "consult/consult-compile" "\
 Jump to a compilation error in the current buffer.
 
 This command collects entries from compilation buffers and grep
 buffers related to the current buffer.  The command supports
 preview of the currently selected error." t)
-(register-definition-prefixes "../site-lisp/consult/consult-compile" '("consult-compile--"))
+(register-definition-prefixes "consult/consult-compile" '("consult-compile--"))
 
 
-;;; Generated autoloads from ../site-lisp/consult/consult-flymake.el
+;;; Generated autoloads from consult/consult-flymake.el
 
-(autoload 'consult-flymake "../site-lisp/consult/consult-flymake" "\
+(autoload 'consult-flymake "consult/consult-flymake" "\
 Jump to Flymake diagnostic.
 When PROJECT is non-nil then prompt with diagnostics from all
 buffers in the current project instead of just the current buffer.
 
 (fn &optional PROJECT)" t)
-(register-definition-prefixes "../site-lisp/consult/consult-flymake" '("consult-flymake--"))
+(register-definition-prefixes "consult/consult-flymake" '("consult-flymake--"))
 
 
-;;; Generated autoloads from ../site-lisp/consult/consult-imenu.el
+;;; Generated autoloads from consult/consult-imenu.el
 
-(autoload 'consult-imenu "../site-lisp/consult/consult-imenu" "\
+(autoload 'consult-imenu "consult/consult-imenu" "\
 Select item from flattened `imenu' using `completing-read' with preview.
 
 The command supports preview and narrowing.  See the variable
@@ -1468,7 +1642,7 @@ The command supports preview and narrowing.  See the variable
 The symbol at point is added to the future history.
 
 See also `consult-imenu-multi'." t)
-(autoload 'consult-imenu-multi "../site-lisp/consult/consult-imenu" "\
+(autoload 'consult-imenu-multi "consult/consult-imenu" "\
 Select item from the imenus of all buffers from the same project.
 
 In order to determine the buffers belonging to the same project, the
@@ -1478,55 +1652,55 @@ same major mode as the current buffer are used.  See also
 QUERY can be set to a plist according to `consult--buffer-query'.
 
 (fn &optional QUERY)" t)
-(register-definition-prefixes "../site-lisp/consult/consult-imenu" '("consult-imenu-"))
+(register-definition-prefixes "consult/consult-imenu" '("consult-imenu-"))
 
 
-;;; Generated autoloads from ../site-lisp/consult/consult-info.el
+;;; Generated autoloads from consult/consult-info.el
 
-(autoload 'consult-info "../site-lisp/consult/consult-info" "\
+(autoload 'consult-info "consult/consult-info" "\
 Full text search through info MANUALS.
 
 (fn &rest MANUALS)" t)
-(register-definition-prefixes "../site-lisp/consult/consult-info" '("consult-info--"))
+(register-definition-prefixes "consult/consult-info" '("consult-info--"))
 
 
-;;; Generated autoloads from ../site-lisp/consult/consult-kmacro.el
+;;; Generated autoloads from consult/consult-kmacro.el
 
-(autoload 'consult-kmacro "../site-lisp/consult/consult-kmacro" "\
+(autoload 'consult-kmacro "consult/consult-kmacro" "\
 Run a chosen keyboard macro.
 
 With prefix ARG, run the macro that many times.
 Macros containing mouse clicks are omitted.
 
 (fn ARG)" t)
-(register-definition-prefixes "../site-lisp/consult/consult-kmacro" '("consult-kmacro--"))
+(register-definition-prefixes "consult/consult-kmacro" '("consult-kmacro--"))
 
 
-;;; Generated autoloads from ../site-lisp/consult-lsp/consult-lsp.el
+;;; Generated autoloads from consult-lsp/consult-lsp.el
 
-(autoload 'consult-lsp-diagnostics "../site-lisp/consult-lsp/consult-lsp" "\
+(autoload 'consult-lsp-diagnostics "consult-lsp/consult-lsp" "\
 Query LSP-mode diagnostics.
 
 When ARG is set through prefix, query all workspaces.
 
 (fn ARG)" t)
-(autoload 'consult-lsp-symbols "../site-lisp/consult-lsp/consult-lsp" "\
+(autoload 'consult-lsp-symbols "consult-lsp/consult-lsp" "\
 Query workspace symbols. When ARG is set through prefix, query all workspaces.
 
 (fn ARG)" t)
-(autoload 'consult-lsp-file-symbols "../site-lisp/consult-lsp/consult-lsp" "\
+(autoload 'consult-lsp-file-symbols "consult-lsp/consult-lsp" "\
 Search symbols defined in current file in a manner similar to `consult-line'.
 
 If the prefix argument GROUP-RESULTS is specified, symbols are grouped by their
 kind; otherwise they are returned in the order that they appear in the file.
 
 (fn GROUP-RESULTS)" t)
-(register-definition-prefixes "../site-lisp/consult-lsp/consult-lsp" '("consult-lsp-"))
+(register-definition-prefixes "consult-lsp/consult-lsp" '("consult-lsp-"))
 
 
-;;; Generated autoloads from ../site-lisp/consult/consult-org.el
+;;; Generated autoloads from consult/consult-org.el
 
-(autoload 'consult-org-heading "../site-lisp/consult/consult-org" "\
+(autoload 'consult-org-heading "consult/consult-org" "\
 Jump to an Org heading.
 
 MATCH and SCOPE are as in `org-map-entries' and determine which
@@ -1534,32 +1708,32 @@ entries are offered.  By default, all entries of the current
 buffer are offered.
 
 (fn &optional MATCH SCOPE)" t)
-(autoload 'consult-org-agenda "../site-lisp/consult/consult-org" "\
+(autoload 'consult-org-agenda "consult/consult-org" "\
 Jump to an Org agenda heading.
 
 By default, all agenda entries are offered.  MATCH is as in
 `org-map-entries' and can used to refine this.
 
 (fn &optional MATCH)" t)
-(register-definition-prefixes "../site-lisp/consult/consult-org" '("consult-org--"))
+(register-definition-prefixes "consult/consult-org" '("consult-org--"))
 
 
-;;; Generated autoloads from ../site-lisp/consult/consult-register.el
+;;; Generated autoloads from consult/consult-register.el
 
-(autoload 'consult-register-window "../site-lisp/consult/consult-register" "\
+(autoload 'consult-register-window "consult/consult-register" "\
 Enhanced drop-in replacement for `register-preview'.
 
 BUFFER is the window buffer.
 SHOW-EMPTY must be t if the window should be shown for an empty register list.
 
 (fn BUFFER &optional SHOW-EMPTY)")
-(autoload 'consult-register-format "../site-lisp/consult/consult-register" "\
+(autoload 'consult-register-format "consult/consult-register" "\
 Enhanced preview of register REG.
 This function can be used as `register-preview-function'.
 If COMPLETION is non-nil format the register for completion.
 
 (fn REG &optional COMPLETION)")
-(autoload 'consult-register "../site-lisp/consult/consult-register" "\
+(autoload 'consult-register "consult/consult-register" "\
 Load register and either jump to location or insert the stored text.
 
 This command is useful to search the register contents.  For quick access
@@ -1570,7 +1744,7 @@ built-in register access functions.  The command supports narrowing, see
 `jump-to-register' and `insert-register' for the meaning of prefix ARG.
 
 (fn &optional ARG)" t)
-(autoload 'consult-register-load "../site-lisp/consult/consult-register" "\
+(autoload 'consult-register-load "consult/consult-register" "\
 Do what I mean with a REG.
 
 For a window configuration, restore it.  For a number or text, insert it.
@@ -1578,7 +1752,7 @@ For a location, jump to it.  See `jump-to-register' and `insert-register'
 for the meaning of prefix ARG.
 
 (fn REG &optional ARG)" t)
-(autoload 'consult-register-store "../site-lisp/consult/consult-register" "\
+(autoload 'consult-register-store "consult/consult-register" "\
 Store register dependent on current context, showing an action menu.
 
 With an active region, store/append/prepend the contents, optionally
@@ -1587,12 +1761,12 @@ ARG, store or add the number.  Otherwise store point, frameset, window or
 kmacro.
 
 (fn ARG)" t)
-(register-definition-prefixes "../site-lisp/consult/consult-register" '("consult-register-"))
+(register-definition-prefixes "consult/consult-register" '("consult-register-"))
 
 
-;;; Generated autoloads from ../site-lisp/consult/consult-xref.el
+;;; Generated autoloads from consult/consult-xref.el
 
-(autoload 'consult-xref "../site-lisp/consult/consult-xref" "\
+(autoload 'consult-xref "consult/consult-xref" "\
 Show xrefs with preview in the minibuffer.
 
 This function can be used for `xref-show-xrefs-function'.
@@ -1600,13 +1774,13 @@ See `xref-show-xrefs-function' for the description of the
 FETCHER and ALIST arguments.
 
 (fn FETCHER &optional ALIST)")
-(register-definition-prefixes "../site-lisp/consult/consult-xref" '("consult-xref--"))
+(register-definition-prefixes "consult/consult-xref" '("consult-xref--"))
 
 
-;;; Generated autoloads from ../site-lisp/auctex/context.el
+;;; Generated autoloads from auctex/context.el
 
 (defalias 'ConTeXt-mode #'context-mode)
-(autoload 'context-mode "../site-lisp/auctex/context" "\
+(autoload 'context-mode "auctex/context" "\
 Major mode in AUCTeX for editing ConTeXt files.
 
 Special commands:
@@ -1615,12 +1789,12 @@ Special commands:
 Entering `context-mode' calls the value of `text-mode-hook',
 then the value of `TeX-mode-hook', and then the value
 of `ConTeXt-mode-hook'." t)
-(register-definition-prefixes "../site-lisp/auctex/context" '("ConTeXt-" "TeX-ConTeXt-sentinel" "context-guess-current-interface"))
+(register-definition-prefixes "auctex/context" '("ConTeXt-" "TeX-ConTeXt-sentinel" "context-guess-current-interface"))
 
 
-;;; Generated autoloads from ../site-lisp/auctex/context-en.el
+;;; Generated autoloads from auctex/context-en.el
 
-(autoload 'context-en-mode "../site-lisp/auctex/context-en" "\
+(autoload 'context-en-mode "auctex/context-en" "\
 Major mode for editing files for ConTeXt using its english interface.
 
 Special commands:
@@ -1629,12 +1803,12 @@ Special commands:
 Entering `context-mode' calls the value of `text-mode-hook',
 then the value of `TeX-mode-hook', and then the value
 of `ConTeXt-mode-hook'." t)
-(register-definition-prefixes "../site-lisp/auctex/context-en" '("ConTeXt-"))
+(register-definition-prefixes "auctex/context-en" '("ConTeXt-"))
 
 
-;;; Generated autoloads from ../site-lisp/auctex/context-nl.el
+;;; Generated autoloads from auctex/context-nl.el
 
-(autoload 'context-nl-mode "../site-lisp/auctex/context-nl" "\
+(autoload 'context-nl-mode "auctex/context-nl" "\
 Major mode for editing files for ConTeXt using its dutch interface.
 
 Special commands:
@@ -1643,22 +1817,22 @@ Special commands:
 Entering `context-mode' calls the value of `text-mode-hook',
 then the value of `TeX-mode-hook', and then the value
 of `ConTeXt-mode-hook'." t)
-(register-definition-prefixes "../site-lisp/auctex/context-nl" '("ConTeXt-"))
+(register-definition-prefixes "auctex/context-nl" '("ConTeXt-"))
 
 
-;;; Generated autoloads from ../site-lisp/auctex/tests/context/context-test.el
+;;; Generated autoloads from auctex/tests/context/context-test.el
 
-(register-definition-prefixes "../site-lisp/auctex/tests/context/context-test" '("ConTeXt-mode-common-initialization"))
-
-
-;;; Generated autoloads from ../site-lisp/company-mode/test/core-tests.el
-
-(register-definition-prefixes "../site-lisp/company-mode/test/core-tests" '("ct-"))
+(register-definition-prefixes "auctex/tests/context/context-test" '("ConTeXt-mode-common-initialization"))
 
 
-;;; Generated autoloads from ../site-lisp/corfu/corfu.el
+;;; Generated autoloads from company-mode/test/core-tests.el
 
-(autoload 'corfu-mode "../site-lisp/corfu/corfu" "\
+(register-definition-prefixes "company-mode/test/core-tests" '("ct-"))
+
+
+;;; Generated autoloads from corfu/corfu.el
+
+(autoload 'corfu-mode "corfu/corfu" "\
 COmpletion in Region FUnction.
 
 This is a minor mode.  If called interactively, toggle the `Corfu
@@ -1684,8 +1858,8 @@ for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `global-corfu-mode'.")
-(custom-autoload 'global-corfu-mode "../site-lisp/corfu/corfu" nil)
-(autoload 'global-corfu-mode "../site-lisp/corfu/corfu" "\
+(custom-autoload 'global-corfu-mode "corfu/corfu" nil)
+(autoload 'global-corfu-mode "corfu/corfu" "\
 Toggle Corfu mode in all buffers.
 With prefix ARG, enable Global Corfu mode if ARG is positive;
 otherwise, disable it.
@@ -1699,17 +1873,17 @@ Corfu mode is enabled in all buffers where `corfu--on' would do it.
 See `corfu-mode' for more information on Corfu mode.
 
 (fn &optional ARG)" t)
-(register-definition-prefixes "../site-lisp/corfu/corfu" '("corfu-" "global-corfu-modes"))
+(register-definition-prefixes "corfu/corfu" '("corfu-" "global-corfu-modes"))
 
 
-;;; Generated autoloads from ../site-lisp/corfu/extensions/corfu-echo.el
+;;; Generated autoloads from corfu/extensions/corfu-echo.el
 
 (defvar corfu-echo-mode nil "\
 Non-nil if Corfu-Echo mode is enabled.
 See the `corfu-echo-mode' command
 for a description of this minor mode.")
-(custom-autoload 'corfu-echo-mode "../site-lisp/corfu/extensions/corfu-echo" nil)
-(autoload 'corfu-echo-mode "../site-lisp/corfu/extensions/corfu-echo" "\
+(custom-autoload 'corfu-echo-mode "corfu/extensions/corfu-echo" nil)
+(autoload 'corfu-echo-mode "corfu/extensions/corfu-echo" "\
 Show candidate documentation in echo area.
 
 This is a global minor mode.  If called interactively, toggle the
@@ -1727,10 +1901,10 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(register-definition-prefixes "../site-lisp/corfu/extensions/corfu-echo" '("corfu-echo-"))
+(register-definition-prefixes "corfu/extensions/corfu-echo" '("corfu-echo-"))
 
 
-;;; Generated autoloads from ../site-lisp/corfu/extensions/corfu-history.el
+;;; Generated autoloads from corfu/extensions/corfu-history.el
 
 (defvar corfu-history-mode nil "\
 Non-nil if Corfu-History mode is enabled.
@@ -1739,8 +1913,8 @@ for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `corfu-history-mode'.")
-(custom-autoload 'corfu-history-mode "../site-lisp/corfu/extensions/corfu-history" nil)
-(autoload 'corfu-history-mode "../site-lisp/corfu/extensions/corfu-history" "\
+(custom-autoload 'corfu-history-mode "corfu/extensions/corfu-history" nil)
+(autoload 'corfu-history-mode "corfu/extensions/corfu-history" "\
 Update Corfu history and sort completions by history.
 
 This is a global minor mode.  If called interactively, toggle the
@@ -1758,17 +1932,17 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(register-definition-prefixes "../site-lisp/corfu/extensions/corfu-history" '("corfu-history"))
+(register-definition-prefixes "corfu/extensions/corfu-history" '("corfu-history"))
 
 
-;;; Generated autoloads from ../site-lisp/corfu/extensions/corfu-indexed.el
+;;; Generated autoloads from corfu/extensions/corfu-indexed.el
 
 (defvar corfu-indexed-mode nil "\
 Non-nil if Corfu-Indexed mode is enabled.
 See the `corfu-indexed-mode' command
 for a description of this minor mode.")
-(custom-autoload 'corfu-indexed-mode "../site-lisp/corfu/extensions/corfu-indexed" nil)
-(autoload 'corfu-indexed-mode "../site-lisp/corfu/extensions/corfu-indexed" "\
+(custom-autoload 'corfu-indexed-mode "corfu/extensions/corfu-indexed" nil)
+(autoload 'corfu-indexed-mode "corfu/extensions/corfu-indexed" "\
 Prefix candidates with indices.
 
 This is a global minor mode.  If called interactively, toggle the
@@ -1786,32 +1960,32 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(register-definition-prefixes "../site-lisp/corfu/extensions/corfu-indexed" '("corfu-indexed-"))
+(register-definition-prefixes "corfu/extensions/corfu-indexed" '("corfu-indexed-"))
 
 
-;;; Generated autoloads from ../site-lisp/corfu/extensions/corfu-info.el
+;;; Generated autoloads from corfu/extensions/corfu-info.el
 
-(autoload 'corfu-info-documentation "../site-lisp/corfu/extensions/corfu-info" "\
+(autoload 'corfu-info-documentation "corfu/extensions/corfu-info" "\
 Show documentation of current candidate.
 If called with a prefix ARG, the buffer is persistent.
 
 (fn &optional ARG)" t)
-(autoload 'corfu-info-location "../site-lisp/corfu/extensions/corfu-info" "\
+(autoload 'corfu-info-location "corfu/extensions/corfu-info" "\
 Show location of current candidate.
 If called with a prefix ARG, the buffer is persistent.
 
 (fn &optional ARG)" t)
-(register-definition-prefixes "../site-lisp/corfu/extensions/corfu-info" '("corfu-info--"))
+(register-definition-prefixes "corfu/extensions/corfu-info" '("corfu-info--"))
 
 
-;;; Generated autoloads from ../site-lisp/corfu/extensions/corfu-popupinfo.el
+;;; Generated autoloads from corfu/extensions/corfu-popupinfo.el
 
 (defvar corfu-popupinfo-mode nil "\
 Non-nil if Corfu-Popupinfo mode is enabled.
 See the `corfu-popupinfo-mode' command
 for a description of this minor mode.")
-(custom-autoload 'corfu-popupinfo-mode "../site-lisp/corfu/extensions/corfu-popupinfo" nil)
-(autoload 'corfu-popupinfo-mode "../site-lisp/corfu/extensions/corfu-popupinfo" "\
+(custom-autoload 'corfu-popupinfo-mode "corfu/extensions/corfu-popupinfo" nil)
+(autoload 'corfu-popupinfo-mode "corfu/extensions/corfu-popupinfo" "\
 Corfu info popup minor mode.
 
 This is a global minor mode.  If called interactively, toggle the
@@ -1829,23 +2003,23 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(register-definition-prefixes "../site-lisp/corfu/extensions/corfu-popupinfo" '("corfu-popupinfo-"))
+(register-definition-prefixes "corfu/extensions/corfu-popupinfo" '("corfu-popupinfo-"))
 
 
-;;; Generated autoloads from ../site-lisp/corfu/extensions/corfu-quick.el
+;;; Generated autoloads from corfu/extensions/corfu-quick.el
 
-(autoload 'corfu-quick-jump "../site-lisp/corfu/extensions/corfu-quick" "\
+(autoload 'corfu-quick-jump "corfu/extensions/corfu-quick" "\
 Jump to candidate using quick keys." t)
-(autoload 'corfu-quick-insert "../site-lisp/corfu/extensions/corfu-quick" "\
+(autoload 'corfu-quick-insert "corfu/extensions/corfu-quick" "\
 Insert candidate using quick keys." t)
-(autoload 'corfu-quick-complete "../site-lisp/corfu/extensions/corfu-quick" "\
+(autoload 'corfu-quick-complete "corfu/extensions/corfu-quick" "\
 Complete candidate using quick keys." t)
-(register-definition-prefixes "../site-lisp/corfu/extensions/corfu-quick" '("corfu-quick"))
+(register-definition-prefixes "corfu/extensions/corfu-quick" '("corfu-quick"))
 
 
-;;; Generated autoloads from ../site-lisp/dash.el/dash.el
+;;; Generated autoloads from dash.el/dash.el
 
-(autoload 'dash-fontify-mode "../site-lisp/dash.el/dash" "\
+(autoload 'dash-fontify-mode "dash.el/dash" "\
 Toggle fontification of Dash special variables.
 
 Dash-Fontify mode is a buffer-local minor mode intended for Emacs
@@ -1881,8 +2055,8 @@ for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `global-dash-fontify-mode'.")
-(custom-autoload 'global-dash-fontify-mode "../site-lisp/dash.el/dash" nil)
-(autoload 'global-dash-fontify-mode "../site-lisp/dash.el/dash" "\
+(custom-autoload 'global-dash-fontify-mode "dash.el/dash" nil)
+(autoload 'global-dash-fontify-mode "dash.el/dash" "\
 Toggle Dash-Fontify mode in all buffers.
 With prefix ARG, enable Global Dash-Fontify mode if ARG is positive;
 otherwise, disable it.
@@ -1897,15 +2071,15 @@ Dash-Fontify mode is enabled in all buffers where
 See `dash-fontify-mode' for more information on Dash-Fontify mode.
 
 (fn &optional ARG)" t)
-(autoload 'dash-register-info-lookup "../site-lisp/dash.el/dash" "\
+(autoload 'dash-register-info-lookup "dash.el/dash" "\
 Register the Dash Info manual with `info-lookup-symbol'.
 This allows Dash symbols to be looked up with \\[info-lookup-symbol]." t)
-(register-definition-prefixes "../site-lisp/dash.el/dash" '("!cdr" "!cons" "--" "->" "-a" "-butlast" "-c" "-d" "-e" "-f" "-gr" "-i" "-juxt" "-keep" "-l" "-m" "-no" "-o" "-p" "-r" "-s" "-t" "-u" "-value-to-list" "-when-let" "-zip" "dash-"))
+(register-definition-prefixes "dash.el/dash" '("!cdr" "!cons" "--" "->" "-a" "-butlast" "-c" "-d" "-e" "-f" "-gr" "-i" "-juxt" "-keep" "-l" "-m" "-no" "-o" "-p" "-r" "-s" "-t" "-u" "-value-to-list" "-when-let" "-zip" "dash-"))
 
 
-;;; Generated autoloads from ../site-lisp/dired-preview/dired-preview.el
+;;; Generated autoloads from dired-preview/dired-preview.el
 
-(autoload 'dired-preview-mode "../site-lisp/dired-preview/dired-preview" "\
+(autoload 'dired-preview-mode "dired-preview/dired-preview" "\
 Buffer-local mode to preview file at point in Dired.
 
 This is a minor mode.  If called interactively, toggle the
@@ -1931,8 +2105,8 @@ for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `dired-preview-global-mode'.")
-(custom-autoload 'dired-preview-global-mode "../site-lisp/dired-preview/dired-preview" nil)
-(autoload 'dired-preview-global-mode "../site-lisp/dired-preview/dired-preview" "\
+(custom-autoload 'dired-preview-global-mode "dired-preview/dired-preview" nil)
+(autoload 'dired-preview-global-mode "dired-preview/dired-preview" "\
 Toggle Dired-Preview mode in all buffers.
 With prefix ARG, enable Dired-Preview-Global mode if ARG is positive;
 otherwise, disable it.
@@ -1947,12 +2121,12 @@ would do it.
 See `dired-preview-mode' for more information on Dired-Preview mode.
 
 (fn &optional ARG)" t)
-(register-definition-prefixes "../site-lisp/dired-preview/dired-preview" '("dired-preview-"))
+(register-definition-prefixes "dired-preview/dired-preview" '("dired-preview-"))
 
 
-;;; Generated autoloads from ../site-lisp/diredfl/diredfl.el
+;;; Generated autoloads from diredfl/diredfl.el
 
-(autoload 'diredfl-mode "../site-lisp/diredfl/diredfl" "\
+(autoload 'diredfl-mode "diredfl/diredfl" "\
 Enable additional font locking in `dired-mode'.
 
 This is a minor mode.  If called interactively, toggle the
@@ -1978,8 +2152,8 @@ for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `diredfl-global-mode'.")
-(custom-autoload 'diredfl-global-mode "../site-lisp/diredfl/diredfl" nil)
-(autoload 'diredfl-global-mode "../site-lisp/diredfl/diredfl" "\
+(custom-autoload 'diredfl-global-mode "diredfl/diredfl" nil)
+(autoload 'diredfl-global-mode "diredfl/diredfl" "\
 Toggle Diredfl mode in all buffers.
 With prefix ARG, enable Diredfl-Global mode if ARG is positive;
 otherwise, disable it.
@@ -1994,10 +2168,10 @@ Diredfl mode is enabled in all buffers where `(lambda nil (when
 See `diredfl-mode' for more information on Diredfl mode.
 
 (fn &optional ARG)" t)
-(register-definition-prefixes "../site-lisp/diredfl/diredfl" '("diredfl-"))
+(register-definition-prefixes "diredfl/diredfl" '("diredfl-"))
 
 
-;;; Generated autoloads from ../site-lisp/dirvish/dirvish.el
+;;; Generated autoloads from dirvish/dirvish.el
 
 (defvar dirvish-override-dired-mode nil "\
 Non-nil if Dirvish-Override-Dired mode is enabled.
@@ -2006,8 +2180,8 @@ for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `dirvish-override-dired-mode'.")
-(custom-autoload 'dirvish-override-dired-mode "../site-lisp/dirvish/dirvish" nil)
-(autoload 'dirvish-override-dired-mode "../site-lisp/dirvish/dirvish" "\
+(custom-autoload 'dirvish-override-dired-mode "dirvish/dirvish" nil)
+(autoload 'dirvish-override-dired-mode "dirvish/dirvish" "\
 Let Dirvish take over Dired globally.
 
 This is a global minor mode.  If called interactively, toggle the
@@ -2026,32 +2200,32 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(autoload 'dirvish "../site-lisp/dirvish/dirvish" "\
+(autoload 'dirvish "dirvish/dirvish" "\
 Start a full frame Dirvish session with optional PATH.
 If called with \\[universal-arguments], prompt for PATH,
 otherwise it defaults to `default-directory'.
 
 (fn &optional PATH)" t)
-(autoload 'dirvish-dwim "../site-lisp/dirvish/dirvish" "\
+(autoload 'dirvish-dwim "dirvish/dirvish" "\
 Start a fullframe session only when `one-window-p'.
 If called with \\[universal-arguments], prompt for PATH,
 otherwise it defaults to `default-directory'.
 If `one-window-p' returns nil, open PATH using regular Dired.
 
 (fn &optional PATH)" t)
-(register-definition-prefixes "../site-lisp/dirvish/dirvish" '("dirvish-"))
+(register-definition-prefixes "dirvish/dirvish" '("dirvish-"))
 
 
-;;; Generated autoloads from ../site-lisp/dirvish/extensions/dirvish-collapse.el
+;;; Generated autoloads from dirvish/extensions/dirvish-collapse.el
 
-(register-definition-prefixes "../site-lisp/dirvish/extensions/dirvish-collapse" '("dirvish-collapse--cache"))
+(register-definition-prefixes "dirvish/extensions/dirvish-collapse" '("dirvish-collapse--cache"))
 
 
-;;; Generated autoloads from ../site-lisp/dirvish/extensions/dirvish-emerge.el
+;;; Generated autoloads from dirvish/extensions/dirvish-emerge.el
 
-(autoload 'dirvish-emerge-menu "../site-lisp/dirvish/extensions/dirvish-emerge" "\
+(autoload 'dirvish-emerge-menu "dirvish/extensions/dirvish-emerge" "\
 Manage pinned files in Dirvish." t)
-(autoload 'dirvish-emerge-mode "../site-lisp/dirvish/extensions/dirvish-emerge" "\
+(autoload 'dirvish-emerge-mode "dirvish/extensions/dirvish-emerge" "\
 Toggle grouping of files in Dirvish.
 
 This is a minor mode.  If called interactively, toggle the
@@ -2069,32 +2243,32 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(register-definition-prefixes "../site-lisp/dirvish/extensions/dirvish-emerge" '("dirvish-emerge-"))
+(register-definition-prefixes "dirvish/extensions/dirvish-emerge" '("dirvish-emerge-"))
 
 
-;;; Generated autoloads from ../site-lisp/dirvish/dirvish-extras.el
+;;; Generated autoloads from dirvish/dirvish-extras.el
 
  (autoload 'dirvish-setup-menu "dirvish-extras" nil t)
-(autoload 'dirvish-copy-file-name "../site-lisp/dirvish/dirvish-extras" "\
+(autoload 'dirvish-copy-file-name "dirvish/dirvish-extras" "\
 Copy filename of marked files.
 If MULTI-LINE, make every name occupy a new line.
 
 (fn &optional MULTI-LINE)" t)
-(autoload 'dirvish-copy-file-path "../site-lisp/dirvish/dirvish-extras" "\
+(autoload 'dirvish-copy-file-path "dirvish/dirvish-extras" "\
 Copy filepath of marked files.
 If MULTI-LINE, make every path occupy a new line.
 
 (fn &optional MULTI-LINE)" t)
-(autoload 'dirvish-total-file-size "../site-lisp/dirvish/dirvish-extras" "\
+(autoload 'dirvish-total-file-size "dirvish/dirvish-extras" "\
 Echo total file size of FILESET.
 FILESET defaults to `dired-get-marked-files'.
 
 (fn &optional FILESET)" t)
-(autoload 'dirvish-layout-toggle "../site-lisp/dirvish/dirvish-extras" "\
+(autoload 'dirvish-layout-toggle "dirvish/dirvish-extras" "\
 Toggle layout of current Dirvish session.
 A session with layout means it has a companion preview window and
 possibly one or more parent windows." t)
-(autoload 'dirvish-layout-switch "../site-lisp/dirvish/dirvish-extras" "\
+(autoload 'dirvish-layout-switch "dirvish/dirvish-extras" "\
 Switch Dirvish layout according to RECIPE.
 If RECIPE is not provided, switch to the recipe next to the
 current layout defined in `dirvish-layout-recipes'.
@@ -2104,13 +2278,13 @@ current layout defined in `dirvish-layout-recipes'.
  (autoload 'dirvish-chxxx-menu "dirvish-extras" nil t)
  (autoload 'dirvish-mark-menu "dirvish-extras" nil t)
  (autoload 'dirvish-dired-cheatsheet "dirvish-extras" nil t)
-(register-definition-prefixes "../site-lisp/dirvish/dirvish-extras" '("dirvish-"))
+(register-definition-prefixes "dirvish/dirvish-extras" '("dirvish-"))
 
 
-;;; Generated autoloads from ../site-lisp/dirvish/extensions/dirvish-fd.el
+;;; Generated autoloads from dirvish/extensions/dirvish-fd.el
 
  (autoload 'dirvish-fd-switches-menu "dirvish-fd" nil t)
-(autoload 'dirvish-fd-jump "../site-lisp/dirvish/extensions/dirvish-fd" "\
+(autoload 'dirvish-fd-jump "dirvish/extensions/dirvish-fd" "\
 Browse directories using `fd' command.
 This command takes a while to index all the directories the first
 time you run it.  After the indexing, it fires up instantly.
@@ -2123,7 +2297,7 @@ If prefixed twice with \\`C-u' or if CURRENT-DIR-P holds the
 value 16, let the user choose the root directory of their search.
 
 (fn &optional CURRENT-DIR-P)" t)
-(autoload 'dirvish-fd "../site-lisp/dirvish/extensions/dirvish-fd" "\
+(autoload 'dirvish-fd "dirvish/extensions/dirvish-fd" "\
 Run `fd' on DIR and go into Dired mode on a buffer of the output.
 The command run is essentially:
 
@@ -2131,25 +2305,25 @@ The command run is essentially:
      --exec-batch `dirvish-fd-ls-program' `dired-listing-switches' --directory.
 
 (fn DIR PATTERN)" t)
-(autoload 'dirvish-fd-ask "../site-lisp/dirvish/extensions/dirvish-fd" "\
+(autoload 'dirvish-fd-ask "dirvish/extensions/dirvish-fd" "\
 The same as `dirvish-fd' but ask initial `pattern' via prompt. 
 
 (fn DIR PATTERN)" t)
-(register-definition-prefixes "../site-lisp/dirvish/extensions/dirvish-fd" '("dirvish-fd-"))
+(register-definition-prefixes "dirvish/extensions/dirvish-fd" '("dirvish-fd-"))
 
 
-;;; Generated autoloads from ../site-lisp/dirvish/extensions/dirvish-history.el
+;;; Generated autoloads from dirvish/extensions/dirvish-history.el
 
-(autoload 'dirvish-history-jump "../site-lisp/dirvish/extensions/dirvish-history" "\
+(autoload 'dirvish-history-jump "dirvish/extensions/dirvish-history" "\
 Open a target directory from `dirvish--history'." t)
-(autoload 'dirvish-history-last "../site-lisp/dirvish/extensions/dirvish-history" "\
+(autoload 'dirvish-history-last "dirvish/extensions/dirvish-history" "\
 Switch to the most recently visited dirvish buffer." t)
-(autoload 'dirvish-history-go-forward "../site-lisp/dirvish/extensions/dirvish-history" "\
+(autoload 'dirvish-history-go-forward "dirvish/extensions/dirvish-history" "\
 Navigate to next ARG directory in history.
 ARG defaults to 1.
 
 (fn ARG)" t)
-(autoload 'dirvish-history-go-backward "../site-lisp/dirvish/extensions/dirvish-history" "\
+(autoload 'dirvish-history-go-backward "dirvish/extensions/dirvish-history" "\
 Navigate to previous ARG directory in history.
 ARG defaults to 1.
 
@@ -2157,26 +2331,26 @@ ARG defaults to 1.
  (autoload 'dirvish-history-menu "dirvish-history" nil t)
 
 
-;;; Generated autoloads from ../site-lisp/dirvish/extensions/dirvish-icons.el
+;;; Generated autoloads from dirvish/extensions/dirvish-icons.el
 
-(register-definition-prefixes "../site-lisp/dirvish/extensions/dirvish-icons" '("dirvish-"))
+(register-definition-prefixes "dirvish/extensions/dirvish-icons" '("dirvish-"))
 
 
-;;; Generated autoloads from ../site-lisp/dirvish/extensions/dirvish-ls.el
+;;; Generated autoloads from dirvish/extensions/dirvish-ls.el
 
  (autoload 'dirvish-quicksort "dirvish-ls" nil t)
  (autoload 'dirvish-ls-switches-menu "dirvish-ls" nil t)
-(register-definition-prefixes "../site-lisp/dirvish/extensions/dirvish-ls" '("dirvish-ls--"))
+(register-definition-prefixes "dirvish/extensions/dirvish-ls" '("dirvish-ls--"))
 
 
-;;; Generated autoloads from ../site-lisp/dirvish/extensions/dirvish-narrow.el
+;;; Generated autoloads from dirvish/extensions/dirvish-narrow.el
 
-(autoload 'dirvish-narrow "../site-lisp/dirvish/extensions/dirvish-narrow" "\
+(autoload 'dirvish-narrow "dirvish/extensions/dirvish-narrow" "\
 Narrow a Dirvish buffer to the files matching a regex." t)
-(register-definition-prefixes "../site-lisp/dirvish/extensions/dirvish-narrow" '("dirvish-narrow-"))
+(register-definition-prefixes "dirvish/extensions/dirvish-narrow" '("dirvish-narrow-"))
 
 
-;;; Generated autoloads from ../site-lisp/dirvish/extensions/dirvish-peek.el
+;;; Generated autoloads from dirvish/extensions/dirvish-peek.el
 
 (defvar dirvish-peek-mode nil "\
 Non-nil if Dirvish-Peek mode is enabled.
@@ -2185,8 +2359,8 @@ for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `dirvish-peek-mode'.")
-(custom-autoload 'dirvish-peek-mode "../site-lisp/dirvish/extensions/dirvish-peek" nil)
-(autoload 'dirvish-peek-mode "../site-lisp/dirvish/extensions/dirvish-peek" "\
+(custom-autoload 'dirvish-peek-mode "dirvish/extensions/dirvish-peek" nil)
+(autoload 'dirvish-peek-mode "dirvish/extensions/dirvish-peek" "\
 Show file preview when narrowing candidates using minibuffer.
 
 This is a global minor mode.  If called interactively, toggle the
@@ -2204,16 +2378,16 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(register-definition-prefixes "../site-lisp/dirvish/extensions/dirvish-peek" '("dirvish-peek-"))
+(register-definition-prefixes "dirvish/extensions/dirvish-peek" '("dirvish-peek-"))
 
 
-;;; Generated autoloads from ../site-lisp/dirvish/extensions/dirvish-quick-access.el
+;;; Generated autoloads from dirvish/extensions/dirvish-quick-access.el
 
  (autoload 'dirvish-quick-access "dirvish-quick-access" nil t)
-(register-definition-prefixes "../site-lisp/dirvish/extensions/dirvish-quick-access" '("dirvish-quick-access-function"))
+(register-definition-prefixes "dirvish/extensions/dirvish-quick-access" '("dirvish-quick-access-function"))
 
 
-;;; Generated autoloads from ../site-lisp/dirvish/extensions/dirvish-side.el
+;;; Generated autoloads from dirvish/extensions/dirvish-side.el
 
 (defvar dirvish-side-follow-mode nil "\
 Non-nil if Dirvish-Side-Follow mode is enabled.
@@ -2222,8 +2396,8 @@ for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `dirvish-side-follow-mode'.")
-(custom-autoload 'dirvish-side-follow-mode "../site-lisp/dirvish/extensions/dirvish-side" nil)
-(autoload 'dirvish-side-follow-mode "../site-lisp/dirvish/extensions/dirvish-side" "\
+(custom-autoload 'dirvish-side-follow-mode "dirvish/extensions/dirvish-side" nil)
+(autoload 'dirvish-side-follow-mode "dirvish/extensions/dirvish-side" "\
 Toggle `dirvish-side-follow-mode'.
 
 When enabled the visible side session will select the current
@@ -2246,7 +2420,7 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(autoload 'dirvish-side "../site-lisp/dirvish/extensions/dirvish-side" "\
+(autoload 'dirvish-side "dirvish/extensions/dirvish-side" "\
 Toggle a Dirvish session at the side window.
 
 - If the current window is a side session window, hide it.
@@ -2258,68 +2432,68 @@ If called with \\[universal-arguments], prompt for PATH,
 otherwise it defaults to `project-current'.
 
 (fn &optional PATH)" t)
-(register-definition-prefixes "../site-lisp/dirvish/extensions/dirvish-side" '("dirvish-side-"))
+(register-definition-prefixes "dirvish/extensions/dirvish-side" '("dirvish-side-"))
 
 
-;;; Generated autoloads from ../site-lisp/dirvish/extensions/dirvish-subtree.el
+;;; Generated autoloads from dirvish/extensions/dirvish-subtree.el
 
-(autoload 'dirvish-subtree-up "../site-lisp/dirvish/extensions/dirvish-subtree" "\
+(autoload 'dirvish-subtree-up "dirvish/extensions/dirvish-subtree" "\
 Jump to beginning of current subtree." t)
-(autoload 'dirvish-subtree-remove "../site-lisp/dirvish/extensions/dirvish-subtree" "\
+(autoload 'dirvish-subtree-remove "dirvish/extensions/dirvish-subtree" "\
 Remove subtree at point." t)
-(autoload 'dirvish-subtree-clear "../site-lisp/dirvish/extensions/dirvish-subtree" "\
+(autoload 'dirvish-subtree-clear "dirvish/extensions/dirvish-subtree" "\
 Clear all subtrees in the buffer." t)
-(autoload 'dirvish-subtree-toggle "../site-lisp/dirvish/extensions/dirvish-subtree" "\
+(autoload 'dirvish-subtree-toggle "dirvish/extensions/dirvish-subtree" "\
 Insert subtree at point or remove it if it was not present." t)
  (autoload 'dirvish-subtree-menu "dirvish-subtree" nil t)
-(register-definition-prefixes "../site-lisp/dirvish/extensions/dirvish-subtree" '("dirvish-"))
+(register-definition-prefixes "dirvish/extensions/dirvish-subtree" '("dirvish-"))
 
 
-;;; Generated autoloads from ../site-lisp/dirvish/extensions/dirvish-vc.el
+;;; Generated autoloads from dirvish/extensions/dirvish-vc.el
 
  (autoload 'dirvish-vc-menu "dirvish-vc" nil t)
-(register-definition-prefixes "../site-lisp/dirvish/extensions/dirvish-vc" '("dirvish-vc-"))
+(register-definition-prefixes "dirvish/extensions/dirvish-vc" '("dirvish-vc-"))
 
 
-;;; Generated autoloads from ../site-lisp/dirvish/dirvish-widgets.el
+;;; Generated autoloads from dirvish/dirvish-widgets.el
 
-(register-definition-prefixes "../site-lisp/dirvish/dirvish-widgets" '("dirvish-"))
+(register-definition-prefixes "dirvish/dirvish-widgets" '("dirvish-"))
 
 
-;;; Generated autoloads from ../site-lisp/dirvish/extensions/dirvish-yank.el
+;;; Generated autoloads from dirvish/extensions/dirvish-yank.el
 
  (autoload 'dirvish-yank-menu "dirvish-yank" nil t)
-(autoload 'dirvish-yank "../site-lisp/dirvish/extensions/dirvish-yank" "\
+(autoload 'dirvish-yank "dirvish/extensions/dirvish-yank" "\
 Paste marked files to DEST.
 Prompt for DEST when prefixed with \\[universal-argument], it
 defaults to `dired-current-directory.'
 
 (fn &optional DEST)" t)
-(autoload 'dirvish-move "../site-lisp/dirvish/extensions/dirvish-yank" "\
+(autoload 'dirvish-move "dirvish/extensions/dirvish-yank" "\
 Move marked files to DEST.
 Prompt for DEST when prefixed with \\[universal-argument], it
 defaults to `dired-current-directory'.
 
 (fn &optional DEST)" t)
-(autoload 'dirvish-symlink "../site-lisp/dirvish/extensions/dirvish-yank" "\
+(autoload 'dirvish-symlink "dirvish/extensions/dirvish-yank" "\
 Symlink marked files to DEST.
 Prompt for DEST when prefixed with \\[universal-argument], it
 defaults to `dired-current-directory'.
 
 (fn &optional DEST)" t)
-(autoload 'dirvish-relative-symlink "../site-lisp/dirvish/extensions/dirvish-yank" "\
+(autoload 'dirvish-relative-symlink "dirvish/extensions/dirvish-yank" "\
 Similar to `dirvish-symlink', but link files relatively.
 Prompt for DEST when prefixed with \\[universal-argument], it
 defaults to `dired-current-directory'.
 
 (fn &optional DEST)" t)
-(autoload 'dirvish-hardlink "../site-lisp/dirvish/extensions/dirvish-yank" "\
+(autoload 'dirvish-hardlink "dirvish/extensions/dirvish-yank" "\
 Hardlink marked files to DEST.
 Prompt for DEST when prefixed with \\[universal-argument], it
 defaults to `dired-current-directory'.
 
 (fn &optional DEST)" t)
-(autoload 'dirvish-rsync "../site-lisp/dirvish/extensions/dirvish-yank" "\
+(autoload 'dirvish-rsync "dirvish/extensions/dirvish-yank" "\
 Rsync marked files to DEST, prompt for DEST if not called with.
 If either the sources or the DEST is located in a remote host,
 the `dirvish-yank-rsync-program' and `dirvish-yank-rsync-args'
@@ -2332,16 +2506,176 @@ unexpected errors.
 
 (fn DEST)" t)
  (autoload 'dirvish-rsync-transient "dirvish-yank" nil t)
-(autoload 'dirvish-yank--rsync-apply-switches-and-copy "../site-lisp/dirvish/extensions/dirvish-yank" "\
+(autoload 'dirvish-yank--rsync-apply-switches-and-copy "dirvish/extensions/dirvish-yank" "\
 Execute rsync command generated by transient ARGS.
 
 (fn ARGS)" t)
-(register-definition-prefixes "../site-lisp/dirvish/extensions/dirvish-yank" '("dirvish-"))
+(register-definition-prefixes "dirvish/extensions/dirvish-yank" '("dirvish-"))
 
 
-;;; Generated autoloads from ../site-lisp/doom-modeline/doom-modeline.el
+;;; Generated autoloads from themes/themes/doom-1337-theme.el
 
-(autoload 'doom-modeline-set-main-modeline "../site-lisp/doom-modeline/doom-modeline" "\
+(register-definition-prefixes "themes/themes/doom-1337-theme" '("doom-1337"))
+
+
+;;; Generated autoloads from themes/themes/doom-Iosvkem-theme.el
+
+(register-definition-prefixes "themes/themes/doom-Iosvkem-theme" '("doom-Iosvkem"))
+
+
+;;; Generated autoloads from themes/themes/doom-acario-dark-theme.el
+
+(register-definition-prefixes "themes/themes/doom-acario-dark-theme" '("doom-acario-dark"))
+
+
+;;; Generated autoloads from themes/themes/doom-acario-light-theme.el
+
+(register-definition-prefixes "themes/themes/doom-acario-light-theme" '("doom-acario-light"))
+
+
+;;; Generated autoloads from themes/themes/doom-ayu-dark-theme.el
+
+(register-definition-prefixes "themes/themes/doom-ayu-dark-theme" '("doom-ayu-dark"))
+
+
+;;; Generated autoloads from themes/themes/doom-ayu-light-theme.el
+
+(register-definition-prefixes "themes/themes/doom-ayu-light-theme" '("doom-ayu-light"))
+
+
+;;; Generated autoloads from themes/themes/doom-ayu-mirage-theme.el
+
+(register-definition-prefixes "themes/themes/doom-ayu-mirage-theme" '("doom-ayu-mirage"))
+
+
+;;; Generated autoloads from themes/themes/doom-badger-theme.el
+
+(register-definition-prefixes "themes/themes/doom-badger-theme" '("doom-badger"))
+
+
+;;; Generated autoloads from themes/themes/doom-challenger-deep-theme.el
+
+(register-definition-prefixes "themes/themes/doom-challenger-deep-theme" '("doom-challenger-deep"))
+
+
+;;; Generated autoloads from themes/themes/doom-city-lights-theme.el
+
+(register-definition-prefixes "themes/themes/doom-city-lights-theme" '("doom-city-lights"))
+
+
+;;; Generated autoloads from themes/themes/doom-dark+-theme.el
+
+(register-definition-prefixes "themes/themes/doom-dark+-theme" '("doom-dark+"))
+
+
+;;; Generated autoloads from themes/themes/doom-dracula-theme.el
+
+(register-definition-prefixes "themes/themes/doom-dracula-theme" '("doom-dracula"))
+
+
+;;; Generated autoloads from themes/themes/doom-earl-grey-theme.el
+
+(register-definition-prefixes "themes/themes/doom-earl-grey-theme" '("doom-earl-grey"))
+
+
+;;; Generated autoloads from themes/themes/doom-ephemeral-theme.el
+
+(register-definition-prefixes "themes/themes/doom-ephemeral-theme" '(":group" "doom-ephemeral"))
+
+
+;;; Generated autoloads from themes/themes/doom-fairy-floss-theme.el
+
+(register-definition-prefixes "themes/themes/doom-fairy-floss-theme" '("doom-fairy-floss"))
+
+
+;;; Generated autoloads from themes/themes/doom-feather-dark-theme.el
+
+(register-definition-prefixes "themes/themes/doom-feather-dark-theme" '("doom-feather-"))
+
+
+;;; Generated autoloads from themes/themes/doom-feather-light-theme.el
+
+(register-definition-prefixes "themes/themes/doom-feather-light-theme" '("doom-feather-light"))
+
+
+;;; Generated autoloads from themes/themes/doom-flatwhite-theme.el
+
+(register-definition-prefixes "themes/themes/doom-flatwhite-theme" '("doom-f"))
+
+
+;;; Generated autoloads from themes/themes/doom-gruvbox-light-theme.el
+
+(register-definition-prefixes "themes/themes/doom-gruvbox-light-theme" '("doom-gruvbox-light"))
+
+
+;;; Generated autoloads from themes/themes/doom-gruvbox-theme.el
+
+(register-definition-prefixes "themes/themes/doom-gruvbox-theme" '("doom-gruvbox"))
+
+
+;;; Generated autoloads from themes/themes/doom-henna-theme.el
+
+(register-definition-prefixes "themes/themes/doom-henna-theme" '("doom-henna"))
+
+
+;;; Generated autoloads from themes/themes/doom-homage-black-theme.el
+
+(register-definition-prefixes "themes/themes/doom-homage-black-theme" '("doom-homage-black"))
+
+
+;;; Generated autoloads from themes/themes/doom-homage-white-theme.el
+
+(register-definition-prefixes "themes/themes/doom-homage-white-theme" '("doom-homage-white"))
+
+
+;;; Generated autoloads from themes/themes/doom-horizon-theme.el
+
+(register-definition-prefixes "themes/themes/doom-horizon-theme" '("doom-horizon"))
+
+
+;;; Generated autoloads from themes/themes/doom-ir-black-theme.el
+
+(register-definition-prefixes "themes/themes/doom-ir-black-theme" '("doom-ir-black"))
+
+
+;;; Generated autoloads from themes/themes/doom-lantern-theme.el
+
+(register-definition-prefixes "themes/themes/doom-lantern-theme" '("doom-lantern"))
+
+
+;;; Generated autoloads from themes/themes/doom-laserwave-theme.el
+
+(register-definition-prefixes "themes/themes/doom-laserwave-theme" '("doom-laserwave"))
+
+
+;;; Generated autoloads from themes/themes/doom-manegarm-theme.el
+
+(register-definition-prefixes "themes/themes/doom-manegarm-theme" '("doom-manegarm"))
+
+
+;;; Generated autoloads from themes/themes/doom-material-dark-theme.el
+
+(register-definition-prefixes "themes/themes/doom-material-dark-theme" '("doom-material-"))
+
+
+;;; Generated autoloads from themes/themes/doom-material-theme.el
+
+(register-definition-prefixes "themes/themes/doom-material-theme" '("doom-material"))
+
+
+;;; Generated autoloads from themes/themes/doom-meltbus-theme.el
+
+(register-definition-prefixes "themes/themes/doom-meltbus-theme" '("doom-meltbus"))
+
+
+;;; Generated autoloads from themes/themes/doom-miramare-theme.el
+
+(register-definition-prefixes "themes/themes/doom-miramare-theme" '("doom-miramare"))
+
+
+;;; Generated autoloads from doom-modeline/doom-modeline.el
+
+(autoload 'doom-modeline-set-main-modeline "doom-modeline/doom-modeline" "\
 Set main mode-line.
 If DEFAULT is non-nil, set the default mode-line for all buffers.
 
@@ -2353,8 +2687,8 @@ for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `doom-modeline-mode'.")
-(custom-autoload 'doom-modeline-mode "../site-lisp/doom-modeline/doom-modeline" nil)
-(autoload 'doom-modeline-mode "../site-lisp/doom-modeline/doom-modeline" "\
+(custom-autoload 'doom-modeline-mode "doom-modeline/doom-modeline" nil)
+(autoload 'doom-modeline-mode "doom-modeline/doom-modeline" "\
 Toggle `doom-modeline' on or off.
 
 This is a global minor mode.  If called interactively, toggle the
@@ -2372,15 +2706,15 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(register-definition-prefixes "../site-lisp/doom-modeline/doom-modeline" '("doom-modeline-"))
+(register-definition-prefixes "doom-modeline/doom-modeline" '("doom-modeline-"))
 
 
-;;; Generated autoloads from ../site-lisp/doom-modeline/doom-modeline-core.el
+;;; Generated autoloads from doom-modeline/doom-modeline-core.el
 
-(register-definition-prefixes "../site-lisp/doom-modeline/doom-modeline-core" '("doom-modeline"))
+(register-definition-prefixes "doom-modeline/doom-modeline-core" '("doom-modeline"))
 
 
-;;; Generated autoloads from ../site-lisp/doom-modeline/doom-modeline-env.el
+;;; Generated autoloads from doom-modeline/doom-modeline-env.el
 
  (autoload 'doom-modeline-env-setup-python "doom-modeline-env")
  (autoload 'doom-modeline-env-setup-ruby "doom-modeline-env")
@@ -2388,23 +2722,310 @@ it is disabled.
  (autoload 'doom-modeline-env-setup-go "doom-modeline-env")
  (autoload 'doom-modeline-env-setup-elixir "doom-modeline-env")
  (autoload 'doom-modeline-env-setup-rust "doom-modeline-env")
-(register-definition-prefixes "../site-lisp/doom-modeline/doom-modeline-env" '("doom-modeline-"))
+(register-definition-prefixes "doom-modeline/doom-modeline-env" '("doom-modeline-"))
 
 
-;;; Generated autoloads from ../site-lisp/doom-modeline/doom-modeline-segments.el
+;;; Generated autoloads from doom-modeline/doom-modeline-segments.el
 
-(register-definition-prefixes "../site-lisp/doom-modeline/doom-modeline-segments" '("doom-modeline-"))
+(register-definition-prefixes "doom-modeline/doom-modeline-segments" '("doom-modeline-"))
 
 
-;;; Generated autoloads from ../site-lisp/emacs-application-framework/eaf.el
+;;; Generated autoloads from themes/themes/doom-molokai-theme.el
 
-(autoload 'eaf-open-bookmark "../site-lisp/emacs-application-framework/eaf" "\
+(register-definition-prefixes "themes/themes/doom-molokai-theme" '("doom-molokai"))
+
+
+;;; Generated autoloads from themes/themes/doom-monokai-classic-theme.el
+
+(register-definition-prefixes "themes/themes/doom-monokai-classic-theme" '("doom-monokai-classic"))
+
+
+;;; Generated autoloads from themes/themes/doom-monokai-machine-theme.el
+
+(register-definition-prefixes "themes/themes/doom-monokai-machine-theme" '("doom-monokai-machine"))
+
+
+;;; Generated autoloads from themes/themes/doom-monokai-octagon-theme.el
+
+(register-definition-prefixes "themes/themes/doom-monokai-octagon-theme" '("doom-monokai-octagon"))
+
+
+;;; Generated autoloads from themes/themes/doom-monokai-pro-theme.el
+
+(register-definition-prefixes "themes/themes/doom-monokai-pro-theme" '("doom-monokai-pro"))
+
+
+;;; Generated autoloads from themes/themes/doom-monokai-ristretto-theme.el
+
+(register-definition-prefixes "themes/themes/doom-monokai-ristretto-theme" '("doom-monokai-ristretto"))
+
+
+;;; Generated autoloads from themes/themes/doom-monokai-spectrum-theme.el
+
+(register-definition-prefixes "themes/themes/doom-monokai-spectrum-theme" '("doom-monokai-spectrum"))
+
+
+;;; Generated autoloads from themes/themes/doom-moonlight-theme.el
+
+(register-definition-prefixes "themes/themes/doom-moonlight-theme" '("doom-moonlight"))
+
+
+;;; Generated autoloads from themes/themes/doom-nord-aurora-theme.el
+
+(register-definition-prefixes "themes/themes/doom-nord-aurora-theme" '(":group" "doom-nord-aurora"))
+
+
+;;; Generated autoloads from themes/themes/doom-nord-light-theme.el
+
+(register-definition-prefixes "themes/themes/doom-nord-light-theme" '(":group" "doom-nord-light"))
+
+
+;;; Generated autoloads from themes/themes/doom-nord-theme.el
+
+(register-definition-prefixes "themes/themes/doom-nord-theme" '(":group" "doom-nord"))
+
+
+;;; Generated autoloads from themes/themes/doom-nova-theme.el
+
+(register-definition-prefixes "themes/themes/doom-nova-theme" '("doom-nova"))
+
+
+;;; Generated autoloads from themes/themes/doom-oceanic-next-theme.el
+
+(register-definition-prefixes "themes/themes/doom-oceanic-next-theme" '("doom-oceanic-next"))
+
+
+;;; Generated autoloads from themes/themes/doom-old-hope-theme.el
+
+(register-definition-prefixes "themes/themes/doom-old-hope-theme" '("doom-old-hope"))
+
+
+;;; Generated autoloads from themes/themes/doom-one-light-theme.el
+
+(register-definition-prefixes "themes/themes/doom-one-light-theme" '("doom-one-light"))
+
+
+;;; Generated autoloads from themes/themes/doom-one-theme.el
+
+(register-definition-prefixes "themes/themes/doom-one-theme" '("doom-one"))
+
+
+;;; Generated autoloads from themes/themes/doom-opera-light-theme.el
+
+(register-definition-prefixes "themes/themes/doom-opera-light-theme" '(":group" "doom-opera-light"))
+
+
+;;; Generated autoloads from themes/themes/doom-opera-theme.el
+
+(register-definition-prefixes "themes/themes/doom-opera-theme" '(":group" "doom-opera"))
+
+
+;;; Generated autoloads from themes/themes/doom-outrun-electric-theme.el
+
+(register-definition-prefixes "themes/themes/doom-outrun-electric-theme" '("doom-outrun-electric"))
+
+
+;;; Generated autoloads from themes/themes/doom-palenight-theme.el
+
+(register-definition-prefixes "themes/themes/doom-palenight-theme" '("doom-palenight"))
+
+
+;;; Generated autoloads from themes/themes/doom-peacock-theme.el
+
+(register-definition-prefixes "themes/themes/doom-peacock-theme" '("doom-peacock"))
+
+
+;;; Generated autoloads from themes/themes/doom-pine-theme.el
+
+(register-definition-prefixes "themes/themes/doom-pine-theme" '("doom-pine"))
+
+
+;;; Generated autoloads from themes/themes/doom-plain-dark-theme.el
+
+(register-definition-prefixes "themes/themes/doom-plain-dark-theme" '("doom-plain-"))
+
+
+;;; Generated autoloads from themes/themes/doom-plain-theme.el
+
+(register-definition-prefixes "themes/themes/doom-plain-theme" '("doom-plain"))
+
+
+;;; Generated autoloads from themes/themes/doom-rouge-theme.el
+
+(register-definition-prefixes "themes/themes/doom-rouge-theme" '("doom-rouge"))
+
+
+;;; Generated autoloads from themes/themes/doom-shades-of-purple-theme.el
+
+(register-definition-prefixes "themes/themes/doom-shades-of-purple-theme" '("doom-shades-of-purple"))
+
+
+;;; Generated autoloads from themes/themes/doom-snazzy-theme.el
+
+(register-definition-prefixes "themes/themes/doom-snazzy-theme" '("doom-snazzy"))
+
+
+;;; Generated autoloads from themes/themes/doom-solarized-dark-high-contrast-theme.el
+
+(register-definition-prefixes "themes/themes/doom-solarized-dark-high-contrast-theme" '("doom-solarized-dark-high-contrast"))
+
+
+;;; Generated autoloads from themes/themes/doom-solarized-dark-theme.el
+
+(register-definition-prefixes "themes/themes/doom-solarized-dark-theme" '("doom-solarized-dark"))
+
+
+;;; Generated autoloads from themes/themes/doom-solarized-light-theme.el
+
+(register-definition-prefixes "themes/themes/doom-solarized-light-theme" '("doom-solarized-light"))
+
+
+;;; Generated autoloads from themes/themes/doom-sourcerer-theme.el
+
+(register-definition-prefixes "themes/themes/doom-sourcerer-theme" '("doom-sourcerer"))
+
+
+;;; Generated autoloads from themes/themes/doom-spacegrey-theme.el
+
+(register-definition-prefixes "themes/themes/doom-spacegrey-theme" '("doom-spacegrey"))
+
+
+;;; Generated autoloads from themes/doom-themes.el
+
+(autoload 'doom-name-to-rgb "themes/doom-themes" "\
+Retrieves the hexidecimal string repesented the named COLOR (e.g. \"red\")
+for FRAME (defaults to the current frame).
+
+(fn COLOR)")
+(autoload 'doom-blend "themes/doom-themes" "\
+Blend two colors (hexidecimal strings) together by a coefficient ALPHA (a
+float between 0 and 1)
+
+(fn COLOR1 COLOR2 ALPHA)")
+(autoload 'doom-darken "themes/doom-themes" "\
+Darken a COLOR (a hexidecimal string) by a coefficient ALPHA (a float between
+0 and 1).
+
+(fn COLOR ALPHA)")
+(autoload 'doom-lighten "themes/doom-themes" "\
+Brighten a COLOR (a hexidecimal string) by a coefficient ALPHA (a float
+between 0 and 1).
+
+(fn COLOR ALPHA)")
+(autoload 'doom-color "themes/doom-themes" "\
+Retrieve a specific color named NAME (a symbol) from the current theme.
+
+(fn NAME &optional TYPE)")
+(autoload 'doom-ref "themes/doom-themes" "\
+TODO
+
+(fn FACE PROP &optional CLASS)")
+(autoload 'doom-themes-set-faces "themes/doom-themes" "\
+Customize THEME (a symbol) with FACES.
+
+If THEME is nil, it applies to all themes you load. FACES is a list of Doom
+theme face specs. These is a simplified spec. For example:
+
+  (doom-themes-set-faces 'user
+    '(default :background red :foreground blue)
+    '(doom-modeline-bar :background (if -modeline-bright modeline-bg highlight))
+    '(doom-modeline-buffer-file :inherit 'mode-line-buffer-id :weight 'bold)
+    '(doom-modeline-buffer-path :inherit 'mode-line-emphasis :weight 'bold)
+    '(doom-modeline-buffer-project-root :foreground green :weight 'bold))
+
+(fn THEME &rest FACES)")
+(function-put 'doom-themes-set-faces 'lisp-indent-function 'defun)
+(when (and (boundp 'custom-theme-load-path) load-file-name) (let* ((base (file-name-directory load-file-name)) (dir (expand-file-name "themes/" base))) (add-to-list 'custom-theme-load-path (or (and (file-directory-p dir) dir) base))))
+(register-definition-prefixes "themes/doom-themes" '("def-doom-theme" "doom-"))
+
+
+;;; Generated autoloads from themes/doom-themes-base.el
+
+(register-definition-prefixes "themes/doom-themes-base" '("doom-themes-base-"))
+
+
+;;; Generated autoloads from themes/extensions/doom-themes-ext-neotree.el
+
+(autoload 'doom-themes-neotree-config "themes/extensions/doom-themes-ext-neotree" "\
+Install doom-themes' neotree configuration.
+
+Includes an Atom-esque icon theme and highlighting based on filetype.")
+(register-definition-prefixes "themes/extensions/doom-themes-ext-neotree" '("doom-"))
+
+
+;;; Generated autoloads from themes/extensions/doom-themes-ext-org.el
+
+(autoload 'doom-themes-org-config "themes/extensions/doom-themes-ext-org" "\
+Load `doom-themes-ext-org'.")
+(register-definition-prefixes "themes/extensions/doom-themes-ext-org" '("doom-themes-"))
+
+
+;;; Generated autoloads from themes/extensions/doom-themes-ext-treemacs.el
+
+(autoload 'doom-themes-treemacs-config "themes/extensions/doom-themes-ext-treemacs" "\
+Install doom-themes' treemacs configuration.
+
+Includes an Atom-esque icon theme and highlighting based on filetype.")
+(register-definition-prefixes "themes/extensions/doom-themes-ext-treemacs" '("doom-themes-"))
+
+
+;;; Generated autoloads from themes/extensions/doom-themes-ext-visual-bell.el
+
+(autoload 'doom-themes-visual-bell-fn "themes/extensions/doom-themes-ext-visual-bell" "\
+Blink the mode-line red briefly. Set `ring-bell-function' to this to use it.")
+(autoload 'doom-themes-visual-bell-config "themes/extensions/doom-themes-ext-visual-bell" "\
+Enable flashing the mode-line on error.")
+
+
+;;; Generated autoloads from themes/test/doom-themes-test.el
+
+(register-definition-prefixes "themes/test/doom-themes-test" '("doom-themes-dir"))
+
+
+;;; Generated autoloads from themes/themes/doom-tokyo-night-theme.el
+
+(register-definition-prefixes "themes/themes/doom-tokyo-night-theme" '("doom-tokyo-night"))
+
+
+;;; Generated autoloads from themes/themes/doom-tomorrow-day-theme.el
+
+(register-definition-prefixes "themes/themes/doom-tomorrow-day-theme" '("doom-tomorrow-day"))
+
+
+;;; Generated autoloads from themes/themes/doom-tomorrow-night-theme.el
+
+(register-definition-prefixes "themes/themes/doom-tomorrow-night-theme" '("doom-tomorrow-night"))
+
+
+;;; Generated autoloads from themes/themes/doom-vibrant-theme.el
+
+(register-definition-prefixes "themes/themes/doom-vibrant-theme" '("doom-vibrant"))
+
+
+;;; Generated autoloads from themes/themes/doom-wilmersdorf-theme.el
+
+(register-definition-prefixes "themes/themes/doom-wilmersdorf-theme" '("doom-wilmersdorf"))
+
+
+;;; Generated autoloads from themes/themes/doom-xcode-theme.el
+
+(register-definition-prefixes "themes/themes/doom-xcode-theme" '("doom-xcode"))
+
+
+;;; Generated autoloads from themes/themes/doom-zenburn-theme.el
+
+(register-definition-prefixes "themes/themes/doom-zenburn-theme" '("doom-zenburn"))
+
+
+;;; Generated autoloads from emacs-application-framework/eaf.el
+
+(autoload 'eaf-open-bookmark "emacs-application-framework/eaf" "\
 Command to open or create EAF bookmarks with completion." t)
-(autoload 'eaf-get-file-name-extension "../site-lisp/emacs-application-framework/eaf" "\
+(autoload 'eaf-get-file-name-extension "emacs-application-framework/eaf" "\
 A wrapper around `file-name-extension' that downcases the extension of the FILE.
 
 (fn FILE)")
-(autoload 'eaf-open "../site-lisp/emacs-application-framework/eaf" "\
+(autoload 'eaf-open "emacs-application-framework/eaf" "\
 Open an EAF application with URL, optional APP-NAME and ARGS.
 
 Interactively, a prefix arg replaces ALWAYS-NEW, which means to open a new
@@ -2416,33 +3037,33 @@ By default, `eaf-open' will switch to buffer if corresponding url exists.
 When called interactively, URL accepts a file that can be opened by EAF.
 
 (fn URL &optional APP-NAME ARGS ALWAYS-NEW)" t)
-(autoload 'eaf-install-and-update "../site-lisp/emacs-application-framework/eaf" "\
+(autoload 'eaf-install-and-update "emacs-application-framework/eaf" "\
 Interactively run `install-eaf.py' to install/update EAF apps.
 
 For a full `install-eaf.py' experience, refer to `--help' and run in a terminal.
 
 (fn &rest APPS)" t)
-(register-definition-prefixes "../site-lisp/emacs-application-framework/eaf" '("eaf-" "get-emacs-face-foregrounds"))
+(register-definition-prefixes "emacs-application-framework/eaf" '("eaf-" "get-emacs-face-foregrounds"))
 
 
-;;; Generated autoloads from ../site-lisp/emacs-application-framework/extension/eaf-all-the-icons.el
+;;; Generated autoloads from emacs-application-framework/extension/eaf-all-the-icons.el
 
-(register-definition-prefixes "../site-lisp/emacs-application-framework/extension/eaf-all-the-icons" '("eaf-all-the-icons-"))
+(register-definition-prefixes "emacs-application-framework/extension/eaf-all-the-icons" '("eaf-all-the-icons-"))
 
 
-;;; Generated autoloads from ../site-lisp/emacs-application-framework/app/browser/eaf-browser.el
+;;; Generated autoloads from emacs-application-framework/app/browser/eaf-browser.el
 
-(autoload 'eaf-open-browser-in-background "../site-lisp/emacs-application-framework/app/browser/eaf-browser" "\
+(autoload 'eaf-open-browser-in-background "emacs-application-framework/app/browser/eaf-browser" "\
 Open browser with the specified URL and optional ARGS in background.
 
 (fn URL &optional ARGS)")
-(autoload 'eaf-open-browser-with-history "../site-lisp/emacs-application-framework/app/browser/eaf-browser" "\
+(autoload 'eaf-open-browser-with-history "emacs-application-framework/app/browser/eaf-browser" "\
 A wrapper around `eaf-open-browser' that provides browser history candidates.
 
 If URL is an invalid URL, it will use `eaf-browser-default-search-engine' to search URL as string literal.
 
 This function works best if paired with a fuzzy search package." t)
-(autoload 'eaf-search-it "../site-lisp/emacs-application-framework/app/browser/eaf-browser" "\
+(autoload 'eaf-search-it "emacs-application-framework/app/browser/eaf-browser" "\
 Use SEARCH-ENGINE search SEARCH-STRING.
 
 If called interactively, SEARCH-STRING is defaulted to symbol or region string.
@@ -2451,32 +3072,32 @@ to `eaf-browser-default-search-engine' with a prefix arg, the user is able to
 choose a search engine defined in `eaf-browser-search-engines'
 
 (fn &optional SEARCH-STRING SEARCH-ENGINE)" t)
-(autoload 'eaf-open-browser "../site-lisp/emacs-application-framework/app/browser/eaf-browser" "\
+(autoload 'eaf-open-browser "emacs-application-framework/app/browser/eaf-browser" "\
 Open EAF browser application given a URL and ARGS.
 
 (fn URL &optional ARGS)" t)
-(autoload 'eaf-open-browser-other-window "../site-lisp/emacs-application-framework/app/browser/eaf-browser" "\
+(autoload 'eaf-open-browser-other-window "emacs-application-framework/app/browser/eaf-browser" "\
 Open EAF browser application given a URL and ARGS in other window.
 
 (fn URL &optional ARGS)" t)
-(register-definition-prefixes "../site-lisp/emacs-application-framework/app/browser/eaf-browser" '("eaf-"))
+(register-definition-prefixes "emacs-application-framework/app/browser/eaf-browser" '("eaf-"))
 
 
-;;; Generated autoloads from ../site-lisp/emacs-application-framework/core/eaf-epc.el
+;;; Generated autoloads from emacs-application-framework/core/eaf-epc.el
 
-(register-definition-prefixes "../site-lisp/emacs-application-framework/core/eaf-epc" '("eaf-"))
+(register-definition-prefixes "emacs-application-framework/core/eaf-epc" '("eaf-"))
 
 
-;;; Generated autoloads from ../site-lisp/emacs-application-framework/extension/eaf-evil.el
+;;; Generated autoloads from emacs-application-framework/extension/eaf-evil.el
 
-(autoload 'eaf-enable-evil-intergration "../site-lisp/emacs-application-framework/extension/eaf-evil" "\
+(autoload 'eaf-enable-evil-intergration "emacs-application-framework/extension/eaf-evil" "\
 EAF evil intergration." t)
-(register-definition-prefixes "../site-lisp/emacs-application-framework/extension/eaf-evil" '("eaf-evil-leader-key"))
+(register-definition-prefixes "emacs-application-framework/extension/eaf-evil" '("eaf-evil-leader-key"))
 
 
-;;; Generated autoloads from ../site-lisp/emacs-application-framework/extension/eaf-interleave.el
+;;; Generated autoloads from emacs-application-framework/extension/eaf-interleave.el
 
-(autoload 'eaf-interleave-mode "../site-lisp/emacs-application-framework/extension/eaf-interleave" "\
+(autoload 'eaf-interleave-mode "emacs-application-framework/extension/eaf-interleave" "\
 Interleaving your text books since 2015.
 
 In the past, textbooks were sometimes published as 'interleaved' editions.
@@ -2514,7 +3135,7 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(autoload 'eaf-interleave-app-mode "../site-lisp/emacs-application-framework/extension/eaf-interleave" "\
+(autoload 'eaf-interleave-app-mode "emacs-application-framework/extension/eaf-interleave" "\
 Interleave view for the EAF app.
 
 This is a minor mode.  If called interactively, toggle the
@@ -2533,75 +3154,75 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(autoload 'eaf-interleave--open-notes-file-for-pdf "../site-lisp/emacs-application-framework/extension/eaf-interleave" "\
+(autoload 'eaf-interleave--open-notes-file-for-pdf "emacs-application-framework/extension/eaf-interleave" "\
 Open the notes org file for the current pdf file if it exists.
 Else create it. It is assumed that the notes org file will have
 the exact same base name as the pdf file (just that the notes
 file will have a .org extension instead of .pdf).")
-(register-definition-prefixes "../site-lisp/emacs-application-framework/extension/eaf-interleave" '("eaf-interleave-"))
+(register-definition-prefixes "emacs-application-framework/extension/eaf-interleave" '("eaf-interleave-"))
 
 
-;;; Generated autoloads from ../site-lisp/emacs-application-framework/app/jupyter/eaf-jupyter.el
+;;; Generated autoloads from emacs-application-framework/app/jupyter/eaf-jupyter.el
 
-(autoload 'eaf-jupyter-read-data "../site-lisp/emacs-application-framework/app/jupyter/eaf-jupyter")
-(register-definition-prefixes "../site-lisp/emacs-application-framework/app/jupyter/eaf-jupyter" '("eaf-"))
+(autoload 'eaf-jupyter-read-data "emacs-application-framework/app/jupyter/eaf-jupyter")
+(register-definition-prefixes "emacs-application-framework/app/jupyter/eaf-jupyter" '("eaf-"))
 
 
-;;; Generated autoloads from ../site-lisp/emacs-application-framework/extension/eaf-mail.el
+;;; Generated autoloads from emacs-application-framework/extension/eaf-mail.el
 
-(autoload 'eaf-open-mail-as-html "../site-lisp/emacs-application-framework/extension/eaf-mail" "\
+(autoload 'eaf-open-mail-as-html "emacs-application-framework/extension/eaf-mail" "\
 Open the html mail in EAF Browser.
 
 The value of `mail-user-agent' must be a KEY of the alist `eaf-mua-get-html'.
 
 In that way the corresponding function will be called to retrieve the HTML
  part of the current mail." t)
-(register-definition-prefixes "../site-lisp/emacs-application-framework/extension/eaf-mail" '("eaf-"))
+(register-definition-prefixes "emacs-application-framework/extension/eaf-mail" '("eaf-"))
 
 
-;;; Generated autoloads from ../site-lisp/emacs-application-framework/app/markdown-previewer/eaf-markdown-previewer.el
+;;; Generated autoloads from emacs-application-framework/app/markdown-previewer/eaf-markdown-previewer.el
 
-(register-definition-prefixes "../site-lisp/emacs-application-framework/app/markdown-previewer/eaf-markdown-previewer" '("eaf-"))
+(register-definition-prefixes "emacs-application-framework/app/markdown-previewer/eaf-markdown-previewer" '("eaf-"))
 
 
-;;; Generated autoloads from ../site-lisp/emacs-application-framework/app/markmap/eaf-markmap.el
+;;; Generated autoloads from emacs-application-framework/app/markmap/eaf-markmap.el
 
-(autoload 'eaf-open-markmap "../site-lisp/emacs-application-framework/app/markmap/eaf-markmap" "\
+(autoload 'eaf-open-markmap "emacs-application-framework/app/markmap/eaf-markmap" "\
 Open EAF vue demo" t)
-(register-definition-prefixes "../site-lisp/emacs-application-framework/app/markmap/eaf-markmap" '("eaf-"))
+(register-definition-prefixes "emacs-application-framework/app/markmap/eaf-markmap" '("eaf-"))
 
 
-;;; Generated autoloads from ../site-lisp/emacs-application-framework/app/mindmap/eaf-mindmap.el
+;;; Generated autoloads from emacs-application-framework/app/mindmap/eaf-mindmap.el
 
-(autoload 'eaf-open-mindmap "../site-lisp/emacs-application-framework/app/mindmap/eaf-mindmap" "\
+(autoload 'eaf-open-mindmap "emacs-application-framework/app/mindmap/eaf-mindmap" "\
 Open a given Mindmap FILE.
 
 (fn FILE)" t)
-(register-definition-prefixes "../site-lisp/emacs-application-framework/app/mindmap/eaf-mindmap" '("eaf-" "json-read-r" "org-json-"))
+(register-definition-prefixes "emacs-application-framework/app/mindmap/eaf-mindmap" '("eaf-" "json-read-r" "org-json-"))
 
 
-;;; Generated autoloads from ../site-lisp/emacs-application-framework/extension/eaf-org.el
+;;; Generated autoloads from emacs-application-framework/extension/eaf-org.el
 
-(register-definition-prefixes "../site-lisp/emacs-application-framework/extension/eaf-org" '("eaf-org-"))
-
-
-;;; Generated autoloads from ../site-lisp/emacs-application-framework/app/org-previewer/eaf-org-previewer.el
-
-(register-definition-prefixes "../site-lisp/emacs-application-framework/app/org-previewer/eaf-org-previewer" '("eaf-"))
+(register-definition-prefixes "emacs-application-framework/extension/eaf-org" '("eaf-org-"))
 
 
-;;; Generated autoloads from ../site-lisp/emacs-application-framework/app/pdf-viewer/eaf-pdf-viewer.el
+;;; Generated autoloads from emacs-application-framework/app/org-previewer/eaf-org-previewer.el
 
-(autoload 'eaf-open-office "../site-lisp/emacs-application-framework/app/pdf-viewer/eaf-pdf-viewer" "\
+(register-definition-prefixes "emacs-application-framework/app/org-previewer/eaf-org-previewer" '("eaf-"))
+
+
+;;; Generated autoloads from emacs-application-framework/app/pdf-viewer/eaf-pdf-viewer.el
+
+(autoload 'eaf-open-office "emacs-application-framework/app/pdf-viewer/eaf-pdf-viewer" "\
 View Microsoft Office FILE as READ-ONLY PDF.
 
 (fn FILE)" t)
-(register-definition-prefixes "../site-lisp/emacs-application-framework/app/pdf-viewer/eaf-pdf-viewer" '("eaf-"))
+(register-definition-prefixes "emacs-application-framework/app/pdf-viewer/eaf-pdf-viewer" '("eaf-"))
 
 
-;;; Generated autoloads from ../site-lisp/elisp-refs/elisp-refs.el
+;;; Generated autoloads from elisp-refs/elisp-refs.el
 
-(autoload 'elisp-refs-function "../site-lisp/elisp-refs/elisp-refs" "\
+(autoload 'elisp-refs-function "elisp-refs/elisp-refs" "\
 Display all the references to function SYMBOL, in all loaded
 elisp files.
 
@@ -2611,7 +3232,7 @@ This searches for functions, not macros. For that, see
 `elisp-refs-macro'.
 
 (fn SYMBOL &optional PATH-PREFIX)" t)
-(autoload 'elisp-refs-macro "../site-lisp/elisp-refs/elisp-refs" "\
+(autoload 'elisp-refs-macro "elisp-refs/elisp-refs" "\
 Display all the references to macro SYMBOL, in all loaded
 elisp files.
 
@@ -2621,108 +3242,108 @@ This searches for macros, not functions. For that, see
 `elisp-refs-function'.
 
 (fn SYMBOL &optional PATH-PREFIX)" t)
-(autoload 'elisp-refs-special "../site-lisp/elisp-refs/elisp-refs" "\
+(autoload 'elisp-refs-special "elisp-refs/elisp-refs" "\
 Display all the references to special form SYMBOL, in all loaded
 elisp files.
 
 If called with a prefix, prompt for a directory to limit the search.
 
 (fn SYMBOL &optional PATH-PREFIX)" t)
-(autoload 'elisp-refs-variable "../site-lisp/elisp-refs/elisp-refs" "\
+(autoload 'elisp-refs-variable "elisp-refs/elisp-refs" "\
 Display all the references to variable SYMBOL, in all loaded
 elisp files.
 
 If called with a prefix, prompt for a directory to limit the search.
 
 (fn SYMBOL &optional PATH-PREFIX)" t)
-(autoload 'elisp-refs-symbol "../site-lisp/elisp-refs/elisp-refs" "\
+(autoload 'elisp-refs-symbol "elisp-refs/elisp-refs" "\
 Display all the references to SYMBOL in all loaded elisp files.
 
 If called with a prefix, prompt for a directory to limit the
 search.
 
 (fn SYMBOL &optional PATH-PREFIX)" t)
-(register-definition-prefixes "../site-lisp/elisp-refs/elisp-refs" '("elisp-"))
+(register-definition-prefixes "elisp-refs/elisp-refs" '("elisp-"))
 
 
-;;; Generated autoloads from ../site-lisp/elisp-refs/elisp-refs-bench.el
+;;; Generated autoloads from elisp-refs/elisp-refs-bench.el
 
-(register-definition-prefixes "../site-lisp/elisp-refs/elisp-refs-bench" '("elisp-refs-"))
-
-
-;;; Generated autoloads from ../site-lisp/elisp-refs/test/elisp-refs-unit-test.el
-
-(register-definition-prefixes "../site-lisp/elisp-refs/test/elisp-refs-unit-test" '("with-temp-backed-buffer"))
+(register-definition-prefixes "elisp-refs/elisp-refs-bench" '("elisp-refs-"))
 
 
-;;; Generated autoloads from ../site-lisp/company-mode/test/elisp-tests.el
+;;; Generated autoloads from elisp-refs/test/elisp-refs-unit-test.el
 
-(register-definition-prefixes "../site-lisp/company-mode/test/elisp-tests" '("company-elisp-with-buffer"))
+(register-definition-prefixes "elisp-refs/test/elisp-refs-unit-test" '("with-temp-backed-buffer"))
 
 
-;;; Generated autoloads from ../site-lisp/emacsql/emacsql.el
+;;; Generated autoloads from company-mode/test/elisp-tests.el
 
-(autoload 'emacsql-show-last-sql "../site-lisp/emacsql/emacsql" "\
+(register-definition-prefixes "company-mode/test/elisp-tests" '("company-elisp-with-buffer"))
+
+
+;;; Generated autoloads from emacsql/emacsql.el
+
+(autoload 'emacsql-show-last-sql "emacsql/emacsql" "\
 Display the compiled SQL of the s-expression SQL expression before point.
 A prefix argument causes the SQL to be printed into the current buffer.
 
 (fn &optional PREFIX)" t)
-(register-definition-prefixes "../site-lisp/emacsql/emacsql" '("emacsql-"))
+(register-definition-prefixes "emacsql/emacsql" '("emacsql-"))
 
 
-;;; Generated autoloads from ../site-lisp/emacsql/emacsql-compiler.el
+;;; Generated autoloads from emacsql/emacsql-compiler.el
 
-(register-definition-prefixes "../site-lisp/emacsql/emacsql-compiler" '("emacsql-"))
-
-
-;;; Generated autoloads from ../site-lisp/emacsql/emacsql-mysql.el
-
-(register-definition-prefixes "../site-lisp/emacsql/emacsql-mysql" '("emacsql-mysql-"))
+(register-definition-prefixes "emacsql/emacsql-compiler" '("emacsql-"))
 
 
-;;; Generated autoloads from ../site-lisp/emacsql/emacsql-pg.el
+;;; Generated autoloads from emacsql/emacsql-mysql.el
 
-(register-definition-prefixes "../site-lisp/emacsql/emacsql-pg" '("emacsql-pg-connection"))
-
-
-;;; Generated autoloads from ../site-lisp/emacsql/emacsql-psql.el
-
-(register-definition-prefixes "../site-lisp/emacsql/emacsql-psql" '("emacsql-psql-"))
+(register-definition-prefixes "emacsql/emacsql-mysql" '("emacsql-mysql-"))
 
 
-;;; Generated autoloads from ../site-lisp/emacsql/emacsql-sqlite.el
+;;; Generated autoloads from emacsql/emacsql-pg.el
 
-(register-definition-prefixes "../site-lisp/emacsql/emacsql-sqlite" '("emacsql-sqlite-"))
-
-
-;;; Generated autoloads from ../site-lisp/emacsql/emacsql-sqlite-builtin.el
-
-(register-definition-prefixes "../site-lisp/emacsql/emacsql-sqlite-builtin" '("emacsql-sqlite-builtin-connection"))
+(register-definition-prefixes "emacsql/emacsql-pg" '("emacsql-pg-connection"))
 
 
-;;; Generated autoloads from ../site-lisp/emacsql/emacsql-sqlite-common.el
+;;; Generated autoloads from emacsql/emacsql-psql.el
 
-(register-definition-prefixes "../site-lisp/emacsql/emacsql-sqlite-common" '("emacsql-"))
-
-
-;;; Generated autoloads from ../site-lisp/emacsql/emacsql-sqlite-module.el
-
-(register-definition-prefixes "../site-lisp/emacsql/emacsql-sqlite-module" '("emacsql-sqlite-module-connection"))
+(register-definition-prefixes "emacsql/emacsql-psql" '("emacsql-psql-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/features/support/env.el
+;;; Generated autoloads from emacsql/emacsql-sqlite.el
 
-(register-definition-prefixes "../site-lisp/lsp-mode/features/support/env" '("lsp-mode-"))
-
-
-;;; Generated autoloads from ../site-lisp/f.el/f.el
-
-(register-definition-prefixes "../site-lisp/f.el/f" '("f-"))
+(register-definition-prefixes "emacsql/emacsql-sqlite" '("emacsql-sqlite-"))
 
 
-;;; Generated autoloads from ../site-lisp/fingertip/fingertip.el
+;;; Generated autoloads from emacsql/emacsql-sqlite-builtin.el
 
-(autoload 'fingertip-mode "../site-lisp/fingertip/fingertip" "\
+(register-definition-prefixes "emacsql/emacsql-sqlite-builtin" '("emacsql-sqlite-builtin-connection"))
+
+
+;;; Generated autoloads from emacsql/emacsql-sqlite-common.el
+
+(register-definition-prefixes "emacsql/emacsql-sqlite-common" '("emacsql-"))
+
+
+;;; Generated autoloads from emacsql/emacsql-sqlite-module.el
+
+(register-definition-prefixes "emacsql/emacsql-sqlite-module" '("emacsql-sqlite-module-connection"))
+
+
+;;; Generated autoloads from lsp-mode/features/support/env.el
+
+(register-definition-prefixes "lsp-mode/features/support/env" '("lsp-mode-"))
+
+
+;;; Generated autoloads from f.el/f.el
+
+(register-definition-prefixes "f.el/f" '("f-"))
+
+
+;;; Generated autoloads from fingertip/fingertip.el
+
+(autoload 'fingertip-mode "fingertip/fingertip" "\
 Minor mode for auto parenthesis pairing with syntax table.
 
 \\<fingertip-mode-map>
@@ -2744,14 +3365,14 @@ it is disabled.
 \\{fingertip-mode-map}
 
 (fn &optional ARG)" t)
-(register-definition-prefixes "../site-lisp/fingertip/fingertip" '("fingertip-"))
+(register-definition-prefixes "fingertip/fingertip" '("fingertip-"))
 
 
-;;; Generated autoloads from ../site-lisp/flycheck/flycheck.el
+;;; Generated autoloads from flycheck/flycheck.el
 
-(autoload 'flycheck-manual "../site-lisp/flycheck/flycheck" "\
+(autoload 'flycheck-manual "flycheck/flycheck" "\
 Open the Flycheck manual." t)
-(autoload 'flycheck-mode "../site-lisp/flycheck/flycheck" "\
+(autoload 'flycheck-mode "flycheck/flycheck" "\
 Flycheck is a minor mode for on-the-fly syntax checking.
 
 In `flycheck-mode' the buffer is automatically syntax-checked
@@ -2802,8 +3423,8 @@ for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `global-flycheck-mode'.")
-(custom-autoload 'global-flycheck-mode "../site-lisp/flycheck/flycheck" nil)
-(autoload 'global-flycheck-mode "../site-lisp/flycheck/flycheck" "\
+(custom-autoload 'global-flycheck-mode "flycheck/flycheck" nil)
+(autoload 'global-flycheck-mode "flycheck/flycheck" "\
 Toggle Flycheck mode in all buffers.
 With prefix ARG, enable Global Flycheck mode if ARG is positive;
 otherwise, disable it.
@@ -2818,7 +3439,7 @@ would do it.
 See `flycheck-mode' for more information on Flycheck mode.
 
 (fn &optional ARG)" t)
-(autoload 'flycheck-define-error-level "../site-lisp/flycheck/flycheck" "\
+(autoload 'flycheck-define-error-level "flycheck/flycheck" "\
 Define a new error LEVEL with PROPERTIES.
 
 The following PROPERTIES constitute an error level:
@@ -2877,7 +3498,7 @@ The following PROPERTIES constitute an error level:
 
 (fn LEVEL &rest PROPERTIES)")
 (function-put 'flycheck-define-error-level 'lisp-indent-function 1)
-(autoload 'flycheck-define-command-checker "../site-lisp/flycheck/flycheck" "\
+(autoload 'flycheck-define-command-checker "flycheck/flycheck" "\
 Define SYMBOL as syntax checker to run a command.
 
 Define SYMBOL as generic syntax checker via
@@ -2957,7 +3578,7 @@ default `:verify' function of command checkers.
 (fn SYMBOL DOCSTRING &rest PROPERTIES)")
 (function-put 'flycheck-define-command-checker 'lisp-indent-function 1)
 (function-put 'flycheck-define-command-checker 'doc-string-elt 2)
-(autoload 'flycheck-def-config-file-var "../site-lisp/flycheck/flycheck" "\
+(autoload 'flycheck-def-config-file-var "flycheck/flycheck" "\
 Define SYMBOL as config file variable for CHECKER, with default FILE-NAME.
 
 SYMBOL is declared as customizable variable using `defcustom', to
@@ -2973,7 +3594,7 @@ argument to `flycheck-define-checker'.
 
 (fn SYMBOL CHECKER &optional FILE-NAME &rest CUSTOM-ARGS)" nil t)
 (function-put 'flycheck-def-config-file-var 'lisp-indent-function 3)
-(autoload 'flycheck-def-option-var "../site-lisp/flycheck/flycheck" "\
+(autoload 'flycheck-def-option-var "flycheck/flycheck" "\
 Define SYMBOL as option variable with INIT-VALUE for CHECKER.
 
 SYMBOL is declared as customizable variable using `defcustom', to
@@ -2989,7 +3610,7 @@ Use this together with the `option', `option-list' and
 (fn SYMBOL INIT-VALUE CHECKERS DOCSTRING &rest CUSTOM-ARGS)" nil t)
 (function-put 'flycheck-def-option-var 'lisp-indent-function 3)
 (function-put 'flycheck-def-option-var 'doc-string-elt 4)
-(autoload 'flycheck-define-checker "../site-lisp/flycheck/flycheck" "\
+(autoload 'flycheck-define-checker "flycheck/flycheck" "\
 Define SYMBOL as command syntax checker with DOCSTRING and PROPERTIES.
 
 Like `flycheck-define-command-checker', but PROPERTIES must not
@@ -2999,75 +3620,75 @@ SYMBOL with `flycheck-def-executable-var'.
 (fn SYMBOL DOCSTRING &rest PROPERTIES)" nil t)
 (function-put 'flycheck-define-checker 'lisp-indent-function 1)
 (function-put 'flycheck-define-checker 'doc-string-elt 2)
-(register-definition-prefixes "../site-lisp/flycheck/flycheck" '("flycheck-" "help-flycheck-checker-d" "list-flycheck-errors"))
+(register-definition-prefixes "flycheck/flycheck" '("flycheck-" "help-flycheck-checker-d" "list-flycheck-errors"))
 
 
-;;; Generated autoloads from ../site-lisp/flycheck/flycheck-buttercup.el
+;;; Generated autoloads from flycheck/flycheck-buttercup.el
 
-(register-definition-prefixes "../site-lisp/flycheck/flycheck-buttercup" '("flycheck-buttercup-format-error-list"))
-
-
-;;; Generated autoloads from ../site-lisp/flycheck/maint/flycheck-checkdoc.el
-
-(register-definition-prefixes "../site-lisp/flycheck/maint/flycheck-checkdoc" '("flycheck/"))
+(register-definition-prefixes "flycheck/flycheck-buttercup" '("flycheck-buttercup-format-error-list"))
 
 
-;;; Generated autoloads from ../site-lisp/flycheck/maint/flycheck-compile.el
+;;; Generated autoloads from flycheck/maint/flycheck-checkdoc.el
 
-(register-definition-prefixes "../site-lisp/flycheck/maint/flycheck-compile" '("flycheck/batch-byte-compile"))
-
-
-;;; Generated autoloads from ../site-lisp/flycheck/flycheck-ert.el
-
-(register-definition-prefixes "../site-lisp/flycheck/flycheck-ert" '("flycheck-er"))
+(register-definition-prefixes "flycheck/maint/flycheck-checkdoc" '("flycheck/"))
 
 
-;;; Generated autoloads from ../site-lisp/flycheck/maint/flycheck-format.el
+;;; Generated autoloads from flycheck/maint/flycheck-compile.el
 
-(register-definition-prefixes "../site-lisp/flycheck/maint/flycheck-format" '("flycheck/"))
-
-
-;;; Generated autoloads from ../site-lisp/flycheck/maint/flycheck-maint.el
-
-(register-definition-prefixes "../site-lisp/flycheck/maint/flycheck-maint" '("flycheck/"))
+(register-definition-prefixes "flycheck/maint/flycheck-compile" '("flycheck/batch-byte-compile"))
 
 
-;;; Generated autoloads from ../site-lisp/flymake-flycheck/flymake-flycheck.el
+;;; Generated autoloads from flycheck/flycheck-ert.el
 
-(autoload 'flymake-flycheck-all-available-diagnostic-functions "../site-lisp/flymake-flycheck/flymake-flycheck" "\
+(register-definition-prefixes "flycheck/flycheck-ert" '("flycheck-er"))
+
+
+;;; Generated autoloads from flycheck/maint/flycheck-format.el
+
+(register-definition-prefixes "flycheck/maint/flycheck-format" '("flycheck/"))
+
+
+;;; Generated autoloads from flycheck/maint/flycheck-maint.el
+
+(register-definition-prefixes "flycheck/maint/flycheck-maint" '("flycheck/"))
+
+
+;;; Generated autoloads from flymake-flycheck/flymake-flycheck.el
+
+(autoload 'flymake-flycheck-all-available-diagnostic-functions "flymake-flycheck/flymake-flycheck" "\
 Return a list of diagnostic functions for all usable checkers.
 These might end up providing duplicate functionality, e.g. both
 dash and bash might be used to check a `sh-mode' buffer if both are
 found to be installed.
 
 Usually you will want to use `flymake-flycheck-all-chained-diagnostic-functions' instead.")
-(autoload 'flymake-flycheck-all-chained-diagnostic-functions "../site-lisp/flymake-flycheck/flymake-flycheck" "\
+(autoload 'flymake-flycheck-all-chained-diagnostic-functions "flymake-flycheck/flymake-flycheck" "\
 Return a list of diagnostic functions for the current checker chain.")
-(autoload 'flymake-flycheck-diagnostic-function-for "../site-lisp/flymake-flycheck/flymake-flycheck" "\
+(autoload 'flymake-flycheck-diagnostic-function-for "flymake-flycheck/flymake-flycheck" "\
 Wrap CHECKER to make a `flymake-diagnostics-functions' backend.
 
 (fn CHECKER)")
-(register-definition-prefixes "../site-lisp/flymake-flycheck/flymake-flycheck" '("flymake-flycheck-"))
+(register-definition-prefixes "flymake-flycheck/flymake-flycheck" '("flymake-flycheck-"))
 
 
-;;; Generated autoloads from ../site-lisp/auctex/font-latex.el
+;;; Generated autoloads from auctex/font-latex.el
 
-(autoload 'font-latex-setup "../site-lisp/auctex/font-latex" "\
+(autoload 'font-latex-setup "auctex/font-latex" "\
 Setup this buffer for LaTeX font-lock.  Usually called from a hook.")
-(register-definition-prefixes "../site-lisp/auctex/font-latex" '("font-latex-"))
+(register-definition-prefixes "auctex/font-latex" '("font-latex-"))
 
 
-;;; Generated autoloads from ../site-lisp/auctex/tests/latex/font-latex-test.el
+;;; Generated autoloads from auctex/tests/latex/font-latex-test.el
 
-(register-definition-prefixes "../site-lisp/auctex/tests/latex/font-latex-test" '("LaTeX-common-initialization"))
-
-
-;;; Generated autoloads from ../site-lisp/frame-local/frame-local.el
-
-(register-definition-prefixes "../site-lisp/frame-local/frame-local" '("frame-local-"))
+(register-definition-prefixes "auctex/tests/latex/font-latex-test" '("LaTeX-common-initialization"))
 
 
-;;; Generated autoloads from ../site-lisp/magit/lisp/git-commit.el
+;;; Generated autoloads from frame-local/frame-local.el
+
+(register-definition-prefixes "frame-local/frame-local" '("frame-local-"))
+
+
+;;; Generated autoloads from magit/lisp/git-commit.el
 
 (put 'git-commit-major-mode 'safe-local-variable
     (lambda (val)
@@ -3076,16 +3697,16 @@ Setup this buffer for LaTeX font-lock.  Usually called from a hook.")
                   org-mode
                   fundamental-mode
                   git-commit-elisp-text-mode))))
-(register-definition-prefixes "../site-lisp/magit/lisp/git-commit" '("git-commit-" "global-git-commit-mode"))
+(register-definition-prefixes "magit/lisp/git-commit" '("git-commit-" "global-git-commit-mode"))
 
 
-;;; Generated autoloads from ../site-lisp/magit/lisp/git-rebase.el
+;;; Generated autoloads from magit/lisp/git-rebase.el
 
-(autoload 'git-rebase-current-line "../site-lisp/magit/lisp/git-rebase" "\
+(autoload 'git-rebase-current-line "magit/lisp/git-rebase" "\
 Parse current line into a `git-rebase-action' instance.
 If the current line isn't recognized as a rebase line, an
 instance with all nil values is returned.")
-(autoload 'git-rebase-mode "../site-lisp/magit/lisp/git-rebase" "\
+(autoload 'git-rebase-mode "magit/lisp/git-rebase" "\
 Major mode for editing of a Git rebase file.
 
 Rebase files are generated when you run \"git rebase -i\" or run
@@ -3096,65 +3717,65 @@ running \"man git-rebase\" at the command line) for details.
 (fn)" t)
 (defconst git-rebase-filename-regexp "/git-rebase-todo\\'")
 (add-to-list 'auto-mode-alist (cons git-rebase-filename-regexp #'git-rebase-mode))
-(register-definition-prefixes "../site-lisp/magit/lisp/git-rebase" '("git-rebase-" "magit-imenu--rebase-"))
+(register-definition-prefixes "magit/lisp/git-rebase" '("git-rebase-" "magit-imenu--rebase-"))
 
 
-;;; Generated autoloads from ../site-lisp/helpful/helpful.el
+;;; Generated autoloads from helpful/helpful.el
 
-(autoload 'helpful-function "../site-lisp/helpful/helpful" "\
+(autoload 'helpful-function "helpful/helpful" "\
 Show help for function named SYMBOL.
 
 See also `helpful-macro', `helpful-command' and `helpful-callable'.
 
 (fn SYMBOL)" t)
-(autoload 'helpful-command "../site-lisp/helpful/helpful" "\
+(autoload 'helpful-command "helpful/helpful" "\
 Show help for interactive function named SYMBOL.
 
 See also `helpful-function'.
 
 (fn SYMBOL)" t)
-(autoload 'helpful-key "../site-lisp/helpful/helpful" "\
+(autoload 'helpful-key "helpful/helpful" "\
 Show help for interactive command bound to KEY-SEQUENCE.
 
 (fn KEY-SEQUENCE)" t)
-(autoload 'helpful-macro "../site-lisp/helpful/helpful" "\
+(autoload 'helpful-macro "helpful/helpful" "\
 Show help for macro named SYMBOL.
 
 (fn SYMBOL)" t)
-(autoload 'helpful-callable "../site-lisp/helpful/helpful" "\
+(autoload 'helpful-callable "helpful/helpful" "\
 Show help for function, macro or special form named SYMBOL.
 
 See also `helpful-macro', `helpful-function' and `helpful-command'.
 
 (fn SYMBOL)" t)
-(autoload 'helpful-symbol "../site-lisp/helpful/helpful" "\
+(autoload 'helpful-symbol "helpful/helpful" "\
 Show help for SYMBOL, a variable, function, macro, or face.
 
 See also `helpful-callable' and `helpful-variable'.
 
 (fn SYMBOL)" t)
-(autoload 'helpful-variable "../site-lisp/helpful/helpful" "\
+(autoload 'helpful-variable "helpful/helpful" "\
 Show help for variable named SYMBOL.
 
 (fn SYMBOL)" t)
-(autoload 'helpful-at-point "../site-lisp/helpful/helpful" "\
+(autoload 'helpful-at-point "helpful/helpful" "\
 Show help for the symbol at point." t)
-(register-definition-prefixes "../site-lisp/helpful/helpful" '("helpful-"))
+(register-definition-prefixes "helpful/helpful" '("helpful-"))
 
 
-;;; Generated autoloads from ../site-lisp/helpful/test/helpful-unit-test.el
+;;; Generated autoloads from helpful/test/helpful-unit-test.el
 
-(register-definition-prefixes "../site-lisp/helpful/test/helpful-unit-test" '("helpful-" "test-foo"))
+(register-definition-prefixes "helpful/test/helpful-unit-test" '("helpful-" "test-foo"))
 
 
-;;; Generated autoloads from ../site-lisp/highlight-indent-guides/highlight-indent-guides.el
+;;; Generated autoloads from highlight-indent-guides/highlight-indent-guides.el
 
-(autoload 'highlight-indent-guides-auto-set-faces "../site-lisp/highlight-indent-guides/highlight-indent-guides" "\
+(autoload 'highlight-indent-guides-auto-set-faces "highlight-indent-guides/highlight-indent-guides" "\
 Automatically calculate indent guide faces.
 If this feature is enabled, calculate reasonable values for the indent guide
 colors based on the current theme's colorscheme, and set them appropriately.
 This runs whenever a theme is loaded, but it can also be run interactively." t)
-(autoload 'highlight-indent-guides-mode "../site-lisp/highlight-indent-guides/highlight-indent-guides" "\
+(autoload 'highlight-indent-guides-mode "highlight-indent-guides/highlight-indent-guides" "\
 Display indent guides in a buffer.
 
 This is a minor mode.  If called interactively, toggle the
@@ -3173,37 +3794,37 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(register-definition-prefixes "../site-lisp/highlight-indent-guides/highlight-indent-guides" '("highlight-indent-guides-"))
+(register-definition-prefixes "highlight-indent-guides/highlight-indent-guides" '("highlight-indent-guides-"))
 
 
-;;; Generated autoloads from ../site-lisp/highlight-indent-guides/tests/highlight-indent-guides-tests.el
+;;; Generated autoloads from highlight-indent-guides/tests/highlight-indent-guides-tests.el
 
-(register-definition-prefixes "../site-lisp/highlight-indent-guides/tests/highlight-indent-guides-tests" '("higlight-indent-guides-"))
-
-
-;;; Generated autoloads from ../site-lisp/holo-layer/holo-layer.el
-
-(register-definition-prefixes "../site-lisp/holo-layer/holo-layer" '("holo-layer-"))
+(register-definition-prefixes "highlight-indent-guides/tests/highlight-indent-guides-tests" '("higlight-indent-guides-"))
 
 
-;;; Generated autoloads from ../site-lisp/holo-layer/holo-layer-epc.el
+;;; Generated autoloads from holo-layer/holo-layer.el
 
-(register-definition-prefixes "../site-lisp/holo-layer/holo-layer-epc" '("holo-layer-"))
-
-
-;;; Generated autoloads from ../site-lisp/ht.el/ht.el
-
-(register-definition-prefixes "../site-lisp/ht.el/ht" 'nil)
+(register-definition-prefixes "holo-layer/holo-layer" '("holo-layer-"))
 
 
-;;; Generated autoloads from ../site-lisp/ht.el/test/ht-test.el
+;;; Generated autoloads from holo-layer/holo-layer-epc.el
 
-(register-definition-prefixes "../site-lisp/ht.el/test/ht-test" '("ht-run-tests"))
+(register-definition-prefixes "holo-layer/holo-layer-epc" '("holo-layer-"))
 
 
-;;; Generated autoloads from ../site-lisp/hydra/hydra.el
+;;; Generated autoloads from ht.el/ht.el
 
-(autoload 'defhydra "../site-lisp/hydra/hydra" "\
+(register-definition-prefixes "ht.el/ht" 'nil)
+
+
+;;; Generated autoloads from ht.el/test/ht-test.el
+
+(register-definition-prefixes "ht.el/test/ht-test" '("ht-run-tests"))
+
+
+;;; Generated autoloads from hydra/hydra.el
+
+(autoload 'defhydra "hydra/hydra" "\
 Create a Hydra - a family of functions with prefix NAME.
 
 NAME should be a symbol, it will be the prefix of all functions
@@ -3258,37 +3879,37 @@ result of `defhydra'.
 (fn NAME BODY &optional DOCSTRING &rest HEADS)" nil t)
 (function-put 'defhydra 'lisp-indent-function 'defun)
 (function-put 'defhydra 'doc-string-elt 3)
-(register-definition-prefixes "../site-lisp/hydra/hydra" '("defhydra" "hydra-"))
+(register-definition-prefixes "hydra/hydra" '("defhydra" "hydra-"))
 
 
-;;; Generated autoloads from ../site-lisp/hydra/hydra-examples.el
+;;; Generated autoloads from hydra/hydra-examples.el
 
-(register-definition-prefixes "../site-lisp/hydra/hydra-examples" '("hydra-" "org-agenda-cts" "whitespace-mode"))
-
-
-;;; Generated autoloads from ../site-lisp/hydra/hydra-ox.el
-
-(register-definition-prefixes "../site-lisp/hydra/hydra-ox" '("hydra-ox"))
+(register-definition-prefixes "hydra/hydra-examples" '("hydra-" "org-agenda-cts" "whitespace-mode"))
 
 
-;;; Generated autoloads from ../site-lisp/hydra/hydra-test.el
+;;; Generated autoloads from hydra/hydra-ox.el
 
-(register-definition-prefixes "../site-lisp/hydra/hydra-test" '("hydra-" "remap"))
+(register-definition-prefixes "hydra/hydra-ox" '("hydra-ox"))
 
 
-;;; Generated autoloads from ../site-lisp/emacs-immersive-translate/immersive-translate.el
+;;; Generated autoloads from hydra/hydra-test.el
 
-(autoload 'immersive-translate-abort "../site-lisp/emacs-immersive-translate/immersive-translate" "\
+(register-definition-prefixes "hydra/hydra-test" '("hydra-" "remap"))
+
+
+;;; Generated autoloads from emacs-immersive-translate/immersive-translate.el
+
+(autoload 'immersive-translate-abort "emacs-immersive-translate/immersive-translate" "\
 Stop all active immersive-translate processes in BUF.
 
 (fn BUF)" t)
-(autoload 'immersive-translate-buffer "../site-lisp/emacs-immersive-translate/immersive-translate" "\
+(autoload 'immersive-translate-buffer "emacs-immersive-translate/immersive-translate" "\
 Translate the whole buffer." t)
-(autoload 'immersive-translate-paragraph "../site-lisp/emacs-immersive-translate/immersive-translate" "\
+(autoload 'immersive-translate-paragraph "emacs-immersive-translate/immersive-translate" "\
 Translate the current paragraph." t)
-(autoload 'immersive-translate-clear "../site-lisp/emacs-immersive-translate/immersive-translate" "\
+(autoload 'immersive-translate-clear "emacs-immersive-translate/immersive-translate" "\
 Clear translations." t)
-(autoload 'immersive-translate-auto-mode "../site-lisp/emacs-immersive-translate/immersive-translate" "\
+(autoload 'immersive-translate-auto-mode "emacs-immersive-translate/immersive-translate" "\
 Toggle `immersive-translate-auto-mode'.
 
 Translate paragraph under the cursor after Emacs is idle for
@@ -3310,34 +3931,34 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(autoload 'immersive-translate-setup "../site-lisp/emacs-immersive-translate/immersive-translate" "\
+(autoload 'immersive-translate-setup "emacs-immersive-translate/immersive-translate" "\
 Setup immersive-trasnlate.")
-(register-definition-prefixes "../site-lisp/emacs-immersive-translate/immersive-translate" '("immersive-translate-"))
+(register-definition-prefixes "emacs-immersive-translate/immersive-translate" '("immersive-translate-"))
 
 
-;;; Generated autoloads from ../site-lisp/emacs-immersive-translate/immersive-translate-baidu.el
+;;; Generated autoloads from emacs-immersive-translate/immersive-translate-baidu.el
 
-(register-definition-prefixes "../site-lisp/emacs-immersive-translate/immersive-translate-baidu" '("immersive-translate-"))
-
-
-;;; Generated autoloads from ../site-lisp/emacs-immersive-translate/immersive-translate-chatgpt.el
-
-(register-definition-prefixes "../site-lisp/emacs-immersive-translate/immersive-translate-chatgpt" '("immersive-translate-c"))
+(register-definition-prefixes "emacs-immersive-translate/immersive-translate-baidu" '("immersive-translate-"))
 
 
-;;; Generated autoloads from ../site-lisp/emacs-immersive-translate/immersive-translate-curl.el
+;;; Generated autoloads from emacs-immersive-translate/immersive-translate-chatgpt.el
 
-(register-definition-prefixes "../site-lisp/emacs-immersive-translate/immersive-translate-curl" '("immersive-translate-curl-"))
-
-
-;;; Generated autoloads from ../site-lisp/emacs-immersive-translate/immersive-translate-trans.el
-
-(register-definition-prefixes "../site-lisp/emacs-immersive-translate/immersive-translate-trans" '("immersive-translate-trans-"))
+(register-definition-prefixes "emacs-immersive-translate/immersive-translate-chatgpt" '("immersive-translate-c"))
 
 
-;;; Generated autoloads from ../site-lisp/iscroll/iscroll.el
+;;; Generated autoloads from emacs-immersive-translate/immersive-translate-curl.el
 
-(autoload 'iscroll-mode "../site-lisp/iscroll/iscroll" "\
+(register-definition-prefixes "emacs-immersive-translate/immersive-translate-curl" '("immersive-translate-curl-"))
+
+
+;;; Generated autoloads from emacs-immersive-translate/immersive-translate-trans.el
+
+(register-definition-prefixes "emacs-immersive-translate/immersive-translate-trans" '("immersive-translate-trans-"))
+
+
+;;; Generated autoloads from iscroll/iscroll.el
+
+(autoload 'iscroll-mode "iscroll/iscroll" "\
 Smooth scrolling over images.
 
 This is a minor mode.  If called interactively, toggle the
@@ -3355,19 +3976,19 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(register-definition-prefixes "../site-lisp/iscroll/iscroll" '("iscroll-"))
+(register-definition-prefixes "iscroll/iscroll" '("iscroll-"))
 
 
-;;; Generated autoloads from ../site-lisp/kind-icon/kind-icon.el
+;;; Generated autoloads from kind-icon/kind-icon.el
 
-(autoload 'kind-icon-margin-formatter "../site-lisp/kind-icon/kind-icon" "\
+(autoload 'kind-icon-margin-formatter "kind-icon/kind-icon" "\
 Return a margin-formatter function which produces kind icons.
 METADATA is the completion metadata supplied by the caller (see
 info node `(elisp)Programmed Completion').  To use, add this
 function to the relevant margin-formatters list.
 
 (fn METADATA)")
-(autoload 'kind-icon-enhance-completion "../site-lisp/kind-icon/kind-icon" "\
+(autoload 'kind-icon-enhance-completion "kind-icon/kind-icon" "\
 A wrapper for `completion-in-region-functions'.
 This wrapper sets a custom `affixation-function' on
 COMPLETION-FUNCTION, which places an icon in the prefix slot.  Use
@@ -3378,17 +3999,17 @@ it like:
        completion-in-region-function))
 
 (fn COMPLETION-FUNCTION)")
-(register-definition-prefixes "../site-lisp/kind-icon/kind-icon" '("kind-icon-"))
+(register-definition-prefixes "kind-icon/kind-icon" '("kind-icon-"))
 
 
-;;; Generated autoloads from ../site-lisp/auctex/latex.el
+;;; Generated autoloads from auctex/latex.el
 
-(autoload 'BibTeX-auto-store "../site-lisp/auctex/latex" "\
+(autoload 'BibTeX-auto-store "auctex/latex" "\
 This function should be called from `bibtex-mode-hook'.
 It will setup BibTeX to store keys in an auto file.")
 (add-to-list 'auto-mode-alist '("\\.drv\\'" . latex-mode) t)
 (add-to-list 'auto-mode-alist '("\\.hva\\'" . latex-mode))
-(autoload 'TeX-latex-mode "../site-lisp/auctex/latex" "\
+(autoload 'TeX-latex-mode "auctex/latex" "\
 Major mode in AUCTeX for editing LaTeX files.
 See info under AUCTeX for full documentation.
 
@@ -3399,74 +4020,74 @@ Entering LaTeX mode calls the value of `text-mode-hook',
 then the value of `TeX-mode-hook', and then the value
 of `LaTeX-mode-hook'." t)
 (add-to-list 'auto-mode-alist '("\\.dtx\\'" . doctex-mode))
-(autoload 'docTeX-mode "../site-lisp/auctex/latex" "\
+(autoload 'docTeX-mode "auctex/latex" "\
 Major mode in AUCTeX for editing .dtx files derived from `LaTeX-mode'.
 Runs `LaTeX-mode', sets a few variables and
 runs the hooks in `docTeX-mode-hook'.
 
 (fn)" t)
 (defalias 'TeX-doctex-mode #'docTeX-mode)
-(register-definition-prefixes "../site-lisp/auctex/latex" '("Bib" "LaTeX-" "TeX-" "docTeX-" "latex-math-mode"))
+(register-definition-prefixes "auctex/latex" '("Bib" "LaTeX-" "TeX-" "docTeX-" "latex-math-mode"))
 
 
-;;; Generated autoloads from ../site-lisp/auctex/latex-flymake.el
+;;; Generated autoloads from auctex/latex-flymake.el
 
-(register-definition-prefixes "../site-lisp/auctex/latex-flymake" '("LaTeX-"))
-
-
-;;; Generated autoloads from ../site-lisp/auctex/tests/latex/latex-test.el
-
-(register-definition-prefixes "../site-lisp/auctex/tests/latex/latex-test" '("LaTeX-common-initialization"))
+(register-definition-prefixes "auctex/latex-flymake" '("LaTeX-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-actionscript.el
+;;; Generated autoloads from auctex/tests/latex/latex-test.el
 
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-actionscript" '("lsp-actionscript-"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-ada.el
-
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-ada" '("lsp-ada-"))
+(register-definition-prefixes "auctex/tests/latex/latex-test" '("LaTeX-common-initialization"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-angular.el
+;;; Generated autoloads from lsp-mode/clients/lsp-actionscript.el
 
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-angular" '("lsp-client"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-ansible.el
-
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-ansible" '("lsp-ansible-"))
+(register-definition-prefixes "lsp-mode/clients/lsp-actionscript" '("lsp-actionscript-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-astro.el
+;;; Generated autoloads from lsp-mode/clients/lsp-ada.el
 
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-astro" '("lsp-astro--get-initialization-options"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-awk.el
-
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-awk" '("lsp-awk-executable"))
+(register-definition-prefixes "lsp-mode/clients/lsp-ada" '("lsp-ada-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-bash.el
+;;; Generated autoloads from lsp-mode/clients/lsp-angular.el
 
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-bash" '("lsp-bash-"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-beancount.el
-
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-beancount" '("lsp-beancount-"))
+(register-definition-prefixes "lsp-mode/clients/lsp-angular" '("lsp-client"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/test/lsp-benchmarks.el
+;;; Generated autoloads from lsp-mode/clients/lsp-ansible.el
 
-(register-definition-prefixes "../site-lisp/lsp-mode/test/lsp-benchmarks" '("lsp-benchmark"))
+(register-definition-prefixes "lsp-mode/clients/lsp-ansible" '("lsp-ansible-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-bridge/lsp-bridge.el
+;;; Generated autoloads from lsp-mode/clients/lsp-astro.el
 
-(autoload 'lsp-bridge-mode "../site-lisp/lsp-bridge/lsp-bridge" "\
+(register-definition-prefixes "lsp-mode/clients/lsp-astro" '("lsp-astro--get-initialization-options"))
+
+
+;;; Generated autoloads from lsp-mode/clients/lsp-awk.el
+
+(register-definition-prefixes "lsp-mode/clients/lsp-awk" '("lsp-awk-executable"))
+
+
+;;; Generated autoloads from lsp-mode/clients/lsp-bash.el
+
+(register-definition-prefixes "lsp-mode/clients/lsp-bash" '("lsp-bash-"))
+
+
+;;; Generated autoloads from lsp-mode/clients/lsp-beancount.el
+
+(register-definition-prefixes "lsp-mode/clients/lsp-beancount" '("lsp-beancount-"))
+
+
+;;; Generated autoloads from lsp-mode/test/lsp-benchmarks.el
+
+(register-definition-prefixes "lsp-mode/test/lsp-benchmarks" '("lsp-benchmark"))
+
+
+;;; Generated autoloads from lsp-bridge/lsp-bridge.el
+
+(autoload 'lsp-bridge-mode "lsp-bridge/lsp-bridge" "\
 LSP Bridge mode.
 
 This is a minor mode.  If called interactively, toggle the
@@ -3483,107 +4104,105 @@ evaluate `lsp-bridge-mode'.
 The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
-\\{lsp-bridge-mode-map}
-
 (fn &optional ARG)" t)
-(autoload 'global-lsp-bridge-mode "../site-lisp/lsp-bridge/lsp-bridge" nil t)
-(register-definition-prefixes "../site-lisp/lsp-bridge/lsp-bridge" '("acm-library-path" "lsp-bri" "position-before-jump"))
+(autoload 'global-lsp-bridge-mode "lsp-bridge/lsp-bridge" nil t)
+(register-definition-prefixes "lsp-bridge/lsp-bridge" '("acm-library-path" "lsp-bri" "position-before-jump"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-bridge/lsp-bridge-call-hierarchy.el
+;;; Generated autoloads from lsp-bridge/lsp-bridge-call-hierarchy.el
 
-(register-definition-prefixes "../site-lisp/lsp-bridge/lsp-bridge-call-hierarchy" '("lsp-bridge-"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-bridge/lsp-bridge-code-action.el
-
-(register-definition-prefixes "../site-lisp/lsp-bridge/lsp-bridge-code-action" '("lsp-bridge-code-action"))
+(register-definition-prefixes "lsp-bridge/lsp-bridge-call-hierarchy" '("lsp-bridge-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-bridge/lsp-bridge-diagnostic.el
+;;; Generated autoloads from lsp-bridge/lsp-bridge-code-action.el
 
-(register-definition-prefixes "../site-lisp/lsp-bridge/lsp-bridge-diagnostic" '("lsp-bridge-"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-bridge/lsp-bridge-epc.el
-
-(register-definition-prefixes "../site-lisp/lsp-bridge/lsp-bridge-epc" '("lsp-bridge-"))
+(register-definition-prefixes "lsp-bridge/lsp-bridge-code-action" '("lsp-bridge-code-action"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-bridge/lsp-bridge-jdtls.el
+;;; Generated autoloads from lsp-bridge/lsp-bridge-diagnostic.el
 
-(register-definition-prefixes "../site-lisp/lsp-bridge/lsp-bridge-jdtls" '("lsp-bridge-"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-bridge/lsp-bridge-lsp-installer.el
-
-(register-definition-prefixes "../site-lisp/lsp-bridge/lsp-bridge-lsp-installer" '("codeium-" "lsp-bridge-" "tabnine-bridge-"))
+(register-definition-prefixes "lsp-bridge/lsp-bridge-diagnostic" '("lsp-bridge-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-bridge/lsp-bridge-org-babel.el
+;;; Generated autoloads from lsp-bridge/lsp-bridge-epc.el
 
-(register-definition-prefixes "../site-lisp/lsp-bridge/lsp-bridge-org-babel" '("lsp-bridge-"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-bridge/lsp-bridge-peek.el
-
-(register-definition-prefixes "../site-lisp/lsp-bridge/lsp-bridge-peek" '("lsp-bridge-"))
+(register-definition-prefixes "lsp-bridge/lsp-bridge-epc" '("lsp-bridge-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-bridge/lsp-bridge-ref.el
+;;; Generated autoloads from lsp-bridge/lsp-bridge-jdtls.el
 
-(register-definition-prefixes "../site-lisp/lsp-bridge/lsp-bridge-ref" '("lsp-bridge-ref-"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-bridge/test/lsp-bridge-test.el
-
-(register-definition-prefixes "../site-lisp/lsp-bridge/test/lsp-bridge-test" '("lsp-bridge-start-test"))
+(register-definition-prefixes "lsp-bridge/lsp-bridge-jdtls" '("lsp-bridge-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-camel.el
+;;; Generated autoloads from lsp-bridge/lsp-bridge-lsp-installer.el
 
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-camel" '("lsp-camel-"))
+(register-definition-prefixes "lsp-bridge/lsp-bridge-lsp-installer" '("codeium-" "lsp-bridge-" "tabnine-bridge-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-clangd.el
+;;; Generated autoloads from lsp-bridge/lsp-bridge-org-babel.el
 
-(autoload 'lsp-cpp-flycheck-clang-tidy-error-explainer "../site-lisp/lsp-mode/clients/lsp-clangd" "\
+(register-definition-prefixes "lsp-bridge/lsp-bridge-org-babel" '("lsp-bridge-"))
+
+
+;;; Generated autoloads from lsp-bridge/lsp-bridge-peek.el
+
+(register-definition-prefixes "lsp-bridge/lsp-bridge-peek" '("lsp-bridge-"))
+
+
+;;; Generated autoloads from lsp-bridge/lsp-bridge-ref.el
+
+(register-definition-prefixes "lsp-bridge/lsp-bridge-ref" '("lsp-bridge-ref-"))
+
+
+;;; Generated autoloads from lsp-bridge/test/lsp-bridge-test.el
+
+(register-definition-prefixes "lsp-bridge/test/lsp-bridge-test" '("lsp-bridge-start-test"))
+
+
+;;; Generated autoloads from lsp-mode/clients/lsp-camel.el
+
+(register-definition-prefixes "lsp-mode/clients/lsp-camel" '("lsp-camel-"))
+
+
+;;; Generated autoloads from lsp-mode/clients/lsp-clangd.el
+
+(autoload 'lsp-cpp-flycheck-clang-tidy-error-explainer "lsp-mode/clients/lsp-clangd" "\
 Explain a clang-tidy ERROR by scraping documentation from llvm.org.
 
 (fn ERROR)")
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-clangd" '("lsp-c"))
+(register-definition-prefixes "lsp-mode/clients/lsp-clangd" '("lsp-c"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/test/lsp-clangd-test.el
+;;; Generated autoloads from lsp-mode/test/lsp-clangd-test.el
 
-(register-definition-prefixes "../site-lisp/lsp-mode/test/lsp-clangd-test" '("lsp-in-sample-cpp-project"))
+(register-definition-prefixes "lsp-mode/test/lsp-clangd-test" '("lsp-in-sample-cpp-project"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-clojure.el
+;;; Generated autoloads from lsp-mode/clients/lsp-clojure.el
 
-(autoload 'lsp-clojure-show-test-tree "../site-lisp/lsp-mode/clients/lsp-clojure" "\
+(autoload 'lsp-clojure-show-test-tree "lsp-mode/clients/lsp-clojure" "\
 Show a test tree and focus on it if IGNORE-FOCUS? is nil.
 
 (fn IGNORE-FOCUS?)" t)
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-clojure" '("lsp-clojure-"))
+(register-definition-prefixes "lsp-mode/clients/lsp-clojure" '("lsp-clojure-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/test/lsp-common-test.el
+;;; Generated autoloads from lsp-mode/test/lsp-common-test.el
 
-(register-definition-prefixes "../site-lisp/lsp-mode/test/lsp-common-test" '("lsp-"))
+(register-definition-prefixes "lsp-mode/test/lsp-common-test" '("lsp-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/lsp-completion.el
+;;; Generated autoloads from lsp-mode/lsp-completion.el
 
 (define-obsolete-variable-alias 'lsp-prefer-capf 'lsp-completion-provider "\
 lsp-mode 7.0.1")
 (define-obsolete-variable-alias 'lsp-enable-completion-at-point 'lsp-completion-enable "\
 lsp-mode 7.0.1")
-(autoload 'lsp-completion-at-point "../site-lisp/lsp-mode/lsp-completion" "\
+(autoload 'lsp-completion-at-point "lsp-mode/lsp-completion" "\
 Get lsp completions.")
-(autoload 'lsp-completion--enable "../site-lisp/lsp-mode/lsp-completion" "\
+(autoload 'lsp-completion--enable "lsp-mode/lsp-completion" "\
 Enable LSP completion support.")
-(autoload 'lsp-completion-mode "../site-lisp/lsp-mode/lsp-completion" "\
+(autoload 'lsp-completion-mode "lsp-mode/lsp-completion" "\
 Toggle LSP completion support.
 
 This is a minor mode.  If called interactively, toggle the
@@ -3602,39 +4221,39 @@ it is disabled.
 
 (fn &optional ARG)" t)
 (add-hook 'lsp-configure-hook (lambda nil (when (and lsp-auto-configure lsp-completion-enable) (lsp-completion--enable))))
-(register-definition-prefixes "../site-lisp/lsp-mode/lsp-completion" '("lsp-"))
+(register-definition-prefixes "lsp-mode/lsp-completion" '("lsp-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-credo.el
+;;; Generated autoloads from lsp-mode/clients/lsp-credo.el
 
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-credo" '("lsp-credo-"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-crystal.el
-
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-crystal" '("lsp-clients-crystal-executable"))
+(register-definition-prefixes "lsp-mode/clients/lsp-credo" '("lsp-credo-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-csharp.el
+;;; Generated autoloads from lsp-mode/clients/lsp-crystal.el
 
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-csharp" '("lsp-csharp-"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-css.el
-
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-css" '("lsp-css-"))
+(register-definition-prefixes "lsp-mode/clients/lsp-crystal" '("lsp-clients-crystal-executable"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/lsp-diagnostics.el
+;;; Generated autoloads from lsp-mode/clients/lsp-csharp.el
+
+(register-definition-prefixes "lsp-mode/clients/lsp-csharp" '("lsp-csharp-"))
+
+
+;;; Generated autoloads from lsp-mode/clients/lsp-css.el
+
+(register-definition-prefixes "lsp-mode/clients/lsp-css" '("lsp-css-"))
+
+
+;;; Generated autoloads from lsp-mode/lsp-diagnostics.el
 
 (define-obsolete-variable-alias 'lsp-diagnostic-package 'lsp-diagnostics-provider "\
 lsp-mode 7.0.1")
 (define-obsolete-variable-alias 'lsp-flycheck-default-level 'lsp-diagnostics-flycheck-default-level "\
 lsp-mode 7.0.1")
-(autoload 'lsp-diagnostics-lsp-checker-if-needed "../site-lisp/lsp-mode/lsp-diagnostics")
-(autoload 'lsp-diagnostics--enable "../site-lisp/lsp-mode/lsp-diagnostics" "\
+(autoload 'lsp-diagnostics-lsp-checker-if-needed "lsp-mode/lsp-diagnostics")
+(autoload 'lsp-diagnostics--enable "lsp-mode/lsp-diagnostics" "\
 Enable LSP checker support.")
-(autoload 'lsp-diagnostics-mode "../site-lisp/lsp-mode/lsp-diagnostics" "\
+(autoload 'lsp-diagnostics-mode "lsp-mode/lsp-diagnostics" "\
 Toggle LSP diagnostics integration.
 
 This is a minor mode.  If called interactively, toggle the
@@ -3653,10 +4272,10 @@ it is disabled.
 
 (fn &optional ARG)" t)
 (add-hook 'lsp-configure-hook (lambda nil (when lsp-auto-configure (lsp-diagnostics--enable))))
-(register-definition-prefixes "../site-lisp/lsp-mode/lsp-diagnostics" '("lsp-diagnostics-"))
+(register-definition-prefixes "lsp-mode/lsp-diagnostics" '("lsp-diagnostics-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/lsp-dired.el
+;;; Generated autoloads from lsp-mode/lsp-dired.el
 
 (defvar lsp-dired-mode nil "\
 Non-nil if Lsp-Dired mode is enabled.
@@ -3665,8 +4284,8 @@ for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `lsp-dired-mode'.")
-(custom-autoload 'lsp-dired-mode "../site-lisp/lsp-mode/lsp-dired" nil)
-(autoload 'lsp-dired-mode "../site-lisp/lsp-mode/lsp-dired" "\
+(custom-autoload 'lsp-dired-mode "lsp-mode/lsp-dired" nil)
+(autoload 'lsp-dired-mode "lsp-mode/lsp-dired" "\
 Display `lsp-mode' icons for each file in a dired buffer.
 
 This is a global minor mode.  If called interactively, toggle the
@@ -3684,116 +4303,116 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(register-definition-prefixes "../site-lisp/lsp-mode/lsp-dired" '("lsp-dired-"))
+(register-definition-prefixes "lsp-mode/lsp-dired" '("lsp-dired-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/docs/lsp-doc.el
+;;; Generated autoloads from lsp-mode/docs/lsp-doc.el
 
-(register-definition-prefixes "../site-lisp/lsp-mode/docs/lsp-doc" '("lsp-doc-"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-dockerfile.el
-
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-dockerfile" '("lsp-dockerfile-language-server-command"))
+(register-definition-prefixes "lsp-mode/docs/lsp-doc" '("lsp-doc-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-dot.el
+;;; Generated autoloads from lsp-mode/clients/lsp-dockerfile.el
 
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-dot" '("lsp-dot--dot-ls-server-command"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-elixir.el
-
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-elixir" '("lsp-elixir-"))
+(register-definition-prefixes "lsp-mode/clients/lsp-dockerfile" '("lsp-dockerfile-language-server-command"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-elm.el
+;;; Generated autoloads from lsp-mode/clients/lsp-dot.el
 
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-elm" '("lsp-"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-emmet.el
-
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-emmet" '("lsp-emmet-ls-command"))
+(register-definition-prefixes "lsp-mode/clients/lsp-dot" '("lsp-dot--dot-ls-server-command"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-erlang.el
+;;; Generated autoloads from lsp-mode/clients/lsp-elixir.el
 
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-erlang" '("lsp-erlang-"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-eslint.el
-
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-eslint" '("lsp-"))
+(register-definition-prefixes "lsp-mode/clients/lsp-elixir" '("lsp-elixir-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/test/lsp-file-watch-test.el
+;;; Generated autoloads from lsp-mode/clients/lsp-elm.el
 
-(register-definition-prefixes "../site-lisp/lsp-mode/test/lsp-file-watch-test" '("lsp-"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-fortran.el
-
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-fortran" '("lsp-clients-"))
+(register-definition-prefixes "lsp-mode/clients/lsp-elm" '("lsp-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-fsharp.el
+;;; Generated autoloads from lsp-mode/clients/lsp-emmet.el
 
-(autoload 'lsp-fsharp--workspace-load "../site-lisp/lsp-mode/clients/lsp-fsharp" "\
+(register-definition-prefixes "lsp-mode/clients/lsp-emmet" '("lsp-emmet-ls-command"))
+
+
+;;; Generated autoloads from lsp-mode/clients/lsp-erlang.el
+
+(register-definition-prefixes "lsp-mode/clients/lsp-erlang" '("lsp-erlang-"))
+
+
+;;; Generated autoloads from lsp-mode/clients/lsp-eslint.el
+
+(register-definition-prefixes "lsp-mode/clients/lsp-eslint" '("lsp-"))
+
+
+;;; Generated autoloads from lsp-mode/test/lsp-file-watch-test.el
+
+(register-definition-prefixes "lsp-mode/test/lsp-file-watch-test" '("lsp-"))
+
+
+;;; Generated autoloads from lsp-mode/clients/lsp-fortran.el
+
+(register-definition-prefixes "lsp-mode/clients/lsp-fortran" '("lsp-clients-"))
+
+
+;;; Generated autoloads from lsp-mode/clients/lsp-fsharp.el
+
+(autoload 'lsp-fsharp--workspace-load "lsp-mode/clients/lsp-fsharp" "\
 Load all of the provided PROJECTS.
 
 (fn PROJECTS)")
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-fsharp" '("lsp-fsharp-"))
+(register-definition-prefixes "lsp-mode/clients/lsp-fsharp" '("lsp-fsharp-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-gdscript.el
+;;; Generated autoloads from lsp-mode/clients/lsp-gdscript.el
 
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-gdscript" '("lsp-gdscript-"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-mode/scripts/lsp-generate-settings.el
-
-(register-definition-prefixes "../site-lisp/lsp-mode/scripts/lsp-generate-settings" '("lsp-"))
+(register-definition-prefixes "lsp-mode/clients/lsp-gdscript" '("lsp-gdscript-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-gleam.el
+;;; Generated autoloads from lsp-mode/scripts/lsp-generate-settings.el
 
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-gleam" '("lsp-gleam-executable"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-glsl.el
-
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-glsl" '("lsp-glsl-executable"))
+(register-definition-prefixes "lsp-mode/scripts/lsp-generate-settings" '("lsp-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-go.el
+;;; Generated autoloads from lsp-mode/clients/lsp-gleam.el
 
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-go" '("lsp-go-"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-graphql.el
-
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-graphql" '("lsp-"))
+(register-definition-prefixes "lsp-mode/clients/lsp-gleam" '("lsp-gleam-executable"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-groovy.el
+;;; Generated autoloads from lsp-mode/clients/lsp-glsl.el
 
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-groovy" '("lsp-groovy-"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-hack.el
-
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-hack" '("lsp-clients-hack-command"))
+(register-definition-prefixes "lsp-mode/clients/lsp-glsl" '("lsp-glsl-executable"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-haxe.el
+;;; Generated autoloads from lsp-mode/clients/lsp-go.el
 
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-haxe" '("lsp-"))
+(register-definition-prefixes "lsp-mode/clients/lsp-go" '("lsp-go-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/lsp-headerline.el
+;;; Generated autoloads from lsp-mode/clients/lsp-graphql.el
 
-(autoload 'lsp-headerline-breadcrumb-mode "../site-lisp/lsp-mode/lsp-headerline" "\
+(register-definition-prefixes "lsp-mode/clients/lsp-graphql" '("lsp-"))
+
+
+;;; Generated autoloads from lsp-mode/clients/lsp-groovy.el
+
+(register-definition-prefixes "lsp-mode/clients/lsp-groovy" '("lsp-groovy-"))
+
+
+;;; Generated autoloads from lsp-mode/clients/lsp-hack.el
+
+(register-definition-prefixes "lsp-mode/clients/lsp-hack" '("lsp-clients-hack-command"))
+
+
+;;; Generated autoloads from lsp-mode/clients/lsp-haxe.el
+
+(register-definition-prefixes "lsp-mode/clients/lsp-haxe" '("lsp-"))
+
+
+;;; Generated autoloads from lsp-mode/lsp-headerline.el
+
+(autoload 'lsp-headerline-breadcrumb-mode "lsp-mode/lsp-headerline" "\
 Toggle breadcrumb on headerline.
 
 This is a minor mode.  If called interactively, toggle the
@@ -3812,106 +4431,106 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(autoload 'lsp-breadcrumb-go-to-symbol "../site-lisp/lsp-mode/lsp-headerline" "\
+(autoload 'lsp-breadcrumb-go-to-symbol "lsp-mode/lsp-headerline" "\
 Go to the symbol on breadcrumb at SYMBOL-POSITION.
 
 (fn SYMBOL-POSITION)" t)
-(autoload 'lsp-breadcrumb-narrow-to-symbol "../site-lisp/lsp-mode/lsp-headerline" "\
+(autoload 'lsp-breadcrumb-narrow-to-symbol "lsp-mode/lsp-headerline" "\
 Narrow to the symbol range on breadcrumb at SYMBOL-POSITION.
 
 (fn SYMBOL-POSITION)" t)
-(register-definition-prefixes "../site-lisp/lsp-mode/lsp-headerline" '("lsp-headerline-"))
+(register-definition-prefixes "lsp-mode/lsp-headerline" '("lsp-headerline-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-html.el
+;;; Generated autoloads from lsp-mode/clients/lsp-html.el
 
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-html" '("lsp-html-"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-mode/lsp-icons.el
-
-(register-definition-prefixes "../site-lisp/lsp-mode/lsp-icons" '("lsp-"))
+(register-definition-prefixes "lsp-mode/clients/lsp-html" '("lsp-html-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/lsp-ido.el
+;;; Generated autoloads from lsp-mode/lsp-icons.el
 
-(autoload 'lsp-ido-workspace-symbol "../site-lisp/lsp-mode/lsp-ido" "\
+(register-definition-prefixes "lsp-mode/lsp-icons" '("lsp-"))
+
+
+;;; Generated autoloads from lsp-mode/lsp-ido.el
+
+(autoload 'lsp-ido-workspace-symbol "lsp-mode/lsp-ido" "\
 `ido' for lsp workspace/symbol.
 When called with prefix ARG the default selection will be symbol at point.
 
 (fn ARG)" t)
-(register-definition-prefixes "../site-lisp/lsp-mode/lsp-ido" '("lsp-ido-"))
+(register-definition-prefixes "lsp-mode/lsp-ido" '("lsp-ido-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-idris.el
+;;; Generated autoloads from lsp-mode/clients/lsp-idris.el
 
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-idris" '("lsp-idris2-lsp-"))
+(register-definition-prefixes "lsp-mode/clients/lsp-idris" '("lsp-idris2-lsp-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/lsp-iedit.el
+;;; Generated autoloads from lsp-mode/lsp-iedit.el
 
-(autoload 'lsp-iedit-highlights "../site-lisp/lsp-mode/lsp-iedit" "\
+(autoload 'lsp-iedit-highlights "lsp-mode/lsp-iedit" "\
 Start an `iedit' operation on the documentHighlights at point.
 This can be used as a primitive `lsp-rename' replacement if the
 language server doesn't support renaming.
 
 See also `lsp-enable-symbol-highlighting'." t)
-(autoload 'lsp-iedit-linked-ranges "../site-lisp/lsp-mode/lsp-iedit" "\
+(autoload 'lsp-iedit-linked-ranges "lsp-mode/lsp-iedit" "\
 Start an `iedit' for `textDocument/linkedEditingRange'" t)
-(autoload 'lsp-evil-multiedit-highlights "../site-lisp/lsp-mode/lsp-iedit" "\
+(autoload 'lsp-evil-multiedit-highlights "lsp-mode/lsp-iedit" "\
 Start an `evil-multiedit' operation on the documentHighlights at point.
 This can be used as a primitive `lsp-rename' replacement if the
 language server doesn't support renaming.
 
 See also `lsp-enable-symbol-highlighting'." t)
-(autoload 'lsp-evil-multiedit-linked-ranges "../site-lisp/lsp-mode/lsp-iedit" "\
+(autoload 'lsp-evil-multiedit-linked-ranges "lsp-mode/lsp-iedit" "\
 Start an `evil-multiedit' for `textDocument/linkedEditingRange'" t)
-(autoload 'lsp-evil-state-highlights "../site-lisp/lsp-mode/lsp-iedit" "\
+(autoload 'lsp-evil-state-highlights "lsp-mode/lsp-iedit" "\
 Start `iedit-mode'. for `textDocument/documentHighlight'" t)
-(autoload 'lsp-evil-state-linked-ranges "../site-lisp/lsp-mode/lsp-iedit" "\
+(autoload 'lsp-evil-state-linked-ranges "lsp-mode/lsp-iedit" "\
 Start `iedit-mode'. for `textDocument/linkedEditingRange'" t)
-(register-definition-prefixes "../site-lisp/lsp-mode/lsp-iedit" '("lsp-iedit--on-ranges"))
+(register-definition-prefixes "lsp-mode/lsp-iedit" '("lsp-iedit--on-ranges"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/test/lsp-integration-test.el
+;;; Generated autoloads from lsp-mode/test/lsp-integration-test.el
 
-(register-definition-prefixes "../site-lisp/lsp-mode/test/lsp-integration-test" '("deferred::nextc" "lsp-"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-mode/test/lsp-io-test.el
-
-(register-definition-prefixes "../site-lisp/lsp-mode/test/lsp-io-test" '("lsp--"))
+(register-definition-prefixes "lsp-mode/test/lsp-integration-test" '("deferred::nextc" "lsp-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-javascript.el
+;;; Generated autoloads from lsp-mode/test/lsp-io-test.el
 
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-javascript" '("lsp-"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-mode/test/lsp-javascript-test.el
-
-(register-definition-prefixes "../site-lisp/lsp-mode/test/lsp-javascript-test" '("lsp-flow-" "test-location"))
+(register-definition-prefixes "lsp-mode/test/lsp-io-test" '("lsp--"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-json.el
+;;; Generated autoloads from lsp-mode/clients/lsp-javascript.el
 
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-json" '("lsp-"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-kotlin.el
-
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-kotlin" '("lsp-"))
+(register-definition-prefixes "lsp-mode/clients/lsp-javascript" '("lsp-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/lsp-lens.el
+;;; Generated autoloads from lsp-mode/test/lsp-javascript-test.el
 
-(autoload 'lsp-lens--enable "../site-lisp/lsp-mode/lsp-lens" "\
+(register-definition-prefixes "lsp-mode/test/lsp-javascript-test" '("lsp-flow-" "test-location"))
+
+
+;;; Generated autoloads from lsp-mode/clients/lsp-json.el
+
+(register-definition-prefixes "lsp-mode/clients/lsp-json" '("lsp-"))
+
+
+;;; Generated autoloads from lsp-mode/clients/lsp-kotlin.el
+
+(register-definition-prefixes "lsp-mode/clients/lsp-kotlin" '("lsp-"))
+
+
+;;; Generated autoloads from lsp-mode/lsp-lens.el
+
+(autoload 'lsp-lens--enable "lsp-mode/lsp-lens" "\
 Enable lens mode.")
-(autoload 'lsp-lens-show "../site-lisp/lsp-mode/lsp-lens" "\
+(autoload 'lsp-lens-show "lsp-mode/lsp-lens" "\
 Display lenses in the buffer." t)
-(autoload 'lsp-lens-hide "../site-lisp/lsp-mode/lsp-lens" "\
+(autoload 'lsp-lens-hide "lsp-mode/lsp-lens" "\
 Delete all lenses." t)
-(autoload 'lsp-lens-mode "../site-lisp/lsp-mode/lsp-lens" "\
+(autoload 'lsp-lens-mode "lsp-mode/lsp-lens" "\
 Toggle code-lens overlays.
 
 This is a minor mode.  If called interactively, toggle the
@@ -3929,81 +4548,81 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(autoload 'lsp-avy-lens "../site-lisp/lsp-mode/lsp-lens" "\
+(autoload 'lsp-avy-lens "lsp-mode/lsp-lens" "\
 Click lsp lens using `avy' package." t)
-(register-definition-prefixes "../site-lisp/lsp-mode/lsp-lens" '("lsp-"))
+(register-definition-prefixes "lsp-mode/lsp-lens" '("lsp-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-lua.el
+;;; Generated autoloads from lsp-mode/clients/lsp-lua.el
 
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-lua" '("lsp-"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-magik.el
-
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-magik" '("lsp-magik-"))
+(register-definition-prefixes "lsp-mode/clients/lsp-lua" '("lsp-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-markdown.el
+;;; Generated autoloads from lsp-mode/clients/lsp-magik.el
 
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-markdown" '("lsp-markdown-"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-marksman.el
-
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-marksman" '("lsp-marksman-"))
+(register-definition-prefixes "lsp-mode/clients/lsp-magik" '("lsp-magik-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/test/lsp-methods-test.el
+;;; Generated autoloads from lsp-mode/clients/lsp-markdown.el
 
-(register-definition-prefixes "../site-lisp/lsp-mode/test/lsp-methods-test" '("lsp-"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-mint.el
-
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-mint" '("lsp-clients-mint-executable"))
+(register-definition-prefixes "lsp-mode/clients/lsp-markdown" '("lsp-markdown-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/lsp-mode.el
+;;; Generated autoloads from lsp-mode/clients/lsp-marksman.el
+
+(register-definition-prefixes "lsp-mode/clients/lsp-marksman" '("lsp-marksman-"))
+
+
+;;; Generated autoloads from lsp-mode/test/lsp-methods-test.el
+
+(register-definition-prefixes "lsp-mode/test/lsp-methods-test" '("lsp-"))
+
+
+;;; Generated autoloads from lsp-mode/clients/lsp-mint.el
+
+(register-definition-prefixes "lsp-mode/clients/lsp-mint" '("lsp-clients-mint-executable"))
+
+
+;;; Generated autoloads from lsp-mode/lsp-mode.el
 
 (put 'lsp-enable-file-watchers 'safe-local-variable #'booleanp)
 (put 'lsp-file-watch-ignored-directories 'safe-local-variable 'lsp--string-listp)
 (put 'lsp-file-watch-ignored-files 'safe-local-variable 'lsp--string-listp)
 (put 'lsp-file-watch-threshold 'safe-local-variable (lambda (i) (or (numberp i) (not i))))
-(autoload 'lsp--string-listp "../site-lisp/lsp-mode/lsp-mode" "\
+(autoload 'lsp--string-listp "lsp-mode/lsp-mode" "\
 Return t if all elements of SEQUENCE are strings, else nil.
 
 (fn SEQUENCE)")
-(autoload 'lsp-load-vscode-workspace "../site-lisp/lsp-mode/lsp-mode" "\
+(autoload 'lsp-load-vscode-workspace "lsp-mode/lsp-mode" "\
 Load vscode workspace from FILE
 
 (fn FILE)" t)
-(autoload 'lsp-save-vscode-workspace "../site-lisp/lsp-mode/lsp-mode" "\
+(autoload 'lsp-save-vscode-workspace "lsp-mode/lsp-mode" "\
 Save vscode workspace to FILE
 
 (fn FILE)" t)
-(autoload 'lsp-install-server "../site-lisp/lsp-mode/lsp-mode" "\
+(autoload 'lsp-install-server "lsp-mode/lsp-mode" "\
 Interactively install or re-install server.
 When prefix UPDATE? is t force installation even if the server is present.
 
 (fn UPDATE? &optional SERVER-ID)" t)
-(autoload 'lsp-uninstall-server "../site-lisp/lsp-mode/lsp-mode" "\
+(autoload 'lsp-uninstall-server "lsp-mode/lsp-mode" "\
 Delete a LSP server from `lsp-server-install-dir'.
 
 (fn DIR)" t)
-(autoload 'lsp-uninstall-servers "../site-lisp/lsp-mode/lsp-mode" "\
+(autoload 'lsp-uninstall-servers "lsp-mode/lsp-mode" "\
 Uninstall all installed servers." t)
-(autoload 'lsp-update-server "../site-lisp/lsp-mode/lsp-mode" "\
+(autoload 'lsp-update-server "lsp-mode/lsp-mode" "\
 Interactively update (reinstall) a server.
 
 (fn &optional SERVER-ID)" t)
-(autoload 'lsp-update-servers "../site-lisp/lsp-mode/lsp-mode" "\
+(autoload 'lsp-update-servers "lsp-mode/lsp-mode" "\
 Update (reinstall) all installed servers." t)
-(autoload 'lsp-ensure-server "../site-lisp/lsp-mode/lsp-mode" "\
+(autoload 'lsp-ensure-server "lsp-mode/lsp-mode" "\
 Ensure server SERVER-ID
 
 (fn SERVER-ID)")
-(autoload 'lsp "../site-lisp/lsp-mode/lsp-mode" "\
+(autoload 'lsp "lsp-mode/lsp-mode" "\
 Entry point for the server startup.
 When ARG is t the lsp mode will start new language server even if
 there is language server which can handle current language. When
@@ -4012,33 +4631,33 @@ server if there is such. When `lsp' is called with prefix
 argument ask the user to select which language server to start.
 
 (fn &optional ARG)" t)
-(autoload 'lsp-deferred "../site-lisp/lsp-mode/lsp-mode" "\
+(autoload 'lsp-deferred "lsp-mode/lsp-mode" "\
 Entry point that defers server startup until buffer is visible.
 `lsp-deferred' will wait until the buffer is visible before invoking `lsp'.
 This avoids overloading the server with many files when starting Emacs.")
-(autoload 'lsp-start-plain "../site-lisp/lsp-mode/lsp-mode" "\
+(autoload 'lsp-start-plain "lsp-mode/lsp-mode" "\
 Start `lsp-mode' using minimal configuration using the latest `melpa' version
 of the packages.
 
 In case the major-mode that you are using for " t)
-(register-definition-prefixes "../site-lisp/lsp-mode/lsp-mode" '("defcustom-lsp" "lsp-" "make-lsp-client" "when-lsp-workspace" "with-lsp-workspace"))
+(register-definition-prefixes "lsp-mode/lsp-mode" '("defcustom-lsp" "lsp-" "make-lsp-client" "when-lsp-workspace" "with-lsp-workspace"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/features/step-definitions/lsp-mode-steps.el
+;;; Generated autoloads from lsp-mode/features/step-definitions/lsp-mode-steps.el
 
-(register-definition-prefixes "../site-lisp/lsp-mode/features/step-definitions/lsp-mode-steps" '("lsp-"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-mode/test/lsp-mode-test.el
-
-(register-definition-prefixes "../site-lisp/lsp-mode/test/lsp-mode-test" '("lsp-"))
+(register-definition-prefixes "lsp-mode/features/step-definitions/lsp-mode-steps" '("lsp-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/lsp-modeline.el
+;;; Generated autoloads from lsp-mode/test/lsp-mode-test.el
+
+(register-definition-prefixes "lsp-mode/test/lsp-mode-test" '("lsp-"))
+
+
+;;; Generated autoloads from lsp-mode/lsp-modeline.el
 
 (define-obsolete-variable-alias 'lsp-diagnostics-modeline-scope 'lsp-modeline-diagnostics-scope "\
 lsp-mode 7.0.1")
-(autoload 'lsp-modeline-code-actions-mode "../site-lisp/lsp-mode/lsp-modeline" "\
+(autoload 'lsp-modeline-code-actions-mode "lsp-mode/lsp-modeline" "\
 Toggle code actions on modeline.
 
 This is a minor mode.  If called interactively, toggle the
@@ -4058,7 +4677,7 @@ it is disabled.
 
 (fn &optional ARG)" t)
 (define-obsolete-function-alias 'lsp-diagnostics-modeline-mode 'lsp-modeline-diagnostics-mode "lsp-mode 7.0.1")
-(autoload 'lsp-modeline-diagnostics-mode "../site-lisp/lsp-mode/lsp-modeline" "\
+(autoload 'lsp-modeline-diagnostics-mode "lsp-mode/lsp-modeline" "\
 Toggle diagnostics modeline.
 
 This is a minor mode.  If called interactively, toggle the
@@ -4077,7 +4696,7 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(autoload 'lsp-modeline-workspace-status-mode "../site-lisp/lsp-mode/lsp-modeline" "\
+(autoload 'lsp-modeline-workspace-status-mode "lsp-mode/lsp-modeline" "\
 Toggle workspace status on modeline.
 
 This is a minor mode.  If called interactively, toggle the
@@ -4096,125 +4715,125 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(register-definition-prefixes "../site-lisp/lsp-mode/lsp-modeline" '("lsp-"))
+(register-definition-prefixes "lsp-mode/lsp-modeline" '("lsp-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-nginx.el
+;;; Generated autoloads from lsp-mode/clients/lsp-nginx.el
 
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-nginx" '("lsp-nginx-server-command"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-nim.el
-
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-nim" '("lsp-nim-l"))
+(register-definition-prefixes "lsp-mode/clients/lsp-nginx" '("lsp-nginx-server-command"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-nix.el
+;;; Generated autoloads from lsp-mode/clients/lsp-nim.el
 
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-nix" '("lsp-nix-"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-ocaml.el
-
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-ocaml" '("lsp-"))
+(register-definition-prefixes "lsp-mode/clients/lsp-nim" '("lsp-nim-l"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-openscad.el
+;;; Generated autoloads from lsp-mode/clients/lsp-nix.el
 
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-openscad" '("lsp-openscad-"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-perl.el
-
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-perl" '("lsp-perl-"))
+(register-definition-prefixes "lsp-mode/clients/lsp-nix" '("lsp-nix-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-perlnavigator.el
+;;; Generated autoloads from lsp-mode/clients/lsp-ocaml.el
 
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-perlnavigator" '("lsp-perlnavigator-"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-php.el
-
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-php" '("lsp-"))
+(register-definition-prefixes "lsp-mode/clients/lsp-ocaml" '("lsp-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-pls.el
+;;; Generated autoloads from lsp-mode/clients/lsp-openscad.el
 
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-pls" '("lsp-pls-"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-prolog.el
-
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-prolog" '("lsp-prolog-server-command"))
+(register-definition-prefixes "lsp-mode/clients/lsp-openscad" '("lsp-openscad-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/lsp-protocol.el
+;;; Generated autoloads from lsp-mode/clients/lsp-perl.el
 
-(register-definition-prefixes "../site-lisp/lsp-mode/lsp-protocol" '("dash-expand:&RangeToPoint" "lsp"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-purescript.el
-
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-purescript" '("lsp-purescript-"))
+(register-definition-prefixes "lsp-mode/clients/lsp-perl" '("lsp-perl-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-pwsh.el
+;;; Generated autoloads from lsp-mode/clients/lsp-perlnavigator.el
 
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-pwsh" '("lsp-pwsh-"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-pyls.el
-
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-pyls" '("lsp-"))
+(register-definition-prefixes "lsp-mode/clients/lsp-perlnavigator" '("lsp-perlnavigator-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-pylsp.el
+;;; Generated autoloads from lsp-mode/clients/lsp-php.el
 
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-pylsp" '("lsp-"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-r.el
-
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-r" '("lsp-clients-r-server-command"))
+(register-definition-prefixes "lsp-mode/clients/lsp-php" '("lsp-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-racket.el
+;;; Generated autoloads from lsp-mode/clients/lsp-pls.el
 
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-racket" '("lsp-racket-lang"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-remark.el
-
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-remark" '("lsp-remark-server-command"))
+(register-definition-prefixes "lsp-mode/clients/lsp-pls" '("lsp-pls-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-rf.el
+;;; Generated autoloads from lsp-mode/clients/lsp-prolog.el
 
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-rf" '("expand-start-command" "lsp-rf-language-server-" "parse-rf-language-server-"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-ruby-lsp.el
-
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-ruby-lsp" '("lsp-ruby-lsp-"))
+(register-definition-prefixes "lsp-mode/clients/lsp-prolog" '("lsp-prolog-server-command"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-ruby-syntax-tree.el
+;;; Generated autoloads from lsp-mode/lsp-protocol.el
 
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-ruby-syntax-tree" '("lsp-ruby-syntax-tree-"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-ruff-lsp.el
-
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-ruff-lsp" '("lsp-ruff-lsp-"))
+(register-definition-prefixes "lsp-mode/lsp-protocol" '("dash-expand:&RangeToPoint" "lsp"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-rust.el
+;;; Generated autoloads from lsp-mode/clients/lsp-purescript.el
 
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-rust" '("lsp-"))
+(register-definition-prefixes "lsp-mode/clients/lsp-purescript" '("lsp-purescript-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/lsp-semantic-tokens.el
+;;; Generated autoloads from lsp-mode/clients/lsp-pwsh.el
+
+(register-definition-prefixes "lsp-mode/clients/lsp-pwsh" '("lsp-pwsh-"))
+
+
+;;; Generated autoloads from lsp-mode/clients/lsp-pyls.el
+
+(register-definition-prefixes "lsp-mode/clients/lsp-pyls" '("lsp-"))
+
+
+;;; Generated autoloads from lsp-mode/clients/lsp-pylsp.el
+
+(register-definition-prefixes "lsp-mode/clients/lsp-pylsp" '("lsp-"))
+
+
+;;; Generated autoloads from lsp-mode/clients/lsp-r.el
+
+(register-definition-prefixes "lsp-mode/clients/lsp-r" '("lsp-clients-r-server-command"))
+
+
+;;; Generated autoloads from lsp-mode/clients/lsp-racket.el
+
+(register-definition-prefixes "lsp-mode/clients/lsp-racket" '("lsp-racket-lang"))
+
+
+;;; Generated autoloads from lsp-mode/clients/lsp-remark.el
+
+(register-definition-prefixes "lsp-mode/clients/lsp-remark" '("lsp-remark-server-command"))
+
+
+;;; Generated autoloads from lsp-mode/clients/lsp-rf.el
+
+(register-definition-prefixes "lsp-mode/clients/lsp-rf" '("expand-start-command" "lsp-rf-language-server-" "parse-rf-language-server-"))
+
+
+;;; Generated autoloads from lsp-mode/clients/lsp-ruby-lsp.el
+
+(register-definition-prefixes "lsp-mode/clients/lsp-ruby-lsp" '("lsp-ruby-lsp-"))
+
+
+;;; Generated autoloads from lsp-mode/clients/lsp-ruby-syntax-tree.el
+
+(register-definition-prefixes "lsp-mode/clients/lsp-ruby-syntax-tree" '("lsp-ruby-syntax-tree-"))
+
+
+;;; Generated autoloads from lsp-mode/clients/lsp-ruff-lsp.el
+
+(register-definition-prefixes "lsp-mode/clients/lsp-ruff-lsp" '("lsp-ruff-lsp-"))
+
+
+;;; Generated autoloads from lsp-mode/clients/lsp-rust.el
+
+(register-definition-prefixes "lsp-mode/clients/lsp-rust" '("lsp-"))
+
+
+;;; Generated autoloads from lsp-mode/lsp-semantic-tokens.el
 
 (defvar-local semantic-token-modifier-cache (make-hash-table) "\
 A cache of modifier values to the selected fonts.
@@ -4228,18 +4847,18 @@ given workspace/language-server combination.
 
 This cache should be flushed every time any modifier
 configuration changes.")
-(autoload 'lsp--semantic-tokens-initialize-buffer "../site-lisp/lsp-mode/lsp-semantic-tokens" "\
+(autoload 'lsp--semantic-tokens-initialize-buffer "lsp-mode/lsp-semantic-tokens" "\
 Initialize the buffer for semantic tokens.
 IS-RANGE-PROVIDER is non-nil when server supports range requests.")
-(autoload 'lsp--semantic-tokens-initialize-workspace "../site-lisp/lsp-mode/lsp-semantic-tokens" "\
+(autoload 'lsp--semantic-tokens-initialize-workspace "lsp-mode/lsp-semantic-tokens" "\
 Initialize semantic tokens for WORKSPACE.
 
 (fn WORKSPACE)")
-(autoload 'lsp-semantic-tokens--warn-about-deprecated-setting "../site-lisp/lsp-mode/lsp-semantic-tokens" "\
+(autoload 'lsp-semantic-tokens--warn-about-deprecated-setting "lsp-mode/lsp-semantic-tokens" "\
 Warn about deprecated semantic highlighting variable.")
-(autoload 'lsp-semantic-tokens--enable "../site-lisp/lsp-mode/lsp-semantic-tokens" "\
+(autoload 'lsp-semantic-tokens--enable "lsp-mode/lsp-semantic-tokens" "\
 Enable semantic tokens mode.")
-(autoload 'lsp-semantic-tokens-mode "../site-lisp/lsp-mode/lsp-semantic-tokens" "\
+(autoload 'lsp-semantic-tokens-mode "lsp-mode/lsp-semantic-tokens" "\
 Toggle semantic-tokens support.
 
 This is a minor mode.  If called interactively, toggle the
@@ -4258,66 +4877,66 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(register-definition-prefixes "../site-lisp/lsp-mode/lsp-semantic-tokens" '("lsp-"))
+(register-definition-prefixes "lsp-mode/lsp-semantic-tokens" '("lsp-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-semgrep.el
+;;; Generated autoloads from lsp-mode/clients/lsp-semgrep.el
 
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-semgrep" '("lsp-semgrep-" "semgrep-"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-sml.el
-
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-sml" '("lsp-sml-millet-"))
+(register-definition-prefixes "lsp-mode/clients/lsp-semgrep" '("lsp-semgrep-" "semgrep-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-solargraph.el
+;;; Generated autoloads from lsp-mode/clients/lsp-sml.el
 
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-solargraph" '("lsp-solargraph-"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-sorbet.el
-
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-sorbet" '("lsp-sorbet-"))
+(register-definition-prefixes "lsp-mode/clients/lsp-sml" '("lsp-sml-millet-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-sqls.el
+;;; Generated autoloads from lsp-mode/clients/lsp-solargraph.el
 
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-sqls" '("lsp-sql"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-steep.el
-
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-steep" '("lsp-steep-"))
+(register-definition-prefixes "lsp-mode/clients/lsp-solargraph" '("lsp-solargraph-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-svelte.el
+;;; Generated autoloads from lsp-mode/clients/lsp-sorbet.el
 
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-svelte" '("lsp-svelte-plugin-"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-terraform.el
-
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-terraform" '("construct-tf-package" "lsp-t"))
+(register-definition-prefixes "lsp-mode/clients/lsp-sorbet" '("lsp-sorbet-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-tex.el
+;;; Generated autoloads from lsp-mode/clients/lsp-sqls.el
 
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-tex" '("lsp-"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-toml.el
-
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-toml" '("lsp-toml-"))
+(register-definition-prefixes "lsp-mode/clients/lsp-sqls" '("lsp-sql"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-treemacs/lsp-treemacs.el
+;;; Generated autoloads from lsp-mode/clients/lsp-steep.el
 
-(autoload 'lsp-treemacs-symbols "../site-lisp/lsp-treemacs/lsp-treemacs" "\
+(register-definition-prefixes "lsp-mode/clients/lsp-steep" '("lsp-steep-"))
+
+
+;;; Generated autoloads from lsp-mode/clients/lsp-svelte.el
+
+(register-definition-prefixes "lsp-mode/clients/lsp-svelte" '("lsp-svelte-plugin-"))
+
+
+;;; Generated autoloads from lsp-mode/clients/lsp-terraform.el
+
+(register-definition-prefixes "lsp-mode/clients/lsp-terraform" '("construct-tf-package" "lsp-t"))
+
+
+;;; Generated autoloads from lsp-mode/clients/lsp-tex.el
+
+(register-definition-prefixes "lsp-mode/clients/lsp-tex" '("lsp-"))
+
+
+;;; Generated autoloads from lsp-mode/clients/lsp-toml.el
+
+(register-definition-prefixes "lsp-mode/clients/lsp-toml" '("lsp-toml-"))
+
+
+;;; Generated autoloads from lsp-treemacs/lsp-treemacs.el
+
+(autoload 'lsp-treemacs-symbols "lsp-treemacs/lsp-treemacs" "\
 Show symbols view." t)
-(autoload 'lsp-treemacs-java-deps-list "../site-lisp/lsp-treemacs/lsp-treemacs" "\
+(autoload 'lsp-treemacs-java-deps-list "lsp-treemacs/lsp-treemacs" "\
 Display java dependencies." t)
-(autoload 'lsp-treemacs-java-deps-follow "../site-lisp/lsp-treemacs/lsp-treemacs" nil t)
+(autoload 'lsp-treemacs-java-deps-follow "lsp-treemacs/lsp-treemacs" nil t)
 (defvar lsp-treemacs-sync-mode nil "\
 Non-nil if Lsp-Treemacs-Sync mode is enabled.
 See the `lsp-treemacs-sync-mode' command
@@ -4325,8 +4944,8 @@ for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `lsp-treemacs-sync-mode'.")
-(custom-autoload 'lsp-treemacs-sync-mode "../site-lisp/lsp-treemacs/lsp-treemacs" nil)
-(autoload 'lsp-treemacs-sync-mode "../site-lisp/lsp-treemacs/lsp-treemacs" "\
+(custom-autoload 'lsp-treemacs-sync-mode "lsp-treemacs/lsp-treemacs" nil)
+(autoload 'lsp-treemacs-sync-mode "lsp-treemacs/lsp-treemacs" "\
 Global minor mode for synchronizing lsp-mode workspace folders and treemacs projects.
 
 This is a global minor mode.  If called interactively, toggle the
@@ -4345,55 +4964,55 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(autoload 'lsp-treemacs-references "../site-lisp/lsp-treemacs/lsp-treemacs" "\
+(autoload 'lsp-treemacs-references "lsp-treemacs/lsp-treemacs" "\
 Show the references for the symbol at point.
 With a prefix argument, select the new window and expand the tree of references automatically.
 
 (fn ARG)" t)
-(autoload 'lsp-treemacs-implementations "../site-lisp/lsp-treemacs/lsp-treemacs" "\
+(autoload 'lsp-treemacs-implementations "lsp-treemacs/lsp-treemacs" "\
 Show the implementations for the symbol at point.
 With a prefix argument, select the new window expand the tree of implementations automatically.
 
 (fn ARG)" t)
-(autoload 'lsp-treemacs-call-hierarchy "../site-lisp/lsp-treemacs/lsp-treemacs" "\
+(autoload 'lsp-treemacs-call-hierarchy "lsp-treemacs/lsp-treemacs" "\
 Show the incoming call hierarchy for the symbol at point.
 With a prefix argument, show the outgoing call hierarchy.
 
 (fn OUTGOING)" t)
-(autoload 'lsp-treemacs-type-hierarchy "../site-lisp/lsp-treemacs/lsp-treemacs" "\
+(autoload 'lsp-treemacs-type-hierarchy "lsp-treemacs/lsp-treemacs" "\
 Show the type hierarchy for the symbol at point.
 With prefix 0 show sub-types.
 With prefix 1 show super-types.
 With prefix 2 show both.
 
 (fn DIRECTION)" t)
-(autoload 'lsp-treemacs-errors-list "../site-lisp/lsp-treemacs/lsp-treemacs" nil t)
-(register-definition-prefixes "../site-lisp/lsp-treemacs/lsp-treemacs" '("lsp-treemacs-"))
+(autoload 'lsp-treemacs-errors-list "lsp-treemacs/lsp-treemacs" nil t)
+(register-definition-prefixes "lsp-treemacs/lsp-treemacs" '("lsp-treemacs-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-treemacs/lsp-treemacs-generic.el
+;;; Generated autoloads from lsp-treemacs/lsp-treemacs-generic.el
 
-(register-definition-prefixes "../site-lisp/lsp-treemacs/lsp-treemacs-generic" '("lsp-treemacs-"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-treemacs/lsp-treemacs-themes.el
-
-(register-definition-prefixes "../site-lisp/lsp-treemacs/lsp-treemacs-themes" '("lsp-treemacs-theme"))
+(register-definition-prefixes "lsp-treemacs/lsp-treemacs-generic" '("lsp-treemacs-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-ttcn3.el
+;;; Generated autoloads from lsp-treemacs/lsp-treemacs-themes.el
 
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-ttcn3" '("lsp-ttcn3-lsp-server-command"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-typeprof.el
-
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-typeprof" '("lsp-typeprof-"))
+(register-definition-prefixes "lsp-treemacs/lsp-treemacs-themes" '("lsp-treemacs-theme"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-ui/lsp-ui.el
+;;; Generated autoloads from lsp-mode/clients/lsp-ttcn3.el
 
-(autoload 'lsp-ui-mode "../site-lisp/lsp-ui/lsp-ui" "\
+(register-definition-prefixes "lsp-mode/clients/lsp-ttcn3" '("lsp-ttcn3-lsp-server-command"))
+
+
+;;; Generated autoloads from lsp-mode/clients/lsp-typeprof.el
+
+(register-definition-prefixes "lsp-mode/clients/lsp-typeprof" '("lsp-typeprof-"))
+
+
+;;; Generated autoloads from lsp-ui/lsp-ui.el
+
+(autoload 'lsp-ui-mode "lsp-ui/lsp-ui" "\
 Toggle language server UI mode on or off.
 ‘lsp-ui-mode’ is a minor mode that contains a series of useful UI
 integrations for ‘lsp-mode’.  With a prefix argument ARG, enable
@@ -4402,117 +5021,117 @@ otherwise.  If called from Lisp, enable the mode if ARG is
 omitted or nil, and toggle it if ARG is ‘toggle’.
 
 (fn &optional ARG)" t)
-(register-definition-prefixes "../site-lisp/lsp-ui/lsp-ui" '("lsp-ui-"))
+(register-definition-prefixes "lsp-ui/lsp-ui" '("lsp-ui-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-ui/lsp-ui-doc.el
+;;; Generated autoloads from lsp-ui/lsp-ui-doc.el
 
-(register-definition-prefixes "../site-lisp/lsp-ui/lsp-ui-doc" '("lsp-ui-doc-"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-ui/lsp-ui-flycheck.el
-
-(register-definition-prefixes "../site-lisp/lsp-ui/lsp-ui-flycheck" '("lsp-ui-flycheck-"))
+(register-definition-prefixes "lsp-ui/lsp-ui-doc" '("lsp-ui-doc-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-ui/lsp-ui-imenu.el
+;;; Generated autoloads from lsp-ui/lsp-ui-flycheck.el
 
-(register-definition-prefixes "../site-lisp/lsp-ui/lsp-ui-imenu" '("lsp-ui-imenu" "overlay-priority"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-ui/lsp-ui-peek.el
-
-(register-definition-prefixes "../site-lisp/lsp-ui/lsp-ui-peek" '("lsp-"))
+(register-definition-prefixes "lsp-ui/lsp-ui-flycheck" '("lsp-ui-flycheck-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-ui/lsp-ui-sideline.el
+;;; Generated autoloads from lsp-ui/lsp-ui-imenu.el
 
-(register-definition-prefixes "../site-lisp/lsp-ui/lsp-ui-sideline" '("lsp-ui-sideline"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-ui/lsp-ui-util.el
-
-(register-definition-prefixes "../site-lisp/lsp-ui/lsp-ui-util" '("lsp-ui-util-"))
+(register-definition-prefixes "lsp-ui/lsp-ui-imenu" '("lsp-ui-imenu" "overlay-priority"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/use-package/lsp-use-package.el
+;;; Generated autoloads from lsp-ui/lsp-ui-peek.el
 
-(autoload 'use-package-normalize-ensure-servers "../site-lisp/lsp-mode/use-package/lsp-use-package" "\
+(register-definition-prefixes "lsp-ui/lsp-ui-peek" '("lsp-"))
+
+
+;;; Generated autoloads from lsp-ui/lsp-ui-sideline.el
+
+(register-definition-prefixes "lsp-ui/lsp-ui-sideline" '("lsp-ui-sideline"))
+
+
+;;; Generated autoloads from lsp-ui/lsp-ui-util.el
+
+(register-definition-prefixes "lsp-ui/lsp-ui-util" '("lsp-ui-util-"))
+
+
+;;; Generated autoloads from lsp-mode/use-package/lsp-use-package.el
+
+(autoload 'use-package-normalize-ensure-servers "lsp-mode/use-package/lsp-use-package" "\
 Normalize the arguments to diminish down to a list of symbols.
 LABEL - the label for the section.
 ARG - keyword value to normalize.
 
 (fn NAME LABEL ARG &optional RECURSED)")
-(autoload 'use-package-normalize/:ensure-servers "../site-lisp/lsp-mode/use-package/lsp-use-package" "\
+(autoload 'use-package-normalize/:ensure-servers "lsp-mode/use-package/lsp-use-package" "\
 Normalize ARGS under KEYWORD section.
 NAME is the name of the section.
 
 (fn NAME KEYWORD ARGS)")
 (with-eval-after-load 'use-package (add-to-list 'use-package-keywords :ensure-servers t))
-(register-definition-prefixes "../site-lisp/lsp-mode/use-package/lsp-use-package" '("use-package-handler/:ensure-servers"))
+(register-definition-prefixes "lsp-mode/use-package/lsp-use-package" '("use-package-handler/:ensure-servers"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-v.el
+;;; Generated autoloads from lsp-mode/clients/lsp-v.el
 
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-v" '("lsp-v-vls-executable"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-vala.el
-
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-vala" '("lsp-clients-vala-ls-executable"))
+(register-definition-prefixes "lsp-mode/clients/lsp-v" '("lsp-v-vls-executable"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-verilog.el
+;;; Generated autoloads from lsp-mode/clients/lsp-vala.el
 
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-verilog" '("lsp-clients-"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-vetur.el
-
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-vetur" '("lsp-vetur-"))
+(register-definition-prefixes "lsp-mode/clients/lsp-vala" '("lsp-clients-vala-ls-executable"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-vhdl.el
+;;; Generated autoloads from lsp-mode/clients/lsp-verilog.el
 
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-vhdl" '("ghdl-ls-bin-name" "hdl-checker-bin-name" "lsp-vhdl-" "vhdl-"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-vimscript.el
-
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-vimscript" '("lsp-clients-vim-"))
+(register-definition-prefixes "lsp-mode/clients/lsp-verilog" '("lsp-clients-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-volar.el
+;;; Generated autoloads from lsp-mode/clients/lsp-vetur.el
 
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-volar" '("lsp-volar-"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-mode/scripts/lsp-vscode-snippets.el
-
-(register-definition-prefixes "../site-lisp/lsp-mode/scripts/lsp-vscode-snippets" '("lsp-"))
+(register-definition-prefixes "lsp-mode/clients/lsp-vetur" '("lsp-vetur-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-xml.el
+;;; Generated autoloads from lsp-mode/clients/lsp-vhdl.el
 
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-xml" '("lsp-xml-"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-yaml.el
-
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-yaml" '("lsp-yaml-"))
+(register-definition-prefixes "lsp-mode/clients/lsp-vhdl" '("ghdl-ls-bin-name" "hdl-checker-bin-name" "lsp-vhdl-" "vhdl-"))
 
 
-;;; Generated autoloads from ../site-lisp/lsp-mode/clients/lsp-zig.el
+;;; Generated autoloads from lsp-mode/clients/lsp-vimscript.el
 
-(register-definition-prefixes "../site-lisp/lsp-mode/clients/lsp-zig" '("lsp-zig-zls-executable"))
-
-
-;;; Generated autoloads from ../site-lisp/hydra/lv.el
-
-(register-definition-prefixes "../site-lisp/hydra/lv" '("lv-"))
+(register-definition-prefixes "lsp-mode/clients/lsp-vimscript" '("lsp-clients-vim-"))
 
 
-;;; Generated autoloads from ../site-lisp/magit/lisp/magit.el
+;;; Generated autoloads from lsp-mode/clients/lsp-volar.el
+
+(register-definition-prefixes "lsp-mode/clients/lsp-volar" '("lsp-volar-"))
+
+
+;;; Generated autoloads from lsp-mode/scripts/lsp-vscode-snippets.el
+
+(register-definition-prefixes "lsp-mode/scripts/lsp-vscode-snippets" '("lsp-"))
+
+
+;;; Generated autoloads from lsp-mode/clients/lsp-xml.el
+
+(register-definition-prefixes "lsp-mode/clients/lsp-xml" '("lsp-xml-"))
+
+
+;;; Generated autoloads from lsp-mode/clients/lsp-yaml.el
+
+(register-definition-prefixes "lsp-mode/clients/lsp-yaml" '("lsp-yaml-"))
+
+
+;;; Generated autoloads from lsp-mode/clients/lsp-zig.el
+
+(register-definition-prefixes "lsp-mode/clients/lsp-zig" '("lsp-zig-zls-executable"))
+
+
+;;; Generated autoloads from hydra/lv.el
+
+(register-definition-prefixes "hydra/lv" '("lv-"))
+
+
+;;; Generated autoloads from magit/lisp/magit.el
 
 (defvar magit-define-global-key-bindings 'default "\
 Which set of key bindings to add to the global keymap, if any.
@@ -4561,13 +5180,13 @@ doesn't load the libraries that define the customized variables).
 
 Setting this variable has no effect if `after-init-hook' has
 already been run.")
-(custom-autoload 'magit-define-global-key-bindings "../site-lisp/magit/lisp/magit" t)
+(custom-autoload 'magit-define-global-key-bindings "magit/lisp/magit" t)
 (defun magit-maybe-define-global-key-bindings (&optional force) "\
 See variable `magit-define-global-key-bindings'." (when magit-define-global-key-bindings (let ((map (current-global-map))) (pcase-dolist (`(,key \, def) (cond ((eq magit-define-global-key-bindings 'recommended) '(("C-x g" . magit-status) ("C-c g" . magit-dispatch) ("C-c f" . magit-file-dispatch))) ('(("C-x g" . magit-status) ("C-x M-g" . magit-dispatch) ("C-c M-g" . magit-file-dispatch))))) (when (or force (not (or (lookup-key map (kbd key)) (where-is-internal def (make-sparse-keymap) t)))) (define-key map (kbd key) def))))))
 (if after-init-time (magit-maybe-define-global-key-bindings) (add-hook 'after-init-hook #'magit-maybe-define-global-key-bindings t))
  (autoload 'magit-dispatch "magit" nil t)
  (autoload 'magit-run "magit" nil t)
-(autoload 'magit-git-command "../site-lisp/magit/lisp/magit" "\
+(autoload 'magit-git-command "magit/lisp/magit" "\
 Execute COMMAND asynchronously; display output.
 
 Interactively, prompt for COMMAND in the minibuffer. \"git \" is
@@ -4577,7 +5196,7 @@ With a prefix argument COMMAND is run in the top-level directory
 of the current working tree, otherwise in `default-directory'.
 
 (fn COMMAND)" t)
-(autoload 'magit-git-command-topdir "../site-lisp/magit/lisp/magit" "\
+(autoload 'magit-git-command-topdir "magit/lisp/magit" "\
 Execute COMMAND asynchronously; display output.
 
 Interactively, prompt for COMMAND in the minibuffer. \"git \" is
@@ -4587,7 +5206,7 @@ COMMAND is run in the top-level directory of the current
 working tree.
 
 (fn COMMAND)" t)
-(autoload 'magit-shell-command "../site-lisp/magit/lisp/magit" "\
+(autoload 'magit-shell-command "magit/lisp/magit" "\
 Execute COMMAND asynchronously; display output.
 
 Interactively, prompt for COMMAND in the minibuffer.  With a
@@ -4595,14 +5214,14 @@ prefix argument COMMAND is run in the top-level directory of
 the current working tree, otherwise in `default-directory'.
 
 (fn COMMAND)" t)
-(autoload 'magit-shell-command-topdir "../site-lisp/magit/lisp/magit" "\
+(autoload 'magit-shell-command-topdir "magit/lisp/magit" "\
 Execute COMMAND asynchronously; display output.
 
 Interactively, prompt for COMMAND in the minibuffer.  COMMAND
 is run in the top-level directory of the current working tree.
 
 (fn COMMAND)" t)
-(autoload 'magit-version "../site-lisp/magit/lisp/magit" "\
+(autoload 'magit-version "magit/lisp/magit" "\
 Return the version of Magit currently in use.
 
 If optional argument PRINT-DEST is non-nil, also print the used
@@ -4612,19 +5231,19 @@ with a prefix argument use the current buffer.  Additionally put
 the output in the kill ring.
 
 (fn &optional PRINT-DEST)" t)
-(register-definition-prefixes "../site-lisp/magit/lisp/magit" '("magit-"))
+(register-definition-prefixes "magit/lisp/magit" '("magit-"))
 
 
-;;; Generated autoloads from ../site-lisp/magit/lisp/magit-apply.el
+;;; Generated autoloads from magit/lisp/magit-apply.el
 
-(autoload 'magit-stage-buffer-file "../site-lisp/magit/lisp/magit-apply" "\
+(autoload 'magit-stage-buffer-file "magit/lisp/magit-apply" "\
 Stage all changes to the file being visited in the current buffer." t)
-(autoload 'magit-stage-file "../site-lisp/magit/lisp/magit-apply" "\
+(autoload 'magit-stage-file "magit/lisp/magit-apply" "\
 Read one or more files and stage all changes in those files.
 With a prefix argument offer ignored files for completion.
 
 (fn FILES)" t)
-(autoload 'magit-stage-modified "../site-lisp/magit/lisp/magit-apply" "\
+(autoload 'magit-stage-modified "magit/lisp/magit-apply" "\
 Stage all changes to files modified in the worktree.
 Stage all new content of tracked files and remove tracked files
 that no longer exist in the working tree from the index also.
@@ -4632,18 +5251,18 @@ With a prefix argument also stage previously untracked (but not
 ignored) files.
 
 (fn &optional ALL)" t)
-(autoload 'magit-unstage-buffer-file "../site-lisp/magit/lisp/magit-apply" "\
+(autoload 'magit-unstage-buffer-file "magit/lisp/magit-apply" "\
 Unstage all changes to the file being visited in the current buffer." t)
-(autoload 'magit-unstage-file "../site-lisp/magit/lisp/magit-apply" "\
+(autoload 'magit-unstage-file "magit/lisp/magit-apply" "\
 Read one or more files and unstage all changes to those files.
 
 (fn FILES)" t)
-(autoload 'magit-unstage-all "../site-lisp/magit/lisp/magit-apply" "\
+(autoload 'magit-unstage-all "magit/lisp/magit-apply" "\
 Remove all changes from the staging area." t)
-(register-definition-prefixes "../site-lisp/magit/lisp/magit-apply" '("magit-"))
+(register-definition-prefixes "magit/lisp/magit-apply" '("magit-"))
 
 
-;;; Generated autoloads from ../site-lisp/magit/lisp/magit-autorevert.el
+;;; Generated autoloads from magit/lisp/magit-autorevert.el
 
 (put 'magit-auto-revert-mode 'globalized-minor-mode t)
 (defvar magit-auto-revert-mode (not (or global-auto-revert-mode noninteractive)) "\
@@ -4653,8 +5272,8 @@ for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `magit-auto-revert-mode'.")
-(custom-autoload 'magit-auto-revert-mode "../site-lisp/magit/lisp/magit-autorevert" nil)
-(autoload 'magit-auto-revert-mode "../site-lisp/magit/lisp/magit-autorevert" "\
+(custom-autoload 'magit-auto-revert-mode "magit/lisp/magit-autorevert" nil)
+(autoload 'magit-auto-revert-mode "magit/lisp/magit-autorevert" "\
 Toggle Auto-Revert mode in all buffers.
 With prefix ARG, enable Magit-Auto-Revert mode if ARG is positive;
 otherwise, disable it.
@@ -4669,31 +5288,31 @@ Auto-Revert mode is enabled in all buffers where
 See `auto-revert-mode' for more information on Auto-Revert mode.
 
 (fn &optional ARG)" t)
-(register-definition-prefixes "../site-lisp/magit/lisp/magit-autorevert" '("auto-revert-buffer" "magit-"))
+(register-definition-prefixes "magit/lisp/magit-autorevert" '("auto-revert-buffer" "magit-"))
 
 
-;;; Generated autoloads from ../site-lisp/magit/lisp/magit-base.el
+;;; Generated autoloads from magit/lisp/magit-base.el
 
-(autoload 'magit-emacs-Q-command "../site-lisp/magit/lisp/magit-base" "\
+(autoload 'magit-emacs-Q-command "magit/lisp/magit-base" "\
 Show a shell command that runs an uncustomized Emacs with only Magit loaded.
 See info node `(magit)Debugging Tools' for more information." t)
-(autoload 'Info-follow-nearest-node--magit-gitman "../site-lisp/magit/lisp/magit-base" "\
+(autoload 'Info-follow-nearest-node--magit-gitman "magit/lisp/magit-base" "\
 
 
 (fn FN &optional FORK)")
 (advice-add 'Info-follow-nearest-node :around #'Info-follow-nearest-node--magit-gitman)
 (advice-add 'org-man-export :around #'org-man-export--magit-gitman)
-(autoload 'org-man-export--magit-gitman "../site-lisp/magit/lisp/magit-base" "\
+(autoload 'org-man-export--magit-gitman "magit/lisp/magit-base" "\
 
 
 (fn FN LINK DESCRIPTION FORMAT)")
-(register-definition-prefixes "../site-lisp/magit/lisp/magit-base" '("magit-"))
+(register-definition-prefixes "magit/lisp/magit-base" '("magit-"))
 
 
-;;; Generated autoloads from ../site-lisp/magit/lisp/magit-bisect.el
+;;; Generated autoloads from magit/lisp/magit-bisect.el
 
  (autoload 'magit-bisect "magit-bisect" nil t)
-(autoload 'magit-bisect-start "../site-lisp/magit/lisp/magit-bisect" "\
+(autoload 'magit-bisect-start "magit/lisp/magit-bisect" "\
 Start a bisect session.
 
 Bisecting a bug means to find the commit that introduced it.
@@ -4702,17 +5321,17 @@ good and a known bad commit.  To move the session forward use the
 other actions from the bisect transient command (\\<magit-status-mode-map>\\[magit-bisect]).
 
 (fn BAD GOOD ARGS)" t)
-(autoload 'magit-bisect-reset "../site-lisp/magit/lisp/magit-bisect" "\
+(autoload 'magit-bisect-reset "magit/lisp/magit-bisect" "\
 After bisecting, cleanup bisection state and return to original `HEAD'." t)
-(autoload 'magit-bisect-good "../site-lisp/magit/lisp/magit-bisect" "\
+(autoload 'magit-bisect-good "magit/lisp/magit-bisect" "\
 While bisecting, mark the current commit as good.
 Use this after you have asserted that the commit does not contain
 the bug in question." t)
-(autoload 'magit-bisect-bad "../site-lisp/magit/lisp/magit-bisect" "\
+(autoload 'magit-bisect-bad "magit/lisp/magit-bisect" "\
 While bisecting, mark the current commit as bad.
 Use this after you have asserted that the commit does contain the
 bug in question." t)
-(autoload 'magit-bisect-mark "../site-lisp/magit/lisp/magit-bisect" "\
+(autoload 'magit-bisect-mark "magit/lisp/magit-bisect" "\
 While bisecting, mark the current commit with a bisect term.
 During a bisect using alternate terms, commits can still be
 marked with `magit-bisect-good' and `magit-bisect-bad', as those
@@ -4720,11 +5339,11 @@ commands map to the correct term (\"good\" to --term-old's value
 and \"bad\" to --term-new's).  However, in some cases, it can be
 difficult to keep that mapping straight in your head; this
 command provides an interface that exposes the underlying terms." t)
-(autoload 'magit-bisect-skip "../site-lisp/magit/lisp/magit-bisect" "\
+(autoload 'magit-bisect-skip "magit/lisp/magit-bisect" "\
 While bisecting, skip the current commit.
 Use this if for some reason the current commit is not a good one
 to test.  This command lets Git choose a different one." t)
-(autoload 'magit-bisect-run "../site-lisp/magit/lisp/magit-bisect" "\
+(autoload 'magit-bisect-run "magit/lisp/magit-bisect" "\
 Bisect automatically by running commands after each step.
 
 Unlike `git bisect run' this can be used before bisecting has
@@ -4732,23 +5351,23 @@ begun.  In that case it behaves like `git bisect start; git
 bisect run'.
 
 (fn CMDLINE &optional BAD GOOD ARGS)" t)
-(register-definition-prefixes "../site-lisp/magit/lisp/magit-bisect" '("magit-"))
+(register-definition-prefixes "magit/lisp/magit-bisect" '("magit-"))
 
 
-;;; Generated autoloads from ../site-lisp/magit/lisp/magit-blame.el
+;;; Generated autoloads from magit/lisp/magit-blame.el
 
  (autoload 'magit-blame-echo "magit-blame" nil t)
  (autoload 'magit-blame-addition "magit-blame" nil t)
  (autoload 'magit-blame-removal "magit-blame" nil t)
  (autoload 'magit-blame-reverse "magit-blame" nil t)
  (autoload 'magit-blame "magit-blame" nil t)
-(register-definition-prefixes "../site-lisp/magit/lisp/magit-blame" '("magit-"))
+(register-definition-prefixes "magit/lisp/magit-blame" '("magit-"))
 
 
-;;; Generated autoloads from ../site-lisp/magit/lisp/magit-branch.el
+;;; Generated autoloads from magit/lisp/magit-branch.el
 
  (autoload 'magit-branch "magit" nil t)
-(autoload 'magit-checkout "../site-lisp/magit/lisp/magit-branch" "\
+(autoload 'magit-checkout "magit/lisp/magit-branch" "\
 Checkout REVISION, updating the index and the working tree.
 If REVISION is a local branch, then that becomes the current
 branch.  If it is something else, then `HEAD' becomes detached.
@@ -4759,17 +5378,17 @@ changes.
 
 (fn REVISION &optional ARGS)" t)
 (function-put 'magit-checkout 'interactive-only 'magit--checkout)
-(autoload 'magit-branch-create "../site-lisp/magit/lisp/magit-branch" "\
+(autoload 'magit-branch-create "magit/lisp/magit-branch" "\
 Create BRANCH at branch or revision START-POINT.
 
 (fn BRANCH START-POINT)" t)
 (function-put 'magit-branch-create 'interactive-only 'magit-call-git)
-(autoload 'magit-branch-and-checkout "../site-lisp/magit/lisp/magit-branch" "\
+(autoload 'magit-branch-and-checkout "magit/lisp/magit-branch" "\
 Create and checkout BRANCH at branch or revision START-POINT.
 
 (fn BRANCH START-POINT &optional ARGS)" t)
 (function-put 'magit-branch-and-checkout 'interactive-only 'magit-call-git)
-(autoload 'magit-branch-or-checkout "../site-lisp/magit/lisp/magit-branch" "\
+(autoload 'magit-branch-or-checkout "magit/lisp/magit-branch" "\
 Hybrid between `magit-checkout' and `magit-branch-and-checkout'.
 
 Ask the user for an existing branch or revision.  If the user
@@ -4783,7 +5402,7 @@ does.
 
 (fn ARG &optional START-POINT)" t)
 (function-put 'magit-branch-or-checkout 'interactive-only 'magit-call-git)
-(autoload 'magit-branch-checkout "../site-lisp/magit/lisp/magit-branch" "\
+(autoload 'magit-branch-checkout "magit/lisp/magit-branch" "\
 Checkout an existing or new local branch.
 
 Read a branch name from the user offering all local branches and
@@ -4809,18 +5428,18 @@ when using `magit-branch-and-checkout'.
 
 (fn BRANCH &optional START-POINT)" t)
 (function-put 'magit-branch-checkout 'interactive-only 'magit-call-git)
-(autoload 'magit-branch-orphan "../site-lisp/magit/lisp/magit-branch" "\
+(autoload 'magit-branch-orphan "magit/lisp/magit-branch" "\
 Create and checkout an orphan BRANCH with contents from revision START-POINT.
 
 (fn BRANCH START-POINT)" t)
-(autoload 'magit-branch-spinout "../site-lisp/magit/lisp/magit-branch" "\
+(autoload 'magit-branch-spinout "magit/lisp/magit-branch" "\
 Create new branch from the unpushed commits.
 Like `magit-branch-spinoff' but remain on the current branch.
 If there are any uncommitted changes, then behave exactly like
 `magit-branch-spinoff'.
 
 (fn BRANCH &optional FROM)" t)
-(autoload 'magit-branch-spinoff "../site-lisp/magit/lisp/magit-branch" "\
+(autoload 'magit-branch-spinoff "magit/lisp/magit-branch" "\
 Create new branch from the unpushed commits.
 
 Create and checkout a new branch starting at and tracking the
@@ -4851,7 +5470,7 @@ branch.  If FROM is not reachable from `HEAD' or is reachable
 from the source branch's upstream, then an error is raised.
 
 (fn BRANCH &optional FROM)" t)
-(autoload 'magit-branch-reset "../site-lisp/magit/lisp/magit-branch" "\
+(autoload 'magit-branch-reset "magit/lisp/magit-branch" "\
 Reset a branch to the tip of another branch or any other commit.
 
 When the branch being reset is the current branch, then do a
@@ -4866,7 +5485,7 @@ then also set the target branch as the upstream of the branch
 that is being reset.
 
 (fn BRANCH TO &optional SET-UPSTREAM)" t)
-(autoload 'magit-branch-delete "../site-lisp/magit/lisp/magit-branch" "\
+(autoload 'magit-branch-delete "magit/lisp/magit-branch" "\
 Delete one or multiple branches.
 
 If the region marks multiple branches, then offer to delete
@@ -4880,7 +5499,7 @@ confirmation is required by default in certain cases or if a
 prompt is confusing.
 
 (fn BRANCHES &optional FORCE)" t)
-(autoload 'magit-branch-rename "../site-lisp/magit/lisp/magit-branch" "\
+(autoload 'magit-branch-rename "magit/lisp/magit-branch" "\
 Rename the branch named OLD to NEW.
 
 With a prefix argument FORCE, rename even if a branch named NEW
@@ -4892,108 +5511,108 @@ set `branch.NEW.pushRemote' and maybe rename the push-target on
 the remote.
 
 (fn OLD NEW &optional FORCE)" t)
-(autoload 'magit-branch-shelve "../site-lisp/magit/lisp/magit-branch" "\
+(autoload 'magit-branch-shelve "magit/lisp/magit-branch" "\
 Shelve a BRANCH.
 Rename \"refs/heads/BRANCH\" to \"refs/shelved/BRANCH\",
 and also rename the respective reflog file.
 
 (fn BRANCH)" t)
-(autoload 'magit-branch-unshelve "../site-lisp/magit/lisp/magit-branch" "\
+(autoload 'magit-branch-unshelve "magit/lisp/magit-branch" "\
 Unshelve a BRANCH
 Rename \"refs/shelved/BRANCH\" to \"refs/heads/BRANCH\",
 and also rename the respective reflog file.
 
 (fn BRANCH)" t)
  (autoload 'magit-branch-configure "magit-branch" nil t)
-(register-definition-prefixes "../site-lisp/magit/lisp/magit-branch" '("magit-"))
+(register-definition-prefixes "magit/lisp/magit-branch" '("magit-"))
 
 
-;;; Generated autoloads from ../site-lisp/magit/lisp/magit-bundle.el
+;;; Generated autoloads from magit/lisp/magit-bundle.el
 
  (autoload 'magit-bundle "magit-bundle" nil t)
  (autoload 'magit-bundle-import "magit-bundle" nil t)
-(autoload 'magit-bundle-create-tracked "../site-lisp/magit/lisp/magit-bundle" "\
+(autoload 'magit-bundle-create-tracked "magit/lisp/magit-bundle" "\
 Create and track a new bundle.
 
 (fn FILE TAG BRANCH REFS ARGS)" t)
-(autoload 'magit-bundle-update-tracked "../site-lisp/magit/lisp/magit-bundle" "\
+(autoload 'magit-bundle-update-tracked "magit/lisp/magit-bundle" "\
 Update a bundle that is being tracked using TAG.
 
 (fn TAG)" t)
-(autoload 'magit-bundle-verify "../site-lisp/magit/lisp/magit-bundle" "\
+(autoload 'magit-bundle-verify "magit/lisp/magit-bundle" "\
 Check whether FILE is valid and applies to the current repository.
 
 (fn FILE)" t)
-(autoload 'magit-bundle-list-heads "../site-lisp/magit/lisp/magit-bundle" "\
+(autoload 'magit-bundle-list-heads "magit/lisp/magit-bundle" "\
 List the refs in FILE.
 
 (fn FILE)" t)
-(register-definition-prefixes "../site-lisp/magit/lisp/magit-bundle" '("magit-"))
+(register-definition-prefixes "magit/lisp/magit-bundle" '("magit-"))
 
 
-;;; Generated autoloads from ../site-lisp/magit/lisp/magit-clone.el
+;;; Generated autoloads from magit/lisp/magit-clone.el
 
  (autoload 'magit-clone "magit-clone" nil t)
-(autoload 'magit-clone-regular "../site-lisp/magit/lisp/magit-clone" "\
+(autoload 'magit-clone-regular "magit/lisp/magit-clone" "\
 Create a clone of REPOSITORY in DIRECTORY.
 Then show the status buffer for the new repository.
 
 (fn REPOSITORY DIRECTORY ARGS)" t)
-(autoload 'magit-clone-shallow "../site-lisp/magit/lisp/magit-clone" "\
+(autoload 'magit-clone-shallow "magit/lisp/magit-clone" "\
 Create a shallow clone of REPOSITORY in DIRECTORY.
 Then show the status buffer for the new repository.
 With a prefix argument read the DEPTH of the clone;
 otherwise use 1.
 
 (fn REPOSITORY DIRECTORY ARGS DEPTH)" t)
-(autoload 'magit-clone-shallow-since "../site-lisp/magit/lisp/magit-clone" "\
+(autoload 'magit-clone-shallow-since "magit/lisp/magit-clone" "\
 Create a shallow clone of REPOSITORY in DIRECTORY.
 Then show the status buffer for the new repository.
 Exclude commits before DATE, which is read from the
 user.
 
 (fn REPOSITORY DIRECTORY ARGS DATE)" t)
-(autoload 'magit-clone-shallow-exclude "../site-lisp/magit/lisp/magit-clone" "\
+(autoload 'magit-clone-shallow-exclude "magit/lisp/magit-clone" "\
 Create a shallow clone of REPOSITORY in DIRECTORY.
 Then show the status buffer for the new repository.
 Exclude commits reachable from EXCLUDE, which is a
 branch or tag read from the user.
 
 (fn REPOSITORY DIRECTORY ARGS EXCLUDE)" t)
-(autoload 'magit-clone-bare "../site-lisp/magit/lisp/magit-clone" "\
+(autoload 'magit-clone-bare "magit/lisp/magit-clone" "\
 Create a bare clone of REPOSITORY in DIRECTORY.
 Then show the status buffer for the new repository.
 
 (fn REPOSITORY DIRECTORY ARGS)" t)
-(autoload 'magit-clone-mirror "../site-lisp/magit/lisp/magit-clone" "\
+(autoload 'magit-clone-mirror "magit/lisp/magit-clone" "\
 Create a mirror of REPOSITORY in DIRECTORY.
 Then show the status buffer for the new repository.
 
 (fn REPOSITORY DIRECTORY ARGS)" t)
-(autoload 'magit-clone-sparse "../site-lisp/magit/lisp/magit-clone" "\
+(autoload 'magit-clone-sparse "magit/lisp/magit-clone" "\
 Clone REPOSITORY into DIRECTORY and create a sparse checkout.
 
 (fn REPOSITORY DIRECTORY ARGS)" t)
-(register-definition-prefixes "../site-lisp/magit/lisp/magit-clone" '("magit-"))
+(register-definition-prefixes "magit/lisp/magit-clone" '("magit-"))
 
 
-;;; Generated autoloads from ../site-lisp/magit/lisp/magit-commit.el
+;;; Generated autoloads from magit/lisp/magit-commit.el
 
  (autoload 'magit-commit "magit-commit" nil t)
-(autoload 'magit-commit-create "../site-lisp/magit/lisp/magit-commit" "\
+(autoload 'magit-commit-create "magit/lisp/magit-commit" "\
 Create a new commit on `HEAD'.
 With a prefix argument, amend to the commit at `HEAD' instead.
 
 (git commit [--amend] ARGS)
 
 (fn &optional ARGS)" t)
-(autoload 'magit-commit-amend "../site-lisp/magit/lisp/magit-commit" "\
+(autoload 'magit-commit-amend "magit/lisp/magit-commit" "\
 Amend the last commit.
 
 (git commit --amend ARGS)
 
 (fn &optional ARGS)" t)
-(autoload 'magit-commit-extend "../site-lisp/magit/lisp/magit-commit" "\
+(autoload 'magit-commit-extend "magit/lisp/magit-commit" "\
 Amend the last commit, without editing the message.
 
 With a prefix argument keep the committer date, otherwise change
@@ -5003,7 +5622,7 @@ to inverse the meaning of the prefix argument.
 --amend --no-edit)
 
 (fn &optional ARGS OVERRIDE-DATE)" t)
-(autoload 'magit-commit-reword "../site-lisp/magit/lisp/magit-commit" "\
+(autoload 'magit-commit-reword "magit/lisp/magit-commit" "\
 Reword the last commit, ignoring staged changes.
 
 With a prefix argument keep the committer date, otherwise change
@@ -5016,7 +5635,7 @@ and ignore the option.
 (git commit --amend --only)
 
 (fn &optional ARGS OVERRIDE-DATE)" t)
-(autoload 'magit-commit-fixup "../site-lisp/magit/lisp/magit-commit" "\
+(autoload 'magit-commit-fixup "magit/lisp/magit-commit" "\
 Create a fixup commit.
 
 With a prefix argument the target COMMIT has to be confirmed.
@@ -5024,7 +5643,7 @@ Otherwise the commit at point may be used without confirmation
 depending on the value of option `magit-commit-squash-confirm'.
 
 (fn &optional COMMIT ARGS)" t)
-(autoload 'magit-commit-squash "../site-lisp/magit/lisp/magit-commit" "\
+(autoload 'magit-commit-squash "magit/lisp/magit-commit" "\
 Create a squash commit, without editing the squash message.
 
 With a prefix argument the target COMMIT has to be confirmed.
@@ -5035,7 +5654,7 @@ If you want to immediately add a message to the squash commit,
 then use `magit-commit-augment' instead of this command.
 
 (fn &optional COMMIT ARGS)" t)
-(autoload 'magit-commit-augment "../site-lisp/magit/lisp/magit-commit" "\
+(autoload 'magit-commit-augment "magit/lisp/magit-commit" "\
 Create a squash commit, editing the squash message.
 
 With a prefix argument the target COMMIT has to be confirmed.
@@ -5043,15 +5662,15 @@ Otherwise the commit at point may be used without confirmation
 depending on the value of option `magit-commit-squash-confirm'.
 
 (fn &optional COMMIT ARGS)" t)
-(autoload 'magit-commit-instant-fixup "../site-lisp/magit/lisp/magit-commit" "\
+(autoload 'magit-commit-instant-fixup "magit/lisp/magit-commit" "\
 Create a fixup commit targeting COMMIT and instantly rebase.
 
 (fn &optional COMMIT ARGS)" t)
-(autoload 'magit-commit-instant-squash "../site-lisp/magit/lisp/magit-commit" "\
+(autoload 'magit-commit-instant-squash "magit/lisp/magit-commit" "\
 Create a squash commit targeting COMMIT and instantly rebase.
 
 (fn &optional COMMIT ARGS)" t)
-(autoload 'magit-commit-reshelve "../site-lisp/magit/lisp/magit-commit" "\
+(autoload 'magit-commit-reshelve "magit/lisp/magit-commit" "\
 Change the committer date and possibly the author date of `HEAD'.
 
 The current time is used as the initial minibuffer input and the
@@ -5066,24 +5685,24 @@ is updated:
 - Non-interactively if UPDATE-AUTHOR is nil.
 
 (fn DATE UPDATE-AUTHOR &optional ARGS)" t)
-(autoload 'magit-commit-absorb-modules "../site-lisp/magit/lisp/magit-commit" "\
+(autoload 'magit-commit-absorb-modules "magit/lisp/magit-commit" "\
 Spread modified modules across recent commits.
 
 (fn PHASE COMMIT)" t)
  (autoload 'magit-commit-absorb "magit-commit" nil t)
  (autoload 'magit-commit-autofixup "magit-commit" nil t)
-(register-definition-prefixes "../site-lisp/magit/lisp/magit-commit" '("magit-"))
+(register-definition-prefixes "magit/lisp/magit-commit" '("magit-"))
 
 
-;;; Generated autoloads from ../site-lisp/magit/lisp/magit-diff.el
+;;; Generated autoloads from magit/lisp/magit-diff.el
 
  (autoload 'magit-diff "magit-diff" nil t)
  (autoload 'magit-diff-refresh "magit-diff" nil t)
-(autoload 'magit-diff-dwim "../site-lisp/magit/lisp/magit-diff" "\
+(autoload 'magit-diff-dwim "magit/lisp/magit-diff" "\
 Show changes for the thing at point.
 
 (fn &optional ARGS FILES)" t)
-(autoload 'magit-diff-range "../site-lisp/magit/lisp/magit-diff" "\
+(autoload 'magit-diff-range "magit/lisp/magit-diff" "\
 Show differences between two commits.
 
 REV-OR-RANGE should be a range or a single revision.  If it is a
@@ -5098,55 +5717,55 @@ view changes along, starting at the common ancestor of both
 revisions (i.e., use a \"...\" range).
 
 (fn REV-OR-RANGE &optional ARGS FILES)" t)
-(autoload 'magit-diff-working-tree "../site-lisp/magit/lisp/magit-diff" "\
+(autoload 'magit-diff-working-tree "magit/lisp/magit-diff" "\
 Show changes between the current working tree and the `HEAD' commit.
 With a prefix argument show changes between the working tree and
 a commit read from the minibuffer.
 
 (fn &optional REV ARGS FILES)" t)
-(autoload 'magit-diff-staged "../site-lisp/magit/lisp/magit-diff" "\
+(autoload 'magit-diff-staged "magit/lisp/magit-diff" "\
 Show changes between the index and the `HEAD' commit.
 With a prefix argument show changes between the index and
 a commit read from the minibuffer.
 
 (fn &optional REV ARGS FILES)" t)
-(autoload 'magit-diff-unstaged "../site-lisp/magit/lisp/magit-diff" "\
+(autoload 'magit-diff-unstaged "magit/lisp/magit-diff" "\
 Show changes between the working tree and the index.
 
 (fn &optional ARGS FILES)" t)
-(autoload 'magit-diff-unmerged "../site-lisp/magit/lisp/magit-diff" "\
+(autoload 'magit-diff-unmerged "magit/lisp/magit-diff" "\
 Show changes that are being merged.
 
 (fn &optional ARGS FILES)" t)
-(autoload 'magit-diff-while-committing "../site-lisp/magit/lisp/magit-diff" "\
+(autoload 'magit-diff-while-committing "magit/lisp/magit-diff" "\
 While committing, show the changes that are about to be committed.
 While amending, invoking the command again toggles between
 showing just the new changes or all the changes that will
 be committed." t)
-(autoload 'magit-diff-buffer-file "../site-lisp/magit/lisp/magit-diff" "\
+(autoload 'magit-diff-buffer-file "magit/lisp/magit-diff" "\
 Show diff for the blob or file visited in the current buffer.
 
 When the buffer visits a blob, then show the respective commit.
 When the buffer visits a file, then show the differences between
 `HEAD' and the working tree.  In both cases limit the diff to
 the file or blob." t)
-(autoload 'magit-diff-paths "../site-lisp/magit/lisp/magit-diff" "\
+(autoload 'magit-diff-paths "magit/lisp/magit-diff" "\
 Show changes between any two files on disk.
 
 (fn A B)" t)
-(autoload 'magit-show-commit "../site-lisp/magit/lisp/magit-diff" "\
+(autoload 'magit-show-commit "magit/lisp/magit-diff" "\
 Visit the revision at point in another buffer.
 If there is no revision at point or with a prefix argument prompt
 for a revision.
 
 (fn REV &optional ARGS FILES MODULE)" t)
-(register-definition-prefixes "../site-lisp/magit/lisp/magit-diff" '("magit-"))
+(register-definition-prefixes "magit/lisp/magit-diff" '("magit-"))
 
 
-;;; Generated autoloads from ../site-lisp/magit/lisp/magit-ediff.el
+;;; Generated autoloads from magit/lisp/magit-ediff.el
 
  (autoload 'magit-ediff "magit-ediff" nil)
-(autoload 'magit-ediff-resolve-all "../site-lisp/magit/lisp/magit-ediff" "\
+(autoload 'magit-ediff-resolve-all "magit/lisp/magit-ediff" "\
 Resolve all conflicts in the FILE at point using Ediff.
 
 If there is no file at point or if it doesn't have any unmerged
@@ -5156,7 +5775,7 @@ See info node `(magit) Ediffing' for more information about this
 and alternative commands.
 
 (fn FILE)" t)
-(autoload 'magit-ediff-resolve-rest "../site-lisp/magit/lisp/magit-ediff" "\
+(autoload 'magit-ediff-resolve-rest "magit/lisp/magit-ediff" "\
 Resolve outstanding conflicts in the FILE at point using Ediff.
 
 If there is no file at point or if it doesn't have any unmerged
@@ -5166,12 +5785,12 @@ See info node `(magit) Ediffing' for more information about this
 and alternative commands.
 
 (fn FILE)" t)
-(autoload 'magit-ediff-stage "../site-lisp/magit/lisp/magit-ediff" "\
+(autoload 'magit-ediff-stage "magit/lisp/magit-ediff" "\
 Stage and unstage changes to FILE using Ediff.
 FILE has to be relative to the top directory of the repository.
 
 (fn FILE)" t)
-(autoload 'magit-ediff-compare "../site-lisp/magit/lisp/magit-ediff" "\
+(autoload 'magit-ediff-compare "magit/lisp/magit-ediff" "\
 Compare REVA:FILEA with REVB:FILEB using Ediff.
 
 FILEA and FILEB have to be relative to the top directory of the
@@ -5185,7 +5804,7 @@ at the common ancestor of both revisions (i.e., use a \"...\"
 range).
 
 (fn REVA REVB FILEA FILEB)" t)
-(autoload 'magit-ediff-dwim "../site-lisp/magit/lisp/magit-ediff" "\
+(autoload 'magit-ediff-dwim "magit/lisp/magit-ediff" "\
 Compare, stage, or resolve using Ediff.
 This command tries to guess what file, and what commit or range
 the user wants to compare, stage, or resolve using Ediff.  It
@@ -5194,7 +5813,7 @@ in which case the user is asked about the other.  It might not
 always guess right, in which case the appropriate `magit-ediff-*'
 command has to be used explicitly.  If it cannot read the user's
 mind at all, then it asks the user for a command to run." t)
-(autoload 'magit-ediff-show-staged "../site-lisp/magit/lisp/magit-ediff" "\
+(autoload 'magit-ediff-show-staged "magit/lisp/magit-ediff" "\
 Show staged changes using Ediff.
 
 This only allows looking at the changes; to stage, unstage,
@@ -5203,7 +5822,7 @@ and discard changes using Ediff, use `magit-ediff-stage'.
 FILE must be relative to the top directory of the repository.
 
 (fn FILE)" t)
-(autoload 'magit-ediff-show-unstaged "../site-lisp/magit/lisp/magit-ediff" "\
+(autoload 'magit-ediff-show-unstaged "magit/lisp/magit-ediff" "\
 Show unstaged changes using Ediff.
 
 This only allows looking at the changes; to stage, unstage,
@@ -5212,29 +5831,29 @@ and discard changes using Ediff, use `magit-ediff-stage'.
 FILE must be relative to the top directory of the repository.
 
 (fn FILE)" t)
-(autoload 'magit-ediff-show-working-tree "../site-lisp/magit/lisp/magit-ediff" "\
+(autoload 'magit-ediff-show-working-tree "magit/lisp/magit-ediff" "\
 Show changes between `HEAD' and working tree using Ediff.
 FILE must be relative to the top directory of the repository.
 
 (fn FILE)" t)
-(autoload 'magit-ediff-show-commit "../site-lisp/magit/lisp/magit-ediff" "\
+(autoload 'magit-ediff-show-commit "magit/lisp/magit-ediff" "\
 Show changes introduced by COMMIT using Ediff.
 
 (fn COMMIT)" t)
-(autoload 'magit-ediff-show-stash "../site-lisp/magit/lisp/magit-ediff" "\
+(autoload 'magit-ediff-show-stash "magit/lisp/magit-ediff" "\
 Show changes introduced by STASH using Ediff.
 `magit-ediff-show-stash-with-index' controls whether a
 three-buffer Ediff is used in order to distinguish changes in the
 stash that were staged.
 
 (fn STASH)" t)
-(register-definition-prefixes "../site-lisp/magit/lisp/magit-ediff" '("magit-ediff-"))
+(register-definition-prefixes "magit/lisp/magit-ediff" '("magit-ediff-"))
 
 
-;;; Generated autoloads from ../site-lisp/magit/lisp/magit-extras.el
+;;; Generated autoloads from magit/lisp/magit-extras.el
 
  (autoload 'magit-git-mergetool "magit-extras" nil t)
-(autoload 'magit-run-git-gui-blame "../site-lisp/magit/lisp/magit-extras" "\
+(autoload 'magit-run-git-gui-blame "magit/lisp/magit-extras" "\
 Run `git gui blame' on the given FILENAME and COMMIT.
 Interactively run it for the current file and the `HEAD', with a
 prefix or when the current file cannot be determined let the user
@@ -5242,15 +5861,15 @@ choose.  When the current buffer is visiting FILENAME instruct
 blame to center around the line point is on.
 
 (fn COMMIT FILENAME &optional LINENUM)" t)
-(autoload 'magit-run-git-gui "../site-lisp/magit/lisp/magit-extras" "\
+(autoload 'magit-run-git-gui "magit/lisp/magit-extras" "\
 Run `git gui' for the current git repository." t)
-(autoload 'magit-run-gitk "../site-lisp/magit/lisp/magit-extras" "\
+(autoload 'magit-run-gitk "magit/lisp/magit-extras" "\
 Run `gitk' in the current repository." t)
-(autoload 'magit-run-gitk-branches "../site-lisp/magit/lisp/magit-extras" "\
+(autoload 'magit-run-gitk-branches "magit/lisp/magit-extras" "\
 Run `gitk --branches' in the current repository." t)
-(autoload 'magit-run-gitk-all "../site-lisp/magit/lisp/magit-extras" "\
+(autoload 'magit-run-gitk-all "magit/lisp/magit-extras" "\
 Run `gitk --all' in the current repository." t)
-(autoload 'ido-enter-magit-status "../site-lisp/magit/lisp/magit-extras" "\
+(autoload 'ido-enter-magit-status "magit/lisp/magit-extras" "\
 Drop into `magit-status' from file switching.
 
 This command does not work in Emacs 26.1.
@@ -5270,30 +5889,30 @@ like pretty much every other keymap:
 
   (keymap-set ido-common-completion-map
               \"C-x g\" \\='ido-enter-magit-status)" t)
-(autoload 'magit-project-status "../site-lisp/magit/lisp/magit-extras" "\
+(autoload 'magit-project-status "magit/lisp/magit-extras" "\
 Run `magit-status' in the current project's root." t)
-(autoload 'magit-dired-jump "../site-lisp/magit/lisp/magit-extras" "\
+(autoload 'magit-dired-jump "magit/lisp/magit-extras" "\
 Visit file at point using Dired.
 With a prefix argument, visit in another window.  If there
 is no file at point, then instead visit `default-directory'.
 
 (fn &optional OTHER-WINDOW)" t)
-(autoload 'magit-dired-log "../site-lisp/magit/lisp/magit-extras" "\
+(autoload 'magit-dired-log "magit/lisp/magit-extras" "\
 Show log for all marked files, or the current file.
 
 (fn &optional FOLLOW)" t)
-(autoload 'magit-dired-am-apply-patches "../site-lisp/magit/lisp/magit-extras" "\
+(autoload 'magit-dired-am-apply-patches "magit/lisp/magit-extras" "\
 In Dired, apply the marked (or next ARG) files as patches.
 If inside a repository, then apply in that.  Otherwise prompt
 for a repository.
 
 (fn REPO &optional ARG)" t)
-(autoload 'magit-do-async-shell-command "../site-lisp/magit/lisp/magit-extras" "\
+(autoload 'magit-do-async-shell-command "magit/lisp/magit-extras" "\
 Open FILE with `dired-do-async-shell-command'.
 Interactively, open the file at point.
 
 (fn FILE)" t)
-(autoload 'magit-previous-line "../site-lisp/magit/lisp/magit-extras" "\
+(autoload 'magit-previous-line "magit/lisp/magit-extras" "\
 Like `previous-line' but with Magit-specific shift-selection.
 
 Magit's selection mechanism is based on the region but selects an
@@ -5306,7 +5925,7 @@ is a matter of preference.
 
 (fn &optional ARG TRY-VSCROLL)" t)
 (function-put 'magit-previous-line 'interactive-only '"use `forward-line' with negative argument instead.")
-(autoload 'magit-next-line "../site-lisp/magit/lisp/magit-extras" "\
+(autoload 'magit-next-line "magit/lisp/magit-extras" "\
 Like `next-line' but with Magit-specific shift-selection.
 
 Magit's selection mechanism is based on the region but selects
@@ -5319,7 +5938,7 @@ prefer is a matter of preference.
 
 (fn &optional ARG TRY-VSCROLL)" t)
 (function-put 'magit-next-line 'interactive-only 'forward-line)
-(autoload 'magit-clean "../site-lisp/magit/lisp/magit-extras" "\
+(autoload 'magit-clean "magit/lisp/magit-extras" "\
 Remove untracked files from the working tree.
 With a prefix argument also remove ignored files,
 with two prefix arguments remove ignored files only.
@@ -5327,7 +5946,7 @@ with two prefix arguments remove ignored files only.
 (git clean -f -d [-x|-X])
 
 (fn &optional ARG)" t)
-(autoload 'magit-generate-changelog "../site-lisp/magit/lisp/magit-extras" "\
+(autoload 'magit-generate-changelog "magit/lisp/magit-extras" "\
 Insert ChangeLog entries into the current buffer.
 
 The entries are generated from the diff being committed.
@@ -5335,21 +5954,21 @@ If prefix argument, AMENDING, is non-nil, include changes
 in HEAD as well as staged changes in the diff to check.
 
 (fn &optional AMENDING)" t)
-(autoload 'magit-add-change-log-entry "../site-lisp/magit/lisp/magit-extras" "\
+(autoload 'magit-add-change-log-entry "magit/lisp/magit-extras" "\
 Find change log file and add date entry and item for current change.
 This differs from `add-change-log-entry' (which see) in that
 it acts on the current hunk in a Magit buffer instead of on
 a position in a file-visiting buffer.
 
 (fn &optional WHOAMI FILE-NAME OTHER-WINDOW)" t)
-(autoload 'magit-add-change-log-entry-other-window "../site-lisp/magit/lisp/magit-extras" "\
+(autoload 'magit-add-change-log-entry-other-window "magit/lisp/magit-extras" "\
 Find change log file in other window and add entry and item.
 This differs from `add-change-log-entry-other-window' (which see)
 in that it acts on the current hunk in a Magit buffer instead of
 on a position in a file-visiting buffer.
 
 (fn &optional WHOAMI FILE-NAME)" t)
-(autoload 'magit-edit-line-commit "../site-lisp/magit/lisp/magit-extras" "\
+(autoload 'magit-edit-line-commit "magit/lisp/magit-extras" "\
 Edit the commit that added the current line.
 
 With a prefix argument edit the commit that removes the line,
@@ -5359,7 +5978,7 @@ from `HEAD', or by checking out the commit (or a branch that
 points at it) otherwise.
 
 (fn &optional TYPE)" t)
-(autoload 'magit-diff-edit-hunk-commit "../site-lisp/magit/lisp/magit-extras" "\
+(autoload 'magit-diff-edit-hunk-commit "magit/lisp/magit-extras" "\
 From a hunk, edit the respective commit and visit the file.
 
 First visit the file being modified by the hunk at the correct
@@ -5378,7 +5997,7 @@ the rebase.  If that is undesirable, then it might be better to
 use `magit-rebase-edit-commit' instead of this command.
 
 (fn FILE)" t)
-(autoload 'magit-reshelve-since "../site-lisp/magit/lisp/magit-extras" "\
+(autoload 'magit-reshelve-since "magit/lisp/magit-extras" "\
 Change the author and committer dates of the commits since REV.
 
 Ask the user for the first reachable commit whose dates should
@@ -5395,7 +6014,7 @@ Interactively use the value of the \"--gpg-sign\" option in the
 list returned by `magit-rebase-arguments'.
 
 (fn REV KEYID)" t)
-(autoload 'magit-pop-revision-stack "../site-lisp/magit/lisp/magit-extras" "\
+(autoload 'magit-pop-revision-stack "magit/lisp/magit-extras" "\
 Insert a representation of a revision into the current buffer.
 
 Pop a revision from the `magit-revision-stack' and insert it into
@@ -5420,7 +6039,7 @@ stack, or with two prefix arguments, then read the repository in
 the minibuffer too.
 
 (fn REV TOPLEVEL)" t)
-(autoload 'magit-copy-section-value "../site-lisp/magit/lisp/magit-extras" "\
+(autoload 'magit-copy-section-value "magit/lisp/magit-extras" "\
 Save the value of the current section for later use.
 
 Save the section value to the `kill-ring', and, provided that
@@ -5444,7 +6063,7 @@ the added or removed lines, depending on the sign of the prefix
 argument.
 
 (fn ARG)" t)
-(autoload 'magit-copy-buffer-revision "../site-lisp/magit/lisp/magit-extras" "\
+(autoload 'magit-copy-buffer-revision "magit/lisp/magit-extras" "\
 Save the revision of the current buffer for later use.
 
 Save the revision shown in the current buffer to the `kill-ring'
@@ -5469,64 +6088,64 @@ above.
 When `magit-copy-revision-abbreviated' is non-nil, save the
 abbreviated revision to the `kill-ring' and the
 `magit-revision-stack'." t)
-(autoload 'magit-display-repository-buffer "../site-lisp/magit/lisp/magit-extras" "\
+(autoload 'magit-display-repository-buffer "magit/lisp/magit-extras" "\
 Display a Magit buffer belonging to the current Git repository.
 The buffer is displayed using `magit-display-buffer', which see.
 
 (fn BUFFER)" t)
-(autoload 'magit-switch-to-repository-buffer "../site-lisp/magit/lisp/magit-extras" "\
+(autoload 'magit-switch-to-repository-buffer "magit/lisp/magit-extras" "\
 Switch to a Magit buffer belonging to the current Git repository.
 
 (fn BUFFER)" t)
-(autoload 'magit-switch-to-repository-buffer-other-window "../site-lisp/magit/lisp/magit-extras" "\
+(autoload 'magit-switch-to-repository-buffer-other-window "magit/lisp/magit-extras" "\
 Switch to a Magit buffer belonging to the current Git repository.
 
 (fn BUFFER)" t)
-(autoload 'magit-switch-to-repository-buffer-other-frame "../site-lisp/magit/lisp/magit-extras" "\
+(autoload 'magit-switch-to-repository-buffer-other-frame "magit/lisp/magit-extras" "\
 Switch to a Magit buffer belonging to the current Git repository.
 
 (fn BUFFER)" t)
-(autoload 'magit-abort-dwim "../site-lisp/magit/lisp/magit-extras" "\
+(autoload 'magit-abort-dwim "magit/lisp/magit-extras" "\
 Abort current operation.
 Depending on the context, this will abort a merge, a rebase, a
 patch application, a cherry-pick, a revert, or a bisect." t)
-(register-definition-prefixes "../site-lisp/magit/lisp/magit-extras" '("magit-"))
+(register-definition-prefixes "magit/lisp/magit-extras" '("magit-"))
 
 
-;;; Generated autoloads from ../site-lisp/magit/lisp/magit-fetch.el
+;;; Generated autoloads from magit/lisp/magit-fetch.el
 
  (autoload 'magit-fetch "magit-fetch" nil t)
  (autoload 'magit-fetch-from-pushremote "magit-fetch" nil t)
  (autoload 'magit-fetch-from-upstream "magit-fetch" nil t)
-(autoload 'magit-fetch-other "../site-lisp/magit/lisp/magit-fetch" "\
+(autoload 'magit-fetch-other "magit/lisp/magit-fetch" "\
 Fetch from another repository.
 
 (fn REMOTE ARGS)" t)
-(autoload 'magit-fetch-branch "../site-lisp/magit/lisp/magit-fetch" "\
+(autoload 'magit-fetch-branch "magit/lisp/magit-fetch" "\
 Fetch a BRANCH from a REMOTE.
 
 (fn REMOTE BRANCH ARGS)" t)
-(autoload 'magit-fetch-refspec "../site-lisp/magit/lisp/magit-fetch" "\
+(autoload 'magit-fetch-refspec "magit/lisp/magit-fetch" "\
 Fetch a REFSPEC from a REMOTE.
 
 (fn REMOTE REFSPEC ARGS)" t)
-(autoload 'magit-fetch-all "../site-lisp/magit/lisp/magit-fetch" "\
+(autoload 'magit-fetch-all "magit/lisp/magit-fetch" "\
 Fetch from all remotes.
 
 (fn ARGS)" t)
-(autoload 'magit-fetch-all-prune "../site-lisp/magit/lisp/magit-fetch" "\
+(autoload 'magit-fetch-all-prune "magit/lisp/magit-fetch" "\
 Fetch from all remotes, and prune.
 Prune remote tracking branches for branches that have been
 removed on the respective remote." t)
-(autoload 'magit-fetch-all-no-prune "../site-lisp/magit/lisp/magit-fetch" "\
+(autoload 'magit-fetch-all-no-prune "magit/lisp/magit-fetch" "\
 Fetch from all remotes." t)
  (autoload 'magit-fetch-modules "magit-fetch" nil t)
-(register-definition-prefixes "../site-lisp/magit/lisp/magit-fetch" '("magit-"))
+(register-definition-prefixes "magit/lisp/magit-fetch" '("magit-"))
 
 
-;;; Generated autoloads from ../site-lisp/magit/lisp/magit-files.el
+;;; Generated autoloads from magit/lisp/magit-files.el
 
-(autoload 'magit-find-file "../site-lisp/magit/lisp/magit-files" "\
+(autoload 'magit-find-file "magit/lisp/magit-files" "\
 View FILE from REV.
 Switch to a buffer visiting blob REV:FILE, creating one if none
 already exists.  If prior to calling this command the current
@@ -5534,7 +6153,7 @@ buffer and/or cursor position is about the same file, then go
 to the line and column corresponding to that location.
 
 (fn REV FILE)" t)
-(autoload 'magit-find-file-other-window "../site-lisp/magit/lisp/magit-files" "\
+(autoload 'magit-find-file-other-window "magit/lisp/magit-files" "\
 View FILE from REV, in another window.
 Switch to a buffer visiting blob REV:FILE, creating one if none
 already exists.  If prior to calling this command the current
@@ -5542,7 +6161,7 @@ buffer and/or cursor position is about the same file, then go to
 the line and column corresponding to that location.
 
 (fn REV FILE)" t)
-(autoload 'magit-find-file-other-frame "../site-lisp/magit/lisp/magit-files" "\
+(autoload 'magit-find-file-other-frame "magit/lisp/magit-files" "\
 View FILE from REV, in another frame.
 Switch to a buffer visiting blob REV:FILE, creating one if none
 already exists.  If prior to calling this command the current
@@ -5551,32 +6170,32 @@ the line and column corresponding to that location.
 
 (fn REV FILE)" t)
  (autoload 'magit-file-dispatch "magit" nil t)
-(autoload 'magit-blob-visit-file "../site-lisp/magit/lisp/magit-files" "\
+(autoload 'magit-blob-visit-file "magit/lisp/magit-files" "\
 View the file from the worktree corresponding to the current blob.
 When visiting a blob or the version from the index, then go to
 the same location in the respective file in the working tree." t)
-(autoload 'magit-file-checkout "../site-lisp/magit/lisp/magit-files" "\
+(autoload 'magit-file-checkout "magit/lisp/magit-files" "\
 Checkout FILE from REV.
 
 (fn REV FILE)" t)
-(register-definition-prefixes "../site-lisp/magit/lisp/magit-files" '("magit-"))
+(register-definition-prefixes "magit/lisp/magit-files" '("magit-"))
 
 
-;;; Generated autoloads from ../site-lisp/magit/lisp/magit-git.el
+;;; Generated autoloads from magit/lisp/magit-git.el
 
-(register-definition-prefixes "../site-lisp/magit/lisp/magit-git" '("magit-"))
+(register-definition-prefixes "magit/lisp/magit-git" '("magit-"))
 
 
-;;; Generated autoloads from ../site-lisp/magit/lisp/magit-gitignore.el
+;;; Generated autoloads from magit/lisp/magit-gitignore.el
 
  (autoload 'magit-gitignore "magit-gitignore" nil t)
-(autoload 'magit-gitignore-in-topdir "../site-lisp/magit/lisp/magit-gitignore" "\
+(autoload 'magit-gitignore-in-topdir "magit/lisp/magit-gitignore" "\
 Add the Git ignore RULE to the top-level \".gitignore\" file.
 Since this file is tracked, it is shared with other clones of the
 repository.  Also stage the file.
 
 (fn RULE)" t)
-(autoload 'magit-gitignore-in-subdir "../site-lisp/magit/lisp/magit-gitignore" "\
+(autoload 'magit-gitignore-in-subdir "magit/lisp/magit-gitignore" "\
 Add the Git ignore RULE to a \".gitignore\" file in DIRECTORY.
 Prompt the user for a directory and add the rule to the
 \".gitignore\" file in that directory.  Since such files are
@@ -5584,62 +6203,62 @@ tracked, they are shared with other clones of the repository.
 Also stage the file.
 
 (fn RULE DIRECTORY)" t)
-(autoload 'magit-gitignore-in-gitdir "../site-lisp/magit/lisp/magit-gitignore" "\
+(autoload 'magit-gitignore-in-gitdir "magit/lisp/magit-gitignore" "\
 Add the Git ignore RULE to \"$GIT_DIR/info/exclude\".
 Rules in that file only affects this clone of the repository.
 
 (fn RULE)" t)
-(autoload 'magit-gitignore-on-system "../site-lisp/magit/lisp/magit-gitignore" "\
+(autoload 'magit-gitignore-on-system "magit/lisp/magit-gitignore" "\
 Add the Git ignore RULE to the file specified by `core.excludesFile'.
 Rules that are defined in that file affect all local repositories.
 
 (fn RULE)" t)
-(autoload 'magit-skip-worktree "../site-lisp/magit/lisp/magit-gitignore" "\
+(autoload 'magit-skip-worktree "magit/lisp/magit-gitignore" "\
 Call \"git update-index --skip-worktree -- FILE\".
 
 (fn FILE)" t)
-(autoload 'magit-no-skip-worktree "../site-lisp/magit/lisp/magit-gitignore" "\
+(autoload 'magit-no-skip-worktree "magit/lisp/magit-gitignore" "\
 Call \"git update-index --no-skip-worktree -- FILE\".
 
 (fn FILE)" t)
-(autoload 'magit-assume-unchanged "../site-lisp/magit/lisp/magit-gitignore" "\
+(autoload 'magit-assume-unchanged "magit/lisp/magit-gitignore" "\
 Call \"git update-index --assume-unchanged -- FILE\".
 
 (fn FILE)" t)
-(autoload 'magit-no-assume-unchanged "../site-lisp/magit/lisp/magit-gitignore" "\
+(autoload 'magit-no-assume-unchanged "magit/lisp/magit-gitignore" "\
 Call \"git update-index --no-assume-unchanged -- FILE\".
 
 (fn FILE)" t)
-(register-definition-prefixes "../site-lisp/magit/lisp/magit-gitignore" '("magit-"))
+(register-definition-prefixes "magit/lisp/magit-gitignore" '("magit-"))
 
 
-;;; Generated autoloads from ../site-lisp/magit/lisp/magit-libgit.el
+;;; Generated autoloads from magit/lisp/magit-libgit.el
 
-(register-definition-prefixes "../site-lisp/magit/lisp/magit-libgit" '("magit-libgit-repo"))
+(register-definition-prefixes "magit/lisp/magit-libgit" '("magit-libgit-repo"))
 
 
-;;; Generated autoloads from ../site-lisp/magit/lisp/magit-log.el
+;;; Generated autoloads from magit/lisp/magit-log.el
 
  (autoload 'magit-log "magit-log" nil t)
  (autoload 'magit-log-refresh "magit-log" nil t)
-(autoload 'magit-log-current "../site-lisp/magit/lisp/magit-log" "\
+(autoload 'magit-log-current "magit/lisp/magit-log" "\
 Show log for the current branch.
 When `HEAD' is detached or with a prefix argument show log for
 one or more revs read from the minibuffer.
 
 (fn REVS &optional ARGS FILES)" t)
-(autoload 'magit-log-head "../site-lisp/magit/lisp/magit-log" "\
+(autoload 'magit-log-head "magit/lisp/magit-log" "\
 Show log for `HEAD'.
 
 (fn &optional ARGS FILES)" t)
-(autoload 'magit-log-related "../site-lisp/magit/lisp/magit-log" "\
+(autoload 'magit-log-related "magit/lisp/magit-log" "\
 Show log for the current branch, its upstream and its push target.
 When the upstream is a local branch, then also show its own
 upstream.  When `HEAD' is detached, then show log for that, the
 previously checked out branch and its upstream and push-target.
 
 (fn REVS &optional ARGS FILES)" t)
-(autoload 'magit-log-other "../site-lisp/magit/lisp/magit-log" "\
+(autoload 'magit-log-other "magit/lisp/magit-log" "\
 Show log for one or more revs read from the minibuffer.
 The user can input any revision or revisions separated by a
 space, or even ranges, but only branches and tags, and a
@@ -5647,38 +6266,38 @@ representation of the commit at point, are available as
 completion candidates.
 
 (fn REVS &optional ARGS FILES)" t)
-(autoload 'magit-log-branches "../site-lisp/magit/lisp/magit-log" "\
+(autoload 'magit-log-branches "magit/lisp/magit-log" "\
 Show log for all local branches and `HEAD'.
 
 (fn &optional ARGS FILES)" t)
-(autoload 'magit-log-matching-branches "../site-lisp/magit/lisp/magit-log" "\
+(autoload 'magit-log-matching-branches "magit/lisp/magit-log" "\
 Show log for all branches matching PATTERN and `HEAD'.
 
 (fn PATTERN &optional ARGS FILES)" t)
-(autoload 'magit-log-matching-tags "../site-lisp/magit/lisp/magit-log" "\
+(autoload 'magit-log-matching-tags "magit/lisp/magit-log" "\
 Show log for all tags matching PATTERN and `HEAD'.
 
 (fn PATTERN &optional ARGS FILES)" t)
-(autoload 'magit-log-all-branches "../site-lisp/magit/lisp/magit-log" "\
+(autoload 'magit-log-all-branches "magit/lisp/magit-log" "\
 Show log for all local and remote branches and `HEAD'.
 
 (fn &optional ARGS FILES)" t)
-(autoload 'magit-log-all "../site-lisp/magit/lisp/magit-log" "\
+(autoload 'magit-log-all "magit/lisp/magit-log" "\
 Show log for all references and `HEAD'.
 
 (fn &optional ARGS FILES)" t)
-(autoload 'magit-log-buffer-file "../site-lisp/magit/lisp/magit-log" "\
+(autoload 'magit-log-buffer-file "magit/lisp/magit-log" "\
 Show log for the blob or file visited in the current buffer.
 With a prefix argument or when `--follow' is an active log
 argument, then follow renames.  When the region is active,
 restrict the log to the lines that the region touches.
 
 (fn &optional FOLLOW BEG END)" t)
-(autoload 'magit-log-trace-definition "../site-lisp/magit/lisp/magit-log" "\
+(autoload 'magit-log-trace-definition "magit/lisp/magit-log" "\
 Show log for the definition at point.
 
 (fn FILE FN REV)" t)
-(autoload 'magit-log-merged "../site-lisp/magit/lisp/magit-log" "\
+(autoload 'magit-log-merged "magit/lisp/magit-log" "\
 Show log for the merge of COMMIT into BRANCH.
 
 More precisely, find merge commit M that brought COMMIT into
@@ -5690,35 +6309,35 @@ This command requires git-when-merged, which is available from
 https://github.com/mhagger/git-when-merged.
 
 (fn COMMIT BRANCH &optional ARGS FILES)" t)
-(autoload 'magit-log-move-to-parent "../site-lisp/magit/lisp/magit-log" "\
+(autoload 'magit-log-move-to-parent "magit/lisp/magit-log" "\
 Move to the Nth parent of the current commit.
 
 (fn &optional N)" t)
  (autoload 'magit-shortlog "magit-log" nil t)
-(autoload 'magit-shortlog-since "../site-lisp/magit/lisp/magit-log" "\
+(autoload 'magit-shortlog-since "magit/lisp/magit-log" "\
 Show a history summary for commits since REV.
 
 (fn REV ARGS)" t)
-(autoload 'magit-shortlog-range "../site-lisp/magit/lisp/magit-log" "\
+(autoload 'magit-shortlog-range "magit/lisp/magit-log" "\
 Show a history summary for commit or range REV-OR-RANGE.
 
 (fn REV-OR-RANGE ARGS)" t)
-(autoload 'magit-cherry "../site-lisp/magit/lisp/magit-log" "\
+(autoload 'magit-cherry "magit/lisp/magit-log" "\
 Show commits in a branch that are not merged in the upstream branch.
 
 (fn HEAD UPSTREAM)" t)
-(register-definition-prefixes "../site-lisp/magit/lisp/magit-log" '("magit-"))
+(register-definition-prefixes "magit/lisp/magit-log" '("magit-"))
 
 
-;;; Generated autoloads from ../site-lisp/magit/lisp/magit-margin.el
+;;; Generated autoloads from magit/lisp/magit-margin.el
 
-(register-definition-prefixes "../site-lisp/magit/lisp/magit-margin" '("magit-"))
+(register-definition-prefixes "magit/lisp/magit-margin" '("magit-"))
 
 
-;;; Generated autoloads from ../site-lisp/magit/lisp/magit-merge.el
+;;; Generated autoloads from magit/lisp/magit-merge.el
 
  (autoload 'magit-merge "magit" nil t)
-(autoload 'magit-merge-plain "../site-lisp/magit/lisp/magit-merge" "\
+(autoload 'magit-merge-plain "magit/lisp/magit-merge" "\
 Merge commit REV into the current branch; using default message.
 
 Unless there are conflicts or a prefix argument is used create a
@@ -5730,7 +6349,7 @@ merge.
 (git merge --no-edit|--no-commit [ARGS] REV)
 
 (fn REV &optional ARGS NOCOMMIT)" t)
-(autoload 'magit-merge-editmsg "../site-lisp/magit/lisp/magit-merge" "\
+(autoload 'magit-merge-editmsg "magit/lisp/magit-merge" "\
 Merge commit REV into the current branch; and edit message.
 Perform the merge and prepare a commit message but let the user
 edit it.
@@ -5738,7 +6357,7 @@ edit it.
 (git merge --edit --no-ff [ARGS] REV)
 
 (fn REV &optional ARGS)" t)
-(autoload 'magit-merge-nocommit "../site-lisp/magit/lisp/magit-merge" "\
+(autoload 'magit-merge-nocommit "magit/lisp/magit-merge" "\
 Merge commit REV into the current branch; pretending it failed.
 Pretend the merge failed to give the user the opportunity to
 inspect the merge and change the commit message.
@@ -5746,7 +6365,7 @@ inspect the merge and change the commit message.
 (git merge --no-commit --no-ff [ARGS] REV)
 
 (fn REV &optional ARGS)" t)
-(autoload 'magit-merge-into "../site-lisp/magit/lisp/magit-merge" "\
+(autoload 'magit-merge-into "magit/lisp/magit-merge" "\
 Merge the current branch into BRANCH and remove the former.
 
 Before merging, force push the source branch to its push-remote,
@@ -5757,7 +6376,7 @@ if `forge-branch-pullreq' was used to create the merged branch,
 then also remove the respective remote branch.
 
 (fn BRANCH &optional ARGS)" t)
-(autoload 'magit-merge-absorb "../site-lisp/magit/lisp/magit-merge" "\
+(autoload 'magit-merge-absorb "magit/lisp/magit-merge" "\
 Merge BRANCH into the current branch and remove the former.
 
 Before merging, force push the source branch to its push-remote,
@@ -5768,42 +6387,42 @@ if `forge-branch-pullreq' was used to create the merged branch,
 then also remove the respective remote branch.
 
 (fn BRANCH &optional ARGS)" t)
-(autoload 'magit-merge-squash "../site-lisp/magit/lisp/magit-merge" "\
+(autoload 'magit-merge-squash "magit/lisp/magit-merge" "\
 Squash commit REV into the current branch; don't create a commit.
 
 (git merge --squash REV)
 
 (fn REV)" t)
-(autoload 'magit-merge-preview "../site-lisp/magit/lisp/magit-merge" "\
+(autoload 'magit-merge-preview "magit/lisp/magit-merge" "\
 Preview result of merging REV into the current branch.
 
 (fn REV)" t)
-(autoload 'magit-merge-abort "../site-lisp/magit/lisp/magit-merge" "\
+(autoload 'magit-merge-abort "magit/lisp/magit-merge" "\
 Abort the current merge operation.
 
 (git merge --abort)" t)
-(register-definition-prefixes "../site-lisp/magit/lisp/magit-merge" '("magit-"))
+(register-definition-prefixes "magit/lisp/magit-merge" '("magit-"))
 
 
-;;; Generated autoloads from ../site-lisp/magit/lisp/magit-mode.el
+;;; Generated autoloads from magit/lisp/magit-mode.el
 
-(autoload 'magit-info "../site-lisp/magit/lisp/magit-mode" "\
+(autoload 'magit-info "magit/lisp/magit-mode" "\
 Visit the Magit manual." t)
-(register-definition-prefixes "../site-lisp/magit/lisp/magit-mode" '("magit-"))
+(register-definition-prefixes "magit/lisp/magit-mode" '("magit-"))
 
 
-;;; Generated autoloads from ../site-lisp/magit/lisp/magit-notes.el
+;;; Generated autoloads from magit/lisp/magit-notes.el
 
  (autoload 'magit-notes "magit" nil t)
-(register-definition-prefixes "../site-lisp/magit/lisp/magit-notes" '("magit-notes-"))
+(register-definition-prefixes "magit/lisp/magit-notes" '("magit-notes-"))
 
 
-;;; Generated autoloads from ../site-lisp/magit/lisp/magit-patch.el
+;;; Generated autoloads from magit/lisp/magit-patch.el
 
  (autoload 'magit-patch "magit-patch" nil t)
  (autoload 'magit-patch-create "magit-patch" nil t)
  (autoload 'magit-patch-apply "magit-patch" nil t)
-(autoload 'magit-patch-save "../site-lisp/magit/lisp/magit-patch" "\
+(autoload 'magit-patch-save "magit/lisp/magit-patch" "\
 Write current diff into patch FILE.
 
 What arguments are used to create the patch depends on the value
@@ -5827,7 +6446,7 @@ Of course the arguments that are required to actually show the
 same differences as those shown in the buffer are always used.
 
 (fn FILE &optional ARG)" t)
-(autoload 'magit-request-pull "../site-lisp/magit/lisp/magit-patch" "\
+(autoload 'magit-request-pull "magit/lisp/magit-patch" "\
 Request upstream to pull from your public repository.
 
 URL is the url of your publicly accessible repository.
@@ -5836,41 +6455,41 @@ END is the last commit, usually a branch name, which upstream
 is asked to pull.  START has to be reachable from that commit.
 
 (fn URL START END)" t)
-(register-definition-prefixes "../site-lisp/magit/lisp/magit-patch" '("magit-"))
+(register-definition-prefixes "magit/lisp/magit-patch" '("magit-"))
 
 
-;;; Generated autoloads from ../site-lisp/magit/lisp/magit-process.el
+;;; Generated autoloads from magit/lisp/magit-process.el
 
-(register-definition-prefixes "../site-lisp/magit/lisp/magit-process" '("magit-" "tramp-sh-handle-"))
+(register-definition-prefixes "magit/lisp/magit-process" '("magit-" "tramp-sh-handle-"))
 
 
-;;; Generated autoloads from ../site-lisp/magit/lisp/magit-pull.el
+;;; Generated autoloads from magit/lisp/magit-pull.el
 
  (autoload 'magit-pull "magit-pull" nil t)
  (autoload 'magit-pull-from-pushremote "magit-pull" nil t)
  (autoload 'magit-pull-from-upstream "magit-pull" nil t)
-(autoload 'magit-pull-branch "../site-lisp/magit/lisp/magit-pull" "\
+(autoload 'magit-pull-branch "magit/lisp/magit-pull" "\
 Pull from a branch read in the minibuffer.
 
 (fn SOURCE ARGS)" t)
-(register-definition-prefixes "../site-lisp/magit/lisp/magit-pull" '("magit-pull-"))
+(register-definition-prefixes "magit/lisp/magit-pull" '("magit-pull-"))
 
 
-;;; Generated autoloads from ../site-lisp/magit/lisp/magit-push.el
+;;; Generated autoloads from magit/lisp/magit-push.el
 
  (autoload 'magit-push "magit-push" nil t)
  (autoload 'magit-push-current-to-pushremote "magit-push" nil t)
  (autoload 'magit-push-current-to-upstream "magit-push" nil t)
-(autoload 'magit-push-current "../site-lisp/magit/lisp/magit-push" "\
+(autoload 'magit-push-current "magit/lisp/magit-push" "\
 Push the current branch to a branch read in the minibuffer.
 
 (fn TARGET ARGS)" t)
-(autoload 'magit-push-other "../site-lisp/magit/lisp/magit-push" "\
+(autoload 'magit-push-other "magit/lisp/magit-push" "\
 Push an arbitrary branch or commit somewhere.
 Both the source and the target are read in the minibuffer.
 
 (fn SOURCE TARGET ARGS)" t)
-(autoload 'magit-push-refspecs "../site-lisp/magit/lisp/magit-push" "\
+(autoload 'magit-push-refspecs "magit/lisp/magit-push" "\
 Push one or multiple REFSPECS to a REMOTE.
 Both the REMOTE and the REFSPECS are read in the minibuffer.  To
 use multiple REFSPECS, separate them with commas.  Completion is
@@ -5878,87 +6497,87 @@ only available for the part before the colon, or when no colon
 is used.
 
 (fn REMOTE REFSPECS ARGS)" t)
-(autoload 'magit-push-matching "../site-lisp/magit/lisp/magit-push" "\
+(autoload 'magit-push-matching "magit/lisp/magit-push" "\
 Push all matching branches to another repository.
 If multiple remotes exist, then read one from the user.
 If just one exists, use that without requiring confirmation.
 
 (fn REMOTE &optional ARGS)" t)
-(autoload 'magit-push-tags "../site-lisp/magit/lisp/magit-push" "\
+(autoload 'magit-push-tags "magit/lisp/magit-push" "\
 Push all tags to another repository.
 If only one remote exists, then push to that.  Otherwise prompt
 for a remote, offering the remote configured for the current
 branch as default.
 
 (fn REMOTE &optional ARGS)" t)
-(autoload 'magit-push-tag "../site-lisp/magit/lisp/magit-push" "\
+(autoload 'magit-push-tag "magit/lisp/magit-push" "\
 Push a tag to another repository.
 
 (fn TAG REMOTE &optional ARGS)" t)
-(autoload 'magit-push-notes-ref "../site-lisp/magit/lisp/magit-push" "\
+(autoload 'magit-push-notes-ref "magit/lisp/magit-push" "\
 Push a notes ref to another repository.
 
 (fn REF REMOTE &optional ARGS)" t)
  (autoload 'magit-push-implicitly "magit-push" nil t)
  (autoload 'magit-push-to-remote "magit-push" nil t)
-(register-definition-prefixes "../site-lisp/magit/lisp/magit-push" '("magit-"))
+(register-definition-prefixes "magit/lisp/magit-push" '("magit-"))
 
 
-;;; Generated autoloads from ../site-lisp/magit/lisp/magit-reflog.el
+;;; Generated autoloads from magit/lisp/magit-reflog.el
 
-(autoload 'magit-reflog-current "../site-lisp/magit/lisp/magit-reflog" "\
+(autoload 'magit-reflog-current "magit/lisp/magit-reflog" "\
 Display the reflog of the current branch.
 If `HEAD' is detached, then show the reflog for that instead." t)
-(autoload 'magit-reflog-other "../site-lisp/magit/lisp/magit-reflog" "\
+(autoload 'magit-reflog-other "magit/lisp/magit-reflog" "\
 Display the reflog of a branch or another ref.
 
 (fn REF)" t)
-(autoload 'magit-reflog-head "../site-lisp/magit/lisp/magit-reflog" "\
+(autoload 'magit-reflog-head "magit/lisp/magit-reflog" "\
 Display the `HEAD' reflog." t)
-(register-definition-prefixes "../site-lisp/magit/lisp/magit-reflog" '("magit-reflog-"))
+(register-definition-prefixes "magit/lisp/magit-reflog" '("magit-reflog-"))
 
 
-;;; Generated autoloads from ../site-lisp/magit/lisp/magit-refs.el
+;;; Generated autoloads from magit/lisp/magit-refs.el
 
  (autoload 'magit-show-refs "magit-refs" nil t)
-(autoload 'magit-show-refs-head "../site-lisp/magit/lisp/magit-refs" "\
+(autoload 'magit-show-refs-head "magit/lisp/magit-refs" "\
 List and compare references in a dedicated buffer.
 Compared with `HEAD'.
 
 (fn &optional ARGS)" t)
-(autoload 'magit-show-refs-current "../site-lisp/magit/lisp/magit-refs" "\
+(autoload 'magit-show-refs-current "magit/lisp/magit-refs" "\
 List and compare references in a dedicated buffer.
 Compare with the current branch or `HEAD' if it is detached.
 
 (fn &optional ARGS)" t)
-(autoload 'magit-show-refs-other "../site-lisp/magit/lisp/magit-refs" "\
+(autoload 'magit-show-refs-other "magit/lisp/magit-refs" "\
 List and compare references in a dedicated buffer.
 Compared with a branch read from the user.
 
 (fn &optional REF ARGS)" t)
-(register-definition-prefixes "../site-lisp/magit/lisp/magit-refs" '("magit-"))
+(register-definition-prefixes "magit/lisp/magit-refs" '("magit-"))
 
 
-;;; Generated autoloads from ../site-lisp/magit/lisp/magit-remote.el
+;;; Generated autoloads from magit/lisp/magit-remote.el
 
  (autoload 'magit-remote "magit-remote" nil t)
-(autoload 'magit-remote-add "../site-lisp/magit/lisp/magit-remote" "\
+(autoload 'magit-remote-add "magit/lisp/magit-remote" "\
 Add a remote named REMOTE and fetch it.
 
 (fn REMOTE URL &optional ARGS)" t)
-(autoload 'magit-remote-rename "../site-lisp/magit/lisp/magit-remote" "\
+(autoload 'magit-remote-rename "magit/lisp/magit-remote" "\
 Rename the remote named OLD to NEW.
 
 (fn OLD NEW)" t)
-(autoload 'magit-remote-remove "../site-lisp/magit/lisp/magit-remote" "\
+(autoload 'magit-remote-remove "magit/lisp/magit-remote" "\
 Delete the remote named REMOTE.
 
 (fn REMOTE)" t)
-(autoload 'magit-remote-prune "../site-lisp/magit/lisp/magit-remote" "\
+(autoload 'magit-remote-prune "magit/lisp/magit-remote" "\
 Remove stale remote-tracking branches for REMOTE.
 
 (fn REMOTE)" t)
-(autoload 'magit-remote-prune-refspecs "../site-lisp/magit/lisp/magit-remote" "\
+(autoload 'magit-remote-prune-refspecs "magit/lisp/magit-remote" "\
 Remove stale refspecs for REMOTE.
 
 A refspec is stale if there no longer exists at least one branch
@@ -5973,7 +6592,7 @@ Also remove the remote-tracking branches that were created due to
 the now stale refspecs.  Other stale branches are not removed.
 
 (fn REMOTE)" t)
-(autoload 'magit-remote-set-head "../site-lisp/magit/lisp/magit-remote" "\
+(autoload 'magit-remote-set-head "magit/lisp/magit-remote" "\
 Set the local representation of REMOTE's default branch.
 Query REMOTE and set the symbolic-ref refs/remotes/<remote>/HEAD
 accordingly.  With a prefix argument query for the branch to be
@@ -5981,13 +6600,13 @@ used, which allows you to select an incorrect value if you fancy
 doing that.
 
 (fn REMOTE &optional BRANCH)" t)
-(autoload 'magit-remote-unset-head "../site-lisp/magit/lisp/magit-remote" "\
+(autoload 'magit-remote-unset-head "magit/lisp/magit-remote" "\
 Unset the local representation of REMOTE's default branch.
 Delete the symbolic-ref \"refs/remotes/<remote>/HEAD\".
 
 (fn REMOTE)" t)
  (autoload 'magit-update-default-branch "magit-remote" nil t)
-(autoload 'magit-remote-unshallow "../site-lisp/magit/lisp/magit-remote" "\
+(autoload 'magit-remote-unshallow "magit/lisp/magit-remote" "\
 Convert a shallow remote into a full one.
 If only a single refspec is set and it does not contain a
 wildcard, then also offer to replace it with the standard
@@ -5995,47 +6614,47 @@ refspec.
 
 (fn REMOTE)" t)
  (autoload 'magit-remote-configure "magit-remote" nil t)
-(register-definition-prefixes "../site-lisp/magit/lisp/magit-remote" '("magit-"))
+(register-definition-prefixes "magit/lisp/magit-remote" '("magit-"))
 
 
-;;; Generated autoloads from ../site-lisp/magit/lisp/magit-repos.el
+;;; Generated autoloads from magit/lisp/magit-repos.el
 
-(autoload 'magit-list-repositories "../site-lisp/magit/lisp/magit-repos" "\
+(autoload 'magit-list-repositories "magit/lisp/magit-repos" "\
 Display a list of repositories.
 
 Use the option `magit-repository-directories' to control which
 repositories are displayed." t)
-(register-definition-prefixes "../site-lisp/magit/lisp/magit-repos" '("magit-"))
+(register-definition-prefixes "magit/lisp/magit-repos" '("magit-"))
 
 
-;;; Generated autoloads from ../site-lisp/magit/lisp/magit-reset.el
+;;; Generated autoloads from magit/lisp/magit-reset.el
 
  (autoload 'magit-reset "magit" nil t)
-(autoload 'magit-reset-mixed "../site-lisp/magit/lisp/magit-reset" "\
+(autoload 'magit-reset-mixed "magit/lisp/magit-reset" "\
 Reset the `HEAD' and index to COMMIT, but not the working tree.
 
 (git reset --mixed COMMIT)
 
 (fn COMMIT)" t)
-(autoload 'magit-reset-soft "../site-lisp/magit/lisp/magit-reset" "\
+(autoload 'magit-reset-soft "magit/lisp/magit-reset" "\
 Reset the `HEAD' to COMMIT, but not the index and working tree.
 
 (git reset --soft REVISION)
 
 (fn COMMIT)" t)
-(autoload 'magit-reset-hard "../site-lisp/magit/lisp/magit-reset" "\
+(autoload 'magit-reset-hard "magit/lisp/magit-reset" "\
 Reset the `HEAD', index, and working tree to COMMIT.
 
 (git reset --hard REVISION)
 
 (fn COMMIT)" t)
-(autoload 'magit-reset-keep "../site-lisp/magit/lisp/magit-reset" "\
+(autoload 'magit-reset-keep "magit/lisp/magit-reset" "\
 Reset the `HEAD' and index to COMMIT, while keeping uncommitted changes.
 
 (git reset --keep REVISION)
 
 (fn COMMIT)" t)
-(autoload 'magit-reset-index "../site-lisp/magit/lisp/magit-reset" "\
+(autoload 'magit-reset-index "magit/lisp/magit-reset" "\
 Reset the index to COMMIT.
 Keep the `HEAD' and working tree as-is, so if COMMIT refers to the
 head this effectively unstages all changes.
@@ -6043,72 +6662,72 @@ head this effectively unstages all changes.
 (git reset COMMIT .)
 
 (fn COMMIT)" t)
-(autoload 'magit-reset-worktree "../site-lisp/magit/lisp/magit-reset" "\
+(autoload 'magit-reset-worktree "magit/lisp/magit-reset" "\
 Reset the worktree to COMMIT.
 Keep the `HEAD' and index as-is.
 
 (fn COMMIT)" t)
-(autoload 'magit-reset-quickly "../site-lisp/magit/lisp/magit-reset" "\
+(autoload 'magit-reset-quickly "magit/lisp/magit-reset" "\
 Reset the `HEAD' and index to COMMIT, and possibly the working tree.
 With a prefix argument reset the working tree otherwise don't.
 
 (git reset --mixed|--hard COMMIT)
 
 (fn COMMIT &optional HARD)" t)
-(register-definition-prefixes "../site-lisp/magit/lisp/magit-reset" '("magit-reset-"))
+(register-definition-prefixes "magit/lisp/magit-reset" '("magit-reset-"))
 
 
-;;; Generated autoloads from ../site-lisp/magit/lisp/magit-section.el
+;;; Generated autoloads from magit/lisp/magit-section.el
 
-(register-definition-prefixes "../site-lisp/magit/lisp/magit-section" '("isearch-clean-overlays@magit-mode" "magit-"))
+(register-definition-prefixes "magit/lisp/magit-section" '("isearch-clean-overlays@magit-mode" "magit-"))
 
 
-;;; Generated autoloads from ../site-lisp/magit/lisp/magit-sequence.el
+;;; Generated autoloads from magit/lisp/magit-sequence.el
 
-(autoload 'magit-sequencer-continue "../site-lisp/magit/lisp/magit-sequence" "\
+(autoload 'magit-sequencer-continue "magit/lisp/magit-sequence" "\
 Resume the current cherry-pick or revert sequence." t)
-(autoload 'magit-sequencer-skip "../site-lisp/magit/lisp/magit-sequence" "\
+(autoload 'magit-sequencer-skip "magit/lisp/magit-sequence" "\
 Skip the stopped at commit during a cherry-pick or revert sequence." t)
-(autoload 'magit-sequencer-abort "../site-lisp/magit/lisp/magit-sequence" "\
+(autoload 'magit-sequencer-abort "magit/lisp/magit-sequence" "\
 Abort the current cherry-pick or revert sequence.
 This discards all changes made since the sequence started." t)
  (autoload 'magit-cherry-pick "magit-sequence" nil t)
-(autoload 'magit-cherry-copy "../site-lisp/magit/lisp/magit-sequence" "\
+(autoload 'magit-cherry-copy "magit/lisp/magit-sequence" "\
 Copy COMMITS from another branch onto the current branch.
 Prompt for a commit, defaulting to the commit at point.  If
 the region selects multiple commits, then pick all of them,
 without prompting.
 
 (fn COMMITS &optional ARGS)" t)
-(autoload 'magit-cherry-apply "../site-lisp/magit/lisp/magit-sequence" "\
+(autoload 'magit-cherry-apply "magit/lisp/magit-sequence" "\
 Apply the changes in COMMITS but do not commit them.
 Prompt for a commit, defaulting to the commit at point.  If
 the region selects multiple commits, then apply all of them,
 without prompting.
 
 (fn COMMITS &optional ARGS)" t)
-(autoload 'magit-cherry-harvest "../site-lisp/magit/lisp/magit-sequence" "\
+(autoload 'magit-cherry-harvest "magit/lisp/magit-sequence" "\
 Move COMMITS from another BRANCH onto the current branch.
 Remove the COMMITS from BRANCH and stay on the current branch.
 If a conflict occurs, then you have to fix that and finish the
 process manually.
 
 (fn COMMITS BRANCH &optional ARGS)" t)
-(autoload 'magit-cherry-donate "../site-lisp/magit/lisp/magit-sequence" "\
+(autoload 'magit-cherry-donate "magit/lisp/magit-sequence" "\
 Move COMMITS from the current branch onto another existing BRANCH.
 Remove COMMITS from the current branch and stay on that branch.
 If a conflict occurs, then you have to fix that and finish the
 process manually.  `HEAD' is allowed to be detached initially.
 
 (fn COMMITS BRANCH &optional ARGS)" t)
-(autoload 'magit-cherry-spinout "../site-lisp/magit/lisp/magit-sequence" "\
+(autoload 'magit-cherry-spinout "magit/lisp/magit-sequence" "\
 Move COMMITS from the current branch onto a new BRANCH.
 Remove COMMITS from the current branch and stay on that branch.
 If a conflict occurs, then you have to fix that and finish the
 process manually.
 
 (fn COMMITS BRANCH START-POINT &optional ARGS)" t)
-(autoload 'magit-cherry-spinoff "../site-lisp/magit/lisp/magit-sequence" "\
+(autoload 'magit-cherry-spinoff "magit/lisp/magit-sequence" "\
 Move COMMITS from the current branch onto a new BRANCH.
 Remove COMMITS from the current branch and checkout BRANCH.
 If a conflict occurs, then you have to fix that and finish
@@ -6116,14 +6735,14 @@ the process manually.
 
 (fn COMMITS BRANCH START-POINT &optional ARGS)" t)
  (autoload 'magit-revert "magit-sequence" nil t)
-(autoload 'magit-revert-and-commit "../site-lisp/magit/lisp/magit-sequence" "\
+(autoload 'magit-revert-and-commit "magit/lisp/magit-sequence" "\
 Revert COMMIT by creating a new commit.
 Prompt for a commit, defaulting to the commit at point.  If
 the region selects multiple commits, then revert all of them,
 without prompting.
 
 (fn COMMIT &optional ARGS)" t)
-(autoload 'magit-revert-no-commit "../site-lisp/magit/lisp/magit-sequence" "\
+(autoload 'magit-revert-no-commit "magit/lisp/magit-sequence" "\
 Revert COMMIT by applying it in reverse to the worktree.
 Prompt for a commit, defaulting to the commit at point.  If
 the region selects multiple commits, then revert all of them,
@@ -6131,114 +6750,114 @@ without prompting.
 
 (fn COMMIT &optional ARGS)" t)
  (autoload 'magit-am "magit-sequence" nil t)
-(autoload 'magit-am-apply-patches "../site-lisp/magit/lisp/magit-sequence" "\
+(autoload 'magit-am-apply-patches "magit/lisp/magit-sequence" "\
 Apply the patches FILES.
 
 (fn &optional FILES ARGS)" t)
-(autoload 'magit-am-apply-maildir "../site-lisp/magit/lisp/magit-sequence" "\
+(autoload 'magit-am-apply-maildir "magit/lisp/magit-sequence" "\
 Apply the patches from MAILDIR.
 
 (fn &optional MAILDIR ARGS)" t)
-(autoload 'magit-am-continue "../site-lisp/magit/lisp/magit-sequence" "\
+(autoload 'magit-am-continue "magit/lisp/magit-sequence" "\
 Resume the current patch applying sequence." t)
-(autoload 'magit-am-skip "../site-lisp/magit/lisp/magit-sequence" "\
+(autoload 'magit-am-skip "magit/lisp/magit-sequence" "\
 Skip the stopped at patch during a patch applying sequence." t)
-(autoload 'magit-am-abort "../site-lisp/magit/lisp/magit-sequence" "\
+(autoload 'magit-am-abort "magit/lisp/magit-sequence" "\
 Abort the current patch applying sequence.
 This discards all changes made since the sequence started." t)
  (autoload 'magit-rebase "magit-sequence" nil t)
  (autoload 'magit-rebase-onto-pushremote "magit-sequence" nil t)
  (autoload 'magit-rebase-onto-upstream "magit-sequence" nil t)
-(autoload 'magit-rebase-branch "../site-lisp/magit/lisp/magit-sequence" "\
+(autoload 'magit-rebase-branch "magit/lisp/magit-sequence" "\
 Rebase the current branch onto a branch read in the minibuffer.
 All commits that are reachable from `HEAD' but not from the
 selected branch TARGET are being rebased.
 
 (fn TARGET ARGS)" t)
-(autoload 'magit-rebase-subset "../site-lisp/magit/lisp/magit-sequence" "\
+(autoload 'magit-rebase-subset "magit/lisp/magit-sequence" "\
 Rebase a subset of the current branch's history onto a new base.
 Rebase commits from START to `HEAD' onto NEWBASE.
 START has to be selected from a list of recent commits.
 
 (fn NEWBASE START ARGS)" t)
-(autoload 'magit-rebase-interactive "../site-lisp/magit/lisp/magit-sequence" "\
+(autoload 'magit-rebase-interactive "magit/lisp/magit-sequence" "\
 Start an interactive rebase sequence.
 
 (fn COMMIT ARGS)" t)
-(autoload 'magit-rebase-autosquash "../site-lisp/magit/lisp/magit-sequence" "\
+(autoload 'magit-rebase-autosquash "magit/lisp/magit-sequence" "\
 Combine squash and fixup commits with their intended targets.
 
 (fn ARGS)" t)
-(autoload 'magit-rebase-edit-commit "../site-lisp/magit/lisp/magit-sequence" "\
+(autoload 'magit-rebase-edit-commit "magit/lisp/magit-sequence" "\
 Edit a single older commit using rebase.
 
 (fn COMMIT ARGS)" t)
-(autoload 'magit-rebase-reword-commit "../site-lisp/magit/lisp/magit-sequence" "\
+(autoload 'magit-rebase-reword-commit "magit/lisp/magit-sequence" "\
 Reword a single older commit using rebase.
 
 (fn COMMIT ARGS)" t)
-(autoload 'magit-rebase-remove-commit "../site-lisp/magit/lisp/magit-sequence" "\
+(autoload 'magit-rebase-remove-commit "magit/lisp/magit-sequence" "\
 Remove a single older commit using rebase.
 
 (fn COMMIT ARGS)" t)
-(autoload 'magit-rebase-continue "../site-lisp/magit/lisp/magit-sequence" "\
+(autoload 'magit-rebase-continue "magit/lisp/magit-sequence" "\
 Restart the current rebasing operation.
 In some cases this pops up a commit message buffer for you do
 edit.  With a prefix argument the old message is reused as-is.
 
 (fn &optional NOEDIT)" t)
-(autoload 'magit-rebase-skip "../site-lisp/magit/lisp/magit-sequence" "\
+(autoload 'magit-rebase-skip "magit/lisp/magit-sequence" "\
 Skip the current commit and restart the current rebase operation." t)
-(autoload 'magit-rebase-edit "../site-lisp/magit/lisp/magit-sequence" "\
+(autoload 'magit-rebase-edit "magit/lisp/magit-sequence" "\
 Edit the todo list of the current rebase operation." t)
-(autoload 'magit-rebase-abort "../site-lisp/magit/lisp/magit-sequence" "\
+(autoload 'magit-rebase-abort "magit/lisp/magit-sequence" "\
 Abort the current rebase operation, restoring the original branch." t)
-(register-definition-prefixes "../site-lisp/magit/lisp/magit-sequence" '("magit-"))
+(register-definition-prefixes "magit/lisp/magit-sequence" '("magit-"))
 
 
-;;; Generated autoloads from ../site-lisp/magit/lisp/magit-sparse-checkout.el
+;;; Generated autoloads from magit/lisp/magit-sparse-checkout.el
 
  (autoload 'magit-sparse-checkout "magit-sparse-checkout" nil t)
-(autoload 'magit-sparse-checkout-enable "../site-lisp/magit/lisp/magit-sparse-checkout" "\
+(autoload 'magit-sparse-checkout-enable "magit/lisp/magit-sparse-checkout" "\
 Convert the working tree to a sparse checkout.
 
 (fn &optional ARGS)" t)
-(autoload 'magit-sparse-checkout-set "../site-lisp/magit/lisp/magit-sparse-checkout" "\
+(autoload 'magit-sparse-checkout-set "magit/lisp/magit-sparse-checkout" "\
 Restrict working tree to DIRECTORIES.
 To extend rather than override the currently configured
 directories, call `magit-sparse-checkout-add' instead.
 
 (fn DIRECTORIES)" t)
-(autoload 'magit-sparse-checkout-add "../site-lisp/magit/lisp/magit-sparse-checkout" "\
+(autoload 'magit-sparse-checkout-add "magit/lisp/magit-sparse-checkout" "\
 Add DIRECTORIES to the working tree.
 To override rather than extend the currently configured
 directories, call `magit-sparse-checkout-set' instead.
 
 (fn DIRECTORIES)" t)
-(autoload 'magit-sparse-checkout-reapply "../site-lisp/magit/lisp/magit-sparse-checkout" "\
+(autoload 'magit-sparse-checkout-reapply "magit/lisp/magit-sparse-checkout" "\
 Reapply the sparse checkout rules to the working tree.
 Some operations such as merging or rebasing may need to check out
 files that aren't included in the sparse checkout.  Call this
 command to reset to the sparse checkout state." t)
-(autoload 'magit-sparse-checkout-disable "../site-lisp/magit/lisp/magit-sparse-checkout" "\
+(autoload 'magit-sparse-checkout-disable "magit/lisp/magit-sparse-checkout" "\
 Convert sparse checkout to full checkout.
 Note that disabling the sparse checkout does not clear the
 configured directories.  Call `magit-sparse-checkout-enable' to
 restore the previous sparse checkout." t)
-(register-definition-prefixes "../site-lisp/magit/lisp/magit-sparse-checkout" '("magit-sparse-checkout-"))
+(register-definition-prefixes "magit/lisp/magit-sparse-checkout" '("magit-sparse-checkout-"))
 
 
-;;; Generated autoloads from ../site-lisp/magit/lisp/magit-stash.el
+;;; Generated autoloads from magit/lisp/magit-stash.el
 
  (autoload 'magit-stash "magit-stash" nil t)
-(autoload 'magit-stash-both "../site-lisp/magit/lisp/magit-stash" "\
+(autoload 'magit-stash-both "magit/lisp/magit-stash" "\
 Create a stash of the index and working tree.
 Untracked files are included according to infix arguments.
 One prefix argument is equivalent to `--include-untracked'
 while two prefix arguments are equivalent to `--all'.
 
 (fn MESSAGE &optional INCLUDE-UNTRACKED)" t)
-(autoload 'magit-stash-index "../site-lisp/magit/lisp/magit-stash" "\
+(autoload 'magit-stash-index "magit/lisp/magit-stash" "\
 Create a stash of the index only.
 Unstaged and untracked changes are not stashed.  The stashed
 changes are applied in reverse to both the index and the
@@ -6246,31 +6865,31 @@ worktree.  This command can fail when the worktree is not clean.
 Applying the resulting stash has the inverse effect.
 
 (fn MESSAGE)" t)
-(autoload 'magit-stash-worktree "../site-lisp/magit/lisp/magit-stash" "\
+(autoload 'magit-stash-worktree "magit/lisp/magit-stash" "\
 Create a stash of unstaged changes in the working tree.
 Untracked files are included according to infix arguments.
 One prefix argument is equivalent to `--include-untracked'
 while two prefix arguments are equivalent to `--all'.
 
 (fn MESSAGE &optional INCLUDE-UNTRACKED)" t)
-(autoload 'magit-stash-keep-index "../site-lisp/magit/lisp/magit-stash" "\
+(autoload 'magit-stash-keep-index "magit/lisp/magit-stash" "\
 Create a stash of the index and working tree, keeping index intact.
 Untracked files are included according to infix arguments.
 One prefix argument is equivalent to `--include-untracked'
 while two prefix arguments are equivalent to `--all'.
 
 (fn MESSAGE &optional INCLUDE-UNTRACKED)" t)
-(autoload 'magit-snapshot-both "../site-lisp/magit/lisp/magit-stash" "\
+(autoload 'magit-snapshot-both "magit/lisp/magit-stash" "\
 Create a snapshot of the index and working tree.
 Untracked files are included according to infix arguments.
 One prefix argument is equivalent to `--include-untracked'
 while two prefix arguments are equivalent to `--all'.
 
 (fn &optional INCLUDE-UNTRACKED)" t)
-(autoload 'magit-snapshot-index "../site-lisp/magit/lisp/magit-stash" "\
+(autoload 'magit-snapshot-index "magit/lisp/magit-stash" "\
 Create a snapshot of the index only.
 Unstaged and untracked changes are not stashed." t)
-(autoload 'magit-snapshot-worktree "../site-lisp/magit/lisp/magit-stash" "\
+(autoload 'magit-snapshot-worktree "magit/lisp/magit-stash" "\
 Create a snapshot of unstaged changes in the working tree.
 Untracked files are included according to infix arguments.
 One prefix argument is equivalent to `--include-untracked'
@@ -6278,56 +6897,56 @@ while two prefix arguments are equivalent to `--all'.
 
 (fn &optional INCLUDE-UNTRACKED)" t)
  (autoload 'magit-stash-push "magit-stash" nil t)
-(autoload 'magit-stash-apply "../site-lisp/magit/lisp/magit-stash" "\
+(autoload 'magit-stash-apply "magit/lisp/magit-stash" "\
 Apply a stash to the working tree.
 If nothing is staged, then try to reinstate the stashed index.
 Doing so is not possible if there are staged changes.
 
 (fn STASH)" t)
-(autoload 'magit-stash-pop "../site-lisp/magit/lisp/magit-stash" "\
+(autoload 'magit-stash-pop "magit/lisp/magit-stash" "\
 Apply a stash to the working tree and remove it from stash list.
 If nothing is staged, then try to reinstate the stashed index.
 Doing so is not possible if there are staged changes.  Do not
 remove the stash, if it cannot be applied.
 
 (fn STASH)" t)
-(autoload 'magit-stash-drop "../site-lisp/magit/lisp/magit-stash" "\
+(autoload 'magit-stash-drop "magit/lisp/magit-stash" "\
 Remove a stash from the stash list.
 When the region is active offer to drop all contained stashes.
 
 (fn STASH)" t)
-(autoload 'magit-stash-clear "../site-lisp/magit/lisp/magit-stash" "\
+(autoload 'magit-stash-clear "magit/lisp/magit-stash" "\
 Remove all stashes saved in REF's reflog by deleting REF.
 
 (fn REF)" t)
-(autoload 'magit-stash-branch "../site-lisp/magit/lisp/magit-stash" "\
+(autoload 'magit-stash-branch "magit/lisp/magit-stash" "\
 Create and checkout a new BRANCH from an existing STASH.
 The new branch starts at the commit that was current when the
 stash was created.  If the stash applies cleanly, then drop it.
 
 (fn STASH BRANCH)" t)
-(autoload 'magit-stash-branch-here "../site-lisp/magit/lisp/magit-stash" "\
+(autoload 'magit-stash-branch-here "magit/lisp/magit-stash" "\
 Create and checkout a new BRANCH from an existing STASH.
 Use the current branch or `HEAD' as the starting-point of BRANCH.
 Then apply STASH, dropping it if it applies cleanly.
 
 (fn STASH BRANCH)" t)
-(autoload 'magit-stash-format-patch "../site-lisp/magit/lisp/magit-stash" "\
+(autoload 'magit-stash-format-patch "magit/lisp/magit-stash" "\
 Create a patch from STASH
 
 (fn STASH)" t)
-(autoload 'magit-stash-list "../site-lisp/magit/lisp/magit-stash" "\
+(autoload 'magit-stash-list "magit/lisp/magit-stash" "\
 List all stashes in a buffer." t)
-(autoload 'magit-stash-show "../site-lisp/magit/lisp/magit-stash" "\
+(autoload 'magit-stash-show "magit/lisp/magit-stash" "\
 Show all diffs of a stash in a buffer.
 
 (fn STASH &optional ARGS FILES)" t)
-(register-definition-prefixes "../site-lisp/magit/lisp/magit-stash" '("magit-"))
+(register-definition-prefixes "magit/lisp/magit-stash" '("magit-"))
 
 
-;;; Generated autoloads from ../site-lisp/magit/lisp/magit-status.el
+;;; Generated autoloads from magit/lisp/magit-status.el
 
-(autoload 'magit-init "../site-lisp/magit/lisp/magit-status" "\
+(autoload 'magit-init "magit/lisp/magit-status" "\
 Initialize a Git repository, then show its status.
 
 If the directory is below an existing repository, then the user
@@ -6338,7 +6957,7 @@ has to confirm that it should be reinitialized.
 Non-interactively DIRECTORY is (re-)initialized unconditionally.
 
 (fn DIRECTORY)" t)
-(autoload 'magit-status "../site-lisp/magit/lisp/magit-status" "\
+(autoload 'magit-status "magit/lisp/magit-status" "\
 Show the status of the current Git repository in a buffer.
 
 If the current directory isn't located within a Git repository,
@@ -6381,9 +7000,9 @@ Instead of invoking this alias for `magit-status' using
 \"M-x magit RET\", you should bind a key to `magit-status'
 and read the info node `(magit)Getting Started', which
 also contains other useful hints.")
-(autoload 'magit-status-here "../site-lisp/magit/lisp/magit-status" "\
+(autoload 'magit-status-here "magit/lisp/magit-status" "\
 Like `magit-status' but with non-nil `magit-status-goto-file-position'." t)
-(autoload 'magit-status-quick "../site-lisp/magit/lisp/magit-status" "\
+(autoload 'magit-status-quick "magit/lisp/magit-status" "\
 Show the status of the current Git repository, maybe without refreshing.
 
 If the status buffer of the current Git repository exists but
@@ -6398,18 +7017,18 @@ and additionally cause the buffer to be refresh.
 
 To use this function instead of `magit-status', add this to your
 init file: (global-set-key (kbd \"C-x g\") \\='magit-status-quick)." t)
-(autoload 'magit-status-setup-buffer "../site-lisp/magit/lisp/magit-status" "\
+(autoload 'magit-status-setup-buffer "magit/lisp/magit-status" "\
 
 
 (fn &optional DIRECTORY)")
-(register-definition-prefixes "../site-lisp/magit/lisp/magit-status" '("magit-"))
+(register-definition-prefixes "magit/lisp/magit-status" '("magit-"))
 
 
-;;; Generated autoloads from ../site-lisp/magit/lisp/magit-submodule.el
+;;; Generated autoloads from magit/lisp/magit-submodule.el
 
  (autoload 'magit-submodule "magit-submodule" nil t)
  (autoload 'magit-submodule-add "magit-submodule" nil t)
-(autoload 'magit-submodule-read-name-for-path "../site-lisp/magit/lisp/magit-submodule" "\
+(autoload 'magit-submodule-read-name-for-path "magit/lisp/magit-submodule" "\
 
 
 (fn PATH &optional PREFER-SHORT)")
@@ -6418,7 +7037,7 @@ init file: (global-set-key (kbd \"C-x g\") \\='magit-status-quick)." t)
  (autoload 'magit-submodule-update "magit-submodule" nil t)
  (autoload 'magit-submodule-synchronize "magit-submodule" nil t)
  (autoload 'magit-submodule-unpopulate "magit-submodule" nil t)
-(autoload 'magit-submodule-remove "../site-lisp/magit/lisp/magit-submodule" "\
+(autoload 'magit-submodule-remove "magit/lisp/magit-submodule" "\
 Unregister MODULES and remove their working directories.
 
 For safety reasons, do not remove the gitdirs and if a module has
@@ -6433,75 +7052,75 @@ are additional safety precautions in place, so you might be able
 to recover from making a mistake here, but don't count on it.
 
 (fn MODULES ARGS TRASH-GITDIRS)" t)
-(autoload 'magit-insert-modules "../site-lisp/magit/lisp/magit-submodule" "\
+(autoload 'magit-insert-modules "magit/lisp/magit-submodule" "\
 Insert submodule sections.
 Hook `magit-module-sections-hook' controls which module sections
 are inserted, and option `magit-module-sections-nested' controls
 whether they are wrapped in an additional section.")
-(autoload 'magit-insert-modules-overview "../site-lisp/magit/lisp/magit-submodule" "\
+(autoload 'magit-insert-modules-overview "magit/lisp/magit-submodule" "\
 Insert sections for all modules.
 For each section insert the path and the output of `git describe --tags',
 or, failing that, the abbreviated HEAD commit hash.")
-(autoload 'magit-insert-modules-unpulled-from-upstream "../site-lisp/magit/lisp/magit-submodule" "\
+(autoload 'magit-insert-modules-unpulled-from-upstream "magit/lisp/magit-submodule" "\
 Insert sections for modules that haven't been pulled from the upstream.
 These sections can be expanded to show the respective commits.")
-(autoload 'magit-insert-modules-unpulled-from-pushremote "../site-lisp/magit/lisp/magit-submodule" "\
+(autoload 'magit-insert-modules-unpulled-from-pushremote "magit/lisp/magit-submodule" "\
 Insert sections for modules that haven't been pulled from the push-remote.
 These sections can be expanded to show the respective commits.")
-(autoload 'magit-insert-modules-unpushed-to-upstream "../site-lisp/magit/lisp/magit-submodule" "\
+(autoload 'magit-insert-modules-unpushed-to-upstream "magit/lisp/magit-submodule" "\
 Insert sections for modules that haven't been pushed to the upstream.
 These sections can be expanded to show the respective commits.")
-(autoload 'magit-insert-modules-unpushed-to-pushremote "../site-lisp/magit/lisp/magit-submodule" "\
+(autoload 'magit-insert-modules-unpushed-to-pushremote "magit/lisp/magit-submodule" "\
 Insert sections for modules that haven't been pushed to the push-remote.
 These sections can be expanded to show the respective commits.")
-(autoload 'magit-list-submodules "../site-lisp/magit/lisp/magit-submodule" "\
+(autoload 'magit-list-submodules "magit/lisp/magit-submodule" "\
 Display a list of the current repository's populated submodules." t)
-(register-definition-prefixes "../site-lisp/magit/lisp/magit-submodule" '("magit-"))
+(register-definition-prefixes "magit/lisp/magit-submodule" '("magit-"))
 
 
-;;; Generated autoloads from ../site-lisp/magit/lisp/magit-subtree.el
+;;; Generated autoloads from magit/lisp/magit-subtree.el
 
  (autoload 'magit-subtree "magit-subtree" nil t)
  (autoload 'magit-subtree-import "magit-subtree" nil t)
  (autoload 'magit-subtree-export "magit-subtree" nil t)
-(autoload 'magit-subtree-add "../site-lisp/magit/lisp/magit-subtree" "\
+(autoload 'magit-subtree-add "magit/lisp/magit-subtree" "\
 Add REF from REPOSITORY as a new subtree at PREFIX.
 
 (fn PREFIX REPOSITORY REF ARGS)" t)
-(autoload 'magit-subtree-add-commit "../site-lisp/magit/lisp/magit-subtree" "\
+(autoload 'magit-subtree-add-commit "magit/lisp/magit-subtree" "\
 Add COMMIT as a new subtree at PREFIX.
 
 (fn PREFIX COMMIT ARGS)" t)
-(autoload 'magit-subtree-merge "../site-lisp/magit/lisp/magit-subtree" "\
+(autoload 'magit-subtree-merge "magit/lisp/magit-subtree" "\
 Merge COMMIT into the PREFIX subtree.
 
 (fn PREFIX COMMIT ARGS)" t)
-(autoload 'magit-subtree-pull "../site-lisp/magit/lisp/magit-subtree" "\
+(autoload 'magit-subtree-pull "magit/lisp/magit-subtree" "\
 Pull REF from REPOSITORY into the PREFIX subtree.
 
 (fn PREFIX REPOSITORY REF ARGS)" t)
-(autoload 'magit-subtree-push "../site-lisp/magit/lisp/magit-subtree" "\
+(autoload 'magit-subtree-push "magit/lisp/magit-subtree" "\
 Extract the history of the subtree PREFIX and push it to REF on REPOSITORY.
 
 (fn PREFIX REPOSITORY REF ARGS)" t)
-(autoload 'magit-subtree-split "../site-lisp/magit/lisp/magit-subtree" "\
+(autoload 'magit-subtree-split "magit/lisp/magit-subtree" "\
 Extract the history of the subtree PREFIX.
 
 (fn PREFIX COMMIT ARGS)" t)
-(register-definition-prefixes "../site-lisp/magit/lisp/magit-subtree" '("magit-"))
+(register-definition-prefixes "magit/lisp/magit-subtree" '("magit-"))
 
 
-;;; Generated autoloads from ../site-lisp/magit/lisp/magit-tag.el
+;;; Generated autoloads from magit/lisp/magit-tag.el
 
  (autoload 'magit-tag "magit" nil t)
-(autoload 'magit-tag-create "../site-lisp/magit/lisp/magit-tag" "\
+(autoload 'magit-tag-create "magit/lisp/magit-tag" "\
 Create a new tag with the given NAME at REV.
 With a prefix argument annotate the tag.
 
 (git tag [--annotate] NAME REV)
 
 (fn NAME REV &optional ARGS)" t)
-(autoload 'magit-tag-delete "../site-lisp/magit/lisp/magit-tag" "\
+(autoload 'magit-tag-delete "magit/lisp/magit-tag" "\
 Delete one or more tags.
 If the region marks multiple tags (and nothing else), then offer
 to delete those, otherwise prompt for a single tag to be deleted,
@@ -6510,11 +7129,11 @@ defaulting to the tag at point.
 (git tag -d TAGS)
 
 (fn TAGS)" t)
-(autoload 'magit-tag-prune "../site-lisp/magit/lisp/magit-tag" "\
+(autoload 'magit-tag-prune "magit/lisp/magit-tag" "\
 Offer to delete tags missing locally from REMOTE, and vice versa.
 
 (fn TAGS REMOTE-TAGS REMOTE)" t)
-(autoload 'magit-tag-release "../site-lisp/magit/lisp/magit-tag" "\
+(autoload 'magit-tag-release "magit/lisp/magit-tag" "\
 Create a release tag for `HEAD'.
 
 Assume that release tags match `magit-release-tag-regexp'.
@@ -6534,20 +7153,20 @@ example, a TAG \"v1.2.3\" and a repository located at something
 like \"/path/to/foo-bar\".
 
 (fn TAG MSG &optional ARGS)" t)
-(register-definition-prefixes "../site-lisp/magit/lisp/magit-tag" '("magit-"))
+(register-definition-prefixes "magit/lisp/magit-tag" '("magit-"))
 
 
-;;; Generated autoloads from ../site-lisp/magit/test/magit-tests.el
+;;; Generated autoloads from magit/test/magit-tests.el
 
-(register-definition-prefixes "../site-lisp/magit/test/magit-tests" '("magit-"))
-
-
-;;; Generated autoloads from ../site-lisp/magit/lisp/magit-transient.el
-
-(register-definition-prefixes "../site-lisp/magit/lisp/magit-transient" '("magit-"))
+(register-definition-prefixes "magit/test/magit-tests" '("magit-"))
 
 
-;;; Generated autoloads from ../site-lisp/magit/lisp/magit-wip.el
+;;; Generated autoloads from magit/lisp/magit-transient.el
+
+(register-definition-prefixes "magit/lisp/magit-transient" '("magit-"))
+
+
+;;; Generated autoloads from magit/lisp/magit-wip.el
 
 (defvar magit-wip-mode nil "\
 Non-nil if Magit-Wip mode is enabled.
@@ -6556,8 +7175,8 @@ for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `magit-wip-mode'.")
-(custom-autoload 'magit-wip-mode "../site-lisp/magit/lisp/magit-wip" nil)
-(autoload 'magit-wip-mode "../site-lisp/magit/lisp/magit-wip" "\
+(custom-autoload 'magit-wip-mode "magit/lisp/magit-wip" nil)
+(autoload 'magit-wip-mode "magit/lisp/magit-wip" "\
 Save uncommitted changes to work-in-progress refs.
 
 Whenever appropriate (i.e., when dataloss would be a possibility
@@ -6592,8 +7211,8 @@ for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `magit-wip-after-save-mode'.")
-(custom-autoload 'magit-wip-after-save-mode "../site-lisp/magit/lisp/magit-wip" nil)
-(autoload 'magit-wip-after-save-mode "../site-lisp/magit/lisp/magit-wip" "\
+(custom-autoload 'magit-wip-after-save-mode "magit/lisp/magit-wip" nil)
+(autoload 'magit-wip-after-save-mode "magit/lisp/magit-wip" "\
 Toggle Magit-Wip-After-Save-Local mode in all buffers.
 With prefix ARG, enable Magit-Wip-After-Save mode if ARG is positive;
 otherwise, disable it.
@@ -6613,8 +7232,8 @@ Magit-Wip-After-Save-Local mode.
 Non-nil if Magit-Wip-After-Apply mode is enabled.
 See the `magit-wip-after-apply-mode' command
 for a description of this minor mode.")
-(custom-autoload 'magit-wip-after-apply-mode "../site-lisp/magit/lisp/magit-wip" nil)
-(autoload 'magit-wip-after-apply-mode "../site-lisp/magit/lisp/magit-wip" "\
+(custom-autoload 'magit-wip-after-apply-mode "magit/lisp/magit-wip" nil)
+(autoload 'magit-wip-after-apply-mode "magit/lisp/magit-wip" "\
 Commit to work-in-progress refs.
 
 After applying a change using any \"apply variant\"
@@ -6644,8 +7263,8 @@ it is disabled.
 Non-nil if Magit-Wip-Before-Change mode is enabled.
 See the `magit-wip-before-change-mode' command
 for a description of this minor mode.")
-(custom-autoload 'magit-wip-before-change-mode "../site-lisp/magit/lisp/magit-wip" nil)
-(autoload 'magit-wip-before-change-mode "../site-lisp/magit/lisp/magit-wip" "\
+(custom-autoload 'magit-wip-before-change-mode "magit/lisp/magit-wip" nil)
+(autoload 'magit-wip-before-change-mode "magit/lisp/magit-wip" "\
 Commit to work-in-progress refs before certain destructive changes.
 
 Before invoking a revert command or an \"apply variant\"
@@ -6674,7 +7293,7 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(autoload 'magit-wip-commit-initial-backup "../site-lisp/magit/lisp/magit-wip" "\
+(autoload 'magit-wip-commit-initial-backup "magit/lisp/magit-wip" "\
 Before saving, commit current file to a worktree wip ref.
 
 The user has to add this function to `before-save-hook'.
@@ -6689,28 +7308,28 @@ This function ignores the variables that affect `backup-buffer'
 and can be used along-side that function, which is recommended
 because this function only backs up files that are tracked in
 a Git repository.")
-(register-definition-prefixes "../site-lisp/magit/lisp/magit-wip" '("magit-"))
+(register-definition-prefixes "magit/lisp/magit-wip" '("magit-"))
 
 
-;;; Generated autoloads from ../site-lisp/magit/lisp/magit-worktree.el
+;;; Generated autoloads from magit/lisp/magit-worktree.el
 
  (autoload 'magit-worktree "magit-worktree" nil t)
-(autoload 'magit-worktree-checkout "../site-lisp/magit/lisp/magit-worktree" "\
+(autoload 'magit-worktree-checkout "magit/lisp/magit-worktree" "\
 Checkout BRANCH in a new worktree at PATH.
 
 (fn PATH BRANCH)" t)
-(autoload 'magit-worktree-branch "../site-lisp/magit/lisp/magit-worktree" "\
+(autoload 'magit-worktree-branch "magit/lisp/magit-worktree" "\
 Create a new BRANCH and check it out in a new worktree at PATH.
 
 (fn PATH BRANCH START-POINT &optional FORCE)" t)
-(autoload 'magit-worktree-move "../site-lisp/magit/lisp/magit-worktree" "\
+(autoload 'magit-worktree-move "magit/lisp/magit-worktree" "\
 Move WORKTREE to PATH.
 
 (fn WORKTREE PATH)" t)
-(register-definition-prefixes "../site-lisp/magit/lisp/magit-worktree" '("magit-"))
+(register-definition-prefixes "magit/lisp/magit-worktree" '("magit-"))
 
 
-;;; Generated autoloads from ../site-lisp/marginalia/marginalia.el
+;;; Generated autoloads from marginalia/marginalia.el
 
 (defvar marginalia-mode nil "\
 Non-nil if Marginalia mode is enabled.
@@ -6719,8 +7338,8 @@ for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `marginalia-mode'.")
-(custom-autoload 'marginalia-mode "../site-lisp/marginalia/marginalia" nil)
-(autoload 'marginalia-mode "../site-lisp/marginalia/marginalia" "\
+(custom-autoload 'marginalia-mode "marginalia/marginalia" nil)
+(autoload 'marginalia-mode "marginalia/marginalia" "\
 Annotate completion candidates with richer information.
 
 This is a global minor mode.  If called interactively, toggle the
@@ -6738,31 +7357,31 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(autoload 'marginalia-cycle "../site-lisp/marginalia/marginalia" "\
+(autoload 'marginalia-cycle "marginalia/marginalia" "\
 Cycle between annotators in `marginalia-annotator-registry'." t)
-(register-definition-prefixes "../site-lisp/marginalia/marginalia" '("marginalia-"))
+(register-definition-prefixes "marginalia/marginalia" '("marginalia-"))
 
 
-;;; Generated autoloads from ../site-lisp/markdown-mode/markdown-mode.el
+;;; Generated autoloads from markdown-mode/markdown-mode.el
 
-(autoload 'markdown-mode "../site-lisp/markdown-mode/markdown-mode" "\
+(autoload 'markdown-mode "markdown-mode/markdown-mode" "\
 Major mode for editing Markdown files.
 
 (fn)" t)
 (add-to-list 'auto-mode-alist '("\\.\\(?:md\\|markdown\\|mkd\\|mdown\\|mkdn\\|mdwn\\)\\'" . markdown-mode))
-(autoload 'gfm-mode "../site-lisp/markdown-mode/markdown-mode" "\
+(autoload 'gfm-mode "markdown-mode/markdown-mode" "\
 Major mode for editing GitHub Flavored Markdown files.
 
 (fn)" t)
-(autoload 'markdown-view-mode "../site-lisp/markdown-mode/markdown-mode" "\
+(autoload 'markdown-view-mode "markdown-mode/markdown-mode" "\
 Major mode for viewing Markdown content.
 
 (fn)" t)
-(autoload 'gfm-view-mode "../site-lisp/markdown-mode/markdown-mode" "\
+(autoload 'gfm-view-mode "markdown-mode/markdown-mode" "\
 Major mode for viewing GitHub Flavored Markdown content.
 
 (fn)" t)
-(autoload 'markdown-live-preview-mode "../site-lisp/markdown-mode/markdown-mode" "\
+(autoload 'markdown-live-preview-mode "markdown-mode/markdown-mode" "\
 Toggle native previewing on save for a specific markdown file.
 
 This is a minor mode.  If called interactively, toggle the
@@ -6781,17 +7400,180 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(register-definition-prefixes "../site-lisp/markdown-mode/markdown-mode" '("defun-markdown-" "gfm-" "markdown"))
+(register-definition-prefixes "markdown-mode/markdown-mode" '("defun-markdown-" "gfm-" "markdown"))
 
 
-;;; Generated autoloads from ../site-lisp/markdown-mode/tests/markdown-test.el
+;;; Generated autoloads from markdown-mode/tests/markdown-test.el
 
-(register-definition-prefixes "../site-lisp/markdown-mode/tests/markdown-test" '("markdown-"))
+(register-definition-prefixes "markdown-mode/tests/markdown-test" '("markdown-"))
 
 
-;;; Generated autoloads from ../site-lisp/auctex/multi-prompt.el
+;;; Generated autoloads from meow/meow-beacon.el
 
-(autoload 'multi-prompt "../site-lisp/auctex/multi-prompt" "\
+(register-definition-prefixes "meow/meow-beacon" '("meow-"))
+
+
+;;; Generated autoloads from meow/meow-cheatsheet.el
+
+(register-definition-prefixes "meow/meow-cheatsheet" '("meow-"))
+
+
+;;; Generated autoloads from meow/meow-cheatsheet-layout.el
+
+(register-definition-prefixes "meow/meow-cheatsheet-layout" '("meow-cheatsheet-"))
+
+
+;;; Generated autoloads from meow/meow-command.el
+
+(register-definition-prefixes "meow/meow-command" '("meow-"))
+
+
+;;; Generated autoloads from meow/meow-core.el
+
+(autoload 'meow-mode "meow/meow-core" "\
+Meow minor mode.
+
+This minor mode is used by meow-global-mode, should not be enabled directly.
+
+This is a minor mode.  If called interactively, toggle the `Meow
+mode' mode.  If the prefix argument is positive, enable the mode,
+and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `meow-mode'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)")
+(autoload 'meow-indicator "meow/meow-core" "\
+Indicator showing current mode.")
+(put 'meow-global-mode 'globalized-minor-mode t)
+(defvar meow-global-mode nil "\
+Non-nil if Meow-Global mode is enabled.
+See the `meow-global-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `meow-global-mode'.")
+(custom-autoload 'meow-global-mode "meow/meow-core" nil)
+(autoload 'meow-global-mode "meow/meow-core" "\
+Toggle Meow mode in all buffers.
+With prefix ARG, enable Meow-Global mode if ARG is positive;
+otherwise, disable it.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.
+Enable the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+Meow mode is enabled in all buffers where `(lambda nil (unless
+(minibufferp) (meow-mode 1)))' would do it.
+
+See `meow-mode' for more information on Meow mode.
+
+(fn &optional ARG)" t)
+(register-definition-prefixes "meow/meow-core" '("meow--"))
+
+
+;;; Generated autoloads from meow/meow-esc.el
+
+(register-definition-prefixes "meow/meow-esc" '("meow-"))
+
+
+;;; Generated autoloads from meow/meow-face.el
+
+(register-definition-prefixes "meow/meow-face" '("meow--prepare-face"))
+
+
+;;; Generated autoloads from meow/meow-helpers.el
+
+(autoload 'meow-define-state "meow/meow-helpers" "\
+Define a custom meow state.
+
+The state will be called NAME-SYM, and have description
+DESCRIPTION. Following these two arguments, pairs of keywords and
+values should be passed, similarly to define-minor-mode syntax.
+
+Recognized keywords:
+:keymap - the keymap to use for the state
+:lighter - the text to display in the mode line while state is active
+:face - custom cursor face
+
+The last argument is an optional lisp form that will be run when the minor
+mode turns on AND off. If you want to hook into only the turn-on event,
+check whether (meow-NAME-SYM-mode) is true.
+
+Example usage:
+(meow-define-state mystate
+  \"My meow state\"
+  :lighter \" [M]\"
+  :keymap 'my-keymap
+  (message \"toggled state\"))
+
+Also see meow-register-state, which is used internally by this
+function, if you want more control over defining your state. This
+is more helpful if you already have a keymap and defined minor
+mode that you only need to integrate with meow.
+
+This function produces several items:
+1. meow-NAME-mode: a minor mode for the state. This is the main entry point.
+2. meow-NAME-mode-p: a predicate for whether the state is active.
+3. meow-cursor-type-NAME: a variable for the cursor type for the state.
+4. meow--update-cursor-NAME: a function that sets the cursor type to 3.
+ and face FACE or 'meow-unknown cursor if FACE is nil.
+
+(fn NAME-SYM DESCRIPTION &rest BODY)" nil t)
+(function-put 'meow-define-state 'lisp-indent-function 1)
+(register-definition-prefixes "meow/meow-helpers" '("meow-"))
+
+
+;;; Generated autoloads from meow/meow-keymap.el
+
+(register-definition-prefixes "meow/meow-keymap" '("meow-"))
+
+
+;;; Generated autoloads from meow/meow-keypad.el
+
+(register-definition-prefixes "meow/meow-keypad" '("meow-"))
+
+
+;;; Generated autoloads from meow/meow-shims.el
+
+(register-definition-prefixes "meow/meow-shims" '("meow--"))
+
+
+;;; Generated autoloads from meow/meow-thing.el
+
+(register-definition-prefixes "meow/meow-thing" '("meow-"))
+
+
+;;; Generated autoloads from meow/meow-tutor.el
+
+(register-definition-prefixes "meow/meow-tutor" '("meow-"))
+
+
+;;; Generated autoloads from meow/meow-util.el
+
+(register-definition-prefixes "meow/meow-util" '("meow-"))
+
+
+;;; Generated autoloads from meow/meow-var.el
+
+(register-definition-prefixes "meow/meow-var" '("meow-"))
+
+
+;;; Generated autoloads from meow/meow-visual.el
+
+(register-definition-prefixes "meow/meow-visual" '("meow--"))
+
+
+;;; Generated autoloads from auctex/multi-prompt.el
+
+(autoload 'multi-prompt "auctex/multi-prompt" "\
 Completing prompt for a list of strings.
 The first argument SEPARATOR should be the string (of length 1) to
 separate the elements in the list.  The second argument UNIQUE should
@@ -6799,7 +7581,7 @@ be non-nil, if each element must be unique.  The remaining elements
 are the arguments to `completing-read'.  See that.
 
 (fn SEPARATOR UNIQUE PROMPT TABLE &optional MP-PREDICATE REQUIRE-MATCH INITIAL HISTORY)")
-(autoload 'multi-prompt-key-value "../site-lisp/auctex/multi-prompt" "\
+(autoload 'multi-prompt-key-value "auctex/multi-prompt" "\
 Read multiple strings, with completion and key=value support.
 PROMPT is a string to prompt with, usually ending with a colon
 and a space.
@@ -6817,93 +7599,93 @@ DEF, and INHERIT-INPUT-METHOD.
 The return value is the string as entered in the minibuffer.
 
 (fn PROMPT TABLE &optional PREDICATE REQUIRE-MATCH INITIAL-INPUT HIST DEF INHERIT-INPUT-METHOD)")
-(register-definition-prefixes "../site-lisp/auctex/multi-prompt" '("multi-prompt-"))
+(register-definition-prefixes "auctex/multi-prompt" '("multi-prompt-"))
 
 
-;;; Generated autoloads from ../site-lisp/mwim.el/mwim.el
+;;; Generated autoloads from mwim.el/mwim.el
 
  (autoload 'mwim-beginning-of-line-or-code "mwim" nil t)
  (autoload 'mwim-beginning-of-code-or-line "mwim" nil t)
  (autoload 'mwim-beginning-of-code-or-line-or-comment "mwim" nil t)
  (autoload 'mwim-end-of-line-or-code "mwim" nil t)
  (autoload 'mwim-end-of-code-or-line "mwim" nil t)
-(autoload 'mwim-beginning "../site-lisp/mwim.el/mwim" "\
+(autoload 'mwim-beginning "mwim.el/mwim" "\
 Move point to the next beginning position
 Available positions are defined by `mwim-beginning-position-functions'.
 See `mwim-move-to-next-position' for details.
 Interactively, with prefix argument, move to the previous position.
 
 (fn &optional ARG)" t)
-(autoload 'mwim-end "../site-lisp/mwim.el/mwim" "\
+(autoload 'mwim-end "mwim.el/mwim" "\
 Move point to the next end position.
 Available positions are defined by `mwim-end-position-functions'.
 See `mwim-move-to-next-position' for details.
 Interactively, with prefix argument, move to the previous position.
 
 (fn &optional ARG)" t)
-(autoload 'mwim "../site-lisp/mwim.el/mwim" "\
+(autoload 'mwim "mwim.el/mwim" "\
 Switch between various positions on the current line.
 Available positions are defined by `mwim-position-functions'
 variable.
 Interactively, with prefix argument, move to the previous position.
 
 (fn &optional ARG)" t)
-(register-definition-prefixes "../site-lisp/mwim.el/mwim" '("mwim-"))
+(register-definition-prefixes "mwim.el/mwim" '("mwim-"))
 
 
-;;; Generated autoloads from ../site-lisp/mwim.el/tests/mwim-tests.el
+;;; Generated autoloads from mwim.el/tests/mwim-tests.el
 
-(register-definition-prefixes "../site-lisp/mwim.el/tests/mwim-tests" '("mwim-test-"))
-
-
-;;; Generated autoloads from ../site-lisp/auctex/tests/tex/navigation.el
-
-(register-definition-prefixes "../site-lisp/auctex/tests/tex/navigation" '("TeX-check-f-m-"))
+(register-definition-prefixes "mwim.el/tests/mwim-tests" '("mwim-test-"))
 
 
-;;; Generated autoloads from ../site-lisp/nerd-icons.el/nerd-icons.el
+;;; Generated autoloads from auctex/tests/tex/navigation.el
 
-(autoload 'nerd-icons-install-fonts "../site-lisp/nerd-icons.el/nerd-icons" "\
+(register-definition-prefixes "auctex/tests/tex/navigation" '("TeX-check-f-m-"))
+
+
+;;; Generated autoloads from nerd-icons.el/nerd-icons.el
+
+(autoload 'nerd-icons-install-fonts "nerd-icons.el/nerd-icons" "\
 Helper function to download and install the latests fonts based on OS.
 The provided Nerd Font is Symbols Nerd Font Mono.
 When PFX is non-nil, ignore the prompt and just install
 
 (fn &optional PFX)" t)
-(autoload 'nerd-icons-insert "../site-lisp/nerd-icons.el/nerd-icons" "\
+(autoload 'nerd-icons-insert "nerd-icons.el/nerd-icons" "\
 Interactive icon insertion function.
 When Prefix ARG is non-nil, insert the propertized icon.
 When GLYPH-SET is non-nil, limit the candidates to the icon set matching it.
 
 (fn &optional ARG GLYPH-SET)" t)
-(autoload 'nerd-icons-icon-for-dir "../site-lisp/nerd-icons.el/nerd-icons" "\
+(autoload 'nerd-icons-icon-for-dir "nerd-icons.el/nerd-icons" "\
 Get the formatted icon for DIR.
 ARG-OVERRIDES should be a plist containining `:height',
 `:v-adjust' or `:face' properties like in the normal icon
 inserting functions.
 
 (fn DIR &rest ARG-OVERRIDES)")
-(autoload 'nerd-icons-icon-for-file "../site-lisp/nerd-icons.el/nerd-icons" "\
+(autoload 'nerd-icons-icon-for-file "nerd-icons.el/nerd-icons" "\
 Get the formatted icon for FILE.
 ARG-OVERRIDES should be a plist containining `:height',
 `:v-adjust' or `:face' properties like in the normal icon
 inserting functions.
 
 (fn FILE &rest ARG-OVERRIDES)")
-(autoload 'nerd-icons-icon-for-extension "../site-lisp/nerd-icons.el/nerd-icons" "\
+(autoload 'nerd-icons-icon-for-extension "nerd-icons.el/nerd-icons" "\
 Get the formatted icon for EXT.
 ARG-OVERRIDES should be a plist containining `:height',
 `:v-adjust' or `:face' properties like in the normal icon
 inserting functions.
 
 (fn EXT &rest ARG-OVERRIDES)")
-(autoload 'nerd-icons-icon-for-mode "../site-lisp/nerd-icons.el/nerd-icons" "\
+(autoload 'nerd-icons-icon-for-mode "nerd-icons.el/nerd-icons" "\
 Get the formatted icon for MODE.
 ARG-OVERRIDES should be a plist containining `:height',
 `:v-adjust' or `:face' properties like in the normal icon
 inserting functions.
 
 (fn MODE &rest ARG-OVERRIDES)")
-(autoload 'nerd-icons-icon-for-url "../site-lisp/nerd-icons.el/nerd-icons" "\
+(autoload 'nerd-icons-icon-for-url "nerd-icons.el/nerd-icons" "\
 Get the formatted icon for URL.
 If an icon for URL isn't found in `nerd-icons-url-alist', a globe is used.
 ARG-OVERRIDES should be a plist containining `:height',
@@ -6911,74 +7693,74 @@ ARG-OVERRIDES should be a plist containining `:height',
 inserting functions.
 
 (fn URL &rest ARG-OVERRIDES)")
-(autoload 'nerd-icons-icon-for-buffer "../site-lisp/nerd-icons.el/nerd-icons" "\
+(autoload 'nerd-icons-icon-for-buffer "nerd-icons.el/nerd-icons" "\
 Get the formatted icon for the current buffer.
 
 This function prioritises the use of the buffers file extension to
 discern the icon when its `major-mode' matches its auto mode,
 otherwise it will use the buffers `major-mode' to decide its
 icon.")
-(register-definition-prefixes "../site-lisp/nerd-icons.el/nerd-icons" '("nerd-icons-"))
+(register-definition-prefixes "nerd-icons.el/nerd-icons" '("nerd-icons-"))
 
 
-;;; Generated autoloads from ../site-lisp/nerd-icons.el/data/nerd-icons-data-codicon.el
+;;; Generated autoloads from nerd-icons.el/data/nerd-icons-data-codicon.el
 
-(register-definition-prefixes "../site-lisp/nerd-icons.el/data/nerd-icons-data-codicon" '("nerd-icons/codicon-alist"))
-
-
-;;; Generated autoloads from ../site-lisp/nerd-icons.el/data/nerd-icons-data-devicon.el
-
-(register-definition-prefixes "../site-lisp/nerd-icons.el/data/nerd-icons-data-devicon" '("nerd-icons/devicon-alist"))
+(register-definition-prefixes "nerd-icons.el/data/nerd-icons-data-codicon" '("nerd-icons/codicon-alist"))
 
 
-;;; Generated autoloads from ../site-lisp/nerd-icons.el/data/nerd-icons-data-faicon.el
+;;; Generated autoloads from nerd-icons.el/data/nerd-icons-data-devicon.el
 
-(register-definition-prefixes "../site-lisp/nerd-icons.el/data/nerd-icons-data-faicon" '("nerd-icons/faicon-alist"))
-
-
-;;; Generated autoloads from ../site-lisp/nerd-icons.el/data/nerd-icons-data-flicon.el
-
-(register-definition-prefixes "../site-lisp/nerd-icons.el/data/nerd-icons-data-flicon" '("nerd-icons/flicon-alist"))
+(register-definition-prefixes "nerd-icons.el/data/nerd-icons-data-devicon" '("nerd-icons/devicon-alist"))
 
 
-;;; Generated autoloads from ../site-lisp/nerd-icons.el/data/nerd-icons-data-ipsicon.el
+;;; Generated autoloads from nerd-icons.el/data/nerd-icons-data-faicon.el
 
-(register-definition-prefixes "../site-lisp/nerd-icons.el/data/nerd-icons-data-ipsicon" '("nerd-icons/ipsicon-alist"))
-
-
-;;; Generated autoloads from ../site-lisp/nerd-icons.el/data/nerd-icons-data-mdicon.el
-
-(register-definition-prefixes "../site-lisp/nerd-icons.el/data/nerd-icons-data-mdicon" '("nerd-icons/mdicon-alist"))
+(register-definition-prefixes "nerd-icons.el/data/nerd-icons-data-faicon" '("nerd-icons/faicon-alist"))
 
 
-;;; Generated autoloads from ../site-lisp/nerd-icons.el/data/nerd-icons-data-octicon.el
+;;; Generated autoloads from nerd-icons.el/data/nerd-icons-data-flicon.el
 
-(register-definition-prefixes "../site-lisp/nerd-icons.el/data/nerd-icons-data-octicon" '("nerd-icons/octicon-alist"))
-
-
-;;; Generated autoloads from ../site-lisp/nerd-icons.el/data/nerd-icons-data-pomicon.el
-
-(register-definition-prefixes "../site-lisp/nerd-icons.el/data/nerd-icons-data-pomicon" '("nerd-icons/pomicon-alist"))
+(register-definition-prefixes "nerd-icons.el/data/nerd-icons-data-flicon" '("nerd-icons/flicon-alist"))
 
 
-;;; Generated autoloads from ../site-lisp/nerd-icons.el/data/nerd-icons-data-powerline.el
+;;; Generated autoloads from nerd-icons.el/data/nerd-icons-data-ipsicon.el
 
-(register-definition-prefixes "../site-lisp/nerd-icons.el/data/nerd-icons-data-powerline" '("nerd-icons/powerline-alist"))
-
-
-;;; Generated autoloads from ../site-lisp/nerd-icons.el/data/nerd-icons-data-sucicon.el
-
-(register-definition-prefixes "../site-lisp/nerd-icons.el/data/nerd-icons-data-sucicon" '("nerd-icons/sucicon-alist"))
+(register-definition-prefixes "nerd-icons.el/data/nerd-icons-data-ipsicon" '("nerd-icons/ipsicon-alist"))
 
 
-;;; Generated autoloads from ../site-lisp/nerd-icons.el/data/nerd-icons-data-wicon.el
+;;; Generated autoloads from nerd-icons.el/data/nerd-icons-data-mdicon.el
 
-(register-definition-prefixes "../site-lisp/nerd-icons.el/data/nerd-icons-data-wicon" '("nerd-icons/wicon-alist"))
+(register-definition-prefixes "nerd-icons.el/data/nerd-icons-data-mdicon" '("nerd-icons/mdicon-alist"))
 
 
-;;; Generated autoloads from ../site-lisp/nerd-icons-dired/nerd-icons-dired.el
+;;; Generated autoloads from nerd-icons.el/data/nerd-icons-data-octicon.el
 
-(autoload 'nerd-icons-dired-mode "../site-lisp/nerd-icons-dired/nerd-icons-dired" "\
+(register-definition-prefixes "nerd-icons.el/data/nerd-icons-data-octicon" '("nerd-icons/octicon-alist"))
+
+
+;;; Generated autoloads from nerd-icons.el/data/nerd-icons-data-pomicon.el
+
+(register-definition-prefixes "nerd-icons.el/data/nerd-icons-data-pomicon" '("nerd-icons/pomicon-alist"))
+
+
+;;; Generated autoloads from nerd-icons.el/data/nerd-icons-data-powerline.el
+
+(register-definition-prefixes "nerd-icons.el/data/nerd-icons-data-powerline" '("nerd-icons/powerline-alist"))
+
+
+;;; Generated autoloads from nerd-icons.el/data/nerd-icons-data-sucicon.el
+
+(register-definition-prefixes "nerd-icons.el/data/nerd-icons-data-sucicon" '("nerd-icons/sucicon-alist"))
+
+
+;;; Generated autoloads from nerd-icons.el/data/nerd-icons-data-wicon.el
+
+(register-definition-prefixes "nerd-icons.el/data/nerd-icons-data-wicon" '("nerd-icons/wicon-alist"))
+
+
+;;; Generated autoloads from nerd-icons-dired/nerd-icons-dired.el
+
+(autoload 'nerd-icons-dired-mode "nerd-icons-dired/nerd-icons-dired" "\
 Display nerd-icons icon for each files in a Dired buffer.
 
 This is a minor mode.  If called interactively, toggle the
@@ -6997,57 +7779,57 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(register-definition-prefixes "../site-lisp/nerd-icons-dired/nerd-icons-dired" '("nerd-icons-dired-"))
+(register-definition-prefixes "nerd-icons-dired/nerd-icons-dired" '("nerd-icons-dired-"))
 
 
-;;; Generated autoloads from ../site-lisp/no-littering/no-littering.el
+;;; Generated autoloads from no-littering/no-littering.el
 
-(autoload 'no-littering-expand-etc-file-name "../site-lisp/no-littering/no-littering" "\
+(autoload 'no-littering-expand-etc-file-name "no-littering/no-littering" "\
 Expand filename FILE relative to `no-littering-etc-directory'.
 
 (fn FILE)")
-(autoload 'no-littering-expand-var-file-name "../site-lisp/no-littering/no-littering" "\
+(autoload 'no-littering-expand-var-file-name "no-littering/no-littering" "\
 Expand filename FILE relative to `no-littering-var-directory'.
 
 (fn FILE)")
-(register-definition-prefixes "../site-lisp/no-littering/no-littering" '("no-littering-"))
+(register-definition-prefixes "no-littering/no-littering" '("no-littering-"))
 
 
-;;; Generated autoloads from ../site-lisp/nov.el/nov.el
+;;; Generated autoloads from nov.el/nov.el
 
-(autoload 'nov-mode "../site-lisp/nov.el/nov" "\
+(autoload 'nov-mode "nov.el/nov" "\
 Major mode for reading EPUB documents
 
 (fn)" t)
-(autoload 'nov-bookmark-jump-handler "../site-lisp/nov.el/nov" "\
+(autoload 'nov-bookmark-jump-handler "nov.el/nov" "\
 The bookmark handler-function interface for bookmark BMK.
 
 See also `nov-bookmark-make-record'.
 
 (fn BMK)")
-(register-definition-prefixes "../site-lisp/nov.el/nov" '("nov-"))
+(register-definition-prefixes "nov.el/nov" '("nov-"))
 
 
-;;; Generated autoloads from ../site-lisp/nov-xwidget/nov-xwidget.el
+;;; Generated autoloads from nov-xwidget/nov-xwidget.el
 
-(register-definition-prefixes "../site-lisp/nov-xwidget/nov-xwidget" '("nov-xwidget-"))
+(register-definition-prefixes "nov-xwidget/nov-xwidget" '("nov-xwidget-"))
 
 
-;;; Generated autoloads from ../site-lisp/orderless/orderless.el
+;;; Generated autoloads from orderless/orderless.el
 
-(autoload 'orderless-filter "../site-lisp/orderless/orderless" "\
+(autoload 'orderless-filter "orderless/orderless" "\
 Split STRING into components and find entries TABLE matching all.
 The predicate PRED is used to constrain the entries in TABLE.
 
 (fn STRING TABLE &optional PRED)")
-(autoload 'orderless-all-completions "../site-lisp/orderless/orderless" "\
+(autoload 'orderless-all-completions "orderless/orderless" "\
 Split STRING into components and find entries TABLE matching all.
 The predicate PRED is used to constrain the entries in TABLE.  The
 matching portions of each candidate are highlighted.
 This function is part of the `orderless' completion style.
 
 (fn STRING TABLE PRED POINT)")
-(autoload 'orderless-try-completion "../site-lisp/orderless/orderless" "\
+(autoload 'orderless-try-completion "orderless/orderless" "\
 Complete STRING to unique matching entry in TABLE.
 This uses `orderless-all-completions' to find matches for STRING
 in TABLE among entries satisfying PRED.  If there is only one
@@ -7058,18 +7840,18 @@ This function is part of the `orderless' completion style.
 
 (fn STRING TABLE PRED POINT)")
 (add-to-list 'completion-styles-alist '(orderless orderless-try-completion orderless-all-completions "Completion of multiple components, in any order."))
-(autoload 'orderless-ivy-re-builder "../site-lisp/orderless/orderless" "\
+(autoload 'orderless-ivy-re-builder "orderless/orderless" "\
 Convert STR into regexps for use with ivy.
 This function is for integration of orderless with ivy, use it as
 a value in `ivy-re-builders-alist'.
 
 (fn STR)")
-(register-definition-prefixes "../site-lisp/orderless/orderless" '("orderless-"))
+(register-definition-prefixes "orderless/orderless" '("orderless-"))
 
 
-;;; Generated autoloads from ../site-lisp/org-appear/org-appear.el
+;;; Generated autoloads from org-appear/org-appear.el
 
-(autoload 'org-appear-mode "../site-lisp/org-appear/org-appear" "\
+(autoload 'org-appear-mode "org-appear/org-appear" "\
 A minor mode that automatically toggles elements in Org mode.
 
 This is a minor mode.  If called interactively, toggle the
@@ -7087,22 +7869,22 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(register-definition-prefixes "../site-lisp/org-appear/org-appear" '("org-appear-"))
+(register-definition-prefixes "org-appear/org-appear" '("org-appear-"))
 
 
-;;; Generated autoloads from ../site-lisp/org-bars/org-bars.el
+;;; Generated autoloads from org-bars/org-bars.el
 
-(register-definition-prefixes "../site-lisp/org-bars/org-bars" '("org-bars-"))
-
-
-;;; Generated autoloads from ../site-lisp/org-bars/org-bars-tests.el
-
-(register-definition-prefixes "../site-lisp/org-bars/org-bars-tests" '("comment"))
+(register-definition-prefixes "org-bars/org-bars" '("org-bars-"))
 
 
-;;; Generated autoloads from ../site-lisp/org-visual-outline/org-dynamic-bullets.el
+;;; Generated autoloads from org-bars/org-bars-tests.el
 
-(autoload 'org-dynamic-bullets-mode "../site-lisp/org-visual-outline/org-dynamic-bullets" "\
+(register-definition-prefixes "org-bars/org-bars-tests" '("comment"))
+
+
+;;; Generated autoloads from org-visual-outline/org-dynamic-bullets.el
+
+(autoload 'org-dynamic-bullets-mode "org-visual-outline/org-dynamic-bullets" "\
 Display orgmode trees.
 
 This is a minor mode.  If called interactively, toggle the
@@ -7121,12 +7903,12 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(register-definition-prefixes "../site-lisp/org-visual-outline/org-dynamic-bullets" '("org-dynamic-bullets-"))
+(register-definition-prefixes "org-visual-outline/org-dynamic-bullets" '("org-dynamic-bullets-"))
 
 
-;;; Generated autoloads from ../site-lisp/org-modern/org-modern.el
+;;; Generated autoloads from org-modern/org-modern.el
 
-(autoload 'org-modern-mode "../site-lisp/org-modern/org-modern" "\
+(autoload 'org-modern-mode "org-modern/org-modern" "\
 Modern looks for Org.
 
 This is a minor mode.  If called interactively, toggle the
@@ -7144,7 +7926,7 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(autoload 'org-modern-agenda "../site-lisp/org-modern/org-modern" "\
+(autoload 'org-modern-agenda "org-modern/org-modern" "\
 Finalize Org agenda highlighting.")
 (put 'global-org-modern-mode 'globalized-minor-mode t)
 (defvar global-org-modern-mode nil "\
@@ -7154,8 +7936,8 @@ for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `global-org-modern-mode'.")
-(custom-autoload 'global-org-modern-mode "../site-lisp/org-modern/org-modern" nil)
-(autoload 'global-org-modern-mode "../site-lisp/org-modern/org-modern" "\
+(custom-autoload 'global-org-modern-mode "org-modern/org-modern" nil)
+(autoload 'global-org-modern-mode "org-modern/org-modern" "\
 Toggle Org-Modern mode in all buffers.
 With prefix ARG, enable Global Org-Modern mode if ARG is positive;
 otherwise, disable it.
@@ -7170,12 +7952,12 @@ do it.
 See `org-modern-mode' for more information on Org-Modern mode.
 
 (fn &optional ARG)" t)
-(register-definition-prefixes "../site-lisp/org-modern/org-modern" '("org-modern-"))
+(register-definition-prefixes "org-modern/org-modern" '("org-modern-"))
 
 
-;;; Generated autoloads from ../site-lisp/org-modern-indent/org-modern-indent.el
+;;; Generated autoloads from org-modern-indent/org-modern-indent.el
 
-(autoload 'org-modern-indent-mode "../site-lisp/org-modern-indent/org-modern-indent" "\
+(autoload 'org-modern-indent-mode "org-modern-indent/org-modern-indent" "\
 Org-modern-like block brackets within org-indent.
 
 This is a minor mode.  If called interactively, toggle the
@@ -7194,21 +7976,21 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(register-definition-prefixes "../site-lisp/org-modern-indent/org-modern-indent" '("org-modern-indent-"))
+(register-definition-prefixes "org-modern-indent/org-modern-indent" '("org-modern-indent-"))
 
 
-;;; Generated autoloads from ../site-lisp/org-roam/org-roam.el
+;;; Generated autoloads from org-roam/org-roam.el
 
-(autoload 'org-roam-list-files "../site-lisp/org-roam/org-roam" "\
+(autoload 'org-roam-list-files "org-roam/org-roam" "\
 Return a list of all Org-roam files under `org-roam-directory'.
 See `org-roam-file-p' for how each file is determined to be as
 part of Org-Roam.")
-(register-definition-prefixes "../site-lisp/org-roam/org-roam" '("org-roam-"))
+(register-definition-prefixes "org-roam/org-roam" '("org-roam-"))
 
 
-;;; Generated autoloads from ../site-lisp/org-roam/org-roam-capture.el
+;;; Generated autoloads from org-roam/org-roam-capture.el
 
-(autoload 'org-roam-capture- "../site-lisp/org-roam/org-roam-capture" "\
+(autoload 'org-roam-capture- "org-roam/org-roam-capture" "\
 Main entry point of `org-roam-capture' module.
 GOTO and KEYS correspond to `org-capture' arguments.
 INFO is a plist for filling up Org-roam's capture templates.
@@ -7217,7 +7999,7 @@ PROPS is a plist containing additional Org-roam properties for each template.
 TEMPLATES is a list of org-roam templates.
 
 (fn &key GOTO KEYS NODE INFO PROPS TEMPLATES)")
-(autoload 'org-roam-capture "../site-lisp/org-roam/org-roam-capture" "\
+(autoload 'org-roam-capture "org-roam/org-roam-capture" "\
 Launches an `org-capture' process for a new or existing node.
 This uses the templates defined at `org-roam-capture-templates'.
 Arguments GOTO and KEYS see `org-capture'.
@@ -7228,17 +8010,17 @@ The TEMPLATES, if provided, override the list of capture templates (see
 The INFO, if provided, is passed along to the underlying `org-roam-capture-'.
 
 (fn &optional GOTO KEYS &key FILTER-FN TEMPLATES INFO)" t)
-(register-definition-prefixes "../site-lisp/org-roam/org-roam-capture" '("org-roam-capture-"))
+(register-definition-prefixes "org-roam/org-roam-capture" '("org-roam-capture-"))
 
 
-;;; Generated autoloads from ../site-lisp/org-roam/org-roam-compat.el
+;;; Generated autoloads from org-roam/org-roam-compat.el
 
-(register-definition-prefixes "../site-lisp/org-roam/org-roam-compat" '("org-roam--"))
+(register-definition-prefixes "org-roam/org-roam-compat" '("org-roam--"))
 
 
-;;; Generated autoloads from ../site-lisp/org-roam/extensions/org-roam-dailies.el
+;;; Generated autoloads from org-roam/extensions/org-roam-dailies.el
 
-(autoload 'org-roam-dailies-capture-today "../site-lisp/org-roam/extensions/org-roam-dailies" "\
+(autoload 'org-roam-dailies-capture-today "org-roam/extensions/org-roam-dailies" "\
 Create an entry in the daily-note for today.
 When GOTO is non-nil, go the note without creating an entry.
 
@@ -7246,14 +8028,14 @@ ELisp programs can set KEYS to a string associated with a template.
 In this case, interactive selection will be bypassed.
 
 (fn &optional GOTO KEYS)" t)
-(autoload 'org-roam-dailies-goto-today "../site-lisp/org-roam/extensions/org-roam-dailies" "\
+(autoload 'org-roam-dailies-goto-today "org-roam/extensions/org-roam-dailies" "\
 Find the daily-note for today, creating it if necessary.
 
 ELisp programs can set KEYS to a string associated with a template.
 In this case, interactive selection will be bypassed.
 
 (fn &optional KEYS)" t)
-(autoload 'org-roam-dailies-capture-tomorrow "../site-lisp/org-roam/extensions/org-roam-dailies" "\
+(autoload 'org-roam-dailies-capture-tomorrow "org-roam/extensions/org-roam-dailies" "\
 Create an entry in the daily-note for tomorrow.
 
 With numeric argument N, use the daily-note N days in the future.
@@ -7265,7 +8047,7 @@ ELisp programs can set KEYS to a string associated with a template.
 In this case, interactive selection will be bypassed.
 
 (fn N &optional GOTO KEYS)" t)
-(autoload 'org-roam-dailies-goto-tomorrow "../site-lisp/org-roam/extensions/org-roam-dailies" "\
+(autoload 'org-roam-dailies-goto-tomorrow "org-roam/extensions/org-roam-dailies" "\
 Find the daily-note for tomorrow, creating it if necessary.
 
 With numeric argument N, use the daily-note N days in the
@@ -7275,7 +8057,7 @@ ELisp programs can set KEYS to a string associated with a template.
 In this case, interactive selection will be bypassed.
 
 (fn N &optional KEYS)" t)
-(autoload 'org-roam-dailies-capture-yesterday "../site-lisp/org-roam/extensions/org-roam-dailies" "\
+(autoload 'org-roam-dailies-capture-yesterday "org-roam/extensions/org-roam-dailies" "\
 Create an entry in the daily-note for yesteday.
 
 With numeric argument N, use the daily-note N days in the past.
@@ -7286,7 +8068,7 @@ ELisp programs can set KEYS to a string associated with a template.
 In this case, interactive selection will be bypassed.
 
 (fn N &optional GOTO KEYS)" t)
-(autoload 'org-roam-dailies-goto-yesterday "../site-lisp/org-roam/extensions/org-roam-dailies" "\
+(autoload 'org-roam-dailies-goto-yesterday "org-roam/extensions/org-roam-dailies" "\
 Find the daily-note for yesterday, creating it if necessary.
 
 With numeric argument N, use the daily-note N days in the
@@ -7296,7 +8078,7 @@ ELisp programs can set KEYS to a string associated with a template.
 In this case, interactive selection will be bypassed.
 
 (fn N &optional KEYS)" t)
-(autoload 'org-roam-dailies-capture-date "../site-lisp/org-roam/extensions/org-roam-dailies" "\
+(autoload 'org-roam-dailies-capture-date "org-roam/extensions/org-roam-dailies" "\
 Create an entry in the daily-note for a date using the calendar.
 Prefer past dates, unless PREFER-FUTURE is non-nil.
 With a `C-u' prefix or when GOTO is non-nil, go the note without
@@ -7306,7 +8088,7 @@ ELisp programs can set KEYS to a string associated with a template.
 In this case, interactive selection will be bypassed.
 
 (fn &optional GOTO PREFER-FUTURE KEYS)" t)
-(autoload 'org-roam-dailies-goto-date "../site-lisp/org-roam/extensions/org-roam-dailies" "\
+(autoload 'org-roam-dailies-goto-date "org-roam/extensions/org-roam-dailies" "\
 Find the daily-note for a date using the calendar, creating it if necessary.
 Prefer past dates, unless PREFER-FUTURE is non-nil.
 
@@ -7314,14 +8096,14 @@ ELisp programs can set KEYS to a string associated with a template.
 In this case, interactive selection will be bypassed.
 
 (fn &optional PREFER-FUTURE KEYS)" t)
-(autoload 'org-roam-dailies-find-directory "../site-lisp/org-roam/extensions/org-roam-dailies" "\
+(autoload 'org-roam-dailies-find-directory "org-roam/extensions/org-roam-dailies" "\
 Find and open `org-roam-dailies-directory'." t)
-(register-definition-prefixes "../site-lisp/org-roam/extensions/org-roam-dailies" '("org-roam-dailies-"))
+(register-definition-prefixes "org-roam/extensions/org-roam-dailies" '("org-roam-dailies-"))
 
 
-;;; Generated autoloads from ../site-lisp/org-roam/org-roam-db.el
+;;; Generated autoloads from org-roam/org-roam-db.el
 
-(autoload 'org-roam-db-sync "../site-lisp/org-roam/org-roam-db" "\
+(autoload 'org-roam-db-sync "org-roam/org-roam-db" "\
 Synchronize the cache state with the current Org files on-disk.
 If FORCE, force a rebuild of the cache from scratch.
 
@@ -7333,8 +8115,8 @@ for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `org-roam-db-autosync-mode'.")
-(custom-autoload 'org-roam-db-autosync-mode "../site-lisp/org-roam/org-roam-db" nil)
-(autoload 'org-roam-db-autosync-mode "../site-lisp/org-roam/org-roam-db" "\
+(custom-autoload 'org-roam-db-autosync-mode "org-roam/org-roam-db" nil)
+(autoload 'org-roam-db-autosync-mode "org-roam/org-roam-db" "\
 Global minor mode to keep your Org-roam session automatically synchronized.
 
 Through the session this will continue to setup your
@@ -7361,19 +8143,19 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(autoload 'org-roam-db-autosync-enable "../site-lisp/org-roam/org-roam-db" "\
+(autoload 'org-roam-db-autosync-enable "org-roam/org-roam-db" "\
 Activate `org-roam-db-autosync-mode'.")
-(register-definition-prefixes "../site-lisp/org-roam/org-roam-db" '("emacsql-constraint" "org-roam-d"))
+(register-definition-prefixes "org-roam/org-roam-db" '("emacsql-constraint" "org-roam-d"))
 
 
-;;; Generated autoloads from ../site-lisp/org-roam/extensions/org-roam-export.el
+;;; Generated autoloads from org-roam/extensions/org-roam-export.el
 
-(register-definition-prefixes "../site-lisp/org-roam/extensions/org-roam-export" '("org-roam-export--org-html--reference"))
+(register-definition-prefixes "org-roam/extensions/org-roam-export" '("org-roam-export--org-html--reference"))
 
 
-;;; Generated autoloads from ../site-lisp/org-roam/extensions/org-roam-graph.el
+;;; Generated autoloads from org-roam/extensions/org-roam-graph.el
 
-(autoload 'org-roam-graph "../site-lisp/org-roam/extensions/org-roam-graph" "\
+(autoload 'org-roam-graph "org-roam/extensions/org-roam-graph" "\
 Build and possibly display a graph for NODE.
 ARG may be any of the following values:
   - nil       show the graph.
@@ -7381,12 +8163,12 @@ ARG may be any of the following values:
   - `\\[universal-argument]' N   show the graph for NODE limiting nodes to N steps.
 
 (fn &optional ARG NODE)" t)
-(register-definition-prefixes "../site-lisp/org-roam/extensions/org-roam-graph" '("org-roam-"))
+(register-definition-prefixes "org-roam/extensions/org-roam-graph" '("org-roam-"))
 
 
-;;; Generated autoloads from ../site-lisp/org-roam/org-roam-id.el
+;;; Generated autoloads from org-roam/org-roam-id.el
 
-(autoload 'org-roam-update-org-id-locations "../site-lisp/org-roam/org-roam-id" "\
+(autoload 'org-roam-update-org-id-locations "org-roam/org-roam-id" "\
 Scan Org-roam files to update `org-id' related state.
 This is like `org-id-update-id-locations', but will automatically
 use the currently bound `org-directory' and `org-roam-directory'
@@ -7403,27 +8185,27 @@ that are excluded from identification in Org-roam as
 `org-roam-node's, e.g. with \"ROAM_EXCLUDE\" property.
 
 (fn &rest DIRECTORIES)" t)
-(register-definition-prefixes "../site-lisp/org-roam/org-roam-id" '("org-roam-id-"))
+(register-definition-prefixes "org-roam/org-roam-id" '("org-roam-id-"))
 
 
-;;; Generated autoloads from ../site-lisp/org-roam/org-roam-log.el
+;;; Generated autoloads from org-roam/org-roam-log.el
 
-(register-definition-prefixes "../site-lisp/org-roam/org-roam-log" '("org-roam-log-"))
+(register-definition-prefixes "org-roam/org-roam-log" '("org-roam-log-"))
 
 
-;;; Generated autoloads from ../site-lisp/org-roam/org-roam-migrate.el
+;;; Generated autoloads from org-roam/org-roam-migrate.el
 
-(autoload 'org-roam-migrate-wizard "../site-lisp/org-roam/org-roam-migrate" "\
+(autoload 'org-roam-migrate-wizard "org-roam/org-roam-migrate" "\
 Migrate all notes from to be compatible with Org-roam v2.
 1. Convert all notes from v1 format to v2.
 2. Rebuild the cache.
 3. Replace all file links with ID links." t)
-(register-definition-prefixes "../site-lisp/org-roam/org-roam-migrate" '("org-roam-migrate-"))
+(register-definition-prefixes "org-roam/org-roam-migrate" '("org-roam-migrate-"))
 
 
-;;; Generated autoloads from ../site-lisp/org-roam/org-roam-mode.el
+;;; Generated autoloads from org-roam/org-roam-mode.el
 
-(autoload 'org-roam-buffer-display-dedicated "../site-lisp/org-roam/org-roam-mode" "\
+(autoload 'org-roam-buffer-display-dedicated "org-roam/org-roam-mode" "\
 Launch NODE dedicated Org-roam buffer.
 Unlike the persistent `org-roam-buffer', the contents of this
 buffer won't be automatically changed and will be held in place.
@@ -7433,12 +8215,12 @@ In interactive calls prompt to select NODE, unless called with
 `org-roam-node-at-point'.
 
 (fn NODE)" t)
-(register-definition-prefixes "../site-lisp/org-roam/org-roam-mode" '("org-roam-"))
+(register-definition-prefixes "org-roam/org-roam-mode" '("org-roam-"))
 
 
-;;; Generated autoloads from ../site-lisp/org-roam/org-roam-node.el
+;;; Generated autoloads from org-roam/org-roam-node.el
 
-(autoload 'org-roam-node-find "../site-lisp/org-roam/org-roam-node" "\
+(autoload 'org-roam-node-find "org-roam/org-roam-node" "\
 Find and open an Org-roam node by its title or alias.
 INITIAL-INPUT is the initial input for the prompt.
 FILTER-FN is a function to filter out nodes: it takes an `org-roam-node',
@@ -7448,7 +8230,7 @@ The TEMPLATES, if provided, override the list of capture templates (see
 `org-roam-capture-'.)
 
 (fn &optional OTHER-WINDOW INITIAL-INPUT FILTER-FN PRED &key TEMPLATES)" t)
-(autoload 'org-roam-node-random "../site-lisp/org-roam/org-roam-node" "\
+(autoload 'org-roam-node-random "org-roam/org-roam-node" "\
 Find and open a random Org-roam node.
 With prefix argument OTHER-WINDOW, visit the node in another
 window instead.
@@ -7456,7 +8238,7 @@ FILTER-FN is a function to filter out nodes: it takes an `org-roam-node',
 and when nil is returned the node will be filtered out.
 
 (fn &optional OTHER-WINDOW FILTER-FN)" t)
-(autoload 'org-roam-node-insert "../site-lisp/org-roam/org-roam-node" "\
+(autoload 'org-roam-node-insert "org-roam/org-roam-node" "\
 Find an Org-roam node and insert (where the point is) an \"id:\" link to it.
 FILTER-FN is a function to filter out nodes: it takes an `org-roam-node',
 and when nil is returned the node will be filtered out.
@@ -7465,46 +8247,46 @@ The TEMPLATES, if provided, override the list of capture templates (see
 The INFO, if provided, is passed to the underlying `org-roam-capture-'.
 
 (fn &optional FILTER-FN &key TEMPLATES INFO)" t)
-(autoload 'org-roam-refile "../site-lisp/org-roam/org-roam-node" "\
+(autoload 'org-roam-refile "org-roam/org-roam-node" "\
 Refile node at point to an Org-roam node.
 If region is active, then use it instead of the node at point." t)
-(autoload 'org-roam-extract-subtree "../site-lisp/org-roam/org-roam-node" "\
+(autoload 'org-roam-extract-subtree "org-roam/org-roam-node" "\
 Convert current subtree at point to a node, and extract it into a new file." t)
-(autoload 'org-roam-ref-find "../site-lisp/org-roam/org-roam-node" "\
+(autoload 'org-roam-ref-find "org-roam/org-roam-node" "\
 Find and open an Org-roam node that's dedicated to a specific ref.
 INITIAL-INPUT is the initial input to the prompt.
 FILTER-FN is a function to filter out nodes: it takes an `org-roam-node',
 and when nil is returned the node will be filtered out.
 
 (fn &optional INITIAL-INPUT FILTER-FN)" t)
-(register-definition-prefixes "../site-lisp/org-roam/org-roam-node" '("org-roam-"))
+(register-definition-prefixes "org-roam/org-roam-node" '("org-roam-"))
 
 
-;;; Generated autoloads from ../site-lisp/org-roam/extensions/org-roam-overlay.el
+;;; Generated autoloads from org-roam/extensions/org-roam-overlay.el
 
-(register-definition-prefixes "../site-lisp/org-roam/extensions/org-roam-overlay" '("org-roam-overlay-"))
-
-
-;;; Generated autoloads from ../site-lisp/org-roam/extensions/org-roam-protocol.el
-
-(register-definition-prefixes "../site-lisp/org-roam/extensions/org-roam-protocol" '("org-roam-"))
+(register-definition-prefixes "org-roam/extensions/org-roam-overlay" '("org-roam-overlay-"))
 
 
-;;; Generated autoloads from ../site-lisp/org-roam/org-roam-utils.el
+;;; Generated autoloads from org-roam/extensions/org-roam-protocol.el
 
-(autoload 'org-roam-version "../site-lisp/org-roam/org-roam-utils" "\
+(register-definition-prefixes "org-roam/extensions/org-roam-protocol" '("org-roam-"))
+
+
+;;; Generated autoloads from org-roam/org-roam-utils.el
+
+(autoload 'org-roam-version "org-roam/org-roam-utils" "\
 Return `org-roam' version.
 Interactively, or when MESSAGE is non-nil, show in the echo area.
 
 (fn &optional MESSAGE)" t)
-(autoload 'org-roam-diagnostics "../site-lisp/org-roam/org-roam-utils" "\
+(autoload 'org-roam-diagnostics "org-roam/org-roam-utils" "\
 Collect and print info for `org-roam' issues." t)
-(register-definition-prefixes "../site-lisp/org-roam/org-roam-utils" '("org-roam-"))
+(register-definition-prefixes "org-roam/org-roam-utils" '("org-roam-"))
 
 
-;;; Generated autoloads from ../site-lisp/org-visual-outline/org-visual-indent.el
+;;; Generated autoloads from org-visual-outline/org-visual-indent.el
 
-(autoload 'org-visual-indent-mode "../site-lisp/org-visual-outline/org-visual-indent" "\
+(autoload 'org-visual-indent-mode "org-visual-outline/org-visual-indent" "\
 Add vertical lines to `org-indent'.
 
 This is a minor mode.  If called interactively, toggle the
@@ -7523,12 +8305,12 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(register-definition-prefixes "../site-lisp/org-visual-outline/org-visual-indent" '("org-visual-indent-"))
+(register-definition-prefixes "org-visual-outline/org-visual-indent" '("org-visual-indent-"))
 
 
-;;; Generated autoloads from ../site-lisp/pdf-tools/lisp/pdf-annot.el
+;;; Generated autoloads from pdf-tools/lisp/pdf-annot.el
 
-(autoload 'pdf-annot-minor-mode "../site-lisp/pdf-tools/lisp/pdf-annot" "\
+(autoload 'pdf-annot-minor-mode "pdf-tools/lisp/pdf-annot" "\
 Support for PDF Annotations.
 
 \\{pdf-annot-minor-mode-map}
@@ -7548,22 +8330,22 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(register-definition-prefixes "../site-lisp/pdf-tools/lisp/pdf-annot" '("pdf-annot-"))
+(register-definition-prefixes "pdf-tools/lisp/pdf-annot" '("pdf-annot-"))
 
 
-;;; Generated autoloads from ../site-lisp/pdf-tools/lisp/pdf-cache.el
+;;; Generated autoloads from pdf-tools/lisp/pdf-cache.el
 
-(register-definition-prefixes "../site-lisp/pdf-tools/lisp/pdf-cache" '("boundingbox" "define-pdf-cache-function" "page" "pdf-cache-" "textregions"))
-
-
-;;; Generated autoloads from ../site-lisp/pdf-tools/lisp/pdf-dev.el
-
-(register-definition-prefixes "../site-lisp/pdf-tools/lisp/pdf-dev" '("pdf-dev-"))
+(register-definition-prefixes "pdf-tools/lisp/pdf-cache" '("boundingbox" "define-pdf-cache-function" "page" "pdf-cache-" "textregions"))
 
 
-;;; Generated autoloads from ../site-lisp/pdf-tools/lisp/pdf-history.el
+;;; Generated autoloads from pdf-tools/lisp/pdf-dev.el
 
-(autoload 'pdf-history-minor-mode "../site-lisp/pdf-tools/lisp/pdf-history" "\
+(register-definition-prefixes "pdf-tools/lisp/pdf-dev" '("pdf-dev-"))
+
+
+;;; Generated autoloads from pdf-tools/lisp/pdf-history.el
+
+(autoload 'pdf-history-minor-mode "pdf-tools/lisp/pdf-history" "\
 Keep a history of previously visited pages.
 
 This is a simple stack-based history.  Turning the page or
@@ -7588,17 +8370,17 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(register-definition-prefixes "../site-lisp/pdf-tools/lisp/pdf-history" '("pdf-history-"))
+(register-definition-prefixes "pdf-tools/lisp/pdf-history" '("pdf-history-"))
 
 
-;;; Generated autoloads from ../site-lisp/pdf-tools/lisp/pdf-info.el
+;;; Generated autoloads from pdf-tools/lisp/pdf-info.el
 
-(register-definition-prefixes "../site-lisp/pdf-tools/lisp/pdf-info" '("pdf-info-"))
+(register-definition-prefixes "pdf-tools/lisp/pdf-info" '("pdf-info-"))
 
 
-;;; Generated autoloads from ../site-lisp/pdf-tools/lisp/pdf-isearch.el
+;;; Generated autoloads from pdf-tools/lisp/pdf-isearch.el
 
-(autoload 'pdf-isearch-minor-mode "../site-lisp/pdf-tools/lisp/pdf-isearch" "\
+(autoload 'pdf-isearch-minor-mode "pdf-tools/lisp/pdf-isearch" "\
 Isearch mode for PDF buffer.
 
 When this mode is enabled \\[isearch-forward], among other keys,
@@ -7645,12 +8427,12 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(register-definition-prefixes "../site-lisp/pdf-tools/lisp/pdf-isearch" '("pdf-isearch-"))
+(register-definition-prefixes "pdf-tools/lisp/pdf-isearch" '("pdf-isearch-"))
 
 
-;;; Generated autoloads from ../site-lisp/pdf-tools/lisp/pdf-links.el
+;;; Generated autoloads from pdf-tools/lisp/pdf-links.el
 
-(autoload 'pdf-links-minor-mode "../site-lisp/pdf-tools/lisp/pdf-links" "\
+(autoload 'pdf-links-minor-mode "pdf-tools/lisp/pdf-links" "\
 Handle links in PDF documents.\\<pdf-links-minor-mode-map>
 
 If this mode is enabled, most links in the document may be
@@ -7675,7 +8457,7 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(autoload 'pdf-links-action-perform "../site-lisp/pdf-tools/lisp/pdf-links" "\
+(autoload 'pdf-links-action-perform "pdf-tools/lisp/pdf-links" "\
 Follow LINK, depending on its type.
 
 This may turn to another page, switch to another PDF buffer or
@@ -7689,12 +8471,12 @@ link's link is invoked.  Additionally, SPC may be used to
 scroll the current page.
 
 (fn LINK)" t)
-(register-definition-prefixes "../site-lisp/pdf-tools/lisp/pdf-links" '("pdf-links-"))
+(register-definition-prefixes "pdf-tools/lisp/pdf-links" '("pdf-links-"))
 
 
-;;; Generated autoloads from ../site-lisp/pdf-tools/lisp/pdf-loader.el
+;;; Generated autoloads from pdf-tools/lisp/pdf-loader.el
 
-(autoload 'pdf-loader-install "../site-lisp/pdf-tools/lisp/pdf-loader" "\
+(autoload 'pdf-loader-install "pdf-tools/lisp/pdf-loader" "\
 Prepare Emacs for using PDF Tools.
 
 This function acts as a replacement for `pdf-tools-install' and
@@ -7705,17 +8487,17 @@ The arguments are passed verbatim to `pdf-tools-install', which
 see.
 
 (fn &optional NO-QUERY-P SKIP-DEPENDENCIES-P NO-ERROR-P FORCE-DEPENDENCIES-P)")
-(register-definition-prefixes "../site-lisp/pdf-tools/lisp/pdf-loader" '("pdf-loader--"))
+(register-definition-prefixes "pdf-tools/lisp/pdf-loader" '("pdf-loader--"))
 
 
-;;; Generated autoloads from ../site-lisp/pdf-tools/lisp/pdf-macs.el
+;;; Generated autoloads from pdf-tools/lisp/pdf-macs.el
 
-(register-definition-prefixes "../site-lisp/pdf-tools/lisp/pdf-macs" '("pdf-view-"))
+(register-definition-prefixes "pdf-tools/lisp/pdf-macs" '("pdf-view-"))
 
 
-;;; Generated autoloads from ../site-lisp/pdf-tools/lisp/pdf-misc.el
+;;; Generated autoloads from pdf-tools/lisp/pdf-misc.el
 
-(autoload 'pdf-misc-minor-mode "../site-lisp/pdf-tools/lisp/pdf-misc" "\
+(autoload 'pdf-misc-minor-mode "pdf-tools/lisp/pdf-misc" "\
 FIXME:  Not documented.
 
 This is a minor mode.  If called interactively, toggle the
@@ -7733,7 +8515,7 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(autoload 'pdf-misc-size-indication-minor-mode "../site-lisp/pdf-tools/lisp/pdf-misc" "\
+(autoload 'pdf-misc-size-indication-minor-mode "pdf-tools/lisp/pdf-misc" "\
 Provide a working size indication in the mode-line.
 
 This is a minor mode.  If called interactively, toggle the
@@ -7752,7 +8534,7 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(autoload 'pdf-misc-menu-bar-minor-mode "../site-lisp/pdf-tools/lisp/pdf-misc" "\
+(autoload 'pdf-misc-menu-bar-minor-mode "pdf-tools/lisp/pdf-misc" "\
 Display a PDF Tools menu in the menu-bar.
 
 This is a minor mode.  If called interactively, toggle the
@@ -7771,7 +8553,7 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(autoload 'pdf-misc-context-menu-minor-mode "../site-lisp/pdf-tools/lisp/pdf-misc" "\
+(autoload 'pdf-misc-context-menu-minor-mode "pdf-tools/lisp/pdf-misc" "\
 Provide a right-click context menu in PDF buffers.
 
 \\{pdf-misc-context-menu-minor-mode-map}
@@ -7792,12 +8574,12 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(register-definition-prefixes "../site-lisp/pdf-tools/lisp/pdf-misc" '("pdf-misc-"))
+(register-definition-prefixes "pdf-tools/lisp/pdf-misc" '("pdf-misc-"))
 
 
-;;; Generated autoloads from ../site-lisp/pdf-tools/lisp/pdf-occur.el
+;;; Generated autoloads from pdf-tools/lisp/pdf-occur.el
 
-(autoload 'pdf-occur "../site-lisp/pdf-tools/lisp/pdf-occur" "\
+(autoload 'pdf-occur "pdf-tools/lisp/pdf-occur" "\
 List lines matching STRING or PCRE.
 
 Interactively search for a regexp. Unless a prefix arg was given,
@@ -7807,7 +8589,7 @@ If `pdf-occur-prefer-string-search' is non-nil, the meaning of
 the prefix-arg is inverted.
 
 (fn STRING &optional REGEXP-P)" t)
-(autoload 'pdf-occur-multi-command "../site-lisp/pdf-tools/lisp/pdf-occur" "\
+(autoload 'pdf-occur-multi-command "pdf-tools/lisp/pdf-occur" "\
 Perform `pdf-occur' on multiple buffer.
 
 For a programmatic search of multiple documents see
@@ -7819,8 +8601,8 @@ for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `pdf-occur-global-minor-mode'.")
-(custom-autoload 'pdf-occur-global-minor-mode "../site-lisp/pdf-tools/lisp/pdf-occur" nil)
-(autoload 'pdf-occur-global-minor-mode "../site-lisp/pdf-tools/lisp/pdf-occur" "\
+(custom-autoload 'pdf-occur-global-minor-mode "pdf-tools/lisp/pdf-occur" nil)
+(autoload 'pdf-occur-global-minor-mode "pdf-tools/lisp/pdf-occur" "\
 Enable integration of Pdf Occur with other modes.
 
 This global minor mode enables (or disables)
@@ -7843,7 +8625,7 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(autoload 'pdf-occur-ibuffer-minor-mode "../site-lisp/pdf-tools/lisp/pdf-occur" "\
+(autoload 'pdf-occur-ibuffer-minor-mode "pdf-tools/lisp/pdf-occur" "\
 Hack into ibuffer's do-occur binding.
 
 This mode remaps `ibuffer-do-occur' to
@@ -7867,7 +8649,7 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(autoload 'pdf-occur-dired-minor-mode "../site-lisp/pdf-tools/lisp/pdf-occur" "\
+(autoload 'pdf-occur-dired-minor-mode "pdf-tools/lisp/pdf-occur" "\
 Hack into dired's `dired-do-search' binding.
 
 This mode remaps `dired-do-search' to
@@ -7891,12 +8673,12 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(register-definition-prefixes "../site-lisp/pdf-tools/lisp/pdf-occur" '("pdf-occur-"))
+(register-definition-prefixes "pdf-tools/lisp/pdf-occur" '("pdf-occur-"))
 
 
-;;; Generated autoloads from ../site-lisp/pdf-tools/lisp/pdf-outline.el
+;;; Generated autoloads from pdf-tools/lisp/pdf-outline.el
 
-(autoload 'pdf-outline-minor-mode "../site-lisp/pdf-tools/lisp/pdf-outline" "\
+(autoload 'pdf-outline-minor-mode "pdf-tools/lisp/pdf-outline" "\
 Display an outline of a PDF document.
 
 This provides a PDF's outline on the menu bar via imenu.
@@ -7921,21 +8703,21 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(autoload 'pdf-outline "../site-lisp/pdf-tools/lisp/pdf-outline" "\
+(autoload 'pdf-outline "pdf-tools/lisp/pdf-outline" "\
 Display an PDF outline of BUFFER.
 
 BUFFER defaults to the current buffer.  Select the outline
 buffer, unless NO-SELECT-WINDOW-P is non-nil.
 
 (fn &optional BUFFER NO-SELECT-WINDOW-P)" t)
-(autoload 'pdf-outline-imenu-enable "../site-lisp/pdf-tools/lisp/pdf-outline" "\
+(autoload 'pdf-outline-imenu-enable "pdf-tools/lisp/pdf-outline" "\
 Enable imenu in the current PDF buffer." t)
-(register-definition-prefixes "../site-lisp/pdf-tools/lisp/pdf-outline" '("pdf-outline"))
+(register-definition-prefixes "pdf-tools/lisp/pdf-outline" '("pdf-outline"))
 
 
-;;; Generated autoloads from ../site-lisp/pdf-tools/lisp/pdf-sync.el
+;;; Generated autoloads from pdf-tools/lisp/pdf-sync.el
 
-(autoload 'pdf-sync-minor-mode "../site-lisp/pdf-tools/lisp/pdf-sync" "\
+(autoload 'pdf-sync-minor-mode "pdf-tools/lisp/pdf-sync" "\
 Correlate a PDF position with the TeX file.
 
 \\<pdf-sync-minor-mode-map>
@@ -7969,15 +8751,15 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(register-definition-prefixes "../site-lisp/pdf-tools/lisp/pdf-sync" '("pdf-sync-"))
+(register-definition-prefixes "pdf-tools/lisp/pdf-sync" '("pdf-sync-"))
 
 
-;;; Generated autoloads from ../site-lisp/pdf-tools/lisp/pdf-tools.el
+;;; Generated autoloads from pdf-tools/lisp/pdf-tools.el
 
 (defvar pdf-tools-handle-upgrades t "\
 Whether PDF Tools should handle upgrading itself.")
-(custom-autoload 'pdf-tools-handle-upgrades "../site-lisp/pdf-tools/lisp/pdf-tools" t)
-(autoload 'pdf-tools-install "../site-lisp/pdf-tools/lisp/pdf-tools" "\
+(custom-autoload 'pdf-tools-handle-upgrades "pdf-tools/lisp/pdf-tools" t)
+(autoload 'pdf-tools-install "pdf-tools/lisp/pdf-tools" "\
 Install PDF-Tools in all current and future PDF buffers.
 
 If the `pdf-info-epdfinfo-program' is not running or does not
@@ -8007,40 +8789,40 @@ value (e.g. ~/bin/epdfinfo) before calling this function.
 See `pdf-view-mode' and `pdf-tools-enabled-modes'.
 
 (fn &optional NO-QUERY-P SKIP-DEPENDENCIES-P NO-ERROR-P FORCE-DEPENDENCIES-P)" t)
-(autoload 'pdf-tools-enable-minor-modes "../site-lisp/pdf-tools/lisp/pdf-tools" "\
+(autoload 'pdf-tools-enable-minor-modes "pdf-tools/lisp/pdf-tools" "\
 Enable MODES in the current buffer.
 
 MODES defaults to `pdf-tools-enabled-modes'.
 
 (fn &optional MODES)" t)
-(autoload 'pdf-tools-help "../site-lisp/pdf-tools/lisp/pdf-tools" "\
+(autoload 'pdf-tools-help "pdf-tools/lisp/pdf-tools" "\
 Show a Help buffer for `pdf-tools'." t)
-(register-definition-prefixes "../site-lisp/pdf-tools/lisp/pdf-tools" '("pdf-tools-"))
+(register-definition-prefixes "pdf-tools/lisp/pdf-tools" '("pdf-tools-"))
 
 
-;;; Generated autoloads from ../site-lisp/pdf-tools/lisp/pdf-util.el
+;;; Generated autoloads from pdf-tools/lisp/pdf-util.el
 
-(register-definition-prefixes "../site-lisp/pdf-tools/lisp/pdf-util" '("display-buffer-split-below-and-attach" "pdf-util-"))
+(register-definition-prefixes "pdf-tools/lisp/pdf-util" '("display-buffer-split-below-and-attach" "pdf-util-"))
 
 
-;;; Generated autoloads from ../site-lisp/pdf-tools/lisp/pdf-view.el
+;;; Generated autoloads from pdf-tools/lisp/pdf-view.el
 
-(autoload 'pdf-view-bookmark-jump-handler "../site-lisp/pdf-tools/lisp/pdf-view" "\
+(autoload 'pdf-view-bookmark-jump-handler "pdf-tools/lisp/pdf-view" "\
 The bookmark handler-function interface for bookmark BMK.
 
 See also `pdf-view-bookmark-make-record'.
 
 (fn BMK)")
-(register-definition-prefixes "../site-lisp/pdf-tools/lisp/pdf-view" '("cua-copy-region--pdf-view-advice" "pdf-view-"))
+(register-definition-prefixes "pdf-tools/lisp/pdf-view" '("cua-copy-region--pdf-view-advice" "pdf-view-"))
 
 
-;;; Generated autoloads from ../site-lisp/pdf-tools/lisp/pdf-virtual.el
+;;; Generated autoloads from pdf-tools/lisp/pdf-virtual.el
 
-(autoload 'pdf-virtual-edit-mode "../site-lisp/pdf-tools/lisp/pdf-virtual" "\
+(autoload 'pdf-virtual-edit-mode "pdf-tools/lisp/pdf-virtual" "\
 Major mode when editing a virtual PDF buffer.
 
 (fn)" t)
-(autoload 'pdf-virtual-view-mode "../site-lisp/pdf-tools/lisp/pdf-virtual" "\
+(autoload 'pdf-virtual-view-mode "pdf-tools/lisp/pdf-virtual" "\
 Major mode in virtual PDF buffers.
 
 (fn)" t)
@@ -8051,8 +8833,8 @@ for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `pdf-virtual-global-minor-mode'.")
-(custom-autoload 'pdf-virtual-global-minor-mode "../site-lisp/pdf-tools/lisp/pdf-virtual" nil)
-(autoload 'pdf-virtual-global-minor-mode "../site-lisp/pdf-tools/lisp/pdf-virtual" "\
+(custom-autoload 'pdf-virtual-global-minor-mode "pdf-tools/lisp/pdf-virtual" nil)
+(autoload 'pdf-virtual-global-minor-mode "pdf-tools/lisp/pdf-virtual" "\
 Enable recognition and handling of VPDF files.
 
 This is a global minor mode.  If called interactively, toggle the
@@ -8071,21 +8853,21 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(autoload 'pdf-virtual-buffer-create "../site-lisp/pdf-tools/lisp/pdf-virtual" "\
+(autoload 'pdf-virtual-buffer-create "pdf-tools/lisp/pdf-virtual" "\
 
 
 (fn &optional FILENAMES BUFFER-NAME DISPLAY-P)" t)
-(register-definition-prefixes "../site-lisp/pdf-tools/lisp/pdf-virtual" '("pdf-virtual-"))
+(register-definition-prefixes "pdf-tools/lisp/pdf-virtual" '("pdf-virtual-"))
 
 
-;;; Generated autoloads from ../site-lisp/pdf-tools/test/pdf-virtual-test.el
+;;; Generated autoloads from pdf-tools/test/pdf-virtual-test.el
 
-(register-definition-prefixes "../site-lisp/pdf-tools/test/pdf-virtual-test" '("pdf-virtual-test-document" "with-pdf-virtual-test-"))
+(register-definition-prefixes "pdf-tools/test/pdf-virtual-test" '("pdf-virtual-test-document" "with-pdf-virtual-test-"))
 
 
-;;; Generated autoloads from ../site-lisp/pfuture/pfuture.el
+;;; Generated autoloads from pfuture/pfuture.el
 
-(autoload 'pfuture-new "../site-lisp/pfuture/pfuture" "\
+(autoload 'pfuture-new "pfuture/pfuture" "\
 Create a new future process for command CMD.
 Any arguments after the command are interpreted as arguments to the command.
 This will return a process object with additional \\='stderr and \\='stdout
@@ -8098,12 +8880,12 @@ this is wrong: (pfuture-new \"git status\")
 this is right: (pfuture-new \"git\" \"status\")
 
 (fn &rest CMD)")
-(register-definition-prefixes "../site-lisp/pfuture/pfuture" '("pfuture-"))
+(register-definition-prefixes "pfuture/pfuture" '("pfuture-"))
 
 
-;;; Generated autoloads from ../site-lisp/auctex/plain-tex.el
+;;; Generated autoloads from auctex/plain-tex.el
 
-(autoload 'TeX-plain-tex-mode "../site-lisp/auctex/plain-tex" "\
+(autoload 'TeX-plain-tex-mode "auctex/plain-tex" "\
 Major mode in AUCTeX for editing plain TeX files.
 See info under AUCTeX for documentation.
 
@@ -8113,7 +8895,7 @@ Special commands:
 Entering `plain-tex-mode' calls the value of `text-mode-hook',
 then the value of `TeX-mode-hook', and then the value
 of `plain-TeX-mode-hook'." t)
-(autoload 'ams-tex-mode "../site-lisp/auctex/plain-tex" "\
+(autoload 'ams-tex-mode "auctex/plain-tex" "\
 Major mode in AUCTeX for editing AmS-TeX files.
 See info under AUCTeX for documentation.
 
@@ -8123,14 +8905,14 @@ Special commands:
 Entering `ams-tex-mode' calls the value of `text-mode-hook',
 then the value of `TeX-mode-hook', and then the value
 of `AmS-TeX-mode-hook'." t)
-(register-definition-prefixes "../site-lisp/auctex/plain-tex" '("AmS" "plain-TeX-"))
+(register-definition-prefixes "auctex/plain-tex" '("AmS" "plain-TeX-"))
 
 
-;;; Generated autoloads from ../site-lisp/posframe/posframe.el
+;;; Generated autoloads from posframe/posframe.el
 
-(autoload 'posframe-workable-p "../site-lisp/posframe/posframe" "\
+(autoload 'posframe-workable-p "posframe/posframe" "\
 Test posframe workable status.")
-(autoload 'posframe-show "../site-lisp/posframe/posframe" "\
+(autoload 'posframe-show "posframe/posframe" "\
 Pop up a posframe to show STRING at POSITION.
 
  (1) POSITION
@@ -8335,28 +9117,28 @@ An example parent frame poshandler function is:
 You can use `posframe-delete-all' to delete all posframes.
 
 (fn BUFFER-OR-NAME &key STRING POSITION POSHANDLER POSHANDLER-EXTRA-INFO WIDTH HEIGHT MAX-WIDTH MAX-HEIGHT MIN-WIDTH MIN-HEIGHT X-PIXEL-OFFSET Y-PIXEL-OFFSET LEFT-FRINGE RIGHT-FRINGE BORDER-WIDTH BORDER-COLOR INTERNAL-BORDER-WIDTH INTERNAL-BORDER-COLOR FONT CURSOR WINDOW-POINT FOREGROUND-COLOR BACKGROUND-COLOR RESPECT-HEADER-LINE RESPECT-MODE-LINE INITIALIZE NO-PROPERTIES KEEP-RATIO LINES-TRUNCATE OVERRIDE-PARAMETERS TIMEOUT REFRESH ACCEPT-FOCUS HIDEHANDLER REFPOSHANDLER &allow-other-keys)")
-(autoload 'posframe-hide-all "../site-lisp/posframe/posframe" "\
+(autoload 'posframe-hide-all "posframe/posframe" "\
 Hide all posframe frames." t)
-(autoload 'posframe-delete-all "../site-lisp/posframe/posframe" "\
+(autoload 'posframe-delete-all "posframe/posframe" "\
 Delete all posframe frames and buffers." t)
-(register-definition-prefixes "../site-lisp/posframe/posframe" '("posframe-"))
+(register-definition-prefixes "posframe/posframe" '("posframe-"))
 
 
-;;; Generated autoloads from ../site-lisp/posframe/posframe-benchmark.el
+;;; Generated autoloads from posframe/posframe-benchmark.el
 
-(autoload 'posframe-benchmark "../site-lisp/posframe/posframe-benchmark" "\
+(autoload 'posframe-benchmark "posframe/posframe-benchmark" "\
 Benchmark tool for posframe." t)
-(register-definition-prefixes "../site-lisp/posframe/posframe-benchmark" '("posframe-benchmark-alist"))
+(register-definition-prefixes "posframe/posframe-benchmark" '("posframe-benchmark-alist"))
 
 
-;;; Generated autoloads from ../site-lisp/auctex/preview.el
+;;; Generated autoloads from auctex/preview.el
 
-(autoload 'desktop-buffer-preview "../site-lisp/auctex/preview" "\
+(autoload 'desktop-buffer-preview "auctex/preview" "\
 Hook function for restoring persistent previews into a buffer.
 
 (fn FILE-NAME BUFFER-NAME MISC)")
 (add-to-list 'desktop-buffer-mode-handlers '(latex-mode . desktop-buffer-preview))
-(autoload 'preview-install-styles "../site-lisp/auctex/preview" "\
+(autoload 'preview-install-styles "auctex/preview" "\
 Installs the TeX style files into a permanent location.
 This must be in the TeX search path.  If FORCE-OVERWRITE is greater
 than 1, files will get overwritten without query, if it is less
@@ -8368,30 +9150,30 @@ Similarly FORCE-SAVE can be used for saving
 files are no longer needed in the search path.
 
 (fn DIR &optional FORCE-OVERWRITE FORCE-SAVE)" t)
-(autoload 'LaTeX-preview-setup "../site-lisp/auctex/preview" "\
+(autoload 'LaTeX-preview-setup "auctex/preview" "\
 Hook function for embedding the preview package into AUCTeX.
 This is called by `LaTeX-mode-hook' and changes AUCTeX variables
 to add the preview functionality.")
-(autoload 'preview-report-bug "../site-lisp/auctex/preview" "\
+(autoload 'preview-report-bug "auctex/preview" "\
 Report a bug in the preview-latex package." t)
-(register-definition-prefixes "../site-lisp/auctex/preview" '("TeX-" "desktop-buffer-preview-misc-data" "preview-"))
+(register-definition-prefixes "auctex/preview" '("TeX-" "desktop-buffer-preview-misc-data" "preview-"))
 
 
-;;; Generated autoloads from ../site-lisp/puni/puni.el
+;;; Generated autoloads from puni/puni.el
 
-(autoload 'puni-delete-active-region "../site-lisp/puni/puni" "\
+(autoload 'puni-delete-active-region "puni/puni" "\
 Delete active region.
 When this will cause unbalanced state, ask the user to confirm,
 unless `puni-confirm-when-delete-unbalanced-active-region' is
 nil." t)
-(autoload 'puni-kill-region "../site-lisp/puni/puni" "\
+(autoload 'puni-kill-region "puni/puni" "\
 Kill text between point and mark.
 When this will cause unbalanced state, ask the user to confirm,
 unless `puni-confirm-when-delete-unbalanced-active-region'.
 
 When `rectangle-mark-mode' is enabled, kill the marked
 rectangular region instead." t)
-(autoload 'puni-kill-active-region "../site-lisp/puni/puni" "\
+(autoload 'puni-kill-active-region "puni/puni" "\
 Kill active region.
 When this will cause unbalanced state, ask the user to confirm,
 unless `puni-confirm-when-delete-unbalanced-active-region' is
@@ -8399,7 +9181,7 @@ nil.
 
 When `rectangle-mark-mode' is enabled, kill the marked
 rectangular region instead." t)
-(autoload 'puni-backward-delete-char "../site-lisp/puni/puni" "\
+(autoload 'puni-backward-delete-char "puni/puni" "\
 Delete char backward while keeping expressions balanced.
 With prefix argument N, kill that many chars.  Negative argument
 means kill chars forward.
@@ -8411,7 +9193,7 @@ backward, even if this breaks the balance.
 This respects the variable `delete-active-region'.
 
 (fn &optional N)" t)
-(autoload 'puni-forward-delete-char "../site-lisp/puni/puni" "\
+(autoload 'puni-forward-delete-char "puni/puni" "\
 Delete char forward while keeping expressions balanced.
 With prefix argument N, kill that many chars.  Negative argument
 means kill chars backward.
@@ -8423,19 +9205,19 @@ forward, even if this breaks the balance.
 This respects the variable `delete-active-region'.
 
 (fn &optional N)" t)
-(autoload 'puni-forward-kill-word "../site-lisp/puni/puni" "\
+(autoload 'puni-forward-kill-word "puni/puni" "\
 Kill word forward while keeping expressions balanced.
 With prefix argument N, kill that many words.  Negative argument
 means kill words backward.
 
 (fn &optional N)" t)
-(autoload 'puni-backward-kill-word "../site-lisp/puni/puni" "\
+(autoload 'puni-backward-kill-word "puni/puni" "\
 Kill word backward while keeping expressions balanced.
 With prefix argument N, kill that many words.  Negative argument
 means kill words forward.
 
 (fn &optional N)" t)
-(autoload 'puni-kill-line "../site-lisp/puni/puni" "\
+(autoload 'puni-kill-line "puni/puni" "\
 Kill a line forward while keeping expressions balanced.
 With prefix argument N, kill that many lines.  Negative argument
 means kill lines backward.
@@ -8443,7 +9225,7 @@ means kill lines backward.
 This respects the variable `kill-whole-line'.
 
 (fn &optional N)" t)
-(autoload 'puni-backward-kill-line "../site-lisp/puni/puni" "\
+(autoload 'puni-backward-kill-line "puni/puni" "\
 Kill a line backward while keeping expressions balanced.
 With prefix argument N, kill that many lines.  Negative argument
 means kill lines forward.
@@ -8451,11 +9233,11 @@ means kill lines forward.
 This respects the variable `kill-whole-line'.
 
 (fn &optional N)" t)
-(autoload 'puni-force-delete "../site-lisp/puni/puni" "\
+(autoload 'puni-force-delete "puni/puni" "\
 Force delete backward char, or the active region.
 Can be used to fight with undesired behavior of structural
 editing." t)
-(autoload 'puni-forward-sexp "../site-lisp/puni/puni" "\
+(autoload 'puni-forward-sexp "puni/puni" "\
 Go forward a sexp.
 This is the same as `puni-strict-forward-sexp', except that it
 jumps forward consecutive single-line comments.
@@ -8464,7 +9246,7 @@ With prefix argument N, go forward that many sexps.  Negative
 argument means go backward.
 
 (fn &optional N)" t)
-(autoload 'puni-backward-sexp "../site-lisp/puni/puni" "\
+(autoload 'puni-backward-sexp "puni/puni" "\
 Go backward a sexp.
 This is the same as `puni-strict-backward-sexp', except that it
 jumps backward consecutive single-line comments.
@@ -8473,19 +9255,19 @@ With prefix argument N, go backward that many sexps.  Negative
 argument means go forward.
 
 (fn &optional N)" t)
-(autoload 'puni-forward-sexp-or-up-list "../site-lisp/puni/puni" "\
+(autoload 'puni-forward-sexp-or-up-list "puni/puni" "\
 Go forward a sexp, or an ending delimiter if there's no sexp forward.
 With prefix argument N, do this that many times.  Negative
 argument means go backward.
 
 (fn &optional N)" t)
-(autoload 'puni-backward-sexp-or-up-list "../site-lisp/puni/puni" "\
+(autoload 'puni-backward-sexp-or-up-list "puni/puni" "\
 Go backward a sexp, or a starting delimiter if there's no sexp backward.
 With prefix argument N, do this that many times.  Negative
 argument means go forward.
 
 (fn &optional N)" t)
-(autoload 'puni-beginning-of-sexp "../site-lisp/puni/puni" "\
+(autoload 'puni-beginning-of-sexp "puni/puni" "\
 Go to the beginning of current sexp.
 This means go to the point after the opening delimiter.  If this
 is called from there, then go to the point before the delimiter,
@@ -8495,7 +9277,7 @@ opening delimiters.
 If it goes to the beginning of the buffer (likely to happen when
 called by accident in the top scope), set a mark at where we
 begin so we can pop back to it." t)
-(autoload 'puni-end-of-sexp "../site-lisp/puni/puni" "\
+(autoload 'puni-end-of-sexp "puni/puni" "\
 Go to the end of current sexp.
 This means go to the point before the closing delimiter.  If this
 is called from there, then go to the point after the delimiter,
@@ -8505,7 +9287,7 @@ closing delimiters.
 If it goes to the end of the buffer (likely to happen when called
 by accident in the top scope), set a mark at where we begin so we
 can pop back to it." t)
-(autoload 'puni-syntactic-forward-punct "../site-lisp/puni/puni" "\
+(autoload 'puni-syntactic-forward-punct "puni/puni" "\
 Jump to next punctuation syntactically.
 This means:
 
@@ -8516,7 +9298,7 @@ This means:
 
 This command is designed to give you a \"syntactical navigating\"
 feeling." t)
-(autoload 'puni-syntactic-backward-punct "../site-lisp/puni/puni" "\
+(autoload 'puni-syntactic-backward-punct "puni/puni" "\
 Jump to previous punctuation syntactically.
 This means:
 
@@ -8527,26 +9309,26 @@ This means:
 
 This command is designed to give you a \"syntactical navigating\"
 feeling." t)
-(autoload 'puni-mark-sexp-at-point "../site-lisp/puni/puni" "\
+(autoload 'puni-mark-sexp-at-point "puni/puni" "\
 Mark the sexp at or after point." t)
-(autoload 'puni-mark-list-around-point "../site-lisp/puni/puni" "\
+(autoload 'puni-mark-list-around-point "puni/puni" "\
 Mark the list around point.
 The list around point is the part inside the sexp around point,
 i.e., after its opening delimiter, and before its closing
 delimiter.  If the point is already at the top scope, then the
 whole buffer is the list around point." t)
-(autoload 'puni-mark-sexp-around-point "../site-lisp/puni/puni" "\
+(autoload 'puni-mark-sexp-around-point "puni/puni" "\
 Mark the sexp around point." t)
-(autoload 'puni-expand-region "../site-lisp/puni/puni" "\
+(autoload 'puni-expand-region "puni/puni" "\
 Expand selected region by semantic units." t)
-(autoload 'puni-squeeze "../site-lisp/puni/puni" "\
+(autoload 'puni-squeeze "puni/puni" "\
 Copy the list around point, and delete the sexp around point.
 This can be used to \"rewrap\" a sexp.  You could squeeze it
 first, type in the new delimiters, and then yank inside them.
 
 When there's an active balanced region, copy it and delete the
 sexp around it." t)
-(autoload 'puni-slurp-forward "../site-lisp/puni/puni" "\
+(autoload 'puni-slurp-forward "puni/puni" "\
 Move the closing delimiter of sexp around point forward one sexp.
 With positive prefix argument N, slurp that many sexps.
 
@@ -8557,12 +9339,12 @@ list, e.g.,
   => ((|foo bar))
 
 (fn &optional N)" t)
-(autoload 'puni-barf-forward "../site-lisp/puni/puni" "\
+(autoload 'puni-barf-forward "puni/puni" "\
 Move the closing delimiter of sexp around point backward one sexp.
 With positive prefix argument N, barf that many sexps.
 
 (fn &optional N)" t)
-(autoload 'puni-slurp-backward "../site-lisp/puni/puni" "\
+(autoload 'puni-slurp-backward "puni/puni" "\
 Move the opening delimiter of sexp around point backward one sexp.
 With positive prefix argument N, slurp that many sexps.
 
@@ -8573,30 +9355,30 @@ list, e.g.,
   => ((foo |bar))
 
 (fn &optional N)" t)
-(autoload 'puni-barf-backward "../site-lisp/puni/puni" "\
+(autoload 'puni-barf-backward "puni/puni" "\
 Move the opening delimiter of sexp around point forward one sexp.
 With positive prefix argument N, barf that many sexps.
 
 (fn &optional N)" t)
-(autoload 'puni-splice "../site-lisp/puni/puni" "\
+(autoload 'puni-splice "puni/puni" "\
 Remove the delimiters of sexp around point." t)
-(autoload 'puni-splice-killing-backward "../site-lisp/puni/puni" "\
+(autoload 'puni-splice-killing-backward "puni/puni" "\
 Kill all sexps before point in the current list, then splice it.
 Splicing is done by removing the delimiters of the list." t)
-(autoload 'puni-splice-killing-forward "../site-lisp/puni/puni" "\
+(autoload 'puni-splice-killing-forward "puni/puni" "\
 Kill all sexps after point in the current list, then splice it.
 Splicing is done by removing the delimiters of the list." t)
-(autoload 'puni-split "../site-lisp/puni/puni" "\
+(autoload 'puni-split "puni/puni" "\
 Split the list around point into two sexps." t)
-(autoload 'puni-raise "../site-lisp/puni/puni" "\
+(autoload 'puni-raise "puni/puni" "\
 Replace the sexp around point with sexp at or after point.
 If there's an active balanced region, replace the sexp around it
 with it." t)
-(autoload 'puni-transpose "../site-lisp/puni/puni" "\
+(autoload 'puni-transpose "puni/puni" "\
 Swap the sexp before and after point." t)
-(autoload 'puni-convolute "../site-lisp/puni/puni" "\
+(autoload 'puni-convolute "puni/puni" "\
 Exchange the order of application of two closest outer forms." t)
-(autoload 'puni-wrap-next-sexps "../site-lisp/puni/puni" "\
+(autoload 'puni-wrap-next-sexps "puni/puni" "\
 Wrap next N S-expressions with BEG-DELIM and END-DELIM.
 - If N is a positive integer, wrap N sexps after the point.
 - If N is `to-end', wrap sexps from the point to the end of
@@ -8608,7 +9390,7 @@ Wrap next N S-expressions with BEG-DELIM and END-DELIM.
   instead, otherwise throw an error.
 
 (fn N BEG-DELIM END-DELIM)")
-(autoload 'puni-wrap-round "../site-lisp/puni/puni" "\
+(autoload 'puni-wrap-round "puni/puni" "\
 Wrap the following S-expression with parentheses.
 If a ‘C-u’ prefix argument is given, wrap all S-expressions
 following the point until the end of the buffer or of the
@@ -8617,7 +9399,7 @@ S-expressions.  Automatically indent the newly wrapped
 S-expression.
 
 (fn &optional N)" t)
-(autoload 'puni-wrap-square "../site-lisp/puni/puni" "\
+(autoload 'puni-wrap-square "puni/puni" "\
 Wrap the following S-expression with square brackets.
 If a ‘C-u’ prefix argument is given, wrap all S-expressions
 following the point until the end of the buffer or of the
@@ -8626,7 +9408,7 @@ S-expressions.  Automatically indent the newly wrapped
 S-expression.
 
 (fn &optional N)" t)
-(autoload 'puni-wrap-curly "../site-lisp/puni/puni" "\
+(autoload 'puni-wrap-curly "puni/puni" "\
 Wrap the following S-expression with curly brackets.
 If a ‘C-u’ prefix argument is given, wrap all S-expressions
 following the point until the end of the buffer or of the
@@ -8635,7 +9417,7 @@ S-expressions.  Automatically indent the newly wrapped
 S-expression.
 
 (fn &optional N)" t)
-(autoload 'puni-wrap-angle "../site-lisp/puni/puni" "\
+(autoload 'puni-wrap-angle "puni/puni" "\
 Wrap the following S-expression with angle brackets.
 If a ‘C-u’ prefix argument is given, wrap all S-expressions
 following the point until the end of the buffer or of the
@@ -8648,14 +9430,14 @@ S-expression.
 Keymap used for `puni-mode'.")
 (define-minor-mode puni-mode "Enable keybindings for Puni commands." :keymap puni-mode-map)
 (define-globalized-minor-mode puni-global-mode puni-mode (lambda nil (puni-mode 1)))
-(autoload 'puni-disable-puni-mode "../site-lisp/puni/puni" "\
+(autoload 'puni-disable-puni-mode "puni/puni" "\
 Disable Puni mode in current buffer.")
-(register-definition-prefixes "../site-lisp/puni/puni" '("puni-"))
+(register-definition-prefixes "puni/puni" '("puni-"))
 
 
-;;; Generated autoloads from ../site-lisp/rainbow-delimiters/rainbow-delimiters.el
+;;; Generated autoloads from rainbow-delimiters/rainbow-delimiters.el
 
-(autoload 'rainbow-delimiters-mode "../site-lisp/rainbow-delimiters/rainbow-delimiters" "\
+(autoload 'rainbow-delimiters-mode "rainbow-delimiters/rainbow-delimiters" "\
 Highlight nested parentheses, brackets, and braces according to their depth.
 
 This is a minor mode.  If called interactively, toggle the
@@ -8674,21 +9456,21 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(autoload 'rainbow-delimiters-mode-enable "../site-lisp/rainbow-delimiters/rainbow-delimiters" "\
+(autoload 'rainbow-delimiters-mode-enable "rainbow-delimiters/rainbow-delimiters" "\
 Enable `rainbow-delimiters-mode'.")
-(autoload 'rainbow-delimiters-mode-disable "../site-lisp/rainbow-delimiters/rainbow-delimiters" "\
+(autoload 'rainbow-delimiters-mode-disable "rainbow-delimiters/rainbow-delimiters" "\
 Disable `rainbow-delimiters-mode'.")
-(register-definition-prefixes "../site-lisp/rainbow-delimiters/rainbow-delimiters" '("rainbow-delimiters-"))
+(register-definition-prefixes "rainbow-delimiters/rainbow-delimiters" '("rainbow-delimiters-"))
 
 
-;;; Generated autoloads from ../site-lisp/rainbow-delimiters/rainbow-delimiters-test.el
+;;; Generated autoloads from rainbow-delimiters/rainbow-delimiters-test.el
 
-(register-definition-prefixes "../site-lisp/rainbow-delimiters/rainbow-delimiters-test" '("fontify-" "highlights-matching-" "should-do-nothing" "with-"))
+(register-definition-prefixes "rainbow-delimiters/rainbow-delimiters-test" '("fontify-" "highlights-matching-" "should-do-nothing" "with-"))
 
 
-;;; Generated autoloads from ../site-lisp/rainbow-mode/rainbow-mode.el
+;;; Generated autoloads from rainbow-mode/rainbow-mode.el
 
-(autoload 'rainbow-mode "../site-lisp/rainbow-mode/rainbow-mode" "\
+(autoload 'rainbow-mode "rainbow-mode/rainbow-mode" "\
 Colorize strings that represent colors.
 
 This will fontify with colors the string like \"#aabbcc\" or \"blue\".
@@ -8708,46 +9490,46 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(register-definition-prefixes "../site-lisp/rainbow-mode/rainbow-mode" '("rainbow-"))
+(register-definition-prefixes "rainbow-mode/rainbow-mode" '("rainbow-"))
 
 
-;;; Generated autoloads from ../site-lisp/emacs-rime/rime.el
+;;; Generated autoloads from emacs-rime/rime.el
 
 (defvar rime-title (char-to-string 12563) "\
 The title of input method.")
-(autoload 'rime-lighter "../site-lisp/emacs-rime/rime" "\
+(autoload 'rime-lighter "emacs-rime/rime" "\
 Return a lighter which can be used in mode-line.
 
 The content is `rime-title'.
 
 You can customize the color with `rime-indicator-face' and `rime-indicator-dim-face'.")
-(autoload 'rime-activate "../site-lisp/emacs-rime/rime" "\
+(autoload 'rime-activate "emacs-rime/rime" "\
 Activate rime.
 Argument NAME ignored.
 
 (fn NAME)")
 (register-input-method "rime" "euc-cn" 'rime-activate rime-title)
-(register-definition-prefixes "../site-lisp/emacs-rime/rime" '("rime-"))
+(register-definition-prefixes "emacs-rime/rime" '("rime-"))
 
 
-;;; Generated autoloads from ../site-lisp/emacs-rime/rime-predicates.el
+;;; Generated autoloads from emacs-rime/rime-predicates.el
 
-(register-definition-prefixes "../site-lisp/emacs-rime/rime-predicates" '("rime-predicate-"))
-
-
-;;; Generated autoloads from ../site-lisp/s.el/s.el
-
-(register-definition-prefixes "../site-lisp/s.el/s" '("s-"))
+(register-definition-prefixes "emacs-rime/rime-predicates" '("rime-predicate-"))
 
 
-;;; Generated autoloads from ../site-lisp/shrink-path.el/shrink-path.el
+;;; Generated autoloads from s.el/s.el
 
-(register-definition-prefixes "../site-lisp/shrink-path.el/shrink-path" '("shrink-path-"))
+(register-definition-prefixes "s.el/s" '("s-"))
 
 
-;;; Generated autoloads from ../site-lisp/spinner.el/spinner.el
+;;; Generated autoloads from shrink-path.el/shrink-path.el
 
-(autoload 'spinner-create "../site-lisp/spinner.el/spinner" "\
+(register-definition-prefixes "shrink-path.el/shrink-path" '("shrink-path-"))
+
+
+;;; Generated autoloads from spinner.el/spinner.el
+
+(autoload 'spinner-create "spinner.el/spinner" "\
 Create a spinner of the given TYPE.
 The possible TYPEs are described in `spinner--type-to-frames'.
 
@@ -8770,7 +9552,7 @@ the spinner before this time, in which case it won't display at
 all.
 
 (fn &optional TYPE BUFFER-LOCAL FPS DELAY)")
-(autoload 'spinner-start "../site-lisp/spinner.el/spinner" "\
+(autoload 'spinner-start "spinner.el/spinner" "\
 Start a mode-line spinner of given TYPE-OR-OBJECT.
 If TYPE-OR-OBJECT is an object created with `make-spinner',
 simply activate it.  This method is designed for minor modes, so
@@ -8796,12 +9578,12 @@ displaying the spinner. It is safe to cancel the spinner before
 this time, in which case it won't display at all.
 
 (fn &optional TYPE-OR-OBJECT FPS DELAY)")
-(register-definition-prefixes "../site-lisp/spinner.el/spinner" '("spinner-"))
+(register-definition-prefixes "spinner.el/spinner" '("spinner-"))
 
 
-;;; Generated autoloads from ../site-lisp/symbol-overlay/symbol-overlay.el
+;;; Generated autoloads from symbol-overlay/symbol-overlay.el
 
-(autoload 'symbol-overlay-mode "../site-lisp/symbol-overlay/symbol-overlay" "\
+(autoload 'symbol-overlay-mode "symbol-overlay/symbol-overlay" "\
 Minor mode for auto-highlighting symbol at point.
 
 This is a minor mode.  If called interactively, toggle the
@@ -8819,49 +9601,49 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(autoload 'symbol-overlay-put "../site-lisp/symbol-overlay/symbol-overlay" "\
+(autoload 'symbol-overlay-put "symbol-overlay/symbol-overlay" "\
 Toggle all overlays of symbol at point." t)
-(autoload 'symbol-overlay-count "../site-lisp/symbol-overlay/symbol-overlay" "\
+(autoload 'symbol-overlay-count "symbol-overlay/symbol-overlay" "\
 Show count of symbol at point." t)
-(autoload 'symbol-overlay-remove-all "../site-lisp/symbol-overlay/symbol-overlay" "\
+(autoload 'symbol-overlay-remove-all "symbol-overlay/symbol-overlay" "\
 Remove all highlighted symbols in the buffer.
 When called interactively, then also reset
 `symbol-overlay-keywords-alist'." t)
-(autoload 'symbol-overlay-save-symbol "../site-lisp/symbol-overlay/symbol-overlay" "\
+(autoload 'symbol-overlay-save-symbol "symbol-overlay/symbol-overlay" "\
 Copy symbol at point." t)
-(autoload 'symbol-overlay-toggle-in-scope "../site-lisp/symbol-overlay/symbol-overlay" "\
+(autoload 'symbol-overlay-toggle-in-scope "symbol-overlay/symbol-overlay" "\
 Toggle overlays to be showed in buffer or only in scope." t)
-(autoload 'symbol-overlay-echo-mark "../site-lisp/symbol-overlay/symbol-overlay" "\
+(autoload 'symbol-overlay-echo-mark "symbol-overlay/symbol-overlay" "\
 Jump back to the mark." t)
-(autoload 'symbol-overlay-jump-next "../site-lisp/symbol-overlay/symbol-overlay" "\
+(autoload 'symbol-overlay-jump-next "symbol-overlay/symbol-overlay" "\
 Jump to the next location of symbol at point." t)
-(autoload 'symbol-overlay-jump-prev "../site-lisp/symbol-overlay/symbol-overlay" "\
+(autoload 'symbol-overlay-jump-prev "symbol-overlay/symbol-overlay" "\
 Jump to the previous location of symbol at point." t)
-(autoload 'symbol-overlay-jump-first "../site-lisp/symbol-overlay/symbol-overlay" "\
+(autoload 'symbol-overlay-jump-first "symbol-overlay/symbol-overlay" "\
 Jump to the first location." t)
-(autoload 'symbol-overlay-jump-last "../site-lisp/symbol-overlay/symbol-overlay" "\
+(autoload 'symbol-overlay-jump-last "symbol-overlay/symbol-overlay" "\
 Jump to the last location." t)
-(autoload 'symbol-overlay-jump-to-definition "../site-lisp/symbol-overlay/symbol-overlay" "\
+(autoload 'symbol-overlay-jump-to-definition "symbol-overlay/symbol-overlay" "\
 Jump to the definition of symbol at point.
 The definition syntax should be defined in a function stored in
 `symbol-overlay-definition-function' that returns the definition's regexp
 with the input symbol." t)
-(autoload 'symbol-overlay-switch-forward "../site-lisp/symbol-overlay/symbol-overlay" "\
+(autoload 'symbol-overlay-switch-forward "symbol-overlay/symbol-overlay" "\
 Switch forward to another symbol." t)
-(autoload 'symbol-overlay-switch-backward "../site-lisp/symbol-overlay/symbol-overlay" "\
+(autoload 'symbol-overlay-switch-backward "symbol-overlay/symbol-overlay" "\
 Switch backward to another symbol." t)
-(autoload 'symbol-overlay-isearch-literally "../site-lisp/symbol-overlay/symbol-overlay" "\
+(autoload 'symbol-overlay-isearch-literally "symbol-overlay/symbol-overlay" "\
 Isearch symbol at point literally." t)
-(autoload 'symbol-overlay-query-replace "../site-lisp/symbol-overlay/symbol-overlay" "\
+(autoload 'symbol-overlay-query-replace "symbol-overlay/symbol-overlay" "\
 Query replace symbol at point." t)
-(autoload 'symbol-overlay-rename "../site-lisp/symbol-overlay/symbol-overlay" "\
+(autoload 'symbol-overlay-rename "symbol-overlay/symbol-overlay" "\
 Rename symbol at point on all its occurrences." t)
-(register-definition-prefixes "../site-lisp/symbol-overlay/symbol-overlay" '("symbol-overlay-"))
+(register-definition-prefixes "symbol-overlay/symbol-overlay" '("symbol-overlay-"))
 
 
-;;; Generated autoloads from ../site-lisp/tablist/tablist.el
+;;; Generated autoloads from tablist/tablist.el
 
-(autoload 'tablist-minor-mode "../site-lisp/tablist/tablist" "\
+(autoload 'tablist-minor-mode "tablist/tablist" "\
 Toggle Tablist minor mode on or off.
 
 This is a minor mode.  If called interactively, toggle the
@@ -8879,76 +9661,81 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(autoload 'tablist-mode "../site-lisp/tablist/tablist" "\
+(autoload 'tablist-mode "tablist/tablist" "\
 
 
 (fn)" t)
-(register-definition-prefixes "../site-lisp/tablist/tablist" '("tablist-"))
+(register-definition-prefixes "tablist/tablist" '("tablist-"))
 
 
-;;; Generated autoloads from ../site-lisp/tablist/tablist-filter.el
+;;; Generated autoloads from tablist/tablist-filter.el
 
-(register-definition-prefixes "../site-lisp/tablist/tablist-filter" '("tablist-filter-"))
-
-
-;;; Generated autoloads from ../site-lisp/company-mode/test/template-tests.el
-
-(register-definition-prefixes "../site-lisp/company-mode/test/template-tests" '("company-template-field-assert-text"))
+(register-definition-prefixes "tablist/tablist-filter" '("tablist-filter-"))
 
 
-;;; Generated autoloads from ../site-lisp/citre/tests/tags-lang-c/test.el
+;;; Generated autoloads from company-mode/test/template-tests.el
 
-(register-definition-prefixes "../site-lisp/citre/tests/tags-lang-c/test" '("defs-to-xref"))
-
-
-;;; Generated autoloads from ../site-lisp/citre/tests/global/test.el
-
-(register-definition-prefixes "../site-lisp/citre/tests/global/test" '("delete-global-database" "generate-global-database" "with-clean-global-envs"))
+(register-definition-prefixes "company-mode/test/template-tests" '("company-template-field-assert-text"))
 
 
-;;; Generated autoloads from ../site-lisp/citre/tests/common-process/test.el
+;;; Generated autoloads from citre/tests/tags-lang-c/test.el
 
-(register-definition-prefixes "../site-lisp/citre/tests/common-process/test" '("poll-process"))
-
-
-;;; Generated autoloads from ../site-lisp/shrink-path.el/test/test-helper.el
-
-(register-definition-prefixes "../site-lisp/shrink-path.el/test/test-helper" '("with-"))
+(register-definition-prefixes "citre/tests/tags-lang-c/test" '("defs-to-xref"))
 
 
-;;; Generated autoloads from ../site-lisp/pdf-tools/test/test-helper.el
+;;; Generated autoloads from citre/tests/global/test.el
 
-(register-definition-prefixes "../site-lisp/pdf-tools/test/test-helper" '("cask-elpa" "pdf-t"))
-
-
-;;; Generated autoloads from ../site-lisp/lsp-ui/test/test-helper.el
-
-(register-definition-prefixes "../site-lisp/lsp-ui/test/test-helper" '("lsp-ui-test-"))
+(register-definition-prefixes "citre/tests/global/test" '("delete-global-database" "generate-global-database" "with-clean-global-envs"))
 
 
-;;; Generated autoloads from ../site-lisp/ht.el/test/test-helper.el
+;;; Generated autoloads from citre/tests/common-process/test.el
 
-(register-definition-prefixes "../site-lisp/ht.el/test/test-helper" '("ht-test/"))
-
-
-;;; Generated autoloads from ../site-lisp/combobulate/tests/test-navigation.el
-
-(register-definition-prefixes "../site-lisp/combobulate/tests/test-navigation" '("combobulate-test"))
+(register-definition-prefixes "citre/tests/common-process/test" '("poll-process"))
 
 
-;;; Generated autoloads from ../site-lisp/combobulate/tests/test-prelude.el
+;;; Generated autoloads from themes/test/test-helper.el
 
-(register-definition-prefixes "../site-lisp/combobulate/tests/test-prelude" '("combobulate-test-"))
-
-
-;;; Generated autoloads from ../site-lisp/treemacs/test/testdir1/testdir2/testdir3/testfile.el
-
-(register-definition-prefixes "../site-lisp/treemacs/test/testdir1/testdir2/testdir3/testfile" '("fn1" "fn2"))
+(register-definition-prefixes "themes/test/test-helper" '("-build-face" "-color" "-with-"))
 
 
-;;; Generated autoloads from ../site-lisp/auctex/tex.el
+;;; Generated autoloads from shrink-path.el/test/test-helper.el
 
-(autoload 'TeX-tex-mode "../site-lisp/auctex/tex" "\
+(register-definition-prefixes "shrink-path.el/test/test-helper" '("with-"))
+
+
+;;; Generated autoloads from pdf-tools/test/test-helper.el
+
+(register-definition-prefixes "pdf-tools/test/test-helper" '("cask-elpa" "pdf-t"))
+
+
+;;; Generated autoloads from lsp-ui/test/test-helper.el
+
+(register-definition-prefixes "lsp-ui/test/test-helper" '("lsp-ui-test-"))
+
+
+;;; Generated autoloads from ht.el/test/test-helper.el
+
+(register-definition-prefixes "ht.el/test/test-helper" '("ht-test/"))
+
+
+;;; Generated autoloads from combobulate/tests/test-navigation.el
+
+(register-definition-prefixes "combobulate/tests/test-navigation" '("combobulate-test"))
+
+
+;;; Generated autoloads from combobulate/tests/test-prelude.el
+
+(register-definition-prefixes "combobulate/tests/test-prelude" '("combobulate-test-"))
+
+
+;;; Generated autoloads from treemacs/test/testdir1/testdir2/testdir3/testfile.el
+
+(register-definition-prefixes "treemacs/test/testdir1/testdir2/testdir3/testfile" '("fn1" "fn2"))
+
+
+;;; Generated autoloads from auctex/tex.el
+
+(autoload 'TeX-tex-mode "auctex/tex" "\
 Major mode in AUCTeX for editing TeX or LaTeX files.
 Tries to guess whether this file is for plain TeX or LaTeX.
 
@@ -8959,14 +9746,14 @@ The algorithm is as follows:
    2) If \\documentstyle or \\begin{, \\section{, \\part{ or \\chapter{ is
       found, `latex-mode' is selected.
    3) Otherwise, use `plain-tex-mode'" t)
-(autoload 'TeX-auto-generate "../site-lisp/auctex/tex" "\
+(autoload 'TeX-auto-generate "auctex/tex" "\
 Generate style file for TEX and store it in AUTO.
 If TEX is a directory, generate style files for all files in the directory.
 
 (fn TEX AUTO)" t)
-(autoload 'TeX-auto-generate-global "../site-lisp/auctex/tex" "\
+(autoload 'TeX-auto-generate-global "auctex/tex" "\
 Create global auto directory for global TeX macro definitions." t)
-(autoload 'TeX-submit-bug-report "../site-lisp/auctex/tex" "\
+(autoload 'TeX-submit-bug-report "auctex/tex" "\
 Submit a bug report on AUCTeX via mail.
 
 Don't hesitate to report any problems or inaccurate documentation.
@@ -8974,21 +9761,21 @@ Don't hesitate to report any problems or inaccurate documentation.
 If you don't have setup sending mail from Emacs, please copy the
 output buffer into your mail program, as it gives us important
 information about your AUCTeX version and AUCTeX configuration." t)
-(register-definition-prefixes "../site-lisp/auctex/tex" '("Bib" "ConTeXt-" "LaTeX-" "TeX-" "VirTeX-common-initialization" "docTeX-default-extension" "plain-TeX-auto-regexp-list" "tex-"))
+(register-definition-prefixes "auctex/tex" '("Bib" "ConTeXt-" "LaTeX-" "TeX-" "VirTeX-common-initialization" "docTeX-default-extension" "plain-TeX-auto-regexp-list" "tex-"))
 
 
-;;; Generated autoloads from ../site-lisp/auctex/tex-bar.el
+;;; Generated autoloads from auctex/tex-bar.el
 
-(autoload 'TeX-install-toolbar "../site-lisp/auctex/tex-bar" "\
+(autoload 'TeX-install-toolbar "auctex/tex-bar" "\
 Install toolbar buttons for TeX mode." t)
-(autoload 'LaTeX-install-toolbar "../site-lisp/auctex/tex-bar" "\
+(autoload 'LaTeX-install-toolbar "auctex/tex-bar" "\
 Install toolbar buttons for LaTeX mode." t)
-(register-definition-prefixes "../site-lisp/auctex/tex-bar" '("TeX-bar-"))
+(register-definition-prefixes "auctex/tex-bar" '("TeX-bar-"))
 
 
-;;; Generated autoloads from ../site-lisp/auctex/tex-fold.el
+;;; Generated autoloads from auctex/tex-fold.el
 
-(autoload 'TeX-fold-mode "../site-lisp/auctex/tex-fold" "\
+(autoload 'TeX-fold-mode "auctex/tex-fold" "\
 Minor mode for hiding and revealing macros and environments.
 
 Called interactively, with no prefix argument, toggle the mode.
@@ -8997,20 +9784,20 @@ With zero or negative ARG turn mode off.
 
 (fn &optional ARG)" t)
 (defalias 'tex-fold-mode #'TeX-fold-mode)
-(register-definition-prefixes "../site-lisp/auctex/tex-fold" '("TeX-fold-"))
+(register-definition-prefixes "auctex/tex-fold" '("TeX-fold-"))
 
 
-;;; Generated autoloads from ../site-lisp/auctex/tex-font.el
+;;; Generated autoloads from auctex/tex-font.el
 
-(autoload 'tex-font-setup "../site-lisp/auctex/tex-font" "\
+(autoload 'tex-font-setup "auctex/tex-font" "\
 Setup font lock support for TeX.")
-(register-definition-prefixes "../site-lisp/auctex/tex-font" '("tex-"))
+(register-definition-prefixes "auctex/tex-font" '("tex-"))
 
 
-;;; Generated autoloads from ../site-lisp/auctex/tex-info.el
+;;; Generated autoloads from auctex/tex-info.el
 
 (defalias 'Texinfo-mode #'texinfo-mode)
-(autoload 'TeX-texinfo-mode "../site-lisp/auctex/tex-info" "\
+(autoload 'TeX-texinfo-mode "auctex/tex-info" "\
 Major mode in AUCTeX for editing Texinfo files.
 
 Special commands:
@@ -9018,62 +9805,62 @@ Special commands:
 
 Entering Texinfo mode calls the value of `text-mode-hook' and then the
 value of `Texinfo-mode-hook'." t)
-(register-definition-prefixes "../site-lisp/auctex/tex-info" '("Texinfo-" "texinfo-environment-regexp"))
+(register-definition-prefixes "auctex/tex-info" '("Texinfo-" "texinfo-environment-regexp"))
 
 
-;;; Generated autoloads from ../site-lisp/auctex/tex-ispell.el
+;;; Generated autoloads from auctex/tex-ispell.el
 
-(register-definition-prefixes "../site-lisp/auctex/tex-ispell" '("TeX-ispell-"))
+(register-definition-prefixes "auctex/tex-ispell" '("TeX-ispell-"))
 
 
-;;; Generated autoloads from ../site-lisp/auctex/tex-jp.el
+;;; Generated autoloads from auctex/tex-jp.el
 
-(autoload 'japanese-plain-tex-mode "../site-lisp/auctex/tex-jp" "\
+(autoload 'japanese-plain-tex-mode "auctex/tex-jp" "\
 Major mode in AUCTeX for editing Japanese plain TeX files.
 Set `japanese-TeX-mode' to t, and enter `TeX-plain-tex-mode'." t)
-(autoload 'japanese-latex-mode "../site-lisp/auctex/tex-jp" "\
+(autoload 'japanese-latex-mode "auctex/tex-jp" "\
 Major mode in AUCTeX for editing Japanese LaTeX files.
 Set `japanese-TeX-mode' to t, and enter `TeX-latex-mode'." t)
-(register-definition-prefixes "../site-lisp/auctex/tex-jp" '("TeX-" "japanese-"))
+(register-definition-prefixes "auctex/tex-jp" '("TeX-" "japanese-"))
 
 
-;;; Generated autoloads from ../site-lisp/auctex/tex-style.el
+;;; Generated autoloads from auctex/tex-style.el
 
-(register-definition-prefixes "../site-lisp/auctex/tex-style" '("LaTeX-" "TeX-TikZ-point-name-regexp"))
-
-
-;;; Generated autoloads from ../site-lisp/auctex/tex-wizard.el
-
-(register-definition-prefixes "../site-lisp/auctex/tex-wizard" '("TeX-wizard"))
+(register-definition-prefixes "auctex/tex-style" '("LaTeX-" "TeX-TikZ-point-name-regexp"))
 
 
-;;; Generated autoloads from ../site-lisp/auctex/texmathp.el
+;;; Generated autoloads from auctex/tex-wizard.el
 
-(autoload 'texmathp "../site-lisp/auctex/texmathp" "\
+(register-definition-prefixes "auctex/tex-wizard" '("TeX-wizard"))
+
+
+;;; Generated autoloads from auctex/texmathp.el
+
+(autoload 'texmathp "auctex/texmathp" "\
 Determine if point is inside (La)TeX math mode.
 Returns t or nil.  Additional info is placed into `texmathp-why'.
 The functions assumes that you have (almost) syntactically correct (La)TeX in
 the buffer.
 See the variable `texmathp-tex-commands' about which commands are checked." t)
-(autoload 'texmathp-match-switch "../site-lisp/auctex/texmathp" "\
+(autoload 'texmathp-match-switch "auctex/texmathp" "\
 Search backward for any of the math switches.
 Limit searched to BOUND.
 
 (fn BOUND)")
-(register-definition-prefixes "../site-lisp/auctex/texmathp" '("texmathp-"))
+(register-definition-prefixes "auctex/texmathp" '("texmathp-"))
 
 
-;;; Generated autoloads from ../site-lisp/auctex/toolbar-x.el
+;;; Generated autoloads from auctex/toolbar-x.el
 
  (autoload 'toolbarx-install-toolbar "toolbar-x")
-(register-definition-prefixes "../site-lisp/auctex/toolbar-x" '("toolbarx-"))
+(register-definition-prefixes "auctex/toolbar-x" '("toolbarx-"))
 
 
-;;; Generated autoloads from ../site-lisp/treemacs/src/elisp/treemacs.el
+;;; Generated autoloads from treemacs/src/elisp/treemacs.el
 
-(autoload 'treemacs-version "../site-lisp/treemacs/src/elisp/treemacs" "\
+(autoload 'treemacs-version "treemacs/src/elisp/treemacs" "\
 Return the `treemacs-version'." t)
-(autoload 'treemacs "../site-lisp/treemacs/src/elisp/treemacs" "\
+(autoload 'treemacs "treemacs/src/elisp/treemacs" "\
 Initialise or toggle treemacs.
 - If the treemacs window is visible hide it.
 - If a treemacs buffer exists, but is not visible show it.
@@ -9083,7 +9870,7 @@ Initialise or toggle treemacs.
 - With a prefix ARG launch treemacs and force it to select a workspace
 
 (fn &optional ARG)" t)
-(autoload 'treemacs-select-directory "../site-lisp/treemacs/src/elisp/treemacs" "\
+(autoload 'treemacs-select-directory "treemacs/src/elisp/treemacs" "\
 Select a directory to open in treemacs.
 This command will open *just* the selected directory in treemacs.  If there are
 other projects in the workspace they will be removed.
@@ -9091,7 +9878,7 @@ other projects in the workspace they will be removed.
 To *add* a project to the current workspace use
 `treemacs-add-project-to-workspace' or
 `treemacs-add-and-display-current-project' instead." t)
-(autoload 'treemacs-find-file "../site-lisp/treemacs/src/elisp/treemacs" "\
+(autoload 'treemacs-find-file "treemacs/src/elisp/treemacs" "\
 Find and focus the current file in the treemacs window.
 If the current buffer has visits no file or with a prefix ARG ask for the
 file instead.
@@ -9099,7 +9886,7 @@ Will show/create a treemacs buffers if it is not visible/does not exist.
 For the most part only useful when `treemacs-follow-mode' is not active.
 
 (fn &optional ARG)" t)
-(autoload 'treemacs-find-tag "../site-lisp/treemacs/src/elisp/treemacs" "\
+(autoload 'treemacs-find-tag "treemacs/src/elisp/treemacs" "\
 Find and move point to the tag at point in the treemacs view.
 Most likely to be useful when `treemacs-tag-follow-mode' is not active.
 
@@ -9107,7 +9894,7 @@ Will ask to change the treemacs root if the file to find is not under the
 root.  If no treemacs buffer exists it will be created with the current file's
 containing directory as root.  Will do nothing if the current buffer is not
 visiting a file or Emacs cannot find any tags for the current file." t)
-(autoload 'treemacs-select-window "../site-lisp/treemacs/src/elisp/treemacs" "\
+(autoload 'treemacs-select-window "treemacs/src/elisp/treemacs" "\
 Select the treemacs window if it is visible.
 Bring it to the foreground if it is not visible.
 Initialise a new treemacs buffer as calling `treemacs' would if there is no
@@ -9119,11 +9906,11 @@ In case treemacs is already selected behaviour will depend on
 A non-nil prefix ARG will also force a workspace switch.
 
 (fn &optional ARG)" t)
-(autoload 'treemacs-show-changelog "../site-lisp/treemacs/src/elisp/treemacs" "\
+(autoload 'treemacs-show-changelog "treemacs/src/elisp/treemacs" "\
 Show the changelog of treemacs." t)
-(autoload 'treemacs-edit-workspaces "../site-lisp/treemacs/src/elisp/treemacs" "\
+(autoload 'treemacs-edit-workspaces "treemacs/src/elisp/treemacs" "\
 Edit your treemacs workspaces and projects as an `org-mode' file." t)
-(autoload 'treemacs-add-and-display-current-project-exclusively "../site-lisp/treemacs/src/elisp/treemacs" "\
+(autoload 'treemacs-add-and-display-current-project-exclusively "treemacs/src/elisp/treemacs" "\
 Display the current project, and *only* the current project.
 Like `treemacs-add-and-display-current-project' this will add the current
 project to treemacs based on either projectile, the built-in project.el, or the
@@ -9132,34 +9919,34 @@ current working directory.
 However the \\='exclusive\\=' part means that it will make the current project
 the only project, all other projects *will be removed* from the current
 workspace." t)
-(autoload 'treemacs-add-and-display-current-project "../site-lisp/treemacs/src/elisp/treemacs" "\
+(autoload 'treemacs-add-and-display-current-project "treemacs/src/elisp/treemacs" "\
 Open treemacs and add the current project root to the workspace.
 The project is determined first by projectile (if treemacs-projectile is
 installed), then by project.el, then by the current working directory.
 
 If the project is already registered with treemacs just move point to its root.
 An error message is displayed if the current buffer is not part of any project." t)
-(register-definition-prefixes "../site-lisp/treemacs/src/elisp/treemacs" '("treemacs-version"))
+(register-definition-prefixes "treemacs/src/elisp/treemacs" '("treemacs-version"))
 
 
-;;; Generated autoloads from ../site-lisp/treemacs/src/extra/treemacs-all-the-icons.el
+;;; Generated autoloads from treemacs/src/extra/treemacs-all-the-icons.el
 
-(register-definition-prefixes "../site-lisp/treemacs/src/extra/treemacs-all-the-icons" '("treemacs-all-the-icons-tab"))
-
-
-;;; Generated autoloads from ../site-lisp/treemacs/src/elisp/treemacs-annotations.el
-
-(register-definition-prefixes "../site-lisp/treemacs/src/elisp/treemacs-annotations" '("treemacs-"))
+(register-definition-prefixes "treemacs/src/extra/treemacs-all-the-icons" '("treemacs-all-the-icons-tab"))
 
 
-;;; Generated autoloads from ../site-lisp/treemacs/src/elisp/treemacs-async.el
+;;; Generated autoloads from treemacs/src/elisp/treemacs-annotations.el
 
-(register-definition-prefixes "../site-lisp/treemacs/src/elisp/treemacs-async" '("treemacs-"))
+(register-definition-prefixes "treemacs/src/elisp/treemacs-annotations" '("treemacs-"))
 
 
-;;; Generated autoloads from ../site-lisp/treemacs/src/elisp/treemacs-bookmarks.el
+;;; Generated autoloads from treemacs/src/elisp/treemacs-async.el
 
-(autoload 'treemacs-bookmark "../site-lisp/treemacs/src/elisp/treemacs-bookmarks" "\
+(register-definition-prefixes "treemacs/src/elisp/treemacs-async" '("treemacs-"))
+
+
+;;; Generated autoloads from treemacs/src/elisp/treemacs-bookmarks.el
+
+(autoload 'treemacs-bookmark "treemacs/src/elisp/treemacs-bookmarks" "\
 Find a bookmark in treemacs.
 Only bookmarks marking either a file or a directory are offered for selection.
 Treemacs will try to find and focus the given bookmark's location, in a similar
@@ -9168,63 +9955,63 @@ fashion to `treemacs-find-file'.
 With a prefix argument ARG treemacs will also open the bookmarked location.
 
 (fn &optional ARG)" t)
-(autoload 'treemacs--bookmark-handler "../site-lisp/treemacs/src/elisp/treemacs-bookmarks" "\
+(autoload 'treemacs--bookmark-handler "treemacs/src/elisp/treemacs-bookmarks" "\
 Open Treemacs into a bookmark RECORD.
 
 (fn RECORD)")
-(autoload 'treemacs-add-bookmark "../site-lisp/treemacs/src/elisp/treemacs-bookmarks" "\
+(autoload 'treemacs-add-bookmark "treemacs/src/elisp/treemacs-bookmarks" "\
 Add the current node to Emacs' list of bookmarks.
 For file and directory nodes their absolute path is saved.  Tag nodes
 additionally also save the tag's position.  A tag can only be bookmarked if the
 treemacs node is pointing to a valid buffer position." t)
-(register-definition-prefixes "../site-lisp/treemacs/src/elisp/treemacs-bookmarks" '("treemacs--"))
+(register-definition-prefixes "treemacs/src/elisp/treemacs-bookmarks" '("treemacs--"))
 
 
-;;; Generated autoloads from ../site-lisp/treemacs/src/elisp/treemacs-compatibility.el
+;;; Generated autoloads from treemacs/src/elisp/treemacs-compatibility.el
 
-(register-definition-prefixes "../site-lisp/treemacs/src/elisp/treemacs-compatibility" '("treemacs-"))
-
-
-;;; Generated autoloads from ../site-lisp/treemacs/src/elisp/treemacs-core-utils.el
-
-(register-definition-prefixes "../site-lisp/treemacs/src/elisp/treemacs-core-utils" '("treemacs-"))
+(register-definition-prefixes "treemacs/src/elisp/treemacs-compatibility" '("treemacs-"))
 
 
-;;; Generated autoloads from ../site-lisp/treemacs/src/elisp/treemacs-customization.el
+;;; Generated autoloads from treemacs/src/elisp/treemacs-core-utils.el
 
-(register-definition-prefixes "../site-lisp/treemacs/src/elisp/treemacs-customization" '("treemacs-"))
-
-
-;;; Generated autoloads from ../site-lisp/treemacs/src/elisp/treemacs-diagnostics.el
-
-(register-definition-prefixes "../site-lisp/treemacs/src/elisp/treemacs-diagnostics" '("treemacs-"))
+(register-definition-prefixes "treemacs/src/elisp/treemacs-core-utils" '("treemacs-"))
 
 
-;;; Generated autoloads from ../site-lisp/treemacs/src/elisp/treemacs-dom.el
+;;; Generated autoloads from treemacs/src/elisp/treemacs-customization.el
 
-(register-definition-prefixes "../site-lisp/treemacs/src/elisp/treemacs-dom" '("treemacs-"))
-
-
-;;; Generated autoloads from ../site-lisp/treemacs/src/extra/treemacs-evil.el
-
-(register-definition-prefixes "../site-lisp/treemacs/src/extra/treemacs-evil" '("treemacs-evil--"))
+(register-definition-prefixes "treemacs/src/elisp/treemacs-customization" '("treemacs-"))
 
 
-;;; Generated autoloads from ../site-lisp/treemacs/src/elisp/treemacs-extensions.el
+;;; Generated autoloads from treemacs/src/elisp/treemacs-diagnostics.el
 
-(register-definition-prefixes "../site-lisp/treemacs/src/elisp/treemacs-extensions" '("treemacs-"))
+(register-definition-prefixes "treemacs/src/elisp/treemacs-diagnostics" '("treemacs-"))
 
 
-;;; Generated autoloads from ../site-lisp/treemacs/src/elisp/treemacs-file-management.el
+;;; Generated autoloads from treemacs/src/elisp/treemacs-dom.el
 
-(autoload 'treemacs-delete-file "../site-lisp/treemacs/src/elisp/treemacs-file-management" "\
+(register-definition-prefixes "treemacs/src/elisp/treemacs-dom" '("treemacs-"))
+
+
+;;; Generated autoloads from treemacs/src/extra/treemacs-evil.el
+
+(register-definition-prefixes "treemacs/src/extra/treemacs-evil" '("treemacs-evil--"))
+
+
+;;; Generated autoloads from treemacs/src/elisp/treemacs-extensions.el
+
+(register-definition-prefixes "treemacs/src/elisp/treemacs-extensions" '("treemacs-"))
+
+
+;;; Generated autoloads from treemacs/src/elisp/treemacs-file-management.el
+
+(autoload 'treemacs-delete-file "treemacs/src/elisp/treemacs-file-management" "\
 Delete node at point.
 A delete action must always be confirmed.  Directories are deleted recursively.
 By default files are deleted by moving them to the trash.  With a prefix ARG
 they will instead be wiped irreversibly.
 
 (fn &optional ARG)" t)
-(autoload 'treemacs-delete-marked-files "../site-lisp/treemacs/src/elisp/treemacs-file-management" "\
+(autoload 'treemacs-delete-marked-files "treemacs/src/elisp/treemacs-file-management" "\
 Delete all marked files.
 
 A delete action must always be confirmed.  Directories are deleted recursively.
@@ -9234,43 +10021,43 @@ they will instead be wiped irreversibly.
 For marking files see `treemacs-bulk-file-actions'.
 
 (fn &optional ARG)" t)
-(autoload 'treemacs-move-file "../site-lisp/treemacs/src/elisp/treemacs-file-management" "\
+(autoload 'treemacs-move-file "treemacs/src/elisp/treemacs-file-management" "\
 Move file (or directory) at point.
 
 If the selected target is an existing directory the source file will be directly
 moved into this directory.  If the given target instead does not exist then it
 will be treated as the moved file's new name, meaning the original source file
 will be both moved and renamed." t)
-(autoload 'treemacs-copy-file "../site-lisp/treemacs/src/elisp/treemacs-file-management" "\
+(autoload 'treemacs-copy-file "treemacs/src/elisp/treemacs-file-management" "\
 Copy file (or directory) at point.
 
 If the selected target is an existing directory the source file will be directly
 copied into this directory.  If the given target instead does not exist then it
 will be treated as the copied file's new name, meaning the original source file
 will be both copied and renamed." t)
-(autoload 'treemacs-move-marked-files "../site-lisp/treemacs/src/elisp/treemacs-file-management" "\
+(autoload 'treemacs-move-marked-files "treemacs/src/elisp/treemacs-file-management" "\
 Move all marked files.
 
 For marking files see `treemacs-bulk-file-actions'." t)
-(autoload 'treemacs-copy-marked-files "../site-lisp/treemacs/src/elisp/treemacs-file-management" "\
+(autoload 'treemacs-copy-marked-files "treemacs/src/elisp/treemacs-file-management" "\
 Copy all marked files.
 
 For marking files see `treemacs-bulk-file-actions'." t)
-(autoload 'treemacs-rename-file "../site-lisp/treemacs/src/elisp/treemacs-file-management" "\
+(autoload 'treemacs-rename-file "treemacs/src/elisp/treemacs-file-management" "\
 Rename the file/directory at point.
 
 Buffers visiting the renamed file or visiting a file inside the renamed
 directory and windows showing them will be reloaded.  The list of recent files
 will likewise be updated." t)
-(autoload 'treemacs-show-marked-files "../site-lisp/treemacs/src/elisp/treemacs-file-management" "\
+(autoload 'treemacs-show-marked-files "treemacs/src/elisp/treemacs-file-management" "\
 Print a list of all files marked by treemacs." t)
-(autoload 'treemacs-mark-or-unmark-path-at-point "../site-lisp/treemacs/src/elisp/treemacs-file-management" "\
+(autoload 'treemacs-mark-or-unmark-path-at-point "treemacs/src/elisp/treemacs-file-management" "\
 Mark or unmark the absolute path of the node at point." t)
-(autoload 'treemacs-reset-marks "../site-lisp/treemacs/src/elisp/treemacs-file-management" "\
+(autoload 'treemacs-reset-marks "treemacs/src/elisp/treemacs-file-management" "\
 Unmark all previously marked files in the current buffer." t)
-(autoload 'treemacs-delete-marked-paths "../site-lisp/treemacs/src/elisp/treemacs-file-management" "\
+(autoload 'treemacs-delete-marked-paths "treemacs/src/elisp/treemacs-file-management" "\
 Delete all previously marked files." t)
-(autoload 'treemacs-bulk-file-actions "../site-lisp/treemacs/src/elisp/treemacs-file-management" "\
+(autoload 'treemacs-bulk-file-actions "treemacs/src/elisp/treemacs-file-management" "\
 Activate the bulk file actions hydra.
 This interface allows to quickly (unmark) files, so as to copy, move or delete
 them in bulk.
@@ -9278,37 +10065,37 @@ them in bulk.
 Note that marking files is *permanent*, files will stay marked until they are
 either manually unmarked or deleted.  You can show a list of all currently
 marked files with `treemacs-show-marked-files' or `s' in the hydra." t)
-(autoload 'treemacs-create-file "../site-lisp/treemacs/src/elisp/treemacs-file-management" "\
+(autoload 'treemacs-create-file "treemacs/src/elisp/treemacs-file-management" "\
 Create a new file.
 Enter first the directory to create the new file in, then the new file's name.
 The pre-selection for what directory to create in is based on the \"nearest\"
 path to point - the containing directory for tags and files or the directory
 itself, using $HOME when there is no path at or near point to grab." t)
-(autoload 'treemacs-create-dir "../site-lisp/treemacs/src/elisp/treemacs-file-management" "\
+(autoload 'treemacs-create-dir "treemacs/src/elisp/treemacs-file-management" "\
 Create a new directory.
 Enter first the directory to create the new dir in, then the new dir's name.
 The pre-selection for what directory to create in is based on the \"nearest\"
 path to point - the containing directory for tags and files or the directory
 itself, using $HOME when there is no path at or near point to grab." t)
-(register-definition-prefixes "../site-lisp/treemacs/src/elisp/treemacs-file-management" '("treemacs-"))
+(register-definition-prefixes "treemacs/src/elisp/treemacs-file-management" '("treemacs-"))
 
 
-;;; Generated autoloads from ../site-lisp/treemacs/src/elisp/treemacs-filewatch-mode.el
+;;; Generated autoloads from treemacs/src/elisp/treemacs-filewatch-mode.el
 
-(register-definition-prefixes "../site-lisp/treemacs/src/elisp/treemacs-filewatch-mode" '("treemacs-"))
-
-
-;;; Generated autoloads from ../site-lisp/treemacs/src/elisp/treemacs-follow-mode.el
-
-(register-definition-prefixes "../site-lisp/treemacs/src/elisp/treemacs-follow-mode" '("treemacs-"))
+(register-definition-prefixes "treemacs/src/elisp/treemacs-filewatch-mode" '("treemacs-"))
 
 
-;;; Generated autoloads from ../site-lisp/treemacs/src/elisp/treemacs-fringe-indicator.el
+;;; Generated autoloads from treemacs/src/elisp/treemacs-follow-mode.el
 
-(register-definition-prefixes "../site-lisp/treemacs/src/elisp/treemacs-fringe-indicator" '("treemacs-"))
+(register-definition-prefixes "treemacs/src/elisp/treemacs-follow-mode" '("treemacs-"))
 
 
-;;; Generated autoloads from ../site-lisp/treemacs/src/elisp/treemacs-git-commit-diff-mode.el
+;;; Generated autoloads from treemacs/src/elisp/treemacs-fringe-indicator.el
+
+(register-definition-prefixes "treemacs/src/elisp/treemacs-fringe-indicator" '("treemacs-"))
+
+
+;;; Generated autoloads from treemacs/src/elisp/treemacs-git-commit-diff-mode.el
 
 (defvar treemacs-git-commit-diff-mode nil "\
 Non-nil if Treemacs-Git-Commit-Diff mode is enabled.
@@ -9317,8 +10104,8 @@ for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `treemacs-git-commit-diff-mode'.")
-(custom-autoload 'treemacs-git-commit-diff-mode "../site-lisp/treemacs/src/elisp/treemacs-git-commit-diff-mode" nil)
-(autoload 'treemacs-git-commit-diff-mode "../site-lisp/treemacs/src/elisp/treemacs-git-commit-diff-mode" "\
+(custom-autoload 'treemacs-git-commit-diff-mode "treemacs/src/elisp/treemacs-git-commit-diff-mode" nil)
+(autoload 'treemacs-git-commit-diff-mode "treemacs/src/elisp/treemacs-git-commit-diff-mode" "\
 Minor mode to display commit differences for your git-tracked projects.
 
 When enabled treemacs will add an annotation next to every git project showing
@@ -9351,10 +10138,10 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(register-definition-prefixes "../site-lisp/treemacs/src/elisp/treemacs-git-commit-diff-mode" '("treemacs--"))
+(register-definition-prefixes "treemacs/src/elisp/treemacs-git-commit-diff-mode" '("treemacs--"))
 
 
-;;; Generated autoloads from ../site-lisp/treemacs/src/elisp/treemacs-header-line.el
+;;; Generated autoloads from treemacs/src/elisp/treemacs-header-line.el
 
 (defvar treemacs-indicate-top-scroll-mode nil "\
 Non-nil if Treemacs-Indicate-Top-Scroll mode is enabled.
@@ -9363,8 +10150,8 @@ for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `treemacs-indicate-top-scroll-mode'.")
-(custom-autoload 'treemacs-indicate-top-scroll-mode "../site-lisp/treemacs/src/elisp/treemacs-header-line" nil)
-(autoload 'treemacs-indicate-top-scroll-mode "../site-lisp/treemacs/src/elisp/treemacs-header-line" "\
+(custom-autoload 'treemacs-indicate-top-scroll-mode "treemacs/src/elisp/treemacs-header-line" nil)
+(autoload 'treemacs-indicate-top-scroll-mode "treemacs/src/elisp/treemacs-header-line" "\
 Minor mode which shows whether treemacs is scrolled all the way to the top.
 
 When this mode is enabled the header line of the treemacs window will display
@@ -9393,12 +10180,12 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(register-definition-prefixes "../site-lisp/treemacs/src/elisp/treemacs-header-line" '("treemacs-"))
+(register-definition-prefixes "treemacs/src/elisp/treemacs-header-line" '("treemacs-"))
 
 
-;;; Generated autoloads from ../site-lisp/treemacs/src/elisp/treemacs-hydras.el
+;;; Generated autoloads from treemacs/src/elisp/treemacs-hydras.el
 
-(autoload 'treemacs-common-helpful-hydra "../site-lisp/treemacs/src/elisp/treemacs-hydras" "\
+(autoload 'treemacs-common-helpful-hydra "treemacs/src/elisp/treemacs-hydras" "\
 Summon a helpful hydra to show you the treemacs keymap.
 
 This hydra will show the most commonly used keybinds for treemacs.  For the more
@@ -9407,7 +10194,7 @@ advanced (probably rarely used keybinds) see `treemacs-advanced-helpful-hydra'.
 The keybinds shown in this hydra are not static, but reflect the actual
 keybindings currently in use (including evil mode).  If the hydra is unable to
 find the key a command is bound to it will show a blank instead." t)
-(autoload 'treemacs-advanced-helpful-hydra "../site-lisp/treemacs/src/elisp/treemacs-hydras" "\
+(autoload 'treemacs-advanced-helpful-hydra "treemacs/src/elisp/treemacs-hydras" "\
 Summon a helpful hydra to show you the treemacs keymap.
 
 This hydra will show the more advanced (rarely used) keybinds for treemacs.  For
@@ -9416,12 +10203,12 @@ the more commonly used keybinds see `treemacs-common-helpful-hydra'.
 The keybinds shown in this hydra are not static, but reflect the actual
 keybindings currently in use (including evil mode).  If the hydra is unable to
 find the key a command is bound to it will show a blank instead." t)
-(register-definition-prefixes "../site-lisp/treemacs/src/elisp/treemacs-hydras" '("treemacs-helpful-hydra"))
+(register-definition-prefixes "treemacs/src/elisp/treemacs-hydras" '("treemacs-helpful-hydra"))
 
 
-;;; Generated autoloads from ../site-lisp/treemacs/src/elisp/treemacs-icons.el
+;;; Generated autoloads from treemacs/src/elisp/treemacs-icons.el
 
-(autoload 'treemacs-resize-icons "../site-lisp/treemacs/src/elisp/treemacs-icons" "\
+(autoload 'treemacs-resize-icons "treemacs/src/elisp/treemacs-icons" "\
 Resize the current theme's icons to the given SIZE.
 
 If SIZE is \\='nil' the icons are not resized and will retain their default size
@@ -9438,7 +10225,7 @@ Custom icons are not taken into account, only the size of treemacs' own icons
 png are changed.
 
 (fn SIZE)" t)
-(autoload 'treemacs-define-custom-icon "../site-lisp/treemacs/src/elisp/treemacs-icons" "\
+(autoload 'treemacs-define-custom-icon "treemacs/src/elisp/treemacs-icons" "\
 Define a custom ICON for the current theme to use for FILE-EXTENSIONS.
 
 Note that treemacs has a very loose definition of what constitutes a file
@@ -9450,14 +10237,14 @@ Additionally FILE-EXTENSIONS are also not case sensitive and will be stored in a
 down-cased state.
 
 (fn ICON &rest FILE-EXTENSIONS)")
-(autoload 'treemacs-define-custom-image-icon "../site-lisp/treemacs/src/elisp/treemacs-icons" "\
+(autoload 'treemacs-define-custom-image-icon "treemacs/src/elisp/treemacs-icons" "\
 Same as `treemacs-define-custom-icon' but for image icons instead of strings.
 FILE is the path to an icon image (and not the actual icon string).
 FILE-EXTENSIONS are all the (not case-sensitive) file extensions the icon
 should be used for.
 
 (fn FILE &rest FILE-EXTENSIONS)")
-(autoload 'treemacs-map-icons-with-auto-mode-alist "../site-lisp/treemacs/src/elisp/treemacs-icons" "\
+(autoload 'treemacs-map-icons-with-auto-mode-alist "treemacs/src/elisp/treemacs-icons" "\
 Remaps icons for EXTENSIONS according to `auto-mode-alist'.
 EXTENSIONS should be a list of file extensions such that they match the regex
 stored in `auto-mode-alist', for example \\='(\".cc\").
@@ -9467,10 +10254,10 @@ be assigned which treemacs icon, for example
   (c++-mode . ,(treemacs-get-icon-value \"cpp\")))
 
 (fn EXTENSIONS MODE-ICON-ALIST)")
-(register-definition-prefixes "../site-lisp/treemacs/src/elisp/treemacs-icons" '("treemacs-"))
+(register-definition-prefixes "treemacs/src/elisp/treemacs-icons" '("treemacs-"))
 
 
-;;; Generated autoloads from ../site-lisp/treemacs/src/extra/treemacs-icons-dired.el
+;;; Generated autoloads from treemacs/src/extra/treemacs-icons-dired.el
 
 (defvar treemacs-icons-dired-mode nil "\
 Non-nil if Treemacs-Icons-Dired mode is enabled.
@@ -9479,8 +10266,8 @@ for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `treemacs-icons-dired-mode'.")
-(custom-autoload 'treemacs-icons-dired-mode "../site-lisp/treemacs/src/extra/treemacs-icons-dired" nil)
-(autoload 'treemacs-icons-dired-mode "../site-lisp/treemacs/src/extra/treemacs-icons-dired" "\
+(custom-autoload 'treemacs-icons-dired-mode "treemacs/src/extra/treemacs-icons-dired" nil)
+(autoload 'treemacs-icons-dired-mode "treemacs/src/extra/treemacs-icons-dired" "\
 Display treemacs icons for each file in a Dired buffer.
 
 This is a global minor mode.  If called interactively, toggle the
@@ -9499,52 +10286,52 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(autoload 'treemacs-icons-dired-enable-once "../site-lisp/treemacs/src/extra/treemacs-icons-dired" "\
+(autoload 'treemacs-icons-dired-enable-once "treemacs/src/extra/treemacs-icons-dired" "\
 Enable `treemacs-icons-dired-mode' and remove self from `dired-mode-hook'.
 
 This function is meant to be used as a single-use toggle added to
 `dired-mode-hook' to enable icons for Dired only once, without having to use
 \"with-eval-after-load \\='dired\", since Dired tends to be loaded early.")
-(register-definition-prefixes "../site-lisp/treemacs/src/extra/treemacs-icons-dired" '("treemacs-icons-dired-"))
+(register-definition-prefixes "treemacs/src/extra/treemacs-icons-dired" '("treemacs-icons-dired-"))
 
 
-;;; Generated autoloads from ../site-lisp/treemacs/src/elisp/treemacs-interface.el
+;;; Generated autoloads from treemacs/src/elisp/treemacs-interface.el
 
-(register-definition-prefixes "../site-lisp/treemacs/src/elisp/treemacs-interface" '("treemacs-"))
-
-
-;;; Generated autoloads from ../site-lisp/treemacs/src/elisp/treemacs-logging.el
-
-(register-definition-prefixes "../site-lisp/treemacs/src/elisp/treemacs-logging" '("treemacs-"))
+(register-definition-prefixes "treemacs/src/elisp/treemacs-interface" '("treemacs-"))
 
 
-;;; Generated autoloads from ../site-lisp/treemacs/src/elisp/treemacs-macros.el
+;;; Generated autoloads from treemacs/src/elisp/treemacs-logging.el
 
-(register-definition-prefixes "../site-lisp/treemacs/src/elisp/treemacs-macros" '("treemacs-"))
-
-
-;;; Generated autoloads from ../site-lisp/treemacs/src/extra/treemacs-magit.el
-
-(register-definition-prefixes "../site-lisp/treemacs/src/extra/treemacs-magit" '("treemacs-"))
+(register-definition-prefixes "treemacs/src/elisp/treemacs-logging" '("treemacs-"))
 
 
-;;; Generated autoloads from ../site-lisp/treemacs/src/elisp/treemacs-mode.el
+;;; Generated autoloads from treemacs/src/elisp/treemacs-macros.el
 
-(autoload 'treemacs-mode "../site-lisp/treemacs/src/elisp/treemacs-mode" "\
+(register-definition-prefixes "treemacs/src/elisp/treemacs-macros" '("treemacs-"))
+
+
+;;; Generated autoloads from treemacs/src/extra/treemacs-magit.el
+
+(register-definition-prefixes "treemacs/src/extra/treemacs-magit" '("treemacs-"))
+
+
+;;; Generated autoloads from treemacs/src/elisp/treemacs-mode.el
+
+(autoload 'treemacs-mode "treemacs/src/elisp/treemacs-mode" "\
 A major mode for displaying the file system in a tree layout.
 
 (fn)" t)
-(register-definition-prefixes "../site-lisp/treemacs/src/elisp/treemacs-mode" '("treemacs-"))
+(register-definition-prefixes "treemacs/src/elisp/treemacs-mode" '("treemacs-"))
 
 
-;;; Generated autoloads from ../site-lisp/treemacs/src/elisp/treemacs-mouse-interface.el
+;;; Generated autoloads from treemacs/src/elisp/treemacs-mouse-interface.el
 
-(autoload 'treemacs-leftclick-action "../site-lisp/treemacs/src/elisp/treemacs-mouse-interface" "\
+(autoload 'treemacs-leftclick-action "treemacs/src/elisp/treemacs-mouse-interface" "\
 Move focus to the clicked line.
 Must be bound to a mouse click, or EVENT will not be supplied.
 
 (fn EVENT)" t)
-(autoload 'treemacs-doubleclick-action "../site-lisp/treemacs/src/elisp/treemacs-mouse-interface" "\
+(autoload 'treemacs-doubleclick-action "treemacs/src/elisp/treemacs-mouse-interface" "\
 Run the appropriate double-click action for the current node.
 In the default configuration this means to expand/collapse directories and open
 files and tags in the most recently used window.
@@ -9555,7 +10342,7 @@ This function's exact configuration is stored in
 Must be bound to a mouse double click to properly handle a click EVENT.
 
 (fn EVENT)" t)
-(autoload 'treemacs-single-click-expand-action "../site-lisp/treemacs/src/elisp/treemacs-mouse-interface" "\
+(autoload 'treemacs-single-click-expand-action "treemacs/src/elisp/treemacs-mouse-interface" "\
 A modified single-leftclick action that expands the clicked nodes.
 Can be bound to <mouse1> if you prefer to expand nodes with a single click
 instead of a double click.  Either way it must be bound to a mouse click, or
@@ -9565,12 +10352,12 @@ Clicking on icons will expand a file's tags, just like
 `treemacs-leftclick-action'.
 
 (fn EVENT)" t)
-(autoload 'treemacs-dragleftclick-action "../site-lisp/treemacs/src/elisp/treemacs-mouse-interface" "\
+(autoload 'treemacs-dragleftclick-action "treemacs/src/elisp/treemacs-mouse-interface" "\
 Drag a file/dir node to be opened in a window.
 Must be bound to a mouse click, or EVENT will not be supplied.
 
 (fn EVENT)" t)
-(autoload 'treemacs-define-doubleclick-action "../site-lisp/treemacs/src/elisp/treemacs-mouse-interface" "\
+(autoload 'treemacs-define-doubleclick-action "treemacs/src/elisp/treemacs-mouse-interface" "\
 Define the behaviour of `treemacs-doubleclick-action'.
 Determines that a button with a given STATE should lead to the execution of
 ACTION.
@@ -9579,32 +10366,32 @@ The list of possible states can be found in `treemacs-valid-button-states'.
 ACTION should be one of the `treemacs-visit-node-*' commands.
 
 (fn STATE ACTION)")
-(autoload 'treemacs-node-buffer-and-position "../site-lisp/treemacs/src/elisp/treemacs-mouse-interface" "\
+(autoload 'treemacs-node-buffer-and-position "treemacs/src/elisp/treemacs-mouse-interface" "\
 Return source buffer or list of buffer and position for the current node.
 This information can be used for future display.  Stay in the selected window
 and ignore any prefix argument.
 
 (fn &optional _)" t)
-(autoload 'treemacs-rightclick-menu "../site-lisp/treemacs/src/elisp/treemacs-mouse-interface" "\
+(autoload 'treemacs-rightclick-menu "treemacs/src/elisp/treemacs-mouse-interface" "\
 Show a contextual right click menu based on click EVENT.
 
 (fn EVENT)" t)
-(register-definition-prefixes "../site-lisp/treemacs/src/elisp/treemacs-mouse-interface" '("treemacs--"))
+(register-definition-prefixes "treemacs/src/elisp/treemacs-mouse-interface" '("treemacs--"))
 
 
-;;; Generated autoloads from ../site-lisp/treemacs/src/extra/treemacs-mu4e.el
+;;; Generated autoloads from treemacs/src/extra/treemacs-mu4e.el
 
-(autoload 'treemacs-mu4e "../site-lisp/treemacs/src/extra/treemacs-mu4e" "\
+(autoload 'treemacs-mu4e "treemacs/src/extra/treemacs-mu4e" "\
 Select or display the Mu4e side-bar." t)
-(register-definition-prefixes "../site-lisp/treemacs/src/extra/treemacs-mu4e" '("treemacs-m"))
+(register-definition-prefixes "treemacs/src/extra/treemacs-mu4e" '("treemacs-m"))
 
 
-;;; Generated autoloads from ../site-lisp/treemacs-nerd-icons/treemacs-nerd-icons.el
+;;; Generated autoloads from treemacs-nerd-icons/treemacs-nerd-icons.el
 
-(register-definition-prefixes "../site-lisp/treemacs-nerd-icons/treemacs-nerd-icons" '("treemacs-nerd-icons-tab"))
+(register-definition-prefixes "treemacs-nerd-icons/treemacs-nerd-icons" '("treemacs-nerd-icons-tab"))
 
 
-;;; Generated autoloads from ../site-lisp/treemacs/src/elisp/treemacs-peek-mode.el
+;;; Generated autoloads from treemacs/src/elisp/treemacs-peek-mode.el
 
 (defvar treemacs-peek-mode nil "\
 Non-nil if Treemacs-Peek mode is enabled.
@@ -9613,8 +10400,8 @@ for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `treemacs-peek-mode'.")
-(custom-autoload 'treemacs-peek-mode "../site-lisp/treemacs/src/elisp/treemacs-peek-mode" nil)
-(autoload 'treemacs-peek-mode "../site-lisp/treemacs/src/elisp/treemacs-peek-mode" "\
+(custom-autoload 'treemacs-peek-mode "treemacs/src/elisp/treemacs-peek-mode" nil)
+(autoload 'treemacs-peek-mode "treemacs/src/elisp/treemacs-peek-mode" "\
 Minor mode that allows you to peek at buffers before deciding to open them.
 
 While the mode is active treemacs will automatically display the file at point,
@@ -9645,25 +10432,25 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(register-definition-prefixes "../site-lisp/treemacs/src/elisp/treemacs-peek-mode" '("treemacs--"))
+(register-definition-prefixes "treemacs/src/elisp/treemacs-peek-mode" '("treemacs--"))
 
 
-;;; Generated autoloads from ../site-lisp/treemacs/src/elisp/treemacs-persistence.el
+;;; Generated autoloads from treemacs/src/elisp/treemacs-persistence.el
 
-(register-definition-prefixes "../site-lisp/treemacs/src/elisp/treemacs-persistence" '("treemacs-"))
-
-
-;;; Generated autoloads from ../site-lisp/treemacs/src/extra/treemacs-persp.el
-
-(register-definition-prefixes "../site-lisp/treemacs/src/extra/treemacs-persp" '("treemacs-persp-"))
+(register-definition-prefixes "treemacs/src/elisp/treemacs-persistence" '("treemacs-"))
 
 
-;;; Generated autoloads from ../site-lisp/treemacs/src/extra/treemacs-perspective.el
+;;; Generated autoloads from treemacs/src/extra/treemacs-persp.el
 
-(register-definition-prefixes "../site-lisp/treemacs/src/extra/treemacs-perspective" '("treemacs-perspective-"))
+(register-definition-prefixes "treemacs/src/extra/treemacs-persp" '("treemacs-persp-"))
 
 
-;;; Generated autoloads from ../site-lisp/treemacs/src/elisp/treemacs-project-follow-mode.el
+;;; Generated autoloads from treemacs/src/extra/treemacs-perspective.el
+
+(register-definition-prefixes "treemacs/src/extra/treemacs-perspective" '("treemacs-perspective-"))
+
+
+;;; Generated autoloads from treemacs/src/elisp/treemacs-project-follow-mode.el
 
 (defvar treemacs-project-follow-mode nil "\
 Non-nil if Treemacs-Project-Follow mode is enabled.
@@ -9672,8 +10459,8 @@ for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `treemacs-project-follow-mode'.")
-(custom-autoload 'treemacs-project-follow-mode "../site-lisp/treemacs/src/elisp/treemacs-project-follow-mode" nil)
-(autoload 'treemacs-project-follow-mode "../site-lisp/treemacs/src/elisp/treemacs-project-follow-mode" "\
+(custom-autoload 'treemacs-project-follow-mode "treemacs/src/elisp/treemacs-project-follow-mode" nil)
+(autoload 'treemacs-project-follow-mode "treemacs/src/elisp/treemacs-project-follow-mode" "\
 Toggle `treemacs-only-current-project-mode'.
 
 This is a minor mode meant for those who do not care about treemacs' workspace
@@ -9712,38 +10499,38 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(register-definition-prefixes "../site-lisp/treemacs/src/elisp/treemacs-project-follow-mode" '("treemacs--"))
+(register-definition-prefixes "treemacs/src/elisp/treemacs-project-follow-mode" '("treemacs--"))
 
 
-;;; Generated autoloads from ../site-lisp/treemacs/src/extra/treemacs-projectile.el
+;;; Generated autoloads from treemacs/src/extra/treemacs-projectile.el
 
-(autoload 'treemacs-projectile "../site-lisp/treemacs/src/extra/treemacs-projectile" "\
+(autoload 'treemacs-projectile "treemacs/src/extra/treemacs-projectile" "\
 Add one of `projectile-known-projects' to the treemacs workspace.
 With a prefix ARG was for the name of the project instead of using the name of
 the project's root directory.
 
 (fn &optional ARG)" t)
-(register-definition-prefixes "../site-lisp/treemacs/src/extra/treemacs-projectile" '("treemacs-"))
+(register-definition-prefixes "treemacs/src/extra/treemacs-projectile" '("treemacs-"))
 
 
-;;; Generated autoloads from ../site-lisp/treemacs/src/elisp/treemacs-rendering.el
+;;; Generated autoloads from treemacs/src/elisp/treemacs-rendering.el
 
-(register-definition-prefixes "../site-lisp/treemacs/src/elisp/treemacs-rendering" '("treemacs-"))
-
-
-;;; Generated autoloads from ../site-lisp/treemacs/src/elisp/treemacs-scope.el
-
-(register-definition-prefixes "../site-lisp/treemacs/src/elisp/treemacs-scope" '("treemacs-"))
+(register-definition-prefixes "treemacs/src/elisp/treemacs-rendering" '("treemacs-"))
 
 
-;;; Generated autoloads from ../site-lisp/treemacs/src/extra/treemacs-tab-bar.el
+;;; Generated autoloads from treemacs/src/elisp/treemacs-scope.el
 
-(register-definition-prefixes "../site-lisp/treemacs/src/extra/treemacs-tab-bar" '("treemacs-tab-bar-"))
+(register-definition-prefixes "treemacs/src/elisp/treemacs-scope" '("treemacs-"))
 
 
-;;; Generated autoloads from ../site-lisp/treemacs/src/elisp/treemacs-tag-follow-mode.el
+;;; Generated autoloads from treemacs/src/extra/treemacs-tab-bar.el
 
-(autoload 'treemacs--flatten&sort-imenu-index "../site-lisp/treemacs/src/elisp/treemacs-tag-follow-mode" "\
+(register-definition-prefixes "treemacs/src/extra/treemacs-tab-bar" '("treemacs-tab-bar-"))
+
+
+;;; Generated autoloads from treemacs/src/elisp/treemacs-tag-follow-mode.el
+
+(autoload 'treemacs--flatten&sort-imenu-index "treemacs/src/elisp/treemacs-tag-follow-mode" "\
 Flatten current file's imenu index and sort it by tag position.
 The tags are sorted into the order in which they appear, regardless of section
 or nesting depth.")
@@ -9754,8 +10541,8 @@ for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `treemacs-tag-follow-mode'.")
-(custom-autoload 'treemacs-tag-follow-mode "../site-lisp/treemacs/src/elisp/treemacs-tag-follow-mode" nil)
-(autoload 'treemacs-tag-follow-mode "../site-lisp/treemacs/src/elisp/treemacs-tag-follow-mode" "\
+(custom-autoload 'treemacs-tag-follow-mode "treemacs/src/elisp/treemacs-tag-follow-mode" nil)
+(autoload 'treemacs-tag-follow-mode "treemacs/src/elisp/treemacs-tag-follow-mode" "\
 Toggle `treemacs-tag-follow-mode'.
 
 This acts as more fine-grained alternative to `treemacs-follow-mode' and will
@@ -9794,22 +10581,22 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(register-definition-prefixes "../site-lisp/treemacs/src/elisp/treemacs-tag-follow-mode" '("treemacs--"))
+(register-definition-prefixes "treemacs/src/elisp/treemacs-tag-follow-mode" '("treemacs--"))
 
 
-;;; Generated autoloads from ../site-lisp/treemacs/src/elisp/treemacs-tags.el
+;;; Generated autoloads from treemacs/src/elisp/treemacs-tags.el
 
-(autoload 'treemacs--expand-file-node "../site-lisp/treemacs/src/elisp/treemacs-tags" "\
+(autoload 'treemacs--expand-file-node "treemacs/src/elisp/treemacs-tags" "\
 Open tag items for file BTN.
 Recursively open all tags below BTN when RECURSIVE is non-nil.
 
 (fn BTN &optional RECURSIVE)")
-(autoload 'treemacs--collapse-file-node "../site-lisp/treemacs/src/elisp/treemacs-tags" "\
+(autoload 'treemacs--collapse-file-node "treemacs/src/elisp/treemacs-tags" "\
 Close node given by BTN.
 Remove all open tag entries under BTN when RECURSIVE.
 
 (fn BTN &optional RECURSIVE)")
-(autoload 'treemacs--visit-or-expand/collapse-tag-node "../site-lisp/treemacs/src/elisp/treemacs-tags" "\
+(autoload 'treemacs--visit-or-expand/collapse-tag-node "treemacs/src/elisp/treemacs-tags" "\
 Visit tag section BTN if possible, expand or collapse it otherwise.
 Pass prefix ARG on to either visit or toggle action.
 
@@ -9826,66 +10613,66 @@ function is also called from the top level vist-node functions like
 the display window.
 
 (fn BTN ARG FIND-WINDOW)")
-(autoload 'treemacs--expand-tag-node "../site-lisp/treemacs/src/elisp/treemacs-tags" "\
+(autoload 'treemacs--expand-tag-node "treemacs/src/elisp/treemacs-tags" "\
 Open tags node items for BTN.
 Open all tag section under BTN when call is RECURSIVE.
 
 (fn BTN &optional RECURSIVE)")
-(autoload 'treemacs--collapse-tag-node "../site-lisp/treemacs/src/elisp/treemacs-tags" "\
+(autoload 'treemacs--collapse-tag-node "treemacs/src/elisp/treemacs-tags" "\
 Close tags node at BTN.
 Remove all open tag entries under BTN when RECURSIVE.
 
 (fn BTN &optional RECURSIVE)")
-(autoload 'treemacs--goto-tag "../site-lisp/treemacs/src/elisp/treemacs-tags" "\
+(autoload 'treemacs--goto-tag "treemacs/src/elisp/treemacs-tags" "\
 Go to the tag at BTN.
 
 (fn BTN)")
-(autoload 'treemacs--create-imenu-index-function "../site-lisp/treemacs/src/elisp/treemacs-tags" "\
+(autoload 'treemacs--create-imenu-index-function "treemacs/src/elisp/treemacs-tags" "\
 The `imenu-create-index-function' for treemacs buffers.")
 (function-put 'treemacs--create-imenu-index-function 'side-effect-free 't)
-(register-definition-prefixes "../site-lisp/treemacs/src/elisp/treemacs-tags" '("treemacs--"))
+(register-definition-prefixes "treemacs/src/elisp/treemacs-tags" '("treemacs--"))
 
 
-;;; Generated autoloads from ../site-lisp/treemacs/test/treemacs-test.el
+;;; Generated autoloads from treemacs/test/treemacs-test.el
 
-(register-definition-prefixes "../site-lisp/treemacs/test/treemacs-test" '("test-treemacs--" "treemacs-"))
-
-
-;;; Generated autoloads from ../site-lisp/treemacs/src/elisp/treemacs-themes.el
-
-(register-definition-prefixes "../site-lisp/treemacs/src/elisp/treemacs-themes" '("treemacs-"))
+(register-definition-prefixes "treemacs/test/treemacs-test" '("test-treemacs--" "treemacs-"))
 
 
-;;; Generated autoloads from ../site-lisp/treemacs/src/elisp/treemacs-treelib.el
+;;; Generated autoloads from treemacs/src/elisp/treemacs-themes.el
 
-(register-definition-prefixes "../site-lisp/treemacs/src/elisp/treemacs-treelib" '("treemacs-"))
-
-
-;;; Generated autoloads from ../site-lisp/treemacs/src/elisp/treemacs-visuals.el
-
-(register-definition-prefixes "../site-lisp/treemacs/src/elisp/treemacs-visuals" '("treemacs-"))
+(register-definition-prefixes "treemacs/src/elisp/treemacs-themes" '("treemacs-"))
 
 
-;;; Generated autoloads from ../site-lisp/treemacs/src/elisp/treemacs-workspaces.el
+;;; Generated autoloads from treemacs/src/elisp/treemacs-treelib.el
 
-(register-definition-prefixes "../site-lisp/treemacs/src/elisp/treemacs-workspaces" '("treemacs-"))
-
-
-;;; Generated autoloads from ../site-lisp/treesit-auto/treesit-auto.el
-
-(register-definition-prefixes "../site-lisp/treesit-auto/treesit-auto" '("global-treesit-auto-mode" "treesit-auto-"))
+(register-definition-prefixes "treemacs/src/elisp/treemacs-treelib" '("treemacs-"))
 
 
-;;; Generated autoloads from ../site-lisp/auctex/tests/tex/utility.el
+;;; Generated autoloads from treemacs/src/elisp/treemacs-visuals.el
 
-(register-definition-prefixes "../site-lisp/auctex/tests/tex/utility" '("TeX-dummy-alist"))
+(register-definition-prefixes "treemacs/src/elisp/treemacs-visuals" '("treemacs-"))
 
 
-;;; Generated autoloads from ../site-lisp/valign/valign.el
+;;; Generated autoloads from treemacs/src/elisp/treemacs-workspaces.el
 
-(autoload 'valign-table "../site-lisp/valign/valign" "\
+(register-definition-prefixes "treemacs/src/elisp/treemacs-workspaces" '("treemacs-"))
+
+
+;;; Generated autoloads from treesit-auto/treesit-auto.el
+
+(register-definition-prefixes "treesit-auto/treesit-auto" '("global-treesit-auto-mode" "treesit-auto-"))
+
+
+;;; Generated autoloads from auctex/tests/tex/utility.el
+
+(register-definition-prefixes "auctex/tests/tex/utility" '("TeX-dummy-alist"))
+
+
+;;; Generated autoloads from valign/valign.el
+
+(autoload 'valign-table "valign/valign" "\
 Visually align the table at point." t)
-(autoload 'valign-mode "../site-lisp/valign/valign" "\
+(autoload 'valign-mode "valign/valign" "\
 Visually align Org tables.
 
 This is a minor mode.  If called interactively, toggle the
@@ -9903,17 +10690,17 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(register-definition-prefixes "../site-lisp/valign/valign" '("valign-"))
+(register-definition-prefixes "valign/valign" '("valign-"))
 
 
-;;; Generated autoloads from ../site-lisp/verilog-mode/attic/verilog-lex.el
+;;; Generated autoloads from verilog-mode/attic/verilog-lex.el
 
-(register-definition-prefixes "../site-lisp/verilog-mode/attic/verilog-lex" '("verilog-"))
+(register-definition-prefixes "verilog-mode/attic/verilog-lex" '("verilog-"))
 
 
-;;; Generated autoloads from ../site-lisp/verilog-mode/x/verilog-mode.el
+;;; Generated autoloads from verilog-mode/x/verilog-mode.el
 
-(autoload 'verilog-mode "../site-lisp/verilog-mode/x/verilog-mode" "\
+(autoload 'verilog-mode "verilog-mode/x/verilog-mode" "\
 Major mode for editing Verilog code.
 \\<verilog-mode-map>
 See \\[describe-function] verilog-auto (\\[verilog-auto]) for details on how
@@ -10074,12 +10861,12 @@ Key bindings specific to `verilog-mode-map' are:
 \\{verilog-mode-map}
 
 (fn)" t)
-(register-definition-prefixes "../site-lisp/verilog-mode/x/verilog-mode" '("electric-verilog-" "verilog-" "vl-"))
+(register-definition-prefixes "verilog-mode/x/verilog-mode" '("electric-verilog-" "verilog-" "vl-"))
 
 
-;;; Generated autoloads from ../site-lisp/verilog-mode/e/verilog-mode.el
+;;; Generated autoloads from verilog-mode/e/verilog-mode.el
 
-(autoload 'verilog-mode "../site-lisp/verilog-mode/e/verilog-mode" "\
+(autoload 'verilog-mode "verilog-mode/e/verilog-mode" "\
 Major mode for editing Verilog code.
 \\<verilog-mode-map>
 See \\[describe-function] verilog-auto (\\[verilog-auto]) for details on how
@@ -10240,12 +11027,12 @@ Key bindings specific to `verilog-mode-map' are:
 \\{verilog-mode-map}
 
 (fn)" t)
-(register-definition-prefixes "../site-lisp/verilog-mode/e/verilog-mode" '("electric-verilog-" "verilog-" "vl-"))
+(register-definition-prefixes "verilog-mode/e/verilog-mode" '("electric-verilog-" "verilog-" "vl-"))
 
 
-;;; Generated autoloads from ../site-lisp/verilog-mode/verilog-mode.el
+;;; Generated autoloads from verilog-mode/verilog-mode.el
 
-(autoload 'verilog-mode "../site-lisp/verilog-mode/verilog-mode" "\
+(autoload 'verilog-mode "verilog-mode/verilog-mode" "\
 Major mode for editing Verilog code.
 \\<verilog-mode-map>
 See \\[describe-function] verilog-auto (\\[verilog-auto]) for details on how
@@ -10406,10 +11193,10 @@ Key bindings specific to `verilog-mode-map' are:
 \\{verilog-mode-map}
 
 (fn)" t)
-(register-definition-prefixes "../site-lisp/verilog-mode/verilog-mode" '("electric-verilog-" "verilog-" "vl-"))
+(register-definition-prefixes "verilog-mode/verilog-mode" '("electric-verilog-" "verilog-" "vl-"))
 
 
-;;; Generated autoloads from ../site-lisp/vertico/vertico.el
+;;; Generated autoloads from vertico/vertico.el
 
 (defvar vertico-mode nil "\
 Non-nil if Vertico mode is enabled.
@@ -10418,8 +11205,8 @@ for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `vertico-mode'.")
-(custom-autoload 'vertico-mode "../site-lisp/vertico/vertico" nil)
-(autoload 'vertico-mode "../site-lisp/vertico/vertico" "\
+(custom-autoload 'vertico-mode "vertico/vertico" nil)
+(autoload 'vertico-mode "vertico/vertico" "\
 VERTical Interactive COmpletion.
 
 This is a global minor mode.  If called interactively, toggle the
@@ -10437,17 +11224,17 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(register-definition-prefixes "../site-lisp/vertico/vertico" '("vertico-"))
+(register-definition-prefixes "vertico/vertico" '("vertico-"))
 
 
-;;; Generated autoloads from ../site-lisp/vertico/extensions/vertico-buffer.el
+;;; Generated autoloads from vertico/extensions/vertico-buffer.el
 
 (defvar vertico-buffer-mode nil "\
 Non-nil if Vertico-Buffer mode is enabled.
 See the `vertico-buffer-mode' command
 for a description of this minor mode.")
-(custom-autoload 'vertico-buffer-mode "../site-lisp/vertico/extensions/vertico-buffer" nil)
-(autoload 'vertico-buffer-mode "../site-lisp/vertico/extensions/vertico-buffer" "\
+(custom-autoload 'vertico-buffer-mode "vertico/extensions/vertico-buffer" nil)
+(autoload 'vertico-buffer-mode "vertico/extensions/vertico-buffer" "\
 Display Vertico in a buffer instead of the minibuffer.
 
 This is a global minor mode.  If called interactively, toggle the
@@ -10465,33 +11252,33 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(register-definition-prefixes "../site-lisp/vertico/extensions/vertico-buffer" '("vertico-buffer-"))
+(register-definition-prefixes "vertico/extensions/vertico-buffer" '("vertico-buffer-"))
 
 
-;;; Generated autoloads from ../site-lisp/vertico/extensions/vertico-directory.el
+;;; Generated autoloads from vertico/extensions/vertico-directory.el
 
-(autoload 'vertico-directory-enter "../site-lisp/vertico/extensions/vertico-directory" "\
+(autoload 'vertico-directory-enter "vertico/extensions/vertico-directory" "\
 Enter directory or exit completion with current candidate.
 Exit with current input if prefix ARG is given.
 
 (fn &optional ARG)" t)
-(autoload 'vertico-directory-up "../site-lisp/vertico/extensions/vertico-directory" "\
+(autoload 'vertico-directory-up "vertico/extensions/vertico-directory" "\
 Delete N names before point.
 
 (fn &optional N)" t)
-(autoload 'vertico-directory-delete-char "../site-lisp/vertico/extensions/vertico-directory" "\
+(autoload 'vertico-directory-delete-char "vertico/extensions/vertico-directory" "\
 Delete N directories or chars before point.
 
 (fn &optional N)" t)
-(autoload 'vertico-directory-delete-word "../site-lisp/vertico/extensions/vertico-directory" "\
+(autoload 'vertico-directory-delete-word "vertico/extensions/vertico-directory" "\
 Delete N directories or words before point.
 
 (fn &optional N)" t)
-(autoload 'vertico-directory-tidy "../site-lisp/vertico/extensions/vertico-directory" "\
+(autoload 'vertico-directory-tidy "vertico/extensions/vertico-directory" "\
 Tidy shadowed file name, see `rfn-eshadow-overlay'.")
 
 
-;;; Generated autoloads from ../site-lisp/vertico/extensions/vertico-flat.el
+;;; Generated autoloads from vertico/extensions/vertico-flat.el
 
 (defvar vertico-flat-mode nil "\
 Non-nil if Vertico-Flat mode is enabled.
@@ -10500,8 +11287,8 @@ for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `vertico-flat-mode'.")
-(custom-autoload 'vertico-flat-mode "../site-lisp/vertico/extensions/vertico-flat" nil)
-(autoload 'vertico-flat-mode "../site-lisp/vertico/extensions/vertico-flat" "\
+(custom-autoload 'vertico-flat-mode "vertico/extensions/vertico-flat" nil)
+(autoload 'vertico-flat-mode "vertico/extensions/vertico-flat" "\
 Flat, horizontal display for Vertico.
 
 This is a global minor mode.  If called interactively, toggle the
@@ -10519,10 +11306,10 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(register-definition-prefixes "../site-lisp/vertico/extensions/vertico-flat" '("vertico-flat-"))
+(register-definition-prefixes "vertico/extensions/vertico-flat" '("vertico-flat-"))
 
 
-;;; Generated autoloads from ../site-lisp/vertico/extensions/vertico-grid.el
+;;; Generated autoloads from vertico/extensions/vertico-grid.el
 
 (defvar vertico-grid-mode nil "\
 Non-nil if Vertico-Grid mode is enabled.
@@ -10531,8 +11318,8 @@ for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `vertico-grid-mode'.")
-(custom-autoload 'vertico-grid-mode "../site-lisp/vertico/extensions/vertico-grid" nil)
-(autoload 'vertico-grid-mode "../site-lisp/vertico/extensions/vertico-grid" "\
+(custom-autoload 'vertico-grid-mode "vertico/extensions/vertico-grid" nil)
+(autoload 'vertico-grid-mode "vertico/extensions/vertico-grid" "\
 Grid display for Vertico.
 
 This is a global minor mode.  If called interactively, toggle the
@@ -10550,17 +11337,17 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(register-definition-prefixes "../site-lisp/vertico/extensions/vertico-grid" '("vertico-grid-"))
+(register-definition-prefixes "vertico/extensions/vertico-grid" '("vertico-grid-"))
 
 
-;;; Generated autoloads from ../site-lisp/vertico/extensions/vertico-indexed.el
+;;; Generated autoloads from vertico/extensions/vertico-indexed.el
 
 (defvar vertico-indexed-mode nil "\
 Non-nil if Vertico-Indexed mode is enabled.
 See the `vertico-indexed-mode' command
 for a description of this minor mode.")
-(custom-autoload 'vertico-indexed-mode "../site-lisp/vertico/extensions/vertico-indexed" nil)
-(autoload 'vertico-indexed-mode "../site-lisp/vertico/extensions/vertico-indexed" "\
+(custom-autoload 'vertico-indexed-mode "vertico/extensions/vertico-indexed" nil)
+(autoload 'vertico-indexed-mode "vertico/extensions/vertico-indexed" "\
 Prefix candidates with indices.
 
 This is a global minor mode.  If called interactively, toggle the
@@ -10578,17 +11365,17 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(register-definition-prefixes "../site-lisp/vertico/extensions/vertico-indexed" '("vertico-indexed-"))
+(register-definition-prefixes "vertico/extensions/vertico-indexed" '("vertico-indexed-"))
 
 
-;;; Generated autoloads from ../site-lisp/vertico/extensions/vertico-mouse.el
+;;; Generated autoloads from vertico/extensions/vertico-mouse.el
 
 (defvar vertico-mouse-mode nil "\
 Non-nil if Vertico-Mouse mode is enabled.
 See the `vertico-mouse-mode' command
 for a description of this minor mode.")
-(custom-autoload 'vertico-mouse-mode "../site-lisp/vertico/extensions/vertico-mouse" nil)
-(autoload 'vertico-mouse-mode "../site-lisp/vertico/extensions/vertico-mouse" "\
+(custom-autoload 'vertico-mouse-mode "vertico/extensions/vertico-mouse" nil)
+(autoload 'vertico-mouse-mode "vertico/extensions/vertico-mouse" "\
 Mouse support for Vertico.
 
 This is a global minor mode.  If called interactively, toggle the
@@ -10606,10 +11393,10 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(register-definition-prefixes "../site-lisp/vertico/extensions/vertico-mouse" '("vertico-mouse-"))
+(register-definition-prefixes "vertico/extensions/vertico-mouse" '("vertico-mouse-"))
 
 
-;;; Generated autoloads from ../site-lisp/vertico/extensions/vertico-multiform.el
+;;; Generated autoloads from vertico/extensions/vertico-multiform.el
 
 (defvar vertico-multiform-mode nil "\
 Non-nil if Vertico-Multiform mode is enabled.
@@ -10618,8 +11405,8 @@ for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `vertico-multiform-mode'.")
-(custom-autoload 'vertico-multiform-mode "../site-lisp/vertico/extensions/vertico-multiform" nil)
-(autoload 'vertico-multiform-mode "../site-lisp/vertico/extensions/vertico-multiform" "\
+(custom-autoload 'vertico-multiform-mode "vertico/extensions/vertico-multiform" nil)
+(autoload 'vertico-multiform-mode "vertico/extensions/vertico-multiform" "\
 Configure Vertico in various forms per command.
 
 This is a global minor mode.  If called interactively, toggle the
@@ -10638,45 +11425,45 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(register-definition-prefixes "../site-lisp/vertico/extensions/vertico-multiform" '("vertico-multiform-"))
+(register-definition-prefixes "vertico/extensions/vertico-multiform" '("vertico-multiform-"))
 
 
-;;; Generated autoloads from ../site-lisp/vertico/extensions/vertico-quick.el
+;;; Generated autoloads from vertico/extensions/vertico-quick.el
 
-(autoload 'vertico-quick-jump "../site-lisp/vertico/extensions/vertico-quick" "\
+(autoload 'vertico-quick-jump "vertico/extensions/vertico-quick" "\
 Jump to candidate using quick keys." t)
-(autoload 'vertico-quick-exit "../site-lisp/vertico/extensions/vertico-quick" "\
+(autoload 'vertico-quick-exit "vertico/extensions/vertico-quick" "\
 Exit with candidate using quick keys." t)
-(autoload 'vertico-quick-insert "../site-lisp/vertico/extensions/vertico-quick" "\
+(autoload 'vertico-quick-insert "vertico/extensions/vertico-quick" "\
 Insert candidate using quick keys." t)
-(register-definition-prefixes "../site-lisp/vertico/extensions/vertico-quick" '("vertico-quick"))
+(register-definition-prefixes "vertico/extensions/vertico-quick" '("vertico-quick"))
 
 
-;;; Generated autoloads from ../site-lisp/vertico/extensions/vertico-repeat.el
+;;; Generated autoloads from vertico/extensions/vertico-repeat.el
 
-(autoload 'vertico-repeat-save "../site-lisp/vertico/extensions/vertico-repeat" "\
+(autoload 'vertico-repeat-save "vertico/extensions/vertico-repeat" "\
 Save Vertico session for `vertico-repeat'.
 This function must be registered as `minibuffer-setup-hook'.")
-(autoload 'vertico-repeat-last "../site-lisp/vertico/extensions/vertico-repeat" "\
+(autoload 'vertico-repeat-last "vertico/extensions/vertico-repeat" "\
 Repeat last Vertico completion SESSION.
 If called interactively from an existing Vertico session,
 `vertico-repeat-last' will restore the last input and
 last selected candidate for the current command.
 
 (fn &optional SESSION)" t)
-(autoload 'vertico-repeat-select "../site-lisp/vertico/extensions/vertico-repeat" "\
+(autoload 'vertico-repeat-select "vertico/extensions/vertico-repeat" "\
 Select a Vertico session from the session history and repeat it.
 If called from an existing Vertico session, you can select among
 previous sessions for the current command." t)
-(autoload 'vertico-repeat "../site-lisp/vertico/extensions/vertico-repeat" "\
+(autoload 'vertico-repeat "vertico/extensions/vertico-repeat" "\
 Repeat last Vertico session.
 If prefix ARG is non-nil, offer completion menu to select from session history.
 
 (fn &optional ARG)" t)
-(register-definition-prefixes "../site-lisp/vertico/extensions/vertico-repeat" '("vertico-repeat-"))
+(register-definition-prefixes "vertico/extensions/vertico-repeat" '("vertico-repeat-"))
 
 
-;;; Generated autoloads from ../site-lisp/vertico/extensions/vertico-reverse.el
+;;; Generated autoloads from vertico/extensions/vertico-reverse.el
 
 (defvar vertico-reverse-mode nil "\
 Non-nil if Vertico-Reverse mode is enabled.
@@ -10685,8 +11472,8 @@ for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `vertico-reverse-mode'.")
-(custom-autoload 'vertico-reverse-mode "../site-lisp/vertico/extensions/vertico-reverse" nil)
-(autoload 'vertico-reverse-mode "../site-lisp/vertico/extensions/vertico-reverse" "\
+(custom-autoload 'vertico-reverse-mode "vertico/extensions/vertico-reverse" nil)
+(autoload 'vertico-reverse-mode "vertico/extensions/vertico-reverse" "\
 Reverse the Vertico display.
 
 This is a global minor mode.  If called interactively, toggle the
@@ -10704,10 +11491,10 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(register-definition-prefixes "../site-lisp/vertico/extensions/vertico-reverse" '("vertico-reverse-map"))
+(register-definition-prefixes "vertico/extensions/vertico-reverse" '("vertico-reverse-map"))
 
 
-;;; Generated autoloads from ../site-lisp/vertico/extensions/vertico-unobtrusive.el
+;;; Generated autoloads from vertico/extensions/vertico-unobtrusive.el
 
 (defvar vertico-unobtrusive-mode nil "\
 Non-nil if Vertico-Unobtrusive mode is enabled.
@@ -10716,8 +11503,8 @@ for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `vertico-unobtrusive-mode'.")
-(custom-autoload 'vertico-unobtrusive-mode "../site-lisp/vertico/extensions/vertico-unobtrusive" nil)
-(autoload 'vertico-unobtrusive-mode "../site-lisp/vertico/extensions/vertico-unobtrusive" "\
+(custom-autoload 'vertico-unobtrusive-mode "vertico/extensions/vertico-unobtrusive" nil)
+(autoload 'vertico-unobtrusive-mode "vertico/extensions/vertico-unobtrusive" "\
 Unobtrusive display for Vertico.
 
 This is a global minor mode.  If called interactively, toggle the
@@ -10736,36 +11523,36 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(register-definition-prefixes "../site-lisp/vertico/extensions/vertico-unobtrusive" '("vertico-unobtrusive--orig-count"))
+(register-definition-prefixes "vertico/extensions/vertico-unobtrusive" '("vertico-unobtrusive--orig-count"))
 
 
-;;; Generated autoloads from ../site-lisp/visual-regexp.el/visual-regexp.el
+;;; Generated autoloads from visual-regexp.el/visual-regexp.el
 
-(autoload 'vr/mc-mark "../site-lisp/visual-regexp.el/visual-regexp" "\
+(autoload 'vr/mc-mark "visual-regexp.el/visual-regexp" "\
 Convert regexp selection to multiple cursors.
 
 (fn REGEXP START END)" t)
-(autoload 'vr/replace "../site-lisp/visual-regexp.el/visual-regexp" "\
+(autoload 'vr/replace "visual-regexp.el/visual-regexp" "\
 Regexp-replace with live visual feedback.
 
 (fn REGEXP REPLACE START END)" t)
-(autoload 'vr/query-replace "../site-lisp/visual-regexp.el/visual-regexp" "\
+(autoload 'vr/query-replace "visual-regexp.el/visual-regexp" "\
 Use `vr/query-replace' like you would use `query-replace-regexp'.
 
 (fn REGEXP REPLACE START END)" t)
-(register-definition-prefixes "../site-lisp/visual-regexp.el/visual-regexp" '("vr--" "vr/"))
+(register-definition-prefixes "visual-regexp.el/visual-regexp" '("vr--" "vr/"))
 
 
-;;; Generated autoloads from ../site-lisp/vundo/vundo.el
+;;; Generated autoloads from vundo/vundo.el
 
-(autoload 'vundo "../site-lisp/vundo/vundo" "\
+(autoload 'vundo "vundo/vundo" "\
 Display visual undo for the current buffer." t)
-(register-definition-prefixes "../site-lisp/vundo/vundo" '("vundo-"))
+(register-definition-prefixes "vundo/vundo" '("vundo-"))
 
 
-;;; Generated autoloads from ../site-lisp/vundo/test/vundo-stress-test.el
+;;; Generated autoloads from vundo/test/vundo-stress-test.el
 
-(autoload 'vundo-stress-test "../site-lisp/vundo/test/vundo-stress-test" "\
+(autoload 'vundo-stress-test "vundo/test/vundo-stress-test" "\
 Stress-test vundo-mode and the undo system.
 Interactively, prompts for the number of edits, undos, and
 undo/redo chain depth.  NEDITS is the number of lorem-ipsum
@@ -10785,12 +11572,12 @@ Debug is enabled upon entry to vundo.
 (fn NEDITS NUNDOS MAX-CHAIN-LENGTH TEST-ROOT-NAV)" t)
 
 
-;;; Generated autoloads from ../site-lisp/vundo/test/vundo-test.el
+;;; Generated autoloads from vundo/test/vundo-test.el
 
-(register-definition-prefixes "../site-lisp/vundo/test/vundo-test" '("vundo-"))
+(register-definition-prefixes "vundo/test/vundo-test" '("vundo-"))
 
 
-;;; Generated autoloads from ../site-lisp/emacs-which-key/which-key.el
+;;; Generated autoloads from emacs-which-key/which-key.el
 
 (defvar which-key-mode nil "\
 Non-nil if Which-Key mode is enabled.
@@ -10799,8 +11586,8 @@ for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `which-key-mode'.")
-(custom-autoload 'which-key-mode "../site-lisp/emacs-which-key/which-key" nil)
-(autoload 'which-key-mode "../site-lisp/emacs-which-key/which-key" "\
+(custom-autoload 'which-key-mode "emacs-which-key/which-key" nil)
+(autoload 'which-key-mode "emacs-which-key/which-key" "\
 Toggle which-key-mode.
 
 This is a global minor mode.  If called interactively, toggle the
@@ -10818,19 +11605,19 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(autoload 'which-key-setup-side-window-right "../site-lisp/emacs-which-key/which-key" "\
+(autoload 'which-key-setup-side-window-right "emacs-which-key/which-key" "\
 Apply suggested settings for side-window that opens on right." t)
-(autoload 'which-key-setup-side-window-right-bottom "../site-lisp/emacs-which-key/which-key" "\
+(autoload 'which-key-setup-side-window-right-bottom "emacs-which-key/which-key" "\
 Apply suggested settings for side-window that opens on right
 if there is space and the bottom otherwise." t)
-(autoload 'which-key-setup-side-window-bottom "../site-lisp/emacs-which-key/which-key" "\
+(autoload 'which-key-setup-side-window-bottom "emacs-which-key/which-key" "\
 Apply suggested settings for side-window that opens on bottom." t)
-(autoload 'which-key-setup-minibuffer "../site-lisp/emacs-which-key/which-key" "\
+(autoload 'which-key-setup-minibuffer "emacs-which-key/which-key" "\
 Apply suggested settings for minibuffer.
 Do not use this setup if you use the paging commands. Instead use
 `which-key-setup-side-window-bottom', which is nearly identical
 but more functional." t)
-(autoload 'which-key-add-keymap-based-replacements "../site-lisp/emacs-which-key/which-key" "\
+(autoload 'which-key-add-keymap-based-replacements "emacs-which-key/which-key" "\
 Replace the description of KEY using REPLACEMENT in KEYMAP.
 KEY should take a format suitable for use in `kbd'. REPLACEMENT
 should be a cons cell of the form (STRING . COMMAND) for each
@@ -10847,7 +11634,7 @@ but the above format is preferred, and the option to use a string
 for REPLACEMENT will eventually be removed.
 
 (fn KEYMAP KEY REPLACEMENT &rest MORE)")
-(autoload 'which-key-add-key-based-replacements "../site-lisp/emacs-which-key/which-key" "\
+(autoload 'which-key-add-key-based-replacements "emacs-which-key/which-key" "\
 Replace the description of KEY-SEQUENCE with REPLACEMENT.
 KEY-SEQUENCE is a string suitable for use in `kbd'. REPLACEMENT
 may either be a string, as in
@@ -10869,14 +11656,14 @@ MORE allows you to specifcy additional KEY REPLACEMENT pairs.  All
 replacements are added to `which-key-replacement-alist'.
 
 (fn KEY-SEQUENCE REPLACEMENT &rest MORE)")
-(autoload 'which-key-add-major-mode-key-based-replacements "../site-lisp/emacs-which-key/which-key" "\
+(autoload 'which-key-add-major-mode-key-based-replacements "emacs-which-key/which-key" "\
 Functions like `which-key-add-key-based-replacements'.
 The difference is that MODE specifies the `major-mode' that must
 be active for KEY-SEQUENCE and REPLACEMENT (MORE contains
 addition KEY-SEQUENCE REPLACEMENT pairs) to apply.
 
 (fn MODE KEY-SEQUENCE REPLACEMENT &rest MORE)")
-(autoload 'which-key-reload-key-sequence "../site-lisp/emacs-which-key/which-key" "\
+(autoload 'which-key-reload-key-sequence "emacs-which-key/which-key" "\
 Simulate entering the key sequence KEY-SEQ.
 KEY-SEQ should be a list of events as produced by
 `listify-key-sequence'. If nil, KEY-SEQ defaults to
@@ -10884,32 +11671,32 @@ KEY-SEQ should be a list of events as produced by
 used are reapplied to the new key sequence.
 
 (fn &optional KEY-SEQ)")
-(autoload 'which-key-show-standard-help "../site-lisp/emacs-which-key/which-key" "\
+(autoload 'which-key-show-standard-help "emacs-which-key/which-key" "\
 Call the command in `which-key--prefix-help-cmd-backup'.
 Usually this is `describe-prefix-bindings'.
 
 (fn &optional _)" t)
-(autoload 'which-key-show-next-page-no-cycle "../site-lisp/emacs-which-key/which-key" "\
+(autoload 'which-key-show-next-page-no-cycle "emacs-which-key/which-key" "\
 Show next page of keys unless on the last page, in which case
 call `which-key-show-standard-help'." t)
-(autoload 'which-key-show-previous-page-no-cycle "../site-lisp/emacs-which-key/which-key" "\
+(autoload 'which-key-show-previous-page-no-cycle "emacs-which-key/which-key" "\
 Show previous page of keys unless on the first page, in which
 case do nothing." t)
-(autoload 'which-key-show-next-page-cycle "../site-lisp/emacs-which-key/which-key" "\
+(autoload 'which-key-show-next-page-cycle "emacs-which-key/which-key" "\
 Show the next page of keys, cycling from end to beginning
 after last page.
 
 (fn &optional _)" t)
-(autoload 'which-key-show-previous-page-cycle "../site-lisp/emacs-which-key/which-key" "\
+(autoload 'which-key-show-previous-page-cycle "emacs-which-key/which-key" "\
 Show the previous page of keys, cycling from beginning to end
 after first page.
 
 (fn &optional _)" t)
-(autoload 'which-key-show-top-level "../site-lisp/emacs-which-key/which-key" "\
+(autoload 'which-key-show-top-level "emacs-which-key/which-key" "\
 Show top-level bindings.
 
 (fn &optional _)" t)
-(autoload 'which-key-show-major-mode "../site-lisp/emacs-which-key/which-key" "\
+(autoload 'which-key-show-major-mode "emacs-which-key/which-key" "\
 Show top-level bindings in the map of the current major mode.
 
 This function will also detect evil bindings made using
@@ -10917,27 +11704,27 @@ This function will also detect evil bindings made using
 current evil state. 
 
 (fn &optional ALL)" t)
-(autoload 'which-key-show-full-major-mode "../site-lisp/emacs-which-key/which-key" "\
+(autoload 'which-key-show-full-major-mode "emacs-which-key/which-key" "\
 Show all bindings in the map of the current major mode.
 
 This function will also detect evil bindings made using
 `evil-define-key' in this map. These bindings will depend on the
 current evil state. " t)
-(autoload 'which-key-dump-bindings "../site-lisp/emacs-which-key/which-key" "\
+(autoload 'which-key-dump-bindings "emacs-which-key/which-key" "\
 Dump bindings from PREFIX into buffer named BUFFER-NAME.
 
 PREFIX should be a string suitable for `kbd'.
 
 (fn PREFIX BUFFER-NAME)" t)
-(autoload 'which-key-undo-key "../site-lisp/emacs-which-key/which-key" "\
+(autoload 'which-key-undo-key "emacs-which-key/which-key" "\
 Undo last keypress and force which-key update.
 
 (fn &optional _)" t)
-(autoload 'which-key-C-h-dispatch "../site-lisp/emacs-which-key/which-key" "\
+(autoload 'which-key-C-h-dispatch "emacs-which-key/which-key" "\
 Dispatch C-h commands by looking up key in
 `which-key-C-h-map'. This command is always accessible (from any
 prefix) if `which-key-use-C-h-commands' is non nil." t)
-(autoload 'which-key-show-keymap "../site-lisp/emacs-which-key/which-key" "\
+(autoload 'which-key-show-keymap "emacs-which-key/which-key" "\
 Show the top-level bindings in KEYMAP using which-key.
 KEYMAP is selected interactively from all available keymaps.
 
@@ -10945,25 +11732,25 @@ If NO-PAGING is non-nil, which-key will not intercept subsequent
 keypresses for the paging functionality.
 
 (fn KEYMAP &optional NO-PAGING)" t)
-(autoload 'which-key-show-full-keymap "../site-lisp/emacs-which-key/which-key" "\
+(autoload 'which-key-show-full-keymap "emacs-which-key/which-key" "\
 Show all bindings in KEYMAP using which-key.
 KEYMAP is selected interactively from all available keymaps.
 
 (fn KEYMAP)" t)
-(autoload 'which-key-show-minor-mode-keymap "../site-lisp/emacs-which-key/which-key" "\
+(autoload 'which-key-show-minor-mode-keymap "emacs-which-key/which-key" "\
 Show the top-level bindings in KEYMAP using which-key.
 KEYMAP is selected interactively by mode in
 `minor-mode-map-alist'.
 
 (fn &optional ALL)" t)
-(autoload 'which-key-show-full-minor-mode-keymap "../site-lisp/emacs-which-key/which-key" "\
+(autoload 'which-key-show-full-minor-mode-keymap "emacs-which-key/which-key" "\
 Show all bindings in KEYMAP using which-key.
 KEYMAP is selected interactively by mode in
 `minor-mode-map-alist'." t)
-(register-definition-prefixes "../site-lisp/emacs-which-key/which-key" '("evil-state" "which-key-"))
+(register-definition-prefixes "emacs-which-key/which-key" '("evil-state" "which-key-"))
 
 
-;;; Generated autoloads from ../site-lisp/emacs-winum/winum.el
+;;; Generated autoloads from emacs-winum/winum.el
 
 (defvar winum-mode nil "\
 Non-nil if Winum mode is enabled.
@@ -10972,8 +11759,8 @@ for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `winum-mode'.")
-(custom-autoload 'winum-mode "../site-lisp/emacs-winum/winum" nil)
-(autoload 'winum-mode "../site-lisp/emacs-winum/winum" "\
+(custom-autoload 'winum-mode "emacs-winum/winum" nil)
+(autoload 'winum-mode "emacs-winum/winum" "\
 A minor mode that allows for managing windows based on window numbers.
 
 This is a global minor mode.  If called interactively, toggle the
@@ -10993,62 +11780,62 @@ it is disabled.
 \\{winum-keymap}
 
 (fn &optional ARG)" t)
-(autoload 'winum-select-window-0-or-10 "../site-lisp/emacs-winum/winum" "\
+(autoload 'winum-select-window-0-or-10 "emacs-winum/winum" "\
 Jump to window 0 if assigned or 10 if exists.
 If prefix ARG is given, delete the window instead of selecting it.
 
 (fn &optional ARG)" t)
-(autoload 'winum-select-window-0 "../site-lisp/emacs-winum/winum" "\
+(autoload 'winum-select-window-0 "emacs-winum/winum" "\
 Jump to window 0.
 If prefix ARG is given, delete the window instead of selecting it.
 
 (fn &optional ARG)" t)
-(autoload 'winum-select-window-1 "../site-lisp/emacs-winum/winum" "\
+(autoload 'winum-select-window-1 "emacs-winum/winum" "\
 Jump to window 1.
 If prefix ARG is given, delete the window instead of selecting it.
 
 (fn &optional ARG)" t)
-(autoload 'winum-select-window-2 "../site-lisp/emacs-winum/winum" "\
+(autoload 'winum-select-window-2 "emacs-winum/winum" "\
 Jump to window 2.
 If prefix ARG is given, delete the window instead of selecting it.
 
 (fn &optional ARG)" t)
-(autoload 'winum-select-window-3 "../site-lisp/emacs-winum/winum" "\
+(autoload 'winum-select-window-3 "emacs-winum/winum" "\
 Jump to window 3.
 If prefix ARG is given, delete the window instead of selecting it.
 
 (fn &optional ARG)" t)
-(autoload 'winum-select-window-4 "../site-lisp/emacs-winum/winum" "\
+(autoload 'winum-select-window-4 "emacs-winum/winum" "\
 Jump to window 4.
 If prefix ARG is given, delete the window instead of selecting it.
 
 (fn &optional ARG)" t)
-(autoload 'winum-select-window-5 "../site-lisp/emacs-winum/winum" "\
+(autoload 'winum-select-window-5 "emacs-winum/winum" "\
 Jump to window 5.
 If prefix ARG is given, delete the window instead of selecting it.
 
 (fn &optional ARG)" t)
-(autoload 'winum-select-window-6 "../site-lisp/emacs-winum/winum" "\
+(autoload 'winum-select-window-6 "emacs-winum/winum" "\
 Jump to window 6.
 If prefix ARG is given, delete the window instead of selecting it.
 
 (fn &optional ARG)" t)
-(autoload 'winum-select-window-7 "../site-lisp/emacs-winum/winum" "\
+(autoload 'winum-select-window-7 "emacs-winum/winum" "\
 Jump to window 7.
 If prefix ARG is given, delete the window instead of selecting it.
 
 (fn &optional ARG)" t)
-(autoload 'winum-select-window-8 "../site-lisp/emacs-winum/winum" "\
+(autoload 'winum-select-window-8 "emacs-winum/winum" "\
 Jump to window 8.
 If prefix ARG is given, delete the window instead of selecting it.
 
 (fn &optional ARG)" t)
-(autoload 'winum-select-window-9 "../site-lisp/emacs-winum/winum" "\
+(autoload 'winum-select-window-9 "emacs-winum/winum" "\
 Jump to window 9.
 If prefix ARG is given, delete the window instead of selecting it.
 
 (fn &optional ARG)" t)
-(autoload 'winum-select-window-by-number "../site-lisp/emacs-winum/winum" "\
+(autoload 'winum-select-window-by-number "emacs-winum/winum" "\
 Select or delete window which number is specified by ARG.
 If the number is negative, delete the window instead of selecting it.
 There are several ways to provide the number:
@@ -11060,7 +11847,7 @@ There are several ways to provide the number:
   minibuffer.
 
 (fn &optional ARG)" t)
-(autoload 'winum-set-keymap-prefix "../site-lisp/emacs-winum/winum" "\
+(autoload 'winum-set-keymap-prefix "emacs-winum/winum" "\
 Set key bindings prefix for `winum-keymap' based on `winum-base-map'.
 This function overrides the value of `winum-keymap', so you
 should call it before customization of `winum-keymap' and/or
@@ -11068,30 +11855,30 @@ after customization of `winum-base-map'.
 PREFIX must be a key sequence, like the ones returned by `kbd'.
 
 (fn PREFIX)")
-(autoload 'winum-get-window-by-number "../site-lisp/emacs-winum/winum" "\
+(autoload 'winum-get-window-by-number "emacs-winum/winum" "\
 Return window numbered N if exists, nil otherwise.
 
 (fn N)")
-(autoload 'winum-get-number-string "../site-lisp/emacs-winum/winum" "\
+(autoload 'winum-get-number-string "emacs-winum/winum" "\
 Get the current or specified window's current number as a propertized string.
 WINDOW: if specified, the window of which we want to know the number.
         If not specified, the number of the currently selected window is
         returned.
 
 (fn &optional WINDOW)")
-(autoload 'winum-get-number "../site-lisp/emacs-winum/winum" "\
+(autoload 'winum-get-number "emacs-winum/winum" "\
 Get the current or specified window's current number.
 WINDOW: if specified, the window of which we want to know the number.
         If not specified, the number of the currently selected window is
         returned.
 
 (fn &optional WINDOW)")
-(register-definition-prefixes "../site-lisp/emacs-winum/winum" '("winum-"))
+(register-definition-prefixes "emacs-winum/winum" '("winum-"))
 
 
-;;; Generated autoloads from ../site-lisp/with-editor/lisp/with-editor.el
+;;; Generated autoloads from with-editor/lisp/with-editor.el
 
-(autoload 'with-editor-export-editor "../site-lisp/with-editor/lisp/with-editor" "\
+(autoload 'with-editor-export-editor "with-editor/lisp/with-editor" "\
 Teach subsequent commands to use current Emacs instance as editor.
 
 Set and export the environment variable ENVVAR, by default
@@ -11102,16 +11889,16 @@ This works in `shell-mode', `term-mode', `eshell-mode' and
 `vterm'.
 
 (fn &optional (ENVVAR \"EDITOR\"))" t)
-(autoload 'with-editor-export-git-editor "../site-lisp/with-editor/lisp/with-editor" "\
+(autoload 'with-editor-export-git-editor "with-editor/lisp/with-editor" "\
 Like `with-editor-export-editor' but always set `$GIT_EDITOR'." t)
-(autoload 'with-editor-export-hg-editor "../site-lisp/with-editor/lisp/with-editor" "\
+(autoload 'with-editor-export-hg-editor "with-editor/lisp/with-editor" "\
 Like `with-editor-export-editor' but always set `$HG_EDITOR'." t)
 (defvar shell-command-with-editor-mode nil "\
 Non-nil if Shell-Command-With-Editor mode is enabled.
 See the `shell-command-with-editor-mode' command
 for a description of this minor mode.")
-(custom-autoload 'shell-command-with-editor-mode "../site-lisp/with-editor/lisp/with-editor" nil)
-(autoload 'shell-command-with-editor-mode "../site-lisp/with-editor/lisp/with-editor" "\
+(custom-autoload 'shell-command-with-editor-mode "with-editor/lisp/with-editor" nil)
+(autoload 'shell-command-with-editor-mode "with-editor/lisp/with-editor" "\
 Teach `shell-command' to use current Emacs instance as editor.
 
 Teach `shell-command', and all commands that ultimately call that
@@ -11144,7 +11931,7 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(autoload 'with-editor-async-shell-command "../site-lisp/with-editor/lisp/with-editor" "\
+(autoload 'with-editor-async-shell-command "with-editor/lisp/with-editor" "\
 Like `async-shell-command' but with `$EDITOR' set.
 
 Execute string \"ENVVAR=CLIENT COMMAND\" in an inferior shell;
@@ -11162,18 +11949,18 @@ with arguments, or a script which also works over Tramp.
 Also see `async-shell-command' and `shell-command'.
 
 (fn COMMAND &optional OUTPUT-BUFFER ERROR-BUFFER ENVVAR)" t)
-(autoload 'with-editor-shell-command "../site-lisp/with-editor/lisp/with-editor" "\
+(autoload 'with-editor-shell-command "with-editor/lisp/with-editor" "\
 Like `shell-command' or `with-editor-async-shell-command'.
 If COMMAND ends with \"&\" behave like the latter,
 else like the former.
 
 (fn COMMAND &optional OUTPUT-BUFFER ERROR-BUFFER ENVVAR)" t)
-(register-definition-prefixes "../site-lisp/with-editor/lisp/with-editor" '("server-" "shell-command--shell-command-with-editor-mode" "start-file-process--with-editor-process-filter" "with-editor"))
+(register-definition-prefixes "with-editor/lisp/with-editor" '("server-" "shell-command--shell-command-with-editor-mode" "start-file-process--with-editor-process-filter" "with-editor"))
 
 
-;;; Generated autoloads from ../site-lisp/yasnippet/yasnippet.el
+;;; Generated autoloads from yasnippet/yasnippet.el
 
-(autoload 'yas-minor-mode "../site-lisp/yasnippet/yasnippet" "\
+(autoload 'yas-minor-mode "yasnippet/yasnippet" "\
 Toggle YASnippet mode.
 
 When YASnippet mode is enabled, `yas-expand', normally bound to
@@ -11210,8 +11997,8 @@ for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `yas-global-mode'.")
-(custom-autoload 'yas-global-mode "../site-lisp/yasnippet/yasnippet" nil)
-(autoload 'yas-global-mode "../site-lisp/yasnippet/yasnippet" "\
+(custom-autoload 'yas-global-mode "yasnippet/yasnippet" nil)
+(autoload 'yas-global-mode "yasnippet/yasnippet" "\
 Toggle Yas minor mode in all buffers.
 With prefix ARG, enable Yas-Global mode if ARG is positive; otherwise,
 disable it.
@@ -11227,7 +12014,7 @@ See `yas-minor-mode' for more information on Yas minor mode.
 
 (fn &optional ARG)" t)
 (autoload 'snippet-mode "yasnippet" "A mode for editing yasnippets" t nil)
-(register-definition-prefixes "../site-lisp/yasnippet/yasnippet" '("help-snippet-def" "snippet-mode-map" "yas"))
+(register-definition-prefixes "yasnippet/yasnippet" '("help-snippet-def" "snippet-mode-map" "yas"))
 
 ;;; End of scraped data
 

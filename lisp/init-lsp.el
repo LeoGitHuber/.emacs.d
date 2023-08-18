@@ -8,18 +8,15 @@
   (add-hook hook (lambda ()
                    (unless (derived-mode-p 'emacs-lisp-mode 'lisp-mode
                                            'makefile-mode 'snippet-mode)
-                     (require 'lsp-mode)
-                     ;; (require 'lsp-ui)
-		             ;; (lsp-deferred)
+                     ;; (lsp-deferred)
                      ;; (lsp)
                      ))))
 
 (with-eval-after-load 'lsp-mode
-  (setq lsp-prefer-flymake t
-		lsp-ui-flycheck-enable nil
-		;; lsp-disabled-clients '(svlangserver)
-        )
-  (keymap-set lsp-mode-map "C-c C-d" 'lsp-describe-thing-at-point)
+  (setq lsp-completion-provider :none
+        lsp-prefer-flymake t
+        lsp-ui-flycheck-enable nil)
+  ;; (keymap-set lsp-mode-map "C-c C-d" 'lsp-describe-thing-at-point)
   )
 
 (dolist (hook '(cuda-mode-hook))  ;; prog-mode-hook  TeX-mode-hook
@@ -61,11 +58,14 @@
   (setq corfu-auto t
 	    corfu-cycle t
 	    corfu-quit-no-match 'separator  ;; t
-	    corfu-auto-prefix 2
+	    corfu-auto-prefix 0
 	    corfu-auto-delay 0
 	    corfu-preview-current t)
   (require 'kind-icon)
-  (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
+  (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter)
+  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
+  (add-to-list 'completion-at-point-functions #'cape-file)
+  (add-to-list 'completion-at-point-functions #'cape-elisp-block))
 
 
 
@@ -73,8 +73,9 @@
           (lambda ()
             (corfu-mode)
 			(setq lsp-enable-relative-indentation t)
-			(define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
-			(define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
+            (with-eval-after-load 'lsp-ui
+			  (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
+			  (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references))
 
 			;; For diagnostics
 			(lsp-diagnostics-mode -1)
@@ -93,7 +94,6 @@
 ;; 			(corfu-popupinfo-mode)
 ;; 			(setq corfu-popupinfo-delay '(0.2 . 0.1))
 ;; 			))
-;; (global-corfu-mode)
 
 (add-hook 'company-mode-hook
 		  (lambda ()
@@ -117,21 +117,28 @@
 			(setq company-box-scrollbar 'inherit)
 			(company-box-mode t)))
 
-;; (require 'cape)
-(with-eval-after-load 'cape (add-to-list 'completion-at-point-functions #'cape-file))
+;; (defun company-completion-styles (capf-fn &rest args)
+;;   (let ((completion-styles '(basic partial-completion)))
+;;     (apply capf-fn args)))
 
-(defun company-completion-styles (capf-fn &rest args)
-  (let ((completion-styles '(basic partial-completion)))
-    (apply capf-fn args)))
+;; (advice-add 'company-capf :around #'company-completion-styles)
 
-(advice-add 'company-capf :around #'company-completion-styles)
+(defun lsp-after-start ()
+  "Start lsp-bridge-mode after Emacs startup."
+  ;; (if (bound-and-true-p lsp-bridge-mode)
+  ;;     (remove-hook 'post-command-hook #'lsp-after-start)
+  ;;   (progn
+  ;;     (require 'lsp-bridge)
+  ;;     (global-lsp-bridge-mode)
+  ;;     (with-current-buffer "*scratch*"
+  ;;       (lsp-bridge-mode))))
+  (if (bound-and-true-p corfu-mode)
+      (remove-hook 'post-command-hook #'lsp-after-start)
+    (progn
+      (global-corfu-mode)))
+  )
 
-(add-to-list 'load-path "~/.emacs.d/site-lisp/yasnippet")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/markdown-mode")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/lsp-bridge/")
-
-(require 'lsp-bridge)
-(global-lsp-bridge-mode)
+(add-hook 'post-command-hook #'lsp-after-start)
 
 ;; (with-eval-after-load 'lsp-bridge
 ;;   (when (treesit-available-p)

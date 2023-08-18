@@ -175,9 +175,10 @@ The resulting list contains all items that appear in LIST1 but not LIST2."
     (nconc subdir
            (mapcan #'find-dir-recursively subdir))))
 
-(defvar autoloads-file "~/.emacs.d/lisp/loaddefs.el"
+(defvar autoloads-file "/home/Leo/.emacs.d/site-lisp/loaddefs.el"
   "File with all of autoload setting.")
-(defvar site-lisp-directory "~/.emacs.d/site-lisp"
+
+(defvar site-lisp-directory "/home/Leo/.emacs.d/site-lisp"
   "Directory contained of all third party packages.")
 
 (defun generate-autoloads (&optional dir target)

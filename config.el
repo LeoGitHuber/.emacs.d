@@ -23,21 +23,21 @@
         ;; 暂时不知道检查签名有什么用,先关了再说.
         package-check-signature nil)
 
-;;; Emacs Default Setting
+  ;;; Emacs Default Setting
   (load "~/.emacs.d/lisp/init-func.el")
 
   (let ((packages (find-subdir-recursively "~/.emacs.d/site-lisp")))
     (setq load-path (append load-path packages)))
-  (add-to-list 'load-path "~/.emacs.d/lisp")
-  (add-to-list 'load-path "~/.emacs.d/site-lisp/pdf-tools/lisp")
+  (add-to-list 'load-path "~/.emacs.d/site-lisp")
   (add-to-list 'load-path "~/.emacs.d/site-lisp/treemacs/src/elisp")
   (add-to-list 'load-path "~/.emacs.d/site-lisp/treemacs/src/extra/")
   (add-to-list 'load-path "~/.emacs.d/site-lisp/lsp-mode/clients")
   (add-to-list 'load-path "~/.emacs.d/site-lisp/lsp-mode/scripts")
-
-
+  (add-to-list 'load-path "~/.emacs.d/site-lisp/lsp-mode/docs")
+  (add-to-list 'load-path "~/.emacs.d/site-lisp/vertico/extensions")
+  (add-to-list 'load-path "~/.emacs.d/site-lisp/themes/themes")
+  (load "~/.emacs.d/site-lisp/loaddefs.el")
   (load "~/.emacs.d/lisp/init-gc.el")
-  (load "~/.emacs.d/lisp/loaddefs.el")
   (load "~/.emacs.d/lisp/init-diagnostic.el")
   (load "~/.emacs.d/lisp/init-icons.el")
   (load "~/.emacs.d/lisp/init-keybindings.el")
@@ -74,6 +74,8 @@
     ;; (setq truncate-string-ellipsis (nerd-icons-mdicon "nf-md-arrow_down_right"))
     ;; Don't use help echo tooltips
     ;; (setq x-gtk-use-system-tooltips nil)
+    ;; (unless (symbol-value x-gtk-use-system-tooltips)
+    ;; 	(set-face-attribute 'tooltip nil))
     )
 
   (add-hook 'emacs-startup-hook
@@ -379,38 +381,40 @@
   ;; (color-theme-sanityinc-tomorrow-bright)
 
 ;;; Minibuffer Setting
-  ;; (load "~/.emacs.d/site-lisp/vertico/vertico.el")
   ;; (load "~/.emacs.d/site-lisp/vertico/extensions/vertico-directory.el")
 
-  ;; (add-to-list 'load-path "~/.emacs.d/site-lisp/vertico")
-  ;; (add-to-list 'load-path "~/.emacs.d/site-lisp/marginalia/marginalia.el")
-  ;; (add-to-list 'load-path "~/.emacs.d/site-lisp/orderless/orderless.el")
   (setq completion-styles '(orderless basic)
         completion-category-overrides '((file (styles basic partial-completion))))
-  (add-hook 'pre-command-hook
-            (lambda ()
-              (vertico-mode t)
-              (marginalia-mode t)
-              (if (bound-and-true-p vertico-mode)
-                  (keymap-set vertico-map "C-w" 'vertico-directory-delete-word)
-                (keymap-set minibuffer-mode-map "C-w" 'backward-kill-word))))
+
+  (defun vertico-enable ()
+    (if (boundp vertico-mode)
+        (progn
+          (vertico-mode)
+          (vertico-reverse-mode)
+          (vertico-indexed-mode)
+          (vertico-mouse-mode)
+          (marginalia-mode)
+          (keymap-set vertico-map "?" #'minibuffer-completion-help)
+          (keymap-set vertico-map "M-RET" #'minibuffer-force-complete-and-exit)
+          (keymap-set vertico-map "M-TAB" #'minibuffer-complete)
+          (keymap-set vertico-map "C-w" 'vertico-directory-delete-word))
+      (keymap-set minibuffer-mode-map "C-w" 'backward-kill-word))
+    (remove-hook 'pre-command-hook #'vertico-enable))
+
+  (add-hook 'pre-command-hook #'vertico-enable)
+
   (with-eval-after-load 'vertico (setq vertico-cycle t))
   (setq-default completion-styles '(orderless basic))
   (setq completion-styles '(basic partial-completion orderless)
         completion-category-overrides
         '((file (styles basic partial-completion))))
 
-  ;; (defun sanityinc/use-orderless-in-minibuffer ()
-  ;;   "Setup orderless for minibuffer."
-  ;;   (setq-local completion-styles '(substring orderless)))
-  ;; (add-hook 'minibuffer-setup-hook 'sanityinc/use-orderless-in-minibuffer)
-
-;;; Windows Control
+  ;;; Windows Control
 
   (load "~/.emacs.d/site-lisp/emacs-winum/winum.el")
   (winum-mode)
 
-;;; UI
+  ;;; UI
   (setq fill-column 80)
   (dolist (hook '(prog-mode-hook text-mode-hook))
     (add-hook hook 'display-fill-column-indicator-mode))
@@ -420,80 +424,75 @@
     '(modus-operandi-tritanopia manoj-dark)
     "Set for themes for dark and light mode.")
 
-  (if (equal (cadr themes_chosen) 'modus-vivendi)
-      (progn
-        (setq modus-themes-org-blocks 'gray-background
-	          modus-themes-bold-constructs t
-	          modus-themes-italic-constructs t)
-        (load-theme (car (cdr themes_chosen)) t))
-    (when (equal (cadr themes_chosen) 'manoj-dark)
-      (load-theme (car (cdr themes_chosen)) t)
-      (set-face-foreground 'hl-line 'unspecified)
-      (set-face-background 'fringe 'unspecified)))
-  (set-face-attribute 'mode-line nil
-  					  ;; :background "#0A0E12"
-                      :background "black"
-                      :foreground (face-foreground 'mode-line-buffer)
-                      :box nil
-  					  :font (font-spec
-  						     ;; "JetBrainsMono Nerd Font" "Monego Ligatures" "Maple Mono NF"
-						     :name
-						     "JetBrainsMono Nerd Font"
-						     ;; :weight 'normal
-  						     :size
-						     11.0))
-  ;; (unless (symbol-value x-gtk-use-system-tooltips)
-  ;; 	(set-face-attribute 'tooltip nil))
+  ;; (if (equal (cadr themes_chosen) 'modus-vivendi)
+  ;;     (progn
+  ;;       (setq modus-themes-org-blocks 'gray-background
+  ;;             modus-themes-bold-constructs t
+  ;;             modus-themes-italic-constructs t)
+  ;;       (load-theme (car (cdr themes_chosen)) t))
+  ;;   (when (equal (cadr themes_chosen) 'manoj-dark)
+  ;;     (load-theme (car (cdr themes_chosen)) t)
+  ;;     (set-face-foreground 'hl-line 'unspecified)
+  ;;     (set-face-background 'fringe 'unspecified)))
+  ;; (set-face-attribute 'mode-line nil
+  ;; 					  ;; :background "#0A0E12"
+  ;;                     :background "black"
+  ;;                     :foreground (face-foreground 'mode-line-buffer)
+  ;;                     :box nil
+  ;; 					  :font (font-spec
+  ;; 						     ;; "JetBrainsMono Nerd Font" "Monego Ligatures" "Maple Mono NF"
+  ;;   					     :name
+  ;;   					     "JetBrainsMono Nerd Font"
+  ;;   					     ;; :weight 'normal
+  ;; 						     :size
+  ;;   					     11.0))
 
-  ;; (if (or
-  ;;      (>= (string-to-number (substring (current-time-string) 11 13)) 18)
-  ;;      (<= (string-to-number (substring (current-time-string) 11 13)) 6))
-  ;; 	(progn
-  ;;       (if (equal (cadr themes_chosen) 'modus-vivendi)
-  ;;           (progn
-  ;;             (setq modus-themes-org-blocks 'gray-background
-  ;; 	              modus-themes-bold-constructs t
-  ;; 	              modus-themes-italic-constructs t)
-  ;;             (load-theme (car (cdr themes_chosen)) t))
-  ;;         (when (equal (cadr themes_chosen) 'manoj-dark)
-  ;;           (load-theme (car (cdr themes_chosen)) t)
-  ;;           (set-face-foreground 'hl-line 'unspecified)
-  ;;           (set-face-background 'fringe 'unspecified)))
-  ;;       (set-face-attribute 'mode-line nil
-  ;;   					      ;; :background "#0A0E12"
-  ;;                           :background "black"
-  ;;                           :box nil
-  ;;   					      :font (font-spec
-  ;;   						  	     ;; "JetBrainsMono Nerd Font" "Monego Ligatures" "Maple Mono NF"
-  ;; 							     :name
-  ;; 							     "JetBrainsMono Nerd Font"
-  ;; 							     ;; :weight 'normal
-  ;;   						  	     :size
-  ;; 							     11.0))
-  ;;       ;; (unless (symbol-value x-gtk-use-system-tooltips)
-  ;;       ;; 	(set-face-attribute 'tooltip nil))
-  ;;       )
-  ;;   (progn
-  ;;     ;; (load-theme (car themes_chosen) t)
-  ;;     (when (eq custom-enabled-themes nil)
-  ;;       ;; (set-face-bold 'font-lock-keyword-face t)
-  ;;       ;; (set-face-bold 'font-lock-builtin-face t)
-  ;;       (set-face-background 'highlight "#DFEAEC")
-  ;;       (set-face-background 'fringe 'unspecified)
-  ;;       (set-face-attribute 'line-number-current-line nil :foreground
-  ;;                           "#000000" :background "#C4C4C4" :weight
-  ;;                           'bold))
-  ;;     (setq modus-themes-org-blocks 'gray-background
-  ;; 	      modus-themes-bold-constructs t
-  ;;           modus-themes-italic-constructs t)
-  ;;     (set-face-attribute 'mode-line nil
-  ;;   					    ;; :background "#F4F7FA"
-  ;; 					    :background "white"
-  ;; 					    :box nil
-  ;; 					    :font (font-spec
-  ;;   							   :name
-  ;; 							   "JetBrainsMono Nerd Font"
-  ;; 							   :size 11.0))))
+  (if (or
+       (>= (string-to-number (substring (current-time-string) 11 13)) 18)
+       (<= (string-to-number (substring (current-time-string) 11 13)) 6))
+	  (progn
+        (if (equal (cadr themes_chosen) 'modus-vivendi)
+            (progn
+              (setq modus-themes-org-blocks 'gray-background
+	                modus-themes-bold-constructs t
+	                modus-themes-italic-constructs t)
+              (load-theme (car (cdr themes_chosen)) t))
+          (when (equal (cadr themes_chosen) 'manoj-dark)
+            (load-theme (car (cdr themes_chosen)) t)
+            (set-face-foreground 'hl-line 'unspecified)
+            (set-face-background 'fringe 'unspecified)))
+        (set-face-attribute 'mode-line nil
+    					    ;; :background "#0A0E12"
+                            :background "black"
+                            :box nil
+    					    :font (font-spec
+    						  	   ;; "JetBrainsMono Nerd Font" "Monego Ligatures" "Maple Mono NF"
+							       :name
+							       "JetBrainsMono Nerd Font"
+							       ;; :weight 'normal
+    						  	   :size
+							       11.0)))
+    (progn
+      ;; (load-theme (car themes_chosen) t)
+      (when (eq custom-enabled-themes nil)
+        ;; (set-face-bold 'font-lock-keyword-face t)
+        ;; (set-face-bold 'font-lock-builtin-face t)
+        (set-face-background 'highlight "#DFEAEC")
+        (set-face-background 'fringe 'unspecified)
+        (set-face-attribute 'line-number-current-line nil :foreground
+                            "#000000" :background "#C4C4C4" :weight
+                            'bold))
+      (setq modus-themes-org-blocks 'gray-background
+	        modus-themes-bold-constructs t
+            modus-themes-italic-constructs t)
+      (set-face-attribute 'mode-line nil
+    					  ;; :background "#F4F7FA"
+					      :background "white"
+					      :box nil
+					      :font (font-spec
+    							 :name
+							     "JetBrainsMono Nerd Font"
+							     :size 11.0))))
 
   (set-face-attribute
    'mode-line-inactive nil

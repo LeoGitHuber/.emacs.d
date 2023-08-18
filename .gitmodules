@@ -76,9 +76,6 @@
 [submodule "site-lisp/aggressive-indent-mode"]
 	path = site-lisp/aggressive-indent-mode
 	url = https://github.com/Malabarba/aggressive-indent-mode.git
-[submodule "site-lisp/markdown-mode"]
-	path = site-lisp/markdown-mode
-	url = https://github.com/jrblevin/markdown-mode.git
 [submodule "site-lisp/yasnippet"]
 	path = site-lisp/yasnippet
 	url = https://github.com/joaotavora/yasnippet.git
@@ -136,15 +133,9 @@
 [submodule "site-lisp/holo-layer"]
 	path = site-lisp/holo-layer
 	url = https://github.com/manateelazycat/holo-layer.git
-[submodule "site-lisp/dash.el"]
-	path = site-lisp/dash.el
-	url = https://github.com/magnars/dash.el.git
 [submodule "site-lisp/compat"]
 	path = site-lisp/compat
 	url = https://github.com/emacs-compat/compat.git
-[submodule "site-lisp/f.el"]
-	path = site-lisp/f.el
-	url = https://github.com/rejeep/f.el.git
 [submodule "site-lisp/mwim.el"]
 	path = site-lisp/mwim.el
 	url = https://github.com/alezost/mwim.el.git
@@ -166,9 +157,6 @@
 [submodule "site-lisp/auctex"]
 	path = site-lisp/auctex
 	url = https://git.savannah.gnu.org/git/auctex.git
-[submodule "site-lisp/lsp-mode"]
-	path = site-lisp/lsp-mode
-	url = https://github.com/emacs-lsp/lsp-mode.git
 [submodule "site-lisp/company-mode"]
 	path = site-lisp/company-mode
 	url = https://github.com/company-mode/company-mode.git
@@ -187,12 +175,6 @@
 [submodule "site-lisp/corfu"]
 	path = site-lisp/corfu
 	url = https://github.com/minad/corfu
-[submodule "site-lisp/ht.el"]
-	path = site-lisp/ht.el
-	url = https://github.com/Wilfred/ht.el.git
-[submodule "site-lisp/spinner.el"]
-	path = site-lisp/spinner.el
-	url = https://github.com/Malabarba/spinner.el.git
 [submodule "site-lisp/posframe"]
 	path = site-lisp/posframe
 	url = https://github.com/tumashu/posframe.git
@@ -235,3 +217,36 @@
 [submodule "site-lisp/visual-regexp.el"]
 	path = site-lisp/visual-regexp.el
 	url = https://github.com/benma/visual-regexp.el.git
+[submodule "site-lisp/meow"]
+	path = site-lisp/meow
+	url = https://github.com/meow-edit/meow.git
+[submodule "site-lisp/cape"]
+	path = site-lisp/cape
+	url = https://github.com/minad/cape.git
+[submodule "site-lisp/--force"]
+	path = site-lisp/--force
+	url = https://github.com/rejeep/f.el
+[submodule "site-lisp/--froce"]
+	path = site-lisp/--froce
+	url = https://github.com/Wilfred/ht.el
+[submodule "site-lisp/ht.el"]
+	path = site-lisp/ht.el
+	url = https://github.com/Wilfred/ht.el
+[submodule "site-lisp/f.el"]
+	path = site-lisp/f.el
+	url = https://github.com/rejeep/f.el
+[submodule "site-lisp/dash.el"]
+	path = site-lisp/dash.el
+	url = https://github.com/magnars/dash.el
+[submodule "site-lisp/spinner.el"]
+	path = site-lisp/spinner.el
+	url = https://github.com/Malabarba/spinner.el
+[submodule "site-lisp/markdown-mode"]
+	path = site-lisp/markdown-mode
+	url = https://github.com/jrblevin/markdown-mode.git
+[submodule "site-lisp/lsp-mode"]
+	path = site-lisp/lsp-mode
+	url = https://github.com/emacs-lsp/lsp-mode.git
+[submodule "site-lisp/themes"]
+	path = site-lisp/themes
+	url = https://github.com/doomemacs/themes.git

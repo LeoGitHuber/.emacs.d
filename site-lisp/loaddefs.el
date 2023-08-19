@@ -1849,6 +1849,8 @@ evaluate `corfu-mode'.
 The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
+\\{corfu-mode-map}
+
 (fn &optional ARG)" t)
 (put 'global-corfu-mode 'globalized-minor-mode t)
 (defvar global-corfu-mode nil "\
@@ -7449,6 +7451,8 @@ evaluate `meow-mode'.
 The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
+\\{meow-keymap}
+
 (fn &optional ARG)")
 (autoload 'meow-indicator "meow/meow-core" "\
 Indicator showing current mode.")
@@ -11603,6 +11607,8 @@ evaluate `(default-value \\='which-key-mode)'.
 
 The mode's hook is called both when the mode is enabled and when
 it is disabled.
+
+\\{which-key-mode-map}
 
 (fn &optional ARG)" t)
 (autoload 'which-key-setup-side-window-right "emacs-which-key/which-key" "\

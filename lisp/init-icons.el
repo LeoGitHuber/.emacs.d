@@ -7,6 +7,8 @@
 (add-to-list 'load-path "~/.emacs.d/site-lisp/treemacs-nerd-icons")
 (add-to-list 'load-path "~/.emacs.d/site-lisp/nerd-icons-dired")
 
+(setq nerd-icons-font-family "JetBrainsMono Nerd Font")
+
 (require 'nerd-icons)
 
 (load "~/.emacs.d/self-develop/modeline-setting.el")

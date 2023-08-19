@@ -41,6 +41,7 @@
   (load "~/.emacs.d/lisp/init-diagnostic.el")
   (load "~/.emacs.d/lisp/init-icons.el")
   (load "~/.emacs.d/lisp/init-keybindings.el")
+  (load "~/.emacs.d/lisp/init-meow.el")
   (load "~/.emacs.d/lisp/init-lsp.el")
   (load "~/.emacs.d/lisp/init-dired.el")
   (load "~/.emacs.d/lisp/init-chinese.el")
@@ -64,14 +65,21 @@
     ;; Hack --- HarmonyOS Sans SC
     ;; JetBrainsMono Nerd Font
     ;; "Iosevka Fixed"    ;; Input Mono
+    (setq frame-title-format
+  	      '((:eval (if (buffer-file-name)
+  				       (abbreviate-file-name
+				        (buffer-name))
+  				     "%b"))))
+
 
     ;; ;; Enable Ligatures Feature, more info: https://github.com/mickeynp/ligature.el
     ;; (global-ligature-mode)
     ;; ;; PragmataPro Font Ligature Support
     ;; (ligature-pragmatapro-setup)
-
     ;; Set icon for truncation
     ;; (setq truncate-string-ellipsis (nerd-icons-mdicon "nf-md-arrow_down_right"))
+
+    (setq x-underline-at-descent-line t)
     ;; Don't use help echo tooltips
     ;; (setq x-gtk-use-system-tooltips nil)
     ;; (unless (symbol-value x-gtk-use-system-tooltips)
@@ -237,8 +245,7 @@
   ;; (desktop-save-mode 1)
 
 
-;;; Efficiency
-  ;; (load "~/.emacs.d/site-lisp/vundo/vundo.el")
+  ;;; Efficiency
   (keymap-global-set "C-x f" 'find-file)
   (keymap-global-set "C-u" 'undo)
   (keymap-global-set "C-z" 'vundo)
@@ -288,10 +295,7 @@
     (setq browse-kill-ring-separator "------------------------------"
   		  browse-kill-ring-separator-face 'shadow))
 
-  ;; Meow
-  ;; (load "~/.emacs.d/meow.el")
-
-;;; Visual Repalcement
+  ;;; Visual Repalcement
   (keymap-global-set "C-c r" 'vr/replace)
   (keymap-global-set "C-c m" 'vr/mc-mark)
 
@@ -341,17 +345,12 @@
 
   ;; (add-hook 'c-ts-mode-hook (lambda () (setq c-ts-mode-indent-offset 4)))
 
-  ;; (load "~/.emacs.d/site-lisp/emacs-which-key/which-key.el")
-  (when (display-graphic-p)
-    (setq frame-title-format
-  	      '((:eval (if (buffer-file-name)
-  				       (abbreviate-file-name
-				        (buffer-name))
-  				     "%b"))))
-    (with-eval-after-load 'which-key
-      (which-key-mode t)
-	  (setq which-key-max-description-length 30
-		    which-key-show-remaining-keys t)))
+  (load "~/.emacs.d/site-lisp/emacs-which-key/which-key.el")
+
+  (with-eval-after-load 'which-key
+    (which-key-mode t)
+	(setq which-key-max-description-length 30
+		  which-key-show-remaining-keys t))
 
   (define-key global-map [remap list-buffers] 'ibuffer)
 
@@ -421,32 +420,13 @@
   ;; (global-display-fill-column-indicator-mode)
 
   (defvar themes_chosen
-    '(modus-operandi-tritanopia manoj-dark)
+    '(
+      ;; modus-operandi-tritanopia
+      doom-rouge
+      doom-rouge ;; manoj-dark
+      )
     "Set for themes for dark and light mode.")
-
-  ;; (if (equal (cadr themes_chosen) 'modus-vivendi)
-  ;;     (progn
-  ;;       (setq modus-themes-org-blocks 'gray-background
-  ;;             modus-themes-bold-constructs t
-  ;;             modus-themes-italic-constructs t)
-  ;;       (load-theme (car (cdr themes_chosen)) t))
-  ;;   (when (equal (cadr themes_chosen) 'manoj-dark)
-  ;;     (load-theme (car (cdr themes_chosen)) t)
-  ;;     (set-face-foreground 'hl-line 'unspecified)
-  ;;     (set-face-background 'fringe 'unspecified)))
-  ;; (set-face-attribute 'mode-line nil
-  ;; 					  ;; :background "#0A0E12"
-  ;;                     :background "black"
-  ;;                     :foreground (face-foreground 'mode-line-buffer)
-  ;;                     :box nil
-  ;; 					  :font (font-spec
-  ;; 						     ;; "JetBrainsMono Nerd Font" "Monego Ligatures" "Maple Mono NF"
-  ;;   					     :name
-  ;;   					     "JetBrainsMono Nerd Font"
-  ;;   					     ;; :weight 'normal
-  ;; 						     :size
-  ;;   					     11.0))
-
+  (require 'doom-themes)
   (if (or
        (>= (string-to-number (substring (current-time-string) 11 13)) 18)
        (<= (string-to-number (substring (current-time-string) 11 13)) 6))
@@ -457,23 +437,19 @@
 	                modus-themes-bold-constructs t
 	                modus-themes-italic-constructs t)
               (load-theme (car (cdr themes_chosen)) t))
-          (when (equal (cadr themes_chosen) 'manoj-dark)
-            (load-theme (car (cdr themes_chosen)) t)
-            (set-face-foreground 'hl-line 'unspecified)
-            (set-face-background 'fringe 'unspecified)))
-        (set-face-attribute 'mode-line nil
-    					    ;; :background "#0A0E12"
-                            :background "black"
-                            :box nil
-    					    :font (font-spec
-    						  	   ;; "JetBrainsMono Nerd Font" "Monego Ligatures" "Maple Mono NF"
-							       :name
-							       "JetBrainsMono Nerd Font"
-							       ;; :weight 'normal
-    						  	   :size
-							       11.0)))
+          (if (equal (cadr themes_chosen) 'manoj-dark)
+              (progn
+                (load-theme (car (cdr themes_chosen)) t)
+                (set-face-foreground 'hl-line 'unspecified)
+                (set-face-background 'fringe 'unspecified))
+            (progn
+              (load-theme (cadr themes_chosen) t)
+              (setq doom-rouge-brighter-comments t
+                    doom-rouge-brighter-tabs t)
+              ))
+          ))
     (progn
-      ;; (load-theme (car themes_chosen) t)
+      (load-theme (car themes_chosen) t)
       (when (eq custom-enabled-themes nil)
         ;; (set-face-bold 'font-lock-keyword-face t)
         ;; (set-face-bold 'font-lock-builtin-face t)
@@ -481,25 +457,38 @@
         (set-face-background 'fringe 'unspecified)
         (set-face-attribute 'line-number-current-line nil :foreground
                             "#000000" :background "#C4C4C4" :weight
-                            'bold))
+                            'bold)
+        )
       (setq modus-themes-org-blocks 'gray-background
 	        modus-themes-bold-constructs t
-            modus-themes-italic-constructs t)
+            modus-themes-italic-constructs t)))
+
+  (if (equal (frame-parameter nil 'background-mode) 'dark)
       (set-face-attribute 'mode-line nil
-    					  ;; :background "#F4F7FA"
-					      :background "white"
-					      :box nil
-					      :font (font-spec
-    							 :name
+                          ;; :background "black"
+                          :box nil
+    				      :font (font-spec
+    						     ;; "JetBrainsMono Nerd Font" "Monego Ligatures" "Maple Mono NF"
+							     :name
 							     "JetBrainsMono Nerd Font"
-							     :size 11.0))))
+                                 :size
+							     11.0)
+                          :underline
+                          (face-foreground 'mode-line-emphasis)
+                          )
+    (set-face-attribute 'mode-line nil
+    				    ;; :background "#F4F7FA"
+					    :background "white"
+					    :box nil
+					    :font (font-spec
+    						   :name
+							   "JetBrainsMono Nerd Font"
+							   :size 11.0)))
 
   (set-face-attribute
    'mode-line-inactive nil
    :inherit 'mode-line
    :box nil)
-
-  (setq x-underline-at-descent-line t)
 
   ;; (dolist (hook '(prog-mode-hook cuda-mode-hook))
   ;;   (add-hook hook 'highlight-indent-guides-mode))

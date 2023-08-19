@@ -40,6 +40,7 @@
                                 ("Pictures" (extensions "jpg" "png" "jpeg" "svg" "gif"))
                                 ("Audio" (extensions "mp3" "flac" "wav" "ape" "aac"))
                                 ("Archives" (extensions "gz" "rar" "zip")))
+        dirvish-path-separators '(" ~" " /" "/")
         ;; dirvish-hide-details nil
         dirvish-mode-line-height 20
         ;; dirvish-show-media-properties t

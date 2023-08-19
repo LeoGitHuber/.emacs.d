@@ -2,12 +2,19 @@
 ;;; Commentary:
 ;;; Code:
 
+
+;; Use "C-[" to exit insert make things complicated because of Emacs,
+;; but you can follow below steps to do that.
+;; (define-key input-decode-map [?\C-\[] [C-\[])  ;; (kdb "C-[") or [control-bracketleft]
+;; (define-key global-map [C-\[] [?\C-g])
+
 (require 'meow)
 (defun meow-setup ()
   (setq meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
   (meow-motion-overwrite-define-key
    '("j" . meow-next)
    '("k" . meow-prev)
+   '("M-q" . ignore)
    '("<escape>" . ignore))
   (meow-leader-define-key
    ;; SPC j/k will run the original command in MOTION state.
@@ -88,9 +95,19 @@
    '("z" . meow-pop-selection)
    '("'" . repeat)
    '(":" . execute-extended-command)
-   '("<escape>" . ignore)))
+   '("/" . isearch-forward)
+   ;; '("g g" . beginning-of-buffer)
+   '("G" . end-of-buffer)
+   '("M-q" . ignore)
+   '("?" . help-command)
+   '("<escape>" . ignore))
+  (meow-define-keys 'insert '("M-q" . meow-insert-exit))
+  )
 
 (meow-setup)
+
+(setq meow-use-cursor-position-hack t
+      meow-use-enhanced-selection-effect t)
 
 (meow-global-mode)
 

@@ -250,3 +250,9 @@
 [submodule "site-lisp/themes"]
 	path = site-lisp/themes
 	url = https://github.com/doomemacs/themes.git
+[submodule "site-lisp/highlight-numbers"]
+	path = site-lisp/highlight-numbers
+	url = https://github.com/Fanael/highlight-numbers.git
+[submodule "site-lisp/paren-face"]
+	path = site-lisp/paren-face
+	url = https://github.com/tarsius/paren-face.git

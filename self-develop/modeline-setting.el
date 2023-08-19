@@ -262,6 +262,10 @@
   (nerd-icons-powerline "nf-pl-right_hard_divider")
   "Set the separator right icon for mode-line area.")
 
+(defvar ml-sep-winum
+  nil
+  "Whether set a seperator between winum and other part.")
+
 (defvar fc-info
   (nerd-icons-codicon "nf-cod-question" :face '(:inherit flycheck-info-my))
   "Set icon for Flycheck Info.")
@@ -469,19 +473,30 @@
  mode-line-format
  '((:eval
 	(concat
+     ;;; Winum
 	 (when (and (bound-and-true-p winum-mode) (winum-get-number))
-	   (alist-get (winum-get-number) winum-list)
-	   ;; (if (buffer-file-name)
-	   ;;     (propertize mode-line-sep 'face '(:inherit mode-line-area-1-separator-2))
-	   ;;   (propertize mode-line-sep 'face '(:inherit mode-line-area-1-separator-3)))
+       (propertize (format " %d " (winum-get-number)) 'face '(:inherit winum-face))
+	   ;;   (alist-get (winum-get-number) winum-list)
+	   ;;   ;; (if (buffer-file-name)
+	   ;;   ;;     (propertize mode-line-sep 'face '(:inherit mode-line-area-1-separator-2))
+	   ;;   ;;   (propertize mode-line-sep 'face '(:inherit mode-line-area-1-separator-3)))
        )
-     ;; Git
+
+     ;;; Meow
+     (if (bound-and-true-p meow-mode)
+         (propertize meow--indicator)
+       ;;; Evil
+       (when (bound-and-true-p evil-mode)
+         ""))
+
+     ;;; Git
      (when vc-mode
        (concat
-        (propertize mode-line-sep
-                    'face
-                    `(:background ,(face-background 'mode-line-git)
-                                  :foreground ,(face-background 'mode-line-area-1)))
+        (when ml-sep-winum
+          (propertize mode-line-sep
+                      'face
+                      `(:background ,(face-background 'mode-line-git)
+                                    :foreground ,(face-background 'mode-line-area-1))))
         (propertize
 	     (cond
 	      ((string-match "Git[:-]" vc-mode)
@@ -541,7 +556,7 @@
                                                (t (setq .note (+ 1 .note))))))))
                                  (if (> (+ .error .warning .note) 0)
                                      (concat
-                                      (unless vc-mode
+                                      (unless (or vc-mode (not ml-sep-winum))
                                         (propertize
                                          mode-line-sep
                                          'face
@@ -574,32 +589,34 @@
                                          ,(face-background 'mode-line-git))))
                                    ;; (nerd-icons-mdicon "nf-md-check_circle_outline"
                                    ;;                    :face '(:inherit success))
-                                   (unless vc-mode
+                                   (unless (or vc-mode (not ml-sep-winum))
                                      (propertize
                                       mode-line-sep
                                       'face '(:inherit mode-line-area-1-separator-3)))
                                    ))))))))
-           (propertize
-            icon
-            'help-echo (concat "Flymake\n"
-                               (cond
-                                ;; (some-waiting "Checking...")
-                                ((null known) "No Checker")
-                                ;; (all-disabled "All Checkers Disabled")
-                                (t (format "%d/%d backends running
+           (unless (equal icon "nil")
+             (propertize
+              icon
+              'help-echo (concat "Flymake\n"
+                                 (cond
+                                  ;; (some-waiting "Checking...")
+                                  ((null known) "No Checker")
+                                  ;; (all-disabled "All Checkers Disabled")
+                                  (t (format "%d/%d backends running
            mouse-1: Display minor mode menu
            mouse-2: Show help for minor mode"
-                                           (length running) (length known)))))
-            'mouse-face 'mode-line-highlight
-            'local-map (let ((map (make-sparse-keymap)))
-                         (define-key map [mode-line down-mouse-1]
-                                     flymake-menu)
-                         (define-key map [mode-line mouse-2]
-                                     (lambda ()
-                                       (interactive)
-                                       (describe-function 'flymake-mode)))
-                         map)))
-       (propertize mode-line-sep 'face '(:inherit mode-line-area-1-separator-3)))
+                                             (length running) (length known)))))
+              'mouse-face 'mode-line-highlight
+              'local-map (let ((map (make-sparse-keymap)))
+                           (define-key map [mode-line down-mouse-1]
+                                       flymake-menu)
+                           (define-key map [mode-line mouse-2]
+                                       (lambda ()
+                                         (interactive)
+                                         (describe-function 'flymake-mode)))
+                           map))))
+       (when ml-sep-winum
+         (propertize mode-line-sep 'face '(:inherit mode-line-area-1-separator-3))))
 
      ;; Directory
      ;; (if (buffer-file-name)

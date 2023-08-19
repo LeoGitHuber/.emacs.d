@@ -61,6 +61,8 @@
 	    corfu-auto-prefix 0
 	    corfu-auto-delay 0
 	    corfu-preview-current t)
+  (when (boundp meow-insert-exit-hook)
+    (add-hook 'meow-insert-exit-hook 'corfu-quit))
   (require 'kind-icon)
   (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter)
   (add-to-list 'completion-at-point-functions #'cape-dabbrev)
@@ -135,8 +137,7 @@
   (if (bound-and-true-p corfu-mode)
       (remove-hook 'post-command-hook #'lsp-after-start)
     (progn
-      (global-corfu-mode)))
-  )
+      (global-corfu-mode))))
 
 (add-hook 'post-command-hook #'lsp-after-start)
 

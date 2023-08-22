@@ -45,21 +45,33 @@
   (load "~/.emacs.d/lisp/init-lsp.el")
   (load "~/.emacs.d/lisp/init-dired.el")
   (load "~/.emacs.d/lisp/init-chinese.el")
-  (load "~/.emacs.d/lisp/init-hydra.el")
   (load "~/.emacs.d/lisp/init-input.el")
   (load "~/.emacs.d/lisp/init-eaf.el")
   (load "~/.emacs.d/lisp/init-latex.el")
   (load "~/.emacs.d/lisp/init-org.el")
   (load "~/.emacs.d/lisp/init-verilog.el")
   (load "~/.emacs.d/lisp/init-reader.el")
+  (load "~/.emacs.d/lisp/init-hydra.el")
+  (load "~/.emacs.d/site-lisp/emacs-which-key/which-key.el")
 
-  ;; (dolist
-  ;;     (file (cddr (directory-files "~/.emacs.d/lisp" t nil nil nil)))
-  ;;   (or (string-match "abandoned" file)
-  ;;       (load file)))
+  ;; (global-lsp-bridge-mode)
+  ;; (global-corfu-mode)
+
+  (defun enable-after-meow ()
+    "Modes enable after meow insert."
+    (unless (bound-and-true-p lsp-bridge-mode)
+      (add-hook 'emacs-lisp-mode-hook 'lsp-bridge-mode)
+      (when (derived-mode-p 'emacs-lisp-mode 'lisp-mode)
+        (lsp-bridge-mode))
+      (with-current-buffer (get-buffer-create "*scratch*")
+        (lsp-bridge-mode)))
+    (remove-hook 'meow-insert-enter-hook #'enable-after-meow))
+
+  (when (bound-and-true-p meow-mode)
+    (add-hook 'meow-insert-enter-hook #'enable-after-meow))
 
   (when (display-graphic-p)
-    (set-en_cn-font "Input Mono" "HarmonyOS Sans SC" 12.0)
+    (set-en_cn-font "Input Mono" "HarmonyOS Sans SC" 13.0)
     ;; Maple Mono NF --- Maple Mono SC NF, HarmonyOS Sans SC
     ;; PragmataPro Mono Liga --- SimHei
     ;; Hack --- HarmonyOS Sans SC
@@ -70,7 +82,6 @@
   				       (abbreviate-file-name
 				        (buffer-name))
   				     "%b"))))
-
 
     ;; ;; Enable Ligatures Feature, more info: https://github.com/mickeynp/ligature.el
     ;; (global-ligature-mode)
@@ -290,6 +301,7 @@
 
   ;; (load "~/.emacs.d/site-lisp/browse-kill-ring/browse-kill-ring.el")
   (keymap-global-set "C-c k" 'browse-kill-ring)
+  ;; (browse-kill-ring-default-keybindings)
   (add-hook 'after-init-hook 'browse-kill-ring-default-keybindings)
   (with-eval-after-load 'browse-kill-ring
     (setq browse-kill-ring-separator "------------------------------"
@@ -345,8 +357,6 @@
 
   ;; (add-hook 'c-ts-mode-hook (lambda () (setq c-ts-mode-indent-offset 4)))
 
-  (load "~/.emacs.d/site-lisp/emacs-which-key/which-key.el")
-
   (with-eval-after-load 'which-key
     (which-key-mode t)
 	(setq which-key-max-description-length 30
@@ -369,7 +379,7 @@
     (setq xref-show-xrefs-function 'consult-xref
 		  xref-show-definitions-function 'consult-xref))
 
-;;; Theme
+  ;;; Theme
   (dolist (hook '(prog-mode-hook text-mode-hook cuda-mode-hook))
     (add-hook hook 'rainbow-mode))
   ;; (load "~/.emacs.d/site-lisp/rainbow-delimiters/rainbow-delimiters.el")
@@ -423,7 +433,8 @@
     '(
       ;; modus-operandi-tritanopia
       doom-rouge
-      doom-rouge ;; manoj-dark
+      ;; manoj-dark
+      doom-rouge
       )
     "Set for themes for dark and light mode.")
   (require 'doom-themes)
@@ -508,7 +519,8 @@
   (with-eval-after-load 'highlight-indent-guides
     (setq highlight-indent-guides-method 'character
 		  highlight-indent-guides-responsive 'top
-		  highlight-indent-guides-suppress-auto-error t)))
+		  highlight-indent-guides-suppress-auto-error t))
+  )
 
 (provide 'config)
 ;;; config.el ends here.

@@ -75,13 +75,13 @@
 
 (setq eldoc-documentation-function 'eldoc-documentation-compose)
 
-(add-hook 'flymake-mode-hook
-          (lambda ()
-            (sanityinc/enable-flymake-flycheck)
-            ;; (setq-default eldoc-documentation-functions
-            ;;               (cons 'flymake-eldoc-function
-            ;;                     (delq 'flymake-eldoc-function eldoc-documentation-functions)))
-            ))
+;; (add-hook 'flymake-mode-hook
+;;           (lambda ()
+;;             (sanityinc/enable-flymake-flycheck)
+;;             ;; (setq-default eldoc-documentation-functions
+;;             ;;               (cons 'flymake-eldoc-function
+;;             ;;                     (delq 'flymake-eldoc-function eldoc-documentation-functions)))
+;;             ))
 
 
 (provide 'init-diagnostic)

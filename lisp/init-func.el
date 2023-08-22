@@ -131,21 +131,6 @@ Set Font for both of English and Chinese characters."
   "Function for `hl-line-range-function'."
   (cons (line-beginning-position) (+ 1 (line-end-position))))
 
-(defun find-subdir-recursively (dir)
-  "Find all subdirectories in DIR.
-
-Dot-directories and directories contain `.nosearch' will be skipped."
-  (thread-last (directory-files dir nil)
-               (cl-remove-if (lambda (f)
-                               (string-prefix-p "." f)))
-               (mapcar (lambda (d) (expand-file-name d dir)))
-               (cl-remove-if-not #'file-directory-p)
-               (cl-remove-if (lambda (d)
-                               (string-prefix-p "test" d)))
-               (cl-remove-if (lambda (d)
-                               (file-exists-p (expand-file-name ".nosearch"
-                                                                d))))))
-
 (defun get-pure-cons (list1 list2)
   "Combine LIST1 and LIST2.
 The resulting list contains all items that appear in LIST1 but not LIST2."
@@ -168,6 +153,29 @@ The resulting list contains all items that appear in LIST1 but not LIST2."
       (setq n2 0)
       (setq compute 0))
     result))
+
+(defun screen-capture (place &rest _)
+  "Use grim to capture screen and store it into PLACE."
+  (interactive
+   (find-file-read-args "Store into: "
+                        (confirm-nonexistent-file-or-buffer)))
+  (shell-command (format "grim -l 0 -g \"$(slurp)\" %s" place) nil nil)
+  (kill-new (format "[[%s][]]" place)))
+
+(defun find-subdir-recursively (dir)
+  "Find all subdirectories in DIR.
+
+Dot-directories and directories contain `.nosearch' will be skipped."
+  (thread-last (directory-files dir nil)
+               (cl-remove-if (lambda (f)
+                               (string-prefix-p "." f)))
+               (mapcar (lambda (d) (expand-file-name d dir)))
+               (cl-remove-if-not #'file-directory-p)
+               (cl-remove-if (lambda (d)
+                               (string-prefix-p "test" d)))
+               (cl-remove-if (lambda (d)
+                               (file-exists-p (expand-file-name ".nosearch"
+                                                                d))))))
 
 (defun find-dir-recursively (dir)
   "Find all `.el' files in DIR and its subdirectories."

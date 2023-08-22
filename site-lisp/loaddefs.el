@@ -431,6 +431,60 @@ Unconditionally turn on Bib Cite mode.")
 (register-definition-prefixes "auctex/bib-cite" '("LaTeX-find-label-hist-alist" "bib-" "create-alist-from-list" "member-cis" "psg-" "search-directory-tree"))
 
 
+;;; Generated autoloads from breadcrumb/breadcrumb.el
+
+(autoload 'breadcrumb-imenu-crumbs "breadcrumb/breadcrumb" "\
+Describe point inside the Imenu tree of current file.")
+(autoload 'breadcrumb-project-crumbs "breadcrumb/breadcrumb" "\
+Describing the current file inside project.")
+(autoload 'breadcrumb-local-mode "breadcrumb/breadcrumb" "\
+Header lines with breadcrumbs.
+
+This is a minor mode.  If called interactively, toggle the
+`Breadcrumb-Local mode' mode.  If the prefix argument is
+positive, enable the mode, and if it is zero or negative, disable
+the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `breadcrumb-local-mode'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t)
+(put 'breadcrumb-mode 'globalized-minor-mode t)
+(defvar breadcrumb-mode nil "\
+Non-nil if Breadcrumb mode is enabled.
+See the `breadcrumb-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `breadcrumb-mode'.")
+(custom-autoload 'breadcrumb-mode "breadcrumb/breadcrumb" nil)
+(autoload 'breadcrumb-mode "breadcrumb/breadcrumb" "\
+Toggle Bc-Local mode in all buffers.
+With prefix ARG, enable Breadcrumb mode if ARG is positive; otherwise,
+disable it.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.
+Enable the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+Bc-Local mode is enabled in all buffers where
+`bc--turn-on-local-mode-on-behalf-of-global-mode' would do it.
+
+See `bc-local-mode' for more information on Bc-Local mode.
+
+(fn &optional ARG)" t)
+(autoload 'breadcrumb-jump "breadcrumb/breadcrumb" "\
+Like \\[execute-extended-command] `imenu', but breadcrumb-powered." t)
+(register-definition-prefixes "breadcrumb/breadcrumb" '("bc-"))
+
+
 ;;; Generated autoloads from browse-kill-ring/browse-kill-ring.el
 
 (autoload 'browse-kill-ring-default-keybindings "browse-kill-ring/browse-kill-ring" "\
@@ -2707,6 +2761,8 @@ evaluate `(default-value \\='doom-modeline-mode)'.
 The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
+\\{doom-modeline-mode-map}
+
 (fn &optional ARG)" t)
 (register-definition-prefixes "doom-modeline/doom-modeline" '("doom-modeline-"))
 
@@ -3804,6 +3860,21 @@ it is disabled.
 (register-definition-prefixes "highlight-indent-guides/tests/highlight-indent-guides-tests" '("higlight-indent-guides-"))
 
 
+;;; Generated autoloads from highlight-numbers/highlight-numbers.el
+
+(autoload 'highlight-numbers-mode "highlight-numbers/highlight-numbers" "\
+Minor mode for highlighting numeric literals in source code.
+
+Toggle Highlight Numbers mode on or off.
+
+With a prefix argument ARG, enable Highlight Numbers mode if ARG is
+positive, and disable it otherwise. If called from Lisp, enable
+the mode if ARG is omitted or nil, and toggle it if ARG is `toggle'.
+
+(fn &optional ARG)" t)
+(register-definition-prefixes "highlight-numbers/highlight-numbers" '("highlight-numbers-"))
+
+
 ;;; Generated autoloads from holo-layer/holo-layer.el
 
 (register-definition-prefixes "holo-layer/holo-layer" '("holo-layer-"))
@@ -3977,6 +4048,8 @@ evaluate `iscroll-mode'.
 The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
+\\{iscroll-mode-map}
+
 (fn &optional ARG)" t)
 (register-definition-prefixes "iscroll/iscroll" '("iscroll-"))
 
@@ -4105,6 +4178,8 @@ evaluate `lsp-bridge-mode'.
 
 The mode's hook is called both when the mode is enabled and when
 it is disabled.
+
+\\{lsp-bridge-mode-map}
 
 (fn &optional ARG)" t)
 (autoload 'global-lsp-bridge-mode "lsp-bridge/lsp-bridge" nil t)
@@ -8312,6 +8387,53 @@ it is disabled.
 (register-definition-prefixes "org-visual-outline/org-visual-indent" '("org-visual-indent-"))
 
 
+;;; Generated autoloads from paren-face/paren-face.el
+
+(autoload 'paren-face-mode "paren-face/paren-face" "\
+Use a dedicated face just for parentheses.
+
+This is a minor mode.  If called interactively, toggle the
+`Paren-Face mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `paren-face-mode'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t)
+(put 'global-paren-face-mode 'globalized-minor-mode t)
+(defvar global-paren-face-mode nil "\
+Non-nil if Global Paren-Face mode is enabled.
+See the `global-paren-face-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `global-paren-face-mode'.")
+(custom-autoload 'global-paren-face-mode "paren-face/paren-face" nil)
+(autoload 'global-paren-face-mode "paren-face/paren-face" "\
+Toggle Paren-Face mode in all buffers.
+With prefix ARG, enable Global Paren-Face mode if ARG is positive;
+otherwise, disable it.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.
+Enable the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+Paren-Face mode is enabled in all buffers where
+`turn-on-paren-face-mode-if-desired' would do it.
+
+See `paren-face-mode' for more information on Paren-Face mode.
+
+(fn &optional ARG)" t)
+(register-definition-prefixes "paren-face/paren-face" '("paren-face-" "turn-on-paren-face-mode-if-desired"))
+
+
 ;;; Generated autoloads from pdf-tools/lisp/pdf-annot.el
 
 (autoload 'pdf-annot-minor-mode "pdf-tools/lisp/pdf-annot" "\
@@ -9437,6 +9559,243 @@ Keymap used for `puni-mode'.")
 (autoload 'puni-disable-puni-mode "puni/puni" "\
 Disable Puni mode in current buffer.")
 (register-definition-prefixes "puni/puni" '("puni-"))
+
+
+;;; Generated autoloads from pyim/pyim.el
+
+(defvar pyim-title "PYIM ")
+(register-input-method "pyim" "UTF-8" #'pyim-activate pyim-title "")
+(autoload 'pyim-activate "pyim/pyim" "\
+pyim 启动函数.
+
+pyim 是使用 `pyim-activate' 来启动输入法，这个命令主要做如下工作：
+1. 重置所有的 local 变量。
+2. 创建汉字到拼音和拼音到汉字的 hash table。
+3. 创建词库缓存 dcache.
+4. 运行 hook： `pyim-load-hook'。
+5. 将 `pyim--kill-emacs-hook-function' 命令添加到 `kill-emacs-hook' , emacs 关闭
+之前将用户选择过的词生成的缓存和词频缓存保存到文件，供以后使用。
+6. 设定变量：
+   1. `input-method-function'
+   2. `deactivate-current-input-method-function'
+7. 运行 `pyim-activate-hook'
+
+pyim 使用函数 `pyim-activate' 启动输入法的时候，会将变量
+`input-method-function' 设置为 `pyim-input-method' ，这个变量会影
+响 `read-event' 的行为。
+
+当输入字符时，`read-event' 会被调用，`read-event' 调用的过程中，
+会执行 `pyim-input-method' 这个函数。
+
+(fn &optional ARGS)" t)
+(autoload 'pyim-convert-string-at-point "pyim/pyim" "\
+将光标前的用户输入的字符串转换为中文.
+
+(fn &optional _)" t)
+(register-definition-prefixes "pyim/pyim" '("pyim-"))
+
+
+;;; Generated autoloads from pyim/pyim-autoselector.el
+
+(register-definition-prefixes "pyim/pyim-autoselector" '("pyim-autoselector-"))
+
+
+;;; Generated autoloads from pyim/pyim-candidates.el
+
+(register-definition-prefixes "pyim/pyim-candidates" '("pyim-"))
+
+
+;;; Generated autoloads from pyim/pyim-cloudim.el
+
+(register-definition-prefixes "pyim/pyim-cloudim" '("pyim-cloudim"))
+
+
+;;; Generated autoloads from pyim/pyim-common.el
+
+(register-definition-prefixes "pyim/pyim-common" '("pyim-"))
+
+
+;;; Generated autoloads from pyim/pyim-cregexp.el
+
+(register-definition-prefixes "pyim/pyim-cregexp" '("pyim-cregexp-"))
+
+
+;;; Generated autoloads from pyim/pyim-cregexp-utils.el
+
+(autoload 'pyim-cregexp-convert-at-point "pyim/pyim-cregexp-utils" "\
+将光标前的字符串按拼音的规则转换为一个搜索中文的 regexp.
+用于实现拼音搜索中文的功能。
+
+在 minibuffer 中，这个命令默认会自动运行 `exit-minibuffer'.
+这个可以使用 INSERT-ONLY 参数控制。
+
+(fn &optional INSERT-ONLY)" t)
+(defvar pyim-isearch-mode nil "\
+Non-nil if pyim-isearch mode is enabled.
+See the `pyim-isearch-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `pyim-isearch-mode'.")
+(custom-autoload 'pyim-isearch-mode "pyim/pyim-cregexp-utils" nil)
+(autoload 'pyim-isearch-mode "pyim/pyim-cregexp-utils" "\
+这个 mode 为 isearch 添加拼音搜索功能.
+
+This is a global minor mode.  If called interactively, toggle the
+`pyim-isearch mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `(default-value \\='pyim-isearch-mode)'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t)
+(register-definition-prefixes "pyim/pyim-cregexp-utils" '("pyim-"))
+
+
+;;; Generated autoloads from pyim/pyim-cstring.el
+
+(autoload 'pyim-cstring-to-pinyin "pyim/pyim-cstring" "\
+将汉字字符串转换为对应的拼音字符串的工具.
+
+如果 SHOU-ZI-MU 设置为 t, 转换仅得到拼音首字母字符串。当
+RETURN-LIST 设置为 t 时，返回一个拼音列表，这个列表包含词条的一个
+或者多个拼音（词条包含多音字时）；如果 IGNORE-DUO-YIN-ZI 设置为
+t, 遇到多音字时，只使用第一个拼音，其它拼音忽略。
+
+BUG: 当 STRING 中包含其它标点符号，并且设置 SEPERATER 时，结果会
+包含多余的连接符：比如： \"你=好\" --> \"ni-=-hao\"
+
+(fn STRING &optional SHOU-ZI-MU SEPARATOR RETURN-LIST IGNORE-DUO-YIN-ZI _)")
+(autoload 'pyim-cstring-to-pinyin-simple "pyim/pyim-cstring" "\
+简化版的 `pyim-cstring-to-pinyin', 不处理多音字。
+
+(fn STRING &optional SHOU-ZI-MU SEPARATOR RETURN-LIST)")
+(register-definition-prefixes "pyim/pyim-cstring" '("pyim-"))
+
+
+;;; Generated autoloads from pyim/pyim-cstring-utils.el
+
+(register-definition-prefixes "pyim/pyim-cstring-utils" '("pyim-"))
+
+
+;;; Generated autoloads from pyim/pyim-dcache.el
+
+(register-definition-prefixes "pyim/pyim-dcache" '("pyim-dcache-"))
+
+
+;;; Generated autoloads from pyim/pyim-dhashcache.el
+
+(register-definition-prefixes "pyim/pyim-dhashcache" '("pyim-dhashcache-"))
+
+
+;;; Generated autoloads from pyim/pyim-dict.el
+
+(register-definition-prefixes "pyim/pyim-dict" '("pyim-"))
+
+
+;;; Generated autoloads from pyim/pyim-dict-manager.el
+
+(autoload 'pyim-dicts-manager "pyim/pyim-dict-manager" "\
+pyim 词库管理器。
+
+使用这个词库管理器可以方便的执行下列命令：
+1. 添加词库。
+2. 删除词库。
+3. 向上和向下移动词库。
+4. 保存词库设置。
+5. 重启输入法。" t)
+(register-definition-prefixes "pyim/pyim-dict-manager" '("pyim-dict-manager-"))
+
+
+;;; Generated autoloads from pyim/pyim-dregcache.el
+
+(register-definition-prefixes "pyim/pyim-dregcache" '("pyim-dregcache-"))
+
+
+;;; Generated autoloads from pyim/tests/pyim-emacs-init.el
+
+(register-definition-prefixes "pyim/tests/pyim-emacs-init" '("pyim-test-find-file"))
+
+
+;;; Generated autoloads from pyim/pyim-entered.el
+
+(register-definition-prefixes "pyim/pyim-entered" '("pyim-entered-"))
+
+
+;;; Generated autoloads from pyim/pyim-indicator.el
+
+(register-definition-prefixes "pyim/pyim-indicator" '("pyim-indicator-"))
+
+
+;;; Generated autoloads from pyim/pyim-liberime.el
+
+(register-definition-prefixes "pyim/pyim-liberime" '("pyim-"))
+
+
+;;; Generated autoloads from pyim/pyim-outcome.el
+
+(register-definition-prefixes "pyim/pyim-outcome" '("pyim-"))
+
+
+;;; Generated autoloads from pyim/pyim-page.el
+
+(register-definition-prefixes "pyim/pyim-page" '("pyim-page-"))
+
+
+;;; Generated autoloads from pyim/pyim-pinyin.el
+
+(register-definition-prefixes "pyim/pyim-pinyin" '("pyim-pinyin-"))
+
+
+;;; Generated autoloads from pyim/pyim-preview.el
+
+(register-definition-prefixes "pyim/pyim-preview" '("pyim-preview--"))
+
+
+;;; Generated autoloads from pyim/pyim-probe.el
+
+(register-definition-prefixes "pyim/pyim-probe" '("pyim-probe-"))
+
+
+;;; Generated autoloads from pyim/pyim-process.el
+
+(register-definition-prefixes "pyim/pyim-process" '("pyim-"))
+
+
+;;; Generated autoloads from pyim/pyim-punctuation.el
+
+(register-definition-prefixes "pyim/pyim-punctuation" '("pyim-punctuation-"))
+
+
+;;; Generated autoloads from pyim/pyim-pymap.el
+
+(register-definition-prefixes "pyim/pyim-pymap" '("pyim-pymap"))
+
+
+;;; Generated autoloads from pyim/pyim-pymap-utils.el
+
+(register-definition-prefixes "pyim/pyim-pymap-utils" '("pyim-pymap-"))
+
+
+;;; Generated autoloads from pyim/pyim-scheme.el
+
+(autoload 'pyim-default-scheme "pyim/pyim-scheme" "\
+
+
+(fn &optional SCHEME-NAME)" t)
+(register-definition-prefixes "pyim/pyim-scheme" '("pyim-"))
+
+
+;;; Generated autoloads from pyim/tests/pyim-tests.el
+
+(register-definition-prefixes "pyim/tests/pyim-tests" '("pyim-tests-"))
 
 
 ;;; Generated autoloads from rainbow-delimiters/rainbow-delimiters.el

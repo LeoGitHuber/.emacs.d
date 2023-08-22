@@ -513,9 +513,16 @@
                       (process-lines "git"
                                      "diff" "--numstat" buffer-file-name))))
           (if stat
-              (let ((stat (string-split stat)))
-                (concat (propertize (format " +%s " (car stat)) 'face '(:inherit ml-git-insert))
-                        (propertize (format "-%s " (cadr stat)) 'face '(:inherit ml-git-delete))))
+              (let* ((stat (string-split stat))
+                     (insert (car stat))
+                     (remove (cadr stat)))
+                (concat
+                 (if (equal insert "0")
+                     " "
+                   (propertize (format " +%s " insert) 'face '(:inherit ml-git-insert)))
+                 (if (equal remove "0")
+                     ""
+                   (propertize (format "-%s " remove) 'face '(:inherit ml-git-delete)))))
             ""))))
 
      (if (and (bound-and-true-p flymake-mode)
@@ -531,8 +538,10 @@
                          (cond
                           ;; (some-waiting
                           ;;  (propertize "⟲ " 'face '(:inherit font-lock-doc-face)))
-                          ((null known)
-                           (propertize "󰳤 " 'face '(:inherit error)))
+                          ;; ((null known)
+                          ;; (propertize "󰳤 " 'face '(:inherit error))
+                          ;; ""
+                          ;; )
                           ;; (all-disabled
                           ;;  (propertize "󰀧 " 'face '(:inherit warning)))
                           (t (let ((.error 0)
@@ -587,8 +596,6 @@
                                        'face
                                        `(:foreground
                                          ,(face-background 'mode-line-git))))
-                                   ;; (nerd-icons-mdicon "nf-md-check_circle_outline"
-                                   ;;                    :face '(:inherit success))
                                    (unless (or vc-mode (not ml-sep-winum))
                                      (propertize
                                       mode-line-sep
@@ -717,20 +724,21 @@
 						   (propertize " Suspicious")
 						   (propertize " | " 'face `(:inherit mode-line-seperator))))))
 
-     ;; Input Method
-     (if (and (equal current-input-method "rime")
-			  (bound-and-true-p rime-mode))
-	     (if (and (rime--should-enable-p)
-				  (not (rime--should-inline-ascii-p)))
-		     (format "%s%s"
-				     (propertize (format "%s-CN" (rime-lighter))
-							     'face `(:inherit input-method-indicator-cn-face))
-				     (propertize " | " 'face `(:inherit mode-line-seperator)))
-		   (format "%s%s"
-				   (propertize (format "%s-EN" (rime-lighter))
-							   'face `(:inherit input-method-indicator-en-face))
-				   (propertize " | " 'face `(:inherit mode-line-seperator)))))
-     ;; System && Encoding
+     ;;; Input Method
+     (when (and (equal current-input-method "rime")
+			    (bound-and-true-p rime-mode))
+       (concat
+	    (if (and (rime--should-enable-p)
+			     (not (rime--should-inline-ascii-p)))
+		    (propertize (format "%s-CN " (rime-lighter))
+					    'face `(:inherit input-method-indicator-cn-face))
+		  (propertize (format "%s-EN " (rime-lighter))
+					  'face `(:inherit input-method-indicator-en-face))
+		  )
+        ;; (propertize " | " 'face `(:inherit mode-line-emphasis))
+        ))
+
+     ;;; System && Encoding
      ;; (propertize (let ((buf-coding (format "%s" buffer-file-coding-system)))
      ;; 				(if (string-match "\\(dos\\|unix\\|mac\\)" buf-coding)
      ;; 					(upcase (concat (string-trim-right buf-coding (concat "-" (match-string 1 buf-coding))) (format "[%s] " system-type)))

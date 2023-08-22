@@ -77,6 +77,7 @@
    '("o" . meow-block)
    '("O" . meow-to-block)
    '("p" . meow-yank)
+   '("P" . meow-yank-forward)
    '("q" . meow-quit)
    '("Q" . meow-goto-line)
    '("r" . meow-replace)
@@ -99,15 +100,24 @@
    ;; '("g g" . beginning-of-buffer)
    '("G" . end-of-buffer)
    '("M-q" . ignore)
-   '("?" . help-command)
    '("<escape>" . ignore))
   (meow-define-keys 'insert '("M-q" . meow-insert-exit))
+  (add-hook 'meow-insert-exit-hook 'save-buffer)
+  (defun meow-yank-forward ()
+    "Yank forward."
+    (interactive)
+    (let ((select-enable-clipboard meow-use-clipboard))
+      (save-excursion
+        (meow--execute-kbd-macro meow--kbd-yank))
+      ))
   )
 
 (meow-setup)
 
 (setq meow-use-cursor-position-hack t
-      meow-use-enhanced-selection-effect t)
+      meow-use-enhanced-selection-effect t
+      meow--kbd-kill-region "M-w"
+      meow--kbd-kill-ring-save "C-w")
 
 (meow-global-mode)
 

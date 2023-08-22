@@ -100,7 +100,9 @@
   ;; ("C-j" . fingertip-jump-up)
   )
 ;;; Helpful
+
 (keymap-global-set "M-?" 'help-command)
+
 (with-eval-after-load 'help
   (define-key global-map [remap describe-function] 'helpful-function)
   (define-key global-map [remap describe-key] 'helpful-key)

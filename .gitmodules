@@ -256,3 +256,12 @@
 [submodule "site-lisp/paren-face"]
 	path = site-lisp/paren-face
 	url = https://github.com/tarsius/paren-face.git
+[submodule "site-lisp/breadcrumb"]
+	path = site-lisp/breadcrumb
+	url = https://github.com/joaotavora/breadcrumb.git
+[submodule "site-lisp/pyim"]
+	path = site-lisp/pyim
+	url = https://github.com/tumashu/pyim.git
+[submodule "site-lisp/blink-search"]
+	path = site-lisp/blink-search
+	url = https://github.com/manateelazycat/blink-search.git

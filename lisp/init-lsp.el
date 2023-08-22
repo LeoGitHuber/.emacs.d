@@ -4,11 +4,11 @@
 
 ;;; Coding Relpated
 
-(dolist (hook '(prog-mdoe-hook cuda-mode-hook TeX-mode-hook verilog-mode-hook))
+(dolist (hook '(prog-mdoe-hook cuda-mode-hook TeX-mode-hook))
   (add-hook hook (lambda ()
                    (unless (derived-mode-p 'emacs-lisp-mode 'lisp-mode
                                            'makefile-mode 'snippet-mode)
-                     ;; (lsp-deferred)
+                     (lsp-deferred)
                      ;; (lsp)
                      ))))
 
@@ -61,7 +61,7 @@
 	    corfu-auto-prefix 0
 	    corfu-auto-delay 0
 	    corfu-preview-current t)
-  (when (boundp meow-insert-exit-hook)
+  (when (boundp 'meow-insert-exit-hook)
     (add-hook 'meow-insert-exit-hook 'corfu-quit))
   (require 'kind-icon)
   (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter)
@@ -69,7 +69,10 @@
   (add-to-list 'completion-at-point-functions #'cape-file)
   (add-to-list 'completion-at-point-functions #'cape-elisp-block))
 
-
+(with-eval-after-load 'eglot
+  (setq eglot-send-changes-idle-time 0)
+  (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
+  (add-hook 'eglot-connect-hook 'corfu-mode))
 
 (add-hook 'lsp-mode-hook
           (lambda ()
@@ -124,22 +127,6 @@
 ;;     (apply capf-fn args)))
 
 ;; (advice-add 'company-capf :around #'company-completion-styles)
-
-(defun lsp-after-start ()
-  "Start lsp-bridge-mode after Emacs startup."
-  ;; (if (bound-and-true-p lsp-bridge-mode)
-  ;;     (remove-hook 'post-command-hook #'lsp-after-start)
-  ;;   (progn
-  ;;     (require 'lsp-bridge)
-  ;;     (global-lsp-bridge-mode)
-  ;;     (with-current-buffer "*scratch*"
-  ;;       (lsp-bridge-mode))))
-  (if (bound-and-true-p corfu-mode)
-      (remove-hook 'post-command-hook #'lsp-after-start)
-    (progn
-      (global-corfu-mode))))
-
-(add-hook 'post-command-hook #'lsp-after-start)
 
 ;; (with-eval-after-load 'lsp-bridge
 ;;   (when (treesit-available-p)

@@ -6,6 +6,15 @@
 (add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-rime")
 
 (with-eval-after-load 'rime
+  (defun rime-predicate-meow-mode-p ()
+    "Detect whether the current buffer is in `meow' state.
+
+Include `meow-normal-state' , `meow-motion-state'.
+
+Can be used in `rime-disable-predicates' and `rime-inline-predicates'."
+    (and (fboundp 'meow-mode)
+         (meow-normal-mode-p)
+         ))
   (keymap-set rime-mode-map "C-`" 'rime-send-keybinding)
   ;; (define-key rime-mode-map (kbd "Shift") 'rime-send-keybinding)
   (define-key rime-mode-map (kbd "C-t") 'rime-inline-ascii)
@@ -21,21 +30,19 @@
 		;; :background-color "#333333"
 		;; :internal-border-width 10)
 		rime-disable-predicates
-		'(;; rime-predicate-evil-mode-p
-		  rime-predicate-space-after-cc-p
+		'(rime-predicate-space-after-cc-p
 		  rime-predicate-current-uppercase-letter-p
 		  rime-predicate-after-alphabet-char-p
 		  rime-predicate-prog-in-code-p
 		  rime-predicate-hydra-p
 		  ;; rime-predicate-evil-mode-p
-		  ;; meow-normal-mode-p
-		  ;; rime-predicate-prog-in-code-p
+          rime-predicate-meow-mode-p
 		  ;; rime-predicate-tex-math-or-command-p
 		  )
-		rime-deactivate-when-exit-minibuffer nil
+		;; rime-deactivate-when-exit-minibuffer t
 		rime-inline-ascii-trigger 'shift-l
 		)
-  ;; (set-face-attribute 'rime-comment-face nil :foreground "#dcdccc")
+  (keymap-set rime-mode-map "M-y" 'rime-force-enable)
   )
 
 ;; (keymap-global-set "C-\\" 'rime-commit-and-toggle-input-method)
@@ -45,9 +52,8 @@
   (require 'rime)
   (ignore-errors (rime-commit1))
   (toggle-input-method))
-;; (autoload 'rime-commit1-and-toggle-input-method "rime" nil t)
+
 (keymap-global-set "C-\\" 'rime-commit1-and-toggle-input-method)
-(with-eval-after-load 'rime (keymap-set rime-mode-map "M-y" 'rime-force-enable))
 
 ;; (require 'pyim-wbdict)
 ;; (require 'pyim)

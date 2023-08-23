@@ -21,7 +21,7 @@
         verilog-auto-inst-param-value t
         verilog-auto-inst-vector nil
         verilog-auto-lineup (quote all)
-        verilog-auto-newline nil
+        ;; verilog-auto-newline nil
         verilog-auto-save-policy nil
         verilog-auto-template-warn-unused t
         verilog-case-indent 3

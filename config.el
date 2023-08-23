@@ -460,7 +460,7 @@
               ))
           ))
     (progn
-      (load-theme (car themes_chosen) t)
+      ;; (load-theme (car themes_chosen) t)
       (when (eq custom-enabled-themes nil)
         ;; (set-face-bold 'font-lock-keyword-face t)
         ;; (set-face-bold 'font-lock-builtin-face t)

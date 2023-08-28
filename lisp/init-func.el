@@ -160,7 +160,7 @@ The resulting list contains all items that appear in LIST1 but not LIST2."
    (find-file-read-args "Store into: "
                         (confirm-nonexistent-file-or-buffer)))
   (shell-command (format "grim -l 0 -g \"$(slurp)\" %s" place) nil nil)
-  (kill-new (format "[[%s][]]" place)))
+  (kill-new (format "[[file:%s][]]" place)))
 
 (defun find-subdir-recursively (dir)
   "Find all subdirectories in DIR.

@@ -144,22 +144,22 @@
   :group 'mode-line-personal)
 
 (with-eval-after-load 'rime
-  (set-face-attribute 'rime-indicator-face nil
-					  :font (font-spec
-							 :name "JetBrainsMono Nerd Font"))
+  ;; (set-face-attribute 'rime-indicator-face nil
+  ;; :font (font-spec
+  ;; :name "JetBrainsMono Nerd Font"))
   (defface input-method-indicator-cn-face
 	'(
-	  (((background dark)) :foreground "#d65d0e" :inherit rime-indicator-face)
-      (((background light)) :foreground "#af3a03" :inherit rime-indicator-face))
+	  (((background dark)) :foreground "#d65d0e" :inherit mode-line)
+      (((background light)) :foreground "#af3a03" :inherit mode-line))
 	"Face for personal mode line setting area 2."
-	:group 'mode-line-personal))
+	:group 'mode-line-personal)
 
-(defface input-method-indicator-en-face
-  '(
-	(((background dark)) :foreground "#b16286" :inherit mode-line)
-    (((background light)) :foreground "#8f3f71" :inherit mode-line))
-  "Face for personal mode line setting area 2."
-  :group 'mode-line-personal)
+  (defface input-method-indicator-en-face
+    '(
+	  (((background dark)) :foreground "#b16286" :inherit mode-line)
+      (((background light)) :foreground "#8f3f71" :inherit mode-line))
+    "Face for personal mode line setting area 2."
+    :group 'mode-line-personal))
 
 (defface mode-line-area-4
   '((((background dark)) :foreground "#d5c4a1")

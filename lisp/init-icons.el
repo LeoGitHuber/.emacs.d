@@ -13,7 +13,7 @@
 
 (load "~/.emacs.d/self-develop/modeline-setting.el")
 
-;; (add-hook 'dired-mode-hook 'nerd-icons-dired-mode)
+(add-hook 'dired-mode-hook 'nerd-icons-dired-mode)
 
 (with-eval-after-load 'treemacs
   (require 'treemacs-nerd-icons)

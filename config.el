@@ -71,7 +71,7 @@
     (add-hook 'meow-insert-enter-hook #'enable-after-meow))
 
   (when (display-graphic-p)
-    (set-en_cn-font "Input Mono" "HarmonyOS Sans SC" 13.0)
+    (set-en_cn-font "Input Mono" "HarmonyOS Sans SC" 14.0)
     ;; Maple Mono NF --- Maple Mono SC NF, HarmonyOS Sans SC
     ;; PragmataPro Mono Liga --- SimHei
     ;; Hack --- HarmonyOS Sans SC
@@ -263,12 +263,22 @@
 
   (global-set-key [remap comment-dwim] 'comment-or-uncomment)
   (setq comment-auto-fill-only-comments t)
-  (dolist (hook '(prog-mode-hook))
-    (add-hook hook #'whitespace-mode))
   (setq whitespace-style '(face trailing))
+  ;; (setq-default whitespace-style
+  ;;               '(face spaces empty tabs newline trailing space-mark tab-mark newline-mark))
+  (setq-default whitespace-display-mappings
+                '(
+                  ;; space -> · else .
+                  (space-mark 32 [183] [46])
+                  ;; new line -> ¬ else $
+                  (newline-mark ?\n [172 ?\n] [36 ?\n])
+                  ;; carriage return (Windows) -> ¶ else #
+                  (newline-mark ?\r [182] [35])
+                  ;; tabs -> » else >
+                  (tab-mark ?\t [187 ?\t] [62 ?\t])))
+  (add-hook 'prog-mode-hook #'whitespace-mode)
 
   (electric-indent-mode -1)
-
   ;; (follow-mode)
 
   ;; Smoothly scrolling over image
@@ -283,11 +293,6 @@
 
   (add-to-list 'load-path "~/.emacs.d/site-lisp/magit/lisp")
   (add-to-list 'load-path "~/.emacs.d/site-lisp/with-editor/lisp")
-  ;; (require 'magit-autoloads)
-
-  ;; (load
-  ;;  "~/.emacs.d/site-lisp/aggressive-indent-mode/aggressive-indent.el")
-  ;; (global-aggressive-indent-mode t)
   (dolist
       (hook
        '(emacs-lisp-mode-hook c++-ts-mode-hook c-ts-mode-hook

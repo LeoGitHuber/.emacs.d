@@ -84,7 +84,7 @@
 		    (org-appear-mode)
 		    ;; (company-mode)
 		    ;; (corfu-mode)
-		    (visual-line-mode)
+		    ;; (visual-line-mode)
             (valign-mode)))
 
 ;; (with-eval-after-load 'org
@@ -131,8 +131,6 @@
 ;; (require 'org-bars)
 ;; (add-hook 'org-mode-hook #'org-bars-mode)
 
-
-;; (add-hook 'org-mode-hook 'visual-line-mode)
 ;; (add-hook 'org-mode-hook 'word-wrap-whitespace-mode)
 
 (setq-default org-startup-folded 'overview
@@ -164,7 +162,7 @@
 							   org-roam-unlinked-references-section))
 (with-eval-after-load 'org-roam
   (add-hook 'org-roam-mode-hook (lambda ()
-                                  (turn-on-visual-line-mode)
+                                  ;; (turn-on-visual-line-mode)
                                   (word-wrap-whitespace-mode)))
   (org-roam-db-autosync-mode))
 

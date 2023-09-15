@@ -431,6 +431,74 @@ Unconditionally turn on Bib Cite mode.")
 (register-definition-prefixes "auctex/bib-cite" '("LaTeX-find-label-hist-alist" "bib-" "create-alist-from-list" "member-cis" "psg-" "search-directory-tree"))
 
 
+;;; Generated autoloads from blink-search/blink-search.el
+
+(autoload 'blink-search-restart-process "blink-search/blink-search" "\
+Stop and restart Blink-Search process." t)
+(autoload 'blink-search-kill-process "blink-search/blink-search" "\
+Stop Blink-Search process and kill all Blink-Search buffers." t)
+(autoload 'blink-search-quit "blink-search/blink-search" nil t)
+(autoload 'blink-search-quick-do "blink-search/blink-search" nil t)
+(autoload 'blink-search "blink-search/blink-search" "\
+Start blink-search.
+
+blink-search will search current symbol if you call this function with `C-u' prefix.
+
+(fn &optional ARG)" t)
+(register-definition-prefixes "blink-search/blink-search" '("blink-search-"))
+
+
+;;; Generated autoloads from blink-search/backend/blink-search-buffer-list.el
+
+(register-definition-prefixes "blink-search/backend/blink-search-buffer-list" '("blink-search-buffer-list-update"))
+
+
+;;; Generated autoloads from blink-search/backend/blink-search-current-buffer.el
+
+(register-definition-prefixes "blink-search/backend/blink-search-current-buffer" '("blink-search-"))
+
+
+;;; Generated autoloads from blink-search/backend/blink-search-elisp-symbol.el
+
+(register-definition-prefixes "blink-search/backend/blink-search-elisp-symbol" '("blink-search-"))
+
+
+;;; Generated autoloads from blink-search/blink-search-epc.el
+
+(register-definition-prefixes "blink-search/blink-search-epc" '("blink-search-"))
+
+
+;;; Generated autoloads from blink-search/backend/blink-search-grep-file.el
+
+(register-definition-prefixes "blink-search/backend/blink-search-grep-file" '("blink-search-grep-file-"))
+
+
+;;; Generated autoloads from blink-search/backend/blink-search-grep-pdf.el
+
+(register-definition-prefixes "blink-search/backend/blink-search-grep-pdf" '("blink-search-grep-pdf-"))
+
+
+;;; Generated autoloads from blink-search/blink-search-icon.el
+
+(autoload 'blink-search-icon-fetch-all "blink-search/blink-search-icon" nil t)
+(register-definition-prefixes "blink-search/blink-search-icon" '("blink-search-icon"))
+
+
+;;; Generated autoloads from blink-search/backend/blink-search-imenu.el
+
+(register-definition-prefixes "blink-search/backend/blink-search-imenu" '("blink-search-i"))
+
+
+;;; Generated autoloads from blink-search/backend/blink-search-pdf.el
+
+(register-definition-prefixes "blink-search/backend/blink-search-pdf" '("blink-search-pdf-"))
+
+
+;;; Generated autoloads from blink-search/backend/blink-search-recent-file.el
+
+(register-definition-prefixes "blink-search/backend/blink-search-recent-file" '("blink-search-"))
+
+
 ;;; Generated autoloads from breadcrumb/breadcrumb.el
 
 (autoload 'breadcrumb-imenu-crumbs "breadcrumb/breadcrumb" "\
@@ -1414,8 +1482,11 @@ These configuration options are supported:
 (autoload 'consult-outline "consult/consult" "\
 Jump to an outline heading, obtained by matching against `outline-regexp'.
 
-This command supports narrowing to a heading level and candidate preview.
-The symbol at point is added to the future history." t)
+This command supports narrowing to a heading level and candidate
+preview.  The initial narrowing LEVEL can be given as prefix
+argument.  The symbol at point is added to the future history.
+
+(fn &optional LEVEL)" t)
 (autoload 'consult-mark "consult/consult" "\
 Jump to a marker in MARKERS list (defaults to buffer-local `mark-ring').
 
@@ -1637,9 +1708,17 @@ See `consult-grep' for details.
 
 (fn &optional DIR INITIAL)" t)
 (autoload 'consult-find "consult/consult" "\
-Search for files in DIR matching input regexp given INITIAL input.
-See `consult-grep' for details regarding the asynchronous search
-and the arguments.
+Search for files with `find' in DIR.
+The file names must match the input regexp.  INITIAL is the
+initial minibuffer input.  See `consult-grep' for details
+regarding the asynchronous search and the arguments.
+
+(fn &optional DIR INITIAL)" t)
+(autoload 'consult-fd "consult/consult" "\
+Search for files with `fd' in DIR.
+The file names must match the input regexp.  INITIAL is the
+initial minibuffer input.  See `consult-grep' for details
+regarding the asynchronous search and the arguments.
 
 (fn &optional DIR INITIAL)" t)
 (autoload 'consult-locate "consult/consult" "\
@@ -1902,8 +1981,6 @@ evaluate `corfu-mode'.
 
 The mode's hook is called both when the mode is enabled and when
 it is disabled.
-
-\\{corfu-mode-map}
 
 (fn &optional ARG)" t)
 (put 'global-corfu-mode 'globalized-minor-mode t)
@@ -2760,8 +2837,6 @@ evaluate `(default-value \\='doom-modeline-mode)'.
 
 The mode's hook is called both when the mode is enabled and when
 it is disabled.
-
-\\{doom-modeline-mode-map}
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "doom-modeline/doom-modeline" '("doom-modeline-"))
@@ -4048,8 +4123,6 @@ evaluate `iscroll-mode'.
 The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
-\\{iscroll-mode-map}
-
 (fn &optional ARG)" t)
 (register-definition-prefixes "iscroll/iscroll" '("iscroll-"))
 
@@ -4103,6 +4176,96 @@ runs the hooks in `docTeX-mode-hook'.
 (fn)" t)
 (defalias 'TeX-doctex-mode #'docTeX-mode)
 (register-definition-prefixes "auctex/latex" '("Bib" "LaTeX-" "TeX-" "docTeX-" "latex-math-mode"))
+
+
+;;; Generated autoloads from latex-extra/latex-extra.el
+
+(autoload 'latex/setup-auto-fill "latex-extra/latex-extra" "\
+Set the function used to fill a paragraph to `latex/auto-fill-function'." t)
+(autoload 'latex/setup-keybinds "latex-extra/latex-extra" "\
+Obsolete function. Use (add-hook 'LaTeX-mode-hook #'latex-extra-mode) instead." t)
+(autoload 'latex-extra-mode "latex-extra/latex-extra" "\
+Defines extra commands and keys for LaTeX-mode.
+
+To activate just call
+    (add-hook 'LaTeX-mode-hook #'latex-extra-mode)
+
+The additions of this package fall into the following three
+categories:
+
+1-Key Compilation
+=================
+
+Tired of hitting C-c C-c 4 times (latex, bibtex, latex, view) for
+the document to compile? This defines a much needed command that does
+*everything* at once, and even handles compilation errors!
+
+  C-c C-a `latex/compile-commands-until-done'
+
+Navigation
+==========
+
+Five new keybindings are defined for navigating between
+sections/chapters. These are meant to be intuitive to people familiar
+with `org-mode'.
+
+  C-c C-n `latex/next-section'
+    Goes forward to the next section-like command in the buffer (part,
+    chapter, (sub)section, or (sub)paragraph, whichever comes first).
+  C-c C-u `latex/up-section'
+    Goes backward to the previous section-like command containing this
+    one. For instance, if you're inside a subsection it goes up to the
+    section that contains it.
+  C-c C-f `latex/next-section-same-level'
+    Like next-section, except it skips anything that's \"lower-level\" then
+    the current one. For instance, if you're inside a subsection it finds
+    the next subsection (or higher), skipping any subsubsections or
+    paragraphs.
+  C-M-f `latex/forward-environment'
+    Skip over the next environment, or exit the current one, whichever
+    comes first.
+  C-M-e `latex/end-of-environment'
+    Exit the current environment, and skip over some whitespace
+    afterwards. (Like `LaTeX-find-matching-end', but a little more useful.)
+
+  C-M-b `latex/backward-environment'
+  C-M-a `latex/beginning-of-environment'
+  C-c C-p `latex/previous-section'
+  C-c C-b `latex/previous-section-same-level'
+    Same as above, but go backward.
+
+Whitespace Handling
+===================
+
+`latex-extra.el' improves `auto-fill-mode' so that it only applies to
+text, not equations. To use this improvement, just activate
+`auto-fill-mode' as usual.
+
+It also defines a new command:
+
+  C-c C-q `latex/clean-fill-indent-environment'
+    Completely cleans up the entire current environment. This involves:
+
+    1. Removing extraneous spaces and blank lines.
+    2. Filling text (and only text, not equations).
+    3. Indenting everything.
+
+This is a minor mode.  If called interactively, toggle the
+`Latex-Extra mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `latex-extra-mode'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t)
+(register-definition-prefixes "latex-extra/latex-extra" '("latex"))
 
 
 ;;; Generated autoloads from auctex/latex-flymake.el
@@ -4178,8 +4341,6 @@ evaluate `lsp-bridge-mode'.
 
 The mode's hook is called both when the mode is enabled and when
 it is disabled.
-
-\\{lsp-bridge-mode-map}
 
 (fn &optional ARG)" t)
 (autoload 'global-lsp-bridge-mode "lsp-bridge/lsp-bridge" nil t)
@@ -4795,6 +4956,11 @@ it is disabled.
 (register-definition-prefixes "lsp-mode/lsp-modeline" '("lsp-"))
 
 
+;;; Generated autoloads from lsp-mode/clients/lsp-move.el
+
+(register-definition-prefixes "lsp-mode/clients/lsp-move" '("lsp-clients-"))
+
+
 ;;; Generated autoloads from lsp-mode/clients/lsp-nginx.el
 
 (register-definition-prefixes "lsp-mode/clients/lsp-nginx" '("lsp-nginx-server-command"))
@@ -4888,6 +5054,11 @@ it is disabled.
 ;;; Generated autoloads from lsp-mode/clients/lsp-rf.el
 
 (register-definition-prefixes "lsp-mode/clients/lsp-rf" '("expand-start-command" "lsp-rf-language-server-" "parse-rf-language-server-"))
+
+
+;;; Generated autoloads from lsp-mode/clients/lsp-rubocop.el
+
+(register-definition-prefixes "lsp-mode/clients/lsp-rubocop" '("lsp-rubocop-"))
 
 
 ;;; Generated autoloads from lsp-mode/clients/lsp-ruby-lsp.el
@@ -5317,9 +5488,9 @@ the output in the kill ring.
 Stage all changes to the file being visited in the current buffer." t)
 (autoload 'magit-stage-file "magit/lisp/magit-apply" "\
 Read one or more files and stage all changes in those files.
-With a prefix argument offer ignored files for completion.
+With prefix argument FORCE, offer ignored files for completion.
 
-(fn FILES)" t)
+(fn FILES &optional FORCE)" t)
 (autoload 'magit-stage-modified "magit/lisp/magit-apply" "\
 Stage all changes to files modified in the worktree.
 Stage all new content of tracked files and remove tracked files
@@ -6976,15 +7147,42 @@ while two prefix arguments are equivalent to `--all'.
  (autoload 'magit-stash-push "magit-stash" nil t)
 (autoload 'magit-stash-apply "magit/lisp/magit-stash" "\
 Apply a stash to the working tree.
-If nothing is staged, then try to reinstate the stashed index.
-Doing so is not possible if there are staged changes.
+
+First try \"git stash apply --index\", which tries to preserve
+the index stored in the stash, if any.  This may fail because
+applying the stash could result in conflicts and those have to
+be stored in the index, making it impossible to also store the
+stash's index there as well.
+
+If the above failed, then try \"git stash apply\".  This fails
+(with or without \"--index\") if there are any uncommitted
+changes to files that are also modified in the stash.
+
+If both of the above failed, then apply using \"git apply\".
+If there are no conflicting files, use \"--3way\".  If there are
+conflicting files, then using \"--3way\" requires that those
+files are staged first, which may be undesirable, so prompt
+the user whether to use \"--3way\" or \"--reject\".
 
 (fn STASH)" t)
 (autoload 'magit-stash-pop "magit/lisp/magit-stash" "\
-Apply a stash to the working tree and remove it from stash list.
-If nothing is staged, then try to reinstate the stashed index.
-Doing so is not possible if there are staged changes.  Do not
-remove the stash, if it cannot be applied.
+Apply a stash to the working tree, on success remove it from stash list.
+
+First try \"git stash pop --index\", which tries to preserve
+the index stored in the stash, if any.  This may fail because
+applying the stash could result in conflicts and those have to
+be stored in the index, making it impossible to also store the
+stash's index there as well.
+
+If the above failed, then try \"git stash apply\".  This fails
+(with or without \"--index\") if there are any uncommitted
+changes to files that are also modified in the stash.
+
+If both of the above failed, then apply using \"git apply\".
+If there are no conflicting files, use \"--3way\".  If there are
+conflicting files, then using \"--3way\" requires that those
+files are staged first, which may be undesirable, so prompt
+the user whether to use \"--3way\" or \"--reject\".
 
 (fn STASH)" t)
 (autoload 'magit-stash-drop "magit/lisp/magit-stash" "\
@@ -10184,7 +10382,7 @@ Set `japanese-TeX-mode' to t, and enter `TeX-plain-tex-mode'." t)
 (autoload 'japanese-latex-mode "auctex/tex-jp" "\
 Major mode in AUCTeX for editing Japanese LaTeX files.
 Set `japanese-TeX-mode' to t, and enter `TeX-latex-mode'." t)
-(register-definition-prefixes "auctex/tex-jp" '("TeX-" "japanese-"))
+(register-definition-prefixes "auctex/tex-jp" '("TeX-japanese-process-" "japanese-"))
 
 
 ;;; Generated autoloads from auctex/tex-style.el
@@ -11855,6 +12053,17 @@ it is disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "vertico/extensions/vertico-reverse" '("vertico-reverse-map"))
+
+
+;;; Generated autoloads from vertico/extensions/vertico-suspend.el
+
+(autoload 'vertico-suspend "vertico/extensions/vertico-suspend" "\
+Suspend the current completion session.
+If the command is invoked from within the Vertico minibuffer, the
+current session is suspended.  If the command is invoked from
+outside the minibuffer, the active minibuffer is either selected
+or the latest completion session is restored." t)
+(register-definition-prefixes "vertico/extensions/vertico-suspend" '("vertico-suspend--"))
 
 
 ;;; Generated autoloads from vertico/extensions/vertico-unobtrusive.el

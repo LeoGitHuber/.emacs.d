@@ -57,6 +57,7 @@
       ;; make-backup-files t   ;; 设置是否生成备份文件，例如 configuration.org~
       auto-mode-case-fold nil
       )
+
 (setq-default
  pgtk-wait-for-event-timeout 0
  truncate-lines t

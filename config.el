@@ -36,6 +36,7 @@
   (add-to-list 'load-path "~/.emacs.d/site-lisp/lsp-mode/docs")
   (add-to-list 'load-path "~/.emacs.d/site-lisp/vertico/extensions")
   (add-to-list 'load-path "~/.emacs.d/site-lisp/themes/themes")
+  (add-to-list 'load-path "~/.emacs.d/site-lisp/pdf-tools/lisp")
   (load "~/.emacs.d/site-lisp/loaddefs.el")
   (load "~/.emacs.d/lisp/init-gc.el")
   (load "~/.emacs.d/lisp/init-diagnostic.el")
@@ -175,7 +176,7 @@
                (+ (point) 1)
                (point-max))))
 
-  (add-hook 'text-mode-hook 'toggle-truncate-lines)
+  (add-hook 'TeX-mode-hook 'toggle-truncate-lines)
 
   ;; (add-hook 'emacs-startup-hook ;; 'after-init-hook
   ;;           (lambda ()
@@ -202,8 +203,8 @@
   ;;               (savehist-mode t))))
 
 
-  ;; (add-to-list 'load-path "~/.emacs.d/site-lisp/no-littering")
   ;; (rquire 'no-littering)
+  (repeat-mode)
   (load "~/.emacs.d/site-lisp/no-littering/no-littering.el")
   (with-eval-after-load 'no-littering
     (recentf-mode t)
@@ -258,7 +259,6 @@
 
   ;;; Efficiency
   (keymap-global-set "C-x f" 'find-file)
-  (keymap-global-set "C-u" 'undo)
   (keymap-global-set "C-z" 'vundo)
 
   (global-set-key [remap comment-dwim] 'comment-or-uncomment)
@@ -435,11 +435,13 @@
   ;; (global-display-fill-column-indicator-mode)
 
   (defvar themes_chosen
-    '(
+    '(;;; Light theme
       ;; modus-operandi-tritanopia
       doom-rouge
+      ;;; Dark theme
       ;; manoj-dark
-      doom-rouge
+      ;; doom-rouge
+      modus-vivendi
       )
     "Set for themes for dark and light mode.")
   (require 'doom-themes)
@@ -452,7 +454,8 @@
               (setq modus-themes-org-blocks 'gray-background
 	                modus-themes-bold-constructs t
 	                modus-themes-italic-constructs t)
-              (load-theme (car (cdr themes_chosen)) t))
+              (load-theme (car (cdr themes_chosen)) t)
+              (set-face-attribute 'modus-themes-heading-1 nil :height 1.25))
           (if (equal (cadr themes_chosen) 'manoj-dark)
               (progn
                 (load-theme (car (cdr themes_chosen)) t)
@@ -461,9 +464,7 @@
             (progn
               (load-theme (cadr themes_chosen) t)
               (setq doom-rouge-brighter-comments t
-                    doom-rouge-brighter-tabs t)
-              ))
-          ))
+                    doom-rouge-brighter-tabs t)))))
     (progn
       ;; (load-theme (car themes_chosen) t)
       (when (eq custom-enabled-themes nil)
@@ -481,7 +482,7 @@
 
   (if (equal (frame-parameter nil 'background-mode) 'dark)
       (set-face-attribute 'mode-line nil
-                          ;; :background "black"
+                          :background "black"
                           :box nil
     				      :font (font-spec
     						     ;; "JetBrainsMono Nerd Font" "Monego Ligatures" "Maple Mono NF"
@@ -490,8 +491,7 @@
                                  :size
 							     11.0)
                           :underline
-                          (face-foreground 'mode-line-emphasis)
-                          )
+                          (face-foreground 'mode-line-emphasis))
     (set-face-attribute 'mode-line nil
     				    ;; :background "#F4F7FA"
 					    :background "white"

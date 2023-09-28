@@ -102,7 +102,10 @@
    '("M-q" . ignore)
    '("<escape>" . ignore))
   (meow-define-keys 'insert '("M-q" . meow-insert-exit))
-  (add-hook 'meow-insert-exit-hook 'save-buffer)
+  (add-hook 'meow-insert-exit-hook
+            (lambda ()
+              (if buffer-file-name
+                  (save-buffer))))
   (defun meow-yank-forward ()
     "Yank forward."
     (interactive)

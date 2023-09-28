@@ -55,14 +55,14 @@
   (load "~/.emacs.d/lisp/init-hydra.el")
   (load "~/.emacs.d/site-lisp/emacs-which-key/which-key.el")
 
-  ;; (global-lsp-bridge-mode)
-  ;; (global-corfu-mode)
-
   (defun enable-after-meow ()
     "Modes enable after meow insert."
     (unless (bound-and-true-p lsp-bridge-mode)
       (add-hook 'emacs-lisp-mode-hook 'lsp-bridge-mode)
-      (when (derived-mode-p 'emacs-lisp-mode 'lisp-mode)
+      (add-hook 'c-ts-mode-hook 'lsp-bridge-mode)
+      (add-hook 'c++-ts-mode-hook 'lsp-bridge-mode)
+      (when (derived-mode-p 'emacs-lisp-mode 'lisp-mode
+                            'c-ts-mode 'c++-ts-mode)
         (lsp-bridge-mode))
       (with-current-buffer (get-buffer-create "*scratch*")
         (lsp-bridge-mode)))
@@ -72,7 +72,7 @@
     (add-hook 'meow-insert-enter-hook #'enable-after-meow))
 
   (when (display-graphic-p)
-    (set-en_cn-font "Input Mono" "HarmonyOS Sans SC" 14.0)
+    (set-en_cn-font "Input Mono" "LXGW WenKai Screen" 12.0)
     ;; Maple Mono NF --- Maple Mono SC NF, HarmonyOS Sans SC
     ;; PragmataPro Mono Liga --- SimHei
     ;; Hack --- HarmonyOS Sans SC
@@ -145,6 +145,7 @@
 
   (setq show-paren-when-point-inside-paren t
   	    show-paren-when-point-in-periphery t
+        show-paren-delay 0
   	    show-paren-context-when-offscreen 'child-frame)
 
   ;; (add-to-list 'load-path "~/.emacs.d/site-lisp/auto-save")
@@ -176,7 +177,8 @@
                (+ (point) 1)
                (point-max))))
 
-  (add-hook 'TeX-mode-hook 'toggle-truncate-lines)
+  (dolist (hook '(TeX-mode-hook dired-mode-hook))
+    (add-hook hook 'toggle-truncate-lines))
 
   ;; (add-hook 'emacs-startup-hook ;; 'after-init-hook
   ;;           (lambda ()
@@ -403,6 +405,7 @@
   (defun vertico-enable ()
     (if (boundp vertico-mode)
         (progn
+          (require 'orderless)
           (vertico-mode)
           (vertico-reverse-mode)
           (vertico-indexed-mode)
@@ -446,7 +449,7 @@
     "Set for themes for dark and light mode.")
   (require 'doom-themes)
   (if (or
-       (>= (string-to-number (substring (current-time-string) 11 13)) 18)
+       (>= (string-to-number (substring (current-time-string) 11 13)) 24)
        (<= (string-to-number (substring (current-time-string) 11 13)) 6))
 	  (progn
         (if (equal (cadr themes_chosen) 'modus-vivendi)
@@ -475,6 +478,7 @@
         (set-face-attribute 'line-number-current-line nil :foreground
                             "#000000" :background "#C4C4C4" :weight
                             'bold)
+        (set-face-bold 'font-lock-keyword-face 't)
         )
       (setq modus-themes-org-blocks 'gray-background
 	        modus-themes-bold-constructs t
@@ -509,14 +513,14 @@
   ;; (dolist (hook '(prog-mode-hook cuda-mode-hook))
   ;;   (add-hook hook 'highlight-indent-guides-mode))
 
-  (dolist (hook '(
-				  ;; completion-list-mode-hook
-				  ;; completion-in-region-mode-hook
-				  term-mode-hook
-				  ;; shell-mode-hook
-				  messages-buffer-mode-hook
-				  org-roam-mode-hook))
-    (add-hook hook 'hide-mode-line-mode))
+  ;; (dolist (hook '(
+  ;;   			  ;; completion-list-mode-hook
+  ;;   			  ;; completion-in-region-mode-hook
+  ;;   			  term-mode-hook
+  ;;   			  ;; shell-mode-hook
+  ;;   			  messages-buffer-mode-hook
+  ;;   			  org-roam-mode-hook))
+  ;;   (add-hook hook 'hide-mode-line-mode))
 
   (when (boundp 'hl-todo)
     (global-hl-todo-mode))

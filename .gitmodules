@@ -268,3 +268,9 @@
 [submodule "site-lisp/latex-extra"]
 	path = site-lisp/latex-extra
 	url = https://github.com/Malabarba/latex-extra.git
+[submodule "site-lisp/verilog-ext"]
+	path = site-lisp/verilog-ext
+	url = https://github.com/gmlarumbe/verilog-ext.git
+[submodule "site-lisp/emacs-kaolin-themes"]
+	path = site-lisp/emacs-kaolin-themes
+	url = https://github.com/ogdenwebb/emacs-kaolin-themes.git

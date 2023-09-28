@@ -1953,11 +1953,6 @@ of `ConTeXt-mode-hook'." t)
 (register-definition-prefixes "auctex/context-nl" '("ConTeXt-"))
 
 
-;;; Generated autoloads from auctex/tests/context/context-test.el
-
-(register-definition-prefixes "auctex/tests/context/context-test" '("ConTeXt-mode-common-initialization"))
-
-
 ;;; Generated autoloads from company-mode/test/core-tests.el
 
 (register-definition-prefixes "company-mode/test/core-tests" '("ct-"))
@@ -1981,6 +1976,8 @@ evaluate `corfu-mode'.
 
 The mode's hook is called both when the mode is enabled and when
 it is disabled.
+
+\\{corfu-mode-map}
 
 (fn &optional ARG)" t)
 (put 'global-corfu-mode 'globalized-minor-mode t)
@@ -3811,11 +3808,6 @@ Setup this buffer for LaTeX font-lock.  Usually called from a hook.")
 (register-definition-prefixes "auctex/font-latex" '("font-latex-"))
 
 
-;;; Generated autoloads from auctex/tests/latex/font-latex-test.el
-
-(register-definition-prefixes "auctex/tests/latex/font-latex-test" '("LaTeX-common-initialization"))
-
-
 ;;; Generated autoloads from frame-local/frame-local.el
 
 (register-definition-prefixes "frame-local/frame-local" '("frame-local-"))
@@ -4123,8 +4115,103 @@ evaluate `iscroll-mode'.
 The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
+\\{iscroll-mode-map}
+
 (fn &optional ARG)" t)
 (register-definition-prefixes "iscroll/iscroll" '("iscroll-"))
+
+
+;;; Generated autoloads from emacs-kaolin-themes/themes/kaolin-aurora-theme.el
+
+(register-definition-prefixes "emacs-kaolin-themes/themes/kaolin-aurora-theme" '("aurora"))
+
+
+;;; Generated autoloads from emacs-kaolin-themes/themes/kaolin-blossom-theme.el
+
+(register-definition-prefixes "emacs-kaolin-themes/themes/kaolin-blossom-theme" '("blossom" "kaolin-blossom-bg"))
+
+
+;;; Generated autoloads from emacs-kaolin-themes/themes/kaolin-breeze-theme.el
+
+(register-definition-prefixes "emacs-kaolin-themes/themes/kaolin-breeze-theme" '("breeze"))
+
+
+;;; Generated autoloads from emacs-kaolin-themes/themes/kaolin-bubblegum-theme.el
+
+(register-definition-prefixes "emacs-kaolin-themes/themes/kaolin-bubblegum-theme" '("bubblegum"))
+
+
+;;; Generated autoloads from emacs-kaolin-themes/themes/kaolin-dark-theme.el
+
+(register-definition-prefixes "emacs-kaolin-themes/themes/kaolin-dark-theme" '("dark"))
+
+
+;;; Generated autoloads from emacs-kaolin-themes/themes/kaolin-eclipse-theme.el
+
+(register-definition-prefixes "emacs-kaolin-themes/themes/kaolin-eclipse-theme" '("eclipse" "kaolin-eclipse-alt-bg"))
+
+
+;;; Generated autoloads from emacs-kaolin-themes/themes/kaolin-galaxy-theme.el
+
+(register-definition-prefixes "emacs-kaolin-themes/themes/kaolin-galaxy-theme" '("galaxy" "kaolin-galaxy-alt-bg"))
+
+
+;;; Generated autoloads from emacs-kaolin-themes/themes/kaolin-light-theme.el
+
+(register-definition-prefixes "emacs-kaolin-themes/themes/kaolin-light-theme" '("kaolin-light-alt-bg" "light"))
+
+
+;;; Generated autoloads from emacs-kaolin-themes/themes/kaolin-mono-dark-theme.el
+
+(register-definition-prefixes "emacs-kaolin-themes/themes/kaolin-mono-dark-theme" '("mono-dark"))
+
+
+;;; Generated autoloads from emacs-kaolin-themes/themes/kaolin-mono-light-theme.el
+
+(register-definition-prefixes "emacs-kaolin-themes/themes/kaolin-mono-light-theme" '("kaolin-mono-light-alt-bg" "mono-light"))
+
+
+;;; Generated autoloads from emacs-kaolin-themes/themes/kaolin-ocean-theme.el
+
+(register-definition-prefixes "emacs-kaolin-themes/themes/kaolin-ocean-theme" '("kaolin-ocean-alt-bg" "ocean"))
+
+
+;;; Generated autoloads from emacs-kaolin-themes/themes/kaolin-shiva-theme.el
+
+(register-definition-prefixes "emacs-kaolin-themes/themes/kaolin-shiva-theme" '("kaolin-shiva-" "shiva"))
+
+
+;;; Generated autoloads from emacs-kaolin-themes/themes/kaolin-temple-theme.el
+
+(register-definition-prefixes "emacs-kaolin-themes/themes/kaolin-temple-theme" '("temple"))
+
+
+;;; Generated autoloads from emacs-kaolin-themes/kaolin-themes.el
+
+(autoload 'kaolin-treemacs-theme "emacs-kaolin-themes/kaolin-themes" "\
+Enable kaolin-themes treemacs theme with all-the-icons package.")
+(when (and (boundp 'custom-theme-load-path) load-file-name) (let* ((base (file-name-directory load-file-name)) (dir (expand-file-name "themes/" base))) (add-to-list 'custom-theme-load-path (or (and (file-directory-p dir) dir) base))))
+(register-definition-prefixes "emacs-kaolin-themes/kaolin-themes" '("define-kaolin-theme" "kaolin-theme"))
+
+
+;;; Generated autoloads from emacs-kaolin-themes/kaolin-themes-lib.el
+
+(register-definition-prefixes "emacs-kaolin-themes/kaolin-themes-lib" '("kaolin-"))
+
+
+;;; Generated autoloads from emacs-kaolin-themes/kaolin-themes-treemacs.el
+
+(register-definition-prefixes "emacs-kaolin-themes/kaolin-themes-treemacs" '("kaolin-t"))
+
+
+;;; Generated autoloads from emacs-kaolin-themes/themes/kaolin-valley-dark-theme.el
+
+(register-definition-prefixes "emacs-kaolin-themes/themes/kaolin-valley-dark-theme" '("kaolin-valley-dark-alt-" "valley-dark"))
+
+
+;;; Generated autoloads from emacs-kaolin-themes/themes/kaolin-valley-light-theme.el
+
+(register-definition-prefixes "emacs-kaolin-themes/themes/kaolin-valley-light-theme" '("kaolin-valley-light-alt-bg" "valley-light"))
 
 
 ;;; Generated autoloads from kind-icon/kind-icon.el
@@ -4273,11 +4360,6 @@ it is disabled.
 (register-definition-prefixes "auctex/latex-flymake" '("LaTeX-"))
 
 
-;;; Generated autoloads from auctex/tests/latex/latex-test.el
-
-(register-definition-prefixes "auctex/tests/latex/latex-test" '("LaTeX-common-initialization"))
-
-
 ;;; Generated autoloads from lsp-mode/clients/lsp-actionscript.el
 
 (register-definition-prefixes "lsp-mode/clients/lsp-actionscript" '("lsp-actionscript-"))
@@ -4341,6 +4423,8 @@ evaluate `lsp-bridge-mode'.
 
 The mode's hook is called both when the mode is enabled and when
 it is disabled.
+
+\\{lsp-bridge-mode-map}
 
 (fn &optional ARG)" t)
 (autoload 'global-lsp-bridge-mode "lsp-bridge/lsp-bridge" nil t)
@@ -11252,6 +11336,143 @@ it is disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "valign/valign" '("valign-"))
+
+
+;;; Generated autoloads from verilog-ext/verilog-ext.el
+
+(autoload 'verilog-ext-mode-setup "verilog-ext/verilog-ext" "\
+Setup `verilog-ext-mode' depending on enabled features." t)
+(autoload 'verilog-ext-mode "verilog-ext/verilog-ext" "\
+Minor mode for editing SystemVerilog files.
+
+\\{verilog-ext-mode-map}
+
+This is a minor mode.  If called interactively, toggle the
+`Verilog-Ext mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `verilog-ext-mode'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t)
+(register-definition-prefixes "verilog-ext/verilog-ext" '("verilog-ext-"))
+
+
+;;; Generated autoloads from verilog-ext/verilog-ext-beautify.el
+
+(register-definition-prefixes "verilog-ext/verilog-ext-beautify" '("verilog-ext-beautify-"))
+
+
+;;; Generated autoloads from verilog-ext/verilog-ext-block-end-comments.el
+
+(register-definition-prefixes "verilog-ext/verilog-ext-block-end-comments" '("verilog-ext-block-end-"))
+
+
+;;; Generated autoloads from verilog-ext/verilog-ext-capf.el
+
+(register-definition-prefixes "verilog-ext/verilog-ext-capf" '("verilog-ext-capf-"))
+
+
+;;; Generated autoloads from verilog-ext/verilog-ext-compile.el
+
+(register-definition-prefixes "verilog-ext/verilog-ext-compile" '("verilog-ext-"))
+
+
+;;; Generated autoloads from verilog-ext/verilog-ext-eglot.el
+
+(register-definition-prefixes "verilog-ext/verilog-ext-eglot" '("verilog-ext-eglot-"))
+
+
+;;; Generated autoloads from verilog-ext/verilog-ext-flycheck.el
+
+(register-definition-prefixes "verilog-ext/verilog-ext-flycheck" '("verilog-ext-flycheck-"))
+
+
+;;; Generated autoloads from verilog-ext/verilog-ext-font-lock.el
+
+(register-definition-prefixes "verilog-ext/verilog-ext-font-lock" '("verilog-ext-font-lock-"))
+
+
+;;; Generated autoloads from verilog-ext/verilog-ext-formatter.el
+
+(register-definition-prefixes "verilog-ext/verilog-ext-formatter" '("verilog-ext-formatter-"))
+
+
+;;; Generated autoloads from verilog-ext/verilog-ext-hierarchy.el
+
+(register-definition-prefixes "verilog-ext/verilog-ext-hierarchy" '("verilog-ext-hierarchy-"))
+
+
+;;; Generated autoloads from verilog-ext/verilog-ext-hs.el
+
+(register-definition-prefixes "verilog-ext/verilog-ext-hs" '("verilog-ext-hs-"))
+
+
+;;; Generated autoloads from verilog-ext/verilog-ext-imenu.el
+
+(register-definition-prefixes "verilog-ext/verilog-ext-imenu" '("verilog-ext-imenu-"))
+
+
+;;; Generated autoloads from verilog-ext/verilog-ext-lsp.el
+
+(register-definition-prefixes "verilog-ext/verilog-ext-lsp" '("verilog-ext-lsp-"))
+
+
+;;; Generated autoloads from verilog-ext/verilog-ext-nav.el
+
+(register-definition-prefixes "verilog-ext/verilog-ext-nav" '("verilog-ext-"))
+
+
+;;; Generated autoloads from verilog-ext/verilog-ext-ports.el
+
+(register-definition-prefixes "verilog-ext/verilog-ext-ports" '("verilog-ext-ports-"))
+
+
+;;; Generated autoloads from verilog-ext/verilog-ext-tags.el
+
+(register-definition-prefixes "verilog-ext/verilog-ext-tags" '("verilog-ext-tags-"))
+
+
+;;; Generated autoloads from verilog-ext/verilog-ext-template.el
+
+(register-definition-prefixes "verilog-ext/verilog-ext-template" '("verilog-ext-" "with-verilog-ext-template"))
+
+
+;;; Generated autoloads from verilog-ext/verilog-ext-time-stamp.el
+
+(register-definition-prefixes "verilog-ext/verilog-ext-time-stamp" '("verilog-ext-time-stamp-"))
+
+
+;;; Generated autoloads from verilog-ext/verilog-ext-typedef.el
+
+(register-definition-prefixes "verilog-ext/verilog-ext-typedef" '("verilog-ext-typedef-"))
+
+
+;;; Generated autoloads from verilog-ext/verilog-ext-utils.el
+
+(register-definition-prefixes "verilog-ext/verilog-ext-utils" '("verilog-ext-"))
+
+
+;;; Generated autoloads from verilog-ext/verilog-ext-which-func.el
+
+(register-definition-prefixes "verilog-ext/verilog-ext-which-func" '("verilog-ext-which-func"))
+
+
+;;; Generated autoloads from verilog-ext/verilog-ext-workspace.el
+
+(register-definition-prefixes "verilog-ext/verilog-ext-workspace" '("verilog-ext-workspace-"))
+
+
+;;; Generated autoloads from verilog-ext/verilog-ext-xref.el
+
+(register-definition-prefixes "verilog-ext/verilog-ext-xref" '("verilog-ext-xref-"))
 
 
 ;;; Generated autoloads from verilog-mode/attic/verilog-lex.el

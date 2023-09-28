@@ -120,6 +120,9 @@
   "󰌶 "
   "Icon for diagnostic hint.")
 
+(defvar-local git-status-cache nil
+  "Help to set color of icon for git.")
+
 (defface mode-line-area-2-separator
   '(
 	(((background dark)) :foreground "#244032" :background "#341A00")
@@ -518,15 +521,21 @@
                      (remove (cadr stat)))
                 (concat
                  (if (equal insert "0")
-                     " "
-                   (propertize (format " +%s " insert) 'face '(:inherit ml-git-insert)))
+                     (progn
+                       (setq-local git-status-cache nil)
+                       " ")
+                   (progn
+                     (setq-local git-status-cache 'insert)
+                     (propertize (format " +%s " insert) 'face '(:inherit ml-git-insert))))
                  (if (equal remove "0")
                      ""
-                   (propertize (format "-%s " remove) 'face '(:inherit ml-git-delete)))))
+                   (progn
+                     (setq-local git-status-cache 'delete)
+                     (propertize (format "-%s " remove) 'face '(:inherit ml-git-delete))))))
             ""))))
 
      (if (and (bound-and-true-p flymake-mode)
-              flymake--state)
+              (flymake-running-backends))
          (let* ((known (hash-table-keys flymake--state))
                 (running (flymake-running-backends))
                 (disabled (flymake-disabled-backends))
@@ -622,8 +631,17 @@
                                          (interactive)
                                          (describe-function 'flymake-mode)))
                            map))))
-       (when ml-sep-winum
-         (propertize mode-line-sep 'face '(:inherit mode-line-area-1-separator-3))))
+       (if ml-sep-winum
+           (propertize mode-line-sep 'face
+                       '(:inherit mode-line-area-1-separator-3))
+         (if git-status-cache
+             (propertize mode-line-sep 'face
+                         `(:foreground
+                           ,(face-background
+                             (if (eq git-status-cache 'delete)
+                                 'ml-git-delete
+                               'ml-git-insert))))
+           "")))
 
      ;; Directory
      ;; (if (buffer-file-name)
@@ -641,7 +659,6 @@
 	       ((buffer-modified-p) Buffer-modified))))
 
    mode-line-format-right-align
-
 
    (:eval
     (concat

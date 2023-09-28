@@ -38,15 +38,17 @@
             (lambda ()
               (eglot-ensure)
               (add-to-list 'eglot-server-programs
-                           ;; '(verilog-mode . ("svlangserver"))
+                           '(verilog-mode . ("svlangserver"))
                            ;; '(verilog-mode . ("svls"))
-                           '(verilog-mode . ("vls"))
+                           ;; '(verilog-mode . ("vls"))
                            )
-              ;; (setq eglot-workspace-configuration
-              ;;       '(:svlangserver
-              ;;         (:settings
-              ;;          (:systemverilog.launchConfiguration: "verilator -sv -Wall --lint-only",
-              ;;                                               :systemverilog.formatCommand: "verible-verilog-format"))))
+              (setq eglot-workspace-configuration
+                    '(:svlangserver
+                      (:settings
+                       (:systemverilog.launchConfiguration:
+                        "verilator -sv -Wall --lint-only",
+                        :systemverilog.formatCommand:
+                        "verible-verilog-format"))))
               ;; (setq eglot-workspace-configuration
               ;;       '(:svls
               ;;         (:settings

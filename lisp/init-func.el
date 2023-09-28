@@ -99,7 +99,9 @@ Set Font for both of English and Chinese characters."
     (if (save-excursion
           (beginning-of-line)
           (looking-at "\\s-*$"))
-        (call-interactively 'comment-dwim)
+        (progn
+          (call-interactively 'comment-dwim)
+          (next-line))
       (comment-or-uncomment-region (line-beginning-position) (line-end-position)))))
 
 ;;;###autoload

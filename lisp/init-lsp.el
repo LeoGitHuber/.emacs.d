@@ -72,7 +72,7 @@
 (with-eval-after-load 'eglot
   (setq eglot-send-changes-idle-time 0)
   (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
-  (add-hook 'eglot-connect-hook 'corfu-mode))
+  (add-hook 'eglot-managed-mode-hook #'corfu-mode))
 
 (add-hook 'lsp-mode-hook
           (lambda ()
@@ -162,7 +162,7 @@
 		acm-backend-elisp-candidate-min-length 2
 		acm-backend-search-file-words-candidate-min-length 3
 		acm-backend-yas-candidate-min-length 1
-
+        lsp-bridge-python-command "python"
 		;; This will cause `org-roam-node-find' get wrong and I don't know why.
 		;; lsp-bridge-enable-org-babel t
 		))

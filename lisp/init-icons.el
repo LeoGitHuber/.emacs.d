@@ -30,5 +30,12 @@
 ;; 		fc-error (nerd-icons-codicon "nf-cod-error" :face '(:inherit flycheck-error-my)))
 ;; )
 
+;; (with-eval-after-load 'tab-bar
+;;   (setq tab-bar-close-button
+;;         (propertize " 󰅖" :help-echo "Close tab"))
+;;   ;; modified_icon = '●'
+;;   ;; close_icon = ''
+;;   )
+
 (provide 'init-icons)
 ;;; init-icons.el ends here.

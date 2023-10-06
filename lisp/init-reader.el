@@ -8,6 +8,7 @@
 
 (with-eval-after-load 'pdf-tools
   (setq pdf-view-use-scaling t
+        pdf-view-continuous nil
 		pdf-anot-list-format '((page . 3)
 							   (type . 10)
 							   (contents . 50)

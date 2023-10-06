@@ -7,17 +7,11 @@
 (dolist (hook '(prog-mdoe-hook cuda-mode-hook TeX-mode-hook))
   (add-hook hook (lambda ()
                    (unless (derived-mode-p 'emacs-lisp-mode 'lisp-mode
+                                           'verilog-mode
                                            'makefile-mode 'snippet-mode)
                      (lsp-deferred)
                      ;; (lsp)
                      ))))
-
-(with-eval-after-load 'lsp-mode
-  (setq lsp-completion-provider :none
-        lsp-prefer-flymake t
-        lsp-ui-flycheck-enable nil)
-  ;; (keymap-set lsp-mode-map "C-c C-d" 'lsp-describe-thing-at-point)
-  )
 
 (dolist (hook '(cuda-mode-hook))  ;; prog-mode-hook  TeX-mode-hook
   (add-hook hook 'yas-minor-mode))
@@ -52,7 +46,13 @@
 
 		;; ui
 		;; lsp-ui-doc-show-with-cursor nil
-		))
+
+        lsp-completion-provider :none
+        lsp-prefer-flymake t
+        lsp-ui-flycheck-enable nil
+		)
+  ;; (keymap-set lsp-mode-map "C-c C-d" 'lsp-describe-thing-at-point)
+  )
 
 (with-eval-after-load 'corfu
   (setq corfu-auto t
@@ -134,11 +134,7 @@
 ;; 	  (dolist (hook lsp-bridge-temp-list)
 ;; 		(add-to-list 'lsp-bridge-default-mode-hooks (intern (string-replace "mode" "ts-mode" (symbol-name hook))))))))
 
-(add-hook 'lsp-bridge-mode-hook
-          (lambda ()
-			(yas/minor-mode t)
-			(setq lsp-bridge-enable-diagnostics nil
-				  lsp-bridge-c-lsp-server "ccls")))
+(add-hook 'lsp-bridge-mode-hook 'yas/minor-mode)
 
 (with-eval-after-load 'lsp-bridge
   ;; (with-current-buffer (get-buffer-create "*scratch*")
@@ -152,7 +148,7 @@
 		acm-enable-search-file-words t
 		acm-enable-telega nil
 		acm-enable-tabnine nil
-		lsp-bridge-enable-log t
+		;; lsp-bridge-enable-log t
 		lsp-bridge-enable-signature-help t
 		lsp-bridge-enable-diagnostics nil
 		lsp-bridge-complete-manually nil
@@ -165,7 +161,19 @@
         lsp-bridge-python-command "python"
 		;; This will cause `org-roam-node-find' get wrong and I don't know why.
 		;; lsp-bridge-enable-org-babel t
-		))
+        lsp-bridge-c-lsp-server "ccls"
+        lsp-bridge-user-langserver-dir "~/.emacs.d/lisp/langserver"
+        lsp-bridge-user-multiserver-dir "~/.emacs.d/lisp/multilangserver"
+        )
+  ;; (add-to-list 'lsp-bridge-multi-lang-server-mode-list
+  ;;              '((verilog-mode) . "verilog"))
+  ;; (add-to-list 'lsp-bridge-multi-lang-server-extension-list
+  ;;              '(("v" "sv") . "verilog"))
+  ;; (setf (cdr (assoc 'verilog-mode lsp-bridge-single-lang-server-mode-list)) '("svlangserver"))
+  ;; (add-to-list 'lsp-bridge-single-lang-server-mode-list '((verilog-mode) . "svlangserver"))
+  ;; (add-to-list 'lsp-bridge-single-lang-server-mode-list '((verilog-mode) . "veridian"))
+  ;; (add-to-list 'lsp-bridge-single-lang-server-mode-list '((verilog-mode) . "svls"))
+  )
 
 (with-eval-after-load 'kind-icon
   (setq kind-icon-use-icons nil)

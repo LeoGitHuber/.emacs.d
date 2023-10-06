@@ -61,7 +61,9 @@
       (add-hook 'emacs-lisp-mode-hook 'lsp-bridge-mode)
       (add-hook 'c-ts-mode-hook 'lsp-bridge-mode)
       (add-hook 'c++-ts-mode-hook 'lsp-bridge-mode)
+      ;; (add-hook 'verilog-mode-hook 'lsp-bridge-mode)
       (when (derived-mode-p 'emacs-lisp-mode 'lisp-mode
+                            ;; 'verilog-mode
                             'c-ts-mode 'c++-ts-mode)
         (lsp-bridge-mode))
       (with-current-buffer (get-buffer-create "*scratch*")
@@ -284,11 +286,12 @@
   ;; (follow-mode)
 
   ;; Smoothly scrolling over image
-  (add-hook 'text-mode-hook
-            (lambda ()
-              (or (boundp 'iscroll-mode)
-                  (load "~/.emacs.d/site-lisp/iscroll/iscroll.el"))
-              (iscroll-mode)))
+  (unless (>= (string-to-number emacs-version) 30)
+    (add-hook 'text-mode-hook
+              (lambda ()
+                (or (boundp 'iscroll-mode)
+                    (load "~/.emacs.d/site-lisp/iscroll/iscroll.el"))
+                (iscroll-mode))))
 
   (setq auto-mode-alist
 	    (cons '("\\.pdf\\'" . pdf-view-mode) auto-mode-alist))
@@ -449,7 +452,7 @@
     "Set for themes for dark and light mode.")
   (require 'doom-themes)
   (if (or
-       (>= (string-to-number (substring (current-time-string) 11 13)) 24)
+       (>= (string-to-number (substring (current-time-string) 11 13)) 18)
        (<= (string-to-number (substring (current-time-string) 11 13)) 6))
 	  (progn
         (if (equal (cadr themes_chosen) 'modus-vivendi)
@@ -496,14 +499,28 @@
 							     11.0)
                           :underline
                           (face-foreground 'mode-line-emphasis))
-    (set-face-attribute 'mode-line nil
-    				    ;; :background "#F4F7FA"
-					    :background "white"
-					    :box nil
-					    :font (font-spec
-    						   :name
-							   "JetBrainsMono Nerd Font"
-							   :size 11.0)))
+    (progn
+      (set-face-attribute 'mode-line nil
+    				      ;; :background "#F4F7FA"
+					      :background "white"
+					      :box nil
+					      :font (font-spec
+    						     :name
+							     "JetBrainsMono Nerd Font"
+							     :size 11.0))
+      (with-eval-after-load 'org
+        (set-face-attribute 'org-verbatim nil
+                            :foreground "#e74c3c"
+                            :box '(:line-width 1 :color "#e1e4e5")))
+      (with-eval-after-load 'tab-bar
+        (set-face-attribute 'tab-bar nil
+                            :font (font-spec
+                                   :name
+                                   "JetBrainsMono Nerd Font"
+                                   :size 11.0))
+        (set-face-attribute 'tab-bar-tab nil
+                            :background (face-attribute 'default :background)
+                            :box 'unspecified))))
 
   (set-face-attribute
    'mode-line-inactive nil

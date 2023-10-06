@@ -1,0 +1,8 @@
+{
+    "name": "svlangserver",
+    "languageId": "verilog",
+    "command": [
+        "svlangserver"
+    ],
+    "settings": {}
+}

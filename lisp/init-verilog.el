@@ -9,10 +9,11 @@
   ;;    (make-lsp-client :new-connection (lsp-stdio-connection '("svls"))
   ;;   				  :major-modes '(verilog-mode)
   ;;   				  :priority -1)))
-  (require 'lsp-verilog)
-  (custom-set-variables
-   '(lsp-clients-svlangserver-launchConfiguration "verilator -sv --lint-only -Wall")
-   '(lsp-clients-svlangserver-formatCommand "verible-verilog-format"))
+  (with-eval-after-load 'lsp-mode
+    (require 'lsp-verilog)
+    (custom-set-variables
+     '(lsp-clients-svlangserver-launchConfiguration "verilator -sv --lint-only -Wall")
+     '(lsp-clients-svlangserver-formatCommand "verible-verilog-format")))
   (setq verilog-indent-lists nil
         verilog-auto-delete-trailing-whitespace t
         ;; verilog-indent-level-declaration 0
@@ -38,9 +39,10 @@
             (lambda ()
               (eglot-ensure)
               (add-to-list 'eglot-server-programs
-                           '(verilog-mode . ("svlangserver"))
+                           ;; '(verilog-mode . ("svlangserver"))
                            ;; '(verilog-mode . ("svls"))
                            ;; '(verilog-mode . ("vls"))
+                           '(verilog-mode . ("veridian"))
                            )
               (setq eglot-workspace-configuration
                     '(:svlangserver

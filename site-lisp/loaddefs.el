@@ -994,6 +994,26 @@ See `cns-mode' for more information on Cns mode.
 
 ;;; Generated autoloads from combobulate/combobulate.el
 
+(autoload 'combobulate-mode "combobulate/combobulate" "\
+Navigate and edit text by syntactic constructs
+
+\\{combobulate-key-map}
+
+This is a minor mode.  If called interactively, toggle the
+`Combobulate mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `combobulate-mode'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t)
 (register-definition-prefixes "combobulate/combobulate" '("combobulate-"))
 
 
@@ -4115,8 +4135,6 @@ evaluate `iscroll-mode'.
 The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
-\\{iscroll-mode-map}
-
 (fn &optional ARG)" t)
 (register-definition-prefixes "iscroll/iscroll" '("iscroll-"))
 
@@ -4449,6 +4467,11 @@ it is disabled.
 ;;; Generated autoloads from lsp-bridge/lsp-bridge-epc.el
 
 (register-definition-prefixes "lsp-bridge/lsp-bridge-epc" '("lsp-bridge-"))
+
+
+;;; Generated autoloads from lsp-bridge/lsp-bridge-inlay-hint.el
+
+(register-definition-prefixes "lsp-bridge/lsp-bridge-inlay-hint" '("lsp-bridge-inlay-hint"))
 
 
 ;;; Generated autoloads from lsp-bridge/lsp-bridge-jdtls.el
@@ -4893,6 +4916,11 @@ Click lsp lens using `avy' package." t)
 ;;; Generated autoloads from lsp-mode/clients/lsp-marksman.el
 
 (register-definition-prefixes "lsp-mode/clients/lsp-marksman" '("lsp-marksman-"))
+
+
+;;; Generated autoloads from lsp-mode/clients/lsp-mdx.el
+
+(register-definition-prefixes "lsp-mode/clients/lsp-mdx" '("lsp-mdx-server-command"))
 
 
 ;;; Generated autoloads from lsp-mode/test/lsp-methods-test.el

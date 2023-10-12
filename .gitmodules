@@ -274,3 +274,27 @@
 [submodule "site-lisp/emacs-kaolin-themes"]
 	path = site-lisp/emacs-kaolin-themes
 	url = https://github.com/ogdenwebb/emacs-kaolin-themes.git
+[submodule "site-lisp/centaur-tabs"]
+	path = site-lisp/centaur-tabs
+	url = https://github.com/ema2159/centaur-tabs.git
+[submodule "site-lisp/all-the-icons.el"]
+	path = site-lisp/all-the-icons.el
+	url = https://github.com/domtronn/all-the-icons.el.git
+[submodule "site-lisp/awesome-tab"]
+	path = site-lisp/awesome-tab
+	url = https://github.com/manateelazycat/awesome-tab.git
+[submodule "site-lisp/powerline"]
+	path = site-lisp/powerline
+	url = https://github.com/milkypostman/powerline.git
+[submodule "site-lisp/jupyter"]
+	path = site-lisp/jupyter
+	url = https://github.com/emacs-jupyter/jupyter.git
+[submodule "site-lisp/emacs-websocket"]
+	path = site-lisp/emacs-websocket
+	url = https://github.com/ahyatt/emacs-websocket.git
+[submodule "site-lisp/emacs-web-server"]
+	path = site-lisp/emacs-web-server
+	url = https://github.com/skeeto/emacs-web-server
+[submodule "site-lisp/emacs-zmq"]
+	path = site-lisp/emacs-zmq
+	url = http://github.com/nnicandro/emacs-zmq

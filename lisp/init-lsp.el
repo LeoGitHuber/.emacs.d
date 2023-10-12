@@ -161,7 +161,7 @@
         lsp-bridge-python-command "python"
 		;; This will cause `org-roam-node-find' get wrong and I don't know why.
 		;; lsp-bridge-enable-org-babel t
-        lsp-bridge-c-lsp-server "ccls"
+        lsp-bridge-c-lsp-server "clangd"
         lsp-bridge-user-langserver-dir "~/.emacs.d/lisp/langserver"
         lsp-bridge-user-multiserver-dir "~/.emacs.d/lisp/multilangserver"
         )

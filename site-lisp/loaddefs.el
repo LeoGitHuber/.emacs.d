@@ -166,6 +166,53 @@ mode.
 (register-definition-prefixes "company-mode/test/all" '("company-test-path"))
 
 
+;;; Generated autoloads from all-the-icons.el/all-the-icons.el
+
+(autoload 'all-the-icons-icon-for-dir "all-the-icons.el/all-the-icons" "\
+Get the formatted icon for DIR.
+ARG-OVERRIDES should be a plist containining `:height',
+`:v-adjust' or `:face' properties like in the normal icon
+inserting functions.
+
+Note: You want chevron, please use `all-the-icons-icon-for-dir-with-chevron'.
+
+(fn DIR &rest ARG-OVERRIDES)")
+(autoload 'all-the-icons-icon-for-file "all-the-icons.el/all-the-icons" "\
+Get the formatted icon for FILE.
+ARG-OVERRIDES should be a plist containining `:height',
+`:v-adjust' or `:face' properties like in the normal icon
+inserting functions.
+
+(fn FILE &rest ARG-OVERRIDES)")
+(autoload 'all-the-icons-icon-for-mode "all-the-icons.el/all-the-icons" "\
+Get the formatted icon for MODE.
+ARG-OVERRIDES should be a plist containining `:height',
+`:v-adjust' or `:face' properties like in the normal icon
+inserting functions.
+
+(fn MODE &rest ARG-OVERRIDES)")
+(autoload 'all-the-icons-icon-for-url "all-the-icons.el/all-the-icons" "\
+Get the formatted icon for URL.
+If an icon for URL isn't found in `all-the-icons-url-alist', a globe is used.
+ARG-OVERRIDES should be a plist containining `:height',
+`:v-adjust' or `:face' properties like in the normal icon
+inserting functions.
+
+(fn URL &rest ARG-OVERRIDES)")
+(autoload 'all-the-icons-install-fonts "all-the-icons.el/all-the-icons" "\
+Helper function to download and install the latests fonts based on OS.
+When PFX is non-nil, ignore the prompt and just install
+
+(fn &optional PFX)" t)
+(autoload 'all-the-icons-insert "all-the-icons.el/all-the-icons" "\
+Interactive icon insertion function.
+When Prefix ARG is non-nil, insert the propertized icon.
+When FAMILY is non-nil, limit the candidates to the icon set matching it.
+
+(fn &optional ARG FAMILY)" t)
+(register-definition-prefixes "all-the-icons.el/all-the-icons" '("all-the-icons-"))
+
+
 ;;; Generated autoloads from company-mode/test/async-tests.el
 
 (register-definition-prefixes "company-mode/test/async-tests" '("company-async-backend"))
@@ -394,6 +441,43 @@ The window scope is determined by `avy-all-windows' (ARG negates it).
 (autoload 'avy-transpose-lines-in-region "avy/avy" "\
 Transpose lines in the active region." t)
 (register-definition-prefixes "avy/avy" '("avy-"))
+
+
+;;; Generated autoloads from awesome-tab/awesome-tab.el
+
+(autoload 'awesome-tab-backward "awesome-tab/awesome-tab" "\
+Select the previous available tab.
+Depend on the setting of the option `awesome-tab-cycle-scope'." t)
+(autoload 'awesome-tab-forward "awesome-tab/awesome-tab" "\
+Select the next available tab.
+Depend on the setting of the option `awesome-tab-cycle-scope'." t)
+(autoload 'awesome-tab-backward-group "awesome-tab/awesome-tab" "\
+Go to selected tab in the previous available group." t)
+(autoload 'awesome-tab-forward-group "awesome-tab/awesome-tab" "\
+Go to selected tab in the next available group." t)
+(autoload 'awesome-tab-backward-tab "awesome-tab/awesome-tab" "\
+Select the previous visible tab." t)
+(autoload 'awesome-tab-forward-tab "awesome-tab/awesome-tab" "\
+Select the next visible tab." t)
+(defvar awesome-tab-mode nil "\
+Non-nil if Awesome-Tab mode is enabled.
+See the `awesome-tab-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `awesome-tab-mode'.")
+(custom-autoload 'awesome-tab-mode "awesome-tab/awesome-tab" nil)
+(autoload 'awesome-tab-mode "awesome-tab/awesome-tab" "\
+Toggle display of a tab bar in the header line.
+With prefix argument ARG, turn on if positive, otherwise off.
+Returns non-nil if the new state is enabled.
+
+\\{awesome-tab-mode-map}
+
+(fn &optional ARG)" t)
+(autoload 'awesome-tab-counsel-switch-group "awesome-tab/awesome-tab" "\
+Switch group of awesome-tab." t)
+(register-definition-prefixes "awesome-tab/awesome-tab" '("awesome" "helm-source-awesome-tab-group"))
 
 
 ;;; Generated autoloads from verilog-mode/batch_prof.el
@@ -747,6 +831,68 @@ If INTERACTIVE is nil the function acts like a capf.
 ;;; Generated autoloads from company-mode/test/capf-tests.el
 
 (register-definition-prefixes "company-mode/test/capf-tests" '("company-"))
+
+
+;;; Generated autoloads from centaur-tabs/centaur-tabs.el
+
+(autoload 'centaur-tabs-local-mode "centaur-tabs/centaur-tabs" "\
+Toggle local display of the tab bar.
+With prefix argument ARG, turn on if positive, otherwise off.
+Returns non-nil if the new state is enabled.
+When turned on, if a local header line is shown, it is hidden to show
+the tab bar.  The tab bar is locally hidden otherwise.  When turned
+off, if a local header line is hidden or the tab bar is locally
+hidden, it is shown again.  Signal an error if Centaur-Tabs mode is off.
+
+(fn &optional ARG)" t)
+(defvar centaur-tabs-mode nil "\
+Non-nil if Centaur-Tabs mode is enabled.
+See the `centaur-tabs-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `centaur-tabs-mode'.")
+(custom-autoload 'centaur-tabs-mode "centaur-tabs/centaur-tabs" nil)
+(autoload 'centaur-tabs-mode "centaur-tabs/centaur-tabs" "\
+Toggle display of a tab bar in the header line.
+With prefix argument ARG, turn on if positive, otherwise off.
+Returns non-nil if the new state is enabled.
+
+\\{centaur-tabs-mode-map}
+
+(fn &optional ARG)" t)
+(register-definition-prefixes "centaur-tabs/centaur-tabs" '("centaur-tabs-"))
+
+
+;;; Generated autoloads from centaur-tabs/centaur-tabs-elements.el
+
+(register-definition-prefixes "centaur-tabs/centaur-tabs-elements" '("cent"))
+
+
+;;; Generated autoloads from centaur-tabs/centaur-tabs-functions.el
+
+(autoload 'centaur-tabs-backward "centaur-tabs/centaur-tabs-functions" "\
+Select the previous available tab.
+Depend on the setting of the option `centaur-tabs-cycle-scope'." t)
+(autoload 'centaur-tabs-forward "centaur-tabs/centaur-tabs-functions" "\
+Select the next available tab.
+Depend on the setting of the option `centaur-tabs-cycle-scope'." t)
+(autoload 'centaur-tabs-backward-group "centaur-tabs/centaur-tabs-functions" "\
+Go to selected tab in the previous available group." t)
+(autoload 'centaur-tabs-forward-group "centaur-tabs/centaur-tabs-functions" "\
+Go to selected tab in the next available group." t)
+(autoload 'centaur-tabs-backward-tab "centaur-tabs/centaur-tabs-functions" "\
+Select the previous visible tab." t)
+(autoload 'centaur-tabs-forward-tab "centaur-tabs/centaur-tabs-functions" "\
+Select the next visible tab." t)
+(register-definition-prefixes "centaur-tabs/centaur-tabs-functions" '("centaur-tabs-"))
+
+
+;;; Generated autoloads from centaur-tabs/centaur-tabs-interactive.el
+
+(autoload 'centaur-tabs-counsel-switch-group "centaur-tabs/centaur-tabs-interactive" "\
+Display a list of current buffer groups using Counsel." t)
+(register-definition-prefixes "centaur-tabs/centaur-tabs-interactive" '("centaur-tabs-"))
 
 
 ;;; Generated autoloads from markdown-mode/tests/checkdoc-batch.el
@@ -1997,8 +2143,6 @@ evaluate `corfu-mode'.
 The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
-\\{corfu-mode-map}
-
 (fn &optional ARG)" t)
 (put 'global-corfu-mode 'globalized-minor-mode t)
 (defvar global-corfu-mode nil "\
@@ -2225,6 +2369,36 @@ See `dash-fontify-mode' for more information on Dash-Fontify mode.
 Register the Dash Info manual with `info-lookup-symbol'.
 This allows Dash symbols to be looked up with \\[info-lookup-symbol]." t)
 (register-definition-prefixes "dash.el/dash" '("!cdr" "!cons" "--" "->" "-a" "-butlast" "-c" "-d" "-e" "-f" "-gr" "-i" "-juxt" "-keep" "-l" "-m" "-no" "-o" "-p" "-r" "-s" "-t" "-u" "-value-to-list" "-when-let" "-zip" "dash-"))
+
+
+;;; Generated autoloads from all-the-icons.el/data/data-alltheicons.el
+
+(register-definition-prefixes "all-the-icons.el/data/data-alltheicons" '("all-the-icons-data/alltheicons-alist"))
+
+
+;;; Generated autoloads from all-the-icons.el/data/data-faicons.el
+
+(register-definition-prefixes "all-the-icons.el/data/data-faicons" '("all-the-icons-data/fa-icon-alist"))
+
+
+;;; Generated autoloads from all-the-icons.el/data/data-fileicons.el
+
+(register-definition-prefixes "all-the-icons.el/data/data-fileicons" '("all-the-icons-data/file-icon-alist"))
+
+
+;;; Generated autoloads from all-the-icons.el/data/data-material.el
+
+(register-definition-prefixes "all-the-icons.el/data/data-material" '("all-the-icons-data/material-icons-alist"))
+
+
+;;; Generated autoloads from all-the-icons.el/data/data-octicons.el
+
+(register-definition-prefixes "all-the-icons.el/data/data-octicons" '("all-the-icons-data/octicons-alist"))
+
+
+;;; Generated autoloads from all-the-icons.el/data/data-weathericons.el
+
+(register-definition-prefixes "all-the-icons.el/data/data-weathericons" '("all-the-icons-data/weather-icons-alist"))
 
 
 ;;; Generated autoloads from dired-preview/dired-preview.el
@@ -3803,6 +3977,13 @@ SYMBOL with `flycheck-def-executable-var'.
 (register-definition-prefixes "flycheck/maint/flycheck-maint" '("flycheck/"))
 
 
+;;; Generated autoloads from lsp-bridge/flymake-bridge/flymake-bridge.el
+
+(autoload 'flymake-bridge-setup "lsp-bridge/flymake-bridge/flymake-bridge" "\
+Setup lsp-bridge-diagnostic integration with Flymake." t)
+(register-definition-prefixes "lsp-bridge/flymake-bridge/flymake-bridge" '("flymake-bridge"))
+
+
 ;;; Generated autoloads from flymake-flycheck/flymake-flycheck.el
 
 (autoload 'flymake-flycheck-all-available-diagnostic-functions "flymake-flycheck/flymake-flycheck" "\
@@ -4137,6 +4318,409 @@ it is disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "iscroll/iscroll" '("iscroll-"))
+
+
+;;; Generated autoloads from jupyter/jupyter-base.el
+
+(register-definition-prefixes "jupyter/jupyter-base" '("jupyter-"))
+
+
+;;; Generated autoloads from jupyter/jupyter-channel.el
+
+(register-definition-prefixes "jupyter/jupyter-channel" '("jupyter-channel"))
+
+
+;;; Generated autoloads from jupyter/jupyter-channel-ioloop.el
+
+(register-definition-prefixes "jupyter/jupyter-channel-ioloop" '("jupyter-channel-ioloop"))
+
+
+;;; Generated autoloads from jupyter/jupyter-client.el
+
+(register-definition-prefixes "jupyter/jupyter-client" '("comm-" "define-jupyter-client-handler" "input-request" "jupyter-"))
+
+
+;;; Generated autoloads from jupyter/jupyter-env.el
+
+(register-definition-prefixes "jupyter/jupyter-env" '("jupyter-"))
+
+
+;;; Generated autoloads from jupyter/jupyter-ioloop.el
+
+(register-definition-prefixes "jupyter/jupyter-ioloop" '("jupyter-ioloop"))
+
+
+;;; Generated autoloads from jupyter/jupyter-julia.el
+
+(register-definition-prefixes "jupyter/jupyter-julia" '("jupyter-julia-"))
+
+
+;;; Generated autoloads from jupyter/jupyter-kernel.el
+
+(register-definition-prefixes "jupyter/jupyter-kernel" '("jupyter-kernel-name"))
+
+
+;;; Generated autoloads from jupyter/jupyter-kernel-process.el
+
+(register-definition-prefixes "jupyter/jupyter-kernel-process" '("jupyter-"))
+
+
+;;; Generated autoloads from jupyter/jupyter-kernelspec.el
+
+(register-definition-prefixes "jupyter/jupyter-kernelspec" '("jupyter-"))
+
+
+;;; Generated autoloads from jupyter/jupyter-messages.el
+
+(register-definition-prefixes "jupyter/jupyter-messages" '("jupyter-"))
+
+
+;;; Generated autoloads from jupyter/jupyter-mime.el
+
+(register-definition-prefixes "jupyter/jupyter-mime" '("jupyter-"))
+
+
+;;; Generated autoloads from jupyter/test/jupyter-monad-test.el
+
+(register-definition-prefixes "jupyter/test/jupyter-monad-test" '("jupyter-test-dummy-msgs"))
+
+
+;;; Generated autoloads from jupyter/jupyter-monads.el
+
+(register-definition-prefixes "jupyter/jupyter-monads" '("jupyter-"))
+
+
+;;; Generated autoloads from jupyter/jupyter-org-client.el
+
+(register-definition-prefixes "jupyter/jupyter-org-client" '("jupyter-org-"))
+
+
+;;; Generated autoloads from jupyter/jupyter-org-extensions.el
+
+(autoload 'jupyter-org-insert-src-block "jupyter/jupyter-org-extensions" "\
+Insert a src-block above `point'.
+With prefix arg BELOW, insert it below `point'.
+
+If `point' is in a src-block use the language of the src-block and
+copy the header to the new block.
+
+If QUERY is non-nil and `point' is not in a src-block, ask for
+the language to use for the new block.  Otherwise try to select a
+language based on the src-block's near `point'.
+
+(fn &optional BELOW QUERY)" t)
+(autoload 'jupyter-org-split-src-block "jupyter/jupyter-org-extensions" "\
+Split the current src block with point in upper block.
+
+With a prefix BELOW move point to lower block.
+
+(fn &optional BELOW)" t)
+(autoload 'jupyter-org-execute-and-next-block "jupyter/jupyter-org-extensions" "\
+Execute his block and jump or add a new one.
+
+If a new block is created, use the same language, switches and parameters.
+With prefix arg NEW, always insert new cell.
+
+(fn &optional NEW)" t)
+(autoload 'jupyter-org-execute-to-point "jupyter/jupyter-org-extensions" "\
+Execute Jupyter source blocks that start before point.
+Only execute Jupyter source blocks that have the same session.
+Non-Jupyter source blocks are evaluated conditionally.
+
+The session is selected in the following way:
+
+   * If `point' is at a Jupyter source block, use its session.
+
+   * If `point' is not at a Jupyter source block, examine the
+     source blocks before `point' and ask the user to select a
+     session if multiple exist.  If there is only one session, use
+     it without asking.
+
+   * Finally, if a session could not be found, then no Jupyter
+     source blocks exist before `point'.  In this case, no session
+     is selected and all the source blocks before `point' will be
+     evaluated, e.g. when all source blocks before `point' are
+     shell source blocks.
+
+NOTE: If a session could be selected, only Jupyter source blocks
+that have the same session are evaluated *without* evaluating any
+other source blocks.  You can also evaluate ANY source block that
+doesn't have a Jupyter session by providing a prefix argument.
+This is useful, e.g. to evaluate shell source blocks along with
+Jupyter source blocks.
+
+(fn ANY)" t)
+(autoload 'jupyter-org-execute-subtree "jupyter/jupyter-org-extensions" "\
+Execute Jupyter source blocks that start before point in the current subtree.
+This function narrows the buffer to the current subtree and calls
+`jupyter-org-execute-to-point'.  See that function for the meaning
+of the ANY argument.
+
+(fn ANY)" t)
+(autoload 'jupyter-org-next-busy-src-block "jupyter/jupyter-org-extensions" "\
+Jump to the next busy source block.
+
+With a prefix argument ARG, jump forward ARG many blocks.
+
+When BACKWARD is non-nil, jump to the previous block.
+
+(fn ARG &optional BACKWARD)" t)
+(autoload 'jupyter-org-previous-busy-src-block "jupyter/jupyter-org-extensions" "\
+Jump to the previous busy source block.
+
+With a prefix argument ARG, jump backward ARG many source blocks.
+
+(fn ARG)" t)
+(autoload 'jupyter-org-inspect-src-block "jupyter/jupyter-org-extensions" "\
+Inspect the symbol under point when in a source block." t)
+(autoload 'jupyter-org-restart-kernel-execute-block "jupyter/jupyter-org-extensions" "\
+Restart the kernel of the source block where point is and execute it." t)
+(autoload 'jupyter-org-restart-and-execute-to-point "jupyter/jupyter-org-extensions" "\
+Kill the kernel and run all Jupyter src-blocks to point.
+With a prefix argument, run ANY source block that doesn't have a
+Jupyter session as well.
+
+See `jupyter-org-execute-to-point' for more information on which
+source blocks are evaluated.
+
+(fn &optional ANY)" t)
+(autoload 'jupyter-org-restart-kernel-execute-buffer "jupyter/jupyter-org-extensions" "\
+Restart kernel and execute buffer." t)
+(autoload 'jupyter-org-jump-to-block "jupyter/jupyter-org-extensions" "\
+Jump to a source block in the buffer using `ivy'.
+If narrowing is in effect, jump to a block in the narrowed region.
+Use a numeric prefix CONTEXT to specify how many lines of context to showin the
+process of selecting a source block.
+Defaults to `jupyter-org-jump-to-block-context-lines'.
+
+(fn &optional CONTEXT)" t)
+(autoload 'jupyter-org-jump-to-visible-block "jupyter/jupyter-org-extensions" "\
+Jump to a visible src block with avy." t)
+(autoload 'jupyter-org-edit-header "jupyter/jupyter-org-extensions" "\
+Edit the src-block header in the minibuffer." t)
+(autoload 'jupyter-org-kill-block-and-results "jupyter/jupyter-org-extensions" "\
+Kill the block and its results." t)
+(autoload 'jupyter-org-copy-block-and-results "jupyter/jupyter-org-extensions" "\
+Copy the src block at the current point and its results." t)
+(autoload 'jupyter-org-clone-block "jupyter/jupyter-org-extensions" "\
+Clone the block above the current block.
+
+If BELOW is non-nil, add the cloned block below.
+
+(fn &optional BELOW)" t)
+(autoload 'jupyter-org-merge-blocks "jupyter/jupyter-org-extensions" "\
+Merge the current block with the next block." t)
+(autoload 'jupyter-org-move-src-block "jupyter/jupyter-org-extensions" "\
+Move source block before of after another.
+
+If BELOW is non-nil, move the block down, otherwise move it up.
+
+(fn &optional BELOW)" t)
+(autoload 'jupyter-org-clear-all-results "jupyter/jupyter-org-extensions" "\
+Clear all results in the buffer." t)
+(autoload 'jupyter-org-interrupt-kernel "jupyter/jupyter-org-extensions" "\
+Interrupt the kernel." t)
+(register-definition-prefixes "jupyter/jupyter-org-extensions" '("jupyter-org-"))
+
+
+;;; Generated autoloads from jupyter/jupyter-repl.el
+
+(autoload 'jupyter-repl-associate-buffer "jupyter/jupyter-repl" "\
+Associate the `current-buffer' with a REPL CLIENT.
+If the `major-mode' of the `current-buffer' is the
+`jupyter-repl-lang-mode' of CLIENT, call the function
+`jupyter-repl-interaction-mode' to enable the corresponding mode.
+
+CLIENT should be the symbol `jupyter-repl-client' or the symbol
+of a subclass.  If CLIENT is a buffer or the name of a buffer, use
+the `jupyter-current-client' local to the buffer.
+
+(fn CLIENT)" t)
+(defvar jupyter-repl-persistent-mode nil "\
+Non-nil if Jupyter-Repl-Persistent mode is enabled.
+See the `jupyter-repl-persistent-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `jupyter-repl-persistent-mode'.")
+(custom-autoload 'jupyter-repl-persistent-mode "jupyter/jupyter-repl" nil)
+(autoload 'jupyter-repl-persistent-mode "jupyter/jupyter-repl" "\
+Global minor mode to persist Jupyter REPL connections.
+
+When the `jupyter-current-client' of the current buffer is a REPL
+client, its value is propagated to all buffers switched to that
+have the same `major-mode' as the client's kernel language and
+`jupyter-repl-interaction-mode' is enabled in those buffers.
+
+This is a global minor mode.  If called interactively, toggle the
+`Jupyter-Repl-Persistent mode' mode.  If the prefix argument is
+positive, enable the mode, and if it is zero or negative, disable
+the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `(default-value \\='jupyter-repl-persistent-mode)'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t)
+(autoload 'jupyter-run-repl "jupyter/jupyter-repl" "\
+Run a Jupyter REPL connected to a kernel with name, KERNEL-NAME.
+KERNEL-NAME will be passed to `jupyter-guess-kernelspec' and the
+first kernel found will be used to start the new kernel.
+
+With a prefix argument give a new REPL-NAME for the REPL.
+
+Optional argument ASSOCIATE-BUFFER, if non-nil, means to enable
+the REPL interaction mode by calling the function
+`jupyter-repl-interaction-mode' in the `current-buffer' and
+associate it with the REPL created.  When called interactively,
+ASSOCIATE-BUFFER is set to t.  If the `current-buffer's
+`major-mode' does not correspond to the language of the kernel
+started, ASSOCIATE-BUFFER has no effect.
+
+Optional argument CLIENT-CLASS is a subclass of
+`jupyter-repl-client' that the REPL client will be an instance
+of.  The default is `jupyter-repl-client'.
+
+When called interactively, DISPLAY the new REPL buffer.
+Otherwise, in a non-interactive call, return the REPL client
+connected to the kernel.
+
+Note, if `default-directory' is a remote directory, a kernel will
+start on the remote host by using the \"jupyter kernel\" shell
+command on the host.
+
+(fn KERNEL-NAME &optional REPL-NAME ASSOCIATE-BUFFER CLIENT-CLASS DISPLAY)" t)
+(autoload 'jupyter-connect-repl "jupyter/jupyter-repl" "\
+Run a Jupyter REPL using a kernel's connection FILE.
+Return the REPL client connected to the kernel.  When called
+interactively, DISPLAY the new REPL buffer as well.  With a
+prefix argument give a new REPL-NAME for the REPL.
+
+FILE is the name of a connection file that will be read.
+ASSOCIATE-BUFFER has the same meaning as in `jupyter-run-repl'.
+Optional argument CLIENT-CLASS is the class of the client that
+will be used to initialize the REPL and should be a class symbol
+like the symbol `jupyter-repl-client', which is the default. 
+
+(fn FILE &optional REPL-NAME ASSOCIATE-BUFFER CLIENT-CLASS DISPLAY)" t)
+(register-definition-prefixes "jupyter/jupyter-repl" '("jupyter-"))
+
+
+;;; Generated autoloads from jupyter/jupyter-rest-api.el
+
+(register-definition-prefixes "jupyter/jupyter-rest-api" '("jupyter-"))
+
+
+;;; Generated autoloads from jupyter/jupyter-server.el
+
+(autoload 'jupyter-server-launch-kernel "jupyter/jupyter-server" "\
+Start a kernel on SERVER.
+
+With a prefix argument, ask to select a server if there are
+mutiple to choose from, otherwise the most recently used server
+is used as determined by `jupyter-current-server'.
+
+(fn SERVER)" t)
+(autoload 'jupyter-run-server-repl "jupyter/jupyter-server" "\
+On SERVER start a kernel with KERNEL-NAME.
+
+With a prefix argument, ask to select a server if there are
+mutiple to choose from, otherwise the most recently used server
+is used as determined by `jupyter-current-server'.
+
+REPL-NAME, ASSOCIATE-BUFFER, CLIENT-CLASS, and DISPLAY all have
+the same meaning as in `jupyter-run-repl'.
+
+(fn SERVER KERNEL-NAME &optional REPL-NAME ASSOCIATE-BUFFER CLIENT-CLASS DISPLAY)" t)
+(autoload 'jupyter-connect-server-repl "jupyter/jupyter-server" "\
+On SERVER, connect to the kernel with KERNEL-ID.
+
+With a prefix argument, ask to select a server if there are
+mutiple to choose from, otherwise the most recently used server
+is used as determined by `jupyter-current-server'.
+
+REPL-NAME, ASSOCIATE-BUFFER, CLIENT-CLASS, and DISPLAY all have
+the same meaning as in `jupyter-connect-repl'.
+
+(fn SERVER KERNEL-ID &optional REPL-NAME ASSOCIATE-BUFFER CLIENT-CLASS DISPLAY)" t)
+(autoload 'jupyter-server-list-kernels "jupyter/jupyter-server" "\
+Display a list of live kernels on SERVER.
+When called interactively, ask to select a SERVER when given a
+prefix argument otherwise the `jupyter-current-server' will be
+used.
+
+(fn SERVER)" t)
+(register-definition-prefixes "jupyter/jupyter-server" '("jupyter-"))
+
+
+;;; Generated autoloads from jupyter/jupyter-server-kernel.el
+
+(register-definition-prefixes "jupyter/jupyter-server-kernel" '("jupyter-"))
+
+
+;;; Generated autoloads from jupyter/test/jupyter-test.el
+
+(register-definition-prefixes "jupyter/test/jupyter-test" '("jupyter-" "org-babel-jupyter-resource-directory"))
+
+
+;;; Generated autoloads from jupyter/jupyter-tramp.el
+
+(defconst jupyter-tramp-file-name-handler-alist '((access-file . tramp-handle-access-file) (add-name-to-file . tramp-handle-add-name-to-file) (copy-file . jupyter-tramp-copy-file) (delete-directory . jupyter-tramp-delete-directory) (delete-file . jupyter-tramp-delete-file) (directory-file-name . tramp-handle-directory-file-name) (directory-files . tramp-handle-directory-files) (directory-files-and-attributes . tramp-handle-directory-files-and-attributes) (dired-compress-file . ignore) (dired-uncache . tramp-handle-dired-uncache) (expand-file-name . jupyter-tramp-expand-file-name) (file-accessible-directory-p . tramp-handle-file-accessible-directory-p) (file-acl . ignore) (file-attributes . jupyter-tramp-file-attributes) (file-directory-p . jupyter-tramp-file-directory-p) (file-equal-p . tramp-handle-file-equal-p) (file-executable-p . tramp-handle-file-exists-p) (file-exists-p . tramp-handle-file-exists-p) (file-in-directory-p . tramp-handle-file-in-directory-p) (file-local-copy . jupyter-tramp-file-local-copy) (file-modes . tramp-handle-file-modes) (file-name-all-completions . jupyter-tramp-file-name-all-completions) (file-name-as-directory . tramp-handle-file-name-as-directory) (file-name-case-insensitive-p . tramp-handle-file-name-case-insensitive-p) (file-name-completion . tramp-handle-file-name-completion) (file-name-directory . tramp-handle-file-name-directory) (file-name-nondirectory . tramp-handle-file-name-nondirectory) (file-newer-than-file-p . tramp-handle-file-newer-than-file-p) (file-notify-add-watch . tramp-handle-file-notify-add-watch) (file-notify-rm-watch . tramp-handle-file-notify-rm-watch) (file-notify-valid-p . tramp-handle-file-notify-valid-p) (file-ownership-preserved-p . ignore) (file-readable-p . tramp-handle-file-exists-p) (file-regular-p . tramp-handle-file-regular-p) (file-remote-p . jupyter-tramp-file-remote-p) (file-selinux-context . tramp-handle-file-selinux-context) (file-symlink-p . jupyter-tramp-file-symlink-p) (file-system-info . ignore) (file-truename . tramp-handle-file-truename) (file-writable-p . jupyter-tramp-file-writable-p) (find-backup-file-name . ignore) (insert-directory . tramp-handle-insert-directory) (insert-file-contents . tramp-handle-insert-file-contents) (load . tramp-handle-load) (make-auto-save-file-name . tramp-handle-make-auto-save-file-name) (make-directory . jupyter-tramp-make-directory) (make-directory-internal . ignore) (make-nearby-temp-file . tramp-handle-make-nearby-temp-file) (make-symbolic-link . tramp-handle-make-symbolic-link) (rename-file . jupyter-tramp-rename-file) (set-file-acl . ignore) (set-file-modes . ignore) (set-file-selinux-context . ignore) (set-file-times . ignore) (set-visited-file-modtime . tramp-handle-set-visited-file-modtime) (substitute-in-file-name . tramp-handle-substitute-in-file-name) (temporary-file-directory . tramp-handle-temporary-file-directory) (unhandled-file-name-directory . ignore) (vc-registered . ignore) (verify-visited-file-modtime . tramp-handle-verify-visited-file-modtime) (write-region . jupyter-tramp-write-region)) "\
+Alist of handler functions for Tramp Jupyter method.
+Operations not mentioned here will be handled by the default Emacs primitives.")
+(defconst jupyter-tramp-methods '("jpy" "jpys") "\
+Methods to connect Jupyter kernel servers.")
+(with-eval-after-load 'tramp (mapc (lambda (method) (add-to-list 'tramp-methods (list method (list 'tramp-default-port 8888) (list 'tramp-tmpdir "/tmp")))) jupyter-tramp-methods) (tramp-register-foreign-file-name-handler 'jupyter-tramp-file-name-p 'jupyter-tramp-file-name-handler) (add-to-list 'tramp-default-host-alist '("\\`jpys?\\'" nil "localhost")))
+(defsubst jupyter-tramp-file-name-method-p (method) "\
+Return METHOD if it corresponds to a Jupyter filename method or nil." (and (string-match-p "\\`jpys?\\'" method) method))
+(autoload 'jupyter-tramp-ensure-dissected-file-name "jupyter/jupyter-tramp" "\
+
+
+(fn VEC-OR-FILENAME)")
+(defsubst jupyter-tramp-file-name-p (vec-or-filename) "\
+If FILENAME is a Jupyter filename, return its method otherwise nil." (when-let* ((vec (jupyter-tramp-ensure-dissected-file-name vec-or-filename))) (jupyter-tramp-file-name-method-p (tramp-file-name-method vec))))
+(autoload 'jupyter-tramp-file-name-handler "jupyter/jupyter-tramp" "\
+
+
+(fn OPERATION &rest ARGS)")
+(autoload 'jupyter-tramp-file-name-from-url "jupyter/jupyter-tramp" "\
+Return a Jupyter TRAMP filename for the root directory of a kernel server.
+The filename is based off of URL's host and port if any.
+
+(fn URL)")
+(autoload 'jupyter-tramp-url-from-file-name "jupyter/jupyter-tramp" "\
+Return a URL string based off the method, host, and port of FILENAME.
+
+(fn FILENAME)")
+(autoload 'jupyter-tramp-server-from-file-name "jupyter/jupyter-tramp" "\
+Return a `jupyter-server' instance based off of FILENAME's remote components.
+If the connection has not been authenticated by the server,
+attempt to authenticate the connection.  Raise an error if that
+fails.
+
+(fn FILENAME)")
+(register-definition-prefixes "jupyter/jupyter-tramp" '("jupyter-tramp-"))
+
+
+;;; Generated autoloads from jupyter/jupyter-widget-client.el
+
+(register-definition-prefixes "jupyter/jupyter-widget-client" '("httpd/jupyter" "jupyter-widget"))
+
+
+;;; Generated autoloads from jupyter/jupyter-zmq-channel.el
+
+(register-definition-prefixes "jupyter/jupyter-zmq-channel" '("jupyter-"))
+
+
+;;; Generated autoloads from jupyter/jupyter-zmq-channel-ioloop.el
+
+(register-definition-prefixes "jupyter/jupyter-zmq-channel-ioloop" '("jupyter-zmq-channel-ioloop"))
 
 
 ;;; Generated autoloads from emacs-kaolin-themes/themes/kaolin-aurora-theme.el
@@ -8204,6 +8788,13 @@ See also `nov-bookmark-make-record'.
 (register-definition-prefixes "nov-xwidget/nov-xwidget" '("nov-xwidget-"))
 
 
+;;; Generated autoloads from jupyter/ob-jupyter.el
+
+(autoload 'org-babel-jupyter-scratch-buffer "jupyter/ob-jupyter" "\
+Display a scratch buffer connected to the current block's session." t)
+(register-definition-prefixes "jupyter/ob-jupyter" '("org-babel-"))
+
+
 ;;; Generated autoloads from orderless/orderless.el
 
 (autoload 'orderless-filter "orderless/orderless" "\
@@ -9567,6 +10158,63 @@ Benchmark tool for posframe." t)
 (register-definition-prefixes "posframe/posframe-benchmark" '("posframe-benchmark-alist"))
 
 
+;;; Generated autoloads from powerline/powerline.el
+
+(autoload 'powerline-hud "powerline/powerline" "\
+Return XPM of relative buffer location using FACE1 and FACE2 of optional WIDTH.
+
+(fn FACE1 FACE2 &optional WIDTH)")
+(autoload 'powerline-mouse "powerline/powerline" "\
+Return mouse handler for CLICK-GROUP given CLICK-TYPE and STRING.
+
+(fn CLICK-GROUP CLICK-TYPE STRING)")
+(autoload 'powerline-concat "powerline/powerline" "\
+Concatonate STRINGS and pad sides by spaces.
+
+(fn &rest STRINGS)")
+(autoload 'defpowerline "powerline/powerline" "\
+Create function NAME by wrapping BODY with powerline padding an propetization.
+
+(fn NAME BODY)" nil t)
+(autoload 'powerline-raw "powerline/powerline" "\
+Render STR as mode-line data using FACE and optionally PAD import.
+PAD can be left (`l') or right (`r').
+
+(fn STR &optional FACE PAD)")
+(autoload 'powerline-fill "powerline/powerline" "\
+Return empty space using FACE and leaving RESERVE space on the right.
+
+(fn FACE RESERVE)")
+ (autoload 'powerline-major-mode "powerline")
+ (autoload 'powerline-minor-modes "powerline")
+ (autoload 'powerline-narrow "powerline")
+ (autoload 'powerline-vc "powerline")
+ (autoload 'powerline-encoding "powerline")
+ (autoload 'powerline-buffer-size "powerline")
+ (autoload 'powerline-buffer-id "powerline")
+ (autoload 'powerline-process "powerline")
+ (autoload 'powerline-selected-window-active "powerline")
+(register-definition-prefixes "powerline/powerline" '("pl/" "powerline-"))
+
+
+;;; Generated autoloads from powerline/powerline-separators.el
+
+(register-definition-prefixes "powerline/powerline-separators" '("pl/" "powerline-image-apple-rgb"))
+
+
+;;; Generated autoloads from powerline/powerline-themes.el
+
+(autoload 'powerline-default-theme "powerline/powerline-themes" "\
+Setup the default mode-line." t)
+(autoload 'powerline-center-theme "powerline/powerline-themes" "\
+Setup a mode-line with major and minor modes centered." t)
+(autoload 'powerline-vim-theme "powerline/powerline-themes" "\
+Setup a Vim-like mode-line." t)
+(autoload 'powerline-nano-theme "powerline/powerline-themes" "\
+Setup a nano-like mode-line." t)
+(register-definition-prefixes "powerline/powerline-themes" '("powerline-"))
+
+
 ;;; Generated autoloads from auctex/preview.el
 
 (autoload 'desktop-buffer-preview "auctex/preview" "\
@@ -10200,6 +10848,28 @@ Argument NAME ignored.
 (register-definition-prefixes "shrink-path.el/shrink-path" '("shrink-path-"))
 
 
+;;; Generated autoloads from emacs-web-server/simple-httpd.el
+
+(autoload 'httpd-start "emacs-web-server/simple-httpd" "\
+Start the web server process. If the server is already
+running, this will restart the server. There is only one server
+instance per Emacs instance." t)
+(autoload 'httpd-stop "emacs-web-server/simple-httpd" "\
+Stop the web server if it is currently running, otherwise do nothing." t)
+(autoload 'httpd-running-p "emacs-web-server/simple-httpd" "\
+Return non-nil if the simple-httpd server is running.")
+(autoload 'httpd-serve-directory "emacs-web-server/simple-httpd" "\
+Start the web server with given `directory' as `httpd-root'.
+
+(fn DIRECTORY)" t)
+(register-definition-prefixes "emacs-web-server/simple-httpd" '("defservlet" "httpd" "with-httpd-buffer"))
+
+
+;;; Generated autoloads from emacs-web-server/simple-httpd-test.el
+
+(register-definition-prefixes "emacs-web-server/simple-httpd-test" '("httpd--flet"))
+
+
 ;;; Generated autoloads from spinner.el/spinner.el
 
 (autoload 'spinner-create "spinner.el/spinner" "\
@@ -10384,6 +11054,11 @@ it is disabled.
 ;;; Generated autoloads from lsp-ui/test/test-helper.el
 
 (register-definition-prefixes "lsp-ui/test/test-helper" '("lsp-ui-test-"))
+
+
+;;; Generated autoloads from jupyter/test/test-helper.el
+
+(register-definition-prefixes "jupyter/test/test-helper" '("jupyter-"))
 
 
 ;;; Generated autoloads from ht.el/test/test-helper.el
@@ -12398,6 +13073,21 @@ Debug is enabled upon entry to vundo.
 (register-definition-prefixes "vundo/test/vundo-test" '("vundo-"))
 
 
+;;; Generated autoloads from emacs-websocket/websocket.el
+
+(register-definition-prefixes "emacs-websocket/websocket" '("websocket-"))
+
+
+;;; Generated autoloads from emacs-websocket/websocket-functional-test.el
+
+(register-definition-prefixes "emacs-websocket/websocket-functional-test" '("websocket-"))
+
+
+;;; Generated autoloads from emacs-websocket/websocket-test.el
+
+(register-definition-prefixes "emacs-websocket/websocket-test" '("websocket-test-"))
+
+
 ;;; Generated autoloads from emacs-which-key/which-key.el
 
 (defvar which-key-mode nil "\
@@ -12838,6 +13528,16 @@ See `yas-minor-mode' for more information on Yas minor mode.
 (fn &optional ARG)" t)
 (autoload 'snippet-mode "yasnippet" "A mode for editing yasnippets" t nil)
 (register-definition-prefixes "yasnippet/yasnippet" '("help-snippet-def" "snippet-mode-map" "yas"))
+
+
+;;; Generated autoloads from emacs-zmq/zmq.el
+
+(register-definition-prefixes "emacs-zmq/zmq" '("zmq-"))
+
+
+;;; Generated autoloads from emacs-zmq/zmq-tests.el
+
+(register-definition-prefixes "emacs-zmq/zmq-tests" '("zmq-"))
 
 ;;; End of scraped data
 

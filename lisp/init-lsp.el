@@ -57,13 +57,18 @@
 (with-eval-after-load 'corfu
   (setq corfu-auto t
 	    corfu-cycle t
-	    corfu-quit-no-match 'separator  ;; t
-	    corfu-auto-prefix 0
+	    ;; corfu-quit-no-match 'separator  ;; t
+	    corfu-auto-prefix 1
 	    corfu-auto-delay 0
-	    corfu-preview-current t)
+	    corfu-preview-current t
+        corfu-quit-no-match t
+        corfu-quit-at-boundary t)
   (when (boundp 'meow-insert-exit-hook)
     (add-hook 'meow-insert-exit-hook 'corfu-quit))
   (require 'kind-icon)
+  (keymap-set corfu-map "TAB" 'corfu-insert)
+  (keymap-set corfu-map "<backtab>" 'corfu-complete)
+  (keymap-unset corfu-map "RET")
   (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter)
   (add-to-list 'completion-at-point-functions #'cape-dabbrev)
   (add-to-list 'completion-at-point-functions #'cape-file)
@@ -161,7 +166,7 @@
         lsp-bridge-python-command "python"
 		;; This will cause `org-roam-node-find' get wrong and I don't know why.
 		;; lsp-bridge-enable-org-babel t
-        lsp-bridge-c-lsp-server "clangd"
+        ;; lsp-bridge-c-lsp-server "clangd"
         lsp-bridge-user-langserver-dir "~/.emacs.d/lisp/langserver"
         lsp-bridge-user-multiserver-dir "~/.emacs.d/lisp/multilangserver"
         )

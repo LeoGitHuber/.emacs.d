@@ -38,6 +38,8 @@
   ;;  )
   (setq org-hide-emphasis-markers t
 		org-pretty-entities t
+        prettify-symbols-mode t
+        prettify-symbols-unprettify-at-point 'right-edge
 		org-image-actual-width nil
 		;; org-todo-keywords '((sequence "     " "     "))
 		org-preview-latex-process-alist '((dvipng :programs

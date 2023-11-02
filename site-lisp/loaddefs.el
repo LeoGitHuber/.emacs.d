@@ -2311,6 +2311,11 @@ Complete candidate using quick keys." t)
 (register-definition-prefixes "corfu/extensions/corfu-quick" '("corfu-quick"))
 
 
+;;; Generated autoloads from esxml/css-lite.el
+
+(register-definition-prefixes "esxml/css-lite" '("*css-stream*" "*indent-css*" "+newline+" "css" "expand-tree" "inline-css" "make-css-" "process-css-" "selector-to-string" "string-cut" "to-string"))
+
+
 ;;; Generated autoloads from dash.el/dash.el
 
 (autoload 'dash-fontify-mode "dash.el/dash" "\
@@ -3544,6 +3549,82 @@ View Microsoft Office FILE as READ-ONLY PDF.
 (register-definition-prefixes "emacs-application-framework/app/pdf-viewer/eaf-pdf-viewer" '("eaf-"))
 
 
+;;; Generated autoloads from ef-themes/ef-themes.el
+
+(autoload 'ef-themes-select "ef-themes/ef-themes" "\
+Load an Ef THEME using minibuffer completion.
+
+With optional VARIANT as a prefix argument, prompt to limit the
+set of themes to either dark or light variants.
+
+Run `ef-themes-post-load-hook' after loading the theme.
+
+When called from Lisp, THEME is the symbol of a theme.  VARIANT
+is ignored in this scenario.
+
+(fn THEME &optional VARIANT)" t)
+(autoload 'ef-themes-select-light "ef-themes/ef-themes" "\
+Load a light Ef THEME.
+Run `ef-themes-post-load-hook' after loading the theme.
+
+Also see `ef-themes-select-dark'.
+
+This command is the same as `ef-themes-select' except it only
+prompts for light themes when called interactively.  Calling it
+from Lisp behaves the same as `ef-themes-select' for the THEME
+argument, meaning that it loads the Ef THEME regardless of
+whether it is light or dark.
+
+(fn THEME)" t)
+(autoload 'ef-themes-select-dark "ef-themes/ef-themes" "\
+Load a dark Ef THEME.
+Run `ef-themes-post-load-hook' after loading the theme.
+
+Also see `ef-themes-select-light'.
+
+This command is the same as `ef-themes-select' except it only
+prompts for dark themes when called interactively.  Calling it
+from Lisp behaves the same as `ef-themes-select' for the THEME
+argument, meaning that it loads the Ef THEME regardless of
+whether it is light or dark.
+
+(fn THEME)" t)
+(autoload 'ef-themes-toggle "ef-themes/ef-themes" "\
+Toggle between the two `ef-themes-to-toggle'.
+If `ef-themes-to-toggle' does not specify two Ef themes, inform
+the user about it while prompting with completion for a theme
+among our collection (this is practically the same as the
+`ef-themes-select' command).
+
+Run `ef-themes-post-load-hook' after loading the theme." t)
+(autoload 'ef-themes-load-random "ef-themes/ef-themes" "\
+Load an Ef theme at random, excluding the current one.
+
+With optional VARIANT as a prefix argument, prompt to limit the
+set of themes to either dark or light variants.
+
+Run `ef-themes-post-load-hook' after loading the theme.
+
+When called from Lisp, VARIANT is either the `dark' or `light'
+symbol.
+
+(fn &optional VARIANT)" t)
+(autoload 'ef-themes-theme "ef-themes/ef-themes" "\
+Bind NAME's color PALETTE around face specs and variables.
+Face specifications are passed to `custom-theme-set-faces'.
+While variables are handled by `custom-theme-set-variables'.
+Those are stored in `ef-themes-faces' and
+`ef-themes-custom-variables' respectively.
+
+Optional OVERRIDES are appended to PALETTE, overriding
+corresponding entries.
+
+(fn NAME PALETTE &optional OVERRIDES)" nil t)
+(function-put 'ef-themes-theme 'lisp-indent-function 0)
+(when load-file-name (let ((dir (file-name-directory load-file-name))) (unless (file-equal-p dir (expand-file-name "themes/" data-directory)) (add-to-list 'custom-theme-load-path dir))))
+(register-definition-prefixes "ef-themes/ef-themes" '("ef-themes-"))
+
+
 ;;; Generated autoloads from elisp-refs/elisp-refs.el
 
 (autoload 'elisp-refs-function "elisp-refs/elisp-refs" "\
@@ -3658,6 +3739,41 @@ A prefix argument causes the SQL to be printed into the current buffer.
 ;;; Generated autoloads from lsp-mode/features/support/env.el
 
 (register-definition-prefixes "lsp-mode/features/support/env" '("lsp-mode-"))
+
+
+;;; Generated autoloads from esxml/esxml.el
+
+(register-definition-prefixes "esxml/esxml" '("attr" "esxml-" "pp-esxml-to-xml" "string-trim-whitespace" "sxml-to-" "xml-to-esxml"))
+
+
+;;; Generated autoloads from esxml/esxml-form.el
+
+(register-definition-prefixes "esxml/esxml-form" '("esxml-"))
+
+
+;;; Generated autoloads from esxml/esxml-form-tests.el
+
+(register-definition-prefixes "esxml/esxml-form-tests" '("esxml-form-field-set--test-defaults" "my-test-db"))
+
+
+;;; Generated autoloads from esxml/esxml-html.el
+
+(register-definition-prefixes "esxml/esxml-html" '("esxml-"))
+
+
+;;; Generated autoloads from esxml/esxml-query.el
+
+(register-definition-prefixes "esxml/esxml-query" '("esxml-"))
+
+
+;;; Generated autoloads from esxml/esxml-query-tests.el
+
+(register-definition-prefixes "esxml/esxml-query-tests" '("esxml-query-document"))
+
+
+;;; Generated autoloads from esxml/esxpath.el
+
+(register-definition-prefixes "esxml/esxpath" '("esxpath" "on-nodeset" "plambda" "test-sheet"))
 
 
 ;;; Generated autoloads from f.el/f.el
@@ -5041,6 +5157,11 @@ it is disabled.
 ;;; Generated autoloads from lsp-bridge/lsp-bridge-code-action.el
 
 (register-definition-prefixes "lsp-bridge/lsp-bridge-code-action" '("lsp-bridge-code-action"))
+
+
+;;; Generated autoloads from lsp-bridge/lsp-bridge-dart.el
+
+(register-definition-prefixes "lsp-bridge/lsp-bridge-dart" '("lsp-bridge-dart-"))
 
 
 ;;; Generated autoloads from lsp-bridge/lsp-bridge-diagnostic.el
@@ -13022,6 +13143,67 @@ it is disabled.
 (register-definition-prefixes "vertico/extensions/vertico-unobtrusive" '("vertico-unobtrusive--orig-count"))
 
 
+;;; Generated autoloads from visual-fill-column/visual-fill-column.el
+
+(autoload 'visual-fill-column-mode "visual-fill-column/visual-fill-column" "\
+Wrap lines according to `fill-column' in `visual-line-mode'.
+
+This is a minor mode.  If called interactively, toggle the
+`Visual-Fill-Column mode' mode.  If the prefix argument is
+positive, enable the mode, and if it is zero or negative, disable
+the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `visual-fill-column-mode'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t)
+(put 'global-visual-fill-column-mode 'globalized-minor-mode t)
+(defvar global-visual-fill-column-mode nil "\
+Non-nil if Global Visual-Fill-Column mode is enabled.
+See the `global-visual-fill-column-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `global-visual-fill-column-mode'.")
+(custom-autoload 'global-visual-fill-column-mode "visual-fill-column/visual-fill-column" nil)
+(autoload 'global-visual-fill-column-mode "visual-fill-column/visual-fill-column" "\
+Toggle Visual-Fill-Column mode in all buffers.
+With prefix ARG, enable Global Visual-Fill-Column mode if ARG is
+positive; otherwise, disable it.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.
+Enable the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+Visual-Fill-Column mode is enabled in all buffers where
+`turn-on-visual-fill-column-mode' would do it.
+
+See `visual-fill-column-mode' for more information on
+Visual-Fill-Column mode.
+
+(fn &optional ARG)" t)
+(autoload 'visual-fill-column-split-window-sensibly "visual-fill-column/visual-fill-column" "\
+Split WINDOW sensibly, unsetting its margins first.
+This function unsets the window margins and calls
+`split-window-sensibly'.
+
+By default, `split-window-sensibly' does not split a window in
+two side-by-side windows if it has wide margins, even if there is
+enough space for a vertical split.  This function is used as the
+value of `split-window-preferred-function' to allow
+`display-buffer' to split such windows.
+
+(fn &optional WINDOW)")
+(register-definition-prefixes "visual-fill-column/visual-fill-column" '("turn-on-visual-fill-column-mode" "visual-fill-column-"))
+
+
 ;;; Generated autoloads from visual-regexp.el/visual-regexp.el
 
 (autoload 'vr/mc-mark "visual-regexp.el/visual-regexp" "\
@@ -13528,6 +13710,16 @@ See `yas-minor-mode' for more information on Yas minor mode.
 (fn &optional ARG)" t)
 (autoload 'snippet-mode "yasnippet" "A mode for editing yasnippets" t nil)
 (register-definition-prefixes "yasnippet/yasnippet" '("help-snippet-def" "snippet-mode-map" "yas"))
+
+
+;;; Generated autoloads from yuck-mode/yuck-mode.el
+
+(autoload 'yuck-mode "yuck-mode/yuck-mode" "\
+Major mode for editing yuck config files.
+
+(fn)" t)
+(add-to-list 'auto-mode-alist '("\\.yuck\\'" . yuck-mode))
+(register-definition-prefixes "yuck-mode/yuck-mode" '("yuck-"))
 
 
 ;;; Generated autoloads from emacs-zmq/zmq.el

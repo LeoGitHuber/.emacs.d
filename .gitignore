@@ -11,4 +11,5 @@ eaf/*
 org-roam.db
 transient
 .lsp*
+**/auto/
 *~

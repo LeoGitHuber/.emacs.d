@@ -11,7 +11,7 @@
 
 (require 'nerd-icons)
 
-(load "~/.emacs.d/self-develop/modeline-setting.el")
+;; (load "~/.emacs.d/self-develop/modeline-setting.el")
 
 (add-hook 'dired-mode-hook 'nerd-icons-dired-mode)
 

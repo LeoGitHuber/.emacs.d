@@ -298,3 +298,15 @@
 [submodule "site-lisp/emacs-zmq"]
 	path = site-lisp/emacs-zmq
 	url = http://github.com/nnicandro/emacs-zmq
+[submodule "site-lisp/ef-themes"]
+	path = site-lisp/ef-themes
+	url = https://github.com/protesilaos/ef-themes.git
+[submodule "site-lisp/esxml"]
+	path = site-lisp/esxml
+	url = https://github.com/tali713/esxml.git
+[submodule "site-lisp/visual-fill-column"]
+	path = site-lisp/visual-fill-column
+	url = https://codeberg.org/joostkremers/visual-fill-column.git
+[submodule "site-lisp/yuck-mode"]
+	path = site-lisp/yuck-mode
+	url = https://github.com/mmcjimsey26/yuck-mode.git

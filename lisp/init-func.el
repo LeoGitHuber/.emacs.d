@@ -17,6 +17,16 @@
         (backward-kill-word arg)))))
 
 ;;;###autoload
+(defun smart-kill-line (&optional args)
+  "Kill ARGS line in a smart way."
+  (interactive "p")
+  (if (bound-and-true-p puni-mode)
+      (puni-kill-line args)
+    (if (bound-and-true-p fingertip-mode)
+        (fingertip-kill)
+      (kill-line args))))
+
+;;;###autoload
 (defun downcase-any (arg)
   "Downcase any situation with ARG words."
   (interactive "p")

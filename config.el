@@ -53,6 +53,7 @@
   (load "~/.emacs.d/lisp/init-verilog.el")
   (load "~/.emacs.d/lisp/init-reader.el")
   (load "~/.emacs.d/lisp/init-hydra.el")
+  (load "~/.emacs.d/lisp/latex-node.el")
   (load "~/.emacs.d/site-lisp/emacs-which-key/which-key.el")
 
   (defun enable-after-meow ()
@@ -74,7 +75,7 @@
     (add-hook 'meow-insert-enter-hook #'enable-after-meow))
 
   (when (display-graphic-p)
-    (set-en_cn-font "Input Mono" "LXGW WenKai Screen" 12.0)
+    (set-en_cn-font "JetBrainsMono Nerd Font" "LXGW WenKai Screen" 12.0)
     ;; Maple Mono NF --- Maple Mono SC NF, HarmonyOS Sans SC
     ;; PragmataPro Mono Liga --- SimHei
     ;; Hack --- HarmonyOS Sans SC
@@ -84,7 +85,11 @@
   	      '((:eval (if (buffer-file-name)
   				       (abbreviate-file-name
 				        (buffer-name))
-  				     "%b"))))
+  				     "%b")))
+          bidi-inhibit-bpa t
+          long-line-threshold 1000
+          large-hscroll-threshold 1000
+          syntax-wholeline-max 1000)
 
     ;; ;; Enable Ligatures Feature, more info: https://github.com/mickeynp/ligature.el
     ;; (global-ligature-mode)
@@ -148,7 +153,22 @@
   (setq show-paren-when-point-inside-paren t
   	    show-paren-when-point-in-periphery t
         show-paren-delay 0
-  	    show-paren-context-when-offscreen 'child-frame)
+  	    show-paren-context-when-offscreen 'child-frame
+        show-paren--context-child-frame-parameters
+        '((visibility) (width . 0) (height . 0) (min-width . t)
+          (min-height . t) (no-accept-focus . t) (no-focus-on-map . t)
+          (border-width . 0) (child-frame-border-width . 1) (left-fringe . 0)
+          (right-fringe . 0) (vertical-scroll-bars) (horizontal-scroll-bars)
+          (menu-bar-lines . 0) (tool-bar-lines . 0) (tab-bar-lines . 0)
+          (no-other-frame . t) (no-other-window . t)
+          (no-delete-other-windows . t) (unsplittable . t) (undecorated . t)
+          (cursor-type) (no-special-glyphs . t) (desktop-dont-save . t)
+          (child-frame-border-width 3)))
+
+  ;; Set this face for `show-paren-mode' context appearance when offscreen.
+  (set-face-attribute 'child-frame-border
+                      nil
+                      :background (nth 3 (face-attribute 'mode-line-highlight :box)))
 
   ;; (add-to-list 'load-path "~/.emacs.d/site-lisp/auto-save")
   ;; (require 'auto-save)
@@ -160,7 +180,6 @@
 		      (string-suffix-p
 		       "gpg"
 		       (file-name-extension (buffer-name)) t)))))
-
 
   (setq auto-save-visited-interval 1
         ;; auto-save-timeout 30
@@ -238,8 +257,10 @@
 			    tab-always-indent t
 			    tab-first-completion 'word-or-paren-or-punct
 			    indent-tabs-mode nil
-                bidi-display-reordering 'left-to-right
-                bidi-paragraph-direction 'left-to-right
+                ;; bidi-display-reordering 'left-to-right
+                bidi-display-reordering nil
+                ;; bidi-paragraph-direction 'left-to-right
+                ;; bidi-paragraph-direction nil
                 fringe-indicator-alist
                 '((truncation () right-arrow)
                   (continuation () right-curly-arrow)
@@ -251,7 +272,8 @@
                           top-left-angle)
                   (top-bottom left-bracket right-bracket top-right-angle
                               top-left-angle)
-                  (empty-line . empty-line) (unknown . question-mark)))
+                  (empty-line . empty-line) (unknown . question-mark))
+                visual-fill-column-center-text t)
 
   (dolist (mode '(prog-mode-hook TeX-mode-hook cuda-mode-hook))
     (add-hook mode (lambda () (display-line-numbers-mode t))))
@@ -301,7 +323,8 @@
   (dolist
       (hook
        '(emacs-lisp-mode-hook c++-ts-mode-hook c-ts-mode-hook
-                              cuda-mode-hook))
+                              cuda-mode-hook yuck-mode-hook
+                              scss-mode-hook))
     (add-hook hook 'aggressive-indent-mode))
   ;; (dolist (mode '(verilog-mode org-mode term-mode))
   ;;   (add-to-list 'aggressive-indent-excluded-modes mode))
@@ -447,12 +470,13 @@
       ;;; Dark theme
       ;; manoj-dark
       ;; doom-rouge
-      modus-vivendi
+      ;; modus-vivendi
+      ef-trio-dark
       )
     "Set for themes for dark and light mode.")
   (require 'doom-themes)
   (if (or
-       (>= (string-to-number (substring (current-time-string) 11 13)) 18)
+       (>= (string-to-number (substring (current-time-string) 11 13)) 20)
        (<= (string-to-number (substring (current-time-string) 11 13)) 6))
 	  (progn
         (if (equal (cadr themes_chosen) 'modus-vivendi)
@@ -467,10 +491,13 @@
                 (load-theme (car (cdr themes_chosen)) t)
                 (set-face-foreground 'hl-line 'unspecified)
                 (set-face-background 'fringe 'unspecified))
-            (progn
-              (load-theme (cadr themes_chosen) t)
-              (setq doom-rouge-brighter-comments t
-                    doom-rouge-brighter-tabs t)))))
+            (if (equal (cadr themes_chosen) 'ef-trio-dark)
+                (ef-themes-select-dark (cadr themes_chosen))
+              (progn
+                (load-theme (cadr themes_chosen) t)
+                (setq doom-rouge-brighter-comments t
+                      doom-rouge-brighter-tabs t))
+              ))))
     (progn
       ;; (load-theme (car themes_chosen) t)
       (when (eq custom-enabled-themes nil)

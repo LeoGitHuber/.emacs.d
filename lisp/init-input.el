@@ -32,18 +32,20 @@ Can be used in `rime-disable-predicates' and `rime-inline-predicates'."
 		rime-disable-predicates
 		'(rime-predicate-space-after-cc-p
 		  rime-predicate-current-uppercase-letter-p
-		  rime-predicate-after-alphabet-char-p
+		  ;; rime-predicate-after-alphabet-char-p
+          ;; rime-predicate-after-ascii-char-p
 		  rime-predicate-prog-in-code-p
 		  rime-predicate-hydra-p
 		  ;; rime-predicate-evil-mode-p
           rime-predicate-meow-mode-p
-		  ;; rime-predicate-tex-math-or-command-p
 		  )
 		;; rime-deactivate-when-exit-minibuffer t
 		rime-inline-ascii-trigger 'shift-l
 		)
   (keymap-set rime-mode-map "M-y" 'rime-force-enable)
-  )
+  (with-eval-after-load 'tex
+    (add-to-list 'rime-disable-predicates
+                 'rime-predicate-tex-advance-p)))
 
 ;; (keymap-global-set "C-\\" 'rime-commit-and-toggle-input-method)
 (defun rime-commit1-and-toggle-input-method ()

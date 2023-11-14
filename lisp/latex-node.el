@@ -15,9 +15,15 @@
       (if (y-or-n-p (format "Whether to create directory %s?" latex-node-directory))
           (make-directory latex-node-directory)))
   (let ((value (find-file-noselect
-                (format "%s%s" latex-node-directory
+                (format "%s%s.tex" latex-node-directory
                         (completing-read "Node: "
-                                         (cddr (directory-files latex-node-directory)))))))
+                                         (let ((files (directory-files latex-node-directory))
+                                               (texs ()))
+                                           (dolist (file files)
+                                             (let ((fname (string-match "\.tex" file)))
+                                               (when fname
+                                                 (setq texs (cons (substring file 0 fname) texs)))))
+                                           texs))))))
     (pop-to-buffer-same-window value)
     (unless (file-exists-p (buffer-file-name value))
       (insert-file-contents latex-node-template))))

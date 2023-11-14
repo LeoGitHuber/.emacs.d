@@ -19,13 +19,16 @@
                (let ((string (buffer-substring (point) (max (line-beginning-position) (- (point) 80)))))
                  (or (or (string-match-p "[\x5c][\x21-\x24\x26-\x7a\x7c\x7e]*$" string)
                          (if (string-match-p "[\x5c][a-zA-Z\x23\x40]+[\x7b][^\x7d\x25]*$" string)
-                             (if (> (char-before) #x7b)
-                                 (and rime--current-input-key
-                                      (or (= #x7e rime--current-input-key)
-                                          (= #x7c rime--current-input-key)))
-                               ())
-                           ()))
-                     (string-match-p "[a-zA-Z][0-9\x21-\x2f\x3a-\x40\x5b-\x60\x7a\x7c\7e\x7f]*$" string)
+                             (if (and (string-match-p "[\x5c]\\(begin\\)\\|\\(end\\)[\x7b]" string)
+                                      (= (char-before) #x7b))
+                                 t
+                               (if (> (char-before) #x7b)
+                                   (and rime--current-input-key
+                                        (or (= #x7e rime--current-input-key)
+                                            (= #x7c rime--current-input-key)))
+                                 ())
+                               ())))
+                     (string-match-p "[a-zA-Z][0-9\x21-\x23\x25-\x2f\x3a-\x40\x5b-\x60\x7a\x7c\7e\x7f]*$" string)
                      ))))
     (rime-predicate-after-ascii-char-p)))
 
@@ -44,6 +47,8 @@
   (setq TeX-auto-save t
         TeX-parse-self t)
   (setq-default TeX-master nil)
+  (add-to-list 'TeX-view-program-list '("sioyek" "sioyek --new-window --page %(outpage) %o"))
+  (add-to-list 'TeX-view-program-selection '(output-pdf "sioyek"))
   (with-eval-after-load 'eaf
     (add-to-list 'TeX-view-program-list '("eaf" eaf-pdf-synctex-forward-view))
     (add-to-list 'TeX-view-program-selection '(output-pdf "eaf"))))

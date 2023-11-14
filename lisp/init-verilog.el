@@ -39,10 +39,10 @@
             (lambda ()
               (eglot-ensure)
               (add-to-list 'eglot-server-programs
-                           ;; '(verilog-mode . ("svlangserver"))
+                           '(verilog-mode . ("svlangserver"))
                            ;; '(verilog-mode . ("svls"))
                            ;; '(verilog-mode . ("vls"))
-                           '(verilog-mode . ("veridian"))
+                           ;; '(verilog-mode . ("veridian"))
                            )
               (setq eglot-workspace-configuration
                     '(:svlangserver

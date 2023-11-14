@@ -77,7 +77,8 @@
 (with-eval-after-load 'eglot
   (setq eglot-send-changes-idle-time 0)
   (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
-  (add-hook 'eglot-managed-mode-hook #'corfu-mode))
+  (add-hook 'eglot-managed-mode-hook #'corfu-mode)
+  (add-hook 'eglot-managed-mode-hook #'yas-minor-mode))
 
 (add-hook 'lsp-mode-hook
           (lambda ()
@@ -175,7 +176,7 @@
   ;; (add-to-list 'lsp-bridge-multi-lang-server-extension-list
   ;;              '(("v" "sv") . "verilog"))
   ;; (setf (cdr (assoc 'verilog-mode lsp-bridge-single-lang-server-mode-list)) '("svlangserver"))
-  ;; (add-to-list 'lsp-bridge-single-lang-server-mode-list '((verilog-mode) . "svlangserver"))
+  (add-to-list 'lsp-bridge-single-lang-server-mode-list '((verilog-mode) . "svlangserver"))
   ;; (add-to-list 'lsp-bridge-single-lang-server-mode-list '((verilog-mode) . "veridian"))
   ;; (add-to-list 'lsp-bridge-single-lang-server-mode-list '((verilog-mode) . "svls"))
   )

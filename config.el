@@ -476,7 +476,7 @@
     "Set for themes for dark and light mode.")
   (require 'doom-themes)
   (if (or
-       (>= (string-to-number (substring (current-time-string) 11 13)) 20)
+       (>= (string-to-number (substring (current-time-string) 11 13)) 18)
        (<= (string-to-number (substring (current-time-string) 11 13)) 6))
 	  (progn
         (if (equal (cadr themes_chosen) 'modus-vivendi)

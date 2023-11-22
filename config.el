@@ -71,8 +71,10 @@
         (lsp-bridge-mode)))
     (remove-hook 'meow-insert-enter-hook #'enable-after-meow))
 
-  (when (bound-and-true-p meow-mode)
-    (add-hook 'meow-insert-enter-hook #'enable-after-meow))
+  ;; (when (bound-and-true-p meow-mode)
+  ;;   (add-hook 'meow-insert-enter-hook #'enable-after-meow))
+
+  (global-lsp-bridge-mode)
 
   (when (display-graphic-p)
     (set-en_cn-font "JetBrainsMono Nerd Font" "LXGW WenKai Screen" 12.0)
@@ -261,6 +263,7 @@
                 bidi-display-reordering nil
                 ;; bidi-paragraph-direction 'left-to-right
                 ;; bidi-paragraph-direction nil
+                ;; display-fill-column-indicator-character 124
                 fringe-indicator-alist
                 '((truncation () right-arrow)
                   (continuation () right-curly-arrow)
@@ -315,8 +318,9 @@
                     (load "~/.emacs.d/site-lisp/iscroll/iscroll.el"))
                 (iscroll-mode))))
 
-  (setq auto-mode-alist
-	    (cons '("\\.pdf\\'" . pdf-view-mode) auto-mode-alist))
+  (add-to-list 'auto-mode-alist '("\\.pdf\\'" . pdf-view-mode))
+  (add-to-list 'auto-mode-alist '("\\.ya?ml\\'" . yaml-ts-mode))
+
 
   (add-to-list 'load-path "~/.emacs.d/site-lisp/magit/lisp")
   (add-to-list 'load-path "~/.emacs.d/site-lisp/with-editor/lisp")
@@ -401,8 +405,8 @@
   ;; (require 'consult)
   ;; (load "~/.emacs.d/site-lisp/consult/consult-xref.el")
 
-  ;; (autoload 'consult-buffer "consult" nil t)
-  ;; (autoload 'consult-line "consult" nil t)
+  (autoload 'consult-buffer "consult" nil t)
+  (autoload 'consult-line "consult" nil t)
   (keymap-global-set "C-x l" 'consult-line)
   (keymap-global-set "C-x b" 'consult-buffer)
   (with-eval-after-load 'consult
@@ -410,7 +414,7 @@
      consult-buffer
      :preview-key '(:debounce 0.4 "M-."))
     (setq xref-show-xrefs-function 'consult-xref
-		  xref-show-definitions-function 'consult-xref))
+    	  xref-show-definitions-function 'consult-xref))
 
   ;;; Theme
   (dolist (hook '(prog-mode-hook text-mode-hook cuda-mode-hook))
@@ -476,7 +480,7 @@
     "Set for themes for dark and light mode.")
   (require 'doom-themes)
   (if (or
-       (>= (string-to-number (substring (current-time-string) 11 13)) 18)
+       (>= (string-to-number (substring (current-time-string) 11 13)) 20)
        (<= (string-to-number (substring (current-time-string) 11 13)) 6))
 	  (progn
         (if (equal (cadr themes_chosen) 'modus-vivendi)
@@ -535,10 +539,6 @@
     						     :name
 							     "JetBrainsMono Nerd Font"
 							     :size 11.0))
-      (with-eval-after-load 'org
-        (set-face-attribute 'org-verbatim nil
-                            :foreground "#e74c3c"
-                            :box '(:line-width 1 :color "#e1e4e5")))
       (with-eval-after-load 'tab-bar
         (set-face-attribute 'tab-bar nil
                             :font (font-spec

@@ -158,7 +158,7 @@
 		lsp-bridge-enable-signature-help t
 		lsp-bridge-enable-diagnostics nil
 		lsp-bridge-complete-manually nil
-		lsp-bridge-enable-profile t
+		;; lsp-bridge-enable-profile t
 		;; lsp-bridge-multi-lang-server-mode-list nil
 		acm-backend-lsp-candidate-min-length 2
 		acm-backend-elisp-candidate-min-length 2

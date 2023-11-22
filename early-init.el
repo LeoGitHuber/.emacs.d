@@ -22,7 +22,9 @@
       package-quickstart nil
       ;; package-enable-at-startup nil
       ;; package--init-file-ensure t
-      ;; inhibit-startup-message t
+      inhibit-startup-message t
+      ;; inhibit-startup-screen t
+      ;; initial-buffer-choice "*Emacs*"
       ;; auto-mode-case-fold nil
       ;; Remove irreleant command line options for faster startup
       ;; command-line-x-option-alist nil

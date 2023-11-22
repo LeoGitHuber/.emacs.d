@@ -20,17 +20,6 @@
 ;;                            (2 (prog1 () (compose-region (match-beginning 2) (match-end 2) "")))))
 ;;                         'append)
 
-;; (custom-theme-set-faces
-;; 'user
-;; ;; '(fixed-pitch ((t (:family "Essential PragmataPro" :height 1.0))))
-;; ;; '(variable-pitch ((t (:family "Bookerly" :height 1.0))))
-;; '(fixed-pitch ((t (:family "Source Code Pro" :height 1.0))))
-;; '(variable-pitch ((t (:family "Source Code Pro" :height 1.0))))
-;; '(org-table ((t (:inherit fixed-pitch))))
-;; '(org-tag ((t (:inherit fixed-pitch))))
-;; '(org-verbatim ((t (:inherit fixed-pitch))))
-;; '(org-src ((t (:inherit fixed-pitch)))))
-
 (with-eval-after-load 'org
   ;; (set-face-attribute 'org-table nil :font (font-spec :name "Sarasa Mono SC" ; LXGW WenKai
   ;; 													  :weight 'semibold
@@ -82,14 +71,29 @@
      (jupyter . t)))
   )
 
-;; (add-hook 'org-mode-hook 'variable-pitch-mode)
-
 (add-hook 'org-mode-hook
 		  (lambda ()
             (electric-indent-local-mode)
 		    (setq-local company-backends '(company-files company-keywords))
             (setq org-appear-autolinks t)
 		    (org-appear-mode)
+            (custom-theme-set-faces
+             'user
+             '(fixed-pitch ((t (:family "Input Mono" :height 0.9))))
+             '(variable-pitch ((t (:family "Palatino Linotype" :height 1.0))))
+             '(org-block ((t (:inherit fixed-pitch))))
+             '(org-code ((t (:inherit fixed-pitch))))
+             '(org-table ((t (:inherit variable-pitch))))
+             '(org-special-keyword ((t (:inherit fixed-pitch))))
+             '(org-verbatim
+               ((((background light))
+                 (:foreground "#e74c3c"
+                              :box (:line-width 1 :color "#e1e4e5")
+                              :inherit fixed-pitch))
+                (((background dark)) (:inherit fixed-pitch))))
+             '(org-meta-line ((t (:inherit (font-lock-comment-face fixed-pitch)))))
+             '(fill-column-indicator ((t (:inherit (shadow fixed-pitch))))))
+            (variable-pitch-mode)
 		    ;; (company-mode)
 		    ;; (corfu-mode)
 		    ;; (visual-line-mode)

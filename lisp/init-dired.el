@@ -23,10 +23,18 @@
         mouse-drag-and-drop-region-cross-program t
         dired-kill-when-opening-new-dired-buffer t
         dired-recursive-copies 'always
-        dired-recursive-deletes 'always
+        ;; dired-recursive-deletes 'always
         delete-by-moving-to-trash t
         image-dired-thumb-size 256
-        image-dired-marking-shows-next nil))
+        image-dired-marking-shows-next nil)
+  (defun dired-open-externally (&optional arg)
+    "Open marked or current file in operating system's default application."
+    (interactive "P")
+    (dired-map-over-marks
+     (embark-open-externally (dired-get-filename))
+     arg))
+  (keymap-set dired-mode-map "e" 'dired-open-externally))
+
 (with-eval-after-load 'dirvish
   ;; (dirvish-peek-mode)
   ;; (require 'dirvish-side)

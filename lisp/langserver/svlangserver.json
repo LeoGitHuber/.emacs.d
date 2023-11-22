@@ -1,8 +1,14 @@
 {
-    "name": "svlangserver",
-    "languageId": "verilog",
-    "command": [
-        "svlangserver"
-    ],
-    "settings": {}
+  "name": "svlangserver",
+  "languageId": "verilog",
+  "command": [
+    "svlangserver"
+  ],
+  "settings": {
+    "systemverilog.includeIndexing": ["**/*.{sv,svh,v,vh}", "*.{sv,svh,v,vh}"],
+    "systemverilog.excludeIndexing":[],
+    "systemverilog.defines" : [],
+    "systemverilog.launchConfiguration": "verilator -sv -Wall --lint-only",
+    "systemverilog.formatCommand": "verible-verilog-format"
+  }
 }

@@ -1,8 +1,18 @@
 {
-    "name": "veridian",
-    "languageId": "verilog",
-    "command": [
-        "veridian"
-    ],
-    "settings": {}
+  "name": "veridian",
+  "languageId": "verilog",
+  "command": [
+    "veridian"
+  ],
+  "auto_search_workdir": true,
+  "settings": {
+    "syntax": {
+      "enabled": true,
+      "path": "verible-verilog-syntax"
+    },
+    "format": {
+      "enabled": true,
+      "path": "verible-verilog-format"
+    }
+  }
 }

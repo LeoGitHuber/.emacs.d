@@ -82,9 +82,6 @@
 [submodule "site-lisp/puni"]
 	path = site-lisp/puni
 	url = https://github.com/AmaiKinono/puni.git
-[submodule "site-lisp/browse-kill-ring"]
-	path = site-lisp/browse-kill-ring
-	url = https://github.com/browse-kill-ring/browse-kill-ring.git
 [submodule "site-lisp/diredfl"]
 	path = site-lisp/diredfl
 	url = https://github.com/purcell/diredfl.git
@@ -316,3 +313,6 @@
 [submodule "site-lisp/popper"]
 	path = site-lisp/popper
 	url = https://github.com/karthink/popper.git
+[submodule "site-lisp/persp-mode.el"]
+	path = site-lisp/persp-mode.el
+	url = https://github.com/Bad-ptr/persp-mode.el.git

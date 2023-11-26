@@ -82,7 +82,11 @@
              '(fixed-pitch ((t (:family "Input Mono" :height 0.9))))
              '(variable-pitch ((t (:family "Palatino Linotype" :height 1.0))))
              '(org-block ((t (:inherit fixed-pitch))))
-             '(org-code ((t (:inherit fixed-pitch))))
+             '(org-code ((((background light))
+                          (:foreground "#1F2328"
+                           :background "#EFF1F3"
+                           :inherit fixed-pitch))
+                         (((background dark)) (:inherit fixed-pitch))))
              '(org-table ((t (:inherit variable-pitch))))
              '(org-special-keyword ((t (:inherit fixed-pitch))))
              '(org-verbatim

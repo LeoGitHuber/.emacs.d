@@ -13,8 +13,8 @@
                      ;; (lsp)
                      ))))
 
-(dolist (hook '(cuda-mode-hook))  ;; prog-mode-hook  TeX-mode-hook
-  (add-hook hook 'yas-minor-mode))
+;; (dolist (hook '(cuda-mode-hook))  ;; prog-mode-hook  TeX-mode-hook
+;;   (add-hook hook 'yas-minor-mode))
 
 (with-eval-after-load 'lsp-mode
   (setq lsp-keymap-prefix "C-c l"
@@ -62,23 +62,40 @@
 	    corfu-auto-delay 0
 	    corfu-preview-current t
         corfu-quit-no-match t
+        ;; corfu-preselect 'prompt
         corfu-quit-at-boundary t)
   (when (boundp 'meow-insert-exit-hook)
     (add-hook 'meow-insert-exit-hook 'corfu-quit))
   (require 'kind-icon)
-  (keymap-set corfu-map "TAB" 'corfu-insert)
-  (keymap-set corfu-map "<backtab>" 'corfu-complete)
-  (keymap-unset corfu-map "RET")
+  (keymap-set corfu-map "<tab>" 'corfu-insert)
+  ;; (keymap-set corfu-map "<backtab>" 'corfu-previous)
+  ;; (keymap-set corfu-map "S-<return>" 'corfu-insert)
+  ;; (keymap-unset corfu-map "RET")
   (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter)
-  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
   (add-to-list 'completion-at-point-functions #'cape-file)
-  (add-to-list 'completion-at-point-functions #'cape-elisp-block))
+  ;; (add-to-list 'completion-at-point-functions #'cape-dabbrev)
+  ;; (add-to-list 'completion-at-point-functions #'cape-elisp-block)
+  )
+
+;; (with-eval-after-load 'yasnippet
+;;   (add-hook 'yas-keymap-disable-hook
+;;             (lambda()
+;;               (or
+;;                (when (boundp 'corfu--frame)
+;;                  (and
+;;                   (frame-live-p corfu--frame)
+;;                   (frame-visible-p corfu--frame)))
+;;                (when (boundp 'acm-menu-frame)
+;;                  (and (frame-live-p acm-menu-frame)
+;;                       (frame-visible-p acm-menu-frame)))
+;;                ))))
 
 (with-eval-after-load 'eglot
   (setq eglot-send-changes-idle-time 0)
   (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
   (add-hook 'eglot-managed-mode-hook #'corfu-mode)
-  (add-hook 'eglot-managed-mode-hook #'yas-minor-mode))
+  (add-hook 'eglot-managed-mode-hook #'yas-minor-mode)
+  )
 
 (add-hook 'lsp-mode-hook
           (lambda ()
@@ -134,17 +151,11 @@
 
 ;; (advice-add 'company-capf :around #'company-completion-styles)
 
-;; (with-eval-after-load 'lsp-bridge
-;;   (when (treesit-available-p)
-;; 	(let ((lsp-bridge-temp-list lsp-bridge-default-mode-hooks))
-;; 	  (dolist (hook lsp-bridge-temp-list)
-;; 		(add-to-list 'lsp-bridge-default-mode-hooks (intern (string-replace "mode" "ts-mode" (symbol-name hook))))))))
-
-(add-hook 'lsp-bridge-mode-hook 'yas/minor-mode)
-
 (with-eval-after-load 'lsp-bridge
   ;; (with-current-buffer (get-buffer-create "*scratch*")
   ;;   (lsp-bridge-mode))
+  (add-hook 'lsp-bridge-mode-hook 'yas/minor-mode)
+  (keymap-set yas-keymap "<tab>" 'acm-complete-or-expand-yas-snippet)
   (setq acm-candidate-match-function 'orderless-flex
 		;; acm-enable-icon t
 		;; acm-enable-doc t

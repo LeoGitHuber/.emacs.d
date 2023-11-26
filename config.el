@@ -41,8 +41,8 @@
   (load "~/.emacs.d/lisp/init-gc.el")
   (load "~/.emacs.d/lisp/init-diagnostic.el")
   (load "~/.emacs.d/lisp/init-icons.el")
-  (load "~/.emacs.d/lisp/init-keybindings.el")
   (load "~/.emacs.d/lisp/init-meow.el")
+  (load "~/.emacs.d/lisp/init-keybindings.el")
   (load "~/.emacs.d/lisp/init-lsp.el")
   (load "~/.emacs.d/lisp/init-dired.el")
   (load "~/.emacs.d/lisp/init-chinese.el")
@@ -77,11 +77,11 @@
   (global-lsp-bridge-mode)
 
   (when (display-graphic-p)
-    (set-en_cn-font "JetBrainsMono Nerd Font" "LXGW WenKai Screen" 12.0)
+    (set-en_cn-font "JetBrainsMono NF" "LXGW WenKai Screen" 12.0)
     ;; Maple Mono NF --- Maple Mono SC NF, HarmonyOS Sans SC
     ;; PragmataPro Mono Liga --- SimHei
     ;; Hack --- HarmonyOS Sans SC
-    ;; JetBrainsMono Nerd Font
+    ;; JetBrainsMono NF
     ;; "Iosevka Fixed"    ;; Input Mono
     (setq frame-title-format
   	      '((:eval (if (buffer-file-name)
@@ -336,14 +336,6 @@
   (dolist (hook '(term-mode-hook))
     (add-hook hook #'puni-disable-puni-mode))
 
-  ;; (load "~/.emacs.d/site-lisp/browse-kill-ring/browse-kill-ring.el")
-  (keymap-global-set "C-c k" 'browse-kill-ring)
-  ;; (browse-kill-ring-default-keybindings)
-  (add-hook 'after-init-hook 'browse-kill-ring-default-keybindings)
-  (with-eval-after-load 'browse-kill-ring
-    (setq browse-kill-ring-separator "------------------------------"
-  		  browse-kill-ring-separator-face 'shadow))
-
   ;;; Visual Repalcement
   (keymap-global-set "C-c r" 'vr/replace)
   (keymap-global-set "C-c m" 'vr/mc-mark)
@@ -523,9 +515,9 @@
                           :background "black"
                           :box nil
     				      :font (font-spec
-    						     ;; "JetBrainsMono Nerd Font" "Monego Ligatures" "Maple Mono NF"
+    						     ;; "JetBrainsMono NF" "Monego Ligatures" "Maple Mono NF"
 							     :name
-							     "JetBrainsMono Nerd Font"
+							     "JetBrainsMono NF"
                                  :size
 							     11.0)
                           :underline
@@ -537,13 +529,13 @@
 					      :box nil
 					      :font (font-spec
     						     :name
-							     "JetBrainsMono Nerd Font"
+							     "JetBrainsMono NF"
 							     :size 11.0))
       (with-eval-after-load 'tab-bar
         (set-face-attribute 'tab-bar nil
                             :font (font-spec
                                    :name
-                                   "JetBrainsMono Nerd Font"
+                                   "JetBrainsMono NF"
                                    :size 11.0))
         (set-face-attribute 'tab-bar-tab nil
                             :background (face-attribute 'default :background)

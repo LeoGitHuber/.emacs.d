@@ -32,6 +32,11 @@
 (register-definition-prefixes "lsp-bridge/acm/acm-backend-copilot" '("acm-"))
 
 
+;;; Generated autoloads from lsp-bridge/acm/acm-backend-ctags.el
+
+(register-definition-prefixes "lsp-bridge/acm/acm-backend-ctags" '("acm-"))
+
+
 ;;; Generated autoloads from lsp-bridge/acm/acm-backend-elisp.el
 
 (register-definition-prefixes "lsp-bridge/acm/acm-backend-elisp" '("acm-backend-elisp-"))
@@ -10221,6 +10226,52 @@ it is disabled.
 (register-definition-prefixes "pdf-tools/test/pdf-virtual-test" '("pdf-virtual-test-document" "with-pdf-virtual-test-"))
 
 
+;;; Generated autoloads from persp-mode.el/persp-mode.el
+
+(autoload 'persp-def-auto-persp "persp-mode.el/persp-mode" "\
+
+
+(fn NAME &rest KEYARGS &key BUFFER-NAME FILE-NAME MODE MODE-NAME MINOR-MODE MINOR-MODE-NAME PREDICATE HOOKS DYN-ENV GET-NAME GET-BUFFER GET-PERSP SWITCH PARAMETERS NOAUTO WEAK USER-DATA ON-MATCH AFTER-MATCH DONT-PICK-UP-BUFFERS DELETE)")
+(define-obsolete-function-alias 'def-auto-persp 'persp-def-auto-persp "persp-mode 2.9.6")
+(autoload 'persp-def-buffer-save/load "persp-mode.el/persp-mode" "\
+
+
+(fn &rest KEYARGS &key BUFFER-NAME FILE-NAME MODE MODE-NAME MINOR-MODE MINOR-MODE-NAME PREDICATE TAG-SYMBOL SAVE-VARS SAVE-FUNCTION LOAD-FUNCTION AFTER-LOAD-FUNCTION MODE-RESTORE-FUNCTION APPEND)")
+(define-obsolete-function-alias 'def-persp-buffer-save/load 'persp-def-buffer-save/load "persp-mode 2.9.6")
+(defvar persp-mode nil "\
+Non-nil if Persp mode is enabled.
+See the `persp-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `persp-mode'.")
+(custom-autoload 'persp-mode "persp-mode.el/persp-mode" nil)
+(autoload 'persp-mode "persp-mode.el/persp-mode" "\
+Toggle the persp-mode.
+
+When active, keeps track of multiple \\='perspectives\\=',
+named collections of buffers and window configurations.
+Here is a keymap of this minor mode:
+\\{persp-mode-map}
+
+This is a global minor mode.  If called interactively, toggle the
+`Persp mode' mode.  If the prefix argument is positive, enable
+the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `(default-value \\='persp-mode)'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t)
+(register-definition-prefixes "persp-mode.el/persp-mode" '("*persp-" "clear-window-persp" "def-" "get-" "ido-toggle-persp-filter" "persp" "safe-persp-" "set-" "window-persp-set-p" "with-persp-ido-hooks"))
+
+
 ;;; Generated autoloads from pfuture/pfuture.el
 
 (autoload 'pfuture-new "pfuture/pfuture" "\
@@ -10262,6 +10313,81 @@ Entering `ams-tex-mode' calls the value of `text-mode-hook',
 then the value of `TeX-mode-hook', and then the value
 of `AmS-TeX-mode-hook'." t)
 (register-definition-prefixes "auctex/plain-tex" '("AmS" "plain-TeX-"))
+
+
+;;; Generated autoloads from popper/popper.el
+
+(defvar popper-mode nil "\
+Non-nil if Popper mode is enabled.
+See the `popper-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `popper-mode'.")
+(custom-autoload 'popper-mode "popper/popper" nil)
+(autoload 'popper-mode "popper/popper" "\
+Toggle Popper mode.
+
+When enabled, treat certain buffer windows as popups, a class of
+window that can be summoned or dismissed with a command.  See the
+customization options for details on how to designate buffer
+types as popups.
+
+This is a global minor mode.  If called interactively, toggle the
+`Popper mode' mode.  If the prefix argument is positive, enable
+the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `(default-value \\='popper-mode)'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t)
+(register-definition-prefixes "popper/popper" '("popper-"))
+
+
+;;; Generated autoloads from popper/popper-echo.el
+
+(defvar popper-echo-mode nil "\
+Non-nil if Popper-Echo mode is enabled.
+See the `popper-echo-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `popper-echo-mode'.")
+(custom-autoload 'popper-echo-mode "popper/popper-echo" nil)
+(autoload 'popper-echo-mode "popper/popper-echo" "\
+Toggle Popper Echo mode.
+
+Show popup names in cycling order in the echo area when
+performing an action that involves showing a popup.  These popups
+can be accessed directly or acted upon by using quick keys (see
+`popper-echo-dispatch-keys').
+
+To define buffers as popups and customize popup display, see
+`popper-mode'.
+
+This is a global minor mode.  If called interactively, toggle the
+`Popper-Echo mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `(default-value \\='popper-echo-mode)'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t)
+(register-definition-prefixes "popper/popper-echo" '("popper-echo"))
 
 
 ;;; Generated autoloads from posframe/posframe.el
@@ -13370,6 +13496,8 @@ evaluate `visual-fill-column-mode'.
 
 The mode's hook is called both when the mode is enabled and when
 it is disabled.
+
+\\{visual-fill-column-mode-map}
 
 (fn &optional ARG)" t)
 (put 'global-visual-fill-column-mode 'globalized-minor-mode t)

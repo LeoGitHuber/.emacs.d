@@ -7,49 +7,16 @@
 ;; (add-to-list 'load-path "~/.emacs.d/site-lisp/combobulate")
 ;; (require 'puni)
 
-(if (bound-and-true-p meow-mode)
-	(progn
-	  ;; (keymap-global-unset "M-l")
-	  ;; (keymap-global-unset "M-c")
-	  ;; (keymap-global-unset "M-u")
-	  ;; (keymap-global-unset "C-w")
-	  ;; (keymap-global-unset "M-w")
-	  ;; (keymap-global-unset "C-k")
-	  (keymap-global-set "C-h" 'backward-delete-char-untabify)
-	  (keymap-global-set "C-w" 'kill-or-save)
-	  (keymap-global-set "M-w" 'puni-kill-region)
-	  (keymap-global-set "C-k" 'smart-kill-line)
-      (keymap-global-set "M-l" 'downcase-any)
-	  (keymap-global-set "M-u" 'upcase-any)
-	  (keymap-global-set "M-c" 'capitalize-any)
-      (keymap-global-set "C-x C-r" 'restart-emacs)
-      (keymap-global-unset "ESC")
-      (keymap-global-set "M-o" 'other-window))
+(unless (bound-and-true-p meow-mode)
   (progn
-	;; (keymap-global-unset "M-l")
-	;; (keymap-global-unset "M-c")
-	;; (keymap-global-unset "M-u")
-	;; (keymap-global-unset "C-w")
-	;; (keymap-global-unset "M-w")
-	;; (keymap-global-unset "C-k")
-	(keymap-global-set "C-h" 'backward-delete-char-untabify)
-	(keymap-global-set "C-w" 'kill-or-save)
-	(keymap-global-set "M-w" 'puni-kill-region)
-	(keymap-global-set "C-k" 'smart-kill-line)
     (keymap-global-set "M-k" 'puni-backward-kill-line)
-	(keymap-global-set "M-l" 'downcase-any)
-	(keymap-global-set "M-u" 'upcase-any)
-	(keymap-global-set "M-c" 'capitalize-any)
     (keymap-global-set "M-j" 'open-newline-above)
     (keymap-global-set "C-j" 'open-newline-below)
-    (keymap-global-set "C-x C-r" 'restart-emacs)
-    (keymap-global-set "M-o" 'other-window)
     ;; (keymap-global-set "M-N" 'windmove-down)
     ;; (keymap-global-set "M-P" 'windmove-up)
     ;; (keymap-global-set "M-I" 'windmove-right)
     ;; (keymap-global-set "M-O" 'windmove-left)
     ;;replace =isearch-delete-char= with =isearch-del-char=
-    (keymap-set isearch-mode-map "C-h" 'isearch-del-char)
     ;; (add-to-list 'load-path "~/.emacs.d/site-lisp/avy")
 
     ;; Avy
@@ -62,6 +29,17 @@
     ;; (global-set-key (kbd "M-g f") 'avy-goto-line)
     ;; (global-set-key (kbd "C-c C-j") 'avy-resume)
     ))
+
+(keymap-global-set "C-k" 'smart-kill-line)
+(keymap-global-set "M-l" 'downcase-any)
+(keymap-global-set "M-c" 'capitalize-any)
+(keymap-global-set "C-w" 'kill-or-save)
+(keymap-global-set "M-w" 'puni-kill-region)
+(keymap-set isearch-mode-map "C-h" 'isearch-del-char)
+(keymap-global-set "C-h" 'backward-delete-char-untabify)
+(keymap-global-set "M-o" 'other-window)
+(keymap-global-set "C-x k" 'kill-this-buffer)
+(keymap-global-set "C-x C-r" 'restart-emacs)
 
 ;;; Fingertip
 (dolist (hook '(emacs-lisp-mode-hook c-mode-hook lisp-mode-hook))
@@ -99,6 +77,7 @@
   ;; 向父节点跳动
   ;; ("C-j" . fingertip-jump-up)
   )
+
 ;;; Helpful
 
 (keymap-global-set "M-?" 'help-command)

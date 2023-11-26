@@ -211,25 +211,25 @@ use `cm/autoloads-file' as TARGET."
          (dir (or dir site-lisp-directory)))
     (loaddefs-generate (find-dir-recursively dir) target nil nil nil t)))
 
-(defun recentf-time-sort ()
-  "Sort recentf file list."
-  (when recentf-mode
-    (thread-last
-      recentf-list
-      ;; Use modification time, since getting file access time seems to count as
-      ;; accessing the file, ruining future uses.
-      (mapcar (lambda (f)
-                (cons f (file-attribute-access-time (file-attributes f)))))
-      (seq-sort (pcase-lambda (`(,f1 . ,t1) `(,f2 . ,t2))
-                  ;; Want existing, most recent, local files first.
-                  (cond ((or (not (file-exists-p f1))
-                             (file-remote-p f1))
-                         nil)
-                        ((or (not (file-exists-p f2))
-                             (file-remote-p f2))
-                         t)
-                        (t (time-less-p t2 t1)))))
-      (mapcar #'car))))
+;; (defun recentf-time-sort ()
+;;   "Sort recentf file list."
+;;   (when recentf-mode
+;;     (thread-last
+;;       recentf-list
+;;       ;; Use modification time, since getting file access time seems to count as
+;;       ;; accessing the file, ruining future uses.
+;;       (mapcar (lambda (f)
+;;                 (cons f (file-attribute-access-time (file-attributes f)))))
+;;       (seq-sort (pcase-lambda (`(,f1 . ,t1) `(,f2 . ,t2))
+;;                   ;; Want existing, most recent, local files first.
+;;                   (cond ((or (not (file-exists-p f1))
+;;                              (file-remote-p f1))
+;;                          nil)
+;;                         ((or (not (file-exists-p f2))
+;;                              (file-remote-p f2))
+;;                          t)
+;;                         (t (time-less-p t2 t1)))))
+;;       (mapcar #'car))))
 
 (provide 'init-func)
 ;;; init-func.el ends here.

@@ -316,3 +316,6 @@
 [submodule "site-lisp/persp-mode.el"]
 	path = site-lisp/persp-mode.el
 	url = https://github.com/Bad-ptr/persp-mode.el.git
+[submodule "site-lisp/indent-bars"]
+	path = site-lisp/indent-bars
+	url = https://github.com/jdtsmith/indent-bars.git

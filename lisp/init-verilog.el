@@ -16,7 +16,6 @@
      '(lsp-clients-svlangserver-formatCommand "verible-verilog-format")))
   (setq verilog-indent-lists nil
         verilog-auto-delete-trailing-whitespace t
-        ;; verilog-indent-level-declaration 0
         verilog-align-ifelse t
         verilog-auto-delete-trailing-whitespace t
         verilog-auto-inst-param-value t

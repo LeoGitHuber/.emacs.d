@@ -54,27 +54,31 @@
   (load "~/.emacs.d/lisp/init-reader.el")
   (load "~/.emacs.d/lisp/init-hydra.el")
   (load "~/.emacs.d/lisp/latex-node.el")
-  (load "~/.emacs.d/site-lisp/emacs-which-key/which-key.el")
+  (load "~/.emacs.d/lisp/ultimate-tab.el")
+  (tab-bar-mode)
 
   (defun enable-after-meow ()
     "Modes enable after meow insert."
     (unless (bound-and-true-p lsp-bridge-mode)
-      (add-hook 'emacs-lisp-mode-hook 'lsp-bridge-mode)
-      (add-hook 'c-ts-mode-hook 'lsp-bridge-mode)
-      (add-hook 'c++-ts-mode-hook 'lsp-bridge-mode)
-      ;; (add-hook 'verilog-mode-hook 'lsp-bridge-mode)
-      (when (derived-mode-p 'emacs-lisp-mode 'lisp-mode
-                            ;; 'verilog-mode
-                            'c-ts-mode 'c++-ts-mode)
-        (lsp-bridge-mode))
-      (with-current-buffer (get-buffer-create "*scratch*")
-        (lsp-bridge-mode)))
+      (global-lsp-bridge-mode)
+      (lsp-bridge-mode)
+      ;; (add-hook 'emacs-lisp-mode-hook 'lsp-bridge-mode)
+      ;; (add-hook 'c-ts-mode-hook 'lsp-bridge-mode)
+      ;; (add-hook 'c++-ts-mode-hook 'lsp-bridge-mode)
+      ;; ;; (add-hook 'verilog-mode-hook 'lsp-bridge-mode)
+      ;; (when (derived-mode-p 'emacs-lisp-mode 'lisp-mode
+      ;;                       ;; 'verilog-mode
+      ;;                       'c-ts-mode 'c++-ts-mode)
+      ;;   (lsp-bridge-mode))
+      ;; (with-current-buffer (get-buffer-create "*scratch*")
+      ;;   (lsp-bridge-mode))
+      )
     (remove-hook 'meow-insert-enter-hook #'enable-after-meow))
 
-  ;; (when (bound-and-true-p meow-mode)
-  ;;   (add-hook 'meow-insert-enter-hook #'enable-after-meow))
+  (when (bound-and-true-p meow-mode)
+    (add-hook 'meow-insert-enter-hook #'enable-after-meow))
 
-  (global-lsp-bridge-mode)
+  ;; (global-lsp-bridge-mode)
 
   (when (display-graphic-p)
     (set-en_cn-font "JetBrainsMono NF" "LXGW WenKai Screen" 12.0)
@@ -84,10 +88,10 @@
     ;; JetBrainsMono NF
     ;; "Iosevka Fixed"    ;; Input Mono
     (setq frame-title-format
-  	      '((:eval (if (buffer-file-name)
-  				       (abbreviate-file-name
-				        (buffer-name))
-  				     "%b")))
+          '((:eval (if (buffer-file-name)
+                       (abbreviate-file-name
+                        (buffer-name))
+                     "%b")))
           bidi-inhibit-bpa t
           long-line-threshold 1000
           large-hscroll-threshold 1000
@@ -108,12 +112,12 @@
     )
 
   (add-hook 'emacs-startup-hook
-  		    (lambda () (setq gc-cons-threshold better-gc-cons-threshold)))
+            (lambda () (setq gc-cons-threshold better-gc-cons-threshold)))
 
   (setq frame-title-format
-	    '((:eval (if (buffer-file-name)
-				     (abbreviate-file-name (buffer-file-name))
-				   "%b"))))
+        '((:eval (if (buffer-file-name)
+                     (abbreviate-file-name (buffer-file-name))
+                   "%b"))))
 
   (add-hook 'minibuffer-setup-hook 'gc-minibuffer-setup-hook)
   (add-hook 'minibuffer-exit-hook 'gc-minibuffer-exit-hook)
@@ -143,9 +147,9 @@
 
   (setq electric-pair-inhibit-predicate
         'electric-pair-conservative-inhibit
-	    scroll-preserve-screen-position t
-	    scroll-margin 0
-	    scroll-conservatively 97
+        scroll-preserve-screen-position t
+        scroll-margin 0
+        scroll-conservatively 97
         eldoc-idle-delay 0.2)
 
   (delete-selection-mode)
@@ -153,9 +157,9 @@
   ;; (setq-default cursor-type '(bar . 3))
 
   (setq show-paren-when-point-inside-paren t
-  	    show-paren-when-point-in-periphery t
+        show-paren-when-point-in-periphery t
         show-paren-delay 0
-  	    show-paren-context-when-offscreen 'child-frame
+        show-paren-context-when-offscreen 'child-frame
         show-paren--context-child-frame-parameters
         '((visibility) (width . 0) (height . 0) (min-width . t)
           (min-height . t) (no-accept-focus . t) (no-focus-on-map . t)
@@ -179,9 +183,9 @@
     (setq auto-save-delete-trailing-whitespace t
           auto-save-disable-predicates
           '((lambda ()
-		      (string-suffix-p
-		       "gpg"
-		       (file-name-extension (buffer-name)) t)))))
+              (string-suffix-p
+               "gpg"
+               (file-name-extension (buffer-name)) t)))))
 
   (setq auto-save-visited-interval 1
         ;; auto-save-timeout 30
@@ -234,7 +238,7 @@
   (with-eval-after-load 'no-littering
     (recentf-mode t)
     (setq recentf-max-saved-items 1000
-	      recentf-exclude `("/tmp/" "/ssh:"
+          recentf-exclude `("/tmp/" "/ssh:"
                             ,(concat user-emacs-directory
                                      "lib/.*-autoloads\\.el\\'")))
     (add-to-list 'recentf-exclude no-littering-var-directory)
@@ -246,19 +250,19 @@
   (savehist-mode t)
 
   (setq history-delete-duplicates t
-	    recentf-max-menu-items 5
-	    ring-bell-function 'ignore
-	    isearch-lazy-count t
+        recentf-max-menu-items 5
+        ring-bell-function 'ignore
+        isearch-lazy-count t
         isearch-wrap-pause 'no
         lazy-highlight-cleanup nil
         ;; 处理中英文断行不分割问题，需要开启 toggle-word-wrap 和
         ;; visual-line-mode 才能体现
-	    word-wrap-by-category t)
+        word-wrap-by-category t)
 
   (setq-default tab-width 4
-			    tab-always-indent t
-			    tab-first-completion 'word-or-paren-or-punct
-			    indent-tabs-mode nil
+                tab-always-indent t
+                tab-first-completion 'word-or-paren-or-punct
+                indent-tabs-mode nil
                 ;; bidi-display-reordering 'left-to-right
                 bidi-display-reordering nil
                 ;; bidi-paragraph-direction 'left-to-right
@@ -271,7 +275,7 @@
                   (down . down-arrow)
                   (top top-left-angle top-right-angle)
                   (bottom bottom-left-angle bottom-right-angle
-			              top-right-angle
+                          top-right-angle
                           top-left-angle)
                   (top-bottom left-bracket right-bracket top-right-angle
                               top-left-angle)
@@ -358,19 +362,20 @@
   (global-set-key [remap move-end-of-line] 'mwim-end-of-code-or-line)
 
   (c-add-style "microsoft"
-  			   '("stroustrup"
-  			     (c-offsets-alist
-  				  (access-label . /)
-  				  (innamespace . -)
-  				  (inline-open . 0)
-  				  (inher-cont . c-lineup-multi-inher)
-  				  (arglist-cont-nonempty . +)
-  				  (template-args-cont . +))))
+               '("stroustrup"
+                 (c-offsets-alist
+                  (access-label . /)
+                  (innamespace . -)
+                  (inline-open . 0)
+                  (inher-cont . c-lineup-multi-inher)
+                  (arglist-cont-nonempty . +)
+                  (template-args-cont . +))))
 
   (when (treesit-available-p)
     (setq major-mode-remap-alist
           '((c-mode          . c-ts-mode)
             (c++-mode        . c++-ts-mode)
+            (c-or-c++-mode . c-or-c++-ts-mode)
             (conf-toml-mode  . toml-ts-mode)
             (csharp-mode     . csharp-ts-mode)
             (css-mode        . css-ts-mode)
@@ -380,18 +385,145 @@
             (js-json-mode    . json-ts-mode)
             (python-mode     . python-ts-mode)
             (ruby-mode       . ruby-ts-mode)
-            (sh-mode         . bash-ts-mode)))
+            (sh-mode         . bash-ts-mode))
+          ;; treesit-font-lock-level 3
+          )
     (add-hook 'emacs-lisp-mode-hook (lambda () (treesit-parser-create 'elisp))))
 
+  ;; (defun packages-load-after-minibuffer ()
+  ;;   (when (file-exists-p "~/.emacs.d/site-lisp/emacs-which-key/which-key.el")
+  ;;     (load "~/.emacs.d/site-lisp/emacs-which-key/which-key.el")
+  ;;     (which-key-mode t)
+  ;;     (setq which-key-max-description-length 30
+  ;;   	    which-key-show-remaining-keys t)
+  ;;     )
+  ;;   (when (file-exists-p "~/.emacs.d/site-lisp/popper")
+  ;;     (popper-mode +1))
+  ;;   (remove-hook 'minibuffer-setup-hook 'packages-load-after-minibuffer))
 
-  ;; (add-hook 'c-ts-mode-hook (lambda () (setq c-ts-mode-indent-offset 4)))
+  ;; (add-hook 'minibuffer-setup-hook 'packages-load-after-minibuffer)
 
-  (with-eval-after-load 'which-key
+  (when (file-exists-p "~/.emacs.d/site-lisp/emacs-which-key/which-key.el")
+    (load "~/.emacs.d/site-lisp/emacs-which-key/which-key.el")
     (which-key-mode t)
-	(setq which-key-max-description-length 30
-		  which-key-show-remaining-keys t))
+    (setq which-key-max-description-length 30
+          which-key-show-remaining-keys t)
+    )
+  (setq popper-reference-buffers
+        '("\\*Messages\\*"
+          "Output\\*$"
+          "\\*Async Shell Command\\*"
+          "Go-Translate"
+          help-mode
+          helpful-mode
+          compilation-mode
+          youdao-dictionary-mode))
+  (defun popper--fit-window-width (win)
+    "Determine the height of popup window WIN by fitting it to the buffer's content."
+    (fit-window-to-buffer
+     win
+     (frame-height)
+     (floor (frame-height) 6)
+     (floor (frame-width) 2)
+     ;; (floor (frame-width) 2)
+     (floor (* (frame-width) 17) 35)
+     ))
+  (defun popper--fit-window-height (win)
+    "Determine the height of popup window WIN by fitting it to the buffer's content."
+    (fit-window-to-buffer
+     win
+     (floor (frame-height) 2)
+     (floor (frame-height) 3)))
+  (defun popper-display-popup-adaptive (buffer &optional alist)
+    "Display popup-buffer BUFFER at the bottom of the screen.
+ALIST is an association list of action symbols and values.  See
+Info node `(elisp) Buffer Display Action Alists' for details of
+such alists."
+    (if (> (window-pixel-height) (window-pixel-width))
+        (display-buffer-in-side-window
+         buffer
+         (append alist
+                 `((window-height . ,popper-window-height)
+                   (side . bottom)
+                   (slot . 1))))
+      (display-buffer-in-side-window
+       buffer
+       (append alist
+               `((window-width . popper--fit-window-width)
+                 (side . right)
+                 (slot . 1))))))
+  (setq popper-display-function #'popper-display-popup-adaptive
+        fit-window-to-buffer-horizontally t)
+  (keymap-global-set "C-`" 'popper-toggle)
+  (keymap-global-set "M-`" 'popper-cycle)
+  (keymap-global-set "C-M-`" 'popper-toggle-type)
+  (popper-mode +1)
+  (popper-echo-mode +1)
 
   (define-key global-map [remap list-buffers] 'ibuffer)
+
+  (add-hook 'prog-mode-hook 'indent-bars-mode)
+  (with-eval-after-load 'indent-bars
+    (setq ;; indent-bars-pattern "."
+     ;; indent-bars-highlight-current-depth
+     ;; '(:face default :blend 0.4)
+     indent-bars-treesit-support t
+     indent-bars-no-descend-string t
+     indent-bars-treesit-ignore-blank-lines-types '("module")
+     indent-bars-width-frac 0.15
+     )
+    (defun indent-bars--guess-spacing ()
+      "Get indentation spacing of current buffer.
+Adapted from `highlight-indentation-mode'."
+      (cond
+       (indent-bars-spacing-override)
+       ((and (derived-mode-p 'c-ts-mode) (boundp 'c-ts-mode-indent-offset))
+        c-ts-mode-indent-offset)
+       ((and (derived-mode-p 'c++-ts-mode) (boundp 'c-ts-mode-indent-offset))
+        c-ts-mode-indent-offset)
+       ((and (derived-mode-p 'python-mode) (boundp 'py-indent-offset))
+        py-indent-offset)
+       ((and (derived-mode-p 'python-mode) (boundp 'python-indent-offset))
+        python-indent-offset)
+       ((and (derived-mode-p 'ruby-mode) (boundp 'ruby-indent-level))
+        ruby-indent-level)
+       ((and (derived-mode-p 'scala-mode) (boundp 'scala-indent:step))
+        scala-indent:step)
+       ((and (derived-mode-p 'scala-mode) (boundp 'scala-mode-indent:step))
+        scala-mode-indent:step)
+       ((and (or (derived-mode-p 'scss-mode) (derived-mode-p 'css-mode))
+	         (boundp 'css-indent-offset))
+        css-indent-offset)
+       ((and (derived-mode-p 'nxml-mode) (boundp 'nxml-child-indent))
+        nxml-child-indent)
+       ((and (derived-mode-p 'coffee-mode) (boundp 'coffee-tab-width))
+        coffee-tab-width)
+       ((and (derived-mode-p 'js-mode) (boundp 'js-indent-level))
+        js-indent-level)
+       ((and (derived-mode-p 'js2-mode) (boundp 'js2-basic-offset))
+        js2-basic-offset)
+       ((and (fboundp 'derived-mode-class)
+	         (eq (derived-mode-class major-mode) 'sws-mode) (boundp 'sws-tab-width))
+        sws-tab-width)
+       ((and (derived-mode-p 'web-mode) (boundp 'web-mode-markup-indent-offset))
+        web-mode-markup-indent-offset)
+       ((and (derived-mode-p 'web-mode) (boundp 'web-mode-html-offset)) ; old var
+        web-mode-html-offset)
+       ((and (local-variable-p 'c-basic-offset) (boundp 'c-basic-offset))
+        c-basic-offset)
+       ((and (derived-mode-p 'yaml-mode) (boundp 'yaml-indent-offset))
+        yaml-indent-offset)
+       ((and (derived-mode-p 'elixir-mode) (boundp 'elixir-smie-indent-basic))
+        elixir-smie-indent-basic)
+       ((and (derived-mode-p 'lisp-data-mode) (boundp 'lisp-body-indent))
+        lisp-body-indent)
+       ((and (derived-mode-p 'cobol-mode) (boundp 'cobol-tab-width))
+        cobol-tab-width)
+       ((or (derived-mode-p 'go-ts-mode) (derived-mode-p 'go-mode))
+        tab-width)
+       ((and (boundp 'standard-indent) standard-indent))
+       (t 4)))
+    )
 
   ;; (add-to-list 'load-path "~/.emacs.d/site-lisp/consult")
   ;; (require 'consult)
@@ -406,7 +538,7 @@
      consult-buffer
      :preview-key '(:debounce 0.4 "M-."))
     (setq xref-show-xrefs-function 'consult-xref
-    	  xref-show-definitions-function 'consult-xref))
+          xref-show-definitions-function 'consult-xref))
 
   ;;; Theme
   (dolist (hook '(prog-mode-hook text-mode-hook cuda-mode-hook))
@@ -450,11 +582,10 @@
 
   ;;; Windows Control
 
-  (load "~/.emacs.d/site-lisp/emacs-winum/winum.el")
-  (winum-mode)
+  ;; (load "~/.emacs.d/site-lisp/emacs-winum/winum.el")
+  ;; (winum-mode)
 
   ;;; UI
-  (setq fill-column 80)
   (dolist (hook '(prog-mode-hook text-mode-hook))
     (add-hook hook 'display-fill-column-indicator-mode))
   ;; (global-display-fill-column-indicator-mode)
@@ -470,16 +601,16 @@
       ef-trio-dark
       )
     "Set for themes for dark and light mode.")
-  (require 'doom-themes)
+  ;; (require 'doom-themes)
   (if (or
        (>= (string-to-number (substring (current-time-string) 11 13)) 20)
        (<= (string-to-number (substring (current-time-string) 11 13)) 6))
-	  (progn
+      (progn
         (if (equal (cadr themes_chosen) 'modus-vivendi)
             (progn
               (setq modus-themes-org-blocks 'gray-background
-	                modus-themes-bold-constructs t
-	                modus-themes-italic-constructs t)
+                    modus-themes-bold-constructs t
+                    modus-themes-italic-constructs t)
               (load-theme (car (cdr themes_chosen)) t)
               (set-face-attribute 'modus-themes-heading-1 nil :height 1.25))
           (if (equal (cadr themes_chosen) 'manoj-dark)
@@ -507,30 +638,30 @@
         (set-face-bold 'font-lock-keyword-face 't)
         )
       (setq modus-themes-org-blocks 'gray-background
-	        modus-themes-bold-constructs t
+            modus-themes-bold-constructs t
             modus-themes-italic-constructs t)))
 
   (if (equal (frame-parameter nil 'background-mode) 'dark)
       (set-face-attribute 'mode-line nil
                           :background "black"
                           :box nil
-    				      :font (font-spec
-    						     ;; "JetBrainsMono NF" "Monego Ligatures" "Maple Mono NF"
-							     :name
-							     "JetBrainsMono NF"
+                          :font (font-spec
+                                 ;; "JetBrainsMono NF" "Monego Ligatures" "Maple Mono NF"
+                                 :name
+                                 "JetBrainsMono NF"
                                  :size
-							     11.0)
+                                 11.0)
                           :underline
                           (face-foreground 'mode-line-emphasis))
     (progn
       (set-face-attribute 'mode-line nil
-    				      ;; :background "#F4F7FA"
-					      :background "white"
-					      :box nil
-					      :font (font-spec
-    						     :name
-							     "JetBrainsMono NF"
-							     :size 11.0))
+                          :background "#F4F7FA"
+                          ;; :background "white"
+                          :box nil
+                          :font (font-spec
+                                 :name
+                                 "JetBrainsMono NF"
+                                 :size 11.0))
       (with-eval-after-load 'tab-bar
         (set-face-attribute 'tab-bar nil
                             :font (font-spec
@@ -563,8 +694,8 @@
 
   (with-eval-after-load 'highlight-indent-guides
     (setq highlight-indent-guides-method 'character
-		  highlight-indent-guides-responsive 'top
-		  highlight-indent-guides-suppress-auto-error t))
+          highlight-indent-guides-responsive 'top
+          highlight-indent-guides-suppress-auto-error t))
   )
 
 (provide 'config)

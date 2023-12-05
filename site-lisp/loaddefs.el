@@ -148,18 +148,15 @@ or call the function `global-aggressive-indent-mode'.")
 (custom-autoload 'global-aggressive-indent-mode "aggressive-indent-mode/aggressive-indent" nil)
 (autoload 'global-aggressive-indent-mode "aggressive-indent-mode/aggressive-indent" "\
 Toggle Aggressive-Indent mode in all buffers.
-With prefix ARG, enable Global Aggressive-Indent mode if ARG is
-positive; otherwise, disable it.
+With prefix ARG, enable Global Aggressive-Indent mode if ARG is positive; otherwise, disable it.
 
 If called from Lisp, toggle the mode if ARG is `toggle'.
 Enable the mode if ARG is nil, omitted, or is a positive number.
 Disable the mode if ARG is a negative number.
 
-Aggressive-Indent mode is enabled in all buffers where
-`aggressive-indent-mode' would do it.
+Aggressive-Indent mode is enabled in all buffers where `aggressive-indent-mode' would do it.
 
-See `aggressive-indent-mode' for more information on Aggressive-Indent
-mode.
+See `aggressive-indent-mode' for more information on Aggressive-Indent mode.
 
 (fn &optional ARG)" t)
 (defalias 'aggressive-indent-global-mode #'global-aggressive-indent-mode)
@@ -633,15 +630,14 @@ or call the function `breadcrumb-mode'.")
 (custom-autoload 'breadcrumb-mode "breadcrumb/breadcrumb" nil)
 (autoload 'breadcrumb-mode "breadcrumb/breadcrumb" "\
 Toggle Bc-Local mode in all buffers.
-With prefix ARG, enable Breadcrumb mode if ARG is positive; otherwise,
-disable it.
+With prefix ARG, enable Breadcrumb mode if ARG is positive; otherwise, disable it.
 
 If called from Lisp, toggle the mode if ARG is `toggle'.
 Enable the mode if ARG is nil, omitted, or is a positive number.
 Disable the mode if ARG is a negative number.
 
-Bc-Local mode is enabled in all buffers where
-`bc--turn-on-local-mode-on-behalf-of-global-mode' would do it.
+Bc-Local mode is enabled in all buffers where `bc--turn-on-local-mode-on-behalf-of-global-mode'
+would do it.
 
 See `bc-local-mode' for more information on Bc-Local mode.
 
@@ -649,18 +645,6 @@ See `bc-local-mode' for more information on Bc-Local mode.
 (autoload 'breadcrumb-jump "breadcrumb/breadcrumb" "\
 Like \\[execute-extended-command] `imenu', but breadcrumb-powered." t)
 (register-definition-prefixes "breadcrumb/breadcrumb" '("bc-"))
-
-
-;;; Generated autoloads from browse-kill-ring/browse-kill-ring.el
-
-(autoload 'browse-kill-ring-default-keybindings "browse-kill-ring/browse-kill-ring" "\
-Set up M-y (`yank-pop') so that it can invoke `browse-kill-ring'.
-Normally, if M-y was not preceeded by C-y, then it has no useful
-behavior.  This function sets things up so that M-y will invoke
-`browse-kill-ring'." t)
-(autoload 'browse-kill-ring "browse-kill-ring/browse-kill-ring" "\
-Display items in the `kill-ring' in another buffer." t)
-(register-definition-prefixes "browse-kill-ring/browse-kill-ring" '("browse-kill-ring-"))
 
 
 ;;; Generated autoloads from cape/cape.el
@@ -1136,15 +1120,13 @@ or call the function `global-cns-mode'.")
 (custom-autoload 'global-cns-mode "emacs-chinese-word-segmentation/cns" nil)
 (autoload 'global-cns-mode "emacs-chinese-word-segmentation/cns" "\
 Toggle Cns mode in all buffers.
-With prefix ARG, enable Global Cns mode if ARG is positive; otherwise,
-disable it.
+With prefix ARG, enable Global Cns mode if ARG is positive; otherwise, disable it.
 
 If called from Lisp, toggle the mode if ARG is `toggle'.
 Enable the mode if ARG is nil, omitted, or is a positive number.
 Disable the mode if ARG is a negative number.
 
-Cns mode is enabled in all buffers where `(lambda nil (cns-mode 1))'
-would do it.
+Cns mode is enabled in all buffers where `(lambda nil (cns-mode 1))' would do it.
 
 See `cns-mode' for more information on Cns mode.
 
@@ -1334,15 +1316,13 @@ or call the function `global-company-mode'.")
 (custom-autoload 'global-company-mode "company-mode/company" nil)
 (autoload 'global-company-mode "company-mode/company" "\
 Toggle Company mode in all buffers.
-With prefix ARG, enable Global Company mode if ARG is positive;
-otherwise, disable it.
+With prefix ARG, enable Global Company mode if ARG is positive; otherwise, disable it.
 
 If called from Lisp, toggle the mode if ARG is `toggle'.
 Enable the mode if ARG is nil, omitted, or is a positive number.
 Disable the mode if ARG is a negative number.
 
-Company mode is enabled in all buffers where `company-mode-on' would
-do it.
+Company mode is enabled in all buffers where `company-mode-on' would do it.
 
 See `company-mode' for more information on Company mode.
 
@@ -2171,8 +2151,7 @@ or call the function `global-corfu-mode'.")
 (custom-autoload 'global-corfu-mode "corfu/corfu" nil)
 (autoload 'global-corfu-mode "corfu/corfu" "\
 Toggle Corfu mode in all buffers.
-With prefix ARG, enable Global Corfu mode if ARG is positive;
-otherwise, disable it.
+With prefix ARG, enable Global Corfu mode if ARG is positive; otherwise, disable it.
 
 If called from Lisp, toggle the mode if ARG is `toggle'.
 Enable the mode if ARG is nil, omitted, or is a positive number.
@@ -2373,15 +2352,13 @@ or call the function `global-dash-fontify-mode'.")
 (custom-autoload 'global-dash-fontify-mode "dash.el/dash" nil)
 (autoload 'global-dash-fontify-mode "dash.el/dash" "\
 Toggle Dash-Fontify mode in all buffers.
-With prefix ARG, enable Global Dash-Fontify mode if ARG is positive;
-otherwise, disable it.
+With prefix ARG, enable Global Dash-Fontify mode if ARG is positive; otherwise, disable it.
 
 If called from Lisp, toggle the mode if ARG is `toggle'.
 Enable the mode if ARG is nil, omitted, or is a positive number.
 Disable the mode if ARG is a negative number.
 
-Dash-Fontify mode is enabled in all buffers where
-`dash--turn-on-fontify-mode' would do it.
+Dash-Fontify mode is enabled in all buffers where `dash--turn-on-fontify-mode' would do it.
 
 See `dash-fontify-mode' for more information on Dash-Fontify mode.
 
@@ -2453,15 +2430,13 @@ or call the function `dired-preview-global-mode'.")
 (custom-autoload 'dired-preview-global-mode "dired-preview/dired-preview" nil)
 (autoload 'dired-preview-global-mode "dired-preview/dired-preview" "\
 Toggle Dired-Preview mode in all buffers.
-With prefix ARG, enable Dired-Preview-Global mode if ARG is positive;
-otherwise, disable it.
+With prefix ARG, enable Dired-Preview-Global mode if ARG is positive; otherwise, disable it.
 
 If called from Lisp, toggle the mode if ARG is `toggle'.
 Enable the mode if ARG is nil, omitted, or is a positive number.
 Disable the mode if ARG is a negative number.
 
-Dired-Preview mode is enabled in all buffers where `dired-preview--on'
-would do it.
+Dired-Preview mode is enabled in all buffers where `dired-preview--on' would do it.
 
 See `dired-preview-mode' for more information on Dired-Preview mode.
 
@@ -2500,15 +2475,14 @@ or call the function `diredfl-global-mode'.")
 (custom-autoload 'diredfl-global-mode "diredfl/diredfl" nil)
 (autoload 'diredfl-global-mode "diredfl/diredfl" "\
 Toggle Diredfl mode in all buffers.
-With prefix ARG, enable Diredfl-Global mode if ARG is positive;
-otherwise, disable it.
+With prefix ARG, enable Diredfl-Global mode if ARG is positive; otherwise, disable it.
 
 If called from Lisp, toggle the mode if ARG is `toggle'.
 Enable the mode if ARG is nil, omitted, or is a positive number.
 Disable the mode if ARG is a negative number.
 
-Diredfl mode is enabled in all buffers where `(lambda nil (when
-(derived-mode-p 'dired-mode) (diredfl-mode)))' would do it.
+Diredfl mode is enabled in all buffers where `(lambda nil (when (derived-mode-p 'dired-mode)
+(diredfl-mode)))' would do it.
 
 See `diredfl-mode' for more information on Diredfl mode.
 
@@ -4074,15 +4048,13 @@ or call the function `global-flycheck-mode'.")
 (custom-autoload 'global-flycheck-mode "flycheck/flycheck" nil)
 (autoload 'global-flycheck-mode "flycheck/flycheck" "\
 Toggle Flycheck mode in all buffers.
-With prefix ARG, enable Global Flycheck mode if ARG is positive;
-otherwise, disable it.
+With prefix ARG, enable Global Flycheck mode if ARG is positive; otherwise, disable it.
 
 If called from Lisp, toggle the mode if ARG is `toggle'.
 Enable the mode if ARG is nil, omitted, or is a positive number.
 Disable the mode if ARG is a negative number.
 
-Flycheck mode is enabled in all buffers where `flycheck-mode-on-safe'
-would do it.
+Flycheck mode is enabled in all buffers where `flycheck-mode-on-safe' would do it.
 
 See `flycheck-mode' for more information on Flycheck mode.
 
@@ -4619,6 +4591,29 @@ Setup immersive-trasnlate.")
 ;;; Generated autoloads from emacs-immersive-translate/immersive-translate-trans.el
 
 (register-definition-prefixes "emacs-immersive-translate/immersive-translate-trans" '("immersive-translate-trans-"))
+
+
+;;; Generated autoloads from indent-bars/indent-bars.el
+
+(autoload 'indent-bars-mode "indent-bars/indent-bars" "\
+Indicate indentation with configurable bars.
+
+This is a minor mode.  If called interactively, toggle the
+`Indent-Bars mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `indent-bars-mode'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t)
+(register-definition-prefixes "indent-bars/indent-bars" '("indent-bars-"))
 
 
 ;;; Generated autoloads from iscroll/iscroll.el
@@ -6553,15 +6548,14 @@ or call the function `magit-auto-revert-mode'.")
 (custom-autoload 'magit-auto-revert-mode "magit/lisp/magit-autorevert" nil)
 (autoload 'magit-auto-revert-mode "magit/lisp/magit-autorevert" "\
 Toggle Auto-Revert mode in all buffers.
-With prefix ARG, enable Magit-Auto-Revert mode if ARG is positive;
-otherwise, disable it.
+With prefix ARG, enable Magit-Auto-Revert mode if ARG is positive; otherwise, disable it.
 
 If called from Lisp, toggle the mode if ARG is `toggle'.
 Enable the mode if ARG is nil, omitted, or is a positive number.
 Disable the mode if ARG is a negative number.
 
-Auto-Revert mode is enabled in all buffers where
-`magit-turn-on-auto-revert-mode-if-desired' would do it.
+Auto-Revert mode is enabled in all buffers where `magit-turn-on-auto-revert-mode-if-desired' would
+do it.
 
 See `auto-revert-mode' for more information on Auto-Revert mode.
 
@@ -8519,8 +8513,7 @@ or call the function `magit-wip-after-save-mode'.")
 (custom-autoload 'magit-wip-after-save-mode "magit/lisp/magit-wip" nil)
 (autoload 'magit-wip-after-save-mode "magit/lisp/magit-wip" "\
 Toggle Magit-Wip-After-Save-Local mode in all buffers.
-With prefix ARG, enable Magit-Wip-After-Save mode if ARG is positive;
-otherwise, disable it.
+With prefix ARG, enable Magit-Wip-After-Save mode if ARG is positive; otherwise, disable it.
 
 If called from Lisp, toggle the mode if ARG is `toggle'.
 Enable the mode if ARG is nil, omitted, or is a positive number.
@@ -8529,8 +8522,7 @@ Disable the mode if ARG is a negative number.
 Magit-Wip-After-Save-Local mode is enabled in all buffers where
 `magit-wip-after-save-local-mode-turn-on' would do it.
 
-See `magit-wip-after-save-local-mode' for more information on
-Magit-Wip-After-Save-Local mode.
+See `magit-wip-after-save-local-mode' for more information on Magit-Wip-After-Save-Local mode.
 
 (fn &optional ARG)" t)
 (defvar magit-wip-after-apply-mode nil "\
@@ -8770,15 +8762,14 @@ or call the function `meow-global-mode'.")
 (custom-autoload 'meow-global-mode "meow/meow-core" nil)
 (autoload 'meow-global-mode "meow/meow-core" "\
 Toggle Meow mode in all buffers.
-With prefix ARG, enable Meow-Global mode if ARG is positive;
-otherwise, disable it.
+With prefix ARG, enable Meow-Global mode if ARG is positive; otherwise, disable it.
 
 If called from Lisp, toggle the mode if ARG is `toggle'.
 Enable the mode if ARG is nil, omitted, or is a positive number.
 Disable the mode if ARG is a negative number.
 
-Meow mode is enabled in all buffers where `(lambda nil (unless
-(minibufferp) (meow-mode 1)))' would do it.
+Meow mode is enabled in all buffers where `(lambda nil (unless (minibufferp) (meow-mode 1)))' would
+do it.
 
 See `meow-mode' for more information on Meow mode.
 
@@ -9253,15 +9244,13 @@ or call the function `global-org-modern-mode'.")
 (custom-autoload 'global-org-modern-mode "org-modern/org-modern" nil)
 (autoload 'global-org-modern-mode "org-modern/org-modern" "\
 Toggle Org-Modern mode in all buffers.
-With prefix ARG, enable Global Org-Modern mode if ARG is positive;
-otherwise, disable it.
+With prefix ARG, enable Global Org-Modern mode if ARG is positive; otherwise, disable it.
 
 If called from Lisp, toggle the mode if ARG is `toggle'.
 Enable the mode if ARG is nil, omitted, or is a positive number.
 Disable the mode if ARG is a negative number.
 
-Org-Modern mode is enabled in all buffers where `org-modern--on' would
-do it.
+Org-Modern mode is enabled in all buffers where `org-modern--on' would do it.
 
 See `org-modern-mode' for more information on Org-Modern mode.
 
@@ -9653,15 +9642,13 @@ or call the function `global-paren-face-mode'.")
 (custom-autoload 'global-paren-face-mode "paren-face/paren-face" nil)
 (autoload 'global-paren-face-mode "paren-face/paren-face" "\
 Toggle Paren-Face mode in all buffers.
-With prefix ARG, enable Global Paren-Face mode if ARG is positive;
-otherwise, disable it.
+With prefix ARG, enable Global Paren-Face mode if ARG is positive; otherwise, disable it.
 
 If called from Lisp, toggle the mode if ARG is `toggle'.
 Enable the mode if ARG is nil, omitted, or is a positive number.
 Disable the mode if ARG is a negative number.
 
-Paren-Face mode is enabled in all buffers where
-`turn-on-paren-face-mode-if-desired' would do it.
+Paren-Face mode is enabled in all buffers where `turn-on-paren-face-mode-if-desired' would do it.
 
 See `paren-face-mode' for more information on Paren-Face mode.
 
@@ -10346,6 +10333,8 @@ evaluate `(default-value \\='popper-mode)'.
 
 The mode's hook is called both when the mode is enabled and when
 it is disabled.
+
+\\{popper-mode-map}
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "popper/popper" '("popper-"))
@@ -13511,18 +13500,16 @@ or call the function `global-visual-fill-column-mode'.")
 (custom-autoload 'global-visual-fill-column-mode "visual-fill-column/visual-fill-column" nil)
 (autoload 'global-visual-fill-column-mode "visual-fill-column/visual-fill-column" "\
 Toggle Visual-Fill-Column mode in all buffers.
-With prefix ARG, enable Global Visual-Fill-Column mode if ARG is
-positive; otherwise, disable it.
+With prefix ARG, enable Global Visual-Fill-Column mode if ARG is positive; otherwise, disable it.
 
 If called from Lisp, toggle the mode if ARG is `toggle'.
 Enable the mode if ARG is nil, omitted, or is a positive number.
 Disable the mode if ARG is a negative number.
 
-Visual-Fill-Column mode is enabled in all buffers where
-`turn-on-visual-fill-column-mode' would do it.
+Visual-Fill-Column mode is enabled in all buffers where `turn-on-visual-fill-column-mode' would do
+it.
 
-See `visual-fill-column-mode' for more information on
-Visual-Fill-Column mode.
+See `visual-fill-column-mode' for more information on Visual-Fill-Column mode.
 
 (fn &optional ARG)" t)
 (autoload 'visual-fill-column-split-window-sensibly "visual-fill-column/visual-fill-column" "\
@@ -14031,15 +14018,13 @@ or call the function `yas-global-mode'.")
 (custom-autoload 'yas-global-mode "yasnippet/yasnippet" nil)
 (autoload 'yas-global-mode "yasnippet/yasnippet" "\
 Toggle Yas minor mode in all buffers.
-With prefix ARG, enable Yas-Global mode if ARG is positive; otherwise,
-disable it.
+With prefix ARG, enable Yas-Global mode if ARG is positive; otherwise, disable it.
 
 If called from Lisp, toggle the mode if ARG is `toggle'.
 Enable the mode if ARG is nil, omitted, or is a positive number.
 Disable the mode if ARG is a negative number.
 
-Yas minor mode is enabled in all buffers where `yas-minor-mode-on'
-would do it.
+Yas minor mode is enabled in all buffers where `yas-minor-mode-on' would do it.
 
 See `yas-minor-mode' for more information on Yas minor mode.
 

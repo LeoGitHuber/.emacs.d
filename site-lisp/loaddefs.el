@@ -4273,11 +4273,11 @@ SYMBOL with `flycheck-def-executable-var'.
 (register-definition-prefixes "flycheck/maint/flycheck-maint" '("flycheck/"))
 
 
-;;; Generated autoloads from lsp-bridge/flymake-bridge/flymake-bridge.el
+;;; Generated autoloads from flymake-bridge/flymake-bridge.el
 
-(autoload 'flymake-bridge-setup "lsp-bridge/flymake-bridge/flymake-bridge" "\
+(autoload 'flymake-bridge-setup "flymake-bridge/flymake-bridge" "\
 Setup lsp-bridge-diagnostic integration with Flymake." t)
-(register-definition-prefixes "lsp-bridge/flymake-bridge/flymake-bridge" '("flymake-bridge"))
+(register-definition-prefixes "flymake-bridge/flymake-bridge" '("flymake-bridge"))
 
 
 ;;; Generated autoloads from flymake-flycheck/flymake-flycheck.el
@@ -13794,8 +13794,6 @@ evaluate `(default-value \\='winum-mode)'.
 
 The mode's hook is called both when the mode is enabled and when
 it is disabled.
-
-\\{winum-keymap}
 
 (fn &optional ARG)" t)
 (autoload 'winum-select-window-0-or-10 "emacs-winum/winum" "\

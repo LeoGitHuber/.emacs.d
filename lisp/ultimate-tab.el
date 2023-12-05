@@ -552,6 +552,7 @@ automatically choosing a major mode, use \\[find-file-literally]."
     (if (listp value)
 	    (mapcar 'pop-to-buffer-same-window (nreverse value))
       (if (or (not tab-bar-tab-project)
+              (not (buffer-file-name value))
               (eq (project--find-in-directory (file-name-directory (buffer-file-name value)))
                   tab-bar-tab-project))
           (pop-to-buffer-same-window value)

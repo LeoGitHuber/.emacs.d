@@ -319,3 +319,6 @@
 [submodule "site-lisp/indent-bars"]
 	path = site-lisp/indent-bars
 	url = https://github.com/jdtsmith/indent-bars.git
+[submodule "site-lisp/flymake-bridge"]
+	path = site-lisp/flymake-bridge
+	url = https://github.com/liuyinz/flymake-bridge.git

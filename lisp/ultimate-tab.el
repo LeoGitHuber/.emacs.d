@@ -30,7 +30,7 @@
   "Filter buffer for tab-bar's windows tab line.")
 
 (defvar tab-bar-tab-line-close-button
-  (propertize " 󰅖 " :help-echo "Close tab"
+  (propertize "󰅖 " :help-echo "Close tab"
               'face `(:inherit tab-bar-tab)
               'display '(space-width 0.5)
               'mouse-face 'highlight
@@ -38,6 +38,14 @@
               )
   "Close button for tab-bar's tab."
   )
+
+(defvar tab-bar-tab-line-indicator
+  (propertize "▎" 'face
+              `(:inherit tab-bar-tab
+                :foreground
+                ,(or (face-foreground 'mode-line-emphasis)
+                     "#4B535D")))
+  "Indicator for tab-bar's current tab.")
 
 (defvar tab-bar-tab-line-strings nil
   "tab line string for tab-bar.")
@@ -70,32 +78,34 @@
                                ((> severity note-level) (setq .warning (+ .warning 1)))
                                (t (setq .note (+ .note 1)))))
                        )
-                     (concat
-                      (propertize " "
-                                  'face `(:background ,(face-background 'tab-bar-tab))
-                                  'display '(space-width 0.5))
-                      (mapconcat
-                       (lambda (c)
-                         (if (eq (car c) 0)
-                             ""
-                           (propertize
-                            (concat (number-to-string (car c))
-                                    (nth 2 c))
-                            'face `(:inherit ,(nth 1 c)
-                                             :background ,(face-background 'tab-bar-tab)
-                                             :slant italic)
-                            )))
-                       `((,.error
-                          flymake-error-echo
-                          " "
-                          )
-                         (,.warning
-                          flymake-warning-echo
-                          " ")
-                         (,.note
-                          flymake-note-echo  ;; ""
-                          "")))
-                      )
+                     (let ((cache (mapconcat
+                                   (lambda (c)
+                                     (unless (eq (car c) 0)
+                                       (propertize
+                                        (concat (number-to-string (car c))
+                                                (nth 2 c))
+                                        'face `(:inherit ,(nth 1 c)
+                                                         :background ,(face-background 'tab-bar-tab)
+                                                         :slant italic)
+                                        )))
+                                   `((,.error
+                                      flymake-error-echo
+                                      " "
+                                      )
+                                     (,.warning
+                                      flymake-warning-echo
+                                      " ")
+                                     (,.note
+                                      flymake-note-echo  ;; ""
+                                      "")))))
+                       (if (equal cache "")
+                           cache
+                         (concat cache
+                                 (propertize " "
+                                             'face
+                                             '(:inherit tab-bar-tab)
+                                             'display
+                                             '(space-width 0.5)))))
                      ))))))
 
 (defun tab-bar-generate-tab-line-cache (&rest _)
@@ -129,12 +139,12 @@
       (setq tab-bar-format-tab-line-cache
             (if (or (not project)
                     (and tab-bar-tab-project
-                         (eq tab-bar-tab-project (project-root project))))
+                         (eq tab-bar-tab-project project)))
                 (if tab-bar-format-tab-line-cache
                     (nconc tab-bar-format-tab-line-cache (list current))
                   (nconc (list current) windows-buffer))
               (let ((pr (expand-file-name (project-root project))))
-                (setq tab-bar-tab-project (project-root project))
+                (setq tab-bar-tab-project project)
                 (dolist (b hidden)
                   (let ((dir (buffer-local-value 'default-directory b)))
                     (and (string-prefix-p pr
@@ -171,13 +181,20 @@
                       (setq i (+ i 1))
                       (if (eq b current)
                           (append
+                           `((tab-bar-tab-line-indicator
+                              menu-item
+                              ,tab-bar-tab-line-indicator
+                              ignore
+                              :help nil
+                              ))
                            `((,(intern buf-name)
                               menu-item
                               ,(propertize
                                 (concat
-                                 (format " %d." i)
+                                 (format "%d." i)
                                  " "
                                  buf-name
+                                 " "
                                  )
                                 'face '(:inherit tab-bar-tab))
                               ignore
@@ -193,8 +210,7 @@
                               menu-item
                               tab-bar-tab-line-close-button
                               kill-this-buffer
-                              :help "Close Buffer"))
-                           )
+                              :help "Close Buffer")))
                         `((,(intern buf-name)
                            menu-item
                            ,(propertize (concat
@@ -236,9 +252,9 @@
 
 (defun tab-bar-mouse-down-1 (event)
   "Select the tab at mouse click, or add a new tab on the tab bar.
-Whether this command adds a new tab or selects an existing tab
-depends on whether the click is on the \"+\" button or on an
-existing tab."
+  Whether this command adds a new tab or selects an existing tab
+  depends on whether the click is on the \"+\" button or on an
+  existing tab."
   (interactive "e")
   (let* ((item (tab-bar--event-to-item (event-start event)))
          (tab-number (tab-bar--key-to-number (nth 0 item))))
@@ -256,8 +272,8 @@ existing tab."
 
 (defun tab-bar-mouse-1 (event)
   "Close the tab whose \"x\" close button you click.
-See also `tab-bar-mouse-close-tab', which closes the tab
-regardless of where you click on it.  Also add a new tab."
+  See also `tab-bar-mouse-close-tab', which closes the tab
+  regardless of where you click on it.  Also add a new tab."
   (interactive "e")
   (let* ((item (tab-bar--event-to-item (event-start event)))
          (tab-number (tab-bar--key-to-number (nth 0 item))))
@@ -308,14 +324,14 @@ regardless of where you click on it.  Also add a new tab."
 
 (defun tab-bar-new-tab-to (&optional tab-number)
   "Add a new tab at the absolute position TAB-NUMBER.
-TAB-NUMBER counts from 1.  If no TAB-NUMBER is specified, then add
-a new tab at the position specified by `tab-bar-new-tab-to'.
-Negative TAB-NUMBER counts tabs from the end of the tab bar,
-and -1 means the new tab will become the last one.
-Argument addressing is absolute in contrast to `tab-bar-new-tab',
-where argument addressing is relative.
-After the tab is created, the hooks in
-`tab-bar-tab-post-open-functions' are run."
+  TAB-NUMBER counts from 1.  If no TAB-NUMBER is specified, then add
+  a new tab at the position specified by `tab-bar-new-tab-to'.
+  Negative TAB-NUMBER counts tabs from the end of the tab bar,
+  and -1 means the new tab will become the last one.
+  Argument addressing is absolute in contrast to `tab-bar-new-tab',
+  where argument addressing is relative.
+  After the tab is created, the hooks in
+  `tab-bar-tab-post-open-functions' are run."
   (interactive "P")
   (let* ((tabs (funcall tab-bar-tabs-function))
          (from-index (tab-bar--current-tab-index tabs))
@@ -404,14 +420,14 @@ After the tab is created, the hooks in
 
 (defun tab-bar-select-tab (&optional tab-number)
   "Switch to the tab by its absolute position TAB-NUMBER in the tab bar.
-When this command is bound to a numeric key (with a key prefix or modifier key
-using `tab-bar-select-tab-modifiers'), calling it without an argument
-will translate its bound numeric key to the numeric argument.
-Also the prefix argument TAB-NUMBER can be used to override
-the numeric key, so it takes precedence over the bound digit key.
-For example, `<MODIFIER>-2' will select the second tab, but `C-u 15
-<MODIFIER>-2' will select the 15th tab.  TAB-NUMBER counts from 1.
-Negative TAB-NUMBER counts tabs from the end of the tab bar."
+  When this command is bound to a numeric key (with a key prefix or modifier key
+                                                    using `tab-bar-select-tab-modifiers'), calling it without an argument
+  will translate its bound numeric key to the numeric argument.
+  Also the prefix argument TAB-NUMBER can be used to override
+  the numeric key, so it takes precedence over the bound digit key.
+  For example, `<MODIFIER>-2' will select the second tab, but `C-u 15
+  <MODIFIER>-2' will select the 15th tab.  TAB-NUMBER counts from 1.
+  Negative TAB-NUMBER counts tabs from the end of the tab bar."
   (interactive "P")
   (unless (integerp tab-number)
     (let ((key (event-basic-type last-command-event)))
@@ -519,32 +535,32 @@ Negative TAB-NUMBER counts tabs from the end of the tab bar."
 
 (defun find-file (filename &optional wildcards)
   "Edit file FILENAME.
-\\<minibuffer-local-map>Switch to a buffer visiting file FILENAME, creating one if none
-already exists.
-Interactively, the default if you just type RET is the current directory,
-but the visited file name is available through the minibuffer history:
-type \\[next-history-element] to pull it into the minibuffer.
+  \\<minibuffer-local-map>Switch to a buffer visiting file FILENAME, creating one if none
+  already exists.
+  Interactively, the default if you just type RET is the current directory,
+  but the visited file name is available through the minibuffer history:
+  type \\[next-history-element] to pull it into the minibuffer.
 
-The first time \\[next-history-element] is used after Emacs prompts for the file name,
-the result is affected by `file-name-at-point-functions', which by
-default try to guess the file name by looking at point in the current
-buffer.  Customize the value of `file-name-at-point-functions' or set
-it to nil, if you want only the visited file name and the current
-directory to be available on first \\[next-history-element] request.
+  The first time \\[next-history-element] is used after Emacs prompts for the file name,
+  the result is affected by `file-name-at-point-functions', which by
+  default try to guess the file name by looking at point in the current
+  buffer.  Customize the value of `file-name-at-point-functions' or set
+  it to nil, if you want only the visited file name and the current
+  directory to be available on first \\[next-history-element] request.
 
-You can visit files on remote machines by specifying something
-like /ssh:SOME_REMOTE_MACHINE:FILE for the file name.  You can
-also visit local files as a different user by specifying
-/sudo::FILE for the file name.
-See the Info node `(tramp)File name Syntax' in the Tramp Info
-manual, for more about this.
+  You can visit files on remote machines by specifying something
+  like /ssh:SOME_REMOTE_MACHINE:FILE for the file name.  You can
+  also visit local files as a different user by specifying
+  /sudo::FILE for the file name.
+  See the Info node `(tramp)File name Syntax' in the Tramp Info
+  manual, for more about this.
 
-Interactively, or if WILDCARDS is non-nil in a call from Lisp,
-expand wildcards (if any) and visit multiple files.  You can
-suppress wildcard expansion by setting `find-file-wildcards' to nil.
+  Interactively, or if WILDCARDS is non-nil in a call from Lisp,
+  expand wildcards (if any) and visit multiple files.  You can
+  suppress wildcard expansion by setting `find-file-wildcards' to nil.
 
-\\<global-map>To visit a file without any kind of conversion and without
-automatically choosing a major mode, use \\[find-file-literally]."
+  \\<global-map>To visit a file without any kind of conversion and without
+  automatically choosing a major mode, use \\[find-file-literally]."
   (interactive
    (find-file-read-args "Find file: "
                         (confirm-nonexistent-file-or-buffer)))
@@ -553,8 +569,8 @@ automatically choosing a major mode, use \\[find-file-literally]."
 	    (mapcar 'pop-to-buffer-same-window (nreverse value))
       (if (or (not tab-bar-tab-project)
               (not (buffer-file-name value))
-              (eq (project--find-in-directory (file-name-directory (buffer-file-name value)))
-                  tab-bar-tab-project))
+              (equal (project--find-in-directory (file-name-directory (buffer-file-name value)))
+                     tab-bar-tab-project))
           (pop-to-buffer-same-window value)
         (let ((tab-bar-new-tab-choice (buffer-name value)))
           (tab-bar-new-tab-to))))))
@@ -572,10 +588,13 @@ automatically choosing a major mode, use \\[find-file-literally]."
           tab-bar-format-history
           tab-bar-format-tabs
           ))
+  (set-face-attribute 'tab-bar nil
+                      :inherit nil)
   (set-face-attribute 'tab-bar-tab nil
-                      :slant 'italic :weight 'bold
-                      ;; :underline `(:color ,(face-foreground 'default))
-                      )
+                      :background (face-background 'default)
+                      :box nil
+                      :slant 'italic
+                      :weight 'bold)
   (set-face-attribute 'tab-bar-tab-inactive nil
                       :slant 'normal :weight 'normal :underline nil)
 

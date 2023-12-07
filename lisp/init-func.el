@@ -32,10 +32,10 @@
   (interactive "p")
   (save-excursion
     (if (region-active-p)
-	    (downcase-region (region-beginning) (region-end))
-	  (progn
-	    (left-word)
-	    (downcase-word arg)))))
+        (downcase-region (region-beginning) (region-end))
+      (progn
+        (left-word)
+        (downcase-word arg)))))
 
 ;;;###autoload
 (defun upcase-any (arg)
@@ -43,10 +43,10 @@
   (interactive "p")
   (save-excursion
     (if (region-active-p)
-	    (upcase-region (region-beginning) (region-end))
-	  (progn
-	    (left-word)
-	    (upcase-word arg)))))
+        (upcase-region (region-beginning) (region-end))
+      (progn
+        (left-word)
+        (upcase-word arg)))))
 
 ;;;###autoload
 (defun capitalize-any (arg)
@@ -54,10 +54,10 @@
   (interactive "p")
   (save-excursion
     (if (region-active-p)
-	    (capitalize-region (region-beginning) (region-end))
-	  (progn
-	    (left-word)
-	    (capitalize-word arg)))))
+        (capitalize-region (region-beginning) (region-end))
+      (progn
+        (left-word)
+        (capitalize-word arg)))))
 
 ;;;###autoload
 (defun open-newline-above (arg)
@@ -86,13 +86,13 @@ Set Font for both of English and Chinese characters."
   (set-face-attribute
    'default nil
    :font (font-spec
-		  :name en-font
-		  :weight 'normal
-  		  :slant 'normal
-  		  :size f-size))
+          :name en-font
+          :weight 'medium
+          ;; :slant 'normal
+          :size f-size))
 
   (dolist (charset '(kana han symbol cjk-misc bopomofo))
-	(set-fontset-font "fontset-default" charset (font-spec :family cn-font))))
+    (set-fontset-font "fontset-default" charset (font-spec :family cn-font))))
 
 (defun insert-tab-char()
   "Insert a tab char. (ASCII 9, \t)."
@@ -118,8 +118,8 @@ Set Font for both of English and Chinese characters."
 (defun hideshow-folded-overlay-fn (ov)
   (when (eq 'code (overlay-get ov 'hs))
     (let* ((nlines (count-lines (overlay-start ov) (overlay-end ov)))
-  		   (info (format " ... #%d " nlines)))
-  	  (overlay-put ov 'display (propertize info 'face hideshow-folded-face)))))
+             (info (format " ... #%d " nlines)))
+        (overlay-put ov 'display (propertize info 'face hideshow-folded-face)))))
 
 ;;;###autoload
 (defun update-all-autoloads ()

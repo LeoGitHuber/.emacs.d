@@ -39,7 +39,7 @@
   (add-to-list 'load-path "~/.emacs.d/site-lisp/pdf-tools/lisp")
   (load "~/.emacs.d/site-lisp/loaddefs.el")
   (load "~/.emacs.d/lisp/init-gc.el")
-  (load "~/.emacs.d/lisp/init-diagnostic.el")
+  (load "~/.emacs.d/lisp/init-flymake.el")
   (load "~/.emacs.d/lisp/init-icons.el")
   (load "~/.emacs.d/lisp/init-meow.el")
   (load "~/.emacs.d/lisp/init-keybindings.el")
@@ -54,8 +54,6 @@
   (load "~/.emacs.d/lisp/init-reader.el")
   (load "~/.emacs.d/lisp/init-hydra.el")
   (load "~/.emacs.d/lisp/latex-node.el")
-  (load "~/.emacs.d/lisp/ultimate-tab.el")
-  (tab-bar-mode)
 
   (defun enable-after-meow ()
     "Modes enable after meow insert."
@@ -72,16 +70,15 @@
       ;;   (lsp-bridge-mode))
       ;; (with-current-buffer (get-buffer-create "*scratch*")
       ;;   (lsp-bridge-mode))
+      ;; (add-hook 'lsp-bridge-mode-hook #'flymake-bridge-setup)
       )
     (remove-hook 'meow-insert-enter-hook #'enable-after-meow))
 
   (when (bound-and-true-p meow-mode)
     (add-hook 'meow-insert-enter-hook #'enable-after-meow))
 
-  ;; (global-lsp-bridge-mode)
-
   (when (display-graphic-p)
-    (set-en_cn-font "JetBrainsMono NF" "LXGW WenKai Screen" 12.0)
+    (set-en_cn-font "BlexMono Nerd Font" "LXGW WenKai Screen" 12.0)
     ;; Maple Mono NF --- Maple Mono SC NF, HarmonyOS Sans SC
     ;; PragmataPro Mono Liga --- SimHei
     ;; Hack --- HarmonyOS Sans SC
@@ -603,7 +600,7 @@ Adapted from `highlight-indentation-mode'."
     "Set for themes for dark and light mode.")
   ;; (require 'doom-themes)
   (if (or
-       (>= (string-to-number (substring (current-time-string) 11 13)) 20)
+       (>= (string-to-number (substring (current-time-string) 11 13)) 19)
        (<= (string-to-number (substring (current-time-string) 11 13)) 6))
       (progn
         (if (equal (cadr themes_chosen) 'modus-vivendi)
@@ -648,7 +645,7 @@ Adapted from `highlight-indentation-mode'."
                           :font (font-spec
                                  ;; "JetBrainsMono NF" "Monego Ligatures" "Maple Mono NF"
                                  :name
-                                 "JetBrainsMono NF"
+                                 "BlexMono Nerd Font"
                                  :size
                                  11.0)
                           :underline
@@ -660,25 +657,17 @@ Adapted from `highlight-indentation-mode'."
                           :box nil
                           :font (font-spec
                                  :name
-                                 "JetBrainsMono NF"
+                                 "BlexMono Nerd Font"
                                  :size 11.0))
-      (with-eval-after-load 'tab-bar
-        (set-face-attribute 'tab-bar nil
-                            :font (font-spec
-                                   :name
-                                   "JetBrainsMono NF"
-                                   :size 11.0))
-        (set-face-attribute 'tab-bar-tab nil
-                            :background (face-attribute 'default :background)
-                            :box 'unspecified))))
+      ))
 
   (set-face-attribute
    'mode-line-inactive nil
    :inherit 'mode-line
    :box nil)
 
-  ;; (dolist (hook '(prog-mode-hook cuda-mode-hook))
-  ;;   (add-hook hook 'highlight-indent-guides-mode))
+  (load "~/.emacs.d/lisp/ultimate-tab.el")
+  (tab-bar-mode)
 
   ;; (dolist (hook '(
   ;;   			  ;; completion-list-mode-hook

@@ -6,7 +6,7 @@
 (add-to-list 'load-path "~/.emacs.d/site-lisp/treemacs-nerd-icons")
 (add-to-list 'load-path "~/.emacs.d/site-lisp/nerd-icons-dired")
 
-(setq nerd-icons-font-family "JetBrainsMono NF")
+(setq nerd-icons-font-family "BlexMono Nerd Font")
 
 (require 'nerd-icons)
 

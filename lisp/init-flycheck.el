@@ -1,4 +1,4 @@
-;;; init-diagnostic --- Init for Diagnostic
+;;; init-flycheck --- Init for flycheck  -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 
@@ -55,25 +55,9 @@
 ;; (add-hook 'flycheck-mode-hook #'flycheck-set-indication-mode)
 ;; (with-eval-after-load 'flycheck (setq flycheck-indication-mode 'left-margin))
 
-(with-eval-after-load 'flymake
-  (with-eval-after-load 'flycheck
-    (setq-default flycheck-disabled-checkers
-                  (append (default-value 'flycheck-disabled-checkers)
-                          '(emacs-lisp emacs-lisp-checkdoc emacs-lisp-package))))
-
-  (defun sanityinc/enable-flymake-flycheck ()
-    (setq-local flymake-diagnostic-functions
-                (seq-uniq (append flymake-diagnostic-functions
-                                  (flymake-flycheck-all-chained-diagnostic-functions))))))
-
-(dolist (hook '(prog-mode-hook text-mode-hook))
-  (add-hook hook 'flymake-mode))
 
 ;; (dolist (hook '(prog-mode-hook text-mode-hook))
 ;;   (add-hook hook 'flycheck-mode))
-
-
-(setq eldoc-documentation-function 'eldoc-documentation-compose)
 
 ;; (add-hook 'flymake-mode-hook
 ;;           (lambda ()
@@ -83,6 +67,5 @@
 ;;             ;;                     (delq 'flymake-eldoc-function eldoc-documentation-functions)))
 ;;             ))
 
-
-(provide 'init-diagnostic)
-;;; init-diagnostic.el ends here.
+(provide 'init-flycheck)
+;;; init-flycheck.el ends here.

@@ -3,7 +3,6 @@
 ;;; Code:
 
 ;;; Puni
-(add-to-list 'load-path "~/.emacs.d/site-lisp/puni")
 ;; (add-to-list 'load-path "~/.emacs.d/site-lisp/combobulate")
 ;; (require 'puni)
 
@@ -37,13 +36,12 @@
 (keymap-global-set "M-w" 'puni-kill-region)
 (keymap-set isearch-mode-map "C-h" 'isearch-del-char)
 (keymap-global-set "C-h" 'backward-delete-char-untabify)
-(keymap-global-set "M-o" 'other-window)
 (keymap-global-set "C-x k" 'kill-this-buffer)
 (keymap-global-set "C-x C-r" 'restart-emacs)
 
 ;;; Fingertip
-(dolist (hook '(emacs-lisp-mode-hook c-mode-hook lisp-mode-hook))
-  (add-hook hook 'fingertip-mode))
+;; (dolist (hook '(emacs-lisp-mode-hook c-mode-hook lisp-mode-hook))
+;;   (add-hook hook 'fingertip-mode))
 (with-eval-after-load 'fingertip
   ;; 移动
   ;; ("M-n" . fingertip-jump-left)

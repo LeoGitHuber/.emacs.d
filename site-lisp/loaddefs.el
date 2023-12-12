@@ -2139,6 +2139,8 @@ evaluate `corfu-mode'.
 The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
+\\{corfu-mode-map}
+
 (fn &optional ARG)" t)
 (put 'global-corfu-mode 'globalized-minor-mode t)
 (defvar global-corfu-mode nil "\
@@ -3023,6 +3025,8 @@ evaluate `(default-value \\='doom-modeline-mode)'.
 
 The mode's hook is called both when the mode is enabled and when
 it is disabled.
+
+\\{doom-modeline-mode-map}
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "doom-modeline/doom-modeline" '("doom-modeline-"))
@@ -5344,6 +5348,8 @@ evaluate `lsp-bridge-mode'.
 
 The mode's hook is called both when the mode is enabled and when
 it is disabled.
+
+\\{lsp-bridge-mode-map}
 
 (fn &optional ARG)" t)
 (autoload 'global-lsp-bridge-mode "lsp-bridge/lsp-bridge" nil t)
@@ -10970,6 +10976,12 @@ whole buffer is the list around point." t)
 Mark the sexp around point." t)
 (autoload 'puni-expand-region "puni/puni" "\
 Expand selected region by semantic units." t)
+(autoload 'puni-contract-region "puni/puni" "\
+Contract selected region by semantic units.
+When given a numeric prefix argument ARG, contract that many
+times.
+
+(fn ARG)" t)
 (autoload 'puni-squeeze "puni/puni" "\
 Copy the list around point, and delete the sexp around point.
 This can be used to \"rewrap\" a sexp.  You could squeeze it

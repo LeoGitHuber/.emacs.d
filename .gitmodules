@@ -322,3 +322,12 @@
 [submodule "site-lisp/flymake-bridge"]
 	path = site-lisp/flymake-bridge
 	url = https://github.com/liuyinz/flymake-bridge.git
+[submodule "site-lisp/pass"]
+	path = site-lisp/pass
+	url = https://github.com/NicolasPetton/pass.git
+[submodule "site-lisp/password-store-otp.el"]
+	path = site-lisp/password-store-otp.el
+	url = https://github.com/volrath/password-store-otp.el.git
+[submodule "site-lisp/password-store"]
+	path = site-lisp/password-store
+	url = https://git.zx2c4.com/password-store

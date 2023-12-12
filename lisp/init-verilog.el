@@ -38,8 +38,8 @@
   ;;           (lambda ()
   ;;             (eglot-ensure)
   ;;             (add-to-list 'eglot-server-programs
-  ;;                          '(verilog-mode . ("svlangserver"))
-  ;;                          ;; '(verilog-mode . ("svls"))
+  ;;                          ;; '(verilog-mode . ("svlangserver"))
+  ;;                          '(verilog-mode . ("svls"))
   ;;                          ;; '(verilog-mode . ("vls"))
   ;;                          ;; '(verilog-mode . ("veridian"))
   ;;                          )
@@ -56,24 +56,24 @@
   ;;             ;;           ;; :diagnostics
   ;;             ;;           ;; (:enabled :json-false)
   ;;             ;;           ))))
+  ;;             ;; (setq eglot-workspace-configuration
+  ;;             ;;       '(:svlangserver
+  ;;             ;;         (:settings
+  ;;             ;;          (:systemverilog.includeIndexing:
+  ;;             ;;           ["**/*.{sv,svh,v,vh}", "*.{sv,svh,v,vh}"],
+  ;;             ;;           :systemverilog.launchConfiguration:
+  ;;             ;;           "verilator -sv -Wall --lint-only",
+  ;;             ;;           :systemverilog.formatCommand:
+  ;;             ;;           "verible-verilog-format"))))
   ;;             (setq eglot-workspace-configuration
-  ;;                   '(:svlangserver
+  ;;                   '(:svls
   ;;                     (:settings
-  ;;                      (:systemverilog.includeIndexing:
-  ;;                       ["**/*.{sv,svh,v,vh}", "*.{sv,svh,v,vh}"],
-  ;;                       :systemverilog.launchConfiguration:
+  ;;                      (:systemverilog.launchConfiguration:
   ;;                       "verilator -sv -Wall --lint-only",
   ;;                       :systemverilog.formatCommand:
   ;;                       "verible-verilog-format"))))
-  ;; ;;             ;; (setq eglot-workspace-configuration
-  ;; ;;             ;;       '(:svls
-  ;; ;;             ;;         (:settings
-  ;; ;;             ;;          (:systemverilog.launchConfiguration:
-  ;; ;;             ;;            "verilator -sv -Wall --lint-only",
-  ;; ;;             ;;           :systemverilog.formatCommand:
-  ;; ;;             ;;           "verible-verilog-format"))))
-  ;; ;; )
-  ;; )
+  ;;             )
+  ;;           )
   )
 
 

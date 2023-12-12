@@ -74,8 +74,10 @@
       )
     (remove-hook 'meow-insert-enter-hook #'enable-after-meow))
 
-  (when (bound-and-true-p meow-mode)
-    (add-hook 'meow-insert-enter-hook #'enable-after-meow))
+  ;; (when (bound-and-true-p meow-mode)
+  ;;   (add-hook 'meow-insert-enter-hook #'enable-after-meow))
+
+  ;; (global-lsp-bridge-mode)
 
   (when (display-graphic-p)
     (set-en_cn-font "BlexMono Nerd Font" "LXGW WenKai Screen" 12.0)
@@ -553,23 +555,25 @@ Adapted from `highlight-indentation-mode'."
   (setq completion-styles '(orderless basic)
         completion-category-overrides '((file (styles basic partial-completion))))
 
-  (defun vertico-enable ()
-    (if (boundp vertico-mode)
-        (progn
-          (require 'orderless)
-          (vertico-mode)
-          (vertico-reverse-mode)
-          (vertico-indexed-mode)
-          (vertico-mouse-mode)
-          (marginalia-mode)
-          (keymap-set vertico-map "?" #'minibuffer-completion-help)
-          (keymap-set vertico-map "M-RET" #'minibuffer-force-complete-and-exit)
-          (keymap-set vertico-map "M-TAB" #'minibuffer-complete)
-          (keymap-set vertico-map "C-w" 'vertico-directory-delete-word))
-      (keymap-set minibuffer-mode-map "C-w" 'backward-kill-word))
-    (remove-hook 'pre-command-hook #'vertico-enable))
+  (defun vertico-lsp-enable ()
+    (and (functionp 'lsp-bridge-mode)
+         (global-lsp-bridge-mode))
+    (and (boundp 'vertico-mode)
+         (progn
+           (require 'orderless)
+           (vertico-mode)
+           (vertico-reverse-mode)
+           (vertico-indexed-mode)
+           (vertico-mouse-mode)
+           (marginalia-mode)
+           (keymap-set vertico-map "?" #'minibuffer-completion-help)
+           (keymap-set vertico-map "M-RET" #'minibuffer-force-complete-and-exit)
+           (keymap-set vertico-map "M-TAB" #'minibuffer-complete)
+           (keymap-set vertico-map "C-w" 'vertico-directory-delete-word))
+         (keymap-set minibuffer-mode-map "C-w" 'backward-kill-word))
+    (remove-hook 'pre-command-hook #'vertico-lsp-enable))
 
-  (add-hook 'pre-command-hook #'vertico-enable)
+  (add-hook 'pre-command-hook #'vertico-lsp-enable)
 
   (with-eval-after-load 'vertico (setq vertico-cycle t))
   (setq-default completion-styles '(orderless basic))
@@ -668,6 +672,8 @@ Adapted from `highlight-indentation-mode'."
 
   (load "~/.emacs.d/lisp/ultimate-tab.el")
   (tab-bar-mode)
+
+  (load "~/.emacs.d/site-lisp/password-store/contrib/emacs/password-store.el")
 
   ;; (dolist (hook '(
   ;;   			  ;; completion-list-mode-hook

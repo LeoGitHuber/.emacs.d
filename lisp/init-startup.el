@@ -105,7 +105,10 @@
                 ?─)
                )
               "\n")
-      (add-text-properties (- (line-beginning-position) fill-column 1)
+      ;; (add-text-properties (- (line-beginning-position) fill-column 1)
+      ;;                      (point)
+      ;;                      '(line-height 1.5 line-spacing 0.3))
+      (add-text-properties (- (line-beginning-position) (- fill-column 30))
                            (point)
                            '(line-height 1.5 line-spacing 0.3))
       (seq-do

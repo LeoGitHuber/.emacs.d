@@ -16,7 +16,7 @@
 
 ;; (load-theme 'modus-operandi t)
 
-(setq gc-cons-threshold most-positive-fixnum
+(setq gc-cons-threshold (* 80 1024 1024)  ;; most-positive-fixnum
       gc-cons-percentage 0.6
       ;; garbage-collection-messages t ;; for debug
       package-quickstart nil

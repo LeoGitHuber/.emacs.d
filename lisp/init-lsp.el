@@ -186,8 +186,8 @@
   ;;              '(("v" "sv") . "verilog"))
   ;; (setf (cdr (assoc 'verilog-mode lsp-bridge-single-lang-server-mode-list)) '("svlangserver"))
   ;; (add-to-list 'lsp-bridge-single-lang-server-mode-list '((verilog-mode) . "svlangserver"))
-  (add-to-list 'lsp-bridge-single-lang-server-mode-list '((verilog-mode) . "verible"))
-  ;; (add-to-list 'lsp-bridge-single-lang-server-mode-list '((verilog-mode) . "veridian"))
+  ;; (add-to-list 'lsp-bridge-single-lang-server-mode-list '((verilog-mode) . "verible"))
+  (add-to-list 'lsp-bridge-single-lang-server-mode-list '((verilog-mode) . "veridian"))
   ;; (add-to-list 'lsp-bridge-single-lang-server-mode-list '((verilog-mode) . "svls"))
   )
 

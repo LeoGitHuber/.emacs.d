@@ -97,7 +97,6 @@
    '("'" . repeat)
    '(":" . execute-extended-command)
    '("/" . isearch-forward)
-   ;; '("g g" . beginning-of-buffer)
    '("G" . end-of-buffer)
    '("M-q" . ignore)
    '("<escape>" . ignore))

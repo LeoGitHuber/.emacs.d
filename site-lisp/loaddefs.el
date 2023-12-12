@@ -5345,8 +5345,6 @@ evaluate `lsp-bridge-mode'.
 The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
-\\{lsp-bridge-mode-map}
-
 (fn &optional ARG)" t)
 (autoload 'global-lsp-bridge-mode "lsp-bridge/lsp-bridge" nil t)
 (register-definition-prefixes "lsp-bridge/lsp-bridge" '("acm-library-path" "lsp-bri" "position-before-jump"))
@@ -9656,6 +9654,129 @@ See `paren-face-mode' for more information on Paren-Face mode.
 (register-definition-prefixes "paren-face/paren-face" '("paren-face-" "turn-on-paren-face-mode-if-desired"))
 
 
+;;; Generated autoloads from pass/pass.el
+
+(autoload 'pass "pass/pass" "\
+Open the password-store buffer." t)
+(register-definition-prefixes "pass/pass" '("pass-"))
+
+
+;;; Generated autoloads from password-store/contrib/emacs/password-store.el
+
+(autoload 'password-store-edit "password-store/contrib/emacs/password-store" "\
+Edit password for ENTRY.
+
+(fn ENTRY)" t)
+(autoload 'password-store-get "password-store/contrib/emacs/password-store" "\
+Return password for ENTRY.
+
+Returns the first line of the password data.  When CALLBACK is
+non-`NIL', call CALLBACK with the first line instead.
+
+(fn ENTRY &optional CALLBACK)")
+(autoload 'password-store-get-field "password-store/contrib/emacs/password-store" "\
+Return FIELD for ENTRY.
+FIELD is a string, for instance \"url\".  When CALLBACK is
+non-`NIL', call it with the line associated to FIELD instead.  If
+FIELD equals to symbol secret, then this function reduces to
+`password-store-get'.
+
+(fn ENTRY FIELD &optional CALLBACK)")
+(autoload 'password-store-clear "password-store/contrib/emacs/password-store" "\
+Clear secret in the kill ring.
+
+Optional argument FIELD, a symbol or a string, describes the
+stored secret to clear; if nil, then set it to 'secret.  Note,
+FIELD does not affect the function logic; it is only used to
+display the message:
+
+(message \"Field %s cleared from kill ring and system clipboard.\" field).
+
+(fn &optional FIELD)" t)
+(autoload 'password-store-copy "password-store/contrib/emacs/password-store" "\
+Add password for ENTRY into the kill ring.
+
+Clear previous password from the kill ring.  Pointer to the kill
+ring is stored in `password-store-kill-ring-pointer'.  Password
+is cleared after `password-store-time-before-clipboard-restore'
+seconds.
+
+(fn ENTRY)" t)
+(autoload 'password-store-copy-field "password-store/contrib/emacs/password-store" "\
+Add FIELD for ENTRY into the kill ring.
+
+Clear previous secret from the kill ring.  Pointer to the kill
+ring is stored in `password-store-kill-ring-pointer'.  Secret
+field is cleared after
+`password-store-time-before-clipboard-restore' seconds.  If FIELD
+equals to symbol secret, then this function reduces to
+`password-store-copy'.
+
+(fn ENTRY FIELD)" t)
+(autoload 'password-store-init "password-store/contrib/emacs/password-store" "\
+Initialize new password store and use GPG-ID for encryption.
+
+Separate multiple IDs with spaces.
+
+(fn GPG-ID)" t)
+(autoload 'password-store-insert "password-store/contrib/emacs/password-store" "\
+Insert a new ENTRY containing PASSWORD.
+
+(fn ENTRY PASSWORD)" t)
+(autoload 'password-store-generate "password-store/contrib/emacs/password-store" "\
+Generate a new password for ENTRY with PASSWORD-LENGTH.
+
+Default PASSWORD-LENGTH is `password-store-password-length'.
+
+(fn ENTRY &optional PASSWORD-LENGTH)" t)
+(autoload 'password-store-generate-no-symbols "password-store/contrib/emacs/password-store" "\
+Generate a new password without symbols for ENTRY with PASSWORD-LENGTH.
+
+Default PASSWORD-LENGTH is `password-store-password-length'.
+
+(fn ENTRY &optional PASSWORD-LENGTH)" t)
+(autoload 'password-store-remove "password-store/contrib/emacs/password-store" "\
+Remove ENTRY.
+
+(fn ENTRY)" t)
+(autoload 'password-store-rename "password-store/contrib/emacs/password-store" "\
+Rename ENTRY to NEW-ENTRY.
+
+(fn ENTRY NEW-ENTRY)" t)
+(autoload 'password-store-version "password-store/contrib/emacs/password-store" "\
+Show version of `password-store-executable'." t)
+(autoload 'password-store-url "password-store/contrib/emacs/password-store" "\
+Load URL for ENTRY.
+
+(fn ENTRY)" t)
+(register-definition-prefixes "password-store/contrib/emacs/password-store" '("password-store-"))
+
+
+;;; Generated autoloads from password-store-otp.el/password-store-otp.el
+
+(autoload 'password-store-otp-token-copy "password-store-otp.el/password-store-otp" "\
+Copy an OTP token from ENTRY to clipboard.
+
+(fn ENTRY)" t)
+(autoload 'password-store-otp-uri-copy "password-store-otp.el/password-store-otp" "\
+Copy an OTP URI from ENTRY to clipboard.
+
+(fn ENTRY)" t)
+(autoload 'password-store-otp-insert "password-store-otp.el/password-store-otp" "\
+Insert a new ENTRY containing OTP-URI.
+
+(fn ENTRY OTP-URI)" t)
+(autoload 'password-store-otp-append "password-store-otp.el/password-store-otp" "\
+Append to an ENTRY the given OTP-URI.
+
+(fn ENTRY OTP-URI)" t)
+(autoload 'password-store-otp-append-from-image "password-store-otp.el/password-store-otp" "\
+Check clipboard for an image and scan it to get an OTP URI, append it to ENTRY.
+
+(fn ENTRY)" t)
+(register-definition-prefixes "password-store-otp.el/password-store-otp" '("password-store-otp-"))
+
+
 ;;; Generated autoloads from pdf-tools/lisp/pdf-annot.el
 
 (autoload 'pdf-annot-minor-mode "pdf-tools/lisp/pdf-annot" "\
@@ -12524,7 +12645,7 @@ it is disabled.
 
 ;;; Generated autoloads from verilog-ext/verilog-ext-capf.el
 
-(register-definition-prefixes "verilog-ext/verilog-ext-capf" '("verilog-ext-capf-"))
+(register-definition-prefixes "verilog-ext/verilog-ext-capf" '("verilog-ext-capf"))
 
 
 ;;; Generated autoloads from verilog-ext/verilog-ext-compile.el
@@ -12610,11 +12731,6 @@ it is disabled.
 ;;; Generated autoloads from verilog-ext/verilog-ext-which-func.el
 
 (register-definition-prefixes "verilog-ext/verilog-ext-which-func" '("verilog-ext-which-func"))
-
-
-;;; Generated autoloads from verilog-ext/verilog-ext-workspace.el
-
-(register-definition-prefixes "verilog-ext/verilog-ext-workspace" '("verilog-ext-workspace-"))
 
 
 ;;; Generated autoloads from verilog-ext/verilog-ext-xref.el
@@ -13373,13 +13489,18 @@ Insert candidate using quick keys." t)
 (autoload 'vertico-repeat-save "vertico/extensions/vertico-repeat" "\
 Save Vertico session for `vertico-repeat'.
 This function must be registered as `minibuffer-setup-hook'.")
-(autoload 'vertico-repeat-last "vertico/extensions/vertico-repeat" "\
-Repeat last Vertico completion SESSION.
-If called interactively from an existing Vertico session,
-`vertico-repeat-last' will restore the last input and
-last selected candidate for the current command.
+(autoload 'vertico-repeat-next "vertico/extensions/vertico-repeat" "\
+Repeat Nth next Vertico completion session.
+This command must be called from an existing Vertico session
+after `vertico-repeat-previous'.
 
-(fn &optional SESSION)" t)
+(fn N)" t)
+(autoload 'vertico-repeat-previous "vertico/extensions/vertico-repeat" "\
+Repeat Nth previous Vertico completion session.
+If called from an existing Vertico session, restore the input and
+selected candidate for the current command.
+
+(fn N)" t)
 (autoload 'vertico-repeat-select "vertico/extensions/vertico-repeat" "\
 Select a Vertico session from the session history and repeat it.
 If called from an existing Vertico session, you can select among

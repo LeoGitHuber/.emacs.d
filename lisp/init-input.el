@@ -6,6 +6,8 @@
 (add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-rime")
 
 (with-eval-after-load 'rime
+  (set-face-attribute 'rime-preedit-face nil :underline t
+                      :inverse-video 'unspecified)
   (defun rime-predicate-meow-mode-p ()
     "Detect whether the current buffer is in `meow' state.
 
@@ -42,7 +44,7 @@ Can be used in `rime-disable-predicates' and `rime-inline-predicates'."
                        (string-match-p "[a-zA-Z][0-9\x21-\x23\x25-\x2f\x3a-\x40\x5b-\x60\x7a\x7c\7e\x7f]*$" string)
                        ))))
       (rime-predicate-after-ascii-char-p)))
-  (keymap-set rime-mode-map "C-`" 'rime-send-keybinding)
+  (keymap-set rime-mode-map "s-`" 'rime-send-keybinding)
   ;; (define-key rime-mode-map (kbd "Shift") 'rime-send-keybinding)
   (define-key rime-mode-map (kbd "C-t") 'rime-inline-ascii)
   (define-key minibuffer-mode-map (kbd "C-t") 'rime-inline-ascii)

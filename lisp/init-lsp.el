@@ -4,14 +4,13 @@
 
 ;;; Coding Relpated
 
-(dolist (hook '(prog-mdoe-hook cuda-mode-hook TeX-mode-hook))
-  (add-hook hook (lambda ()
-                   (unless (derived-mode-p 'emacs-lisp-mode 'lisp-mode
-                                           'verilog-mode
-                                           'makefile-mode 'snippet-mode)
-                     (lsp-deferred)
-                     ;; (lsp)
-                     ))))
+;; (dolist (hook '(prog-mdoe-hook cuda-mode-hook TeX-mode-hook))
+;;   (add-hook hook (lambda ()
+;;                    (unless (derived-mode-p 'emacs-lisp-mode 'lisp-mode
+;;                                            'verilog-mode
+;;                                            'makefile-mode 'snippet-mode)
+;;                      (lsp-deferred)
+;;                      ))))
 
 ;; (dolist (hook '(cuda-mode-hook))  ;; prog-mode-hook  TeX-mode-hook
 ;;   (add-hook hook 'yas-minor-mode))

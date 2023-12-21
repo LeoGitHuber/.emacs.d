@@ -134,8 +134,6 @@ evaluate `aggressive-indent-mode'.
 The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
-\\{aggressive-indent-mode-map}
-
 (fn &optional ARG)" t)
 (put 'global-aggressive-indent-mode 'globalized-minor-mode t)
 (defvar global-aggressive-indent-mode nil "\
@@ -2139,8 +2137,6 @@ evaluate `corfu-mode'.
 The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
-\\{corfu-mode-map}
-
 (fn &optional ARG)" t)
 (put 'global-corfu-mode 'globalized-minor-mode t)
 (defvar global-corfu-mode nil "\
@@ -3025,8 +3021,6 @@ evaluate `(default-value \\='doom-modeline-mode)'.
 
 The mode's hook is called both when the mode is enabled and when
 it is disabled.
-
-\\{doom-modeline-mode-map}
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "doom-modeline/doom-modeline" '("doom-modeline-"))
@@ -3987,8 +3981,6 @@ evaluate `fingertip-mode'.
 
 The mode's hook is called both when the mode is enabled and when
 it is disabled.
-
-\\{fingertip-mode-map}
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "fingertip/fingertip" '("fingertip-"))
@@ -5348,8 +5340,6 @@ evaluate `lsp-bridge-mode'.
 
 The mode's hook is called both when the mode is enabled and when
 it is disabled.
-
-\\{lsp-bridge-mode-map}
 
 (fn &optional ARG)" t)
 (autoload 'global-lsp-bridge-mode "lsp-bridge/lsp-bridge" nil t)
@@ -8750,8 +8740,6 @@ evaluate `meow-mode'.
 The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
-\\{meow-keymap}
-
 (fn &optional ARG)")
 (autoload 'meow-indicator "meow/meow-core" "\
 Indicator showing current mode.")
@@ -10461,8 +10449,6 @@ evaluate `(default-value \\='popper-mode)'.
 The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
-\\{popper-mode-map}
-
 (fn &optional ARG)" t)
 (register-definition-prefixes "popper/popper" '("popper-"))
 
@@ -10788,6 +10774,7 @@ Setup a nano-like mode-line." t)
 
 ;;; Generated autoloads from auctex/preview.el
 
+(put 'preview-scale-function 'safe-local-variable (lambda (x) (and (numberp x) (<= 0.1 x 10))))
 (autoload 'desktop-buffer-preview "auctex/preview" "\
 Hook function for restoring persistent previews into a buffer.
 
@@ -13619,8 +13606,6 @@ evaluate `visual-fill-column-mode'.
 The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
-\\{visual-fill-column-mode-map}
-
 (fn &optional ARG)" t)
 (put 'global-visual-fill-column-mode 'globalized-minor-mode t)
 (defvar global-visual-fill-column-mode nil "\
@@ -13752,8 +13737,6 @@ evaluate `(default-value \\='which-key-mode)'.
 
 The mode's hook is called both when the mode is enabled and when
 it is disabled.
-
-\\{which-key-mode-map}
 
 (fn &optional ARG)" t)
 (autoload 'which-key-setup-side-window-right "emacs-which-key/which-key" "\

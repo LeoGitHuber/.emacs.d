@@ -2,13 +2,10 @@
 ;;; Commentary:
 ;;; Code:
 
-;;; Puni
 ;; (add-to-list 'load-path "~/.emacs.d/site-lisp/combobulate")
-;; (require 'puni)
 
 (unless (bound-and-true-p meow-mode)
   (progn
-    (keymap-global-set "M-k" 'puni-backward-kill-line)
     (keymap-global-set "M-j" 'open-newline-above)
     (keymap-global-set "C-j" 'open-newline-below)
     ;; (keymap-global-set "M-N" 'windmove-down)
@@ -33,7 +30,12 @@
 (keymap-global-set "M-l" 'downcase-any)
 (keymap-global-set "M-c" 'capitalize-any)
 (keymap-global-set "C-w" 'kill-or-save)
-(keymap-global-set "M-w" 'puni-kill-region)
+(add-hook 'puni-mode-hook
+          (lambda ()
+            (keymap-set puni-mode-map "M-w" 'puni-kill-region)
+            (keymap-set puni-mode-map "M-k" 'puni-backward-kill-line)
+            (keymap-unset puni-mode-map "C-w")))
+
 (keymap-set isearch-mode-map "C-h" 'isearch-del-char)
 (keymap-global-set "C-h" 'backward-delete-char-untabify)
 (keymap-global-set "C-x k" 'kill-this-buffer)

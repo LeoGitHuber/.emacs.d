@@ -12,7 +12,7 @@
 
 (eval-after-load "tex-mode"
   '(progn
-     ;; (load "auctex.el" nil t t)
+     (load "auctex.el" nil t t)
      (load "preview-latex.el" nil t t)
      ))
 
@@ -28,21 +28,29 @@
 
 (add-hook 'LaTeX-mode-hook
           (lambda()
-			(add-to-list 'TeX-command-list '("XeLaTeX" "%`xelatex -shell-escape --syntex=1%(mode)%' %t" TeX-run-TeX nil t))
-			(setq TeX-command-default "XeLaTeX")
+            (add-to-list 'TeX-command-list '("XeLaTeX" "%`xelatex -shell-escape --syntex=1%(mode)%' %t" TeX-run-TeX nil t))
+            (setq TeX-command-default "XeLaTeX")
             (TeX-global-PDF-mode)
             (TeX-fold-mode)
-		    'turn-on-cdlatex ;; 设置cdlatex
-		    ))
+            'turn-on-cdlatex ;; 设置cdlatex
+            ))
 
 (add-hook 'TeX-mode-hook
           (lambda()
-			(add-to-list 'TeX-command-list '("XeLaTeX" "%`xelatex --syntex=1%(mode)%' %t" TeX-run-TeX nil t))
-			(setq TeX-command-default "XeLaTeX")
+            (add-to-list 'TeX-command-list '("XeLaTeX" "%`xelatex --syntex=1%(mode)%' %t" TeX-run-TeX nil t))
+            (setq TeX-command-default "XeLaTeX")
             (TeX-global-PDF-mode)
             (TeX-fold-mode)
-		    'turn-on-cdlatex  ;; 设置cdlatex
-		    ))
+            'turn-on-cdlatex  ;; 设置cdlatex
+            ))
+
+(add-hook 'tex-mode-hook
+          (lambda()
+            (setq display-tex-shell-buffer-action nil)
+            (visual-line-mode)
+            (TeX-fold-mode)
+            'turn-on-cdlatex  ;; 设置cdlatex
+            ))
 
 (provide 'init-latex)
 ;;; init-latex.el ends here.

@@ -20,8 +20,10 @@
                                          (let ((files (directory-files latex-node-directory))
                                                (texs ()))
                                            (dolist (file files)
-                                             (let ((fname (string-match "\.tex" file)))
-                                               (when fname
+                                             (let ((fname (string-match "\.tex" file))
+                                                   (temp (string-match "_region_.tex" file)))
+                                               (when (and fname
+                                                          (not temp))
                                                  (setq texs (cons (substring file 0 fname) texs)))))
                                            texs))))))
     (pop-to-buffer-same-window value)

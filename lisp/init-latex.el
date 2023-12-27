@@ -18,8 +18,21 @@
 
 (with-eval-after-load 'tex
   (setq TeX-auto-save t
-        TeX-parse-self t)
-  (setq-default TeX-master nil)
+        TeX-parse-self t
+        ;; TeX-fold-auto t
+        TeX-expand-list '(("%x" TeX-active-master-with-quotes "xdv" t))
+        preview-image-type 'dvipng
+        ;; preview-pdf-color-adjust-method nil
+        )
+  (setq-default TeX-master nil
+                TeX-engine 'xetex
+                preview-scale-function 0.6
+                ;; preview-LaTeX-command '("%`%l -no-pdf \"\\nonstopmode\\nofiles\
+                ;; \\PassOptionsToPackage{" ("," . preview-required-option-list) "}{preview}\
+                ;; \\AtBeginDocument{\\ifx\\ifPreview\\undefined"
+                ;; preview-default-preamble "\\fi}\"%' \"\\detokenize{\" %(t-filename-only) \"}\"")
+                ;; preview-dvipng-command "dvipng -picky -noghostscript %x -o %m/prev%%03d.png"
+                )
   (add-to-list 'TeX-view-program-list '("sioyek" "sioyek --new-window --page %(outpage) %o"))
   (add-to-list 'TeX-view-program-selection '(output-pdf "sioyek"))
   (with-eval-after-load 'eaf
@@ -29,10 +42,12 @@
 (add-hook 'LaTeX-mode-hook
           (lambda()
             (add-to-list 'TeX-command-list '("XeLaTeX" "%`xelatex -shell-escape --syntex=1%(mode)%' %t" TeX-run-TeX nil t))
-            (setq TeX-command-default "XeLaTeX")
+            (setq TeX-command-default "XeLaTeX"
+                  )
             (TeX-global-PDF-mode)
-            (TeX-fold-mode)
-            'turn-on-cdlatex ;; 设置cdlatex
+            (TeX-fold-mode 1)
+            'turn-on-cdlatex
+            'turn-on-reftex
             ))
 
 (add-hook 'TeX-mode-hook
@@ -40,16 +55,18 @@
             (add-to-list 'TeX-command-list '("XeLaTeX" "%`xelatex --syntex=1%(mode)%' %t" TeX-run-TeX nil t))
             (setq TeX-command-default "XeLaTeX")
             (TeX-global-PDF-mode)
-            (TeX-fold-mode)
-            'turn-on-cdlatex  ;; 设置cdlatex
+            (TeX-fold-mode 1)
+            'turn-on-cdlatex
+            'turn-on-reftex
             ))
 
 (add-hook 'tex-mode-hook
           (lambda()
             (setq display-tex-shell-buffer-action nil)
             (visual-line-mode)
-            (TeX-fold-mode)
-            'turn-on-cdlatex  ;; 设置cdlatex
+            (TeX-fold-mode 1)
+            'turn-on-cdlatex
+            'turn-on-reftex
             ))
 
 (provide 'init-latex)

@@ -280,6 +280,7 @@
     (hook
      '(emacs-lisp-mode-hook c++-ts-mode-hook c-ts-mode-hook
                             cuda-mode-hook yuck-mode-hook
+                            python-ts-mode python-mode
                             scss-mode-hook))
   (add-hook hook 'aggressive-indent-mode))
 ;; (dolist (mode '(verilog-mode org-mode term-mode))

@@ -1,16 +1,26 @@
 \documentclass[12pt, a4paper]{article}
-\usepackage{geometry, setspace, xeCJK, titlesec, fontspec, titletoc, indentfirst, graphicx, amsmath, unicode-math, tikz, float, cite, cases, makecell, array, tabularray, subcaption, caption, listings}
+\usepackage{geometry, setspace, titlesec, titletoc, indentfirst, graphicx, amsmath, unicode-math, tikz, float, cite, cases, makecell, array, tabularray, subcaption, caption, listings}
+\usepackage{xeCJK}
+\usepackage{fontspec}
 \usepackage[bookmarksopen=true]{hyperref}
 \usepackage{bookmark}
 \usepackage[nottoc]{tocbibind}
 
 \counterwithin{figure}{chapter}
-\geometry{inner=4.0cm, outer=2.0cm, top=3.0cm, bottom=2.0cm}
-% \setCJKmainfont{SimSun}[AutoFakeBold]    % rm罗马
-% \setCJKsansfont{SimHei}[AutoFakeBold]    % sf无衬线
-% \setmainfont{Times New Roman}
-% \setsansfont{Helvetica}
-% \setmathfont{Cambria Math}
+\geometry{inner=1.25in, outer=1.25in, top=1in, bottom=1in}
+\setCJKmainfont{SimSun}[AutoFakeBold]    % rm罗马
+\setCJKsansfont{SimHei}[AutoFakeBold]    % sf无衬线
+
+% \setmainfont{Times New Roman}  % Windows setting
+\setmainfont{TeX Gyre Termes}[
+  Path=/usr/local/texlive/2023/texmf-dist/fonts/opentype/public/tex-gyre/,
+  Extension=.otf,
+  UprightFont=texgyretermes-regular,
+  BoldFont=texgyretermes-bold,
+  ItalicFont=texgyretermes-italic,
+  BoldItalicFont=texgyretermes-bolditalic
+]
+\setmathfont{texgyretermes-math.otf}
 \xeCJKsetup{CJKspace=true}
 
 % \newfontfamily\monaco{Monaco}

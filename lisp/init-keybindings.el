@@ -27,8 +27,8 @@
     ))
 
 (keymap-global-set "C-k" 'smart-kill-line)
-(keymap-global-set "M-l" 'downcase-any)
-(keymap-global-set "M-c" 'capitalize-any)
+;; (keymap-global-set "M-l" 'downcase-any)
+;; (keymap-global-set "M-c" 'capitalize-any)
 (keymap-global-set "C-w" 'kill-or-save)
 (add-hook 'puni-mode-hook
           (lambda ()
@@ -87,6 +87,11 @@
   (define-key global-map [remap describe-key] 'helpful-key)
   (define-key global-map [remap describe-variable] 'helpful-variable)
   (define-key global-map [remap describe-command] 'helpful-command))
+
+(with-eval-after-load 'init-func
+  (define-key global-map [remap upcase-word] 'upcase-any)
+  (define-key global-map [remap downcase-word] 'downcase-any)
+  (define-key global-map [remap capitalize-word] 'capitalize-any))
 
 (provide 'init-keybindings)
 ;;; init-keybindings.el ends here.

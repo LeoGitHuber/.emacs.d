@@ -22,43 +22,43 @@
 
 (with-eval-after-load 'org
   ;; (set-face-attribute 'org-table nil :font (font-spec :name "Sarasa Mono SC" ; LXGW WenKai
-  ;; 													  :weight 'semibold
-  ;; 													  :size 13.0)
+  ;;                             :weight 'semibold
+  ;;                             :size 13.0)
   ;;  )
   (setq org-hide-emphasis-markers t
-		org-pretty-entities t
+        org-pretty-entities t
         prettify-symbols-mode t
         prettify-symbols-unprettify-at-point 'right-edge
-		org-image-actual-width nil
-		;; org-todo-keywords '((sequence "     " "     "))
-		org-preview-latex-process-alist '((dvipng :programs
-												  ("latex" "dvipng")
-												  :description "dvi > png" :message "you need to install the programs: latex and dvipng." :image-input-type "dvi" :image-output-type "png" :image-size-adjust
-												  (1.0 . 1.0)
-												  :latex-compiler
-												  ("latex -interaction nonstopmode -output-directory %o %f")
-												  :image-converter
-												  ("dvipng -D %D -T tight -o %O %f")
-												  :transparent-image-converter
-												  ("dvipng -D %D -T tight -bg Transparent -o %O %f"))
-										  (dvisvgm :programs
-												   ("latex" "dvisvgm")
-												   :description "dvi > svg" :message "you need to install the programs: latex and dvisvgm." :image-input-type "xdv" :image-output-type "svg" :image-size-adjust
-												   (1.0 . 1.0)
-												   :latex-compiler
-												   ("xelatex -no-pdf -interaction nonstopmode -output-directory %o %f")
-												   :image-converter
-												   ("dvisvgm %f --no-fonts --exact-bbox --scale=%S --output=%O"))
-										  (imagemagick :programs
-													   ("latex" "convert")
-													   :description "pdf > png" :message "you need to install the programs: latex and imagemagick." :image-input-type "pdf" :image-output-type "png" :image-size-adjust
-													   (1.0 . 1.0)
-													   :latex-compiler
-													   ("pdflatex -interaction nonstopmode -output-directory %o %f")
-													   :image-converter
-													   ("convert -density %D -trim -antialias %f -quality 100 %O")))
-		org-preview-latex-default-process 'dvisvgm
-		org-format-latex-header "\\documentclass[10pt]{article}\n\\usepackage[usenames]{color}\n[DEFAULT-PACKAGES]\n[PACKAGES]\n\\pagestyle{empty}  % do not remove\n% The settings below are copied from fullpage.sty\n
+        org-image-actual-width nil
+        ;; org-todo-keywords '((sequence "     " "     "))
+        org-preview-latex-process-alist '((dvipng :programs
+                                                  ("latex" "dvipng")
+                                                  :description "dvi > png" :message "you need to install the programs: latex and dvipng." :image-input-type "dvi" :image-output-type "png" :image-size-adjust
+                                                  (1.0 . 1.0)
+                                                  :latex-compiler
+                                                  ("latex -interaction nonstopmode -output-directory %o %f")
+                                                  :image-converter
+                                                  ("dvipng -D %D -T tight -o %O %f")
+                                                  :transparent-image-converter
+                                                  ("dvipng -D %D -T tight -bg Transparent -o %O %f"))
+                                          (dvisvgm :programs
+                                                   ("latex" "dvisvgm")
+                                                   :description "dvi > svg" :message "you need to install the programs: latex and dvisvgm." :image-input-type "xdv" :image-output-type "svg" :image-size-adjust
+                                                   (1.0 . 1.0)
+                                                   :latex-compiler
+                                                   ("xelatex -no-pdf -interaction nonstopmode -output-directory %o %f")
+                                                   :image-converter
+                                                   ("dvisvgm %f --no-fonts --exact-bbox --scale=%S --output=%O"))
+                                          (imagemagick :programs
+                                                       ("latex" "convert")
+                                                       :description "pdf > png" :message "you need to install the programs: latex and imagemagick." :image-input-type "pdf" :image-output-type "png" :image-size-adjust
+                                                       (1.0 . 1.0)
+                                                       :latex-compiler
+                                                       ("pdflatex -interaction nonstopmode -output-directory %o %f")
+                                                       :image-converter
+                                                       ("convert -density %D -trim -antialias %f -quality 100 %O")))
+        ;; org-preview-latex-default-process 'dvisvgm
+        org-format-latex-header "\\documentclass[10pt]{article}\n\\usepackage[usenames]{color}\n[DEFAULT-PACKAGES]\n[PACKAGES]\n\\pagestyle{empty}  % do not remove\n% The settings below are copied from fullpage.sty\n
         \\usepackage{xeCJK,tikz,caption,float,makecell,circuitikz,array}\n
         \\usetikzlibrary{shapes,arrows,calc,arrows.meta}\n
         \\usetikzlibrary{circuits.logic.IEC,calc}\n
@@ -72,11 +72,11 @@
   )
 
 (add-hook 'org-mode-hook
-		  (lambda ()
+      (lambda ()
             (electric-indent-local-mode)
-		    (setq-local company-backends '(company-files company-keywords))
+        (setq-local company-backends '(company-files company-keywords))
             (setq org-appear-autolinks t)
-		    (org-appear-mode)
+        (org-appear-mode)
             (custom-theme-set-faces
              'user
              '(fixed-pitch ((t (:family "Input Mono" :height 0.9))))
@@ -98,9 +98,9 @@
              '(org-meta-line ((t (:inherit (font-lock-comment-face fixed-pitch)))))
              '(fill-column-indicator ((t (:inherit (shadow fixed-pitch))))))
             (variable-pitch-mode)
-		    ;; (company-mode)
-		    ;; (corfu-mode)
-		    ;; (visual-line-mode)
+        ;; (company-mode)
+        ;; (corfu-mode)
+        ;; (visual-line-mode)
             (valign-mode)))
 
 ;; (with-eval-after-load 'org
@@ -123,23 +123,23 @@
 
 (with-eval-after-load 'org-modern
   (setq org-modern-todo t
-		org-modern-table nil
-		org-modern-tag t
-		org-modern-priority t
-		org-modern-keyword t
-		org-modern-block-name t
-		org-modern-horizontal-rule t
-		org-modern-statistics t
-		org-modern-timestamp t
-		;; org-modern-hide-stars t
-		org-modern-checkbox nil
-		;; org-modern-star nil
-		org-modern-list
-		'(
-		  ;; (?- . "-")
-		  (?* . "•")
-		  (?+ . "‣"))
-		))
+    org-modern-table nil
+    org-modern-tag t
+    org-modern-priority t
+    org-modern-keyword t
+    org-modern-block-name t
+    org-modern-horizontal-rule t
+    org-modern-statistics t
+    org-modern-timestamp t
+    ;; org-modern-hide-stars t
+    org-modern-checkbox nil
+    ;; org-modern-star nil
+    org-modern-list
+    '(
+      ;; (?- . "-")
+      (?* . "•")
+      (?+ . "‣"))
+    ))
 
 
 ;; (add-hook 'org-agenda-finalize-hook 'org-modern-agenda)
@@ -150,20 +150,20 @@
 ;; (add-hook 'org-mode-hook 'word-wrap-whitespace-mode)
 
 (setq-default org-startup-folded 'overview
-			  org-startup-with-inline-images t
+        org-startup-with-inline-images t
               org-startup-indented t)
 ;; (setq-default org-highlight-latex-and-related '(native latex script entities))
 
 (add-hook 'org-mode-hook
-		  (lambda ()
-			(setq-local time-stamp-active t
-						time-stamp-start "#\\+MODIFIED: [ \t]*"
-						time-stamp-end "$"
-						time-stamp-format "\[%Y-%m-%d %3a %H:%M\]")
-			(setq org-list-allow-alphabetical t)
-			(add-hook 'before-save-hook 'time-stamp nil 'local)
-			(org-modern-mode)
-			))
+      (lambda ()
+      (setq-local time-stamp-active t
+            time-stamp-start "#\\+MODIFIED: [ \t]*"
+            time-stamp-end "$"
+            time-stamp-format "\[%Y-%m-%d %3a %H:%M\]")
+      (setq org-list-allow-alphabetical t)
+      (add-hook 'before-save-hook 'time-stamp nil 'local)
+      (org-modern-mode)
+      ))
 
 ;; (run-with-timer 2 nil #'(lambda ()
 ;; (require 'org-contrib)
@@ -174,8 +174,8 @@
 (setq org-roam-directory "~/Personal/org-roam"    ; 设置 org-roam 笔记的默认目录，缺省值 /home/leo/org-roam
       org-roam-db-gc-threshold most-positive-fixnum
       org-roam-mode-sections '(org-roam-backlinks-section
-							   org-roam-reflinks-section
-							   org-roam-unlinked-references-section))
+                 org-roam-reflinks-section
+                 org-roam-unlinked-references-section))
 (with-eval-after-load 'org-roam
   (add-hook 'org-roam-mode-hook (lambda ()
                                   ;; (turn-on-visual-line-mode)
@@ -183,50 +183,50 @@
   (org-roam-db-autosync-mode))
 
 ;; (add-to-list 'display-buffer-alist
-;; 			 '("\\*org-roam*\\*"
-;; 			   (display-buffer-in-side-window)
-;; 			   (side . right)
-;; 			   (window-width . 0.15)))
+;;        '("\\*org-roam*\\*"
+;;          (display-buffer-in-side-window)
+;;          (side . right)
+;;          (window-width . 0.15)))
 
 ;; (with-eval-after-load 'org-roam
 ;;   Auto toggle org-roam-buffer.
 ;;   (defun my/org-roam-buffer-show (_)
-;; 	(if (and
-;; 		 Don't do anything if we're in the minibuffer or in the calendar
-;; 		 (not (minibufferp))
-;; 		 (not (> 120 (frame-width)))
-;; 		 (not (bound-and-true-p olivetti-mode))
-;; 		 (not (derived-mode-p 'calendar-mode))
-;; 		 Show org-roam buffer iff the current buffer has a org-roam file
-;; 		 (xor (org-roam-file-p) (eq 'visible (org-roam-buffer--visibility))))
-;; 		(org-roam-buffer-toggle)))
+;;   (if (and
+;;      Don't do anything if we're in the minibuffer or in the calendar
+;;      (not (minibufferp))
+;;      (not (> 120 (frame-width)))
+;;      (not (bound-and-true-p olivetti-mode))
+;;      (not (derived-mode-p 'calendar-mode))
+;;      Show org-roam buffer iff the current buffer has a org-roam file
+;;      (xor (org-roam-file-p) (eq 'visible (org-roam-buffer--visibility))))
+;;     (org-roam-buffer-toggle)))
 ;;   (add-hook 'window-buffer-change-functions 'my/org-roam-buffer-show)
 ;;   )
 
 (with-eval-after-load 'org-roam
   (setq org-roam-database-connector 'sqlite-builtin)
   (setq org-roam-node-display-template
-		(concat "${title:*} "
-				(propertize "${tags:10}" 'face 'org-tag))))
+    (concat "${title:*} "
+        (propertize "${tags:10}" 'face 'org-tag))))
 
 (with-eval-after-load 'org-roam
   (setq org-roam-capture-templates
-		'(("d" "default" plain "%?"
-		   :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
-							  "#+title: ${title}\n")
-		   :unnarrowed t)
-		  ("b" "Books" plain "* Related Information\n\nAuthor: %^{Author}\nVersion: %^{Version}\n\n* Notes\n%?"
-		   :target (file+head "books/${slug}.org"
-							  "#+TITLE: ${title}\n#+FILETAGS: %^{}\n#+CREATED: %U\n#+MODIFIED: \n\n")
-		   :unnarrowed t)
-		  ("t" "Trifles" entry "* Notes:\n%?"
-		   :target (file+head "Trifles/${slug}.org"
-							  "#+TITLE: ${title}\n#+FILETAGS: %^g\n#+CREATED: %U\n#+MODIFIED: \n\n")
-		   :unnarrowed t)
-		  ("p" "Programming" entry "* Notes:\n%?"
-		   :target (file+head "Programming/${slug}.org"
-							  "#+TITLE: ${title}\n#+FILETAGS: %^g\n#+CREATED: %U\n#+MODIFIED: \n\n")
-		   :unnarrowed t))))
+    '(("d" "default" plain "%?"
+       :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+                "#+title: ${title}\n")
+       :unnarrowed t)
+      ("b" "Books" plain "* Related Information\n\nAuthor: %^{Author}\nVersion: %^{Version}\n\n* Notes\n%?"
+       :target (file+head "books/${slug}.org"
+                "#+TITLE: ${title}\n#+FILETAGS: %^{}\n#+CREATED: %U\n#+MODIFIED: \n\n")
+       :unnarrowed t)
+      ("t" "Trifles" entry "* Notes:\n%?"
+       :target (file+head "Trifles/${slug}.org"
+                "#+TITLE: ${title}\n#+FILETAGS: %^g\n#+CREATED: %U\n#+MODIFIED: \n\n")
+       :unnarrowed t)
+      ("p" "Programming" entry "* Notes:\n%?"
+       :target (file+head "Programming/${slug}.org"
+                "#+TITLE: ${title}\n#+FILETAGS: %^g\n#+CREATED: %U\n#+MODIFIED: \n\n")
+       :unnarrowed t))))
 
 (provide 'init-org)
 ;;; init-org.el ends here.

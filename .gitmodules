@@ -331,3 +331,6 @@
 [submodule "site-lisp/password-store"]
 	path = site-lisp/password-store
 	url = https://git.zx2c4.com/password-store
+[submodule "site-lisp/eldoc-box"]
+	path = site-lisp/eldoc-box
+	url = https://github.com/casouri/eldoc-box

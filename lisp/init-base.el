@@ -29,7 +29,8 @@
 ;; (global-lsp-bridge-mode)
 
 (when (display-graphic-p)
-  (set-en_cn-font "BlexMono Nerd Font" "LXGW WenKai Screen" 12.0)
+  (set-en_cn-font "BlexMono Nerd Font" "Source Han Serif CN" "Palatino Linotype"
+                  "LXGW WenKai Screen" "Source Han Sans CN" 12.0)
   ;; Maple Mono NF --- Maple Mono SC NF, HarmonyOS Sans SC
   ;; PragmataPro Mono Liga --- SimHei
   ;; Hack --- HarmonyOS Sans SC
@@ -197,8 +198,7 @@
 	  savehist-save-minibuffer-history t)
 (savehist-mode t)
 
-(setq history-delete-duplicates t
-      recentf-max-menu-items 5
+(setq recentf-max-menu-items 5
       ring-bell-function 'ignore
       isearch-lazy-count t
       isearch-wrap-pause 'no
@@ -550,12 +550,12 @@ Adapted from `highlight-indentation-mode'."
 (defvar themes_chosen
   '(;;; Light theme
     ;; modus-operandi-tritanopia
-    doom-rouge
-      ;;; Dark theme
+    ef-spring
+    ;; Dark theme
     ;; manoj-dark
     ;; doom-rouge
     ;; modus-vivendi
-    ef-trio-dark
+    ef-elea-dark
     )
   "Set for themes for dark and light mode.")
 ;; (require 'doom-themes)
@@ -575,7 +575,7 @@ Adapted from `highlight-indentation-mode'."
               (load-theme (car (cdr themes_chosen)) t)
               (set-face-foreground 'hl-line 'unspecified)
               (set-face-background 'fringe 'unspecified))
-          (if (equal (cadr themes_chosen) 'ef-trio-dark)
+          (if (string-match "ef-" (symbol-name (cadr themes_chosen)))
               (ef-themes-select-dark (cadr themes_chosen))
             (progn
               (load-theme (cadr themes_chosen) t)
@@ -584,6 +584,7 @@ Adapted from `highlight-indentation-mode'."
             ))))
   (progn
     ;; (load-theme (car themes_chosen) t)
+    ;; (ef-themes-select-light (car themes_chosen))
     (when (eq custom-enabled-themes nil)
       ;; (set-face-bold 'font-lock-keyword-face t)
       ;; (set-face-bold 'font-lock-builtin-face t)

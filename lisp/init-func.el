@@ -80,7 +80,7 @@
     (beginning-of-line)))
 
 ;;;###autoload
-(defun set-en_cn-font (en-font cn-font f-size)
+(defun set-en_cn-font (en-font cn-font serif-font sans-font source-font f-size)
   "EN-FONT for English, CN-FONT for Chinese, F-SIZE represents font size.
 Set Font for both of English and Chinese characters."
   (set-face-attribute
@@ -90,9 +90,64 @@ Set Font for both of English and Chinese characters."
           :weight 'medium
           ;; :slant 'normal
           :size f-size))
-
   (dolist (charset '(kana han symbol cjk-misc bopomofo))
-    (set-fontset-font "fontset-default" charset (font-spec :family cn-font))))
+    (set-fontset-font "fontset-default" charset (font-spec :family cn-font)))
+  (create-fontset-from-fontset-spec
+   (font-xlfd-name
+    (font-spec :family en-font
+               :registry "fontset-variable pitch verbatim")))
+  (set-fontset-font "fontset-variable pitch verbatim" 'han
+                    (font-spec :family source-font))
+  (set-fontset-font "fontset-variable pitch verbatim" 'cjk-misc
+                    (font-spec :family source-font))
+  (dolist (sp `(("regular" . ,cn-font)
+                ("italic" . ,sans-font)
+                ;; ("verbatim" . ,source-font)
+		        ))
+    (let ((registry (concat "fontset-variable pitch " (car sp))))
+      (create-fontset-from-fontset-spec
+       (font-xlfd-name
+        (font-spec :family serif-font
+                   :registry registry)))
+      (set-fontset-font registry 'han
+                        (font-spec :family (cdr sp)))
+      (set-fontset-font registry 'cjk-misc
+                        (font-spec :family (cdr sp)))))
+  (with-eval-after-load 'org
+    (set-face-attribute 'variable-pitch nil
+                        :family serif-font
+                        :fontset "fontset-variable pitch regular")
+    (set-face-attribute 'fixed-pitch nil
+                        :family en-font
+                        ;; :fontset "fontset-variable pitch regular"
+                        )
+    (defface org-emphasis-italic
+      '((default :inherit italic))
+      "My italic emphasis for Org.")
+    (set-face-attribute 'org-emphasis-italic nil :fontset "fontset-variable pitch italic")
+    (defface org-emphasis-verbatim
+      '((default :inherit org-verbatim))
+      "My verbatim emphasis for Org.")
+    (set-face-attribute 'org-verbatim nil :fontset "fontset-variable pitch verbatim")
+    (defface org-emphasis-code
+      '((default :inherit org-code))
+      "My code emphasis for Org.")
+    (set-face-attribute 'org-code nil :fontset "fontset-variable pitch verbatim")
+    (set-face-attribute 'org-block nil :fontset "fontset-variable pitch verbatim")
+
+    (setq org-emphasis-alist
+          '(("*" bold)
+            ("/" org-emphasis-italic)
+            ("_" underline)
+            ("=" org-verbatim verbatim)
+            ("~" org-code verbatim)
+            ("+" (:strike-through t))))
+    ;; (set-face-attribute 'fixed-pitch nil
+    ;;                     :font (font-spec :name en-font))
+    ;; (set-face-attribute 'org-block nil
+    ;;                     :fontset )
+    )
+  )
 
 (defun insert-tab-char()
   "Insert a tab char. (ASCII 9, \t)."

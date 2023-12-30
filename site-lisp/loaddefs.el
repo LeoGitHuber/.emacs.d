@@ -134,6 +134,8 @@ evaluate `aggressive-indent-mode'.
 The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
+\\{aggressive-indent-mode-map}
+
 (fn &optional ARG)" t)
 (put 'global-aggressive-indent-mode 'globalized-minor-mode t)
 (defvar global-aggressive-indent-mode nil "\
@@ -3613,6 +3615,54 @@ corresponding entries.
 (register-definition-prefixes "ef-themes/ef-themes" '("ef-themes-"))
 
 
+;;; Generated autoloads from eldoc-box/eldoc-box.el
+
+(autoload 'eldoc-box-help-at-point "eldoc-box/eldoc-box" "\
+Display documentation of the symbol at point." t)
+(autoload 'eldoc-box-hover-mode "eldoc-box/eldoc-box" "\
+Display hover documentations in a childframe.
+
+The default position of childframe is upper corner.
+
+This is a minor mode.  If called interactively, toggle the
+`Eldoc-Box-Hover mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `eldoc-box-hover-mode'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t)
+(autoload 'eldoc-box-hover-at-point-mode "eldoc-box/eldoc-box" "\
+A convenient minor mode to display doc at point.
+
+You can use \\[keyboard-quit] to hide the doc.
+
+This is a minor mode.  If called interactively, toggle the
+`Eldoc-Box-Hover-At-Point mode' mode.  If the prefix argument is
+positive, enable the mode, and if it is zero or negative, disable
+the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `eldoc-box-hover-at-point-mode'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t)
+(register-definition-prefixes "eldoc-box/eldoc-box" '("eldoc-box-"))
+
+
 ;;; Generated autoloads from elisp-refs/elisp-refs.el
 
 (autoload 'elisp-refs-function "elisp-refs/elisp-refs" "\
@@ -5340,6 +5390,8 @@ evaluate `lsp-bridge-mode'.
 
 The mode's hook is called both when the mode is enabled and when
 it is disabled.
+
+\\{lsp-bridge-mode-map}
 
 (fn &optional ARG)" t)
 (autoload 'global-lsp-bridge-mode "lsp-bridge/lsp-bridge" nil t)
@@ -8740,6 +8792,8 @@ evaluate `meow-mode'.
 The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
+\\{meow-keymap}
+
 (fn &optional ARG)")
 (autoload 'meow-indicator "meow/meow-core" "\
 Indicator showing current mode.")
@@ -8771,6 +8825,32 @@ See `meow-mode' for more information on Meow mode.
 
 ;;; Generated autoloads from meow/meow-esc.el
 
+(defvar meow-esc-mode nil "\
+Non-nil if Meow-Esc mode is enabled.
+See the `meow-esc-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `meow-esc-mode'.")
+(custom-autoload 'meow-esc-mode "meow/meow-esc" nil)
+(autoload 'meow-esc-mode "meow/meow-esc" "\
+Mode that ensures ESC works in the terminal
+
+This is a global minor mode.  If called interactively, toggle the
+`Meow-Esc mode' mode.  If the prefix argument is positive, enable
+the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `(default-value \\='meow-esc-mode)'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t)
 (register-definition-prefixes "meow/meow-esc" '("meow-"))
 
 
@@ -10448,6 +10528,8 @@ evaluate `(default-value \\='popper-mode)'.
 
 The mode's hook is called both when the mode is enabled and when
 it is disabled.
+
+\\{popper-mode-map}
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "popper/popper" '("popper-"))
@@ -13276,10 +13358,13 @@ it is disabled.
 (defvar vertico-buffer-mode nil "\
 Non-nil if Vertico-Buffer mode is enabled.
 See the `vertico-buffer-mode' command
-for a description of this minor mode.")
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `vertico-buffer-mode'.")
 (custom-autoload 'vertico-buffer-mode "vertico/extensions/vertico-buffer" nil)
 (autoload 'vertico-buffer-mode "vertico/extensions/vertico-buffer" "\
-Display Vertico in a buffer instead of the minibuffer.
+Display Vertico like a regular buffer in a large window.
 
 This is a global minor mode.  If called interactively, toggle the
 `Vertico-Buffer mode' mode.  If the prefix argument is positive,
@@ -13583,7 +13668,7 @@ The mode's hook is called both when the mode is enabled and when
 it is disabled.
 
 (fn &optional ARG)" t)
-(register-definition-prefixes "vertico/extensions/vertico-unobtrusive" '("vertico-unobtrusive--orig-count"))
+(register-definition-prefixes "vertico/extensions/vertico-unobtrusive" '("vertico-unobtrusive--restore"))
 
 
 ;;; Generated autoloads from visual-fill-column/visual-fill-column.el
@@ -13605,6 +13690,8 @@ evaluate `visual-fill-column-mode'.
 
 The mode's hook is called both when the mode is enabled and when
 it is disabled.
+
+\\{visual-fill-column-mode-map}
 
 (fn &optional ARG)" t)
 (put 'global-visual-fill-column-mode 'globalized-minor-mode t)
@@ -13667,6 +13754,22 @@ Use `vr/query-replace' like you would use `query-replace-regexp'.
 (autoload 'vundo "vundo/vundo" "\
 Display visual undo for the current buffer." t)
 (register-definition-prefixes "vundo/vundo" '("vundo-"))
+
+
+;;; Generated autoloads from vundo/vundo-diff.el
+
+(autoload 'vundo-diff-mark "vundo/vundo-diff" "\
+Mark NODE for vundo diff.
+NODE defaults to the current node.
+
+(fn &optional NODE)" t)
+(autoload 'vundo-diff-unmark "vundo/vundo-diff" "\
+Unmark the node marked for vundo diff." t)
+(autoload 'vundo-diff "vundo/vundo-diff" "\
+Perform diff between marked and current buffer state.
+Displays in a separate diff buffer with name based on
+the original buffer name." t)
+(register-definition-prefixes "vundo/vundo-diff" '("vundo-diff-"))
 
 
 ;;; Generated autoloads from vundo/test/vundo-stress-test.el
@@ -13737,6 +13840,8 @@ evaluate `(default-value \\='which-key-mode)'.
 
 The mode's hook is called both when the mode is enabled and when
 it is disabled.
+
+\\{which-key-mode-map}
 
 (fn &optional ARG)" t)
 (autoload 'which-key-setup-side-window-right "emacs-which-key/which-key" "\

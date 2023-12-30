@@ -72,22 +72,22 @@
   )
 
 (add-hook 'org-mode-hook
-      (lambda ()
+          (lambda ()
             (electric-indent-local-mode)
-        (setq-local company-backends '(company-files company-keywords))
+            (setq-local company-backends '(company-files company-keywords))
             (setq org-appear-autolinks t)
-        (org-appear-mode)
+            (org-appear-mode)
             (custom-theme-set-faces
              'user
-             '(fixed-pitch ((t (:family "Input Mono" :height 0.9))))
-             '(variable-pitch ((t (:family "Palatino Linotype" :height 1.0))))
+             ;;  ;; '(fixed-pitch ((t (:family "Input Mono" :height 0.9))))
+             ;;  ;; '(variable-pitch ((t (:family "Palatino Linotype" :height 1.0))))
              '(org-block ((t (:inherit fixed-pitch))))
              '(org-code ((((background light))
                           (:foreground "#1F2328"
-                           :background "#EFF1F3"
-                           :inherit fixed-pitch))
+                                       :background "#EFF1F3"
+                                       :inherit fixed-pitch))
                          (((background dark)) (:inherit fixed-pitch))))
-             '(org-table ((t (:inherit variable-pitch))))
+             ;; '(org-table ((t (:inherit variable-pitch))))
              '(org-special-keyword ((t (:inherit fixed-pitch))))
              '(org-verbatim
                ((((background light))
@@ -96,11 +96,13 @@
                               :inherit fixed-pitch))
                 (((background dark)) (:inherit fixed-pitch))))
              '(org-meta-line ((t (:inherit (font-lock-comment-face fixed-pitch)))))
+             '(org-block-begin-line ((t (:inherit fixed-pitch))))
+             '(org-block-end-line ((t (:inherit fixed-pitch))))
              '(fill-column-indicator ((t (:inherit (shadow fixed-pitch))))))
             (variable-pitch-mode)
-        ;; (company-mode)
-        ;; (corfu-mode)
-        ;; (visual-line-mode)
+            ;; (company-mode)
+            ;; (corfu-mode)
+            ;; (visual-line-mode)
             (valign-mode)))
 
 ;; (with-eval-after-load 'org

@@ -2,6 +2,8 @@
 ;;; Commentary:
 ;;; Code:
 
+(tab-bar-mode)
+
 (defvar tab-bar-format-tab-line-cache nil
   "Tab line cache for tab-bar.")
 

@@ -67,4 +67,6 @@
  ;; mode-line-format nil
  )
 
+(setenv "LSP_USE_PLISTS" "true")    ;; https://emacs-lsp.github.io/lsp-mode/page/performance/#use-plists-for-deserialization
+
 ;;; early-init.el ends here.

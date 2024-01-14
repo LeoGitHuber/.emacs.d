@@ -21,10 +21,7 @@
 ;;                         'append)
 
 (with-eval-after-load 'org
-  ;; (set-face-attribute 'org-table nil :font (font-spec :name "Sarasa Mono SC" ; LXGW WenKai
-  ;;                             :weight 'semibold
-  ;;                             :size 13.0)
-  ;;  )
+  (global-org-modern-mode)
   (setq org-hide-emphasis-markers t
         org-pretty-entities t
         prettify-symbols-mode t
@@ -77,6 +74,7 @@
             (setq-local company-backends '(company-files company-keywords))
             (setq org-appear-autolinks t)
             (org-appear-mode)
+            (org-cdlatex-mode)
             (custom-theme-set-faces
              'user
              ;;  ;; '(fixed-pitch ((t (:family "Input Mono" :height 0.9))))
@@ -152,37 +150,28 @@
 ;; (add-hook 'org-mode-hook 'word-wrap-whitespace-mode)
 
 (setq-default org-startup-folded 'overview
-        org-startup-with-inline-images t
+              org-startup-with-inline-images t
               org-startup-indented t)
 ;; (setq-default org-highlight-latex-and-related '(native latex script entities))
 
 (add-hook 'org-mode-hook
-      (lambda ()
-      (setq-local time-stamp-active t
-            time-stamp-start "#\\+MODIFIED: [ \t]*"
-            time-stamp-end "$"
-            time-stamp-format "\[%Y-%m-%d %3a %H:%M\]")
-      (setq org-list-allow-alphabetical t)
-      (add-hook 'before-save-hook 'time-stamp nil 'local)
-      (org-modern-mode)
-      ))
+          (lambda ()
+            (setq-local time-stamp-active t
+                        time-stamp-start "#\\+MODIFIED: [ \t]*"
+                        time-stamp-end "$"
+                        time-stamp-format "\[%Y-%m-%d %3a %H:%M\]")
+            (setq org-list-allow-alphabetical t)
+            (add-hook 'before-save-hook 'time-stamp nil 'local)
+            ))
 
-;; (run-with-timer 2 nil #'(lambda ()
-;; (require 'org-contrib)
-;; (require 'org-modern-indent)))
-(add-hook 'org-mode-hook 'org-modern-indent-mode 100)
+(add-hook 'org-mode-hook #'org-modern-indent-mode 100)
 
 (keymap-global-set "C-c n f" 'org-roam-node-find)
 (setq org-roam-directory "~/Personal/org-roam"    ; 设置 org-roam 笔记的默认目录，缺省值 /home/leo/org-roam
       org-roam-db-gc-threshold most-positive-fixnum
       org-roam-mode-sections '(org-roam-backlinks-section
-                 org-roam-reflinks-section
-                 org-roam-unlinked-references-section))
-(with-eval-after-load 'org-roam
-  (add-hook 'org-roam-mode-hook (lambda ()
-                                  ;; (turn-on-visual-line-mode)
-                                  (word-wrap-whitespace-mode)))
-  (org-roam-db-autosync-mode))
+                               org-roam-reflinks-section
+                               org-roam-unlinked-references-section))
 
 ;; (add-to-list 'display-buffer-alist
 ;;        '("\\*org-roam*\\*"
@@ -206,29 +195,31 @@
 ;;   )
 
 (with-eval-after-load 'org-roam
-  (setq org-roam-database-connector 'sqlite-builtin)
-  (setq org-roam-node-display-template
-    (concat "${title:*} "
-        (propertize "${tags:10}" 'face 'org-tag))))
-
-(with-eval-after-load 'org-roam
-  (setq org-roam-capture-templates
-    '(("d" "default" plain "%?"
-       :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
-                "#+title: ${title}\n")
-       :unnarrowed t)
-      ("b" "Books" plain "* Related Information\n\nAuthor: %^{Author}\nVersion: %^{Version}\n\n* Notes\n%?"
-       :target (file+head "books/${slug}.org"
-                "#+TITLE: ${title}\n#+FILETAGS: %^{}\n#+CREATED: %U\n#+MODIFIED: \n\n")
-       :unnarrowed t)
-      ("t" "Trifles" entry "* Notes:\n%?"
-       :target (file+head "Trifles/${slug}.org"
-                "#+TITLE: ${title}\n#+FILETAGS: %^g\n#+CREATED: %U\n#+MODIFIED: \n\n")
-       :unnarrowed t)
-      ("p" "Programming" entry "* Notes:\n%?"
-       :target (file+head "Programming/${slug}.org"
-                "#+TITLE: ${title}\n#+FILETAGS: %^g\n#+CREATED: %U\n#+MODIFIED: \n\n")
-       :unnarrowed t))))
+  (add-hook 'org-roam-mode-hook (lambda ()
+                                  ;; (turn-on-visual-line-mode)
+                                  (word-wrap-whitespace-mode)))
+  (setq org-roam-database-connector 'sqlite-builtin
+        org-roam-node-display-template
+        (concat "${title:*} "
+                (propertize "${tags:10}" 'face 'org-tag))
+        org-roam-capture-templates
+        '(("d" "default" plain "%?"
+           :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+                              "#+title: ${title}\n")
+           :unnarrowed t)
+          ("b" "Books" plain "* Related Information\n\nAuthor: %^{Author}\nVersion: %^{Version}\n\n* Notes\n%?"
+           :target (file+head "books/${slug}.org"
+                              "#+TITLE: ${title}\n#+FILETAGS: %^{}\n#+CREATED: %U\n#+MODIFIED: \n\n")
+           :unnarrowed t)
+          ("t" "Trifles" entry "* Notes:\n%?"
+           :target (file+head "Trifles/${slug}.org"
+                              "#+TITLE: ${title}\n#+FILETAGS: %^g\n#+CREATED: %U\n#+MODIFIED: \n\n")
+           :unnarrowed t)
+          ("p" "Programming" entry "* Notes:\n%?"
+           :target (file+head "Programming/${slug}.org"
+                              "#+TITLE: ${title}\n#+FILETAGS: %^g\n#+CREATED: %U\n#+MODIFIED: \n\n")
+           :unnarrowed t)))
+  (org-roam-db-autosync-mode))
 
 (provide 'init-org)
 ;;; init-org.el ends here.

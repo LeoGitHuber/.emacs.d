@@ -512,6 +512,11 @@ Show durations in call-tree." t)
 (register-definition-prefixes "benchmark-init-el/benchmark-init-modes" '("benchmark-init/"))
 
 
+;;; Generated autoloads from emacs-lsp-booster/tests/benchmark_and_compare.template.el
+
+(register-definition-prefixes "emacs-lsp-booster/tests/benchmark_and_compare.template" '("-al" "-check-equal-sorted-alist" "-hashtable-to-sorted-alist" "-plist" "-sort-alist" "json-equal"))
+
+
 ;;; Generated autoloads from auctex/bib-cite.el
 
 (autoload 'bib-cite-minor-mode "auctex/bib-cite" "\
@@ -829,6 +834,124 @@ If INTERACTIVE is nil the function acts like a capf.
 ;;; Generated autoloads from company-mode/test/capf-tests.el
 
 (register-definition-prefixes "company-mode/test/capf-tests" '("company-"))
+
+
+;;; Generated autoloads from cdlatex/cdlatex.el
+
+(autoload 'turn-on-cdlatex "cdlatex/cdlatex" "\
+Turn on CDLaTeX minor mode.")
+(autoload 'cdlatex-mode "cdlatex/cdlatex" "\
+Minor mode for editing scientific LaTeX documents.
+
+Here is a list of features: \\<cdlatex-mode-map>
+
+                           KEYWORD COMMANDS
+                           ----------------
+
+Many CDLaTeX commands are activated with an abbrev-like
+mechanism.  When a keyword is typed followed \\[cdlatex-tab], the
+keyword is deleted from the buffer and a command is executed.
+You can get a full list of these commands with
+\\[cdlatex-command-help].  For example, when you type `fr<TAB>',
+CDLaTeX will insert \\frac{}{}.
+
+When inserting templates like \\='\\frac{}{}\\=', the cursor is
+positioned properly.  Use \\[cdlatex-tab] to move through
+templates.  \\[cdlatex-tab] also kills unnecessary braces around
+subscripts and superscripts at point.
+
+                     MATH CHARACTERS AND ACCENTS
+                     ---------------------------
+
+\\[cdlatex-math-symbol] followed by any character inserts a LaTeX
+math character
+      e.g. \\[cdlatex-math-symbol]e
+        => \\epsilon
+
+\\[cdlatex-math-symbol]\\[cdlatex-math-symbol] followed by any
+character inserts other LaTeX math character
+      e.g. \\[cdlatex-math-symbol]\\[cdlatex-math-symbol]e
+        => \\varepsilon
+\\[cdlatex-math-modify]  followed by character puts a math
+accent on a letter or symbol
+      e.g. \\[cdlatex-math-symbol]a\\[cdlatex-math-modify]~
+        => \\tilde{\\alpha}
+
+CDLaTeX is aware of the math environments in LaTeX and modifies
+the workings of some functions according to the current status.
+
+                             ONLINE HELP
+                             -----------
+
+After pressing \\[cdlatex-math-symbol] or
+\\[cdlatex-math-modify], CDLaTeX waits for a short time for the
+second character.  If that does not come, it will pop up a window
+displaying the available characters and their meanings.
+
+                             KEY BINDINGS
+                             ------------
+\\{cdlatex-mode-map}
+
+Under X, many functions will be available also in a menu on the menu bar.
+
+Entering `cdlatex-mode' calls the hook cdlatex-mode-hook.
+
+This is a minor mode.  If called interactively, toggle the
+`CDLatex mode' mode.  If the prefix argument is positive, enable
+the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `cdlatex-mode'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t)
+(autoload 'turn-on-cdlatex-electricindex "cdlatex/cdlatex" "\
+Turn on cdlatex-electricindex minor mode.")
+(autoload 'cdlatex-electricindex-mode "cdlatex/cdlatex" "\
+Minor mode for electric insertion of numbered indixes.
+
+cdlatex-electricindex is a minor mode supporting fast digit index
+insertation in LaTeX math. For example typing x 1 2 will insert
+x_{12}.
+
+To turn cdlatex-electricindex Minor Mode on and off in a
+particular buffer, use `M-x cdlatex-electricindex-mode'.
+
+To turn on cdlatex-electricindex Minor Mode for all LaTeX files,
+add one of the following lines to your .emacs file:
+
+    (add-hook 'latex-mode-hook #'turn-on-cdlatex-electricindex)
+
+This index insertion will only work when the cursor is in a LaTeX
+math environment, based on (texmathp). If texmathp is not
+available, math math-mode will be assumed.
+
+Entering `cdlatex-electricindex-mode' calls the hook
+`cdlatex-electricindex-mode-hook'.
+
+This is a minor mode.  If called interactively, toggle the
+`Cdlatex-Electricindex mode' mode.  If the prefix argument is
+positive, enable the mode, and if it is zero or negative, disable
+the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `cdlatex-electricindex-mode'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t)
+(register-definition-prefixes "cdlatex/cdlatex" '("cdlatex-"))
 
 
 ;;; Generated autoloads from centaur-tabs/centaur-tabs.el
@@ -2138,6 +2261,8 @@ evaluate `corfu-mode'.
 
 The mode's hook is called both when the mode is enabled and when
 it is disabled.
+
+\\{corfu-mode-map}
 
 (fn &optional ARG)" t)
 (put 'global-corfu-mode 'globalized-minor-mode t)
@@ -3615,6 +3740,41 @@ corresponding entries.
 (register-definition-prefixes "ef-themes/ef-themes" '("ef-themes-"))
 
 
+;;; Generated autoloads from eglot-booster/eglot-booster.el
+
+(defvar eglot-booster-mode nil "\
+Non-nil if Eglot-Booster mode is enabled.
+See the `eglot-booster-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `eglot-booster-mode'.")
+(custom-autoload 'eglot-booster-mode "eglot-booster/eglot-booster" nil)
+(autoload 'eglot-booster-mode "eglot-booster/eglot-booster" "\
+Minor mode which boosts plain eglot server programs with emacs-lsp-booster.
+
+The emacs-lsp-booster program must be compiled and available on
+variable `exec-path'.  Only local stdin/out-based lsp servers can
+be boosted.
+
+This is a global minor mode.  If called interactively, toggle the
+`Eglot-Booster mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `(default-value \\='eglot-booster-mode)'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t)
+(register-definition-prefixes "eglot-booster/eglot-booster" '("eglot-booster-"))
+
+
 ;;; Generated autoloads from eldoc-box/eldoc-box.el
 
 (autoload 'eldoc-box-help-at-point "eldoc-box/eldoc-box" "\
@@ -4732,6 +4892,10 @@ it is disabled.
 
 ;;; Generated autoloads from jupyter/jupyter-kernelspec.el
 
+(autoload 'jupyter-refresh-kernelspecs "jupyter/jupyter-kernelspec" "\
+Refresh the list of available kernelspecs.
+Execute this command if the kernelspecs seen by Emacs is out of
+sync with those specified on your system or notebook server." t)
 (register-definition-prefixes "jupyter/jupyter-kernelspec" '("jupyter-"))
 
 
@@ -5036,7 +5200,7 @@ used.
 
 ;;; Generated autoloads from jupyter/jupyter-tramp.el
 
-(defconst jupyter-tramp-file-name-handler-alist '((access-file . tramp-handle-access-file) (add-name-to-file . tramp-handle-add-name-to-file) (copy-file . jupyter-tramp-copy-file) (delete-directory . jupyter-tramp-delete-directory) (delete-file . jupyter-tramp-delete-file) (directory-file-name . tramp-handle-directory-file-name) (directory-files . tramp-handle-directory-files) (directory-files-and-attributes . tramp-handle-directory-files-and-attributes) (dired-compress-file . ignore) (dired-uncache . tramp-handle-dired-uncache) (expand-file-name . jupyter-tramp-expand-file-name) (file-accessible-directory-p . tramp-handle-file-accessible-directory-p) (file-acl . ignore) (file-attributes . jupyter-tramp-file-attributes) (file-directory-p . jupyter-tramp-file-directory-p) (file-equal-p . tramp-handle-file-equal-p) (file-executable-p . tramp-handle-file-exists-p) (file-exists-p . tramp-handle-file-exists-p) (file-in-directory-p . tramp-handle-file-in-directory-p) (file-local-copy . jupyter-tramp-file-local-copy) (file-modes . tramp-handle-file-modes) (file-name-all-completions . jupyter-tramp-file-name-all-completions) (file-name-as-directory . tramp-handle-file-name-as-directory) (file-name-case-insensitive-p . tramp-handle-file-name-case-insensitive-p) (file-name-completion . tramp-handle-file-name-completion) (file-name-directory . tramp-handle-file-name-directory) (file-name-nondirectory . tramp-handle-file-name-nondirectory) (file-newer-than-file-p . tramp-handle-file-newer-than-file-p) (file-notify-add-watch . tramp-handle-file-notify-add-watch) (file-notify-rm-watch . tramp-handle-file-notify-rm-watch) (file-notify-valid-p . tramp-handle-file-notify-valid-p) (file-ownership-preserved-p . ignore) (file-readable-p . tramp-handle-file-exists-p) (file-regular-p . tramp-handle-file-regular-p) (file-remote-p . jupyter-tramp-file-remote-p) (file-selinux-context . tramp-handle-file-selinux-context) (file-symlink-p . jupyter-tramp-file-symlink-p) (file-system-info . ignore) (file-truename . tramp-handle-file-truename) (file-writable-p . jupyter-tramp-file-writable-p) (find-backup-file-name . ignore) (insert-directory . tramp-handle-insert-directory) (insert-file-contents . tramp-handle-insert-file-contents) (load . tramp-handle-load) (make-auto-save-file-name . tramp-handle-make-auto-save-file-name) (make-directory . jupyter-tramp-make-directory) (make-directory-internal . ignore) (make-nearby-temp-file . tramp-handle-make-nearby-temp-file) (make-symbolic-link . tramp-handle-make-symbolic-link) (rename-file . jupyter-tramp-rename-file) (set-file-acl . ignore) (set-file-modes . ignore) (set-file-selinux-context . ignore) (set-file-times . ignore) (set-visited-file-modtime . tramp-handle-set-visited-file-modtime) (substitute-in-file-name . tramp-handle-substitute-in-file-name) (temporary-file-directory . tramp-handle-temporary-file-directory) (unhandled-file-name-directory . ignore) (vc-registered . ignore) (verify-visited-file-modtime . tramp-handle-verify-visited-file-modtime) (write-region . jupyter-tramp-write-region)) "\
+(defconst jupyter-tramp-file-name-handler-alist '((access-file . tramp-handle-access-file) (add-name-to-file . tramp-handle-add-name-to-file) (copy-file . jupyter-tramp-copy-file) (delete-directory . jupyter-tramp-delete-directory) (delete-file . jupyter-tramp-delete-file) (directory-file-name . tramp-handle-directory-file-name) (directory-files . tramp-handle-directory-files) (directory-files-and-attributes . tramp-handle-directory-files-and-attributes) (dired-compress-file . ignore) (dired-uncache . tramp-handle-dired-uncache) (expand-file-name . jupyter-tramp-expand-file-name) (file-accessible-directory-p . tramp-handle-file-accessible-directory-p) (file-acl . ignore) (file-attributes . jupyter-tramp-file-attributes) (file-directory-p . jupyter-tramp-file-directory-p) (file-equal-p . tramp-handle-file-equal-p) (file-executable-p . tramp-handle-file-exists-p) (file-exists-p . jupyter-tramp-file-exists-p) (file-in-directory-p . tramp-handle-file-in-directory-p) (file-local-copy . jupyter-tramp-file-local-copy) (file-modes . tramp-handle-file-modes) (file-name-all-completions . jupyter-tramp-file-name-all-completions) (file-name-as-directory . tramp-handle-file-name-as-directory) (file-name-case-insensitive-p . tramp-handle-file-name-case-insensitive-p) (file-name-completion . tramp-handle-file-name-completion) (file-name-directory . tramp-handle-file-name-directory) (file-name-nondirectory . tramp-handle-file-name-nondirectory) (file-newer-than-file-p . tramp-handle-file-newer-than-file-p) (file-notify-add-watch . tramp-handle-file-notify-add-watch) (file-notify-rm-watch . tramp-handle-file-notify-rm-watch) (file-notify-valid-p . tramp-handle-file-notify-valid-p) (file-ownership-preserved-p . ignore) (file-readable-p . tramp-handle-file-exists-p) (file-regular-p . tramp-handle-file-regular-p) (file-remote-p . jupyter-tramp-file-remote-p) (file-selinux-context . tramp-handle-file-selinux-context) (file-symlink-p . jupyter-tramp-file-symlink-p) (file-system-info . ignore) (file-truename . tramp-handle-file-truename) (file-writable-p . jupyter-tramp-file-writable-p) (find-backup-file-name . ignore) (insert-directory . tramp-handle-insert-directory) (insert-file-contents . tramp-handle-insert-file-contents) (load . tramp-handle-load) (make-auto-save-file-name . tramp-handle-make-auto-save-file-name) (make-directory . jupyter-tramp-make-directory) (make-directory-internal . ignore) (make-nearby-temp-file . tramp-handle-make-nearby-temp-file) (make-symbolic-link . tramp-handle-make-symbolic-link) (rename-file . jupyter-tramp-rename-file) (set-file-acl . ignore) (set-file-modes . ignore) (set-file-selinux-context . ignore) (set-file-times . ignore) (set-visited-file-modtime . tramp-handle-set-visited-file-modtime) (substitute-in-file-name . tramp-handle-substitute-in-file-name) (temporary-file-directory . tramp-handle-temporary-file-directory) (unhandled-file-name-directory . ignore) (vc-registered . ignore) (verify-visited-file-modtime . tramp-handle-verify-visited-file-modtime) (write-region . jupyter-tramp-write-region)) "\
 Alist of handler functions for Tramp Jupyter method.
 Operations not mentioned here will be handled by the default Emacs primitives.")
 (defconst jupyter-tramp-methods '("jpy" "jpys") "\
@@ -5347,9 +5511,19 @@ it is disabled.
 (register-definition-prefixes "lsp-mode/clients/lsp-ansible" '("lsp-ansible-"))
 
 
+;;; Generated autoloads from lsp-mode/clients/lsp-asm.el
+
+(register-definition-prefixes "lsp-mode/clients/lsp-asm" '("lsp-asm-"))
+
+
 ;;; Generated autoloads from lsp-mode/clients/lsp-astro.el
 
 (register-definition-prefixes "lsp-mode/clients/lsp-astro" '("lsp-astro--get-initialization-options"))
+
+
+;;; Generated autoloads from lsp-mode/clients/lsp-autotools.el
+
+(register-definition-prefixes "lsp-mode/clients/lsp-autotools" '("lsp-autotools-"))
 
 
 ;;; Generated autoloads from lsp-mode/clients/lsp-awk.el
@@ -5390,8 +5564,6 @@ evaluate `lsp-bridge-mode'.
 
 The mode's hook is called both when the mode is enabled and when
 it is disabled.
-
-\\{lsp-bridge-mode-map}
 
 (fn &optional ARG)" t)
 (autoload 'global-lsp-bridge-mode "lsp-bridge/lsp-bridge" nil t)
@@ -5463,6 +5635,11 @@ it is disabled.
 (register-definition-prefixes "lsp-bridge/test/lsp-bridge-test" '("lsp-bridge-start-test"))
 
 
+;;; Generated autoloads from lsp-mode/clients/lsp-bufls.el
+
+(register-definition-prefixes "lsp-mode/clients/lsp-bufls" '("lsp-bufls-"))
+
+
 ;;; Generated autoloads from lsp-mode/clients/lsp-camel.el
 
 (register-definition-prefixes "lsp-mode/clients/lsp-camel" '("lsp-camel-"))
@@ -5489,6 +5666,11 @@ Show a test tree and focus on it if IGNORE-FOCUS? is nil.
 
 (fn IGNORE-FOCUS?)" t)
 (register-definition-prefixes "lsp-mode/clients/lsp-clojure" '("lsp-clojure-"))
+
+
+;;; Generated autoloads from lsp-mode/clients/lsp-cmake.el
+
+(register-definition-prefixes "lsp-mode/clients/lsp-cmake" '("lsp-cmake-"))
 
 
 ;;; Generated autoloads from lsp-mode/test/lsp-common-test.el
@@ -5546,6 +5728,11 @@ it is disabled.
 ;;; Generated autoloads from lsp-mode/clients/lsp-css.el
 
 (register-definition-prefixes "lsp-mode/clients/lsp-css" '("lsp-css-"))
+
+
+;;; Generated autoloads from lsp-mode/clients/lsp-cypher.el
+
+(register-definition-prefixes "lsp-mode/clients/lsp-cypher" '("lsp-client--cypher-ls-server-command"))
 
 
 ;;; Generated autoloads from lsp-mode/lsp-diagnostics.el
@@ -5694,6 +5881,11 @@ Load all of the provided PROJECTS.
 (register-definition-prefixes "lsp-mode/clients/lsp-go" '("lsp-go-"))
 
 
+;;; Generated autoloads from lsp-mode/clients/lsp-golangci-lint.el
+
+(register-definition-prefixes "lsp-mode/clients/lsp-golangci-lint" '("lsp-golangci-lint-"))
+
+
 ;;; Generated autoloads from lsp-mode/clients/lsp-graphql.el
 
 (register-definition-prefixes "lsp-mode/clients/lsp-graphql" '("lsp-"))
@@ -5816,9 +6008,19 @@ Start `iedit-mode'. for `textDocument/linkedEditingRange'" t)
 (register-definition-prefixes "lsp-mode/test/lsp-javascript-test" '("lsp-flow-" "test-location"))
 
 
+;;; Generated autoloads from lsp-mode/clients/lsp-jq.el
+
+(register-definition-prefixes "lsp-mode/clients/lsp-jq" '("lsp-clients-jq-server-executable"))
+
+
 ;;; Generated autoloads from lsp-mode/clients/lsp-json.el
 
 (register-definition-prefixes "lsp-mode/clients/lsp-json" '("lsp-"))
+
+
+;;; Generated autoloads from lsp-mode/clients/lsp-jsonnet.el
+
+(register-definition-prefixes "lsp-mode/clients/lsp-jsonnet" '("lsp-clients-jsonnet-server-executable"))
 
 
 ;;; Generated autoloads from lsp-mode/clients/lsp-kotlin.el
@@ -6027,6 +6229,11 @@ it is disabled.
 (register-definition-prefixes "lsp-mode/lsp-modeline" '("lsp-"))
 
 
+;;; Generated autoloads from lsp-mode/clients/lsp-mojo.el
+
+(register-definition-prefixes "lsp-mode/clients/lsp-mojo" '("lsp-mojo-executable"))
+
+
 ;;; Generated autoloads from lsp-mode/clients/lsp-move.el
 
 (register-definition-prefixes "lsp-mode/clients/lsp-move" '("lsp-clients-"))
@@ -6034,7 +6241,7 @@ it is disabled.
 
 ;;; Generated autoloads from lsp-mode/clients/lsp-nginx.el
 
-(register-definition-prefixes "lsp-mode/clients/lsp-nginx" '("lsp-nginx-server-command"))
+(register-definition-prefixes "lsp-mode/clients/lsp-nginx" '("lsp-nginx-"))
 
 
 ;;; Generated autoloads from lsp-mode/clients/lsp-nim.el
@@ -6214,6 +6421,11 @@ it is disabled.
 (register-definition-prefixes "lsp-mode/clients/lsp-solargraph" '("lsp-solargraph-"))
 
 
+;;; Generated autoloads from lsp-mode/clients/lsp-solidity.el
+
+(register-definition-prefixes "lsp-mode/clients/lsp-solidity" '("lsp-client--solidity-"))
+
+
 ;;; Generated autoloads from lsp-mode/clients/lsp-sorbet.el
 
 (register-definition-prefixes "lsp-mode/clients/lsp-sorbet" '("lsp-sorbet-"))
@@ -6237,6 +6449,11 @@ it is disabled.
 ;;; Generated autoloads from lsp-mode/clients/lsp-terraform.el
 
 (register-definition-prefixes "lsp-mode/clients/lsp-terraform" '("construct-tf-package" "lsp-t"))
+
+
+;;; Generated autoloads from lsp-mode/test/lsp-test-utils.el
+
+(register-definition-prefixes "lsp-mode/test/lsp-test-utils" '("lsp-test-"))
 
 
 ;;; Generated autoloads from lsp-mode/clients/lsp-tex.el
@@ -6428,6 +6645,11 @@ NAME is the name of the section.
 ;;; Generated autoloads from lsp-mode/scripts/lsp-vscode-snippets.el
 
 (register-definition-prefixes "lsp-mode/scripts/lsp-vscode-snippets" '("lsp-"))
+
+
+;;; Generated autoloads from lsp-mode/clients/lsp-wgsl.el
+
+(register-definition-prefixes "lsp-mode/clients/lsp-wgsl" '("lsp-wgsl-"))
 
 
 ;;; Generated autoloads from lsp-mode/clients/lsp-xml.el
@@ -9073,6 +9295,18 @@ icon.")
 (register-definition-prefixes "nerd-icons.el/nerd-icons" '("nerd-icons-"))
 
 
+;;; Generated autoloads from nerd-icons-corfu/nerd-icons-corfu.el
+
+(autoload 'nerd-icons-corfu-formatter "nerd-icons-corfu/nerd-icons-corfu" "\
+A margin formatter for Corfu, adding icons.
+
+It receives METADATA, ignores it, and outputs a function that takes a candidate
+and returns the icon.
+
+(fn _)")
+(register-definition-prefixes "nerd-icons-corfu/nerd-icons-corfu" '("nerd-icons-corfu-mapping"))
+
+
 ;;; Generated autoloads from nerd-icons.el/data/nerd-icons-data-codicon.el
 
 (register-definition-prefixes "nerd-icons.el/data/nerd-icons-data-codicon" '("nerd-icons/codicon-alist"))
@@ -9281,6 +9515,32 @@ it is disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "org-visual-outline/org-dynamic-bullets" '("org-dynamic-bullets-"))
+
+
+;;; Generated autoloads from org-margin/org-margin.el
+
+(autoload 'org-margin-mode "org-margin/org-margin" "\
+org-margin mode allows to outdent headers by moving leading
+
+ stars into the margin and transform them into markers depending
+ on the chosen style.
+
+This is a minor mode.  If called interactively, toggle the
+`Org-Margin mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `org-margin-mode'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+(fn &optional ARG)" t)
+(register-definition-prefixes "org-margin/org-margin" '("org-margin-"))
 
 
 ;;; Generated autoloads from org-modern/org-modern.el
@@ -11568,6 +11828,11 @@ this time, in which case it won't display at all.
 
 (fn &optional TYPE-OR-OBJECT FPS DELAY)")
 (register-definition-prefixes "spinner.el/spinner" '("spinner-"))
+
+
+;;; Generated autoloads from svg-lib/svg-lib.el
+
+(register-definition-prefixes "svg-lib/svg-lib" '("svg-lib-"))
 
 
 ;;; Generated autoloads from symbol-overlay/symbol-overlay.el

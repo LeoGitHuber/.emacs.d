@@ -14,9 +14,24 @@
   '(progn
      (load "auctex.el" nil t t)
      (load "preview-latex.el" nil t t)
+     ;; (require 'org-table)
      ))
 
+;; (defun orgtbl-next-field-maybe ()
+;;   "Combine `lsp-bridge-mode', `cdlatex-mode' and `orgtlr-mode'."
+;;   (interactive)
+;;   (if (and (bound-and-true-p lsp-bridge-mode)
+;;            (acm-frame-visible-p acm-menu-frame))
+;;       (acm-complete)
+;;     (if (bound-and-true-p cdlatex-mode)
+;;         (cdlatex-tab)
+;;       (org-table-next-field))))
+
 (with-eval-after-load 'tex
+  (add-hook 'cdlatex-tab-hook
+            (lambda ()
+              (and (bound-and-true-p lsp-bidge-mode)
+                   (acm-frame-visible-p acm-menu-frame))))
   (setq TeX-auto-save t
         TeX-parse-self t
         ;; TeX-fold-auto t
@@ -37,36 +52,36 @@
   (add-to-list 'TeX-view-program-selection '(output-pdf "sioyek"))
   (with-eval-after-load 'eaf
     (add-to-list 'TeX-view-program-list '("eaf" eaf-pdf-synctex-forward-view))
-    (add-to-list 'TeX-view-program-selection '(output-pdf "eaf"))))
+    (add-to-list 'TeX-view-program-selection '(output-pdf "eaf")))
+  )
 
-(add-hook 'LaTeX-mode-hook
-          (lambda()
-            (add-to-list 'TeX-command-list '("XeLaTeX" "%`xelatex -shell-escape --syntex=1%(mode)%' %t" TeX-run-TeX nil t))
-            (setq TeX-command-default "XeLaTeX"
-                  )
-            (TeX-global-PDF-mode)
-            (TeX-fold-mode 1)
-            'turn-on-cdlatex
-            'turn-on-reftex
-            ))
 
-(add-hook 'TeX-mode-hook
-          (lambda()
-            (add-to-list 'TeX-command-list '("XeLaTeX" "%`xelatex --syntex=1%(mode)%' %t" TeX-run-TeX nil t))
-            (setq TeX-command-default "XeLaTeX")
-            (TeX-global-PDF-mode)
-            (TeX-fold-mode 1)
-            'turn-on-cdlatex
-            'turn-on-reftex
-            ))
+(dolist (hook '(LaTeX-mode-hook TeX-mode-hook tex-mode-hook))
+  (add-hook hook
+            (lambda()
+              (electric-indent-local-mode)
+              (add-to-list 'TeX-command-list '("XeLaTeX" "%`xelatex -shell-escape --syntex=1%(mode)%' %t" TeX-run-TeX nil t))
+              (setq TeX-command-default "XeLaTeX")
+              (add-to-list 'texmathp-tex-commands1 '("lstlisting" env-off))
+              (TeX-global-PDF-mode)
+              (TeX-fold-mode 1)
+              (turn-on-cdlatex)
+              (turn-on-reftex)
+              ;; (keymap-set cdlatex-mode-map "<tab>" 'cdlatex-tab-maybe)
+              ;; (turn-on-orgtbl)
+              ;; (keymap-set orgtbl-mode-map "<tab>" 'orgtbl-next-field-maybe)
+              )))
 
 (add-hook 'tex-mode-hook
           (lambda()
+            (electric-indent-local-mode)
             (setq display-tex-shell-buffer-action nil)
             (visual-line-mode)
             (TeX-fold-mode 1)
-            'turn-on-cdlatex
-            'turn-on-reftex
+            (turn-on-cdlatex)
+            (turn-on-reftex)
+            ;; (turn-on-orgtbl)
+            ;; (keymap-set orgtbl-mode-map "<tab>" 'orgtbl-next-field-maybe)
             ))
 
 (provide 'init-latex)

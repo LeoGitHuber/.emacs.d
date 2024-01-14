@@ -4,24 +4,13 @@
 
 ;;; Code:
 
-(defun enable-after-meow ()
-  "Modes enable after meow insert."
-  (unless (bound-and-true-p lsp-bridge-mode)
-    (global-lsp-bridge-mode)
-    (lsp-bridge-mode)
-    ;; (add-hook 'emacs-lisp-mode-hook 'lsp-bridge-mode)
-    ;; (add-hook 'c-ts-mode-hook 'lsp-bridge-mode)
-    ;; (add-hook 'c++-ts-mode-hook 'lsp-bridge-mode)
-    ;; ;; (add-hook 'verilog-mode-hook 'lsp-bridge-mode)
-    ;; (when (derived-mode-p 'emacs-lisp-mode 'lisp-mode
-    ;;                       ;; 'verilog-mode
-    ;;                       'c-ts-mode 'c++-ts-mode)
-    ;;   (lsp-bridge-mode))
-    ;; (with-current-buffer (get-buffer-create "*scratch*")
-    ;;   (lsp-bridge-mode))
-    ;; (add-hook 'lsp-bridge-mode-hook #'flymake-bridge-setup)
-    )
-  (remove-hook 'meow-insert-enter-hook #'enable-after-meow))
+;; (defun enable-after-meow ()
+;;   "Modes enable after meow insert."
+;;   (unless (bound-and-true-p lsp-bridge-mode)
+;;     (global-lsp-bridge-mode)
+;;     (lsp-bridge-mode)
+;;     )
+;;   (remove-hook 'meow-insert-enter-hook #'enable-after-meow))
 
 ;; (when (bound-and-true-p meow-mode)
 ;;   (add-hook 'meow-insert-enter-hook #'enable-after-meow))
@@ -84,6 +73,9 @@
 (pixel-scroll-precision-mode)
 (global-subword-mode)
 (global-auto-revert-mode)
+
+(with-eval-after-load 'info
+  (add-to-list 'Info-directory-list "/usr/local/texlive/2023/texmf-dist/doc/info"))
 
 ;; (setq hl-line-range-function 'hl-current-line-range)
 (global-hl-line-mode)
@@ -510,8 +502,10 @@ Adapted from `highlight-indentation-mode'."
       completion-category-overrides '((file (styles basic partial-completion))))
 
 (defun vertico-lsp-enable ()
-  (and (functionp 'lsp-bridge-mode)
-       (global-lsp-bridge-mode))
+  ;; (and (functionp 'lsp-bridge-mode)
+  ;;      (global-lsp-bridge-mode))
+  (and (functionp 'corfu-mode)
+       (global-corfu-mode))
   (and (boundp 'puni-mode)
        (puni-global-mode))
   (and (boundp 'vertico-mode)
@@ -554,8 +548,7 @@ Adapted from `highlight-indentation-mode'."
     ;; Dark theme
     ;; manoj-dark
     ;; doom-rouge
-    ;; modus-vivendi
-    ef-elea-dark
+    modus-vivendi-tritanopia
     )
   "Set for themes for dark and light mode.")
 ;; (require 'doom-themes)
@@ -628,9 +621,8 @@ Adapted from `highlight-indentation-mode'."
  :box nil)
 
 (load "~/.emacs.d/lisp/ultimate-tab.el")
-(tab-bar-mode)
 
-(load "~/.emacs.d/site-lisp/password-store/contrib/emacs/password-store.el")
+;; (load "~/.emacs.d/site-lisp/password-store/contrib/emacs/password-store.el")
 
 ;; (dolist (hook '(
 ;;   			  ;; completion-list-mode-hook

@@ -27,8 +27,8 @@
                                                  (setq texs (cons (substring file 0 fname) texs)))))
                                            texs))))))
     (pop-to-buffer-same-window value)
-    (unless (file-exists-p (buffer-file-name value))
-      (insert-file-contents latex-node-template))))
+    (if (= (point-min) (point-max))
+        (insert-file-contents latex-node-template))))
 
 (provide 'latex-node)
 ;;; latex-node.el ends here.

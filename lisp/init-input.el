@@ -6,6 +6,8 @@
 (add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-rime")
 
 (with-eval-after-load 'rime
+  (set-face-attribute 'rime-default-face nil :height 1.2)
+  (set-face-attribute 'rime-highlight-candidate-face nil :height 1.2)
   (set-face-attribute 'rime-preedit-face nil :underline t
                       :inverse-video 'unspecified)
   (defun rime-predicate-meow-mode-p ()

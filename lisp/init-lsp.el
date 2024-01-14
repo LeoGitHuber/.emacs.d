@@ -4,18 +4,22 @@
 
 ;;; Coding Relpated
 
-;; (dolist (hook '(prog-mdoe-hook cuda-mode-hook TeX-mode-hook))
-;;   (add-hook hook (lambda ()
-;;                    (unless (derived-mode-p 'emacs-lisp-mode 'lisp-mode
-;;                                            'verilog-mode
-;;                                            'makefile-mode 'snippet-mode)
-;;                      (lsp-deferred)
-;;                      ))))
+(dolist (hook '(prog-mdoe-hook cuda-mode-hook TeX-mode-hook c-ts-mode-hook c++-ts-mode-hook))
+  (add-hook hook (lambda ()
+                   (unless (derived-mode-p 'emacs-lisp-mode 'lisp-mode
+                                           'verilog-mode
+                                           'makefile-mode 'snippet-mode)
+                     ;; (lsp-deferred)
+                     (eglot-ensure)
+                     ))))
 
 ;; (dolist (hook '(cuda-mode-hook))  ;; prog-mode-hook  TeX-mode-hook
 ;;   (add-hook hook 'yas-minor-mode))
 
 (with-eval-after-load 'lsp-mode
+  (with-eval-after-load 'lsp-ui
+    (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
+    (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references))
   (setq lsp-keymap-prefix "C-c l"
         ;; lsp-keep-workspace-alive nil
         ;; lsp-signature-auto-activate nil
@@ -47,9 +51,38 @@
         lsp-completion-provider :none
         lsp-prefer-flymake t
         lsp-ui-flycheck-enable nil
+        lsp-enable-relative-indentation t
         )
   ;; (keymap-set lsp-mode-map "C-c C-d" 'lsp-describe-thing-at-point)
-  )
+  (defun lsp-booster--advice-json-parse (old-fn &rest args)
+    "Try to parse bytecode instead of json."
+    (or
+     (when (equal (following-char) ?#)
+       (let ((bytecode (read (current-buffer))))
+         (when (byte-code-function-p bytecode)
+           (funcall bytecode))))
+     (apply old-fn args)))
+  (advice-add (if (progn (require 'json)
+                         (fboundp 'json-parse-buffer))
+                  'json-parse-buffer
+                'json-read)
+              :around
+              #'lsp-booster--advice-json-parse)
+
+  (defun lsp-booster--advice-final-command (old-fn cmd &optional test?)
+    "Prepend emacs-lsp-booster command to lsp CMD."
+    (let ((orig-result (funcall old-fn cmd test?)))
+      (if (and (not test?)                             ;; for check lsp-server-present?
+               (not (file-remote-p default-directory)) ;; see lsp-resolve-final-command, it would add extra shell wrapper
+               lsp-use-plists
+               (not (functionp 'json-rpc-connection))  ;; native json-rpc
+               (executable-find "emacs-lsp-booster"))
+          (progn
+            (message "Using emacs-lsp-booster for %s!" orig-result)
+            (cons "emacs-lsp-booster" orig-result))
+        orig-result)))
+  (advice-add 'lsp-resolve-final-command :around #'lsp-booster--advice-final-command)
+  (add-hook 'lsp-mode-hook 'corfu-mode))
 
 (with-eval-after-load 'corfu
   (setq corfu-auto t
@@ -63,48 +96,41 @@
         corfu-quit-at-boundary t)
   (when (boundp 'meow-insert-exit-hook)
     (add-hook 'meow-insert-exit-hook 'corfu-quit))
-  (require 'kind-icon)
   (keymap-set corfu-map "<tab>" 'corfu-insert)
   ;; (keymap-set corfu-map "<backtab>" 'corfu-previous)
   ;; (keymap-set corfu-map "S-<return>" 'corfu-insert)
   ;; (keymap-unset corfu-map "RET")
-  (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter)
-  (add-to-list 'completion-at-point-functions #'cape-file)
+  (add-to-list 'completion-at-point-functions 'cape-file)
   ;; (add-to-list 'completion-at-point-functions #'cape-dabbrev)
   ;; (add-to-list 'completion-at-point-functions #'cape-elisp-block)
-  )
+  (add-hook 'corfu-mode-hook 'corfu-popupinfo-mode)
+  (with-eval-after-load 'corfu-popupinfo
+    (setq corfu-popupinfo-delay '(0.1 . 0.1)))
+  ;; (add-to-list 'corfu-margin-formatters 'kind-icon-margin-formatter)
+  (add-to-list 'corfu-margin-formatters 'nerd-icons-corfu-formatter))
 
-;; (with-eval-after-load 'yasnippet
-;;   (add-hook 'yas-keymap-disable-hook
-;;             (lambda()
-;;               (or
-;;                (when (boundp 'corfu--frame)
-;;                  (and
-;;                   (frame-live-p corfu--frame)
-;;                   (frame-visible-p corfu--frame)))
-;;                (when (boundp 'acm-menu-frame)
-;;                  (and (frame-live-p acm-menu-frame)
-;;                       (frame-visible-p acm-menu-frame)))
-;;                ))))
+(with-eval-after-load 'yasnippet
+  (add-hook 'yas-keymap-disable-hook
+            (lambda()
+              (or
+               (when (boundp 'corfu--frame)
+                 (and
+                  (frame-live-p corfu--frame)
+                  (frame-visible-p corfu--frame)))
+               (when (boundp 'acm-menu-frame)
+                 (and (frame-live-p acm-menu-frame)
+                      (frame-visible-p acm-menu-frame)))
+               ))))
 
 (with-eval-after-load 'eglot
   (setq eglot-send-changes-idle-time 0)
+  (add-to-list 'eglot-server-programs
+               '((tex-mode context-mode texinfo-mode bibtex-mode)
+                 . ("digestif")))
   (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
-  (add-hook 'eglot-managed-mode-hook #'corfu-mode)
-  (add-hook 'eglot-managed-mode-hook #'yas-minor-mode)
-  )
-
-(add-hook 'lsp-mode-hook
-          (lambda ()
-            (corfu-mode)
-            (setq lsp-enable-relative-indentation t)
-            (with-eval-after-load 'lsp-ui
-              (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
-              (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references))
-
-            ;; For diagnostics
-            (lsp-diagnostics-mode -1)
-            ))
+  (add-hook 'eglot-managed-mode-hook 'corfu-mode)
+  (add-hook 'eglot-managed-mode-hook 'yas-minor-mode)
+  (eglot-booster-mode))
 
 ;; (dolist (completion '(company-mode corfu-mode))
 ;;   (with-eval-after-load completion
@@ -113,12 +139,6 @@
 ;;     (add-hook mode #completion)
 ;;     )
 ;;     )))
-
-;; (add-hook 'corfu-mode-hook
-;;       (lambda ()
-;;       (corfu-popupinfo-mode)
-;;       (setq corfu-popupinfo-delay '(0.2 . 0.1))
-;;       ))
 
 (add-hook 'company-mode-hook
           (lambda ()
@@ -149,8 +169,6 @@
 ;; (advice-add 'company-capf :around #'company-completion-styles)
 
 (with-eval-after-load 'lsp-bridge
-  ;; (with-current-buffer (get-buffer-create "*scratch*")
-  ;;   (lsp-bridge-mode))
   (add-hook 'lsp-bridge-mode-hook 'yas/minor-mode)
   (keymap-set yas-keymap "<tab>" 'acm-complete-or-expand-yas-snippet)
   (setq acm-candidate-match-function 'orderless-flex
@@ -191,8 +209,8 @@
   )
 
 (with-eval-after-load 'kind-icon
-  (setq kind-icon-use-icons nil)
-  (setq kind-icon-mapping
+  (setq kind-icon-use-icons nil
+        kind-icon-mapping
         `(
           (array ,(nerd-icons-codicon "nf-cod-symbol_array") :face font-lock-type-face)
           (boolean ,(nerd-icons-codicon "nf-cod-symbol_boolean") :face font-lock-builtin-face)

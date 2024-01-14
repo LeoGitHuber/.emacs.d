@@ -334,3 +334,27 @@
 [submodule "site-lisp/eldoc-box"]
 	path = site-lisp/eldoc-box
 	url = https://github.com/casouri/eldoc-box
+[submodule "site-lisp/cdlatex"]
+	path = site-lisp/cdlatex
+	url = https://github.com/cdominik/cdlatex.git
+[submodule "site-lisp/org-margin"]
+	path = site-lisp/org-margin
+	url = https://github.com/rougier/org-margin
+[submodule "site-lisp/svg-lib"]
+	path = site-lisp/svg-lib
+	url = https://github.com/rougier/svg-lib.git
+[submodule "site-lisp/emacs-lsp-booster"]
+	path = site-lisp/emacs-lsp-booster
+	url = https://github.com/blahgeek/emacs-lsp-booster.git
+[submodule "site-lisp/nerd-icons-corfu"]
+	path = site-lisp/nerd-icons-corfu
+	url = https://github.com/LuigiPiucco/nerd-icons-corfu.git
+[submodule "site-lisp/eglot-booster"]
+	path = site-lisp/eglot-booster
+	url = https://github.com/jdtsmith/eglot-booster.git
+[submodule "site-lisp/consult-eglot"]
+	path = site-lisp/consult-eglot
+	url = https://github.com/mohkale/consult-eglot.git
+[submodule "site-lisp/dape"]
+	path = site-lisp/dape
+	url = https://github.com/svaante/dape.git

@@ -124,7 +124,7 @@ current buffer state and calls REPORT-FN when done."
                 (seq-uniq (append flymake-diagnostic-functions
                                   (flymake-flycheck-all-chained-diagnostic-functions))))))
 
-(dolist (hook '(prog-mode-hook text-mode-hook))
+(dolist (hook '(prog-mode-hook))
   (add-hook hook 'flymake-mode))
 
 (setq eldoc-documentation-function 'eldoc-documentation-compose)

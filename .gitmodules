@@ -358,3 +358,9 @@
 [submodule "site-lisp/dape"]
 	path = site-lisp/dape
 	url = https://github.com/svaante/dape.git
+[submodule "site-lisp/pangu-spacing"]
+	path = site-lisp/pangu-spacing
+	url = https://github.com/coldnew/pangu-spacing.git
+[submodule "site-lisp/deno-bridge-jieba"]
+	path = site-lisp/deno-bridge-jieba
+	url = https://github.com/ginqi7/deno-bridge-jieba.git

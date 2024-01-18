@@ -373,22 +373,28 @@
    ;; (floor (frame-width) 2)
    (floor (* (frame-width) 17) 35)
    ))
-(defun popper--fit-window-height (win)
+
+(defun popper--auto-fit-window-height (win)
   "Determine the height of popup window WIN by fitting it to the buffer's content."
   (fit-window-to-buffer
    win
    (floor (frame-height) 2)
-   (floor (frame-height) 3)))
+   (floor (* (frame-height) 2) 5)))
+
 (defun popper-display-popup-adaptive (buffer &optional alist)
   "Display popup-buffer BUFFER at the bottom of the screen.
 ALIST is an association list of action symbols and values.  See
 Info node `(elisp) Buffer Display Action Alists' for details of
 such alists."
-  (if (> (window-pixel-height) (window-pixel-width))
+  (if (and (> (window-pixel-height) (window-pixel-width))
+           (or (and popper-open-popup-alist
+                    (eq (window-parameter (caar popper-open-popup-alist) 'window-side)
+                        'bottom))
+               (not popper-open-popup-alist)))
       (display-buffer-in-side-window
        buffer
        (append alist
-               `((window-height . ,popper-window-height)
+               `((window-height . popper--auto-fit-window-height)
                  (side . bottom)
                  (slot . 1))))
     (display-buffer-in-side-window
@@ -397,7 +403,8 @@ such alists."
              `((window-width . popper--fit-window-width)
                (side . right)
                (slot . 1))))))
-(setq popper-display-function #'popper-display-popup-adaptive
+
+(setq popper-display-function 'popper-display-popup-adaptive
       fit-window-to-buffer-horizontally t)
 (keymap-global-set "C-`" 'popper-toggle)
 (keymap-global-set "M-`" 'popper-cycle)
@@ -632,6 +639,16 @@ Adapted from `highlight-indentation-mode'."
 ;;   			  messages-buffer-mode-hook
 ;;   			  org-roam-mode-hook))
 ;;   (add-hook hook 'hide-mode-line-mode))
+
+(require 'citre)
+(require 'citre-config)
+(with-eval-after-load 'citre
+  (setq citre-ctags-program "/usr/bin/ctags"
+        citre-use-project-root-when-creating-tags t
+        citre-prompt-language-for-ctags-command t))
+
+;; (with-eval-after-load 'citre-ctags
+;;   (setq citre-ctags-program "/usr/bin/ctags"))
 
 (when (boundp 'hl-todo)
   (global-hl-todo-mode))

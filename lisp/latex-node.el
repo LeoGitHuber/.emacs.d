@@ -26,9 +26,16 @@
                                                           (not temp))
                                                  (setq texs (cons (substring file 0 fname) texs)))))
                                            texs))))))
-    (pop-to-buffer-same-window value)
-    (if (= (point-min) (point-max))
-        (insert-file-contents latex-node-template))))
+    (with-current-buffer value
+      (save-excursion
+        (goto-char (point-min))
+        (and (or (= (point-min) (point-max))
+                 (string-match-p "^%%%"
+                                 (buffer-substring-no-properties
+                                  (line-beginning-position 2)
+                                  (line-end-position 2))))
+             (insert-file-contents latex-node-template))))
+    (pop-to-buffer-same-window value)))
 
 (provide 'latex-node)
 ;;; latex-node.el ends here.

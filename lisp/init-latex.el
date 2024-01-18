@@ -32,6 +32,7 @@
             (lambda ()
               (and (bound-and-true-p lsp-bidge-mode)
                    (acm-frame-visible-p acm-menu-frame))))
+  (load "~/.emacs.d/lisp/auctex-latexmk.el")
   (setq TeX-auto-save t
         TeX-parse-self t
         ;; TeX-fold-auto t
@@ -48,8 +49,8 @@
                 ;; preview-default-preamble "\\fi}\"%' \"\\detokenize{\" %(t-filename-only) \"}\"")
                 ;; preview-dvipng-command "dvipng -picky -noghostscript %x -o %m/prev%%03d.png"
                 )
-  (add-to-list 'TeX-view-program-list '("sioyek" "sioyek --new-window --page %(outpage) %o"))
-  (add-to-list 'TeX-view-program-selection '(output-pdf "sioyek"))
+  ;; (add-to-list 'TeX-view-program-list '("sioyek" "sioyek --page %(outpage) %o"))
+  (add-to-list 'TeX-view-program-selection '(output-pdf "Sioyek"))
   (with-eval-after-load 'eaf
     (add-to-list 'TeX-view-program-list '("eaf" eaf-pdf-synctex-forward-view))
     (add-to-list 'TeX-view-program-selection '(output-pdf "eaf")))
@@ -59,6 +60,7 @@
 (dolist (hook '(LaTeX-mode-hook TeX-mode-hook tex-mode-hook))
   (add-hook hook
             (lambda()
+              (auctex-latexmk-setup)
               (electric-indent-local-mode)
               (add-to-list 'TeX-command-list '("XeLaTeX" "%`xelatex -shell-escape --syntex=1%(mode)%' %t" TeX-run-TeX nil t))
               (setq TeX-command-default "XeLaTeX")

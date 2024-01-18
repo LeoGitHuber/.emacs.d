@@ -44,9 +44,9 @@
 (defvar tab-bar-tab-line-indicator
   (propertize "▎" 'face
               `(:inherit tab-bar-tab
-                :foreground
-                ,(or (face-foreground 'mode-line-emphasis)
-                     "#4B535D")))
+                         :foreground
+                         ,(or (face-foreground 'mode-line-emphasis)
+                              "#4B535D")))
   "Indicator for tab-bar's current tab.")
 
 (defvar tab-bar-tab-line-strings nil

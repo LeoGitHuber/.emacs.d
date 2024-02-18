@@ -34,6 +34,29 @@
         verilog-indent-level-module 2
         ;; verilog-tab-to-comment t
         )
+  (setq verilog-ext-feature-list
+        '(;; font-lock
+          xref
+          capf
+          hierarchy
+          eglot
+          ;; lsp
+          flycheck
+          ;; beautify
+          navigation
+          template
+          ;; formatter
+          compilation
+          ;; imenu
+          which-func
+          hideshow
+          typedefs
+          time-stamp
+          block-end-comments
+          ports))
+  (require 'verilog-ext)
+  (verilog-ext-mode-setup)
+  (verilog-ext-eglot-set-server 've-veridian)
   ;; (add-hook 'verilog-mode-hook
   ;;           (lambda ()
   ;;             (eglot-ensure)

@@ -40,6 +40,12 @@
 (keymap-global-set "C-h" 'backward-delete-char-untabify)
 (keymap-global-set "C-x k" 'kill-this-buffer)
 (keymap-global-set "C-x C-r" 'restart-emacs)
+(keymap-global-set "C-c g" 'consult-ripgrep)
+(keymap-global-set "C-c f" 'consult-fd)
+;;; Efficiency
+(keymap-global-set "C-x f" 'find-file)
+(keymap-global-set "C-z" 'vundo)
+(global-set-key [remap comment-dwim] 'comment-or-uncomment)
 
 ;;; Fingertip
 ;; (dolist (hook '(emacs-lisp-mode-hook c-mode-hook lisp-mode-hook))

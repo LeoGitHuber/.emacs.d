@@ -239,21 +239,25 @@ Dot-directories and directories contain `.nosearch' will be skipped."
                (mapcar (lambda (d) (expand-file-name d dir)))
                (cl-remove-if-not #'file-directory-p)
                (cl-remove-if (lambda (d)
-                               (string-prefix-p "test" d)))
+                               (string-suffix-p "test" d)))
+               ;; (cl-remove-if (lambda (d)
+               ;;                 (string-suffix-p "helpful" d)))
                (cl-remove-if (lambda (d)
                                (file-exists-p (expand-file-name ".nosearch"
                                                                 d))))))
 
-(defun find-dir-recursively (dir)
+(defun find-dir-recursively (dir &optional but)
   "Find all `.el' files in DIR and its subdirectories."
-  (let ((subdir (find-subdir-recursively dir)))
+  ;; (let ((subdir (mapcar #'abbreviate-file-name (find-subdir-recursively dir))))
+  (let* ((but (or but 0))
+         (subdir (butlast (mapcar #'abbreviate-file-name (find-subdir-recursively dir)) but)))
     (nconc subdir
-           (mapcan #'find-dir-recursively subdir))))
+           (mapcar #'abbreviate-file-name (mapcan #'find-dir-recursively subdir)))))
 
-(defvar autoloads-file "/home/Leo/.emacs.d/site-lisp/loaddefs.el"
+(defvar autoloads-file "~/.emacs.d/site-lisp/loaddefs.el"
   "File with all of autoload setting.")
 
-(defvar site-lisp-directory "/home/Leo/.emacs.d/site-lisp"
+(defvar site-lisp-directory "~/.emacs.d/site-lisp"
   "Directory contained of all third party packages.")
 
 (defun generate-autoloads (&optional dir target)

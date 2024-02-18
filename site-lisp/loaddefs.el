@@ -102,6 +102,99 @@
 (register-definition-prefixes "lsp-bridge/acm/acm-quick-access" '("acm-"))
 
 
+;;; Generated autoloads from ag.el/ag.el
+
+(autoload 'ag "ag.el/ag" "\
+Search using ag in a given DIRECTORY for a given literal search STRING,
+with STRING defaulting to the symbol under point.
+
+If called with a prefix, prompts for flags to pass to ag.
+
+(fn STRING DIRECTORY)" t)
+(autoload 'ag-files "ag.el/ag" "\
+Search using ag in a given DIRECTORY for a given literal search STRING,
+limited to files that match FILE-TYPE. STRING defaults to the
+symbol under point.
+
+If called with a prefix, prompts for flags to pass to ag.
+
+(fn STRING FILE-TYPE DIRECTORY)" t)
+(autoload 'ag-regexp "ag.el/ag" "\
+Search using ag in a given directory for a given regexp.
+The regexp should be in PCRE syntax, not Emacs regexp syntax.
+
+If called with a prefix, prompts for flags to pass to ag.
+
+(fn STRING DIRECTORY)" t)
+(autoload 'ag-project "ag.el/ag" "\
+Guess the root of the current project and search it with ag
+for the given literal search STRING.
+
+If called with a prefix, prompts for flags to pass to ag.
+
+(fn STRING)" t)
+(autoload 'ag-project-files "ag.el/ag" "\
+Search using ag for a given literal search STRING,
+limited to files that match FILE-TYPE. STRING defaults to the
+symbol under point.
+
+If called with a prefix, prompts for flags to pass to ag.
+
+(fn STRING FILE-TYPE)" t)
+(autoload 'ag-project-regexp "ag.el/ag" "\
+Guess the root of the current project and search it with ag
+for the given regexp. The regexp should be in PCRE syntax, not
+Emacs regexp syntax.
+
+If called with a prefix, prompts for flags to pass to ag.
+
+(fn REGEXP)" t)
+(defalias 'ag-project-at-point 'ag-project)
+(defalias 'ag-regexp-project-at-point 'ag-project-regexp)
+(autoload 'ag-dired "ag.el/ag" "\
+Recursively find files in DIR matching literal search STRING.
+
+The PATTERN is matched against the full path to the file, not
+only against the file name.
+
+The results are presented as a `dired-mode' buffer with
+`default-directory' being DIR.
+
+See also `ag-dired-regexp'.
+
+(fn DIR STRING)" t)
+(autoload 'ag-dired-regexp "ag.el/ag" "\
+Recursively find files in DIR matching REGEXP.
+REGEXP should be in PCRE syntax, not Emacs regexp syntax.
+
+The REGEXP is matched against the full path to the file, not
+only against the file name.
+
+Results are presented as a `dired-mode' buffer with
+`default-directory' being DIR.
+
+See also `find-dired'.
+
+(fn DIR REGEXP)" t)
+(autoload 'ag-project-dired "ag.el/ag" "\
+Recursively find files in current project matching PATTERN.
+
+See also `ag-dired'.
+
+(fn PATTERN)" t)
+(autoload 'ag-project-dired-regexp "ag.el/ag" "\
+Recursively find files in current project matching REGEXP.
+
+See also `ag-dired-regexp'.
+
+(fn REGEXP)" t)
+(autoload 'ag-kill-buffers "ag.el/ag" "\
+Kill all `ag-mode' buffers." t)
+(autoload 'ag-kill-other-buffers "ag.el/ag" "\
+Kill all `ag-mode' buffers other than the current buffer." t)
+(register-definition-prefixes "ag.el/ag" '("ag-" "ag/"))
+
+
 ;;; Generated autoloads from aggressive-indent-mode/aggressive-indent.el
 
 (autoload 'aggressive-indent-indent-defun "aggressive-indent-mode/aggressive-indent" "\
@@ -120,19 +213,18 @@ then keep indenting until nothing more happens.
 Minor mode to keep your code always indented.
 
 This is a minor mode.  If called interactively, toggle the
-`Aggressive-Indent mode' mode.  If the prefix argument is
-positive, enable the mode, and if it is zero or negative, disable
-the mode.
+`Aggressive-Indent mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `aggressive-indent-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 \\{aggressive-indent-mode-map}
 
@@ -161,11 +253,6 @@ See `aggressive-indent-mode' for more information on Aggressive-Indent mode.
 (fn &optional ARG)" t)
 (defalias 'aggressive-indent-global-mode #'global-aggressive-indent-mode)
 (register-definition-prefixes "aggressive-indent-mode/aggressive-indent" '("aggressive-indent-"))
-
-
-;;; Generated autoloads from company-mode/test/all.el
-
-(register-definition-prefixes "company-mode/test/all" '("company-test-path"))
 
 
 ;;; Generated autoloads from all-the-icons.el/all-the-icons.el
@@ -215,9 +302,217 @@ When FAMILY is non-nil, limit the candidates to the icon set matching it.
 (register-definition-prefixes "all-the-icons.el/all-the-icons" '("all-the-icons-"))
 
 
-;;; Generated autoloads from company-mode/test/async-tests.el
+;;; Generated autoloads from apheleia/apheleia.el
 
-(register-definition-prefixes "company-mode/test/async-tests" '("company-async-backend"))
+(autoload 'apheleia-format-buffer "apheleia/apheleia" "\
+Run code formatter asynchronously on current buffer, preserving point.
+
+FORMATTER is a symbol appearing as a key in
+`apheleia-formatters', or a list of them to run multiple
+formatters in a chain. If called interactively, run the currently
+configured formatters (see `apheleia-formatter' and
+`apheleia-mode-alist'), or prompt from `apheleia-formatters' if
+there is none configured for the current buffer. With a prefix
+argument, prompt always.
+
+After the formatters finish running, the diff utility is invoked to
+determine what changes it made. That diff is then used to apply the
+formatter's changes to the current buffer without moving point or
+changing the scroll position in any window displaying the buffer. If
+the buffer has been modified since the formatter started running,
+however, the operation is aborted.
+
+If the formatter actually finishes running and the buffer is
+successfully updated (even if the formatter has not made any
+changes), CALLBACK, if provided, is invoked with no arguments.
+
+(fn FORMATTER &optional CALLBACK)" t)
+(autoload 'apheleia-format-after-save "apheleia/apheleia" "\
+Run code formatter for current buffer if any configured, then save.")
+(define-minor-mode apheleia-mode "Minor mode for reformatting code on save without moving point.
+It is customized by means of the variables `apheleia-mode-alist'
+and `apheleia-formatters'." :lighter apheleia-mode-lighter (if apheleia-mode (add-hook 'after-save-hook #'apheleia-format-after-save nil 'local) (remove-hook 'after-save-hook #'apheleia-format-after-save 'local)))
+(defvar-local apheleia-inhibit nil "\
+Do not enable `apheleia-mode' automatically if non-nil.
+This is designed for use in .dir-locals.el.
+
+See also `apheleia-inhibit-functions'.")
+(put 'apheleia-inhibit 'safe-local-variable #'booleanp)
+(defun apheleia-mode-maybe nil "\
+Enable `apheleia-mode' if allowed by user configuration.
+This checks `apheleia-inhibit-functions' and `apheleia-inhibit'
+to see if it is allowed." (unless (or apheleia-inhibit (run-hook-with-args-until-success 'apheleia-inhibit-functions)) (apheleia-mode)))
+(define-globalized-minor-mode apheleia-global-mode apheleia-mode apheleia-mode-maybe :group 'apheleia)
+(put 'apheleia-mode 'safe-local-variable #'booleanp)
+(register-definition-prefixes "apheleia/apheleia" '("apheleia-"))
+
+
+;;; Generated autoloads from apheleia/apheleia-formatter-context.el
+
+(register-definition-prefixes "apheleia/apheleia-formatter-context" '("apheleia-formatter--context"))
+
+
+;;; Generated autoloads from apheleia/apheleia-formatters.el
+
+(defvar-local apheleia-formatter nil "\
+Name of formatter to use in current buffer, a symbol or nil.
+If non-nil, then `apheleia-formatters' should have a matching
+entry. This overrides `apheleia-mode-alist'.
+
+The value can also be a list of symbols to apply multiple
+formatters in sequence.")
+(register-definition-prefixes "apheleia/apheleia-formatters" '("apheleia-"))
+
+
+;;; Generated autoloads from apheleia/apheleia-log.el
+
+(autoload 'apheleia-goto-error "apheleia/apheleia-log" "\
+Go to the most recently reported formatter error message." t)
+(register-definition-prefixes "apheleia/apheleia-log" '("apheleia-"))
+
+
+;;; Generated autoloads from apheleia/apheleia-rcs.el
+
+(register-definition-prefixes "apheleia/apheleia-rcs" '("apheleia-"))
+
+
+;;; Generated autoloads from apheleia/apheleia-utils.el
+
+(register-definition-prefixes "apheleia/apheleia-utils" '("apheleia-formatters-"))
+
+
+;;; Generated autoloads from emacs-async/async.el
+
+(autoload 'async-start-process "emacs-async/async" "\
+Start the executable PROGRAM asynchronously named NAME.  See `async-start'.
+PROGRAM is passed PROGRAM-ARGS, calling FINISH-FUNC with the
+process object when done.  If FINISH-FUNC is nil, the future
+object will return the process object when the program is
+finished.  Set DEFAULT-DIRECTORY to change PROGRAM's current
+working directory.
+
+(fn NAME PROGRAM FINISH-FUNC &rest PROGRAM-ARGS)")
+(autoload 'async-start "emacs-async/async" "\
+Execute START-FUNC (often a lambda) in a subordinate Emacs process.
+When done, the return value is passed to FINISH-FUNC.  Example:
+
+    (async-start
+       ;; What to do in the child process
+       (lambda ()
+         (message \"This is a test\")
+         (sleep-for 3)
+         222)
+
+       ;; What to do when it finishes
+       (lambda (result)
+         (message \"Async process done, result should be 222: %s\"
+                  result)))
+
+If you call `async-send' from a child process, the message will
+be also passed to the FINISH-FUNC.  You can test RESULT to see if
+it is a message by using `async-message-p'.  If nil, it means
+this is the final result.  Example of the FINISH-FUNC:
+
+    (lambda (result)
+      (if (async-message-p result)
+          (message \"Received a message from child process: %s\" result)
+        (message \"Async process done, result: %s\" result)))
+
+If FINISH-FUNC is nil or missing, a future is returned that can
+be inspected using `async-get', blocking until the value is
+ready.  Example:
+
+    (let ((proc (async-start
+                   ;; What to do in the child process
+                   (lambda ()
+                     (message \"This is a test\")
+                     (sleep-for 3)
+                     222))))
+
+        (message \"I'm going to do some work here\") ;; ....
+
+        (message \"Waiting on async process, result should be 222: %s\"
+                 (async-get proc)))
+
+If you don't want to use a callback, and you don't care about any
+return value from the child process, pass the `ignore' symbol as
+the second argument (if you don't, and never call `async-get', it
+will leave *emacs* process buffers hanging around):
+
+    (async-start
+     (lambda ()
+       (delete-file \"a remote file on a slow link\" nil))
+     \\='ignore)
+
+Special case:
+If the output of START-FUNC is a string with properties
+e.g. (buffer-string) RESULT will be transformed in a list where the
+car is the string itself (without props) and the cdr the rest of
+properties, this allows using in FINISH-FUNC the string without
+properties and then apply the properties in cdr to this string (if
+needed).
+Properties handling special objects like markers are returned as
+list to allow restoring them later.
+See <https://github.com/jwiegley/emacs-async/issues/145> for more infos.
+
+Note: Even when FINISH-FUNC is present, a future is still
+returned except that it yields no value (since the value is
+passed to FINISH-FUNC).  Call `async-get' on such a future always
+returns nil.  It can still be useful, however, as an argument to
+`async-ready' or `async-wait'.
+
+(fn START-FUNC &optional FINISH-FUNC)")
+(register-definition-prefixes "emacs-async/async" '("async-"))
+
+
+;;; Generated autoloads from emacs-async/async-bytecomp.el
+
+(autoload 'async-byte-recompile-directory "emacs-async/async-bytecomp" "\
+Compile all *.el files in DIRECTORY asynchronously.
+All *.elc files are systematically deleted before proceeding.
+
+(fn DIRECTORY &optional QUIET)")
+(defvar async-bytecomp-package-mode nil "\
+Non-nil if Async-Bytecomp-Package mode is enabled.
+See the `async-bytecomp-package-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `async-bytecomp-package-mode'.")
+(custom-autoload 'async-bytecomp-package-mode "emacs-async/async-bytecomp" nil)
+(autoload 'async-bytecomp-package-mode "emacs-async/async-bytecomp" "\
+Byte compile asynchronously packages installed with package.el.
+
+Async compilation of packages can be controlled by
+`async-bytecomp-allowed-packages'.
+
+This is a global minor mode.  If called interactively, toggle the
+`Async-Bytecomp-Package mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `(default-value \\='async-bytecomp-package-mode)'.
+
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
+
+(fn &optional ARG)" t)
+(autoload 'async-byte-compile-file "emacs-async/async-bytecomp" "\
+Byte compile Lisp code FILE asynchronously.
+
+Same as `byte-compile-file' but asynchronous.
+
+(fn FILE)" t)
+(register-definition-prefixes "emacs-async/async-bytecomp" '("async-"))
+
+
+;;; Generated autoloads from emacs-async/async-test.el
+
+(register-definition-prefixes "emacs-async/async-test" '("async-test-"))
 
 
 ;;; Generated autoloads from avy/avy.el
@@ -609,19 +904,18 @@ Describing the current file inside project.")
 Header lines with breadcrumbs.
 
 This is a minor mode.  If called interactively, toggle the
-`Breadcrumb-Local mode' mode.  If the prefix argument is
-positive, enable the mode, and if it is zero or negative, disable
-the mode.
+`Breadcrumb-Local mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `breadcrumb-local-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (put 'breadcrumb-mode 'globalized-minor-mode t)
@@ -634,22 +928,22 @@ either customize it (see the info node `Easy Customization')
 or call the function `breadcrumb-mode'.")
 (custom-autoload 'breadcrumb-mode "breadcrumb/breadcrumb" nil)
 (autoload 'breadcrumb-mode "breadcrumb/breadcrumb" "\
-Toggle Bc-Local mode in all buffers.
+Toggle Breadcrumb-Local mode in all buffers.
 With prefix ARG, enable Breadcrumb mode if ARG is positive; otherwise, disable it.
 
 If called from Lisp, toggle the mode if ARG is `toggle'.
 Enable the mode if ARG is nil, omitted, or is a positive number.
 Disable the mode if ARG is a negative number.
 
-Bc-Local mode is enabled in all buffers where `bc--turn-on-local-mode-on-behalf-of-global-mode'
-would do it.
+Breadcrumb-Local mode is enabled in all buffers where
+`breadcrumb--turn-on-local-mode-on-behalf-of-global-mode' would do it.
 
-See `bc-local-mode' for more information on Bc-Local mode.
+See `breadcrumb-local-mode' for more information on Breadcrumb-Local mode.
 
 (fn &optional ARG)" t)
 (autoload 'breadcrumb-jump "breadcrumb/breadcrumb" "\
 Like \\[execute-extended-command] `imenu', but breadcrumb-powered." t)
-(register-definition-prefixes "breadcrumb/breadcrumb" '("bc-"))
+(register-definition-prefixes "breadcrumb/breadcrumb" '("breadcrumb-"))
 
 
 ;;; Generated autoloads from cape/cape.el
@@ -831,11 +1125,6 @@ If INTERACTIVE is nil the function acts like a capf.
 (register-definition-prefixes "cape/cape-keyword" '("cape-"))
 
 
-;;; Generated autoloads from company-mode/test/capf-tests.el
-
-(register-definition-prefixes "company-mode/test/capf-tests" '("company-"))
-
-
 ;;; Generated autoloads from cdlatex/cdlatex.el
 
 (autoload 'turn-on-cdlatex "cdlatex/cdlatex" "\
@@ -896,19 +1185,19 @@ Under X, many functions will be available also in a menu on the menu bar.
 
 Entering `cdlatex-mode' calls the hook cdlatex-mode-hook.
 
-This is a minor mode.  If called interactively, toggle the
-`CDLatex mode' mode.  If the prefix argument is positive, enable
-the mode, and if it is zero or negative, disable the mode.
+This is a minor mode.  If called interactively, toggle the `CDLatex
+mode' mode.  If the prefix argument is positive, enable the mode, and if
+it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `cdlatex-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (autoload 'turn-on-cdlatex-electricindex "cdlatex/cdlatex" "\
@@ -936,19 +1225,18 @@ Entering `cdlatex-electricindex-mode' calls the hook
 `cdlatex-electricindex-mode-hook'.
 
 This is a minor mode.  If called interactively, toggle the
-`Cdlatex-Electricindex mode' mode.  If the prefix argument is
-positive, enable the mode, and if it is zero or negative, disable
-the mode.
+`Cdlatex-Electricindex mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `cdlatex-electricindex-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "cdlatex/cdlatex" '("cdlatex-"))
@@ -1026,11 +1314,6 @@ Display a list of current buffer groups using Counsel." t)
 (register-definition-prefixes "puni/scripts/checkdoc-hack" '("puni-checkdoc-create-error"))
 
 
-;;; Generated autoloads from treemacs/test/checkdock.el
-
-(register-definition-prefixes "treemacs/test/checkdock" '("all-el-files" "checkdoc-buffer" "get-errors" "valid-doc-words"))
-
-
 ;;; Generated autoloads from citre/citre.el
 
 (put 'citre-enable-xref-integration 'safe-local-variable #'booleanp)
@@ -1079,19 +1362,21 @@ Peek through a symbol in current peek window for references." t)
 (autoload 'citre-mode "citre/citre" "\
 Enable `completion-at-point', xref and imenu integration.
 
-This is a minor mode.  If called interactively, toggle the `Citre
-mode' mode.  If the prefix argument is positive, enable the mode,
-and if it is zero or negative, disable the mode.
+This is a minor mode.  If called interactively, toggle the `Citre mode'
+mode.  If the prefix argument is positive, enable the mode, and if it is
+zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `citre-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
+
+\\{citre-mode-map}
 
 (fn &optional ARG)" t)
 (autoload 'citre-auto-enable-citre-mode "citre/citre" "\
@@ -1264,19 +1549,19 @@ Navigate and edit text by syntactic constructs
 
 \\{combobulate-key-map}
 
-This is a minor mode.  If called interactively, toggle the
-`Combobulate mode' mode.  If the prefix argument is positive,
-enable the mode, and if it is zero or negative, disable the mode.
+This is a minor mode.  If called interactively, toggle the `Combobulate
+mode' mode.  If the prefix argument is positive, enable the mode, and if
+it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `combobulate-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "combobulate/combobulate" '("combobulate-"))
@@ -1413,19 +1698,19 @@ keymap during active completions (`company-active-map'):
 
 \\{company-active-map}
 
-This is a minor mode.  If called interactively, toggle the
-`Company mode' mode.  If the prefix argument is positive, enable
-the mode, and if it is zero or negative, disable the mode.
+This is a minor mode.  If called interactively, toggle the `Company
+mode' mode.  If the prefix argument is positive, enable the mode, and if
+it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `company-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (put 'global-company-mode 'globalized-minor-mode t)
@@ -1482,19 +1767,19 @@ inserted." t)
 (autoload 'company-box-mode "company-box/company-box" "\
 Company-box minor mode.
 
-This is a minor mode.  If called interactively, toggle the
-`company-box mode' mode.  If the prefix argument is positive,
-enable the mode, and if it is zero or negative, disable the mode.
+This is a minor mode.  If called interactively, toggle the `company-box
+mode' mode.  If the prefix argument is positive, enable the mode, and if
+it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `company-box-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "company-box/company-box" '("company-box-"))
@@ -1678,18 +1963,18 @@ or call the function `company-tng-mode'.")
 This minor mode enables `company-tng-frontend'.
 
 This is a global minor mode.  If called interactively, toggle the
-`Company-Tng mode' mode.  If the prefix argument is positive,
-enable the mode, and if it is zero or negative, disable the mode.
+`Company-Tng mode' mode.  If the prefix argument is positive, enable the
+mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `(default-value \\='company-tng-mode)'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "company-mode/company-tng" '("company-tng-"))
@@ -2039,6 +2324,13 @@ preview of the currently selected error." t)
 (register-definition-prefixes "consult/consult-compile" '("consult-compile--"))
 
 
+;;; Generated autoloads from consult-eglot/consult-eglot.el
+
+(autoload 'consult-eglot-symbols "consult-eglot/consult-eglot" "\
+Interactively select a symbol from the current workspace." t)
+(register-definition-prefixes "consult-eglot/consult-eglot" '("consult-eglot-"))
+
+
 ;;; Generated autoloads from consult/consult-flymake.el
 
 (autoload 'consult-flymake "consult/consult-flymake" "\
@@ -2197,50 +2489,26 @@ FETCHER and ALIST arguments.
 
 ;;; Generated autoloads from auctex/context.el
 
-(defalias 'ConTeXt-mode #'context-mode)
-(autoload 'context-mode "auctex/context" "\
+(defalias 'context-mode #'ConTeXt-mode)
+(autoload 'ConTeXt-mode "auctex/context" "\
 Major mode in AUCTeX for editing ConTeXt files.
 
-Special commands:
-\\{ConTeXt-mode-map}
-
-Entering `context-mode' calls the value of `text-mode-hook',
+Entering `ConTeXt-mode' calls the value of `text-mode-hook',
 then the value of `TeX-mode-hook', and then the value
-of `ConTeXt-mode-hook'." t)
+of `ConTeXt-mode-hook'.
+
+(fn)" t)
 (register-definition-prefixes "auctex/context" '("ConTeXt-" "TeX-ConTeXt-sentinel" "context-guess-current-interface"))
 
 
 ;;; Generated autoloads from auctex/context-en.el
 
-(autoload 'context-en-mode "auctex/context-en" "\
-Major mode for editing files for ConTeXt using its english interface.
-
-Special commands:
-\\{ConTeXt-mode-map}
-
-Entering `context-mode' calls the value of `text-mode-hook',
-then the value of `TeX-mode-hook', and then the value
-of `ConTeXt-mode-hook'." t)
 (register-definition-prefixes "auctex/context-en" '("ConTeXt-"))
 
 
 ;;; Generated autoloads from auctex/context-nl.el
 
-(autoload 'context-nl-mode "auctex/context-nl" "\
-Major mode for editing files for ConTeXt using its dutch interface.
-
-Special commands:
-\\{ConTeXt-mode-map}
-
-Entering `context-mode' calls the value of `text-mode-hook',
-then the value of `TeX-mode-hook', and then the value
-of `ConTeXt-mode-hook'." t)
 (register-definition-prefixes "auctex/context-nl" '("ConTeXt-"))
-
-
-;;; Generated autoloads from company-mode/test/core-tests.el
-
-(register-definition-prefixes "company-mode/test/core-tests" '("ct-"))
 
 
 ;;; Generated autoloads from corfu/corfu.el
@@ -2248,21 +2516,19 @@ of `ConTeXt-mode-hook'." t)
 (autoload 'corfu-mode "corfu/corfu" "\
 COmpletion in Region FUnction.
 
-This is a minor mode.  If called interactively, toggle the `Corfu
-mode' mode.  If the prefix argument is positive, enable the mode,
-and if it is zero or negative, disable the mode.
+This is a minor mode.  If called interactively, toggle the `Corfu mode'
+mode.  If the prefix argument is positive, enable the mode, and if it is
+zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `corfu-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
-
-\\{corfu-mode-map}
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (put 'global-corfu-mode 'globalized-minor-mode t)
@@ -2301,18 +2567,18 @@ for a description of this minor mode.")
 Show candidate documentation in echo area.
 
 This is a global minor mode.  If called interactively, toggle the
-`Corfu-Echo mode' mode.  If the prefix argument is positive,
-enable the mode, and if it is zero or negative, disable the mode.
+`Corfu-Echo mode' mode.  If the prefix argument is positive, enable the
+mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `(default-value \\='corfu-echo-mode)'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "corfu/extensions/corfu-echo" '("corfu-echo-"))
@@ -2332,18 +2598,18 @@ or call the function `corfu-history-mode'.")
 Update Corfu history and sort completions by history.
 
 This is a global minor mode.  If called interactively, toggle the
-`Corfu-History mode' mode.  If the prefix argument is positive,
-enable the mode, and if it is zero or negative, disable the mode.
+`Corfu-History mode' mode.  If the prefix argument is positive, enable
+the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `(default-value \\='corfu-history-mode)'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "corfu/extensions/corfu-history" '("corfu-history"))
@@ -2360,18 +2626,18 @@ for a description of this minor mode.")
 Prefix candidates with indices.
 
 This is a global minor mode.  If called interactively, toggle the
-`Corfu-Indexed mode' mode.  If the prefix argument is positive,
-enable the mode, and if it is zero or negative, disable the mode.
+`Corfu-Indexed mode' mode.  If the prefix argument is positive, enable
+the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `(default-value \\='corfu-indexed-mode)'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "corfu/extensions/corfu-indexed" '("corfu-indexed-"))
@@ -2403,18 +2669,18 @@ for a description of this minor mode.")
 Corfu info popup minor mode.
 
 This is a global minor mode.  If called interactively, toggle the
-`Corfu-Popupinfo mode' mode.  If the prefix argument is positive,
-enable the mode, and if it is zero or negative, disable the mode.
+`Corfu-Popupinfo mode' mode.  If the prefix argument is positive, enable
+the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `(default-value \\='corfu-popupinfo-mode)'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "corfu/extensions/corfu-popupinfo" '("corfu-popupinfo-"))
@@ -2436,6 +2702,33 @@ Complete candidate using quick keys." t)
 (register-definition-prefixes "esxml/css-lite" '("*css-stream*" "*indent-css*" "+newline+" "css" "expand-tree" "inline-css" "make-css-" "process-css-" "selector-to-string" "string-cut" "to-string"))
 
 
+;;; Generated autoloads from dape/dape.el
+
+(autoload 'dape "dape/dape" "\
+Start debugging session.
+Start a debugging session for CONFIG.
+See `dape-configs' for more information on CONFIG.
+
+When called as an interactive command, the first symbol like
+is read as key in the `dape-configs' alist and rest as elements
+which override value plist in `dape-configs'.
+
+Interactive example:
+  launch :program \"bin\"
+
+Executes alist key `launch' in `dape-configs' with :program as \"bin\".
+
+Use SKIP-COMPILE to skip compilation.
+
+(fn CONFIG &optional SKIP-COMPILE)" t)
+(register-definition-prefixes "dape/dape" '("dape-"))
+
+
+;;; Generated autoloads from dape/dape-tests.el
+
+(register-definition-prefixes "dape/dape-tests" '("dape-"))
+
+
 ;;; Generated autoloads from dash.el/dash.el
 
 (autoload 'dash-fontify-mode "dash.el/dash" "\
@@ -2451,19 +2744,19 @@ additionally fontifies Dash macro calls.
 See also `dash-fontify-mode-lighter' and
 `global-dash-fontify-mode'.
 
-This is a minor mode.  If called interactively, toggle the
-`Dash-Fontify mode' mode.  If the prefix argument is positive,
-enable the mode, and if it is zero or negative, disable the mode.
+This is a minor mode.  If called interactively, toggle the `Dash-Fontify
+mode' mode.  If the prefix argument is positive, enable the mode, and if
+it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `dash-fontify-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (put 'global-dash-fontify-mode 'globalized-minor-mode t)
@@ -2524,24 +2817,323 @@ This allows Dash symbols to be looked up with \\[info-lookup-symbol]." t)
 (register-definition-prefixes "all-the-icons.el/data/data-weathericons" '("all-the-icons-data/weather-icons-alist"))
 
 
+;;; Generated autoloads from deno-bridge-jieba/deno-bridge-jieba.el
+
+(register-definition-prefixes "deno-bridge-jieba/deno-bridge-jieba" '("deno-bridge-jieba-"))
+
+
+;;; Generated autoloads from emacs-async/dired-async.el
+
+(defvar dired-async-mode nil "\
+Non-nil if Dired-Async mode is enabled.
+See the `dired-async-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `dired-async-mode'.")
+(custom-autoload 'dired-async-mode "emacs-async/dired-async" nil)
+(autoload 'dired-async-mode "emacs-async/dired-async" "\
+Do dired actions asynchronously.
+
+This is a global minor mode.  If called interactively, toggle the
+`Dired-Async mode' mode.  If the prefix argument is positive, enable the
+mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `(default-value \\='dired-async-mode)'.
+
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
+
+(fn &optional ARG)" t)
+(autoload 'dired-async-do-copy "emacs-async/dired-async" "\
+Run ‘dired-do-copy’ asynchronously.
+
+(fn &optional ARG)" t)
+(autoload 'dired-async-do-symlink "emacs-async/dired-async" "\
+Run ‘dired-do-symlink’ asynchronously.
+
+(fn &optional ARG)" t)
+(autoload 'dired-async-do-hardlink "emacs-async/dired-async" "\
+Run ‘dired-do-hardlink’ asynchronously.
+
+(fn &optional ARG)" t)
+(autoload 'dired-async-do-rename "emacs-async/dired-async" "\
+Run ‘dired-do-rename’ asynchronously.
+
+(fn &optional ARG)" t)
+(register-definition-prefixes "emacs-async/dired-async" '("dired-async-"))
+
+
+;;; Generated autoloads from dired-hacks/dired-avfs.el
+
+(register-definition-prefixes "dired-hacks/dired-avfs" '("dired-avfs-"))
+
+
+;;; Generated autoloads from dired-hacks/dired-collapse.el
+
+(autoload 'dired-collapse-mode "dired-hacks/dired-collapse" "\
+Toggle collapsing of unique nested paths in Dired.
+
+This is a minor mode.  If called interactively, toggle the
+`Dired-Collapse mode' mode.  If the prefix argument is positive, enable
+the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `dired-collapse-mode'.
+
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
+
+(fn &optional ARG)" t)
+(register-definition-prefixes "dired-hacks/dired-collapse" '("dired-collapse"))
+
+
+;;; Generated autoloads from dired-hacks/dired-columns.el
+
+(register-definition-prefixes "dired-hacks/dired-columns" '("dired-columns-"))
+
+
+;;; Generated autoloads from dired-hacks/dired-filter.el
+
+(defvar dired-filter-map (let ((map (make-sparse-keymap))) (define-key map "n" 'dired-filter-by-name) (define-key map "r" 'dired-filter-by-regexp) (define-key map "." 'dired-filter-by-extension) (define-key map "h" 'dired-filter-by-dot-files) (define-key map "o" 'dired-filter-by-omit) (define-key map "g" 'dired-filter-by-garbage) (define-key map "e" 'dired-filter-by-predicate) (define-key map "f" 'dired-filter-by-file) (define-key map "d" 'dired-filter-by-directory) (define-key map "m" 'dired-filter-by-mode) (define-key map "s" 'dired-filter-by-symlink) (define-key map "x" 'dired-filter-by-executable) (define-key map "ig" 'dired-filter-by-git-ignored) (define-key map "|" 'dired-filter-or) (define-key map "!" 'dired-filter-negate) (define-key map "*" 'dired-filter-decompose) (define-key map (kbd "TAB") 'dired-filter-transpose) (define-key map "p" 'dired-filter-pop) (define-key map "/" 'dired-filter-pop-all) (define-key map "S" 'dired-filter-save-filters) (define-key map "D" 'dired-filter-delete-saved-filters) (define-key map "A" 'dired-filter-add-saved-filters) (define-key map "L" 'dired-filter-load-saved-filters) map) "\
+Keymap used for filtering files.")
+(defvar dired-filter-mark-map (let ((map (make-sparse-keymap))) (define-key map "n" 'dired-filter-mark-by-name) (define-key map "r" 'dired-filter-mark-by-regexp) (define-key map "." 'dired-filter-mark-by-extension) (define-key map "h" 'dired-filter-mark-by-dot-files) (define-key map "o" 'dired-filter-mark-by-omit) (define-key map "g" 'dired-filter-mark-by-garbage) (define-key map "e" 'dired-filter-mark-by-predicate) (define-key map "f" 'dired-filter-mark-by-file) (define-key map "d" 'dired-filter-mark-by-directory) (define-key map "m" 'dired-filter-mark-by-mode) (define-key map "s" 'dired-filter-mark-by-symlink) (define-key map "x" 'dired-filter-mark-by-executable) (define-key map "ig" 'dired-filter-mark-by-git-ignored) (define-key map "L" 'dired-filter-mark-by-saved-filters) map) "\
+Keymap used for marking files.")
+(autoload 'dired-filter-define "dired-hacks/dired-filter" "\
+Create a filter NAME.
+
+Files matched by the predicate are kept in the listing.
+
+For filters where the reverse behaviour makes more sense as
+default, you can set the `:remove' argument to `t' to flip the
+truth value by default.  Do not flip the value in the predicate
+itself!
+
+DOCUMENTATION is the documentation of the created filter.
+
+BODY should contain forms which will be evaluated to test whether
+or not a particular file should be displayed or not.  The forms
+in BODY will be evaluated with FILE-NAME bound to the file name,
+and QUALIFIER bound to the current argument of the filter.
+During the evaluation point is at the beginning of line.
+
+:description is a short description of this filter (usually one
+or two words).
+
+:reader is a form that is used by `interactive' to read optional
+argument.  If not specified or nil, the filter does not accept
+argument from user.
+
+:qualifier-description is a form to format qualifier for display.
+
+:remove reverses the default matching strategy of the filter.
+
+(fn NAME DOCUMENTATION (&key DESCRIPTION (QUALIFIER-DESCRIPTION \\='(identity qualifier)) READER REMOVE) &rest BODY)" nil t)
+(function-put 'dired-filter-define 'lisp-indent-function 2)
+(function-put 'dired-filter-define 'doc-string-elt 2)
+ (autoload 'dired-filter-by-dot-files "dired-filter")
+ (autoload 'dired-filter-mark-by-dot-files "dired-filter")
+ (autoload 'dired-filter-by-name "dired-filter")
+ (autoload 'dired-filter-mark-by-name "dired-filter")
+ (autoload 'dired-filter-by-regexp "dired-filter")
+ (autoload 'dired-filter-mark-by-regexp "dired-filter")
+ (autoload 'dired-filter-by-extension "dired-filter")
+ (autoload 'dired-filter-mark-by-extension "dired-filter")
+ (autoload 'dired-filter-by-omit "dired-filter")
+ (autoload 'dired-filter-mark-by-omit "dired-filter")
+ (autoload 'dired-filter-by-git-ignored "dired-filter")
+ (autoload 'dired-filter-mark-by-git-ignored "dired-filter")
+ (autoload 'dired-filter-by-garbage "dired-filter")
+ (autoload 'dired-filter-mark-by-garbage "dired-filter")
+ (autoload 'dired-filter-by-executable "dired-filter")
+ (autoload 'dired-filter-mark-by-executable "dired-filter")
+ (autoload 'dired-filter-by-predicate "dired-filter")
+ (autoload 'dired-filter-mark-by-predicate "dired-filter")
+ (autoload 'dired-filter-by-directory "dired-filter")
+ (autoload 'dired-filter-mark-by-directory "dired-filter")
+ (autoload 'dired-filter-by-file "dired-filter")
+ (autoload 'dired-filter-mark-by-file "dired-filter")
+ (autoload 'dired-filter-by-mode "dired-filter")
+ (autoload 'dired-filter-mark-by-mode "dired-filter")
+ (autoload 'dired-filter-by-symlink "dired-filter")
+ (autoload 'dired-filter-mark-by-symlink "dired-filter")
+(autoload 'dired-filter-transpose "dired-hacks/dired-filter" "\
+Transpose the two top filters." t)
+(autoload 'dired-filter-or "dired-hacks/dired-filter" "\
+Or the top two filters." t)
+(autoload 'dired-filter-negate "dired-hacks/dired-filter" "\
+Logically negate the top filter." t)
+(autoload 'dired-filter-decompose "dired-hacks/dired-filter" "\
+Decompose the composite filter on top of the stack.
+
+This means, if the filter is an `or' or `not' filter, pop it and
+push all its constituents back on the stack." t)
+(autoload 'dired-filter-pop "dired-hacks/dired-filter" "\
+Remove the top filter in this buffer.
+
+(fn &optional ARG)" t)
+(autoload 'dired-filter-pop-all "dired-hacks/dired-filter" "\
+Remove all the filters in this buffer." t)
+(autoload 'dired-filter-save-filters "dired-hacks/dired-filter" "\
+Save the the FILTERS in this dired buffer under a NAME for later use.
+
+(fn NAME FILTERS)" t)
+(autoload 'dired-filter-delete-saved-filters "dired-hacks/dired-filter" "\
+Delete saved filters with NAME from `dired-filter-saved-filters'.
+
+(fn NAME)" t)
+(autoload 'dired-filter-load-saved-filters "dired-hacks/dired-filter" "\
+Set this buffer's filters to filters with NAME from `dired-filter-saved-filters'.
+
+(fn NAME)" t)
+(autoload 'dired-filter-add-saved-filters "dired-hacks/dired-filter" "\
+Add to this buffer's filters filters with NAME from `dired-filter-saved-filters'.
+
+(fn NAME)" t)
+(autoload 'dired-filter-mode "dired-hacks/dired-filter" "\
+Toggle filtering of files in Dired.
+
+When you toggle the filter mode, the filter stack and all other
+state is preserved, except the display is not altered.  This
+allows you to quickly toggle the active filter without need of
+popping the stack and then re-inserting the filters again.
+
+This is a minor mode.  If called interactively, toggle the `Dired-Filter
+mode' mode.  If the prefix argument is positive, enable the mode, and if
+it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `dired-filter-mode'.
+
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
+
+(fn &optional ARG)" t)
+(register-definition-prefixes "dired-hacks/dired-filter" '("dired-filter"))
+
+
+;;; Generated autoloads from dired-hacks/dired-hacks-utils.el
+
+(register-definition-prefixes "dired-hacks/dired-hacks-utils" '("dired-"))
+
+
+;;; Generated autoloads from dired-hacks/dired-images.el
+
+(register-definition-prefixes "dired-hacks/dired-images" '("di-"))
+
+
+;;; Generated autoloads from dired-hacks/dired-list.el
+
+(autoload 'dired-list-mpc "dired-hacks/dired-list" "\
+Search mpd(1) database using QUERY and display results as a `dired' buffer.
+
+(fn QUERY)" t)
+(autoload 'dired-list-git-ls-files "dired-hacks/dired-list" "\
+List all files in DIR managed by git and display results as a `dired' buffer.
+
+(fn DIR)" t)
+(autoload 'dired-list-hg-locate "dired-hacks/dired-list" "\
+List all files in DIR managed by mercurial.
+
+Display results as a `dired' buffer.
+
+(fn DIR)" t)
+(autoload 'dired-list-locate "dired-hacks/dired-list" "\
+Locate(1) all files matching NEEDLE and display results as a `dired' buffer.
+
+(fn NEEDLE)" t)
+(autoload 'dired-list-find-file "dired-hacks/dired-list" "\
+Run find(1) on DIR with find command CMD.
+
+By default, directories matching `grep-find-ignored-directories'
+and files matching `grep-find-ignored-files' are ignored.
+
+If called with raw prefix argument \\[universal-argument], no
+files will be ignored.
+
+(fn DIR CMD)" t)
+(autoload 'dired-list-find-name "dired-hacks/dired-list" "\
+Search DIR recursively for files matching the globbing pattern PATTERN.
+
+PATTERN is a shell wildcard (not an Emacs regexp) and need not be quoted.
+
+By default, directories matching `grep-find-ignored-directories'
+and files matching `grep-find-ignored-files' are ignored.
+
+If called with raw prefix argument \\[universal-argument], no
+files will be ignored.
+
+(fn DIR PATTERN)" t)
+(register-definition-prefixes "dired-hacks/dired-list" '("dired-list"))
+
+
+;;; Generated autoloads from dired-hacks/dired-narrow.el
+
+(autoload 'dired-narrow-regexp "dired-hacks/dired-narrow" "\
+Narrow a dired buffer to the files matching a regular expression." t)
+(autoload 'dired-narrow "dired-hacks/dired-narrow" "\
+Narrow a dired buffer to the files matching a string.
+
+If the string contains spaces, then each word is matched against
+the file name separately.  To succeed, all of them have to match
+but the order does not matter.
+
+For example \"foo bar\" matches filename \"bar-and-foo.el\"." t)
+(autoload 'dired-narrow-fuzzy "dired-hacks/dired-narrow" "\
+Narrow a dired buffer to the files matching a fuzzy string.
+
+A fuzzy string is constructed from the filter string by inserting
+\".*\" between each letter.  This is then matched as regular
+expression against the file name." t)
+(register-definition-prefixes "dired-hacks/dired-narrow" '("dired-narrow-"))
+
+
+;;; Generated autoloads from dired-hacks/dired-open.el
+
+(autoload 'dired-open-file "dired-hacks/dired-open" "\
+Try `dired-open-functions' to open the thing under point.
+
+That can be either file or any other line of dired listing.
+
+If no function succeeded, run `dired-find-file' normally.
+
+With \\[universal-argument], run `dired-find-file' normally.
+
+(fn &optional ARG)" t)
+(register-definition-prefixes "dired-hacks/dired-open" '("dired-open-"))
+
+
 ;;; Generated autoloads from dired-preview/dired-preview.el
 
 (autoload 'dired-preview-mode "dired-preview/dired-preview" "\
 Buffer-local mode to preview file at point in Dired.
 
 This is a minor mode.  If called interactively, toggle the
-`Dired-Preview mode' mode.  If the prefix argument is positive,
-enable the mode, and if it is zero or negative, disable the mode.
+`Dired-Preview mode' mode.  If the prefix argument is positive, enable
+the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `dired-preview-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (put 'dired-preview-global-mode 'globalized-minor-mode t)
@@ -2569,24 +3161,242 @@ See `dired-preview-mode' for more information on Dired-Preview mode.
 (register-definition-prefixes "dired-preview/dired-preview" '("dired-preview-"))
 
 
+;;; Generated autoloads from dired-hacks/dired-rainbow.el
+
+(register-definition-prefixes "dired-hacks/dired-rainbow" '("dired-rainbow-"))
+
+
+;;; Generated autoloads from dired-hacks/dired-ranger.el
+
+(autoload 'dired-ranger-copy "dired-hacks/dired-ranger" "\
+Place the marked items in the copy ring.
+
+With non-nil prefix argument, add the marked items to the current
+selection.  This allows you to gather files from multiple dired
+buffers for a single paste.
+
+(fn ARG)" t)
+(autoload 'dired-ranger-paste "dired-hacks/dired-ranger" "\
+Copy the items from copy ring to current directory.
+
+With raw prefix argument \\[universal-argument], do not remove
+the selection from the stack so it can be copied again.
+
+With numeric prefix argument, copy the n-th selection from the
+copy ring.
+
+(fn ARG)" t)
+(autoload 'dired-ranger-move "dired-hacks/dired-ranger" "\
+Move the items from copy ring to current directory.
+
+This behaves like `dired-ranger-paste' but moves the files
+instead of copying them.
+
+(fn ARG)" t)
+(autoload 'dired-ranger-bookmark "dired-hacks/dired-ranger" "\
+Bookmark current dired buffer.
+
+CHAR is a single character (a-zA-Z0-9) representing the bookmark.
+Reusing a bookmark replaces the content.  These bookmarks are not
+persistent, they are used for quick jumping back and forth
+between currently used directories.
+
+(fn CHAR)" t)
+(autoload 'dired-ranger-bookmark-visit "dired-hacks/dired-ranger" "\
+Visit bookmark CHAR.
+
+If the associated dired buffer was killed, we try to reopen it
+according to the setting `dired-ranger-bookmark-reopen'.
+
+The special bookmark `dired-ranger-bookmark-LRU' always jumps to
+the least recently visited dired buffer.
+
+See also `dired-ranger-bookmark'.
+
+(fn CHAR)" t)
+(register-definition-prefixes "dired-hacks/dired-ranger" '("dired-ranger-"))
+
+
+;;; Generated autoloads from dired-sidebar/dired-sidebar.el
+
+(autoload 'dired-sidebar-toggle-sidebar "dired-sidebar/dired-sidebar" "\
+Toggle the project explorer window.
+Optional argument DIR Use DIR as sidebar root if available.
+
+With universal argument, use current directory.
+
+(fn &optional DIR)" t)
+(autoload 'dired-sidebar-toggle-with-current-directory "dired-sidebar/dired-sidebar" "\
+Like `dired-sidebar-toggle-sidebar' but use current-directory." t)
+(autoload 'dired-sidebar-show-sidebar "dired-sidebar/dired-sidebar" "\
+Show sidebar displaying buffer B.
+
+(fn &optional B)" t)
+(autoload 'dired-sidebar-hide-sidebar "dired-sidebar/dired-sidebar" "\
+Hide the sidebar in the selected frame." t)
+(autoload 'dired-sidebar-jump-to-sidebar "dired-sidebar/dired-sidebar" "\
+Jump to `dired-sidebar' buffer if it is showing.
+
+If it's not showing, act as `dired-sidebar-toggle-sidebar'." t)
+(register-definition-prefixes "dired-sidebar/dired-sidebar" '("dired-sidebar-"))
+
+
+;;; Generated autoloads from dired-hacks/dired-subtree.el
+
+(autoload 'dired-subtree-narrow "dired-hacks/dired-subtree" "\
+Narrow the buffer to this subtree." t)
+(autoload 'dired-subtree-up "dired-hacks/dired-subtree" "\
+Jump up one directory.
+
+(fn &optional ARG)" t)
+(autoload 'dired-subtree-down "dired-hacks/dired-subtree" "\
+Jump down one directory.
+
+(fn &optional ARG)" t)
+(autoload 'dired-subtree-next-sibling "dired-hacks/dired-subtree" "\
+Go to the next sibling.
+
+(fn &optional ARG)" t)
+(autoload 'dired-subtree-previous-sibling "dired-hacks/dired-subtree" "\
+Go to the previous sibling.
+
+(fn &optional ARG)" t)
+(autoload 'dired-subtree-beginning "dired-hacks/dired-subtree" "\
+Go to the first file in this subtree." t)
+(autoload 'dired-subtree-end "dired-hacks/dired-subtree" "\
+Go to the first file in this subtree." t)
+(autoload 'dired-subtree-mark-subtree "dired-hacks/dired-subtree" "\
+Mark all files in this subtree.
+
+With prefix argument mark all the files in subdirectories
+recursively.
+
+(fn &optional ALL)" t)
+(autoload 'dired-subtree-unmark-subtree "dired-hacks/dired-subtree" "\
+Unmark all files in this subtree.
+
+With prefix argument unmark all the files in subdirectories
+recursively.
+
+(fn &optional ALL)" t)
+(autoload 'dired-subtree-revert "dired-hacks/dired-subtree" "\
+Revert the subtree.
+
+This means reinserting the content of this subtree and all its
+children." t)
+(autoload 'dired-subtree-insert "dired-hacks/dired-subtree" "\
+Insert subtree under this directory." t)
+(autoload 'dired-subtree-remove "dired-hacks/dired-subtree" "\
+Remove subtree at point." t)
+(autoload 'dired-subtree-toggle "dired-hacks/dired-subtree" "\
+Insert subtree at point or remove it if it was not present." t)
+(autoload 'dired-subtree-cycle "dired-hacks/dired-subtree" "\
+Org-mode like cycle visibility:
+
+1) Show subtree
+2) Show subtree recursively (if previous command was cycle)
+3) Remove subtree
+
+Numeric prefix will set max depth
+
+(fn &optional MAX-DEPTH)" t)
+(autoload 'dired-subtree-only-this-file "dired-hacks/dired-subtree" "\
+Remove all the siblings on the route from this file to the top-most directory.
+
+With ARG non-nil, do not remove expanded directories in parents.
+
+(fn &optional ARG)" t)
+(autoload 'dired-subtree-only-this-directory "dired-hacks/dired-subtree" "\
+Remove all the siblings on the route from this directory to the top-most directory.
+
+With ARG non-nil, do not remove expanded directories in parents.
+
+(fn &optional ARG)" t)
+(autoload 'dired-subtree-apply-filter "dired-hacks/dired-subtree" "\
+Push a local filter for this subtree.
+
+This depends on `dired-filter' package.
+
+It works exactly the same as global dired filters, only
+restricted to a subtree.  The global filter is also applied to
+the subtree.  The filter action is read from `dired-filter-map'." t)
+(register-definition-prefixes "dired-hacks/dired-subtree" '("dired-"))
+
+
+;;; Generated autoloads from dired-hacks/dired-tagsistant.el
+
+(autoload 'dired-tagsistant-some-tags "dired-hacks/dired-tagsistant" "\
+Display all files matching some tag in TAGS.
+
+(fn TAGS)" t)
+(autoload 'dired-tagsistant-all-tags "dired-hacks/dired-tagsistant" "\
+Display all files matching all tags in TAGS.
+
+(fn TAGS)" t)
+(autoload 'dired-tagsistant-some-tags-regexp "dired-hacks/dired-tagsistant" "\
+Display all files where some of their tags matches REGEXP.
+
+(fn REGEXP)" t)
+(autoload 'dired-tagsistant-all-tags-regexp "dired-hacks/dired-tagsistant" "\
+Display all files where all of their tags match REGEXP.
+
+(fn REGEXP)" t)
+(autoload 'dired-tagsistant-list-tags "dired-hacks/dired-tagsistant" "\
+Print all tags on each file of FILES.
+
+If FILES contains only one file, print in minibuffer, otherwise
+pop a window with a list of all tags for each file.
+
+(fn FILES)" t)
+(autoload 'dired-tagsistant-tag "dired-hacks/dired-tagsistant" "\
+Tag FILES with TAGS by copying them into tagsistant store.
+
+FILES is a list of files to tag.
+
+TAGS is a list of tags to assign to the files.  Each tripple tag
+should be represented by one string.  Non-existing tags will be
+created automatically.
+
+(fn FILES TAGS)" t)
+(autoload 'dired-tagsistant-tag-symlink "dired-hacks/dired-tagsistant" "\
+Tag files with TAGS by tagging symlinks pointing to them.
+
+Symbolic links are resolved recursively and always point to the
+*real* file.  This saves space in the database and make updating
+of broken links much simpler.
+
+FILES is a list of files to tag.
+
+TAGS is a list of tags to assign to the files.  Each tripple tag
+should be represented by one string.  Non-existing tags will be
+created automatically.
+
+(fn FILES TAGS)" t)
+(autoload 'dired-tagsistant-add-relation "dired-hacks/dired-tagsistant" "\
+
+
+(fn PARENT REL CHILD)" t)
+(register-definition-prefixes "dired-hacks/dired-tagsistant" '("dired-tagsistant-"))
+
+
 ;;; Generated autoloads from diredfl/diredfl.el
 
 (autoload 'diredfl-mode "diredfl/diredfl" "\
 Enable additional font locking in `dired-mode'.
 
-This is a minor mode.  If called interactively, toggle the
-`Diredfl mode' mode.  If the prefix argument is positive, enable
-the mode, and if it is zero or negative, disable the mode.
+This is a minor mode.  If called interactively, toggle the `Diredfl
+mode' mode.  If the prefix argument is positive, enable the mode, and if
+it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `diredfl-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (put 'diredfl-global-mode 'globalized-minor-mode t)
@@ -2629,19 +3439,18 @@ or call the function `dirvish-override-dired-mode'.")
 Let Dirvish take over Dired globally.
 
 This is a global minor mode.  If called interactively, toggle the
-`Dirvish-Override-Dired mode' mode.  If the prefix argument is
-positive, enable the mode, and if it is zero or negative, disable
-the mode.
+`Dirvish-Override-Dired mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `(default-value \\='dirvish-override-dired-mode)'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (autoload 'dirvish "dirvish/dirvish" "\
@@ -2673,18 +3482,18 @@ Manage pinned files in Dirvish." t)
 Toggle grouping of files in Dirvish.
 
 This is a minor mode.  If called interactively, toggle the
-`Dirvish-Emerge mode' mode.  If the prefix argument is positive,
-enable the mode, and if it is zero or negative, disable the mode.
+`Dirvish-Emerge mode' mode.  If the prefix argument is positive, enable
+the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `dirvish-emerge-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "dirvish/extensions/dirvish-emerge" '("dirvish-emerge-"))
@@ -2808,18 +3617,18 @@ or call the function `dirvish-peek-mode'.")
 Show file preview when narrowing candidates using minibuffer.
 
 This is a global minor mode.  If called interactively, toggle the
-`Dirvish-Peek mode' mode.  If the prefix argument is positive,
-enable the mode, and if it is zero or negative, disable the mode.
+`Dirvish-Peek mode' mode.  If the prefix argument is positive, enable
+the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `(default-value \\='dirvish-peek-mode)'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "dirvish/extensions/dirvish-peek" '("dirvish-peek-"))
@@ -2849,19 +3658,18 @@ buffer's filename.  It will also visits the latest `project-root'
 after switching to a new project.
 
 This is a global minor mode.  If called interactively, toggle the
-`Dirvish-Side-Follow mode' mode.  If the prefix argument is
-positive, enable the mode, and if it is zero or negative, disable
-the mode.
+`Dirvish-Side-Follow mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `(default-value \\='dirvish-side-follow-mode)'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (autoload 'dirvish-side "dirvish/extensions/dirvish-side" "\
@@ -3136,18 +3944,18 @@ or call the function `doom-modeline-mode'.")
 Toggle `doom-modeline' on or off.
 
 This is a global minor mode.  If called interactively, toggle the
-`Doom-Modeline mode' mode.  If the prefix argument is positive,
-enable the mode, and if it is zero or negative, disable the mode.
+`Doom-Modeline mode' mode.  If the prefix argument is positive, enable
+the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `(default-value \\='doom-modeline-mode)'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "doom-modeline/doom-modeline" '("doom-modeline-"))
@@ -3421,11 +4229,6 @@ Blink the mode-line red briefly. Set `ring-bell-function' to this to use it.")
 Enable flashing the mode-line on error.")
 
 
-;;; Generated autoloads from themes/test/doom-themes-test.el
-
-(register-definition-prefixes "themes/test/doom-themes-test" '("doom-themes-dir"))
-
-
 ;;; Generated autoloads from themes/themes/doom-tokyo-night-theme.el
 
 (register-definition-prefixes "themes/themes/doom-tokyo-night-theme" '("doom-tokyo-night"))
@@ -3565,37 +4368,36 @@ e.g. if `eaf-interleave-split-direction' is 'vertical the buffer is
 split horizontally.
 
 This is a minor mode.  If called interactively, toggle the
-`Eaf-Interleave mode' mode.  If the prefix argument is positive,
-enable the mode, and if it is zero or negative, disable the mode.
+`Eaf-Interleave mode' mode.  If the prefix argument is positive, enable
+the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `eaf-interleave-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (autoload 'eaf-interleave-app-mode "emacs-application-framework/extension/eaf-interleave" "\
 Interleave view for the EAF app.
 
 This is a minor mode.  If called interactively, toggle the
-`Eaf-Interleave-App mode' mode.  If the prefix argument is
-positive, enable the mode, and if it is zero or negative, disable
-the mode.
+`Eaf-Interleave-App mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `eaf-interleave-app-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (autoload 'eaf-interleave--open-notes-file-for-pdf "emacs-application-framework/extension/eaf-interleave" "\
@@ -3758,18 +4560,18 @@ variable `exec-path'.  Only local stdin/out-based lsp servers can
 be boosted.
 
 This is a global minor mode.  If called interactively, toggle the
-`Eglot-Booster mode' mode.  If the prefix argument is positive,
-enable the mode, and if it is zero or negative, disable the mode.
+`Eglot-Booster mode' mode.  If the prefix argument is positive, enable
+the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `(default-value \\='eglot-booster-mode)'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "eglot-booster/eglot-booster" '("eglot-booster-"))
@@ -3785,18 +4587,18 @@ Display hover documentations in a childframe.
 The default position of childframe is upper corner.
 
 This is a minor mode.  If called interactively, toggle the
-`Eldoc-Box-Hover mode' mode.  If the prefix argument is positive,
-enable the mode, and if it is zero or negative, disable the mode.
+`Eldoc-Box-Hover mode' mode.  If the prefix argument is positive, enable
+the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `eldoc-box-hover-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (autoload 'eldoc-box-hover-at-point-mode "eldoc-box/eldoc-box" "\
@@ -3806,18 +4608,18 @@ You can use \\[keyboard-quit] to hide the doc.
 
 This is a minor mode.  If called interactively, toggle the
 `Eldoc-Box-Hover-At-Point mode' mode.  If the prefix argument is
-positive, enable the mode, and if it is zero or negative, disable
-the mode.
+positive, enable the mode, and if it is zero or negative, disable the
+mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `eldoc-box-hover-at-point-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "eldoc-box/eldoc-box" '("eldoc-box-"))
@@ -3872,16 +4674,6 @@ search.
 ;;; Generated autoloads from elisp-refs/elisp-refs-bench.el
 
 (register-definition-prefixes "elisp-refs/elisp-refs-bench" '("elisp-refs-"))
-
-
-;;; Generated autoloads from elisp-refs/test/elisp-refs-unit-test.el
-
-(register-definition-prefixes "elisp-refs/test/elisp-refs-unit-test" '("with-temp-backed-buffer"))
-
-
-;;; Generated autoloads from company-mode/test/elisp-tests.el
-
-(register-definition-prefixes "company-mode/test/elisp-tests" '("company-elisp-with-buffer"))
 
 
 ;;; Generated autoloads from emacsql/emacsql.el
@@ -4178,19 +4970,19 @@ Minor mode for auto parenthesis pairing with syntax table.
 
 \\<fingertip-mode-map>
 
-This is a minor mode.  If called interactively, toggle the
-`Fingertip mode' mode.  If the prefix argument is positive,
-enable the mode, and if it is zero or negative, disable the mode.
+This is a minor mode.  If called interactively, toggle the `Fingertip
+mode' mode.  If the prefix argument is positive, enable the mode, and if
+it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `fingertip-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "fingertip/fingertip" '("fingertip-"))
@@ -4591,11 +5383,6 @@ Show help for the symbol at point." t)
 (register-definition-prefixes "helpful/helpful" '("helpful-"))
 
 
-;;; Generated autoloads from helpful/test/helpful-unit-test.el
-
-(register-definition-prefixes "helpful/test/helpful-unit-test" '("helpful-" "test-foo"))
-
-
 ;;; Generated autoloads from highlight-indent-guides/highlight-indent-guides.el
 
 (autoload 'highlight-indent-guides-auto-set-faces "highlight-indent-guides/highlight-indent-guides" "\
@@ -4608,18 +5395,18 @@ Display indent guides in a buffer.
 
 This is a minor mode.  If called interactively, toggle the
 `Highlight-Indent-Guides mode' mode.  If the prefix argument is
-positive, enable the mode, and if it is zero or negative, disable
-the mode.
+positive, enable the mode, and if it is zero or negative, disable the
+mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `highlight-indent-guides-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "highlight-indent-guides/highlight-indent-guides" '("highlight-indent-guides-"))
@@ -4658,11 +5445,6 @@ the mode if ARG is omitted or nil, and toggle it if ARG is `toggle'.
 ;;; Generated autoloads from ht.el/ht.el
 
 (register-definition-prefixes "ht.el/ht" 'nil)
-
-
-;;; Generated autoloads from ht.el/test/ht-test.el
-
-(register-definition-prefixes "ht.el/test/ht-test" '("ht-run-tests"))
 
 
 ;;; Generated autoloads from hydra/hydra.el
@@ -4760,18 +5542,18 @@ Translate paragraph under the cursor after Emacs is idle for
 
 This is a minor mode.  If called interactively, toggle the
 `Immersive-Translate-Auto mode' mode.  If the prefix argument is
-positive, enable the mode, and if it is zero or negative, disable
-the mode.
+positive, enable the mode, and if it is zero or negative, disable the
+mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `immersive-translate-auto-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (autoload 'immersive-translate-setup "emacs-immersive-translate/immersive-translate" "\
@@ -4804,19 +5586,19 @@ Setup immersive-trasnlate.")
 (autoload 'indent-bars-mode "indent-bars/indent-bars" "\
 Indicate indentation with configurable bars.
 
-This is a minor mode.  If called interactively, toggle the
-`Indent-Bars mode' mode.  If the prefix argument is positive,
-enable the mode, and if it is zero or negative, disable the mode.
+This is a minor mode.  If called interactively, toggle the `Indent-Bars
+mode' mode.  If the prefix argument is positive, enable the mode, and if
+it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `indent-bars-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "indent-bars/indent-bars" '("indent-bars-"))
@@ -4827,19 +5609,19 @@ it is disabled.
 (autoload 'iscroll-mode "iscroll/iscroll" "\
 Smooth scrolling over images.
 
-This is a minor mode.  If called interactively, toggle the
-`IScroll mode' mode.  If the prefix argument is positive, enable
-the mode, and if it is zero or negative, disable the mode.
+This is a minor mode.  If called interactively, toggle the `IScroll
+mode' mode.  If the prefix argument is positive, enable the mode, and if
+it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `iscroll-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "iscroll/iscroll" '("iscroll-"))
@@ -4907,11 +5689,6 @@ sync with those specified on your system or notebook server." t)
 ;;; Generated autoloads from jupyter/jupyter-mime.el
 
 (register-definition-prefixes "jupyter/jupyter-mime" '("jupyter-"))
-
-
-;;; Generated autoloads from jupyter/test/jupyter-monad-test.el
-
-(register-definition-prefixes "jupyter/test/jupyter-monad-test" '("jupyter-test-dummy-msgs"))
 
 
 ;;; Generated autoloads from jupyter/jupyter-monads.el
@@ -5083,18 +5860,18 @@ have the same `major-mode' as the client's kernel language and
 
 This is a global minor mode.  If called interactively, toggle the
 `Jupyter-Repl-Persistent mode' mode.  If the prefix argument is
-positive, enable the mode, and if it is zero or negative, disable
-the mode.
+positive, enable the mode, and if it is zero or negative, disable the
+mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `(default-value \\='jupyter-repl-persistent-mode)'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (autoload 'jupyter-run-repl "jupyter/jupyter-repl" "\
@@ -5191,11 +5968,6 @@ used.
 ;;; Generated autoloads from jupyter/jupyter-server-kernel.el
 
 (register-definition-prefixes "jupyter/jupyter-server-kernel" '("jupyter-"))
-
-
-;;; Generated autoloads from jupyter/test/jupyter-test.el
-
-(register-definition-prefixes "jupyter/test/jupyter-test" '("jupyter-" "org-babel-jupyter-resource-directory"))
 
 
 ;;; Generated autoloads from jupyter/jupyter-tramp.el
@@ -5368,31 +6140,59 @@ it like:
 (register-definition-prefixes "kind-icon/kind-icon" '("kind-icon-"))
 
 
+;;; Generated autoloads from LaTeX-auto-activating-snippets/laas.el
+
+(autoload 'laas-mode "LaTeX-auto-activating-snippets/laas" "\
+Minor mode for enabling a ton of auto-activating LaTeX snippets.
+
+This is a minor mode.  If called interactively, toggle the `Laas mode'
+mode.  If the prefix argument is positive, enable the mode, and if it is
+zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `laas-mode'.
+
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
+
+(fn &optional ARG)" t)
+(register-definition-prefixes "LaTeX-auto-activating-snippets/laas" '("laas-"))
+
+
+;;; Generated autoloads from LaTeX-auto-activating-snippets/laas-unicode.el
+
+(register-definition-prefixes "LaTeX-auto-activating-snippets/laas-unicode" '("laas-unicode-"))
+
+
 ;;; Generated autoloads from auctex/latex.el
 
 (autoload 'BibTeX-auto-store "auctex/latex" "\
 This function should be called from `bibtex-mode-hook'.
 It will setup BibTeX to store keys in an auto file.")
-(add-to-list 'auto-mode-alist '("\\.drv\\'" . latex-mode) t)
-(add-to-list 'auto-mode-alist '("\\.hva\\'" . latex-mode))
-(autoload 'TeX-latex-mode "auctex/latex" "\
+(add-to-list 'auto-mode-alist '("\\.drv\\'" . LaTeX-mode) t)
+(add-to-list 'auto-mode-alist '("\\.hva\\'" . LaTeX-mode))
+ (if (eq (symbol-function 'LaTeX-mode) 'latex-mode)
+    (defalias 'LaTeX-mode nil))
+(autoload 'LaTeX-mode "auctex/latex" "\
 Major mode in AUCTeX for editing LaTeX files.
 See info under AUCTeX for full documentation.
 
-Special commands:
-\\{LaTeX-mode-map}
-
 Entering LaTeX mode calls the value of `text-mode-hook',
 then the value of `TeX-mode-hook', and then the value
-of `LaTeX-mode-hook'." t)
-(add-to-list 'auto-mode-alist '("\\.dtx\\'" . doctex-mode))
+of `LaTeX-mode-hook'.
+
+(fn)" t)
+(put 'LaTeX-mode 'auctex-function-definition (symbol-function 'LaTeX-mode))
 (autoload 'docTeX-mode "auctex/latex" "\
 Major mode in AUCTeX for editing .dtx files derived from `LaTeX-mode'.
 Runs `LaTeX-mode', sets a few variables and
 runs the hooks in `docTeX-mode-hook'.
 
 (fn)" t)
-(defalias 'TeX-doctex-mode #'docTeX-mode)
 (register-definition-prefixes "auctex/latex" '("Bib" "LaTeX-" "TeX-" "docTeX-" "latex-math-mode"))
 
 
@@ -5468,19 +6268,19 @@ It also defines a new command:
     2. Filling text (and only text, not equations).
     3. Indenting everything.
 
-This is a minor mode.  If called interactively, toggle the
-`Latex-Extra mode' mode.  If the prefix argument is positive,
-enable the mode, and if it is zero or negative, disable the mode.
+This is a minor mode.  If called interactively, toggle the `Latex-Extra
+mode' mode.  If the prefix argument is positive, enable the mode, and if
+it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `latex-extra-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "latex-extra/latex-extra" '("latex"))
@@ -5541,29 +6341,26 @@ it is disabled.
 (register-definition-prefixes "lsp-mode/clients/lsp-beancount" '("lsp-beancount-"))
 
 
-;;; Generated autoloads from lsp-mode/test/lsp-benchmarks.el
-
-(register-definition-prefixes "lsp-mode/test/lsp-benchmarks" '("lsp-benchmark"))
-
-
 ;;; Generated autoloads from lsp-bridge/lsp-bridge.el
 
 (autoload 'lsp-bridge-mode "lsp-bridge/lsp-bridge" "\
 LSP Bridge mode.
 
-This is a minor mode.  If called interactively, toggle the
-`Lsp-Bridge mode' mode.  If the prefix argument is positive,
-enable the mode, and if it is zero or negative, disable the mode.
+This is a minor mode.  If called interactively, toggle the `Lsp-Bridge
+mode' mode.  If the prefix argument is positive, enable the mode, and if
+it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `lsp-bridge-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
+
+\\{lsp-bridge-mode-map}
 
 (fn &optional ARG)" t)
 (autoload 'global-lsp-bridge-mode "lsp-bridge/lsp-bridge" nil t)
@@ -5622,17 +6419,12 @@ it is disabled.
 
 ;;; Generated autoloads from lsp-bridge/lsp-bridge-ref.el
 
-(register-definition-prefixes "lsp-bridge/lsp-bridge-ref" '("lsp-bridge-ref-"))
+(register-definition-prefixes "lsp-bridge/lsp-bridge-ref" '("lsp-bridge-"))
 
 
 ;;; Generated autoloads from lsp-bridge/lsp-bridge-semantic-tokens.el
 
 (register-definition-prefixes "lsp-bridge/lsp-bridge-semantic-tokens" '("lsp-bridge-semantic-tokens-"))
-
-
-;;; Generated autoloads from lsp-bridge/test/lsp-bridge-test.el
-
-(register-definition-prefixes "lsp-bridge/test/lsp-bridge-test" '("lsp-bridge-start-test"))
 
 
 ;;; Generated autoloads from lsp-mode/clients/lsp-bufls.el
@@ -5654,11 +6446,6 @@ Explain a clang-tidy ERROR by scraping documentation from llvm.org.
 (register-definition-prefixes "lsp-mode/clients/lsp-clangd" '("lsp-c"))
 
 
-;;; Generated autoloads from lsp-mode/test/lsp-clangd-test.el
-
-(register-definition-prefixes "lsp-mode/test/lsp-clangd-test" '("lsp-in-sample-cpp-project"))
-
-
 ;;; Generated autoloads from lsp-mode/clients/lsp-clojure.el
 
 (autoload 'lsp-clojure-show-test-tree "lsp-mode/clients/lsp-clojure" "\
@@ -5671,11 +6458,6 @@ Show a test tree and focus on it if IGNORE-FOCUS? is nil.
 ;;; Generated autoloads from lsp-mode/clients/lsp-cmake.el
 
 (register-definition-prefixes "lsp-mode/clients/lsp-cmake" '("lsp-cmake-"))
-
-
-;;; Generated autoloads from lsp-mode/test/lsp-common-test.el
-
-(register-definition-prefixes "lsp-mode/test/lsp-common-test" '("lsp-"))
 
 
 ;;; Generated autoloads from lsp-mode/lsp-completion.el
@@ -5692,18 +6474,18 @@ Enable LSP completion support.")
 Toggle LSP completion support.
 
 This is a minor mode.  If called interactively, toggle the
-`Lsp-Completion mode' mode.  If the prefix argument is positive,
-enable the mode, and if it is zero or negative, disable the mode.
+`Lsp-Completion mode' mode.  If the prefix argument is positive, enable
+the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `lsp-completion-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (add-hook 'lsp-configure-hook (lambda nil (when (and lsp-auto-configure lsp-completion-enable) (lsp-completion--enable))))
@@ -5748,18 +6530,18 @@ Enable LSP checker support.")
 Toggle LSP diagnostics integration.
 
 This is a minor mode.  If called interactively, toggle the
-`Lsp-Diagnostics mode' mode.  If the prefix argument is positive,
-enable the mode, and if it is zero or negative, disable the mode.
+`Lsp-Diagnostics mode' mode.  If the prefix argument is positive, enable
+the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `lsp-diagnostics-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (add-hook 'lsp-configure-hook (lambda nil (when lsp-auto-configure (lsp-diagnostics--enable))))
@@ -5780,18 +6562,18 @@ or call the function `lsp-dired-mode'.")
 Display `lsp-mode' icons for each file in a dired buffer.
 
 This is a global minor mode.  If called interactively, toggle the
-`Lsp-Dired mode' mode.  If the prefix argument is positive,
-enable the mode, and if it is zero or negative, disable the mode.
+`Lsp-Dired mode' mode.  If the prefix argument is positive, enable the
+mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `(default-value \\='lsp-dired-mode)'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "lsp-mode/lsp-dired" '("lsp-dired-"))
@@ -5835,11 +6617,6 @@ it is disabled.
 ;;; Generated autoloads from lsp-mode/clients/lsp-eslint.el
 
 (register-definition-prefixes "lsp-mode/clients/lsp-eslint" '("lsp-"))
-
-
-;;; Generated autoloads from lsp-mode/test/lsp-file-watch-test.el
-
-(register-definition-prefixes "lsp-mode/test/lsp-file-watch-test" '("lsp-"))
 
 
 ;;; Generated autoloads from lsp-mode/clients/lsp-fortran.el
@@ -5913,18 +6690,18 @@ Toggle breadcrumb on headerline.
 
 This is a minor mode.  If called interactively, toggle the
 `Lsp-Headerline-Breadcrumb mode' mode.  If the prefix argument is
-positive, enable the mode, and if it is zero or negative, disable
-the mode.
+positive, enable the mode, and if it is zero or negative, disable the
+mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `lsp-headerline-breadcrumb-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (autoload 'lsp-breadcrumb-go-to-symbol "lsp-mode/lsp-headerline" "\
@@ -5988,24 +6765,9 @@ Start `iedit-mode'. for `textDocument/linkedEditingRange'" t)
 (register-definition-prefixes "lsp-mode/lsp-iedit" '("lsp-iedit--on-ranges"))
 
 
-;;; Generated autoloads from lsp-mode/test/lsp-integration-test.el
-
-(register-definition-prefixes "lsp-mode/test/lsp-integration-test" '("deferred::nextc" "lsp-"))
-
-
-;;; Generated autoloads from lsp-mode/test/lsp-io-test.el
-
-(register-definition-prefixes "lsp-mode/test/lsp-io-test" '("lsp--"))
-
-
 ;;; Generated autoloads from lsp-mode/clients/lsp-javascript.el
 
 (register-definition-prefixes "lsp-mode/clients/lsp-javascript" '("lsp-"))
-
-
-;;; Generated autoloads from lsp-mode/test/lsp-javascript-test.el
-
-(register-definition-prefixes "lsp-mode/test/lsp-javascript-test" '("lsp-flow-" "test-location"))
 
 
 ;;; Generated autoloads from lsp-mode/clients/lsp-jq.el
@@ -6039,19 +6801,19 @@ Delete all lenses." t)
 (autoload 'lsp-lens-mode "lsp-mode/lsp-lens" "\
 Toggle code-lens overlays.
 
-This is a minor mode.  If called interactively, toggle the
-`Lsp-Lens mode' mode.  If the prefix argument is positive, enable
-the mode, and if it is zero or negative, disable the mode.
+This is a minor mode.  If called interactively, toggle the `Lsp-Lens
+mode' mode.  If the prefix argument is positive, enable the mode, and if
+it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `lsp-lens-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (autoload 'lsp-avy-lens "lsp-mode/lsp-lens" "\
@@ -6082,11 +6844,6 @@ Click lsp lens using `avy' package." t)
 ;;; Generated autoloads from lsp-mode/clients/lsp-mdx.el
 
 (register-definition-prefixes "lsp-mode/clients/lsp-mdx" '("lsp-mdx-server-command"))
-
-
-;;; Generated autoloads from lsp-mode/test/lsp-methods-test.el
-
-(register-definition-prefixes "lsp-mode/test/lsp-methods-test" '("lsp-"))
 
 
 ;;; Generated autoloads from lsp-mode/clients/lsp-mint.el
@@ -6159,11 +6916,6 @@ In case the major-mode that you are using for " t)
 (register-definition-prefixes "lsp-mode/features/step-definitions/lsp-mode-steps" '("lsp-"))
 
 
-;;; Generated autoloads from lsp-mode/test/lsp-mode-test.el
-
-(register-definition-prefixes "lsp-mode/test/lsp-mode-test" '("lsp-"))
-
-
 ;;; Generated autoloads from lsp-mode/lsp-modeline.el
 
 (define-obsolete-variable-alias 'lsp-diagnostics-modeline-scope 'lsp-modeline-diagnostics-scope "\
@@ -6173,18 +6925,18 @@ Toggle code actions on modeline.
 
 This is a minor mode.  If called interactively, toggle the
 `Lsp-Modeline-Code-Actions mode' mode.  If the prefix argument is
-positive, enable the mode, and if it is zero or negative, disable
-the mode.
+positive, enable the mode, and if it is zero or negative, disable the
+mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `lsp-modeline-code-actions-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (define-obsolete-function-alias 'lsp-diagnostics-modeline-mode 'lsp-modeline-diagnostics-mode "lsp-mode 7.0.1")
@@ -6193,37 +6945,37 @@ Toggle diagnostics modeline.
 
 This is a minor mode.  If called interactively, toggle the
 `Lsp-Modeline-Diagnostics mode' mode.  If the prefix argument is
-positive, enable the mode, and if it is zero or negative, disable
-the mode.
+positive, enable the mode, and if it is zero or negative, disable the
+mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `lsp-modeline-diagnostics-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (autoload 'lsp-modeline-workspace-status-mode "lsp-mode/lsp-modeline" "\
 Toggle workspace status on modeline.
 
 This is a minor mode.  If called interactively, toggle the
-`Lsp-Modeline-Workspace-Status mode' mode.  If the prefix
-argument is positive, enable the mode, and if it is zero or
-negative, disable the mode.
+`Lsp-Modeline-Workspace-Status mode' mode.  If the prefix argument is
+positive, enable the mode, and if it is zero or negative, disable the
+mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `lsp-modeline-workspace-status-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "lsp-mode/lsp-modeline" '("lsp-"))
@@ -6388,19 +7140,18 @@ Enable semantic tokens mode.")
 Toggle semantic-tokens support.
 
 This is a minor mode.  If called interactively, toggle the
-`Lsp-Semantic-Tokens mode' mode.  If the prefix argument is
-positive, enable the mode, and if it is zero or negative, disable
-the mode.
+`Lsp-Semantic-Tokens mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `lsp-semantic-tokens-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "lsp-mode/lsp-semantic-tokens" '("lsp-"))
@@ -6451,11 +7202,6 @@ it is disabled.
 (register-definition-prefixes "lsp-mode/clients/lsp-terraform" '("construct-tf-package" "lsp-t"))
 
 
-;;; Generated autoloads from lsp-mode/test/lsp-test-utils.el
-
-(register-definition-prefixes "lsp-mode/test/lsp-test-utils" '("lsp-test-"))
-
-
 ;;; Generated autoloads from lsp-mode/clients/lsp-tex.el
 
 (register-definition-prefixes "lsp-mode/clients/lsp-tex" '("lsp-"))
@@ -6485,19 +7231,18 @@ or call the function `lsp-treemacs-sync-mode'.")
 Global minor mode for synchronizing lsp-mode workspace folders and treemacs projects.
 
 This is a global minor mode.  If called interactively, toggle the
-`Lsp-Treemacs-Sync mode' mode.  If the prefix argument is
-positive, enable the mode, and if it is zero or negative, disable
-the mode.
+`Lsp-Treemacs-Sync mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `(default-value \\='lsp-treemacs-sync-mode)'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (autoload 'lsp-treemacs-references "lsp-treemacs/lsp-treemacs" "\
@@ -7157,9 +7902,9 @@ Amend the last commit, without editing the message.
 
 With a prefix argument keep the committer date, otherwise change
 it.  The option `magit-commit-extend-override-date' can be used
-to inverse the meaning of the prefix argument.  
-(git commit
---amend --no-edit)
+to inverse the meaning of the prefix argument.
+
+(git commit --amend --no-edit)
 
 (fn &optional ARGS OVERRIDE-DATE)" t)
 (autoload 'magit-commit-reword "magit/lisp/magit-commit" "\
@@ -8723,11 +9468,6 @@ like \"/path/to/foo-bar\".
 (register-definition-prefixes "magit/lisp/magit-tag" '("magit-"))
 
 
-;;; Generated autoloads from magit/test/magit-tests.el
-
-(register-definition-prefixes "magit/test/magit-tests" '("magit-"))
-
-
 ;;; Generated autoloads from magit/lisp/magit-transient.el
 
 (register-definition-prefixes "magit/lisp/magit-transient" '("magit-"))
@@ -8756,18 +9496,18 @@ if you want finer control over when the wip refs are updated;
 but that is discouraged.
 
 This is a global minor mode.  If called interactively, toggle the
-`Magit-Wip mode' mode.  If the prefix argument is positive,
-enable the mode, and if it is zero or negative, disable the mode.
+`Magit-Wip mode' mode.  If the prefix argument is positive, enable the
+mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `(default-value \\='magit-wip-mode)'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (put 'magit-wip-after-save-mode 'globalized-minor-mode t)
@@ -8809,19 +9549,18 @@ in the worktree and the other contains snapshots of the entries
 in the index.
 
 This is a global minor mode.  If called interactively, toggle the
-`Magit-Wip-After-Apply mode' mode.  If the prefix argument is
-positive, enable the mode, and if it is zero or negative, disable
-the mode.
+`Magit-Wip-After-Apply mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `(default-value \\='magit-wip-after-apply-mode)'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (defvar magit-wip-before-change-mode nil "\
@@ -8844,18 +9583,18 @@ command which is about to be called are committed.
 
 This is a global minor mode.  If called interactively, toggle the
 `Magit-Wip-Before-Change mode' mode.  If the prefix argument is
-positive, enable the mode, and if it is zero or negative, disable
-the mode.
+positive, enable the mode, and if it is zero or negative, disable the
+mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `(default-value \\='magit-wip-before-change-mode)'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (autoload 'magit-wip-commit-initial-backup "magit/lisp/magit-wip" "\
@@ -8908,18 +9647,18 @@ or call the function `marginalia-mode'.")
 Annotate completion candidates with richer information.
 
 This is a global minor mode.  If called interactively, toggle the
-`Marginalia mode' mode.  If the prefix argument is positive,
-enable the mode, and if it is zero or negative, disable the mode.
+`Marginalia mode' mode.  If the prefix argument is positive, enable the
+mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `(default-value \\='marginalia-mode)'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (autoload 'marginalia-cycle "marginalia/marginalia" "\
@@ -8950,19 +9689,18 @@ Major mode for viewing GitHub Flavored Markdown content.
 Toggle native previewing on save for a specific markdown file.
 
 This is a minor mode.  If called interactively, toggle the
-`Markdown-Live-Preview mode' mode.  If the prefix argument is
-positive, enable the mode, and if it is zero or negative, disable
-the mode.
+`Markdown-Live-Preview mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `markdown-live-preview-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "markdown-mode/markdown-mode" '("defun-markdown-" "gfm-" "markdown"))
@@ -9000,19 +9738,19 @@ Meow minor mode.
 
 This minor mode is used by meow-global-mode, should not be enabled directly.
 
-This is a minor mode.  If called interactively, toggle the `Meow
-mode' mode.  If the prefix argument is positive, enable the mode,
-and if it is zero or negative, disable the mode.
+This is a minor mode.  If called interactively, toggle the `Meow mode'
+mode.  If the prefix argument is positive, enable the mode, and if it is
+zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `meow-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 \\{meow-keymap}
 
@@ -9059,18 +9797,18 @@ or call the function `meow-esc-mode'.")
 Mode that ensures ESC works in the terminal
 
 This is a global minor mode.  If called interactively, toggle the
-`Meow-Esc mode' mode.  If the prefix argument is positive, enable
-the mode, and if it is zero or negative, disable the mode.
+`Meow-Esc mode' mode.  If the prefix argument is positive, enable the
+mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `(default-value \\='meow-esc-mode)'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "meow/meow-esc" '("meow-"))
@@ -9368,19 +10106,18 @@ and returns the icon.
 Display nerd-icons icon for each files in a Dired buffer.
 
 This is a minor mode.  If called interactively, toggle the
-`Nerd-Icons-Dired mode' mode.  If the prefix argument is
-positive, enable the mode, and if it is zero or negative, disable
-the mode.
+`Nerd-Icons-Dired mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `nerd-icons-dired-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "nerd-icons-dired/nerd-icons-dired" '("nerd-icons-dired-"))
@@ -9465,19 +10202,19 @@ a value in `ivy-re-builders-alist'.
 (autoload 'org-appear-mode "org-appear/org-appear" "\
 A minor mode that automatically toggles elements in Org mode.
 
-This is a minor mode.  If called interactively, toggle the
-`Org-Appear mode' mode.  If the prefix argument is positive,
-enable the mode, and if it is zero or negative, disable the mode.
+This is a minor mode.  If called interactively, toggle the `Org-Appear
+mode' mode.  If the prefix argument is positive, enable the mode, and if
+it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `org-appear-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "org-appear/org-appear" '("org-appear-"))
@@ -9499,19 +10236,18 @@ it is disabled.
 Display orgmode trees.
 
 This is a minor mode.  If called interactively, toggle the
-`Org-Dynamic-Bullets mode' mode.  If the prefix argument is
-positive, enable the mode, and if it is zero or negative, disable
-the mode.
+`Org-Dynamic-Bullets mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `org-dynamic-bullets-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "org-visual-outline/org-dynamic-bullets" '("org-dynamic-bullets-"))
@@ -9525,19 +10261,19 @@ org-margin mode allows to outdent headers by moving leading
  stars into the margin and transform them into markers depending
  on the chosen style.
 
-This is a minor mode.  If called interactively, toggle the
-`Org-Margin mode' mode.  If the prefix argument is positive,
-enable the mode, and if it is zero or negative, disable the mode.
+This is a minor mode.  If called interactively, toggle the `Org-Margin
+mode' mode.  If the prefix argument is positive, enable the mode, and if
+it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `org-margin-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "org-margin/org-margin" '("org-margin-"))
@@ -9548,19 +10284,19 @@ it is disabled.
 (autoload 'org-modern-mode "org-modern/org-modern" "\
 Modern looks for Org.
 
-This is a minor mode.  If called interactively, toggle the
-`Org-Modern mode' mode.  If the prefix argument is positive,
-enable the mode, and if it is zero or negative, disable the mode.
+This is a minor mode.  If called interactively, toggle the `Org-Modern
+mode' mode.  If the prefix argument is positive, enable the mode, and if
+it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `org-modern-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (autoload 'org-modern-agenda "org-modern/org-modern" "\
@@ -9596,19 +10332,18 @@ See `org-modern-mode' for more information on Org-Modern mode.
 Org-modern-like block brackets within org-indent.
 
 This is a minor mode.  If called interactively, toggle the
-`Org-Modern-Indent mode' mode.  If the prefix argument is
-positive, enable the mode, and if it is zero or negative, disable
-the mode.
+`Org-Modern-Indent mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `org-modern-indent-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "org-modern-indent/org-modern-indent" '("org-modern-indent-"))
@@ -9763,19 +10498,18 @@ If you need to manually trigger resync of the currently active
 database, see `org-roam-db-sync' command.
 
 This is a global minor mode.  If called interactively, toggle the
-`Org-Roam-Db-Autosync mode' mode.  If the prefix argument is
-positive, enable the mode, and if it is zero or negative, disable
-the mode.
+`Org-Roam-Db-Autosync mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `(default-value \\='org-roam-db-autosync-mode)'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (autoload 'org-roam-db-autosync-enable "org-roam/org-roam-db" "\
@@ -9925,22 +10659,127 @@ Collect and print info for `org-roam' issues." t)
 Add vertical lines to `org-indent'.
 
 This is a minor mode.  If called interactively, toggle the
-`Org-Visual-Indent mode' mode.  If the prefix argument is
-positive, enable the mode, and if it is zero or negative, disable
-the mode.
+`Org-Visual-Indent mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `org-visual-indent-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "org-visual-outline/org-visual-indent" '("org-visual-indent-"))
+
+
+;;; Generated autoloads from outorg/outorg.el
+
+(autoload 'outorg-edit-as-org "outorg/outorg" "\
+Convert and copy to temporary Org buffer
+
+With ARG, act conditional on the raw value of ARG:
+
+| prefix | raw | action 1          | action 2                       |
+|--------+-----+-------------------+--------------------------------|
+| C-u    | (4) | edit-whole-buffer | ---                            |
+| C-1    |   1 | edit-whole-buffer | insert default export-template |
+| C-2    |   2 | edit-whole-buffer | prompt user for template-file  |
+| C-3    |   3 | edit-whole-buffer | insert & keep default template |
+| C-4    |   4 | edit-whole-buffer | insert & keep template-file    |
+| C-5    |   5 | propagate changes | ---                            |
+
+(fn &optional ARG)" t)
+(register-definition-prefixes "outorg/outorg" '("backward-line-comments" "forward-line-comments" "out" "skip-line-comment-or-ws"))
+
+
+;;; Generated autoloads from outorg/outorg-test.el
+
+(register-definition-prefixes "outorg/outorg-test" '("outorg-test-"))
+
+
+;;; Generated autoloads from outshine/outshine.el
+
+(autoload 'outshine-mode "outshine/outshine" "\
+Outshine brings the look&feel of Org-mode to the (GNU Emacs)
+
+world outside of the Org major-mode.
+
+This is a minor mode.  If called interactively, toggle the `Outshine
+mode' mode.  If the prefix argument is positive, enable the mode, and if
+it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `outshine-mode'.
+
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
+
+(fn &optional ARG)" t)
+(autoload 'outshine-hook-function "outshine/outshine" "\
+DEPRECATED, use `outshine-mode'.")
+(register-definition-prefixes "outshine/outshine" '("outshine-"))
+
+
+;;; Generated autoloads from outshine/outshine-org-cmds.el
+
+(register-definition-prefixes "outshine/outshine-org-cmds" '("outshine-"))
+
+
+;;; Generated autoloads from pangu-spacing/pangu-spacing.el
+
+(autoload 'pangu-spacing-space-current-buffer "pangu-spacing/pangu-spacing" "\
+Space current buffer.
+It will really insert separator, no matter what
+`pangu-spacing-real-insert-separtor' is." t)
+(autoload 'pangu-spacing-mode "pangu-spacing/pangu-spacing" "\
+Toggle pangu-spacing-mode
+
+This is a minor mode.  If called interactively, toggle the
+`Pangu-Spacing mode' mode.  If the prefix argument is positive, enable
+the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `pangu-spacing-mode'.
+
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
+
+(fn &optional ARG)" t)
+(put 'global-pangu-spacing-mode 'globalized-minor-mode t)
+(defvar global-pangu-spacing-mode nil "\
+Non-nil if Global Pangu-Spacing mode is enabled.
+See the `global-pangu-spacing-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `global-pangu-spacing-mode'.")
+(custom-autoload 'global-pangu-spacing-mode "pangu-spacing/pangu-spacing" nil)
+(autoload 'global-pangu-spacing-mode "pangu-spacing/pangu-spacing" "\
+Toggle Pangu-Spacing mode in all buffers.
+With prefix ARG, enable Global Pangu-Spacing mode if ARG is positive; otherwise, disable it.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.
+Enable the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+Pangu-Spacing mode is enabled in all buffers where `pangu-spacing-mode' would do it.
+
+See `pangu-spacing-mode' for more information on Pangu-Spacing mode.
+
+(fn &optional ARG)" t)
+(register-definition-prefixes "pangu-spacing/pangu-spacing" '("pangu-spacing-" "turn-on-pangu-spacing"))
 
 
 ;;; Generated autoloads from paren-face/paren-face.el
@@ -9948,19 +10787,19 @@ it is disabled.
 (autoload 'paren-face-mode "paren-face/paren-face" "\
 Use a dedicated face just for parentheses.
 
-This is a minor mode.  If called interactively, toggle the
-`Paren-Face mode' mode.  If the prefix argument is positive,
-enable the mode, and if it is zero or negative, disable the mode.
+This is a minor mode.  If called interactively, toggle the `Paren-Face
+mode' mode.  If the prefix argument is positive, enable the mode, and if
+it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `paren-face-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (put 'global-paren-face-mode 'globalized-minor-mode t)
@@ -10118,19 +10957,19 @@ Support for PDF Annotations.
 
 \\{pdf-annot-minor-mode-map}
 
-This is a minor mode.  If called interactively, toggle the
-`Pdf-Annot minor mode' mode.  If the prefix argument is positive,
-enable the mode, and if it is zero or negative, disable the mode.
+This is a minor mode.  If called interactively, toggle the `Pdf-Annot
+minor mode' mode.  If the prefix argument is positive, enable the mode,
+and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `pdf-annot-minor-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "pdf-tools/lisp/pdf-annot" '("pdf-annot-"))
@@ -10157,20 +10996,19 @@ may be navigated with the following keys.
 
 \\{pdf-history-minor-mode-map}
 
-This is a minor mode.  If called interactively, toggle the
-`Pdf-History minor mode' mode.  If the prefix argument is
-positive, enable the mode, and if it is zero or negative, disable
-the mode.
+This is a minor mode.  If called interactively, toggle the `Pdf-History
+minor mode' mode.  If the prefix argument is positive, enable the mode,
+and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `pdf-history-minor-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "pdf-tools/lisp/pdf-history" '("pdf-history-"))
@@ -10214,20 +11052,19 @@ that not every isearch command work as expected.
 
 \\{pdf-isearch-active-mode-map}
 
-This is a minor mode.  If called interactively, toggle the
-`Pdf-Isearch minor mode' mode.  If the prefix argument is
-positive, enable the mode, and if it is zero or negative, disable
-the mode.
+This is a minor mode.  If called interactively, toggle the `Pdf-Isearch
+minor mode' mode.  If the prefix argument is positive, enable the mode,
+and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `pdf-isearch-minor-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "pdf-tools/lisp/pdf-isearch" '("pdf-isearch-"))
@@ -10245,19 +11082,19 @@ links via \\[pdf-links-isearch-link].
 
 \\{pdf-links-minor-mode-map}
 
-This is a minor mode.  If called interactively, toggle the
-`Pdf-Links minor mode' mode.  If the prefix argument is positive,
-enable the mode, and if it is zero or negative, disable the mode.
+This is a minor mode.  If called interactively, toggle the `Pdf-Links
+minor mode' mode.  If the prefix argument is positive, enable the mode,
+and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `pdf-links-minor-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (autoload 'pdf-links-action-perform "pdf-tools/lisp/pdf-links" "\
@@ -10303,38 +11140,38 @@ see.
 (autoload 'pdf-misc-minor-mode "pdf-tools/lisp/pdf-misc" "\
 FIXME:  Not documented.
 
-This is a minor mode.  If called interactively, toggle the
-`Pdf-Misc minor mode' mode.  If the prefix argument is positive,
-enable the mode, and if it is zero or negative, disable the mode.
+This is a minor mode.  If called interactively, toggle the `Pdf-Misc
+minor mode' mode.  If the prefix argument is positive, enable the mode,
+and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `pdf-misc-minor-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (autoload 'pdf-misc-size-indication-minor-mode "pdf-tools/lisp/pdf-misc" "\
 Provide a working size indication in the mode-line.
 
 This is a minor mode.  If called interactively, toggle the
-`Pdf-Misc-Size-Indication minor mode' mode.  If the prefix
-argument is positive, enable the mode, and if it is zero or
-negative, disable the mode.
+`Pdf-Misc-Size-Indication minor mode' mode.  If the prefix argument is
+positive, enable the mode, and if it is zero or negative, disable the
+mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `pdf-misc-size-indication-minor-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (autoload 'pdf-misc-menu-bar-minor-mode "pdf-tools/lisp/pdf-misc" "\
@@ -10342,18 +11179,18 @@ Display a PDF Tools menu in the menu-bar.
 
 This is a minor mode.  If called interactively, toggle the
 `Pdf-Misc-Menu-Bar minor mode' mode.  If the prefix argument is
-positive, enable the mode, and if it is zero or negative, disable
-the mode.
+positive, enable the mode, and if it is zero or negative, disable the
+mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `pdf-misc-menu-bar-minor-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (autoload 'pdf-misc-context-menu-minor-mode "pdf-tools/lisp/pdf-misc" "\
@@ -10362,19 +11199,19 @@ Provide a right-click context menu in PDF buffers.
 \\{pdf-misc-context-menu-minor-mode-map}
 
 This is a minor mode.  If called interactively, toggle the
-`Pdf-Misc-Context-Menu minor mode' mode.  If the prefix argument
-is positive, enable the mode, and if it is zero or negative,
-disable the mode.
+`Pdf-Misc-Context-Menu minor mode' mode.  If the prefix argument is
+positive, enable the mode, and if it is zero or negative, disable the
+mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `pdf-misc-context-menu-minor-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "pdf-tools/lisp/pdf-misc" '("pdf-misc-"))
@@ -10413,19 +11250,18 @@ This global minor mode enables (or disables)
 in all current and future ibuffer/dired buffer.
 
 This is a global minor mode.  If called interactively, toggle the
-`Pdf-Occur-Global minor mode' mode.  If the prefix argument is
-positive, enable the mode, and if it is zero or negative, disable
-the mode.
+`Pdf-Occur-Global minor mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `(default-value \\='pdf-occur-global-minor-mode)'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (autoload 'pdf-occur-ibuffer-minor-mode "pdf-tools/lisp/pdf-occur" "\
@@ -10438,18 +11274,18 @@ and otherwise fallback to `ibuffer-do-occur'.
 
 This is a minor mode.  If called interactively, toggle the
 `Pdf-Occur-Ibuffer minor mode' mode.  If the prefix argument is
-positive, enable the mode, and if it is zero or negative, disable
-the mode.
+positive, enable the mode, and if it is zero or negative, disable the
+mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `pdf-occur-ibuffer-minor-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (autoload 'pdf-occur-dired-minor-mode "pdf-tools/lisp/pdf-occur" "\
@@ -10461,19 +11297,18 @@ version of `occur', if all marked buffer's are in `pdf-view-mode'
 and otherwise fallback to `dired-do-search'.
 
 This is a minor mode.  If called interactively, toggle the
-`Pdf-Occur-Dired minor mode' mode.  If the prefix argument is
-positive, enable the mode, and if it is zero or negative, disable
-the mode.
+`Pdf-Occur-Dired minor mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `pdf-occur-dired-minor-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "pdf-tools/lisp/pdf-occur" '("pdf-occur-"))
@@ -10490,20 +11325,19 @@ buffer.
 
 \\{pdf-outline-minor-mode-map}
 
-This is a minor mode.  If called interactively, toggle the
-`Pdf-Outline minor mode' mode.  If the prefix argument is
-positive, enable the mode, and if it is zero or negative, disable
-the mode.
+This is a minor mode.  If called interactively, toggle the `Pdf-Outline
+minor mode' mode.  If the prefix argument is positive, enable the mode,
+and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `pdf-outline-minor-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (autoload 'pdf-outline "pdf-tools/lisp/pdf-outline" "\
@@ -10539,19 +11373,19 @@ function displays the PDF page corresponding to the current
 position in the TeX buffer.  This function only works together
 with AUCTeX.
 
-This is a minor mode.  If called interactively, toggle the
-`Pdf-Sync minor mode' mode.  If the prefix argument is positive,
-enable the mode, and if it is zero or negative, disable the mode.
+This is a minor mode.  If called interactively, toggle the `Pdf-Sync
+minor mode' mode.  If the prefix argument is positive, enable the mode,
+and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `pdf-sync-minor-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "pdf-tools/lisp/pdf-sync" '("pdf-sync-"))
@@ -10642,18 +11476,18 @@ Enable recognition and handling of VPDF files.
 
 This is a global minor mode.  If called interactively, toggle the
 `Pdf-Virtual-Global minor mode' mode.  If the prefix argument is
-positive, enable the mode, and if it is zero or negative, disable
-the mode.
+positive, enable the mode, and if it is zero or negative, disable the
+mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `(default-value \\='pdf-virtual-global-minor-mode)'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (autoload 'pdf-virtual-buffer-create "pdf-tools/lisp/pdf-virtual" "\
@@ -10661,11 +11495,6 @@ it is disabled.
 
 (fn &optional FILENAMES BUFFER-NAME DISPLAY-P)" t)
 (register-definition-prefixes "pdf-tools/lisp/pdf-virtual" '("pdf-virtual-"))
-
-
-;;; Generated autoloads from pdf-tools/test/pdf-virtual-test.el
-
-(register-definition-prefixes "pdf-tools/test/pdf-virtual-test" '("pdf-virtual-test-document" "with-pdf-virtual-test-"))
 
 
 ;;; Generated autoloads from persp-mode.el/persp-mode.el
@@ -10696,19 +11525,19 @@ named collections of buffers and window configurations.
 Here is a keymap of this minor mode:
 \\{persp-mode-map}
 
-This is a global minor mode.  If called interactively, toggle the
-`Persp mode' mode.  If the prefix argument is positive, enable
-the mode, and if it is zero or negative, disable the mode.
+This is a global minor mode.  If called interactively, toggle the `Persp
+mode' mode.  If the prefix argument is positive, enable the mode, and if
+it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `(default-value \\='persp-mode)'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "persp-mode.el/persp-mode" '("*persp-" "clear-window-persp" "def-" "get-" "ido-toggle-persp-filter" "persp" "safe-persp-" "set-" "window-persp-set-p" "with-persp-ido-hooks"))
@@ -10734,27 +11563,29 @@ this is right: (pfuture-new \"git\" \"status\")
 
 ;;; Generated autoloads from auctex/plain-tex.el
 
-(autoload 'TeX-plain-tex-mode "auctex/plain-tex" "\
+ (if (eq (symbol-function 'plain-TeX-mode) 'plain-tex-mode)
+    (defalias 'plain-TeX-mode nil))
+(autoload 'plain-TeX-mode "auctex/plain-tex" "\
 Major mode in AUCTeX for editing plain TeX files.
 See info under AUCTeX for documentation.
 
-Special commands:
-\\{plain-TeX-mode-map}
-
-Entering `plain-tex-mode' calls the value of `text-mode-hook',
+Entering `plain-TeX-mode' calls the value of `text-mode-hook',
 then the value of `TeX-mode-hook', and then the value
-of `plain-TeX-mode-hook'." t)
-(autoload 'ams-tex-mode "auctex/plain-tex" "\
-Major mode in AUCTeX for editing AmS-TeX files.
+of `plain-TeX-mode-hook'.
+
+(fn)" t)
+(put 'plain-TeX-mode 'auctex-function-definition (symbol-function 'plain-TeX-mode))
+(autoload 'AmSTeX-mode "auctex/plain-tex" "\
+Major mode in AUCTeX for editing AmSTeX files.
 See info under AUCTeX for documentation.
 
-Special commands:
-\\{AmSTeX-mode-map}
+Entering `AmSTeX-mode' calls the value of `text-mode-hook', then
+the value of `TeX-mode-hook', `plain-TeX-mode-hook' and then the
+value of `AmSTeX-mode-hook'.
 
-Entering `ams-tex-mode' calls the value of `text-mode-hook',
-then the value of `TeX-mode-hook', and then the value
-of `AmS-TeX-mode-hook'." t)
-(register-definition-prefixes "auctex/plain-tex" '("AmS" "plain-TeX-"))
+(fn)" t)
+(defalias 'ams-tex-mode #'AmSTeX-mode)
+(register-definition-prefixes "auctex/plain-tex" '("AmSTeX-" "plain-TeX-"))
 
 
 ;;; Generated autoloads from popper/popper.el
@@ -10776,18 +11607,18 @@ customization options for details on how to designate buffer
 types as popups.
 
 This is a global minor mode.  If called interactively, toggle the
-`Popper mode' mode.  If the prefix argument is positive, enable
-the mode, and if it is zero or negative, disable the mode.
+`Popper mode' mode.  If the prefix argument is positive, enable the
+mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `(default-value \\='popper-mode)'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 \\{popper-mode-map}
 
@@ -10817,18 +11648,18 @@ To define buffers as popups and customize popup display, see
 `popper-mode'.
 
 This is a global minor mode.  If called interactively, toggle the
-`Popper-Echo mode' mode.  If the prefix argument is positive,
-enable the mode, and if it is zero or negative, disable the mode.
+`Popper-Echo mode' mode.  If the prefix argument is positive, enable the
+mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `(default-value \\='popper-echo-mode)'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "popper/popper-echo" '("popper-echo"))
@@ -11121,7 +11952,7 @@ Setup a nano-like mode-line." t)
 Hook function for restoring persistent previews into a buffer.
 
 (fn FILE-NAME BUFFER-NAME MISC)")
-(add-to-list 'desktop-buffer-mode-handlers '(latex-mode . desktop-buffer-preview))
+(add-to-list 'desktop-buffer-mode-handlers '(LaTeX-mode . desktop-buffer-preview))
 (autoload 'preview-install-styles "auctex/preview" "\
 Installs the TeX style files into a permanent location.
 This must be in the TeX search path.  If FORCE-OVERWRITE is greater
@@ -11141,6 +11972,17 @@ to add the preview functionality.")
 (autoload 'preview-report-bug "auctex/preview" "\
 Report a bug in the preview-latex package." t)
 (register-definition-prefixes "auctex/preview" '("TeX-" "desktop-buffer-preview-misc-data" "preview-"))
+
+
+;;; Generated autoloads from ripgrep.el/projectile-ripgrep.el
+
+(autoload 'projectile-ripgrep "ripgrep.el/projectile-ripgrep" "\
+Run a Ripgrep search with `SEARCH-TERM' rooted at the current projectile project root.
+
+With an optional prefix argument `ARG' `SEARCH-TERM' is interpreted as a
+regular expression.
+
+(fn SEARCH-TERM &optional ARG)" t)
 
 
 ;;; Generated autoloads from puni/puni.el
@@ -11506,18 +12348,18 @@ or call the function `pyim-isearch-mode'.")
 这个 mode 为 isearch 添加拼音搜索功能.
 
 This is a global minor mode.  If called interactively, toggle the
-`pyim-isearch mode' mode.  If the prefix argument is positive,
-enable the mode, and if it is zero or negative, disable the mode.
+`pyim-isearch mode' mode.  If the prefix argument is positive, enable
+the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `(default-value \\='pyim-isearch-mode)'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "pyim/pyim-cregexp-utils" '("pyim-"))
@@ -11668,19 +12510,18 @@ pyim 词库管理器。
 Highlight nested parentheses, brackets, and braces according to their depth.
 
 This is a minor mode.  If called interactively, toggle the
-`Rainbow-Delimiters mode' mode.  If the prefix argument is
-positive, enable the mode, and if it is zero or negative, disable
-the mode.
+`Rainbow-Delimiters mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `rainbow-delimiters-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (autoload 'rainbow-delimiters-mode-enable "rainbow-delimiters/rainbow-delimiters" "\
@@ -11702,19 +12543,19 @@ Colorize strings that represent colors.
 
 This will fontify with colors the string like \"#aabbcc\" or \"blue\".
 
-This is a minor mode.  If called interactively, toggle the
-`Rainbow mode' mode.  If the prefix argument is positive, enable
-the mode, and if it is zero or negative, disable the mode.
+This is a minor mode.  If called interactively, toggle the `Rainbow
+mode' mode.  If the prefix argument is positive, enable the mode, and if
+it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `rainbow-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "rainbow-mode/rainbow-mode" '("rainbow-"))
@@ -11742,6 +12583,16 @@ Argument NAME ignored.
 ;;; Generated autoloads from emacs-rime/rime-predicates.el
 
 (register-definition-prefixes "emacs-rime/rime-predicates" '("rime-predicate-"))
+
+
+;;; Generated autoloads from ripgrep.el/ripgrep.el
+
+(autoload 'ripgrep-regexp "ripgrep.el/ripgrep" "\
+Run a ripgrep search with `REGEXP' rooted at `DIRECTORY'.
+`ARGS' provides Ripgrep command line arguments.
+
+(fn REGEXP DIRECTORY &optional ARGS)" t)
+(register-definition-prefixes "ripgrep.el/ripgrep" '("ripgrep"))
 
 
 ;;; Generated autoloads from s.el/s.el
@@ -11774,6 +12625,11 @@ Start the web server with given `directory' as `httpd-root'.
 ;;; Generated autoloads from emacs-web-server/simple-httpd-test.el
 
 (register-definition-prefixes "emacs-web-server/simple-httpd-test" '("httpd--flet"))
+
+
+;;; Generated autoloads from emacs-async/smtpmail-async.el
+
+(register-definition-prefixes "emacs-async/smtpmail-async" '("async-smtpmail-"))
 
 
 ;;; Generated autoloads from spinner.el/spinner.el
@@ -11841,18 +12697,18 @@ this time, in which case it won't display at all.
 Minor mode for auto-highlighting symbol at point.
 
 This is a minor mode.  If called interactively, toggle the
-`Symbol-Overlay mode' mode.  If the prefix argument is positive,
-enable the mode, and if it is zero or negative, disable the mode.
+`Symbol-Overlay mode' mode.  If the prefix argument is positive, enable
+the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `symbol-overlay-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (autoload 'symbol-overlay-put "symbol-overlay/symbol-overlay" "\
@@ -11900,19 +12756,19 @@ Rename symbol at point on all its occurrences." t)
 (autoload 'tablist-minor-mode "tablist/tablist" "\
 Toggle Tablist minor mode on or off.
 
-This is a minor mode.  If called interactively, toggle the
-`Tablist minor mode' mode.  If the prefix argument is positive,
-enable the mode, and if it is zero or negative, disable the mode.
+This is a minor mode.  If called interactively, toggle the `Tablist
+minor mode' mode.  If the prefix argument is positive, enable the mode,
+and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `tablist-minor-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (autoload 'tablist-mode "tablist/tablist" "\
@@ -11925,11 +12781,6 @@ it is disabled.
 ;;; Generated autoloads from tablist/tablist-filter.el
 
 (register-definition-prefixes "tablist/tablist-filter" '("tablist-filter-"))
-
-
-;;; Generated autoloads from company-mode/test/template-tests.el
-
-(register-definition-prefixes "company-mode/test/template-tests" '("company-template-field-assert-text"))
 
 
 ;;; Generated autoloads from citre/tests/tags-lang-c/test.el
@@ -11947,34 +12798,9 @@ it is disabled.
 (register-definition-prefixes "citre/tests/common-process/test" '("poll-process"))
 
 
-;;; Generated autoloads from themes/test/test-helper.el
+;;; Generated autoloads from dired-hacks/tests/test-dired-filter.el
 
-(register-definition-prefixes "themes/test/test-helper" '("-build-face" "-color" "-with-"))
-
-
-;;; Generated autoloads from shrink-path.el/test/test-helper.el
-
-(register-definition-prefixes "shrink-path.el/test/test-helper" '("with-"))
-
-
-;;; Generated autoloads from pdf-tools/test/test-helper.el
-
-(register-definition-prefixes "pdf-tools/test/test-helper" '("cask-elpa" "pdf-t"))
-
-
-;;; Generated autoloads from lsp-ui/test/test-helper.el
-
-(register-definition-prefixes "lsp-ui/test/test-helper" '("lsp-ui-test-"))
-
-
-;;; Generated autoloads from jupyter/test/test-helper.el
-
-(register-definition-prefixes "jupyter/test/test-helper" '("jupyter-"))
-
-
-;;; Generated autoloads from ht.el/test/test-helper.el
-
-(register-definition-prefixes "ht.el/test/test-helper" '("ht-test/"))
+(register-definition-prefixes "dired-hacks/tests/test-dired-filter" '("with-dired"))
 
 
 ;;; Generated autoloads from combobulate/tests/test-navigation.el
@@ -11987,24 +12813,28 @@ it is disabled.
 (register-definition-prefixes "combobulate/tests/test-prelude" '("combobulate-test-"))
 
 
-;;; Generated autoloads from treemacs/test/testdir1/testdir2/testdir3/testfile.el
-
-(register-definition-prefixes "treemacs/test/testdir1/testdir2/testdir3/testfile" '("fn1" "fn2"))
-
-
 ;;; Generated autoloads from auctex/tex.el
 
 (autoload 'TeX-tex-mode "auctex/tex" "\
-Major mode in AUCTeX for editing TeX or LaTeX files.
+Call suitable AUCTeX major mode for editing TeX or LaTeX files.
 Tries to guess whether this file is for plain TeX or LaTeX.
 
 The algorithm is as follows:
 
-   1) if the file is empty or `TeX-force-default-mode' is not set to nil,
-      `TeX-default-mode' is chosen
-   2) If \\documentstyle or \\begin{, \\section{, \\part{ or \\chapter{ is
-      found, `latex-mode' is selected.
-   3) Otherwise, use `plain-tex-mode'" t)
+   1) If the file is empty or `TeX-force-default-mode' is not set to nil,
+      `TeX-default-mode' is chosen.
+   2) If non-commented out content matches with regular expression in
+      `TeX-format-list', use the associated major mode.  For example,
+      if \\documentclass or \\begin{, \\section{, \\part{ or \\chapter{ is
+      found, `LaTeX-mode' is selected.
+   3) Otherwise, use `TeX-default-mode'.
+
+By default, `TeX-format-list' has a fallback entry for
+`plain-TeX-mode', thus non-empty file which didn't match any
+other entries will enter `plain-TeX-mode'." t)
+ (if (eq (symbol-function 'TeX-mode) 'tex-mode)
+    (defalias 'TeX-mode nil))
+(put 'TeX-mode 'auctex-function-definition (symbol-function 'TeX-mode))
 (autoload 'TeX-auto-generate "auctex/tex" "\
 Generate style file for TEX and store it in AUTO.
 If TEX is a directory, generate style files for all files in the directory.
@@ -12020,7 +12850,7 @@ Don't hesitate to report any problems or inaccurate documentation.
 If you don't have setup sending mail from Emacs, please copy the
 output buffer into your mail program, as it gives us important
 information about your AUCTeX version and AUCTeX configuration." t)
-(register-definition-prefixes "auctex/tex" '("Bib" "ConTeXt-" "LaTeX-" "TeX-" "VirTeX-common-initialization" "docTeX-default-extension" "plain-TeX-auto-regexp-list" "tex-"))
+(register-definition-prefixes "auctex/tex" '("Bib" "ConTeXt-" "LaTeX-" "TeX-" "docTeX-default-extension" "plain-TeX-auto-regexp-list" "tex-"))
 
 
 ;;; Generated autoloads from auctex/tex-bar.el
@@ -12055,15 +12885,13 @@ Setup font lock support for TeX.")
 
 ;;; Generated autoloads from auctex/tex-info.el
 
-(defalias 'Texinfo-mode #'texinfo-mode)
-(autoload 'TeX-texinfo-mode "auctex/tex-info" "\
+(autoload 'Texinfo-mode "auctex/tex-info" "\
 Major mode in AUCTeX for editing Texinfo files.
 
-Special commands:
-\\{Texinfo-mode-map}
-
 Entering Texinfo mode calls the value of `text-mode-hook' and then the
-value of `Texinfo-mode-hook'." t)
+value of `Texinfo-mode-hook'.
+
+(fn)" t)
 (register-definition-prefixes "auctex/tex-info" '("Texinfo-" "texinfo-environment-regexp"))
 
 
@@ -12074,12 +12902,16 @@ value of `Texinfo-mode-hook'." t)
 
 ;;; Generated autoloads from auctex/tex-jp.el
 
-(autoload 'japanese-plain-tex-mode "auctex/tex-jp" "\
+(autoload 'japanese-plain-TeX-mode "auctex/tex-jp" "\
 Major mode in AUCTeX for editing Japanese plain TeX files.
-Set `japanese-TeX-mode' to t, and enter `TeX-plain-tex-mode'." t)
-(autoload 'japanese-latex-mode "auctex/tex-jp" "\
+
+(fn)" t)
+(defalias 'japanese-plain-tex-mode #'japanese-plain-TeX-mode)
+(autoload 'japanese-LaTeX-mode "auctex/tex-jp" "\
 Major mode in AUCTeX for editing Japanese LaTeX files.
-Set `japanese-TeX-mode' to t, and enter `TeX-latex-mode'." t)
+
+(fn)" t)
+(defalias 'japanese-latex-mode #'japanese-LaTeX-mode)
 (register-definition-prefixes "auctex/tex-jp" '("TeX-japanese-process-" "japanese-"))
 
 
@@ -12383,18 +13215,18 @@ Does not require `treemacs-git-mode' to be active.
 
 This is a global minor mode.  If called interactively, toggle the
 `Treemacs-Git-Commit-Diff mode' mode.  If the prefix argument is
-positive, enable the mode, and if it is zero or negative, disable
-the mode.
+positive, enable the mode, and if it is zero or negative, disable the
+mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `(default-value \\='treemacs-git-commit-diff-mode)'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "treemacs/src/elisp/treemacs-git-commit-diff-mode" '("treemacs--"))
@@ -12424,19 +13256,19 @@ This mode makes use of `treemacs-user-header-line-format' - and thus
 these options.
 
 This is a global minor mode.  If called interactively, toggle the
-`Treemacs-Indicate-Top-Scroll mode' mode.  If the prefix argument
-is positive, enable the mode, and if it is zero or negative,
-disable the mode.
+`Treemacs-Indicate-Top-Scroll mode' mode.  If the prefix argument is
+positive, enable the mode, and if it is zero or negative, disable the
+mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `(default-value \\='treemacs-indicate-top-scroll-mode)'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "treemacs/src/elisp/treemacs-header-line" '("treemacs-"))
@@ -12530,19 +13362,18 @@ or call the function `treemacs-icons-dired-mode'.")
 Display treemacs icons for each file in a Dired buffer.
 
 This is a global minor mode.  If called interactively, toggle the
-`Treemacs-Icons-Dired mode' mode.  If the prefix argument is
-positive, enable the mode, and if it is zero or negative, disable
-the mode.
+`Treemacs-Icons-Dired mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `(default-value \\='treemacs-icons-dired-mode)'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (autoload 'treemacs-icons-dired-enable-once "treemacs/src/extra/treemacs-icons-dired" "\
@@ -12677,18 +13508,18 @@ The peeked window can be scrolled using
 `treemacs-next/previous-page-other-window'
 
 This is a global minor mode.  If called interactively, toggle the
-`Treemacs-Peek mode' mode.  If the prefix argument is positive,
-enable the mode, and if it is zero or negative, disable the mode.
+`Treemacs-Peek mode' mode.  If the prefix argument is positive, enable
+the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `(default-value \\='treemacs-peek-mode)'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "treemacs/src/elisp/treemacs-peek-mode" '("treemacs--"))
@@ -12744,18 +13575,18 @@ This mode requires at least Emacs version 27 since it relies on
 
 This is a global minor mode.  If called interactively, toggle the
 `Treemacs-Project-Follow mode' mode.  If the prefix argument is
-positive, enable the mode, and if it is zero or negative, disable
-the mode.
+positive, enable the mode, and if it is zero or negative, disable the
+mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `(default-value \\='treemacs-project-follow-mode)'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "treemacs/src/elisp/treemacs-project-follow-mode" '("treemacs--"))
@@ -12825,19 +13656,18 @@ short time and giving the appearance of the tag follow action lasting much
 longer than it really does.
 
 This is a global minor mode.  If called interactively, toggle the
-`Treemacs-Tag-Follow mode' mode.  If the prefix argument is
-positive, enable the mode, and if it is zero or negative, disable
-the mode.
+`Treemacs-Tag-Follow mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `(default-value \\='treemacs-tag-follow-mode)'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "treemacs/src/elisp/treemacs-tag-follow-mode" '("treemacs--"))
@@ -12892,11 +13722,6 @@ The `imenu-create-index-function' for treemacs buffers.")
 (register-definition-prefixes "treemacs/src/elisp/treemacs-tags" '("treemacs--"))
 
 
-;;; Generated autoloads from treemacs/test/treemacs-test.el
-
-(register-definition-prefixes "treemacs/test/treemacs-test" '("test-treemacs--" "treemacs-"))
-
-
 ;;; Generated autoloads from treemacs/src/elisp/treemacs-themes.el
 
 (register-definition-prefixes "treemacs/src/elisp/treemacs-themes" '("treemacs-"))
@@ -12934,19 +13759,19 @@ Visually align the table at point." t)
 (autoload 'valign-mode "valign/valign" "\
 Visually align Org tables.
 
-This is a minor mode.  If called interactively, toggle the
-`Valign mode' mode.  If the prefix argument is positive, enable
-the mode, and if it is zero or negative, disable the mode.
+This is a minor mode.  If called interactively, toggle the `Valign mode'
+mode.  If the prefix argument is positive, enable the mode, and if it is
+zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `valign-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "valign/valign" '("valign-"))
@@ -12961,19 +13786,19 @@ Minor mode for editing SystemVerilog files.
 
 \\{verilog-ext-mode-map}
 
-This is a minor mode.  If called interactively, toggle the
-`Verilog-Ext mode' mode.  If the prefix argument is positive,
-enable the mode, and if it is zero or negative, disable the mode.
+This is a minor mode.  If called interactively, toggle the `Verilog-Ext
+mode' mode.  If the prefix argument is positive, enable the mode, and if
+it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `verilog-ext-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "verilog-ext/verilog-ext" '("verilog-ext-"))
@@ -13587,6 +14412,20 @@ Key bindings specific to `verilog-mode-map' are:
 (register-definition-prefixes "verilog-mode/verilog-mode" '("electric-verilog-" "verilog-" "vl-"))
 
 
+;;; Generated autoloads from verilog-ts-mode/verilog-ts-mode.el
+
+(autoload 'verilog-ts-install-grammar "verilog-ts-mode/verilog-ts-mode" "\
+Install Verilog tree-sitter grammar.
+
+This command requires Git, a C compiler and (sometimes) a C++ compiler,
+and the linker to be installed and on PATH." t)
+(autoload 'verilog-ts-mode "verilog-ts-mode/verilog-ts-mode" "\
+Major mode for editing SystemVerilog files, using tree-sitter library.
+
+(fn)" t)
+(register-definition-prefixes "verilog-ts-mode/verilog-ts-mode" '("verilog-ts-"))
+
+
 ;;; Generated autoloads from vertico/vertico.el
 
 (defvar vertico-mode nil "\
@@ -13601,18 +14440,18 @@ or call the function `vertico-mode'.")
 VERTical Interactive COmpletion.
 
 This is a global minor mode.  If called interactively, toggle the
-`Vertico mode' mode.  If the prefix argument is positive, enable
-the mode, and if it is zero or negative, disable the mode.
+`Vertico mode' mode.  If the prefix argument is positive, enable the
+mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `(default-value \\='vertico-mode)'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "vertico/vertico" '("vertico-"))
@@ -13632,18 +14471,18 @@ or call the function `vertico-buffer-mode'.")
 Display Vertico like a regular buffer in a large window.
 
 This is a global minor mode.  If called interactively, toggle the
-`Vertico-Buffer mode' mode.  If the prefix argument is positive,
-enable the mode, and if it is zero or negative, disable the mode.
+`Vertico-Buffer mode' mode.  If the prefix argument is positive, enable
+the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `(default-value \\='vertico-buffer-mode)'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "vertico/extensions/vertico-buffer" '("vertico-buffer-"))
@@ -13686,18 +14525,18 @@ or call the function `vertico-flat-mode'.")
 Flat, horizontal display for Vertico.
 
 This is a global minor mode.  If called interactively, toggle the
-`Vertico-Flat mode' mode.  If the prefix argument is positive,
-enable the mode, and if it is zero or negative, disable the mode.
+`Vertico-Flat mode' mode.  If the prefix argument is positive, enable
+the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `(default-value \\='vertico-flat-mode)'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "vertico/extensions/vertico-flat" '("vertico-flat-"))
@@ -13717,18 +14556,18 @@ or call the function `vertico-grid-mode'.")
 Grid display for Vertico.
 
 This is a global minor mode.  If called interactively, toggle the
-`Vertico-Grid mode' mode.  If the prefix argument is positive,
-enable the mode, and if it is zero or negative, disable the mode.
+`Vertico-Grid mode' mode.  If the prefix argument is positive, enable
+the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `(default-value \\='vertico-grid-mode)'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "vertico/extensions/vertico-grid" '("vertico-grid-"))
@@ -13745,18 +14584,18 @@ for a description of this minor mode.")
 Prefix candidates with indices.
 
 This is a global minor mode.  If called interactively, toggle the
-`Vertico-Indexed mode' mode.  If the prefix argument is positive,
-enable the mode, and if it is zero or negative, disable the mode.
+`Vertico-Indexed mode' mode.  If the prefix argument is positive, enable
+the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `(default-value \\='vertico-indexed-mode)'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "vertico/extensions/vertico-indexed" '("vertico-indexed-"))
@@ -13773,18 +14612,18 @@ for a description of this minor mode.")
 Mouse support for Vertico.
 
 This is a global minor mode.  If called interactively, toggle the
-`Vertico-Mouse mode' mode.  If the prefix argument is positive,
-enable the mode, and if it is zero or negative, disable the mode.
+`Vertico-Mouse mode' mode.  If the prefix argument is positive, enable
+the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `(default-value \\='vertico-mouse-mode)'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "vertico/extensions/vertico-mouse" '("vertico-mouse-"))
@@ -13804,19 +14643,18 @@ or call the function `vertico-multiform-mode'.")
 Configure Vertico in various forms per command.
 
 This is a global minor mode.  If called interactively, toggle the
-`Vertico-Multiform mode' mode.  If the prefix argument is
-positive, enable the mode, and if it is zero or negative, disable
-the mode.
+`Vertico-Multiform mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `(default-value \\='vertico-multiform-mode)'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "vertico/extensions/vertico-multiform" '("vertico-multiform-"))
@@ -13876,18 +14714,18 @@ or call the function `vertico-reverse-mode'.")
 Reverse the Vertico display.
 
 This is a global minor mode.  If called interactively, toggle the
-`Vertico-Reverse mode' mode.  If the prefix argument is positive,
-enable the mode, and if it is zero or negative, disable the mode.
+`Vertico-Reverse mode' mode.  If the prefix argument is positive, enable
+the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `(default-value \\='vertico-reverse-mode)'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "vertico/extensions/vertico-reverse" '("vertico-reverse-map"))
@@ -13918,19 +14756,18 @@ or call the function `vertico-unobtrusive-mode'.")
 Unobtrusive display for Vertico.
 
 This is a global minor mode.  If called interactively, toggle the
-`Vertico-Unobtrusive mode' mode.  If the prefix argument is
-positive, enable the mode, and if it is zero or negative, disable
-the mode.
+`Vertico-Unobtrusive mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `(default-value \\='vertico-unobtrusive-mode)'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "vertico/extensions/vertico-unobtrusive" '("vertico-unobtrusive--restore"))
@@ -13942,19 +14779,18 @@ it is disabled.
 Wrap lines according to `fill-column' in `visual-line-mode'.
 
 This is a minor mode.  If called interactively, toggle the
-`Visual-Fill-Column mode' mode.  If the prefix argument is
-positive, enable the mode, and if it is zero or negative, disable
-the mode.
+`Visual-Fill-Column mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `visual-fill-column-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 \\{visual-fill-column-mode-map}
 
@@ -14016,6 +14852,10 @@ Use `vr/query-replace' like you would use `query-replace-regexp'.
 
 ;;; Generated autoloads from vundo/vundo.el
 
+(defconst vundo-ascii-symbols '((selected-node . 120) (node . 111) (horizontal-stem . 45) (vertical-stem . 124) (branch . 124) (last-branch . 96)) "\
+ASCII symbols to draw vundo tree.")
+(defconst vundo-unicode-symbols '((selected-node . 9679) (node . 9675) (horizontal-stem . 9472) (vertical-stem . 9474) (branch . 9500) (last-branch . 9492)) "\
+Unicode symbols to draw vundo tree.")
 (autoload 'vundo "vundo/vundo" "\
 Display visual undo for the current buffer." t)
 (register-definition-prefixes "vundo/vundo" '("vundo-"))
@@ -14035,33 +14875,6 @@ Perform diff between marked and current buffer state.
 Displays in a separate diff buffer with name based on
 the original buffer name." t)
 (register-definition-prefixes "vundo/vundo-diff" '("vundo-diff-"))
-
-
-;;; Generated autoloads from vundo/test/vundo-stress-test.el
-
-(autoload 'vundo-stress-test "vundo/test/vundo-stress-test" "\
-Stress-test vundo-mode and the undo system.
-Interactively, prompts for the number of edits, undos, and
-undo/redo chain depth.  NEDITS is the number of lorem-ipsum
-sentences to insert which affects the total depth of the tree.
-NUNDOS is the (approximate) number of undo/redo chains to
-introduce into the edit sequence.  Larger values lead to wider
-trees with more (sub-)branching.  MAX-CHAIN-LENGTH is the maximum
-depth of the undo chains, which affects the length and nesting of
-the branches.  Prefix argument TEST-ROOT-NAV enables benchmarking
-navigation to the root of the undo tree.
-
-Timing is reported for launching vundo, and (if TEST-ROOT-NAV is
-non-nil) navigating to the tree's root.  Current undo limits,
-buffer content size and undo-list memory usage are also reported.
-Debug is enabled upon entry to vundo.
-
-(fn NEDITS NUNDOS MAX-CHAIN-LENGTH TEST-ROOT-NAV)" t)
-
-
-;;; Generated autoloads from vundo/test/vundo-test.el
-
-(register-definition-prefixes "vundo/test/vundo-test" '("vundo-"))
 
 
 ;;; Generated autoloads from emacs-websocket/websocket.el
@@ -14093,18 +14906,18 @@ or call the function `which-key-mode'.")
 Toggle which-key-mode.
 
 This is a global minor mode.  If called interactively, toggle the
-`Which-Key mode' mode.  If the prefix argument is positive,
-enable the mode, and if it is zero or negative, disable the mode.
+`Which-Key mode' mode.  If the prefix argument is positive, enable the
+mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `(default-value \\='which-key-mode)'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 \\{which-key-mode-map}
 
@@ -14267,19 +15080,19 @@ or call the function `winum-mode'.")
 (autoload 'winum-mode "emacs-winum/winum" "\
 A minor mode that allows for managing windows based on window numbers.
 
-This is a global minor mode.  If called interactively, toggle the
-`Winum mode' mode.  If the prefix argument is positive, enable
-the mode, and if it is zero or negative, disable the mode.
+This is a global minor mode.  If called interactively, toggle the `Winum
+mode' mode.  If the prefix argument is positive, enable the mode, and if
+it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `(default-value \\='winum-mode)'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (autoload 'winum-select-window-0-or-10 "emacs-winum/winum" "\
@@ -14419,18 +15232,18 @@ which also allows the use of another variable instead of
 
 This is a global minor mode.  If called interactively, toggle the
 `Shell-Command-With-Editor mode' mode.  If the prefix argument is
-positive, enable the mode, and if it is zero or negative, disable
-the mode.
+positive, enable the mode, and if it is zero or negative, disable the
+mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `(default-value \\='shell-command-with-editor-mode)'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (autoload 'with-editor-async-shell-command "with-editor/lisp/with-editor" "\
@@ -14476,19 +15289,19 @@ Negative prefix argument turns off the mode.
 Key bindings:
 \\{yas-minor-mode-map}
 
-This is a minor mode.  If called interactively, toggle the `yas
-minor mode' mode.  If the prefix argument is positive, enable the
-mode, and if it is zero or negative, disable the mode.
+This is a minor mode.  If called interactively, toggle the `yas minor
+mode' mode.  If the prefix argument is positive, enable the mode, and if
+it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `yas-minor-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (put 'yas-global-mode 'globalized-minor-mode t)

@@ -364,3 +364,33 @@
 [submodule "site-lisp/deno-bridge-jieba"]
 	path = site-lisp/deno-bridge-jieba
 	url = https://github.com/ginqi7/deno-bridge-jieba.git
+[submodule "site-lisp/ag.el"]
+	path = site-lisp/ag.el
+	url = https://github.com/Wilfred/ag.el.git
+[submodule "site-lisp/ripgrep.el"]
+	path = site-lisp/ripgrep.el
+	url = https://github.com/nlamirault/ripgrep.el.git
+[submodule "site-lisp/verilog-ts-mode"]
+	path = site-lisp/verilog-ts-mode
+	url = https://github.com/gmlarumbe/verilog-ts-mode.git
+[submodule "site-lisp/emacs-async"]
+	path = site-lisp/emacs-async
+	url = https://github.com/jwiegley/emacs-async.git
+[submodule "site-lisp/outshine"]
+	path = site-lisp/outshine
+	url = https://github.com/alphapapa/outshine.git
+[submodule "site-lisp/outorg"]
+	path = site-lisp/outorg
+	url = https://github.com/alphapapa/outorg.git
+[submodule "site-lisp/apheleia"]
+	path = site-lisp/apheleia
+	url = https://github.com/radian-software/apheleia.git
+[submodule "site-lisp/dired-sidebar"]
+	path = site-lisp/dired-sidebar
+	url = https://github.com/jojojames/dired-sidebar.git
+[submodule "site-lisp/dired-hacks"]
+	path = site-lisp/dired-hacks
+	url = https://github.com/Fuco1/dired-hacks.git
+[submodule "site-lisp/LaTeX-auto-activating-snippets"]
+	path = site-lisp/LaTeX-auto-activating-snippets
+	url = https://git.tecosaur.net/tec/LaTeX-auto-activating-snippets.git

@@ -20,7 +20,7 @@
                                          (let ((files (directory-files latex-node-directory))
                                                (texs ()))
                                            (dolist (file files)
-                                             (let ((fname (string-match "\.tex" file))
+                                             (let ((fname (string-match "\\.tex" file))
                                                    (temp (string-match "_region_.tex" file)))
                                                (when (and fname
                                                           (not temp))

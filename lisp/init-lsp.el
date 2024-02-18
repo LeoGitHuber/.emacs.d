@@ -4,17 +4,18 @@
 
 ;;; Coding Relpated
 
-(dolist (hook '(prog-mdoe-hook cuda-mode-hook TeX-mode-hook c-ts-mode-hook c++-ts-mode-hook))
-  (add-hook hook (lambda ()
-                   (unless (derived-mode-p 'emacs-lisp-mode 'lisp-mode
-                                           'verilog-mode
-                                           'makefile-mode 'snippet-mode)
-                     ;; (lsp-deferred)
-                     (eglot-ensure)
-                     ))))
+(defun lsp-enable-startup ()
+  "Enable `eglot' or `lsp-mode' for LSP."
+  (dolist (hook '(prog-mdoe-hook cuda-mode-hook TeX-mode-hook c-ts-mode-hook c++-ts-mode-hook))
+    (add-hook hook (lambda ()
+                     (unless (derived-mode-p 'emacs-lisp-mode 'lisp-mode
+                                             'verilog-mode
+                                             'makefile-mode 'snippet-mode)
+                       ;; (lsp-deferred)
+                       (eglot-ensure)
+                       )))))
 
-;; (dolist (hook '(cuda-mode-hook))  ;; prog-mode-hook  TeX-mode-hook
-;;   (add-hook hook 'yas-minor-mode))
+;; (lsp-enable-startup)
 
 (with-eval-after-load 'lsp-mode
   (with-eval-after-load 'lsp-ui
@@ -180,6 +181,7 @@
         acm-enable-search-file-words t
         acm-enable-telega nil
         acm-enable-tabnine nil
+        acm-enable-citre t
         ;; lsp-bridge-enable-log t
         lsp-bridge-enable-signature-help t
         lsp-bridge-enable-diagnostics nil
@@ -194,8 +196,8 @@
         ;; This will cause `org-roam-node-find' get wrong and I don't know why.
         ;; lsp-bridge-enable-org-babel t
         ;; lsp-bridge-c-lsp-server "clangd"
-        lsp-bridge-user-langserver-dir "~/.emacs.d/lisp/langserver"
-        lsp-bridge-user-multiserver-dir "~/.emacs.d/lisp/multilangserver"
+        ;; lsp-bridge-user-langserver-dir "~/.emacs.d/lisp/langserver"
+        ;; lsp-bridge-user-multiserver-dir "~/.emacs.d/lisp/multilangserver"
         )
   ;; (add-to-list 'lsp-bridge-multi-lang-server-mode-list
   ;;              '((verilog-mode) . "verilog"))

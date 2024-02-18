@@ -73,6 +73,8 @@
 (pixel-scroll-precision-mode)
 (global-subword-mode)
 (global-auto-revert-mode)
+(setq global-auto-revert-non-file-buffers t
+      auto-revert-interval 1)
 
 (with-eval-after-load 'info
   (add-to-list 'Info-directory-list "/usr/local/texlive/2023/texmf-dist/doc/info"))
@@ -230,11 +232,6 @@
 ;; (desktop-save-mode 1)
 
 
-  ;;; Efficiency
-(keymap-global-set "C-x f" 'find-file)
-(keymap-global-set "C-z" 'vundo)
-
-(global-set-key [remap comment-dwim] 'comment-or-uncomment)
 (setq comment-auto-fill-only-comments t)
 (setq whitespace-style '(face trailing))
 ;; (setq-default whitespace-style
@@ -251,7 +248,7 @@
                 (tab-mark ?\t [187 ?\t] [62 ?\t])))
 (add-hook 'prog-mode-hook #'whitespace-mode)
 
-(electric-indent-mode -1)
+;; (electric-indent-mode -1)
 ;; (follow-mode)
 
 ;; Smoothly scrolling over image
@@ -270,10 +267,10 @@
 (add-to-list 'load-path "~/.emacs.d/site-lisp/with-editor/lisp")
 (dolist
     (hook
-     '(emacs-lisp-mode-hook c++-ts-mode-hook c-ts-mode-hook
-                            cuda-mode-hook yuck-mode-hook
-                            python-ts-mode python-mode
-                            scss-mode-hook))
+     '(emacs-lisp-mode-hook
+       yuck-mode-hook
+       python-ts-mode python-mode
+       scss-mode-hook))
   (add-hook hook 'aggressive-indent-mode))
 ;; (dolist (mode '(verilog-mode org-mode term-mode))
 ;;   (add-to-list 'aggressive-indent-excluded-modes mode))
@@ -302,15 +299,18 @@
                 'mwim-beginning-of-code-or-line-or-comment)
 (global-set-key [remap move-end-of-line] 'mwim-end-of-code-or-line)
 
-(c-add-style "microsoft"
-             '("stroustrup"
-               (c-offsets-alist
-                (access-label . /)
-                (innamespace . -)
-                (inline-open . 0)
-                (inher-cont . c-lineup-multi-inher)
-                (arglist-cont-nonempty . +)
-                (template-args-cont . +))))
+(c-add-style
+ "microsoft"
+ '("stroustrup"
+   (c-offsets-alist
+    (access-label . /)
+    (innamespace . -)
+    (inline-open . 0)
+    (inher-cont . c-lineup-multi-inher)
+    (arglist-cont-nonempty . +)
+    (template-args-cont . +))
+   )
+ )
 
 (when (treesit-available-p)
   (setq major-mode-remap-alist
@@ -329,7 +329,8 @@
           (sh-mode         . bash-ts-mode))
         ;; treesit-font-lock-level 3
         )
-  (add-hook 'emacs-lisp-mode-hook (lambda () (treesit-parser-create 'elisp))))
+  (add-hook 'emacs-lisp-mode-hook
+            (lambda () (treesit-parser-create 'elisp))))
 
 ;; (defun packages-load-after-minibuffer ()
 ;;   (when (file-exists-p "~/.emacs.d/site-lisp/emacs-which-key/which-key.el")
@@ -359,6 +360,7 @@
         "*Warning*"
         "*tex-shell*"
         "*Compile-Log*"
+        "*xref*"
         help-mode
         helpful-mode
         compilation-mode
@@ -509,10 +511,10 @@ Adapted from `highlight-indentation-mode'."
       completion-category-overrides '((file (styles basic partial-completion))))
 
 (defun vertico-lsp-enable ()
-  ;; (and (functionp 'lsp-bridge-mode)
-  ;;      (global-lsp-bridge-mode))
-  (and (functionp 'corfu-mode)
-       (global-corfu-mode))
+  (and (functionp 'lsp-bridge-mode)
+       (global-lsp-bridge-mode))
+  ;; (and (functionp 'corfu-mode)
+  ;;      (global-corfu-mode))
   (and (boundp 'puni-mode)
        (puni-global-mode))
   (and (boundp 'vertico-mode)
@@ -627,7 +629,7 @@ Adapted from `highlight-indentation-mode'."
  :inherit 'mode-line
  :box nil)
 
-(load "~/.emacs.d/lisp/ultimate-tab.el")
+;; (load "~/.emacs.d/lisp/ultimate-tab.el")
 
 ;; (load "~/.emacs.d/site-lisp/password-store/contrib/emacs/password-store.el")
 

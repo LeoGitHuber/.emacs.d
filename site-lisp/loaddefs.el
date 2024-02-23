@@ -4466,6 +4466,161 @@ View Microsoft Office FILE as READ-ONLY PDF.
 (register-definition-prefixes "emacs-application-framework/app/pdf-viewer/eaf-pdf-viewer" '("eaf-"))
 
 
+;;; Generated autoloads from emacs-application-framework/app/pyqterminal/eaf-pyqterminal.el
+
+(autoload 'eaf-open-pyqterminal "emacs-application-framework/app/pyqterminal/eaf-pyqterminal" "\
+Open EAF PyQterminal." t)
+(autoload 'eaf-open-ipython "emacs-application-framework/app/pyqterminal/eaf-pyqterminal" "\
+Open ipython by EAF PyQterminal." t)
+(register-definition-prefixes "emacs-application-framework/app/pyqterminal/eaf-pyqterminal" '("eaf-"))
+
+
+;;; Generated autoloads from emacs-application-framework/app/terminal/eaf-terminal.el
+
+(autoload 'eaf-open-terminal "emacs-application-framework/app/terminal/eaf-terminal" "\
+Open EAF Terminal, a powerful GUI terminal emulator in Emacs.
+
+The initial directory is `default-directory'.  However, it opens `$HOME'
+ when `default-directory' is part of a remote process.
+
+If a buffer of EAF Terminal in `default-directory' exists, switch to the buffer.
+To override and open a new terminal regardless, call interactively with prefix arg." t)
+(register-definition-prefixes "emacs-application-framework/app/terminal/eaf-terminal" '("eaf-"))
+
+
+;;; Generated autoloads from emacs-eat/term/eat.el
+
+(register-definition-prefixes "emacs-eat/term/eat" '("terminal-init-eat" "xterm-eat-extra-capabilities"))
+
+
+;;; Generated autoloads from emacs-eat/eat.el
+
+(autoload 'eat-term-make "emacs-eat/eat" "\
+Make a Eat terminal at POSITION in BUFFER.
+
+(fn BUFFER POSITION)")
+(autoload 'eat "emacs-eat/eat" "\
+Start a new Eat terminal emulator in a buffer.
+
+Start a new Eat session, or switch to an already active session.
+Return the buffer selected (or created).
+
+With a non-numeric prefix ARG, create a new session.
+
+With a numeric prefix ARG (like \\[universal-argument] 42 \\[eat]),
+switch to the session with that number, or create it if it doesn't
+already exist.
+
+With double prefix argument ARG, ask for the program to run and run it
+in a newly created session.
+
+PROGRAM can be a shell command.
+
+(fn &optional PROGRAM ARG)" t)
+(autoload 'eat-other-window "emacs-eat/eat" "\
+Start a new Eat terminal emulator in a buffer in another window.
+
+Start a new Eat session, or switch to an already active session.
+Return the buffer selected (or created).
+
+With a non-numeric prefix ARG, create a new session.
+
+With a numeric prefix ARG switch to the session with that number, or
+create it if it doesn't already exist.
+
+With double prefix argument ARG, ask for the program to run and run it
+in a newly created session.
+
+PROGRAM can be a shell command.
+
+(fn &optional PROGRAM ARG)" t)
+(defvar eat-eshell-mode nil "\
+Non-nil if Eat-Eshell mode is enabled.
+See the `eat-eshell-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `eat-eshell-mode'.")
+(custom-autoload 'eat-eshell-mode "emacs-eat/eat" nil)
+(autoload 'eat-eshell-mode "emacs-eat/eat" "\
+Toggle Eat terminal emulation in Eshell.
+
+This is a global minor mode.  If called interactively, toggle the
+`Eat-Eshell mode' mode.  If the prefix argument is positive, enable the
+mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `(default-value \\='eat-eshell-mode)'.
+
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
+
+(fn &optional ARG)" t)
+(defvar eat-eshell-visual-command-mode nil "\
+Non-nil if Eat-Eshell-Visual-Command mode is enabled.
+See the `eat-eshell-visual-command-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `eat-eshell-visual-command-mode'.")
+(custom-autoload 'eat-eshell-visual-command-mode "emacs-eat/eat" nil)
+(autoload 'eat-eshell-visual-command-mode "emacs-eat/eat" "\
+Toggle running Eshell visual commands with Eat.
+
+This is a global minor mode.  If called interactively, toggle the
+`Eat-Eshell-Visual-Command mode' mode.  If the prefix argument is
+positive, enable the mode, and if it is zero or negative, disable the
+mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `(default-value \\='eat-eshell-visual-command-mode)'.
+
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
+
+(fn &optional ARG)" t)
+(autoload 'eat-project "emacs-eat/eat" "\
+Start Eat in the current project's root directory.
+
+Start a new Eat session, or switch to an already active session.
+Return the buffer selected (or created).
+
+With a non-numeric prefix ARG, create a new session.
+
+With a numeric prefix ARG (like
+\\[universal-argument] 42 \\[eat-project]), switch to the session with
+that number, or create it if it doesn't already exist.
+
+(fn &optional ARG)" t)
+(autoload 'eat-project-other-window "emacs-eat/eat" "\
+Start Eat in the current project root directory in another window.
+
+Start a new Eat session, or switch to an already active session.
+Return the buffer selected (or created).
+
+With a non-numeric prefix ARG, create a new session.
+
+With a numeric prefix ARG (like
+\\[universal-argument] 42 \\[eat-project]), switch to the session with
+that number, or create it if it doesn't already exist.
+
+(fn &optional ARG)" t)
+(register-definition-prefixes "emacs-eat/eat" '("eat-"))
+
+
+;;; Generated autoloads from emacs-eat/eat-tests.el
+
+(register-definition-prefixes "emacs-eat/eat-tests" '("eat--tests-"))
+
+
 ;;; Generated autoloads from ef-themes/ef-themes.el
 
 (autoload 'ef-themes-select "ef-themes/ef-themes" "\

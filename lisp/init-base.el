@@ -84,7 +84,8 @@
 (dolist
     (hook
      '(eshell-mode-hook shell-mode-hook term-mode-hook
-                        messages-buffer-mode-hook))
+                        messages-buffer-mode-hook
+                        eat-mode-hook))
   (add-hook hook (lambda ()
 				   (setq-local global-hl-line-mode nil))))
 
@@ -329,8 +330,9 @@
           (sh-mode         . bash-ts-mode))
         ;; treesit-font-lock-level 3
         )
-  (add-hook 'emacs-lisp-mode-hook
-            (lambda () (treesit-parser-create 'elisp))))
+  ;; (add-hook 'emacs-lisp-mode-hook
+  ;;           (lambda () (treesit-parser-create 'elisp)))
+  )
 
 ;; (defun packages-load-after-minibuffer ()
 ;;   (when (file-exists-p "~/.emacs.d/site-lisp/emacs-which-key/which-key.el")

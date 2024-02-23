@@ -394,3 +394,6 @@
 [submodule "site-lisp/LaTeX-auto-activating-snippets"]
 	path = site-lisp/LaTeX-auto-activating-snippets
 	url = https://git.tecosaur.net/tec/LaTeX-auto-activating-snippets.git
+[submodule "site-lisp/emacs-eat"]
+	path = site-lisp/emacs-eat
+	url = https://codeberg.org/akib/emacs-eat.git

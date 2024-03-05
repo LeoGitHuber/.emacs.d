@@ -5,7 +5,8 @@
 (require 'benchmark-init-loaddefs)
 (benchmark-init/activate)
 ;; (add-hook 'after-init-hook 'benchmark-init/deactivate)
-(setq custom-file "~/.emacs.d/custom.el")
+(setq custom-file "~/.emacs.d/custom.el"
+      load-prefer-newer t)
 (load "~/.emacs.d/custom.el")
 
 (let ((file-name-handler-alist nil))
@@ -61,23 +62,14 @@
   ;; (load "~/.emacs.d/lisp/latex-node.el")
   ;; (load "~/.emacs.d/lisp/init-latex.el")
   ;; (load "~/.emacs.d/lisp/init-base.el")
-
+  (setq eat-kill-buffer-on-exit t
+        css-indent-offset 2
+        set-mark-command-repeat-pop t)
 
   ;;; @1. GC
-  (defvar better-gc-cons-threshold (* 32 1024 1024) ;; 128mb
-    "The default value to use for `gc-cons-threshold'.
-If you experience freezing, decrease this.
-If you experience stuttering, increase this.")
 
-  ;; 开启 minibuffer 的时候不要 gc
-  (defun gc-minibuffer-setup-hook ()
-    "Turn off garbage collection during setup minibuffer."
-    (setq gc-cons-threshold (* better-gc-cons-threshold 2)))
-
-  (defun gc-minibuffer-exit-hook ()
-    "Turn on garbage collection after minibuffer exit."
-    (garbage-collect)
-    (setq gc-cons-threshold better-gc-cons-threshold))
+  (add-hook 'minibuffer-setup-hook 'gc-minibuffer-setup-hook)
+  (add-hook 'minibuffer-exit-hook 'gc-minibuffer-exit-hook)
 
   ;;; @2. flymake
 
@@ -241,111 +233,6 @@ current buffer state and calls REPORT-FN when done."
   ;;; @4. MEOW
 
   (require 'meow)
-  (defun meow-setup ()
-    (setq meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
-    (meow-motion-overwrite-define-key
-     '("j" . meow-next)
-     '("k" . meow-prev)
-     '("M-q" . ignore)
-     '("<escape>" . ignore))
-    (meow-leader-define-key
-     ;; SPC j/k will run the original command in MOTION state.
-     '("j" . "H-j")
-     '("k" . "H-k")
-     ;; Use SPC (0-9) for digit arguments.
-     '("1" . meow-digit-argument)
-     '("2" . meow-digit-argument)
-     '("3" . meow-digit-argument)
-     '("4" . meow-digit-argument)
-     '("5" . meow-digit-argument)
-     '("6" . meow-digit-argument)
-     '("7" . meow-digit-argument)
-     '("8" . meow-digit-argument)
-     '("9" . meow-digit-argument)
-     '("0" . meow-digit-argument)
-     '("/" . meow-keypad-describe-key)
-     '("?" . meow-cheatsheet))
-    (meow-normal-define-key
-     '("0" . meow-expand-0)
-     '("9" . meow-expand-9)
-     '("8" . meow-expand-8)
-     '("7" . meow-expand-7)
-     '("6" . meow-expand-6)
-     '("5" . meow-expand-5)
-     '("4" . meow-expand-4)
-     '("3" . meow-expand-3)
-     '("2" . meow-expand-2)
-     '("1" . meow-expand-1)
-     '("-" . negative-argument)
-     '(";" . meow-reverse)
-     '("," . meow-inner-of-thing)
-     '("." . meow-bounds-of-thing)
-     '("[" . meow-beginning-of-thing)
-     '("]" . meow-end-of-thing)
-     '("a" . meow-append)
-     '("A" . meow-open-below)
-     '("b" . meow-back-word)
-     '("B" . meow-back-symbol)
-     '("c" . meow-change)
-     '("d" . meow-delete)
-     '("D" . meow-backward-delete)
-     '("e" . meow-next-word)
-     '("E" . meow-next-symbol)
-     '("f" . meow-find)
-     '("g" . meow-cancel-selection)
-     '("G" . meow-grab)
-     '("h" . meow-left)
-     '("H" . meow-left-expand)
-     '("i" . meow-insert)
-     '("I" . meow-open-above)
-     '("j" . meow-next)
-     '("J" . meow-next-expand)
-     '("k" . meow-prev)
-     '("K" . meow-prev-expand)
-     '("l" . meow-right)
-     '("L" . meow-right-expand)
-     '("m" . meow-join)
-     '("n" . meow-search)
-     '("o" . meow-block)
-     '("O" . meow-to-block)
-     '("p" . meow-yank)
-     '("P" . meow-yank-forward)
-     '("q" . meow-quit)
-     '("Q" . meow-goto-line)
-     '("r" . meow-replace)
-     '("R" . meow-swap-grab)
-     '("s" . meow-kill)
-     '("t" . meow-till)
-     '("u" . meow-undo)
-     '("U" . meow-undo-in-selection)
-     '("v" . meow-visit)
-     '("w" . meow-mark-word)
-     '("W" . meow-mark-symbol)
-     '("x" . meow-line)
-     '("X" . meow-goto-line)
-     '("y" . meow-save)
-     '("Y" . meow-sync-grab)
-     '("z" . meow-pop-selection)
-     '("'" . repeat)
-     '(":" . execute-extended-command)
-     '("/" . isearch-forward)
-     '("G" . end-of-buffer)
-     '("M-q" . ignore)
-     '("<escape>" . ignore))
-    (meow-define-keys 'insert '("M-q" . meow-insert-exit))
-    (add-hook 'meow-insert-exit-hook
-              (lambda ()
-                (if buffer-file-name
-                    (save-buffer))))
-    (defun meow-yank-forward ()
-      "Yank forward."
-      (interactive)
-      (let ((select-enable-clipboard meow-use-clipboard))
-        (save-excursion
-          (meow--execute-kbd-macro meow--kbd-yank))
-        ))
-    )
-
   (meow-setup)
 
   (setq meow-use-cursor-position-hack t
@@ -397,12 +284,12 @@ current buffer state and calls REPORT-FN when done."
   (keymap-global-set "C-x C-r" 'restart-emacs)
   (keymap-global-set "C-c g" 'consult-ripgrep)
   (keymap-global-set "C-c f" 'consult-fd)
-;;; Efficiency
+  ;; @ Efficiency
   (keymap-global-set "C-x f" 'find-file)
   (keymap-global-set "C-z" 'vundo)
   (global-set-key [remap comment-dwim] 'comment-or-uncomment)
 
-;;; Fingertip
+  ;; @ Fingertip
   ;; (dolist (hook '(emacs-lisp-mode-hook c-mode-hook lisp-mode-hook))
   ;;   (add-hook hook 'fingertip-mode))
   (with-eval-after-load 'fingertip
@@ -439,7 +326,7 @@ current buffer state and calls REPORT-FN when done."
     ;; ("C-j" . fingertip-jump-up)
     )
 
-;;; Helpful
+  ;; @ Helpful
 
   (keymap-global-set "M-?" 'help-command)
 
@@ -455,17 +342,6 @@ current buffer state and calls REPORT-FN when done."
     (define-key global-map [remap capitalize-word] 'capitalize-any))
 
   ;;; @6. LSP
-
-  (defun lsp-enable-startup ()
-    "Enable `eglot' or `lsp-mode' for LSP."
-    (dolist (hook '(prog-mdoe-hook cuda-mode-hook TeX-mode-hook c-ts-mode-hook c++-ts-mode-hook))
-      (add-hook hook (lambda ()
-                       (unless (derived-mode-p 'emacs-lisp-mode 'lisp-mode
-                                               'verilog-mode
-                                               'makefile-mode 'snippet-mode)
-                         ;; (lsp-deferred)
-                         (eglot-ensure)
-                         )))))
 
   ;; (lsp-enable-startup)
 
@@ -575,15 +451,19 @@ current buffer state and calls REPORT-FN when done."
                         (frame-visible-p acm-menu-frame)))
                  ))))
 
+  (add-to-list 'project-vc-extra-root-markers "tsconfig.json")
+  (add-to-list 'project-vc-extra-root-markers "jsconfig.json")
   (with-eval-after-load 'eglot
     (setq eglot-send-changes-idle-time 0)
-    (add-to-list 'eglot-server-programs
-                 '((tex-mode context-mode texinfo-mode bibtex-mode)
-                   . ("digestif")))
+    ;; (add-to-list 'eglot-server-programs
+    ;;              '((tex-mode context-mode texinfo-mode bibtex-mode)
+    ;;                . ("digestif")))
     (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
     (add-hook 'eglot-managed-mode-hook 'corfu-mode)
     (add-hook 'eglot-managed-mode-hook 'yas-minor-mode)
     (eglot-booster-mode))
+
+  (lsp-enable-startup)
 
   ;; (dolist (completion '(company-mode corfu-mode))
   ;;   (with-eval-after-load completion
@@ -624,33 +504,33 @@ current buffer state and calls REPORT-FN when done."
   (with-eval-after-load 'lsp-bridge
     (add-hook 'lsp-bridge-mode-hook 'yas/minor-mode)
     (keymap-set yas-keymap "<tab>" 'acm-complete-or-expand-yas-snippet)
-    (setq acm-candidate-match-function 'orderless-flex
-          ;; acm-enable-icon t
-          ;; acm-enable-doc t
-          acm-enable-yas t
-          acm-enable-tempel t
-          acm-enable-quick-access nil
-          acm-enable-search-file-words t
-          acm-enable-telega nil
-          acm-enable-tabnine nil
-          acm-enable-citre t
-          ;; lsp-bridge-enable-log t
-          lsp-bridge-enable-signature-help t
-          lsp-bridge-enable-diagnostics nil
-          lsp-bridge-complete-manually nil
-          ;; lsp-bridge-enable-profile t
-          ;; lsp-bridge-multi-lang-server-mode-list nil
-          acm-backend-lsp-candidate-min-length 2
-          acm-backend-elisp-candidate-min-length 2
-          acm-backend-search-file-words-candidate-min-length 3
-          acm-backend-yas-candidate-min-length 1
-          lsp-bridge-python-command "python"
-          ;; This will cause `org-roam-node-find' get wrong and I don't know why.
-          ;; lsp-bridge-enable-org-babel t
-          ;; lsp-bridge-c-lsp-server "clangd"
-          ;; lsp-bridge-user-langserver-dir "~/.emacs.d/lisp/langserver"
-          ;; lsp-bridge-user-multiserver-dir "~/.emacs.d/lisp/multilangserver"
-          )
+    (setq ;; acm-candidate-match-function 'orderless-flex
+     ;; acm-enable-icon t
+     ;; acm-enable-doc t
+     acm-enable-yas t
+     acm-enable-tempel t
+     acm-enable-quick-access nil
+     acm-enable-search-file-words t
+     acm-enable-telega nil
+     acm-enable-tabnine nil
+     acm-enable-citre t
+     ;; lsp-bridge-enable-log t
+     lsp-bridge-enable-signature-help t
+     lsp-bridge-enable-diagnostics nil
+     lsp-bridge-complete-manually nil
+     ;; lsp-bridge-enable-profile t
+     ;; lsp-bridge-multi-lang-server-mode-list nil
+     acm-backend-lsp-candidate-min-length 2
+     acm-backend-elisp-candidate-min-length 2
+     acm-backend-search-file-words-candidate-min-length 3
+     acm-backend-yas-candidate-min-length 1
+     lsp-bridge-python-command "python"
+     ;; This will cause `org-roam-node-find' get wrong and I don't know why.
+     ;; lsp-bridge-enable-org-babel t
+     ;; lsp-bridge-c-lsp-server "clangd"
+     ;; lsp-bridge-user-langserver-dir "~/.emacs.d/lisp/langserver"
+     ;; lsp-bridge-user-multiserver-dir "~/.emacs.d/lisp/multilangserver"
+     )
     ;; (add-to-list 'lsp-bridge-multi-lang-server-mode-list
     ;;              '((verilog-mode) . "verilog"))
     ;; (add-to-list 'lsp-bridge-multi-lang-server-extension-list
@@ -773,68 +653,6 @@ current buffer state and calls REPORT-FN when done."
         cns-debug nil)
 
   (require 'cns nil t)
-
-  (when (featurep 'cns)
-    (add-hook 'find-file-hook 'cns-auto-enable)
-    (when (bound-and-true-p meow-mode)
-      (defun meow-cns-back-word (n)
-        "Select to the beginning the previous Nth word.
-
-A non-expandable word selection will be created.
-This command works similar to `meow-next-word'."
-        (interactive "p")
-        (unless (equal 'word (cdr (meow--selection-type)))
-          (meow--cancel-selection))
-        (let* ((expand (equal '(expand . word) (meow--selection-type)))
-               (_ (when expand (meow--direction-backward)))
-               (type (if expand '(expand . word) '(select . word)))
-               (m (point))
-               (p (save-mark-and-excursion
-                    (when (cns-backward-word n)
-                      (point)))))
-          (when p
-            (thread-first
-              (meow--make-selection type (meow--fix-word-selection-mark p m) p expand)
-              (meow--select))
-            (meow--maybe-highlight-num-positions '(meow--backward-word-1 . meow--forward-word-1)))))
-
-      (defun meow-cns-next-word (n)
-        "Select to the end of the next Nth word.
-
-A non-expandable, word selection will be created.
-
-To select continuous words, use following approaches:
-
-1. start the selection with `meow-mark-word'.
-
-2. use prefix digit arguments.
-
-3. use `meow-expand' after this command.
-"
-        (interactive "p")
-        (unless (equal 'word (cdr (meow--selection-type)))
-          (meow--cancel-selection))
-        (let* ((expand (equal '(expand . word) (meow--selection-type)))
-               (_ (when expand (meow--direction-forward)))
-               (type (if expand '(expand . word) '(select . word)))
-               (m (point))
-               (p (save-mark-and-excursion
-                    (when (cns-forward-word n)
-                      (point)))))
-          (when p
-            (thread-first
-              (meow--make-selection type (meow--fix-word-selection-mark p m) p expand)
-              (meow--select))
-            (meow--maybe-highlight-num-positions '(meow--backward-word-1 . meow--forward-word-1)))))
-
-
-      ;; (add-hook 'cns-mode-hook
-      ;;           (lambda ()
-      ;;             (meow-normal-define-key
-      ;;              '("b" . meow-cns-back-word)
-      ;;              '("e" . meow-cns-next-word)
-      ;;              )))
-      ))
 
   ;;; @9. INPUT
 
@@ -1571,9 +1389,6 @@ _h_   _l_   _o_k        _y_ank
                      (abbreviate-file-name (buffer-file-name))
                    "%b"))))
 
-  (add-hook 'minibuffer-setup-hook 'gc-minibuffer-setup-hook)
-  (add-hook 'minibuffer-exit-hook 'gc-minibuffer-exit-hook)
-
   ;; Emacs 28 后不再需要设置系统编码，以下是以前的设置
   ;; UTF-8 as default encoding
   ;; (set-language-environment "UTF-8")
@@ -1745,7 +1560,6 @@ _h_   _l_   _o_k        _y_ank
   ;; (setq desktop-path (list user-emacs-directory))
   ;;   desktop-auto-save-timeout 600)
   ;; (desktop-save-mode 1)
-
 
   (setq comment-auto-fill-only-comments t)
   (setq whitespace-style '(face trailing))
@@ -1942,59 +1756,7 @@ such alists."
      indent-bars-no-descend-string t
      indent-bars-treesit-ignore-blank-lines-types '("module")
      indent-bars-width-frac 0.15
-     )
-    (defun indent-bars--guess-spacing ()
-      "Get indentation spacing of current buffer.
-Adapted from `highlight-indentation-mode'."
-      (cond
-       (indent-bars-spacing-override)
-       ((and (derived-mode-p 'c-ts-mode) (boundp 'c-ts-mode-indent-offset))
-        c-ts-mode-indent-offset)
-       ((and (derived-mode-p 'c++-ts-mode) (boundp 'c-ts-mode-indent-offset))
-        c-ts-mode-indent-offset)
-       ((and (derived-mode-p 'python-mode) (boundp 'py-indent-offset))
-        py-indent-offset)
-       ((and (derived-mode-p 'python-mode) (boundp 'python-indent-offset))
-        python-indent-offset)
-       ((and (derived-mode-p 'ruby-mode) (boundp 'ruby-indent-level))
-        ruby-indent-level)
-       ((and (derived-mode-p 'scala-mode) (boundp 'scala-indent:step))
-        scala-indent:step)
-       ((and (derived-mode-p 'scala-mode) (boundp 'scala-mode-indent:step))
-        scala-mode-indent:step)
-       ((and (or (derived-mode-p 'scss-mode) (derived-mode-p 'css-mode))
-             (boundp 'css-indent-offset))
-        css-indent-offset)
-       ((and (derived-mode-p 'nxml-mode) (boundp 'nxml-child-indent))
-        nxml-child-indent)
-       ((and (derived-mode-p 'coffee-mode) (boundp 'coffee-tab-width))
-        coffee-tab-width)
-       ((and (derived-mode-p 'js-mode) (boundp 'js-indent-level))
-        js-indent-level)
-       ((and (derived-mode-p 'js2-mode) (boundp 'js2-basic-offset))
-        js2-basic-offset)
-       ((and (fboundp 'derived-mode-class)
-             (eq (derived-mode-class major-mode) 'sws-mode) (boundp 'sws-tab-width))
-        sws-tab-width)
-       ((and (derived-mode-p 'web-mode) (boundp 'web-mode-markup-indent-offset))
-        web-mode-markup-indent-offset)
-       ((and (derived-mode-p 'web-mode) (boundp 'web-mode-html-offset)) ; old var
-        web-mode-html-offset)
-       ((and (local-variable-p 'c-basic-offset) (boundp 'c-basic-offset))
-        c-basic-offset)
-       ((and (derived-mode-p 'yaml-mode) (boundp 'yaml-indent-offset))
-        yaml-indent-offset)
-       ((and (derived-mode-p 'elixir-mode) (boundp 'elixir-smie-indent-basic))
-        elixir-smie-indent-basic)
-       ((and (derived-mode-p 'lisp-data-mode) (boundp 'lisp-body-indent))
-        lisp-body-indent)
-       ((and (derived-mode-p 'cobol-mode) (boundp 'cobol-tab-width))
-        cobol-tab-width)
-       ((or (derived-mode-p 'go-ts-mode) (derived-mode-p 'go-mode))
-        tab-width)
-       ((and (boundp 'standard-indent) standard-indent))
-       (t 4)))
-    )
+     ))
 
   ;; (add-to-list 'load-path "~/.emacs.d/site-lisp/consult")
   ;; (require 'consult)
@@ -2021,17 +1783,17 @@ Adapted from `highlight-indentation-mode'."
   ;; (color-theme-sanityinc-tomorrow-bright)
   ;; (color-theme-sanityinc-tomorrow-bright)
 
-;;; Minibuffer Setting
+  ;; @ Minibuffer Setting
   ;; (load "~/.emacs.d/site-lisp/vertico/extensions/vertico-directory.el")
 
   (setq completion-styles '(orderless basic)
         completion-category-overrides '((file (styles basic partial-completion))))
 
   (defun vertico-lsp-enable ()
-    (and (functionp 'lsp-bridge-mode)
-         (global-lsp-bridge-mode))
-    ;; (and (functionp 'corfu-mode)
-    ;;      (global-corfu-mode))
+    ;; (and (functionp 'lsp-bridge-mode)
+    ;;      (global-lsp-bridge-mode))
+    (and (functionp 'corfu-mode)
+         (global-corfu-mode))
     (and (boundp 'puni-mode)
          (puni-global-mode))
     (and (boundp 'vertico-mode)
@@ -2057,12 +1819,12 @@ Adapted from `highlight-indentation-mode'."
         completion-category-overrides
         '((file (styles basic partial-completion))))
 
-  ;;; Windows Control
+  ;; @ Windows Control
 
   ;; (load "~/.emacs.d/site-lisp/emacs-winum/winum.el")
   ;; (winum-mode)
 
-  ;;; UI
+  ;; @ UI
   (dolist (hook '(prog-mode-hook text-mode-hook))
     (add-hook hook 'display-fill-column-indicator-mode))
   ;; (global-display-fill-column-indicator-mode)

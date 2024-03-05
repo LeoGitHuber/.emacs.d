@@ -801,9 +801,17 @@ Activate benchmark-init and start collecting data." t)
 ;;; Generated autoloads from benchmark-init-el/benchmark-init-modes.el
 
 (autoload 'benchmark-init/show-durations-tabulated "benchmark-init-el/benchmark-init-modes" "\
-Show the benchmark results in a sorted table." t)
+Show the benchmark results in a sorted table.
+ROOT is the root of the tree to show durations for.  If nil, it
+defaults to `benchmark-init/durations-tree'.
+
+(fn &optional ROOT)" t)
 (autoload 'benchmark-init/show-durations-tree "benchmark-init-el/benchmark-init-modes" "\
-Show durations in call-tree." t)
+Show durations in call-tree.
+ROOT is the root of the tree to show durations for.  If nil, it
+defaults to `benchmark-init/durations-tree'.
+
+(fn &optional ROOT)" t)
 (register-definition-prefixes "benchmark-init-el/benchmark-init-modes" '("benchmark-init/"))
 
 
@@ -10320,11 +10328,6 @@ Display a scratch buffer connected to the current block's session." t)
 
 ;;; Generated autoloads from orderless/orderless.el
 
-(autoload 'orderless-filter "orderless/orderless" "\
-Split STRING into components and find entries TABLE matching all.
-The predicate PRED is used to constrain the entries in TABLE.
-
-(fn STRING TABLE &optional PRED)")
 (autoload 'orderless-all-completions "orderless/orderless" "\
 Split STRING into components and find entries TABLE matching all.
 The predicate PRED is used to constrain the entries in TABLE.  The

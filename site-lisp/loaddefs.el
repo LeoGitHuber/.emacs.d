@@ -42,9 +42,19 @@
 (register-definition-prefixes "lsp-bridge/acm/acm-backend-elisp" '("acm-backend-elisp-"))
 
 
+;;; Generated autoloads from lsp-bridge/acm/acm-backend-jupyter.el
+
+(register-definition-prefixes "lsp-bridge/acm/acm-backend-jupyter" '("acm-"))
+
+
 ;;; Generated autoloads from lsp-bridge/acm/acm-backend-lsp.el
 
 (register-definition-prefixes "lsp-bridge/acm/acm-backend-lsp" '("acm-backend-lsp-"))
+
+
+;;; Generated autoloads from lsp-bridge/acm/acm-backend-org-roam.el
+
+(register-definition-prefixes "lsp-bridge/acm/acm-backend-org-roam" '("acm-"))
 
 
 ;;; Generated autoloads from lsp-bridge/acm/acm-backend-path.el
@@ -2037,22 +2047,10 @@ shadow backends that come after it.  Recommended usages:
 (autoload 'consult-completion-in-region "consult/consult" "\
 Use minibuffer completion as the UI for `completion-at-point'.
 
-The function is called with 4 arguments: START END COLLECTION PREDICATE.
-The arguments and expected return value are as specified for
-`completion-in-region'.  Use as a value for `completion-in-region-function'.
-
-The function can be configured via `consult-customize'.
-
-    (consult-customize consult-completion-in-region
-                       :completion-styles (basic)
-                       :cycle-threshold 3)
-
-These configuration options are supported:
-
-    * :cycle-threshold - Cycling threshold (def: `completion-cycle-threshold')
-    * :completion-styles - Use completion styles (def: `completion-styles')
-    * :require-match - Require matches when completing (def: nil)
-    * :prompt - The prompt string shown in the minibuffer
+The function is called with 4 arguments: START END COLLECTION
+PREDICATE.  The arguments and expected return value are as
+specified for `completion-in-region'.  Use this function as a
+value for `completion-in-region-function'.
 
 (fn START END COLLECTION &optional PREDICATE)")
 (autoload 'consult-outline "consult/consult" "\
@@ -2537,6 +2535,8 @@ evaluate `corfu-mode'.
 
 The mode's hook is called both when the mode is enabled and when it is
 disabled.
+
+\\{corfu-mode-map}
 
 (fn &optional ARG)" t)
 (put 'global-corfu-mode 'globalized-minor-mode t)
@@ -6522,8 +6522,6 @@ evaluate `lsp-bridge-mode'.
 
 The mode's hook is called both when the mode is enabled and when it is
 disabled.
-
-\\{lsp-bridge-mode-map}
 
 (fn &optional ARG)" t)
 (autoload 'global-lsp-bridge-mode "lsp-bridge/lsp-bridge" nil t)

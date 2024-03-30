@@ -455,13 +455,14 @@ current buffer state and calls REPORT-FN when done."
   (add-to-list 'project-vc-extra-root-markers "jsconfig.json")
   (with-eval-after-load 'eglot
     (setq eglot-send-changes-idle-time 0)
-    ;; (add-to-list 'eglot-server-programs
-    ;;              '((tex-mode context-mode texinfo-mode bibtex-mode)
-    ;;                . ("digestif")))
+    (add-to-list 'eglot-server-programs
+                 '((tex-mode context-mode texinfo-mode bibtex-mode)
+                   . ("texlab")))
     (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
     (add-hook 'eglot-managed-mode-hook 'corfu-mode)
     (add-hook 'eglot-managed-mode-hook 'yas-minor-mode)
-    (eglot-booster-mode))
+    ;; (eglot-booster-mode)
+    )
 
   (lsp-enable-startup)
 
@@ -538,7 +539,7 @@ current buffer state and calls REPORT-FN when done."
     ;; (setf (cdr (assoc 'verilog-mode lsp-bridge-single-lang-server-mode-list)) '("svlangserver"))
     ;; (add-to-list 'lsp-bridge-single-lang-server-mode-list '((verilog-mode) . "svlangserver"))
     ;; (add-to-list 'lsp-bridge-single-lang-server-mode-list '((verilog-mode) . "verible"))
-    (add-to-list 'lsp-bridge-single-lang-server-mode-list '((verilog-mode) . "veridian"))
+    ;; (add-to-list 'lsp-bridge-single-lang-server-mode-list '((verilog-mode) . "veridian"))
     ;; (add-to-list 'lsp-bridge-single-lang-server-mode-list '((verilog-mode) . "svls"))
     )
 
@@ -1052,15 +1053,17 @@ Can be used in `rime-disable-predicates' and `rime-inline-predicates'."
             ports))
     (require 'verilog-ext)
     (verilog-ext-mode-setup)
-    (verilog-ext-eglot-set-server 've-veridian)
+    ;; (verilog-ext-eglot-set-server 've-veridian)
+    (verilog-ext-eglot-set-server 've-svlangserver)
+
     ;; (add-hook 'verilog-mode-hook
     ;;           (lambda ()
     ;;             (eglot-ensure)
     ;;             (add-to-list 'eglot-server-programs
     ;;                          ;; '(verilog-mode . ("svlangserver"))
-    ;;                          '(verilog-mode . ("svls"))
+    ;;                          ;; '(verilog-mode . ("svls"))
     ;;                          ;; '(verilog-mode . ("vls"))
-    ;;                          ;; '(verilog-mode . ("veridian"))
+    ;;                          '(verilog-mode . ("veridian"))
     ;;                          )
     ;;             ;; (setq eglot-workspace-configuration
     ;;             ;;       '(:veridian
@@ -1084,13 +1087,13 @@ Can be used in `rime-disable-predicates' and `rime-inline-predicates'."
     ;;             ;;           "verilator -sv -Wall --lint-only",
     ;;             ;;           :systemverilog.formatCommand:
     ;;             ;;           "verible-verilog-format"))))
-    ;;             (setq eglot-workspace-configuration
-    ;;                   '(:svls
-    ;;                     (:settings
-    ;;                      (:systemverilog.launchConfiguration:
-    ;;                       "verilator -sv -Wall --lint-only",
-    ;;                       :systemverilog.formatCommand:
-    ;;                       "verible-verilog-format"))))
+    ;;             ;; (setq eglot-workspace-configuration
+    ;;             ;;       '(:svls
+    ;;             ;;         (:settings
+    ;;             ;;          (:systemverilog.launchConfiguration:
+    ;;             ;;           "verilator -sv -Wall --lint-only",
+    ;;             ;;           :systemverilog.formatCommand:
+    ;;             ;;           "verible-verilog-format"))))
     ;;             )
     ;;           )
     )

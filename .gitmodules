@@ -397,3 +397,6 @@
 [submodule "site-lisp/emacs-eat"]
 	path = site-lisp/emacs-eat
 	url = https://codeberg.org/akib/emacs-eat.git
+[submodule "site-lisp/exec-path-from-shell"]
+	path = site-lisp/exec-path-from-shell
+	url = https://github.com/purcell/exec-path-from-shell.git

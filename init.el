@@ -2,7 +2,10 @@
 ;;; Commentary:
 
 (add-to-list 'load-path "~/.emacs.d/site-lisp/benchmark-init-el")
-(require 'benchmark-init-loaddefs)
+(if (string-equal system-type "gnu/linux")
+    (require 'benchmark-init-loaddefs)
+  (require 'benchmark-init)
+  )
 (benchmark-init/activate)
 ;; (add-hook 'after-init-hook 'benchmark-init/deactivate)
 (setq custom-file "~/.emacs.d/custom.el"
@@ -1053,8 +1056,8 @@ Can be used in `rime-disable-predicates' and `rime-inline-predicates'."
             ports))
     (require 'verilog-ext)
     (verilog-ext-mode-setup)
-    ;; (verilog-ext-eglot-set-server 've-veridian)
-    (verilog-ext-eglot-set-server 've-svlangserver)
+    (verilog-ext-eglot-set-server 've-veridian)
+    ;; (verilog-ext-eglot-set-server 've-svlangserver)
 
     ;; (add-hook 'verilog-mode-hook
     ;;           (lambda ()
@@ -1353,7 +1356,9 @@ _h_   _l_   _o_k        _y_ank
   ;; (global-lsp-bridge-mode)
 
   (when (display-graphic-p)
-    (set-en_cn-font "BlexMono Nerd Font" "Source Han Serif CN" "Palatino Linotype"
+    ;; (set-en_cn-font "BlexMono Nerd Font" "Source Han Serif CN" "Palatino Linotype"
+    ;;                 "LXGW WenKai Screen" "Source Han Sans CN" 12.0)
+    (set-en_cn-font "InputMono" "Source Han Serif CN" "Palatino Linotyp"
                     "LXGW WenKai Screen" "Source Han Sans CN" 12.0)
     ;; Maple Mono NF --- Maple Mono SC NF, HarmonyOS Sans SC
     ;; PragmataPro Mono Liga --- SimHei
@@ -1847,12 +1852,15 @@ such alists."
        (>= (string-to-number (substring (current-time-string) 11 13)) 19)
        (<= (string-to-number (substring (current-time-string) 11 13)) 6))
       (progn
-        (if (equal (cadr themes_chosen) 'modus-vivendi)
+        (if (string-match-p "modus" (symbol-name (cadr themes_chosen)))
             (progn
               (setq modus-themes-org-blocks 'gray-background
                     modus-themes-bold-constructs t
                     modus-themes-italic-constructs t)
-              (load-theme (car (cdr themes_chosen)) t)
+              (require-theme 'modus-themes)
+              (if (string-match-p "3.0.0" (modus-themes-version))
+                  (load-theme 'modus-vivendi)
+                (load-theme (car (cdr themes_chosen)) t))
               (set-face-attribute 'modus-themes-heading-1 nil :height 1.25))
           (if (equal (cadr themes_chosen) 'manoj-dark)
               (progn

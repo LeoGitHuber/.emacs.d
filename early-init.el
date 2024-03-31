@@ -6,6 +6,12 @@
 
 (add-to-list 'default-frame-alist '(menu-bar-lines . 0))
 (add-to-list 'default-frame-alist '(tool-bar-lines . 0))
+
+(when (string-equal system-type "windows-nt")
+  (add-to-list 'default-frame-alist '(width . 140))
+  (add-to-list 'default-frame-alist '(height . 60))
+  )
+
 ;; 以下方式与上面相同
 ;; (push '(undecorated . t) default-frame-alist)
 ;; (push '(vertical-scroll-bar) default-frame-alist)

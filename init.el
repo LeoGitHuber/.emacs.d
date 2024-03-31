@@ -2,9 +2,14 @@
 ;;; Commentary:
 
 (add-to-list 'load-path "~/.emacs.d/site-lisp/benchmark-init-el")
-(if (string-equal system-type "gnu/linux")
-    (require 'benchmark-init-loaddefs)
-  (require 'benchmark-init)
+
+(defvar windows-system-p
+  (string-equal system-type "windows-nt")
+  "Judge whether it's Windows system.")
+
+(if windows-system-p
+    (require 'benchmark-init)
+  (require 'benchmark-init-loaddefs)
   )
 (benchmark-init/activate)
 ;; (add-hook 'after-init-hook 'benchmark-init/deactivate)
@@ -464,7 +469,8 @@ current buffer state and calls REPORT-FN when done."
     (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
     (add-hook 'eglot-managed-mode-hook 'corfu-mode)
     (add-hook 'eglot-managed-mode-hook 'yas-minor-mode)
-    ;; (eglot-booster-mode)
+    (when windows-system-p
+      (eglot-booster-mode))
     )
 
   (lsp-enable-startup)

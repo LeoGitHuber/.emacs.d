@@ -8,7 +8,9 @@
   "Judge whether it's Windows system.")
 
 (if windows-system-p
-    (require 'benchmark-init)
+    (progn
+      (require 'benchmark-init)
+      (prefer-coding-system 'utf-8))
   (require 'benchmark-init-loaddefs)
   )
 (benchmark-init/activate)
@@ -1361,39 +1363,8 @@ _h_   _l_   _o_k        _y_ank
 
   ;; (global-lsp-bridge-mode)
 
-  (when (display-graphic-p)
-    (set-en_cn-font "BlexMono Nerd Font" "Source Han Serif CN" "Palatino Linotype"
-                    "LXGW WenKai Screen" "Source Han Sans CN" 12.0)
-    ;; (set-en_cn-font "InputMono" "Source Han Serif CN" "Palatino Linotyp"
-    ;;                 "LXGW WenKai Screen" "Source Han Sans CN" 12.0)
-    ;; Maple Mono NF --- Maple Mono SC NF, HarmonyOS Sans SC
-    ;; PragmataPro Mono Liga --- SimHei
-    ;; Hack --- HarmonyOS Sans SC
-    ;; JetBrainsMono NF
-    ;; "Iosevka Fixed"    ;; Input Mono
-    (setq frame-title-format
-          '((:eval (if (buffer-file-name)
-                       (abbreviate-file-name
-                        (buffer-name))
-                     "%b")))
-          bidi-inhibit-bpa t
-          long-line-threshold 1000
-          large-hscroll-threshold 1000
-          syntax-wholeline-max 1000)
-
-    ;; ;; Enable Ligatures Feature, more info: https://github.com/mickeynp/ligature.el
-    ;; (global-ligature-mode)
-    ;; ;; PragmataPro Font Ligature Support
-    ;; (ligature-pragmatapro-setup)
-    ;; Set icon for truncation
-    ;; (setq truncate-string-ellipsis (nerd-icons-mdicon "nf-md-arrow_down_right"))
-
-    (setq x-underline-at-descent-line t)
-    ;; Don't use help echo tooltips
-    ;; (setq x-gtk-use-system-tooltips nil)
-    ;; (unless (symbol-value x-gtk-use-system-tooltips)
-    ;;   (set-face-attribute 'tooltip nil))
-    )
+  (setup-display-graphic)
+  (add-hook 'server-after-make-frame-hook 'setup-display-graphic)
 
   (add-hook 'emacs-startup-hook
             (lambda () (setq gc-cons-threshold better-gc-cons-threshold)))
@@ -1458,10 +1429,6 @@ _h_   _l_   _o_k        _y_ank
           (cursor-type) (no-special-glyphs . t) (desktop-dont-save . t)
           (child-frame-border-width 3)))
 
-  ;; Set this face for `show-paren-mode' context appearance when offscreen.
-  (set-face-attribute 'child-frame-border
-                      nil
-                      :background (nth 3 (face-attribute 'mode-line-highlight :box)))
 
   ;; (add-to-list 'load-path "~/.emacs.d/site-lisp/auto-save")
   ;; (require 'auto-save)
@@ -1857,29 +1824,28 @@ such alists."
   (if (or
        (>= (string-to-number (substring (current-time-string) 11 13)) 19)
        (<= (string-to-number (substring (current-time-string) 11 13)) 6))
-      (progn
-        (if (string-match-p "modus" (symbol-name (cadr themes_chosen)))
+      (if (string-prefix-p "modus" (symbol-name (cadr themes_chosen)))
+          (progn
+            (setq modus-themes-org-blocks 'gray-background
+                  modus-themes-bold-constructs t
+                  modus-themes-italic-constructs t)
+            (require-theme 'modus-themes)
+            (if (string-equal "3.0.0" modus-themes--version)
+                (load-theme 'modus-vivendi)
+              (load-theme (car (cdr themes_chosen)) t))
+            (set-face-attribute 'modus-themes-heading-1 nil :height 1.25))
+        (if (equal (cadr themes_chosen) 'manoj-dark)
             (progn
-              (setq modus-themes-org-blocks 'gray-background
-                    modus-themes-bold-constructs t
-                    modus-themes-italic-constructs t)
-              (require-theme 'modus-themes)
-              (if (string-match-p "3.0.0" (modus-themes-version))
-                  (load-theme 'modus-vivendi)
-                (load-theme (car (cdr themes_chosen)) t))
-              (set-face-attribute 'modus-themes-heading-1 nil :height 1.25))
-          (if (equal (cadr themes_chosen) 'manoj-dark)
-              (progn
-                (load-theme (car (cdr themes_chosen)) t)
-                (set-face-foreground 'hl-line 'unspecified)
-                (set-face-background 'fringe 'unspecified))
-            (if (string-match "ef-" (symbol-name (cadr themes_chosen)))
-                (ef-themes-select-dark (cadr themes_chosen))
-              (progn
-                (load-theme (cadr themes_chosen) t)
-                (setq doom-rouge-brighter-comments t
-                      doom-rouge-brighter-tabs t))
-              ))))
+              (load-theme (car (cdr themes_chosen)) t)
+              (set-face-foreground 'hl-line 'unspecified)
+              (set-face-background 'fringe 'unspecified))
+          (if (string-match "ef-" (symbol-name (cadr themes_chosen)))
+              (ef-themes-select-dark (cadr themes_chosen))
+            (progn
+              (load-theme (cadr themes_chosen) t)
+              (setq doom-rouge-brighter-comments t
+                    doom-rouge-brighter-tabs t))
+            )))
     (progn
       ;; (load-theme (car themes_chosen) t)
       ;; (ef-themes-select-light (car themes_chosen))

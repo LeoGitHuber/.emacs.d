@@ -421,5 +421,50 @@ If you experience stuttering, increase this.")
   (garbage-collect)
   (setq gc-cons-threshold better-gc-cons-threshold))
 
+(defun setup-display-graphic ()
+  "Setup display graphic for GUI Emacs and Emacsclient."
+  (when (display-graphic-p)
+    ;; (set-en_cn-font "BlexMono Nerd Font" "Source Han Serif CN" "Palatino Linotype"
+    ;;                 "LXGW WenKai Screen" "Source Han Sans CN" 12.0)
+    (set-en_cn-font "InputMono" "Source Han Serif CN" "Palatino Linotyp"
+                    "LXGW WenKai Screen" "Source Han Sans CN" 12.0)
+    ;; Maple Mono NF --- Maple Mono SC NF, HarmonyOS Sans SC
+    ;; PragmataPro Mono Liga --- SimHei
+    ;; Hack --- HarmonyOS Sans SC
+    ;; JetBrainsMono NF
+    ;; "Iosevka Fixed"    ;; Input Mono
+    (setq frame-title-format
+          '((:eval (if (buffer-file-name)
+                       (abbreviate-file-name
+                        (buffer-name))
+                     "%b")))
+          bidi-inhibit-bpa t
+          long-line-threshold 1000
+          large-hscroll-threshold 1000
+          syntax-wholeline-max 1000)
+
+    ;; ;; Enable Ligatures Feature, more info: https://github.com/mickeynp/ligature.el
+    ;; (global-ligature-mode)
+    ;; ;; PragmataPro Font Ligature Support
+    ;; (ligature-pragmatapro-setup)
+    ;; Set icon for truncation
+    ;; (setq truncate-string-ellipsis (nerd-icons-mdicon "nf-md-arrow_down_right"))
+
+    (setq x-underline-at-descent-line t)
+
+    ;; Don't use help echo tooltips
+    ;; (setq x-gtk-use-system-tooltips nil)
+    ;; (unless (symbol-value x-gtk-use-system-tooltips)
+    ;;   (set-face-attribute 'tooltip nil))
+
+    ;; Set this face for `show-paren-mode' context appearance when offscreen.
+    (let ((mode-line-box-p (face-attribute 'mode-line-highlight :box)))
+      (when (not (eq mode-line-box-p 'unspecified))
+        (set-face-attribute 'child-frame-border
+                            nil
+                            :background (nth 3 mode-line-box-p))))
+    )
+  )
+
 (provide 'init-func)
 ;;; init-func.el ends here.

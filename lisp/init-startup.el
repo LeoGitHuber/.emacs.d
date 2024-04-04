@@ -171,7 +171,9 @@
            (insert "\n")))
        file-time-list))
     (setq buffer-read-only t))
-  (remove-hook 'emacs-startup-hook 'initial-startup-screen))
+  (remove-hook 'emacs-startup-hook 'initial-startup-screen)
+  (prefer-coding-system 'gbk)
+  (prefer-coding-system 'utf-8))
 
 (add-hook 'emacs-startup-hook 'initial-startup-screen)
 

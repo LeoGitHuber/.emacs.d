@@ -396,11 +396,18 @@ use `cm/autoloads-file' as TARGET."
 
 (defun lsp-enable-startup ()
   "Enable `eglot' or `lsp-mode' for LSP."
-  (dolist (hook '(prog-mdoe-hook cuda-mode-hook TeX-mode-hook c-ts-mode-hook c++-ts-mode-hook
-                                 js-mode-hook js-ts-mode-hook))
+  (dolist (hook '(prog-mdoe-hook
+                  cuda-mode-hook
+                  TeX-mode-hook
+                  c-ts-mode-hook c++-ts-mode-hook
+                  python-ts-mode-hook python-ts-mode
+                  verilog-mode-hook
+                  verilog-ts-mode-hook
+                  js-mode-hook
+                  js-ts-mode-hook))
     (add-hook hook (lambda ()
                      (unless (derived-mode-p 'emacs-lisp-mode 'lisp-mode
-                                             'verilog-mode
+                                             ;; 'verilog-mode
                                              'makefile-mode 'snippet-mode)
                        ;; (lsp-deferred)
                        (eglot-ensure)
@@ -473,7 +480,7 @@ If you experience stuttering, increase this.")
                   modus-themes-bold-constructs t
                   modus-themes-italic-constructs t)
             (require-theme 'modus-themes)
-            (if (string-equal "3.0.0" modus-themes--version)
+            (if (string-match-p "29" emacs-version)
                 (load-theme 'modus-vivendi)
               (load-theme (car (cdr themes_chosen)) t))
             (set-face-attribute 'modus-themes-heading-1 nil :height 1.25))

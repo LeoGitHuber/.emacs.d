@@ -461,8 +461,8 @@ current buffer state and calls REPORT-FN when done."
                         (frame-visible-p acm-menu-frame)))
                  ))))
 
-  (add-to-list 'project-vc-extra-root-markers "tsconfig.json")
-  (add-to-list 'project-vc-extra-root-markers "jsconfig.json")
+  ;; (add-to-list 'project-vc-extra-root-markers "tsconfig.json")
+  ;; (add-to-list 'project-vc-extra-root-markers "jsconfig.json")
   (with-eval-after-load 'eglot
     (setq eglot-send-changes-idle-time 0)
     (add-to-list 'eglot-server-programs
@@ -471,7 +471,7 @@ current buffer state and calls REPORT-FN when done."
     (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
     (add-hook 'eglot-managed-mode-hook 'corfu-mode)
     (add-hook 'eglot-managed-mode-hook 'yas-minor-mode)
-    (when windows-system-p
+    (when (and windows-system-p (string-match-p "29" emacs-version))
       (eglot-booster-mode))
     )
 
@@ -1635,7 +1635,7 @@ _h_   _l_   _o_k        _y_ank
             (python-mode     . python-ts-mode)
             (ruby-mode       . ruby-ts-mode)
             (sh-mode         . bash-ts-mode))
-          ;; treesit-font-lock-level 3
+          treesit-font-lock-level 4
           )
     ;; (add-hook 'emacs-lisp-mode-hook
     ;;           (lambda () (treesit-parser-create 'elisp)))

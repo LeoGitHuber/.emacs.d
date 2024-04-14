@@ -1851,6 +1851,4 @@ such alists."
     (setq highlight-indent-guides-method 'character
           highlight-indent-guides-responsive 'top
           highlight-indent-guides-suppress-auto-error t))
-
-
   )

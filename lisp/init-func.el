@@ -431,10 +431,11 @@ If you experience stuttering, increase this.")
 (defun setup-display-graphic ()
   "Setup display graphic for GUI Emacs and Emacsclient."
   (when (display-graphic-p)
-    ;; (set-en_cn-font "BlexMono Nerd Font" "Source Han Serif CN" "Palatino Linotype"
-    ;;                 "LXGW WenKai Screen" "Source Han Sans CN" 12.0)
-    (set-en_cn-font "InputMono" "Source Han Serif CN" "Palatino Linotyp"
-                    "LXGW WenKai Screen" "Source Han Sans CN" 12.0)
+    (if (not windows-system-p)
+        (set-en_cn-font "BlexMono Nerd Font" "Source Han Serif CN" "Palatino Linotype"
+                        "LXGW WenKai Screen" "Source Han Sans CN" 12.0)
+      (set-en_cn-font "InputMono" "Source Han Serif CN" "Palatino Linotyp"
+                      "LXGW WenKai Screen" "Source Han Sans CN" 12.0))
     ;; Maple Mono NF --- Maple Mono SC NF, HarmonyOS Sans SC
     ;; PragmataPro Mono Liga --- SimHei
     ;; Hack --- HarmonyOS Sans SC

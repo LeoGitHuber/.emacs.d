@@ -7,12 +7,15 @@
   (string-equal system-type "windows-nt")
   "Judge whether it's Windows system.")
 
-(if windows-system-p
-    (progn
-      (require 'benchmark-init)
-      (prefer-coding-system 'utf-8))
-  (require 'benchmark-init-loaddefs)
-  )
+;; (if windows-system-p
+;;     (progn
+;;       (require 'benchmark-init)
+;;       (prefer-coding-system 'utf-8))
+;;   (require 'benchmark-init-loaddefs)
+;;   )
+
+(require 'benchmark-init)
+
 (benchmark-init/activate)
 ;; (add-hook 'after-init-hook 'benchmark-init/deactivate)
 (setq custom-file "~/.emacs.d/custom.el"
@@ -476,14 +479,6 @@ current buffer state and calls REPORT-FN when done."
     )
 
   (lsp-enable-startup)
-
-  ;; (dolist (completion '(company-mode corfu-mode))
-  ;;   (with-eval-after-load completion
-  ;;   (let ((hls '(emacs-lisp-mode-hook lisp-mode-hook TeX-mode-hook verilog-mode-hook)))
-  ;;     (dolist (mode hls)
-  ;;     (add-hook mode #completion)
-  ;;     )
-  ;;     )))
 
   (add-hook 'company-mode-hook
             (lambda ()
@@ -954,7 +949,7 @@ Can be used in `rime-disable-predicates' and `rime-inline-predicates'."
   (add-hook 'org-mode-hook #'org-modern-indent-mode 100)
 
   (keymap-global-set "C-c n f" 'org-roam-node-find)
-  (setq org-roam-directory "~/Personal/org-roam"    ; 设置 org-roam 笔记的默认目录，缺省值 /home/leo/org-roam
+  (setq org-roam-directory "~/Documents/Personal/org-roam"    ; 设置 org-roam 笔记的默认目录，缺省值 /home/leo/org-roam
         org-roam-db-gc-threshold most-positive-fixnum
         org-roam-mode-sections '(org-roam-backlinks-section
                                  org-roam-reflinks-section
@@ -1022,50 +1017,55 @@ Can be used in `rime-disable-predicates' and `rime-inline-predicates'."
       (custom-set-variables
        '(lsp-clients-svlangserver-launchConfiguration "verilator -sv --lint-only -Wall")
        '(lsp-clients-svlangserver-formatCommand "verible-verilog-format")))
-    (setq verilog-indent-lists nil
+    (setq verilog-indent-lists t
           verilog-auto-delete-trailing-whitespace t
           verilog-align-ifelse t
-          verilog-auto-delete-trailing-whitespace t
           verilog-auto-inst-param-value t
-          verilog-auto-inst-vector nil
-          verilog-auto-lineup (quote all)
-          ;; verilog-auto-newline nil
+          verilog-auto-inst-vector t
+          verilog-auto-lineup 'all
+          verilog-auto-newline t
           verilog-auto-save-policy nil
           verilog-auto-template-warn-unused t
           verilog-case-indent 2
           verilog-cexp-indent 2
           verilog-highlight-grouping-keywords t
           verilog-highlight-modules t
-          verilog-indent-level 2
-          verilog-indent-level-behavioral 2
-          verilog-indent-level-declaration 2
-          verilog-indent-level-module 2
+          verilog-indent-level 3
+          verilog-indent-level-behavioral 3
+          verilog-indent-level-declaration 3
+          verilog-indent-level-module 3
           ;; verilog-tab-to-comment t
+          verilog-ext-feature-list '(;; font-lock
+                                     xref
+                                     capf
+                                     hierarchy
+                                     eglot
+                                     ;; lsp
+                                     flycheck
+                                     ;; beautify
+                                     navigation
+                                     ;; template
+                                     ;; formatter
+                                     ;; compilation
+                                     ;; imenu
+                                     which-func
+                                     hideshow
+                                     typedefs
+                                     time-stamp
+                                     block-end-comments
+                                     ports
+                                     )
+          verilog-ext-hierarchy-backend 'builtin
           )
-    (setq verilog-ext-feature-list
-          '(;; font-lock
-            xref
-            capf
-            hierarchy
-            eglot
-            ;; lsp
-            flycheck
-            ;; beautify
-            navigation
-            template
-            ;; formatter
-            compilation
-            ;; imenu
-            which-func
-            hideshow
-            typedefs
-            time-stamp
-            block-end-comments
-            ports))
     (require 'verilog-ext)
     (verilog-ext-mode-setup)
     (verilog-ext-eglot-set-server 've-veridian)
     ;; (verilog-ext-eglot-set-server 've-svlangserver)
+
+    (add-hook 'verilog-mode-hook
+              (lambda ()
+                (when indent-bars-mode
+                  (setq-local indent-bars-spacing-override verilog-indent-level))))
 
     ;; (add-hook 'verilog-mode-hook
     ;;           (lambda ()

@@ -468,11 +468,15 @@ If you experience stuttering, increase this.")
     ;; Set this face for `show-paren-mode' context appearance when offscreen.
     (let ((mode-line-box-p (face-attribute 'mode-line-highlight :box)))
       (when (not (eq mode-line-box-p 'unspecified))
-        (set-face-attribute 'child-frame-border
-                            nil
-                            :background (nth 3 mode-line-box-p))))
-    )
-  (if (or
+        (if (consp mode-line-box-p)
+            (set-face-attribute 'child-frame-border
+                                nil
+                                :background (nth 3 mode-line-box-p))
+          (set-face-attribute 'child-frame-border
+                                nil
+                                :background mode-line-box-p)
+          )))
+    (if (or
        (>= (string-to-number (substring (current-time-string) 11 13)) 19)
        (<= (string-to-number (substring (current-time-string) 11 13)) 6))
       (if (string-prefix-p "modus" (symbol-name (cadr themes_chosen)))
@@ -539,7 +543,7 @@ If you experience stuttering, increase this.")
    'mode-line-inactive nil
    :inherit 'mode-line
    :box nil)
-  )
+  ))
 
 (provide 'init-func)
 ;;; init-func.el ends here.

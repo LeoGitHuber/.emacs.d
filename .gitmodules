@@ -400,3 +400,9 @@
 [submodule "site-lisp/exec-path-from-shell"]
 	path = site-lisp/exec-path-from-shell
 	url = https://github.com/purcell/exec-path-from-shell.git
+[submodule "tree-sitter-module"]
+	path = tree-sitter-module
+	url = https://github.com/casouri/tree-sitter-module.git
+[submodule "site-lisp/tempel"]
+	path = site-lisp/tempel
+	url = https://github.com/minad/tempel.git

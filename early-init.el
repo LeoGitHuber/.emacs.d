@@ -8,9 +8,12 @@
 (add-to-list 'default-frame-alist '(tool-bar-lines . 0))
 
 (when (string-equal system-type "windows-nt")
-  (add-to-list 'default-frame-alist '(width . 140))
-  (add-to-list 'default-frame-alist '(height . 60))
+  (add-to-list 'default-frame-alist '(width . 180))
+  (add-to-list 'default-frame-alist '(height . 50))
   )
+
+(add-to-list 'default-frame-alist '(width . 140))
+(add-to-list 'default-frame-alist '(height . 60))
 
 ;; 以下方式与上面相同
 ;; (push '(undecorated . t) default-frame-alist)

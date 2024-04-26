@@ -201,7 +201,7 @@ current buffer state and calls REPORT-FN when done."
     (defun verilog-setup-flymake-backend ()
       (add-hook 'flymake-diagnostic-functions 'verilog-flymake-detect nil t))
 
-    (add-hook 'verilog-mode-hook 'verilog-setup-flymake-backend)
+    ;; (add-hook 'verilog-mode-hook 'verilog-setup-flymake-backend)
 
     (defun sanityinc/enable-flymake-flycheck ()
       (setq-local flymake-diagnostic-functions
@@ -1057,9 +1057,9 @@ Can be used in `rime-disable-predicates' and `rime-inline-predicates'."
                                      )
           verilog-ext-hierarchy-backend 'builtin
           )
-    (require 'verilog-ext)
-    (verilog-ext-mode-setup)
-    (verilog-ext-eglot-set-server 've-veridian)
+    ;; (require 'verilog-ext)
+    ;; (verilog-ext-mode-setup)
+    ;; (verilog-ext-eglot-set-server 've-veridian)
     ;; (verilog-ext-eglot-set-server 've-svlangserver)
 
     (add-hook 'verilog-mode-hook
@@ -1067,46 +1067,45 @@ Can be used in `rime-disable-predicates' and `rime-inline-predicates'."
                 (when indent-bars-mode
                   (setq-local indent-bars-spacing-override verilog-indent-level))))
 
-    ;; (add-hook 'verilog-mode-hook
-    ;;           (lambda ()
-    ;;             (eglot-ensure)
-    ;;             (add-to-list 'eglot-server-programs
-    ;;                          ;; '(verilog-mode . ("svlangserver"))
-    ;;                          ;; '(verilog-mode . ("svls"))
-    ;;                          ;; '(verilog-mode . ("vls"))
-    ;;                          '(verilog-mode . ("veridian"))
-    ;;                          )
-    ;;             ;; (setq eglot-workspace-configuration
-    ;;             ;;       '(:veridian
-    ;;             ;;         (:settings
-    ;;             ;;          (:syntax
-    ;;             ;;           (:enabled :json-false)
-    ;;             ;;           ;; (:enabled :json-true
-    ;;             ;;           ;;           :path "verible-verilog-syntax")
-    ;;             ;;           :format:
-    ;;             ;;           (:enabled :json-true
-    ;;             ;;                     :path "verible-verilog-format")
-    ;;             ;;           ;; :diagnostics
-    ;;             ;;           ;; (:enabled :json-false)
-    ;;             ;;           ))))
-    ;;             ;; (setq eglot-workspace-configuration
-    ;;             ;;       '(:svlangserver
-    ;;             ;;         (:settings
-    ;;             ;;          (:systemverilog.includeIndexing:
-    ;;             ;;           ["**/*.{sv,svh,v,vh}", "*.{sv,svh,v,vh}"],
-    ;;             ;;           :systemverilog.launchConfiguration:
-    ;;             ;;           "verilator -sv -Wall --lint-only",
-    ;;             ;;           :systemverilog.formatCommand:
-    ;;             ;;           "verible-verilog-format"))))
-    ;;             ;; (setq eglot-workspace-configuration
-    ;;             ;;       '(:svls
-    ;;             ;;         (:settings
-    ;;             ;;          (:systemverilog.launchConfiguration:
-    ;;             ;;           "verilator -sv -Wall --lint-only",
-    ;;             ;;           :systemverilog.formatCommand:
-    ;;             ;;           "verible-verilog-format"))))
-    ;;             )
-    ;;           )
+    (add-hook 'verilog-mode-hook
+              (lambda ()
+                (eglot-ensure)
+                (add-to-list 'eglot-server-programs
+                             ;; '(verilog-mode . ("svlangserver"))
+                             ;; '(verilog-mode . ("svls"))
+                             ;; '(verilog-mode . ("vls"))
+                             '(verilog-mode . ("veridian"))
+                             )
+                (setq eglot-workspace-configuration
+                      '(:veridian
+                        (:settings
+                         (:syntax
+                          (:enabled :json-true
+                                    :path "verible-verilog-syntax")
+                          :format:
+                          (:enabled :json-true
+                                    :path "verible-verilog-format")
+                          ;; :diagnostics
+                          ;; (:enabled :json-false)
+                          ))))
+                ;;             ;; (setq eglot-workspace-configuration
+                ;;             ;;       '(:svlangserver
+                ;;             ;;         (:settings
+                ;;             ;;          (:systemverilog.includeIndexing:
+                ;;             ;;           ["**/*.{sv,svh,v,vh}", "*.{sv,svh,v,vh}"],
+                ;;             ;;           :systemverilog.launchConfiguration:
+                ;;             ;;           "verilator -sv -Wall --lint-only",
+                ;;             ;;           :systemverilog.formatCommand:
+                ;;             ;;           "verible-verilog-format"))))
+                ;;             ;; (setq eglot-workspace-configuration
+                ;;             ;;       '(:svls
+                ;;             ;;         (:settings
+                ;;             ;;          (:systemverilog.launchConfiguration:
+                ;;             ;;           "verilator -sv -Wall --lint-only",
+                ;;             ;;           :systemverilog.formatCommand:
+                ;;             ;;           "verible-verilog-format"))))
+                )
+              )
     )
 
   ;;; @13. READER
@@ -1753,7 +1752,9 @@ such alists."
 
   ;;; Theme
   (dolist (hook '(prog-mode-hook text-mode-hook cuda-mode-hook))
-    (add-hook hook 'rainbow-mode))
+    ;; (add-hook hook 'rainbow-mode)
+    (add-hook hook 'colorful-mode)
+    )
   ;; (load "~/.emacs.d/site-lisp/rainbow-delimiters/rainbow-delimiters.el")
   (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 

@@ -406,3 +406,6 @@
 [submodule "site-lisp/tempel"]
 	path = site-lisp/tempel
 	url = https://github.com/minad/tempel.git
+[submodule "site-lisp/colorful-mode"]
+	path = site-lisp/colorful-mode
+	url = https://github.com/DevelopmentCool2449/colorful-mode.git

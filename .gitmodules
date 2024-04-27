@@ -409,3 +409,12 @@
 [submodule "site-lisp/colorful-mode"]
 	path = site-lisp/colorful-mode
 	url = https://github.com/DevelopmentCool2449/colorful-mode.git
+[submodule "site-lisp/wavedrom-mode"]
+	path = site-lisp/wavedrom-mode
+	url = https://github.com/gmlarumbe/wavedrom-mode.git
+[submodule "site-lisp/fpga"]
+	path = site-lisp/fpga
+	url = https://github.com/gmlarumbe/fpga.git
+[submodule "site-lisp/lspce"]
+	path = site-lisp/lspce
+	url = https://github.com/zbelial/lspce.git

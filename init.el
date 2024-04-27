@@ -155,8 +155,8 @@
 
     (defun verilog-flymake-detect (report-fn &rest _args)
       "A Flymake backend for verilog.
-Spawn an verilog lsp process that byte-compiles a file representing the
-current buffer state and calls REPORT-FN when done."
+  Spawn an verilog lsp process that byte-compiles a file representing the
+  current buffer state and calls REPORT-FN when done."
       (when verilog--flymake-proc
         (when (process-live-p verilog--flymake-proc)
           (kill-process verilog--flymake-proc)))
@@ -229,10 +229,8 @@ current buffer state and calls REPORT-FN when done."
   (with-eval-after-load 'treemacs
     (require 'treemacs-nerd-icons)
     (treemacs-load-theme "nerd-icons"))
-
   (add-hook 'ibuffer-mode-hook 'nerd-icons-ibuffer-mode)
 
-  ;; (require 'all-the-icons)
   (with-eval-after-load 'all-the-icons (load "~/.emacs.d/self-develop/all-the-icons-diy.el"))
 
   ;; (with-eval-after-load 'nerd-icons
@@ -257,7 +255,7 @@ current buffer state and calls REPORT-FN when done."
 
   ;;; @5. KEYBINDINGS
 
-  ;; (add-to-list 'load-path "~/.emacs.d/site-lisp/combobulate")
+  (add-to-list 'load-path "~/.emacs.d/site-lisp/combobulate")
 
   (unless (bound-and-true-p meow-mode)
     (progn
@@ -356,7 +354,7 @@ current buffer state and calls REPORT-FN when done."
 
   ;;; @6. LSP
 
-  ;; (lsp-enable-startup)
+  (lsp-enable-startup)
 
   (with-eval-after-load 'lsp-mode
     (with-eval-after-load 'lsp-ui
@@ -389,7 +387,6 @@ current buffer state and calls REPORT-FN when done."
 
           ;; ui
           ;; lsp-ui-doc-show-with-cursor nil
-
           lsp-completion-provider :none
           lsp-prefer-flymake t
           lsp-ui-flycheck-enable nil
@@ -424,7 +421,8 @@ current buffer state and calls REPORT-FN when done."
               (cons "emacs-lsp-booster" orig-result))
           orig-result)))
     (advice-add 'lsp-resolve-final-command :around #'lsp-booster--advice-final-command)
-    (add-hook 'lsp-mode-hook 'corfu-mode))
+    (add-hook 'lsp-mode-hook 'corfu-mode)
+    )
 
   (with-eval-after-load 'corfu
     (setq corfu-auto t
@@ -464,8 +462,6 @@ current buffer state and calls REPORT-FN when done."
                         (frame-visible-p acm-menu-frame)))
                  ))))
 
-  ;; (add-to-list 'project-vc-extra-root-markers "tsconfig.json")
-  ;; (add-to-list 'project-vc-extra-root-markers "jsconfig.json")
   (with-eval-after-load 'eglot
     (setq eglot-send-changes-idle-time 0)
     (add-to-list 'eglot-server-programs
@@ -502,11 +498,11 @@ current buffer state and calls REPORT-FN when done."
               (setq company-box-scrollbar 'inherit)
               (company-box-mode t)))
 
-  ;; (defun company-completion-styles (capf-fn &rest args)
-  ;;   (let ((completion-styles '(basic partial-completion)))
-  ;;     (apply capf-fn args)))
+  (defun company-completion-styles (capf-fn &rest args)
+    (let ((completion-styles '(basic partial-completion)))
+      (apply capf-fn args)))
 
-  ;; (advice-add 'company-capf :around #'company-completion-styles)
+  (advice-add 'company-capf :around #'company-completion-styles)
 
   (with-eval-after-load 'lsp-bridge
     (add-hook 'lsp-bridge-mode-hook 'yas/minor-mode)
@@ -531,7 +527,7 @@ current buffer state and calls REPORT-FN when done."
      acm-backend-elisp-candidate-min-length 2
      acm-backend-search-file-words-candidate-min-length 3
      acm-backend-yas-candidate-min-length 1
-     lsp-bridge-python-command "python"
+     ;; lsp-bridge-python-command "python3"
      ;; This will cause `org-roam-node-find' get wrong and I don't know why.
      ;; lsp-bridge-enable-org-babel t
      ;; lsp-bridge-c-lsp-server "clangd"
@@ -648,7 +644,7 @@ current buffer state and calls REPORT-FN when done."
           )
     (keymap-set dirvish-mode-map "TAB" #'dirvish-toggle-subtree))
 
-  ;;; @8. CHINESE
+  ;; @8. CHINESE
 
   (add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-chinese-word-segmentation")
   (setq cns-prog "~/.emacs.d/site-lisp/emacs-chinese-word-segmentation/cnws"
@@ -661,7 +657,7 @@ current buffer state and calls REPORT-FN when done."
 
   (require 'cns nil t)
 
-  ;;; @9. INPUT
+  ;; @9. INPUT
 
   (add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-rime")
 
@@ -673,9 +669,9 @@ current buffer state and calls REPORT-FN when done."
     (defun rime-predicate-meow-mode-p ()
       "Detect whether the current buffer is in `meow' state.
 
-Include `meow-normal-state' , `meow-motion-state'.
+  Include `meow-normal-state' , `meow-motion-state'.
 
-Can be used in `rime-disable-predicates' and `rime-inline-predicates'."
+  Can be used in `rime-disable-predicates' and `rime-inline-predicates'."
       (and (fboundp 'meow-mode)
            (meow-normal-mode-p)
            ))
@@ -762,7 +758,7 @@ Can be used in `rime-disable-predicates' and `rime-inline-predicates'."
   ;; (set-face-attribute 'pyim-page nil :inherit 'default :background "#EEE1B3" :foreground "#000000")
   ;; (set-face-attribute 'pyim-page-border nil :inherit 'pyim-page :background "#000000"))
   ;; (set-face-attribute 'pyim-page-border nil :inherit 'pyim-page :background "#D7DCC8"))
-  ;;
+
   ;; ;; (pyim-wbdict-v86-single-enable)
   ;; (pyim-wbdict-v98-morphe-enable)
   ;; (setq-default pyim-english-input-switch-functions
@@ -776,15 +772,15 @@ Can be used in `rime-disable-predicates' and `rime-inline-predicates'."
   ;; (global-set-key "\M-p" 'pyim-process-toggle-input-ascii)
   ;; (global-set-key "\M-j" 'pyim-toggle-input-ascii)
 
-  ;;; @10. EAF
+  ;; @10. EAF
 
   ;; (require 'eaf)
 
-  ;; (with-eval-after-load 'eaf
-  ;;   (require 'eaf-pdf-viewer)
-  ;;   (setq eaf-pdf-show-progress-on-page nil))
+  (with-eval-after-load 'eaf
+    (require 'eaf-pdf-viewer)
+    (setq eaf-pdf-show-progress-on-page nil))
 
-  ;;; @11. ORG
+  ;; @11. ORG
 
   (add-to-list 'load-path "~/.emacs.d/site-lisp/org-roam")
   (add-to-list 'load-path "~/.emacs.d/site-lisp/org-modern-indent")
@@ -838,11 +834,11 @@ Can be used in `rime-disable-predicates' and `rime-inline-predicates'."
                                                          ("convert -density %D -trim -antialias %f -quality 100 %O")))
           ;; org-preview-latex-default-process 'dvisvgm
           org-format-latex-header "\\documentclass[10pt]{article}\n\\usepackage[usenames]{color}\n[DEFAULT-PACKAGES]\n[PACKAGES]\n\\pagestyle{empty}  % do not remove\n% The settings below are copied from fullpage.sty\n
-        \\usepackage{xeCJK,tikz,caption,float,makecell,circuitikz,array}\n
-        \\usetikzlibrary{shapes,arrows,calc,arrows.meta}\n
-        \\usetikzlibrary{circuits.logic.IEC,calc}\n
-        \\renewcommand{\\arraystretch}{1.3}\n
-        \\setlength{\\textwidth}{\\paperwidth}\n\\addtolength{\\textwidth}{-3cm}\n\\setlength{\\oddsidemargin}{1.5cm}\n\\addtolength{\\oddsidemargin}{-2.54cm}\n\\setlength{\\evensidemargin}{\\oddsidemargin}\n\\setlength{\\textheight}{\\paperheight}\n\\addtolength{\\textheight}{-\\headheight}\n\\addtolength{\\textheight}{-\\headsep}\n\\addtolength{\\textheight}{-\\footskip}\n\\addtolength{\\textheight}{-3cm}\n\\setlength{\\topmargin}{1.5cm}\n\\addtolength{\\topmargin}{-2.54cm}\n")
+          \\usepackage{xeCJK,tikz,caption,float,makecell,circuitikz,array}\n
+          \\usetikzlibrary{shapes,arrows,calc,arrows.meta}\n
+          \\usetikzlibrary{circuits.logic.IEC,calc}\n
+          \\renewcommand{\\arraystretch}{1.3}\n
+          \\setlength{\\textwidth}{\\paperwidth}\n\\addtolength{\\textwidth}{-3cm}\n\\setlength{\\oddsidemargin}{1.5cm}\n\\addtolength{\\oddsidemargin}{-2.54cm}\n\\setlength{\\evensidemargin}{\\oddsidemargin}\n\\setlength{\\textheight}{\\paperheight}\n\\addtolength{\\textheight}{-\\headheight}\n\\addtolength{\\textheight}{-\\headsep}\n\\addtolength{\\textheight}{-\\footskip}\n\\addtolength{\\textheight}{-3cm}\n\\setlength{\\topmargin}{1.5cm}\n\\addtolength{\\topmargin}{-2.54cm}\n")
     (org-babel-do-load-languages
      'org-babel-load-languages
      '((emacs-lisp . t)
@@ -1003,7 +999,7 @@ Can be used in `rime-disable-predicates' and `rime-inline-predicates'."
              :unnarrowed t)))
     (org-roam-db-autosync-mode))
 
-  ;;; @12. VERILOG
+    ;;; @12. VERILOG
 
   (with-eval-after-load 'verilog-mode
     ;; (with-eval-after-load 'lsp-mode
@@ -1012,11 +1008,11 @@ Can be used in `rime-disable-predicates' and `rime-inline-predicates'."
     ;;    (make-lsp-client :new-connection (lsp-stdio-connection '("svls"))
     ;;             :major-modes '(verilog-mode)
     ;;             :priority -1)))
-    (with-eval-after-load 'lsp-mode
-      (require 'lsp-verilog)
-      (custom-set-variables
-       '(lsp-clients-svlangserver-launchConfiguration "verilator -sv --lint-only -Wall")
-       '(lsp-clients-svlangserver-formatCommand "verible-verilog-format")))
+    ;; (with-eval-after-load 'lsp-mode
+    ;;   (require 'lsp-verilog)
+    ;;   (custom-set-variables
+    ;;    '(lsp-clients-svlangserver-launchConfiguration "verilator -sv --lint-only -Wall")
+    ;;    '(lsp-clients-svlangserver-formatCommand "verible-verilog-format")))
     (setq verilog-indent-lists t
           verilog-auto-delete-trailing-whitespace t
           verilog-align-ifelse t
@@ -1062,53 +1058,77 @@ Can be used in `rime-disable-predicates' and `rime-inline-predicates'."
     ;; (verilog-ext-eglot-set-server 've-veridian)
     ;; (verilog-ext-eglot-set-server 've-svlangserver)
 
-    (add-hook 'verilog-mode-hook
-              (lambda ()
-                (when indent-bars-mode
-                  (setq-local indent-bars-spacing-override verilog-indent-level))))
+    (with-eval-after-load 'apheleia
+      (push '(verilog-mode . verible) apheleia-mode-alist)
+      (push '(verilog-ts-mode . verible) apheleia-mode-alist)
+      (push `(verible . ("verible-verilog-format"
+                         "--column_limit" "100"
+                         "--indentation_spaces",(number-to-string verilog-indent-level)
+                         "--line_break_penalty" "2"
+                         "--over_column_limit_penalty" "100"
+                         "--wrap_spaces" "4"
+                         "-"))
+            apheleia-formatters))
 
     (add-hook 'verilog-mode-hook
               (lambda ()
+                (apheleia-mode)
                 (eglot-ensure)
+                (when indent-bars-mode
+                  (setq-local indent-bars-spacing-override verilog-indent-level))
                 (add-to-list 'eglot-server-programs
-                             ;; '(verilog-mode . ("svlangserver"))
-                             ;; '(verilog-mode . ("svls"))
-                             ;; '(verilog-mode . ("vls"))
-                             '(verilog-mode . ("veridian"))
+                             '(verilog-mode . ("svlangserver"))
+                             ;;              ;; '(verilog-mode . ("svls"))
+                             ;;              ;; '(verilog-mode . ("vls"))
+                             ;;              ;; '(verilog-mode . ("veridian"))
                              )
                 (setq eglot-workspace-configuration
-                      '(:veridian
-                        (:settings
-                         (:syntax
-                          (:enabled :json-true
-                                    :path "verible-verilog-syntax")
-                          :format:
-                          (:enabled :json-true
-                                    :path "verible-verilog-format")
-                          ;; :diagnostics
-                          ;; (:enabled :json-false)
-                          ))))
-                ;;             ;; (setq eglot-workspace-configuration
-                ;;             ;;       '(:svlangserver
-                ;;             ;;         (:settings
-                ;;             ;;          (:systemverilog.includeIndexing:
-                ;;             ;;           ["**/*.{sv,svh,v,vh}", "*.{sv,svh,v,vh}"],
-                ;;             ;;           :systemverilog.launchConfiguration:
-                ;;             ;;           "verilator -sv -Wall --lint-only",
-                ;;             ;;           :systemverilog.formatCommand:
-                ;;             ;;           "verible-verilog-format"))))
-                ;;             ;; (setq eglot-workspace-configuration
-                ;;             ;;       '(:svls
-                ;;             ;;         (:settings
-                ;;             ;;          (:systemverilog.launchConfiguration:
-                ;;             ;;           "verilator -sv -Wall --lint-only",
-                ;;             ;;           :systemverilog.formatCommand:
-                ;;             ;;           "verible-verilog-format"))))
+                      ;;       ;; '(:veridian
+                      ;;       ;;   (:settings
+                      ;;       ;;    (:syntax
+                      ;;       ;;     (:enabled :json-true
+                      ;;       ;;               :path "verible-verilog-syntax")
+                      ;;       ;;     :format
+                      ;;       ;;     (:enabled :json-true
+                      ;;       ;;               :path "verible-verilog-format"
+                      ;;       ;;               :args ["--indentation_spaces" "3"])
+                      ;;       ;;     :diagnostics
+                      ;;       ;;     (:enabled :json-false)
+                      ;;       ;;     )))
+                      `((:systemverilog
+                         (:includeIndexing '["**/*.{sv,svh}"])
+                         (:excludeIndexing '["test/**/*.{sv,svh}"])
+                         (:defines nil)
+                         (:launchConfiguration "verilator -sv --lint-only -Wall")
+                         (:lintOnUnsaved t)
+                         (:formatCommand "verible-verilog-format")
+                         ;; (:formatCommand ,(string-join `("verible-verilog-format"
+                         ;;                                 "--column_limit 100"
+                         ;;                                 "--indentation_spaces"
+                         ;;                                 ,(number-to-string verilog-indent-level)
+                         ;;                                 "--line_break_penalty 2"
+                         ;;                                 "--over_column_limit_penalty 100"
+                         ;;                                 "--wrap_spaces 4")
+                         ;;                               " "))
+                         (:formatCommand ,(string-join `("verible-verilog-format"
+                                                         "--wrap_end_else_clauses true")
+                                                       " "))
+                         (:disableCompletionProvider nil)
+                         (:disableHoverProvider nil)
+                         (:disableSignatureHelpProvider nil)
+                         (:disableLinting nil)))
+                      ;;       ;; '(:svls
+                      ;;       ;;   (:settings
+                      ;;       ;;    (:systemverilog.launchConfiguration:
+                      ;;       ;;     "verilator -sv -Wall --lint-only",
+                      ;;       ;;     :systemverilog.formatCommand:
+                      ;;       ;;     "verible-verilog-format")))
+                      )
                 )
               )
     )
 
-  ;;; @13. READER
+    ;;; @13. READER
 
   (with-eval-after-load 'pdf-tools
     (setq pdf-view-use-scaling t
@@ -1136,18 +1156,18 @@ Can be used in `rime-disable-predicates' and `rime-inline-predicates'."
   ;; ;; (add-hook 'nov-mode-hook 'visual-fill-column-mode)
   ;; ;; (add-hook 'nov-mode-hook '(lambda() (set-fill-column 100)))
 
-  ;;; @14. HYDRA
+    ;;; @14. HYDRA
 
   (add-to-list 'load-path "~/.emacs.d/site-lisp/hydra")
   (require 'hydra)
 
   (defhydra hydra-avy (global-map "M-g" :exit t :hint nil)
     "
- Line^^       Region^^        Goto
-----------------------------------------------------------
- [_y_] yank   [_Y_] yank      [_c_] timed char  [_C_] char
- [_m_] move   [_M_] move      [_w_] word        [_W_] any word
- [_k_] kill   [_K_] kill      [_l_] line        [_L_] end of line"
+   Line^^       Region^^        Goto
+  ----------------------------------------------------------
+   [_y_] yank   [_Y_] yank      [_c_] timed char  [_C_] char
+   [_m_] move   [_M_] move      [_w_] word        [_W_] any word
+   [_k_] kill   [_K_] kill      [_l_] line        [_L_] end of line"
     ("c" avy-goto-char-timer)
     ("C" avy-goto-char)
     ("w" avy-goto-word-1)
@@ -1170,19 +1190,19 @@ Can be used in `rime-disable-predicates' and `rime-inline-predicates'."
 
   (defhydra hydra-window (:color pink)
     "
-       Split:                   Move:
-  ╭──────────────────────╯ ╭──────────────────────╯
-     _v_ vertical            _j_ down
-     _h_ horizontal          _k_ up
-     _V_ even vertical       _J_ swap down
-     _H_ even horizontal     _K_ swap up
-     _s_ swap                _L_ swap right
-  ╰──────────────────────╮ _l_ right
-     _D_lt   _d_lt all         _o_nly this
-     _B_ur   _b_ur all         _a_ce  this
-     _m_inimize              _z_en
-     _q_uit                  _f_ullscreen
-  "
+         Split:                   Move:
+    ╭──────────────────────╯ ╭──────────────────────╯
+       _v_ vertical            _j_ down
+       _h_ horizontal          _k_ up
+       _V_ even vertical       _J_ swap down
+       _H_ even horizontal     _K_ swap up
+       _s_ swap                _L_ swap right
+    ╰──────────────────────╮ _l_ right
+       _D_lt   _d_lt all         _o_nly this
+       _B_ur   _b_ur all         _a_ce  this
+       _m_inimize              _z_en
+       _q_uit                  _f_ullscreen
+    "
     ("<left>" windmove-left)
     ("<down>" windmove-down)
     ("<up>" windmove-up)
@@ -1213,11 +1233,11 @@ Can be used in `rime-disable-predicates' and `rime-inline-predicates'."
 
   (defhydra hydra-eMove ()
     "
- Line^^           char^^              word^^              Page^^
----------------------------------------------------------------------
- [_j_] next       [_l_] forward       [_F_] Forward         [_v_] up
- [_k_] previous   [_h_] backward      [_B_] Backward        [_V_] down
- "
+   Line^^           char^^              word^^              Page^^
+  ---------------------------------------------------------------------
+   [_j_] next       [_l_] forward       [_F_] Forward         [_v_] up
+   [_k_] previous   [_h_] backward      [_B_] Backward        [_V_] down
+   "
     ("j" next-line nil)
     ("k" previous-line nil)
     ("v" scroll-uppp nil)
@@ -1237,12 +1257,12 @@ Can be used in `rime-disable-predicates' and `rime-inline-predicates'."
                                        :color pink
                                        :post (deactivate-mark))
     "
-  ^_k_^     _d_elete    _s_tring
-_h_   _l_   _o_k        _y_ank
-  ^_j_^     _n_ew-copy  _r_eset
-^^^^        _e_xchange  _u_ndo
-^^^^        ^ ^         _p_aste
-"
+    ^_k_^     _d_elete    _s_tring
+  _h_   _l_   _o_k        _y_ank
+    ^_j_^     _n_ew-copy  _r_eset
+  ^^^^        _e_xchange  _u_ndo
+  ^^^^        ^ ^         _p_aste
+  "
     ("h" rectangle-backward-char nil)
     ("l" rectangle-forward-char nil)
     ("k" rectangle-previous-line nil)
@@ -1261,10 +1281,10 @@ _h_   _l_   _o_k        _y_ank
 
   (keymap-global-set "C-x SPC" 'hydra-rectangle/body)
 
-  ;;; @15. LATEX-NODE
+    ;;; @15. LATEX-NODE
   (load "~/.emacs.d/lisp/latex-node.el")
 
-  ;;; @16. LATEX
+    ;;; @16. LATEX
 
   ;; On demand loading, leads to faster startup time.
   (pdf-loader-install)
@@ -1348,7 +1368,7 @@ _h_   _l_   _o_k        _y_ank
               ;; (keymap-set orgtbl-mode-map "<tab>" 'orgtbl-next-field-maybe)
               ))
 
-  ;;; @17. BASE
+    ;;; @17. BASE
   ;; (defun enable-after-meow ()
   ;;   "Modes enable after meow insert."
   ;;   (unless (bound-and-true-p lsp-bridge-mode)
@@ -1585,7 +1605,7 @@ _h_   _l_   _o_k        _y_ank
   (dolist (hook '(term-mode-hook))
     (add-hook hook #'puni-disable-puni-mode))
 
-  ;;; Visual Repalcement
+    ;;; Visual Repalcement
   (keymap-global-set "C-c r" 'vr/replace)
   (keymap-global-set "C-c m" 'vr/mc-mark)
 
@@ -1693,9 +1713,9 @@ _h_   _l_   _o_k        _y_ank
 
   (defun popper-display-popup-adaptive (buffer &optional alist)
     "Display popup-buffer BUFFER at the bottom of the screen.
-ALIST is an association list of action symbols and values.  See
-Info node `(elisp) Buffer Display Action Alists' for details of
-such alists."
+  ALIST is an association list of action symbols and values.  See
+  Info node `(elisp) Buffer Display Action Alists' for details of
+  such alists."
     (if (and (> (window-pixel-height) (window-pixel-width))
              (or (and popper-open-popup-alist
                       (eq (window-parameter (caar popper-open-popup-alist) 'window-side)
@@ -1750,7 +1770,7 @@ such alists."
     (setq xref-show-xrefs-function 'consult-xref
           xref-show-definitions-function 'consult-xref))
 
-  ;;; Theme
+    ;;; Theme
   (dolist (hook '(prog-mode-hook text-mode-hook cuda-mode-hook))
     ;; (add-hook hook 'rainbow-mode)
     (add-hook hook 'colorful-mode)

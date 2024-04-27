@@ -87,7 +87,7 @@ Set Font for both of English and Chinese characters."
    'default nil
    :font (font-spec
           :name en-font
-          :weight 'medium
+          :weight 'regular
           ;; :slant 'normal
           :size f-size))
   (dolist (charset '(kana han symbol cjk-misc bopomofo))
@@ -401,8 +401,6 @@ use `cm/autoloads-file' as TARGET."
                   TeX-mode-hook
                   c-ts-mode-hook c++-ts-mode-hook
                   python-ts-mode-hook python-ts-mode
-                  verilog-mode-hook
-                  verilog-ts-mode-hook
                   js-mode-hook
                   js-ts-mode-hook))
     (add-hook hook (lambda ()
@@ -431,11 +429,12 @@ If you experience stuttering, increase this.")
 (defun setup-display-graphic ()
   "Setup display graphic for GUI Emacs and Emacsclient."
   (when (display-graphic-p)
-    (if (not windows-system-p)
-        (set-en_cn-font "BlexMono Nerd Font" "Source Han Serif CN" "Palatino Linotype"
-                        "LXGW WenKai Screen" "Source Han Sans CN" 12.0)
-      (set-en_cn-font "InputMono" "Source Han Serif CN" "Palatino Linotyp"
-                      "LXGW WenKai Screen" "Source Han Sans CN" 12.0))
+    ;; (if (not windows-system-p)
+    ;;     (set-en_cn-font "BlexMono Nerd Font" "Source Han Serif CN" "Palatino Linotype"
+    ;;                     "LXGW WenKai Screen" "Source Han Sans CN" 12.0)
+    (set-en_cn-font "InputMono" "Source Han Serif CN" "Palatino Linotyp"
+                    "LXGW WenKai Screen" "Source Han Sans CN" 12.0)
+    ;;   )
     ;; Maple Mono NF --- Maple Mono SC NF, HarmonyOS Sans SC
     ;; PragmataPro Mono Liga --- SimHei
     ;; Hack --- HarmonyOS Sans SC
@@ -473,77 +472,77 @@ If you experience stuttering, increase this.")
                                 nil
                                 :background (nth 3 mode-line-box-p))
           (set-face-attribute 'child-frame-border
-                                nil
-                                :background mode-line-box-p)
+                              nil
+                              :background mode-line-box-p)
           )))
     (if (or
-       (>= (string-to-number (substring (current-time-string) 11 13)) 19)
-       (<= (string-to-number (substring (current-time-string) 11 13)) 6))
-      (if (string-prefix-p "modus" (symbol-name (cadr themes_chosen)))
-          (progn
-            (setq modus-themes-org-blocks 'gray-background
-                  modus-themes-bold-constructs t
-                  modus-themes-italic-constructs t)
-            (require-theme 'modus-themes)
-            (if (string-match-p "29" emacs-version)
-                (load-theme 'modus-vivendi)
-              (load-theme (car (cdr themes_chosen)) t))
-            (set-face-attribute 'modus-themes-heading-1 nil :height 1.25))
-        (if (equal (cadr themes_chosen) 'manoj-dark)
+         (>= (string-to-number (substring (current-time-string) 11 13)) 19)
+         (<= (string-to-number (substring (current-time-string) 11 13)) 6))
+        (if (string-prefix-p "modus" (symbol-name (cadr themes_chosen)))
             (progn
-              (load-theme (car (cdr themes_chosen)) t)
-              (set-face-foreground 'hl-line 'unspecified)
-              (set-face-background 'fringe 'unspecified))
-          (if (string-match "ef-" (symbol-name (cadr themes_chosen)))
-              (ef-themes-select-dark (cadr themes_chosen))
-            (progn
-              (load-theme (cadr themes_chosen) t)
-              (setq doom-rouge-brighter-comments t
-                    doom-rouge-brighter-tabs t))
-            )))
-    (progn
-      ;; (load-theme (car themes_chosen) t)
-      ;; (ef-themes-select-light (car themes_chosen))
-      (when (eq custom-enabled-themes nil)
-        ;; (set-face-bold 'font-lock-keyword-face t)
-        ;; (set-face-bold 'font-lock-builtin-face t)
-        (set-face-background 'highlight "#DFEAEC")
-        (set-face-background 'fringe 'unspecified)
-        (set-face-attribute 'line-number-current-line nil :foreground
-                            "#000000" :background "#C4C4C4" :weight
-                            'bold)
-        (set-face-bold 'font-lock-keyword-face 't)
-        )
-      (setq modus-themes-org-blocks 'gray-background
-            modus-themes-bold-constructs t
-            modus-themes-italic-constructs t)))
-  (if (equal (frame-parameter nil 'background-mode) 'dark)
-      (set-face-attribute 'mode-line nil
-                          :background "black"
-                          :box nil
-                          :font (font-spec
-                                 ;; "JetBrainsMono NF" "Monego Ligatures" "Maple Mono NF"
-                                 :name
-                                 "BlexMono Nerd Font"
-                                 :size
-                                 11.0)
-                          :underline
-                          (face-foreground 'mode-line-emphasis))
-    (progn
-      (set-face-attribute 'mode-line nil
-                          :background "#F4F7FA"
-                          ;; :background "white"
-                          :box nil
-                          :font (font-spec
-                                 :name
-                                 "BlexMono Nerd Font"
-                                 :size 11.0))
-      ))
-  (set-face-attribute
-   'mode-line-inactive nil
-   :inherit 'mode-line
-   :box nil)
-  ))
+              (setq modus-themes-org-blocks 'gray-background
+                    modus-themes-bold-constructs t
+                    modus-themes-italic-constructs t)
+              (require-theme 'modus-themes)
+              (if (string-match-p "29" emacs-version)
+                  (load-theme 'modus-vivendi)
+                (load-theme (car (cdr themes_chosen)) t))
+              (set-face-attribute 'modus-themes-heading-1 nil :height 1.25))
+          (if (equal (cadr themes_chosen) 'manoj-dark)
+              (progn
+                (load-theme (car (cdr themes_chosen)) t)
+                (set-face-foreground 'hl-line 'unspecified)
+                (set-face-background 'fringe 'unspecified))
+            (if (string-match "ef-" (symbol-name (cadr themes_chosen)))
+                (ef-themes-select-dark (cadr themes_chosen))
+              (progn
+                (load-theme (cadr themes_chosen) t)
+                (setq doom-rouge-brighter-comments t
+                      doom-rouge-brighter-tabs t))
+              )))
+      (progn
+        ;; (load-theme (car themes_chosen) t)
+        ;; (ef-themes-select-light (car themes_chosen))
+        (when (eq custom-enabled-themes nil)
+          ;; (set-face-bold 'font-lock-keyword-face t)
+          ;; (set-face-bold 'font-lock-builtin-face t)
+          (set-face-background 'highlight "#DFEAEC")
+          (set-face-background 'fringe 'unspecified)
+          (set-face-attribute 'line-number-current-line nil :foreground
+                              "#000000" :background "#C4C4C4" :weight
+                              'bold)
+          (set-face-bold 'font-lock-keyword-face 't)
+          )
+        (setq modus-themes-org-blocks 'gray-background
+              modus-themes-bold-constructs t
+              modus-themes-italic-constructs t)))
+    (if (equal (frame-parameter nil 'background-mode) 'dark)
+        (set-face-attribute 'mode-line nil
+                            :background "black"
+                            :box nil
+                            :font (font-spec
+                                   ;; "JetBrainsMono NF" "Monego Ligatures" "Maple Mono NF"
+                                   :name
+                                   "BlexMono Nerd Font"
+                                   :size
+                                   11.0)
+                            :underline
+                            (face-foreground 'mode-line-emphasis))
+      (progn
+        (set-face-attribute 'mode-line nil
+                            :background "#F4F7FA"
+                            ;; :background "white"
+                            :box nil
+                            :font (font-spec
+                                   :name
+                                   "BlexMono Nerd Font"
+                                   :size 11.0))
+        ))
+    (set-face-attribute
+     'mode-line-inactive nil
+     :inherit 'mode-line
+     :box nil)
+    ))
 
 (provide 'init-func)
 ;;; init-func.el ends here.

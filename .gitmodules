@@ -418,3 +418,12 @@
 [submodule "site-lisp/lspce"]
 	path = site-lisp/lspce
 	url = https://github.com/zbelial/lspce.git
+[submodule "site-lisp/devdocs.el"]
+	path = site-lisp/devdocs.el
+	url = https://github.com/astoff/devdocs.el.git
+[submodule "site-lisp/cuda-mode"]
+	path = site-lisp/cuda-mode
+	url = https://github.com/chachi/cuda-mode.git
+[submodule "site-lisp/math-preview"]
+	path = site-lisp/math-preview
+	url = https://gitlab.com/matsievskiysv/math-preview.git

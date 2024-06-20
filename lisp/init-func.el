@@ -400,9 +400,11 @@ use `cm/autoloads-file' as TARGET."
                   cuda-mode-hook
                   TeX-mode-hook
                   c-ts-mode-hook c++-ts-mode-hook
-                  python-ts-mode-hook python-ts-mode
+                  python-ts-mode-hook python-ts-mode-hook
+                  emacs-lisp-mode-hook
                   js-mode-hook
                   js-ts-mode-hook))
+    (add-hook hook 'corfu-mode)
     (add-hook hook (lambda ()
                      (unless (derived-mode-p 'emacs-lisp-mode 'lisp-mode
                                              ;; 'verilog-mode
@@ -430,10 +432,12 @@ If you experience stuttering, increase this.")
   "Setup display graphic for GUI Emacs and Emacsclient."
   (when (display-graphic-p)
     ;; (if (not windows-system-p)
-    ;;     (set-en_cn-font "BlexMono Nerd Font" "Source Han Serif CN" "Palatino Linotype"
-    ;;                     "LXGW WenKai Screen" "Source Han Sans CN" 12.0)
-    (set-en_cn-font "InputMono" "Source Han Serif CN" "Palatino Linotyp"
-                    "LXGW WenKai Screen" "Source Han Sans CN" 12.0)
+    ;; (set-en_cn-font "BlexMono Nerd Font" "Source Han Serif CN" "Input Serif"
+    ;;                 "LXGW WenKai Screen" "Source Han Sans CN" 12.0)
+    ;; (set-en_cn-font "InputMono" "Source Han Serif CN" "Palatino Linotyp"
+    ;;                 "LXGW WenKai Screen" "Source Han Sans CN" 12.0)
+    (set-en_cn-font "PragmataPro Nerd Font" "FZLTHProGBK" "Input Serif"
+                    "LXGW WenKai Screen" "Source Han Sans CN" 13.0)
     ;;   )
     ;; Maple Mono NF --- Maple Mono SC NF, HarmonyOS Sans SC
     ;; PragmataPro Mono Liga --- SimHei

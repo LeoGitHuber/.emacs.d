@@ -38,7 +38,7 @@
 
 (keymap-set isearch-mode-map "C-h" 'isearch-del-char)
 (keymap-global-set "C-h" 'backward-delete-char-untabify)
-(keymap-global-set "C-x k" 'kill-this-buffer)
+(keymap-global-set "C-x k" 'kill-current-buffer)
 (keymap-global-set "C-x C-r" 'restart-emacs)
 (keymap-global-set "C-c g" 'consult-ripgrep)
 (keymap-global-set "C-c f" 'consult-fd)

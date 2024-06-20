@@ -26,22 +26,22 @@
   ;; (require 'package)
   ;; (package-initialize)
 
-  (setq package-archives
-        '(("gnu"    .
-           "https://mirrors.sjtug.sjtu.edu.cn/emacs-elpa/gnu/")
-          ("nongnu" .
-           "https://mirrors.sjtug.sjtu.edu.cn/emacs-elpa/nongnu/")
-          ("melpa"  .
-           "https://mirrors.sjtug.sjtu.edu.cn/emacs-elpa/melpa/"))
-        ;; “Gnu”应该和“melpa”同优先级, 从而默认选取二者中较新的 package.
-        package-archive-priorities '(("gnu"    . 1)
-                                     ("nongnu" . 0)
-                                     ("melpa"  . 1))
-        package-menu-hide-low-priority t
-        ;; 暂时不知道检查签名有什么用,先关了再说.
-        package-check-signature nil
-        eldoc-documentation-function 'eldoc-documentation-compose
-        )
+  ;; (setq package-archives
+  ;;       '(("gnu"    .
+  ;;          "https://mirrors.sjtug.sjtu.edu.cn/emacs-elpa/gnu/")
+  ;;         ("nongnu" .
+  ;;          "https://mirrors.sjtug.sjtu.edu.cn/emacs-elpa/nongnu/")
+  ;;         ("melpa"  .
+  ;;          "https://mirrors.sjtug.sjtu.edu.cn/emacs-elpa/melpa/"))
+  ;;       ;; “Gnu”应该和“melpa”同优先级, 从而默认选取二者中较新的 package.
+  ;;       package-archive-priorities '(("gnu"    . 1)
+  ;;                                    ("nongnu" . 0)
+  ;;                                    ("melpa"  . 1))
+  ;;       package-menu-hide-low-priority t
+  ;;       ;; 暂时不知道检查签名有什么用,先关了再说.
+  ;;       package-check-signature nil
+  ;;       eldoc-documentation-function 'eldoc-documentation-compose
+  ;;       )
 
   ;;; Emacs Default Setting
   (load "~/.emacs.d/lisp/init-func.el")
@@ -84,143 +84,208 @@
   (add-hook 'minibuffer-setup-hook 'gc-minibuffer-setup-hook)
   (add-hook 'minibuffer-exit-hook 'gc-minibuffer-exit-hook)
 
-  ;;; @2. flymake
+  ;;; @2. flymake and flycheck
 
-  (with-eval-after-load 'flymake
-    (setq flymake-no-changes-timeout nil)
+  (with-eval-after-load 'flycheck
+    (flycheck-def-config-file-var flycheck-verilog-verilator-command-file verilog-verilator "commands.f")
+    (flycheck-define-checker verilog-verilator
+      "A Verilog syntax checker using the Verilator Verilog HDL simulator.
 
-    (with-eval-after-load 'flycheck
-      (setq-default flycheck-disabled-checkers
-                    (append (default-value 'flycheck-disabled-checkers)
-                            '(emacs-lisp emacs-lisp-checkdoc emacs-lisp-package))))
-
-    (defvar verilog--flymake-proc nil
-      "A flymake verilog process.")
-
-    (defvar verilog-flymake-command '("verilator" "--lint-only" "-Wall")
-      "Command for verilog's flymake.")
-
-    (defvar verilog--flymake-output-buffer " *stderr of verilog-flymake*"
-      "Buffer for verilog's flymake output.")
-
-    (defun verilog-flymake-done (report-fn
-                                 source-buffer
-                                 output-buffer)
-      (with-current-buffer source-buffer
-        (save-excursion
-          (save-restriction
-            (with-current-buffer output-buffer
-              (goto-char (point-min))
-              (let ((diags))
-                (while (search-forward-regexp
-                        "^\\(%.*\\): .*:\\([0-9]+\\):\\([0-9]+\\): \\(.*\\)$"
-                        nil t)
-                  (let* ((msg (match-string 4))
-                         (level-msg (match-string 1))
-                         (line (string-to-number (match-string 2)))
-                         (locate-string)
-                         (cal)
-                         (beg)
-                         (end)
-                         (level))
-                    (setq level (cond
-                                 ((string-match-p "%Error" level-msg) ':error)
-                                 ((string-match-p "%Warning" level-msg) ':warning)
-                                 (t :note)))
-                    (search-forward-regexp "\\(\\^~*\\)" nil t)
-                    (setq cal (length (match-string 1)))
-                    (let ((current (point))
-                          (line-beginning (line-beginning-position)))
-                      (forward-line -1)
-                      (forward-char (- current line-beginning))
-                      (setq locate-string (buffer-substring-no-properties (- (point) cal) (point))))
-                    (setq beg (with-current-buffer source-buffer
-                                (save-excursion
-                                  (save-restriction
-                                    (goto-char (point-min))
-                                    (or (equal line 1)
-                                        (forward-line (- line 1)))
-                                    (search-forward locate-string nil t)
-                                    (- (point) cal)
-                                    ))))
-                    (setq end (+ beg cal))
-                    (setq diags
-                          (cons (flymake-make-diagnostic
-                                 source-buffer beg end level msg)
-                                diags))
-                    ))
-                (funcall report-fn diags)
-                )))))
-      )
-
-    (defun verilog-flymake-detect (report-fn &rest _args)
-      "A Flymake backend for verilog.
-  Spawn an verilog lsp process that byte-compiles a file representing the
-  current buffer state and calls REPORT-FN when done."
-      (when verilog--flymake-proc
-        (when (process-live-p verilog--flymake-proc)
-          (kill-process verilog--flymake-proc)))
-      (let ((source-buffer (current-buffer))
-            (coding-system-for-write 'utf-8-unix)
-            (coding-system-for-read 'utf-8))
-        (save-restriction
-          (widen)
-          (let* ((output-buffer (generate-new-buffer " *verilog-flymake*")))
-            (setq verilog--flymake-proc
-                  (make-process
-                   :name "verilog-flymake-process"
-                   :buffer output-buffer
-                   :command (append verilog-flymake-command
-                                    (list (buffer-file-name source-buffer)))
-                   :connection-type 'pipe
-                   :sentinel
-                   (lambda (proc _event)
-                     (unless (process-live-p proc)
-                       (unwind-protect
-                           (cond
-                            ((not (and (buffer-live-p source-buffer)
-                                       (eq proc (with-current-buffer source-buffer
-                                                  verilog--flymake-proc))))
-                             (flymake-log :warning
-                                          "verilog-flymake process %s obsolete" proc))
-                            ((memq (process-status proc) '(exit signal))
-                             (verilog-flymake-done report-fn
-                                                   source-buffer
-                                                   verilog--flymake-output-buffer
-                                                   ))
-                            (t
-                             (funcall report-fn
-                                      :panic
-                                      :explanation
-                                      (format "process %s died" proc))))
-                         (kill-buffer verilog--flymake-output-buffer)
-                         )))
-                   :stderr verilog--flymake-output-buffer
-                   :noquery t))))))
-
-    (defun verilog-setup-flymake-backend ()
-      (add-hook 'flymake-diagnostic-functions 'verilog-flymake-detect nil t))
-
-    ;; (add-hook 'verilog-mode-hook 'verilog-setup-flymake-backend)
-
-    (defun sanityinc/enable-flymake-flycheck ()
-      (setq-local flymake-diagnostic-functions
-                  (seq-uniq (append flymake-diagnostic-functions
-                                    (flymake-flycheck-all-chained-diagnostic-functions))))))
-
-  (dolist (hook '(prog-mode-hook))
-    (add-hook hook 'flymake-mode))
-
-
-  ;;; @3. ICONS
+  See URL `https://www.veripool.org/wiki/verilator'."
+      ;; https://verilator.org/guide/latest/exe_verilator.html
+      ;;   The three flags -y, +incdir+<dir> and -I<dir> have similar effect;
+      ;;   +incdir+<dir> and -y are fairly standard across Verilog tools while -I<dir> is used by many C++ compilers.
+      :command ("verilator" "--lint-only" "-Wall" "-Wno-fatal" "--timing"
+                "--bbox-unsup" ; Blackbox unsupported language features to avoid errors on verification sources
+                "--bbox-sys"  ;  Blackbox unknown $system calls
+                (option-list "-I" nil concat)
+                (option-list "-I" nil concat)
+                (config-file "-f" flycheck-verilog-verilator-command-file)
+                (eval (remove buffer-file-name nil))
+                (eval (remove buffer-file-name nil))
+                source)
+      :error-patterns
+      ((warning line-start "%Warning-" (zero-or-more not-newline) ": " (file-name) ":" line ":" column ": " (message) line-end)
+       (error   line-start "%Error: Internal Error: "                  (file-name) ":" line ":" column ": " (message) line-end)
+       (error   line-start "%Error: "                                  (file-name) ":" line ":" column ": " (message) line-end)
+       (error   line-start "%Error-"   (zero-or-more not-newline) ": " (file-name) ":" line ":" column ": " (message) line-end))
+      :modes (verilog-mode verilog-ts-mode))
+    (add-hook 'flycheck-mode-hook '(lambda ()
+                                     (flycheck-set-indication-mode 'left-margin)))
+    )
 
   (add-to-list 'load-path "~/.emacs.d/site-lisp/nerd-icons.el")
   (add-to-list 'load-path "~/.emacs.d/site-lisp/treemacs-nerd-icons")
   (add-to-list 'load-path "~/.emacs.d/site-lisp/nerd-icons-dired")
 
-  (setq nerd-icons-font-family "BlexMono Nerd Font")
-
   (require 'nerd-icons)
+  (setq nerd-icons-font-family "InputMono Nerd Font")
+
+
+  (defface diagnostics-error
+    '(
+      (((background dark)) :background "#090c10" :foreground "#f85149")
+      (((background light)) :foreground "#cb2431")
+      )
+    "Face for flymake Error."
+    :group 'flymake)
+
+  (defface diagnostics-warn
+    '(
+      (((background dark)) :background "#090c10" :foreground "#f0883e")
+      (((background light)) :foreground "#bf8803")
+      )
+    "Face for flymake Warn."
+    :group 'flymake)
+
+  (defface diagnostics-info
+    '((((background dark)) :background "#090c10" :foreground "#75beff" :box (:line-width (5 . -1) :color "#000000"))
+      ;; (((background light)) :foreground "#75beff" :box (:line-width (5 . -1) :color "white"))
+      (((background light)) :foreground "#1155ff" :box (:line-width (5 . -1) :color "white"))
+      )
+    "Face for flymake Info."
+    :group 'flymake)
+
+  (setq flymake-no-changes-timeout nil
+        flymake-indicator-type 'margins
+        flymake-margin-indicators-string
+        ;; `((error "​​​​󰅙" compilation-error)
+        ;;   (warning "​​​​" compilation-warning)
+        ;;   (note "​​​​" compilation-info))
+        ;; `((error "​​​​󰅙​​​​" diagnostics-error)
+        `((error "​​​​󰅙​​​" diagnostics-error)
+          (warning "​​​​​​​​" diagnostics-warn)
+          (note "" diagnostics-info))
+        ;; flymake-autoresize-margins nil
+        )
+
+  (setq-default left-fringe-width 1
+                left-margin-width 1)
+
+  ;; (with-eval-after-load 'flymake
+
+  ;;   (defvar verilog--flymake-proc nil
+  ;;     "A flymake verilog process.")
+
+  ;;   (defvar verilog-flymake-command '("verilator" "--lint-only" "-Wall" "-Wno-fatal" "--timing"
+  ;;                                      "--bbox-unsup" "--bbox-sys")
+  ;;     "Command for verilog's flymake.")
+
+  ;;   (defvar verilog--flymake-output-buffer " *stderr of verilog-flymake*"
+  ;;     "Buffer for verilog's flymake output.")
+
+  ;;   (defun verilog-flymake-done (report-fn
+  ;;                                source-buffer
+  ;;                                output-buffer)
+  ;;     (with-current-buffer source-buffer
+  ;;       (save-excursion
+  ;;         (save-restriction
+  ;;           (with-current-buffer output-buffer
+  ;;             (goto-char (point-min))
+  ;;             (let ((diags))
+  ;;               (while (search-forward-regexp
+  ;;                       "^\\(%.*\\): .*:\\([0-9]+\\):\\([0-9]+\\): \\(.*\\)$"
+  ;;                       nil t)
+  ;;                 (let* ((msg (match-string 4))
+  ;;                        (level-msg (match-string 1))
+  ;;                        (line (string-to-number (match-string 2)))
+  ;;                        (locate-string)
+  ;;                        (cal)
+  ;;                        (beg)
+  ;;                        (end)
+  ;;                        (level))
+  ;;                   (setq level (cond
+  ;;                                ((string-match-p "%Error" level-msg) ':error)
+  ;;                                ((string-match-p "%Warning" level-msg) ':warning)
+  ;;                                (t :note)))
+  ;;                   (search-forward-regexp "\\(\\^~*\\)" nil t)
+  ;;                   (setq cal (length (match-string 1)))
+  ;;                   (let ((current (point))
+  ;;                         (line-beginning (line-beginning-position)))
+  ;;                     (forward-line -1)
+  ;;                     (forward-char (- current line-beginning))
+  ;;                     (setq locate-string (buffer-substring-no-properties (- (point) cal) (point))))
+  ;;                   (setq beg (with-current-buffer source-buffer
+  ;;                               (save-excursion
+  ;;                                 (save-restriction
+  ;;                                   (goto-char (point-min))
+  ;;                                   (or (equal line 1)
+  ;;                                       (forward-line (- line 1)))
+  ;;                                   (search-forward locate-string nil t)
+  ;;                                   (- (point) cal)
+  ;;                                   ))))
+  ;;                   (setq end (+ beg cal))
+  ;;                   (setq diags
+  ;;                         (cons (flymake-make-diagnostic
+  ;;                                source-buffer beg end level msg)
+  ;;                               diags))
+  ;;                   ))
+  ;;               (funcall report-fn diags)
+  ;;               )))))
+  ;;     )
+
+  ;;   (defun verilog-flymake-detect (report-fn &rest _args)
+  ;;     "A Flymake backend for verilog.
+  ;; Spawn an verilog lsp process that byte-compiles a file representing the
+  ;; current buffer state and calls REPORT-FN when done."
+  ;;     (when verilog--flymake-proc
+  ;;       (when (process-live-p verilog--flymake-proc)
+  ;;         (kill-process verilog--flymake-proc)))
+  ;;     (let ((source-buffer (current-buffer))
+  ;;           (coding-system-for-write 'utf-8-unix)
+  ;;           (coding-system-for-read 'utf-8))
+  ;;       (save-restriction
+  ;;         (widen)
+  ;;         (let* ((output-buffer (generate-new-buffer " *verilog-flymake*")))
+  ;;           (setq verilog--flymake-proc
+  ;;                 (make-process
+  ;;                  :name "verilog-flymake-process"
+  ;;                  :buffer output-buffer
+  ;;                  :command (append verilog-flymake-command
+  ;;                                   (list (buffer-file-name source-buffer)))
+  ;;                  :connection-type 'pipe
+  ;;                  :sentinel
+  ;;                  (lambda (proc _event)
+  ;;                    (unless (process-live-p proc)
+  ;;                      (unwind-protect
+  ;;                          (cond
+  ;;                           ((not (and (buffer-live-p source-buffer)
+  ;;                                      (eq proc (with-current-buffer source-buffer
+  ;;                                                 verilog--flymake-proc))))
+  ;;                            (flymake-log :warning
+  ;;                                         "verilog-flymake process %s obsolete" proc))
+  ;;                           ((memq (process-status proc) '(exit signal))
+  ;;                            (verilog-flymake-done report-fn
+  ;;                                                  source-buffer
+  ;;                                                  verilog--flymake-output-buffer
+  ;;                                                  ))
+  ;;                           (t
+  ;;                            (funcall report-fn
+  ;;                                     :panic
+  ;;                                     :explanation
+  ;;                                     (format "process %s died" proc))))
+  ;;                        (kill-buffer verilog--flymake-output-buffer)
+  ;;                        )))
+  ;;                  :stderr verilog--flymake-output-buffer
+  ;;                  :noquery t))))))
+
+  ;;   (defun verilog-setup-flymake-backend ()
+  ;;     (add-hook 'flymake-diagnostic-functions 'verilog-flymake-detect nil t))
+
+  ;;   ;; (add-hook 'verilog-mode-hook 'verilog-setup-flymake-backend)
+
+  ;;   ;; (defun sanityinc/enable-flymake-flycheck ()
+  ;;   ;;   (setq-local flymake-diagnostic-functions
+  ;;   ;;               (seq-uniq (append flymake-diagnostic-functions
+  ;;   ;;                                 (flymake-flycheck-all-chained-diagnostic-functions)))))
+  ;;   )
+
+  (dolist (hook '(prog-mode-hook))
+    (add-hook hook 'flymake-mode)
+    ;; (add-hook hook 'flycheck-mode)
+    )
+
+  ;;; @3. ICONS
 
   ;; (load "~/.emacs.d/self-develop/modeline-setting.el")
 
@@ -291,7 +356,7 @@
 
   (keymap-set isearch-mode-map "C-h" 'isearch-del-char)
   (keymap-global-set "C-h" 'backward-delete-char-untabify)
-  (keymap-global-set "C-x k" 'kill-this-buffer)
+  (keymap-global-set "C-x k" 'kill-current-buffer)
   (keymap-global-set "C-x C-r" 'restart-emacs)
   (keymap-global-set "C-c g" 'consult-ripgrep)
   (keymap-global-set "C-c f" 'consult-fd)
@@ -354,7 +419,7 @@
 
   ;;; @6. LSP
 
-  (lsp-enable-startup)
+  ;; (lsp-enable-startup)
 
   (with-eval-after-load 'lsp-mode
     (with-eval-after-load 'lsp-ui
@@ -474,8 +539,6 @@
       (eglot-booster-mode))
     )
 
-  (lsp-enable-startup)
-
   (add-hook 'company-mode-hook
             (lambda ()
               (setq company-tooltip-align-annotations t
@@ -506,6 +569,10 @@
 
   (with-eval-after-load 'lsp-bridge
     (add-hook 'lsp-bridge-mode-hook 'yas/minor-mode)
+    (add-hook 'c++-ts-mode-hook
+              (lambda ()
+                (setq-local lsp-bridge-inlay-hint-overlays t)
+                ))
     (keymap-set yas-keymap "<tab>" 'acm-complete-or-expand-yas-snippet)
     (setq ;; acm-candidate-match-function 'orderless-flex
      ;; acm-enable-icon t
@@ -519,6 +586,7 @@
      acm-enable-citre t
      ;; lsp-bridge-enable-log t
      lsp-bridge-enable-signature-help t
+     lsp-bridge-enable-inlay-hint t
      lsp-bridge-enable-diagnostics nil
      lsp-bridge-complete-manually nil
      ;; lsp-bridge-enable-profile t
@@ -656,6 +724,8 @@
         cns-debug nil)
 
   (require 'cns nil t)
+  (when (featurep 'cns)
+    (add-hook 'find-file-hook 'cns-auto-enable))
 
   ;; @9. INPUT
 
@@ -870,7 +940,10 @@
                    (:foreground "#e74c3c"
                                 :box (:line-width 1 :color "#e1e4e5")
                                 :inherit fixed-pitch))
-                  (((background dark)) (:inherit fixed-pitch))))
+                  (((background dark))
+                   (:background "#343942"
+                                :foreground "#E6EDF3"
+                                :inherit fixed-pitch))))
                '(org-meta-line ((t (:inherit (font-lock-comment-face fixed-pitch)))))
                '(org-block-begin-line ((t (:inherit fixed-pitch))))
                '(org-block-end-line ((t (:inherit fixed-pitch))))
@@ -1001,132 +1074,136 @@
 
     ;;; @12. VERILOG
 
-  (with-eval-after-load 'verilog-mode
-    ;; (with-eval-after-load 'lsp-mode
-    ;;   (add-to-list 'lsp-language-id-configuration '(verilog-mode . "verilog"))
-    ;;   (lsp-register-client
-    ;;    (make-lsp-client :new-connection (lsp-stdio-connection '("svls"))
-    ;;             :major-modes '(verilog-mode)
-    ;;             :priority -1)))
-    ;; (with-eval-after-load 'lsp-mode
-    ;;   (require 'lsp-verilog)
-    ;;   (custom-set-variables
-    ;;    '(lsp-clients-svlangserver-launchConfiguration "verilator -sv --lint-only -Wall")
-    ;;    '(lsp-clients-svlangserver-formatCommand "verible-verilog-format")))
-    (setq verilog-indent-lists t
-          verilog-auto-delete-trailing-whitespace t
-          verilog-align-ifelse t
-          verilog-auto-inst-param-value t
-          verilog-auto-inst-vector t
-          verilog-auto-lineup 'all
-          verilog-auto-newline t
-          verilog-auto-save-policy nil
-          verilog-auto-template-warn-unused t
-          verilog-case-indent 2
-          verilog-cexp-indent 2
-          verilog-highlight-grouping-keywords t
-          verilog-highlight-modules t
-          verilog-indent-level 3
-          verilog-indent-level-behavioral 3
-          verilog-indent-level-declaration 3
-          verilog-indent-level-module 3
-          ;; verilog-tab-to-comment t
-          verilog-ext-feature-list '(;; font-lock
-                                     xref
-                                     capf
-                                     hierarchy
-                                     eglot
-                                     ;; lsp
-                                     flycheck
-                                     ;; beautify
-                                     navigation
-                                     ;; template
-                                     ;; formatter
-                                     ;; compilation
-                                     ;; imenu
-                                     which-func
-                                     hideshow
-                                     typedefs
-                                     time-stamp
-                                     block-end-comments
-                                     ports
-                                     )
-          verilog-ext-hierarchy-backend 'builtin
-          )
-    ;; (require 'verilog-ext)
-    ;; (verilog-ext-mode-setup)
-    ;; (verilog-ext-eglot-set-server 've-veridian)
-    ;; (verilog-ext-eglot-set-server 've-svlangserver)
+  ;; (with-eval-after-load 'verilog-mode
+  ;;   ;; (with-eval-after-load 'lsp-mode
+  ;;   ;;   (add-to-list 'lsp-language-id-configuration '(verilog-mode . "verilog"))
+  ;;   ;;   (lsp-register-client
+  ;;   ;;    (make-lsp-client :new-connection (lsp-stdio-connection '("svls"))
+  ;;   ;;             :major-modes '(verilog-mode)
+  ;;   ;;             :priority -1)))
+  ;;   ;; (with-eval-after-load 'lsp-mode
+  ;;   ;;   (require 'lsp-verilog)
+  ;;   ;;   (custom-set-variables
+  ;;   ;;    '(lsp-clients-svlangserver-launchConfiguration "verilator -sv --lint-only -Wall")
+  ;;   ;;    '(lsp-clients-svlangserver-formatCommand "verible-verilog-format")))
+  ;;   (setq verilog-indent-lists t
+  ;;         verilog-auto-delete-trailing-whitespace t
+  ;;         verilog-align-ifelse t
+  ;;         verilog-auto-inst-param-value t
+  ;;         verilog-auto-inst-vector t
+  ;;         verilog-auto-lineup 'all
+  ;;         verilog-auto-newline t
+  ;;         verilog-auto-save-policy nil
+  ;;         verilog-auto-template-warn-unused t
+  ;;         verilog-case-indent 2
+  ;;         verilog-cexp-indent 2
+  ;;         verilog-highlight-grouping-keywords t
+  ;;         verilog-highlight-modules t
+  ;;         verilog-indent-level 3
+  ;;         verilog-indent-level-behavioral 3
+  ;;         verilog-indent-level-declaration 3
+  ;;         verilog-indent-level-module 3
+  ;;         ;; verilog-tab-to-comment t
+  ;;         verilog-ts-indent-level 3
+  ;;         verilog-ext-feature-list '(;; font-lock
+  ;;                                    xref
+  ;;                                    capf
+  ;;                                    hierarchy
+  ;;                                    eglot
+  ;;                                    ;; lsp
+  ;;                                    flycheck
+  ;;                                    ;; beautify
+  ;;                                    navigation
+  ;;                                    ;; template
+  ;;                                    ;; formatter
+  ;;                                    ;; compilation
+  ;;                                    ;; imenu
+  ;;                                    which-func
+  ;;                                    hideshow
+  ;;                                    typedefs
+  ;;                                    time-stamp
+  ;;                                    block-end-comments
+  ;;                                    ports
+  ;;                                    )
+  ;;         verilog-ext-hierarchy-backend 'builtin
+  ;;         )
+  ;;   ;; (require 'verilog-ext)
+  ;;   ;; (verilog-ext-mode-setup)
+  ;;   ;; (verilog-ext-eglot-set-server 've-veridian)
+  ;;   ;; (verilog-ext-eglot-set-server 've-svlangserver)
 
-    (with-eval-after-load 'apheleia
-      (push '(verilog-mode . verible) apheleia-mode-alist)
-      (push '(verilog-ts-mode . verible) apheleia-mode-alist)
-      (push `(verible . ("verible-verilog-format"
-                         "--column_limit" "100"
-                         "--indentation_spaces",(number-to-string verilog-indent-level)
-                         "--line_break_penalty" "2"
-                         "--over_column_limit_penalty" "100"
-                         "--wrap_spaces" "4"
-                         "-"))
-            apheleia-formatters))
+  ;;   (with-eval-after-load 'apheleia
+  ;;     (push '(verilog-mode . verible) apheleia-mode-alist)
+  ;;     (push '(verilog-ts-mode . verible) apheleia-mode-alist)
+  ;;     (push `(verible . ("verible-verilog-format"
+  ;;                        "--column_limit" "100"
+  ;;                        "--indentation_spaces",(number-to-string verilog-indent-level)
+  ;;                        "--line_break_penalty" "2"
+  ;;                        "--over_column_limit_penalty" "100"
+  ;;                        "--wrap_spaces" "3"
+  ;;                        "--try_wrap_long_lines"
+  ;;                        "-"))
+  ;;           apheleia-formatters))
 
-    (add-hook 'verilog-mode-hook
-              (lambda ()
-                (apheleia-mode)
-                (eglot-ensure)
-                (when indent-bars-mode
-                  (setq-local indent-bars-spacing-override verilog-indent-level))
+  (add-hook 'verilog-mode-hook
+            (lambda ()
+              (apheleia-mode)
+              (setq indent-bars-spacing-override verilog-indent-level)
+              (indent-bars-reset)
+              ;; (eglot-ensure)
+              (when (boundp 'eglot-server-programs)
                 (add-to-list 'eglot-server-programs
-                             '(verilog-mode . ("svlangserver"))
-                             ;;              ;; '(verilog-mode . ("svls"))
-                             ;;              ;; '(verilog-mode . ("vls"))
-                             ;;              ;; '(verilog-mode . ("veridian"))
+                             ;; '(verilog-mode . ("svlangserver"))
+                             ;; '(verilog-mode . ("svls"))
+                             ;; '(verilog-mode . ("vls"))
+                             '(verilog-mode . ("veridian"))
                              )
-                (setq eglot-workspace-configuration
-                      ;;       ;; '(:veridian
-                      ;;       ;;   (:settings
-                      ;;       ;;    (:syntax
-                      ;;       ;;     (:enabled :json-true
-                      ;;       ;;               :path "verible-verilog-syntax")
-                      ;;       ;;     :format
-                      ;;       ;;     (:enabled :json-true
-                      ;;       ;;               :path "verible-verilog-format"
-                      ;;       ;;               :args ["--indentation_spaces" "3"])
-                      ;;       ;;     :diagnostics
-                      ;;       ;;     (:enabled :json-false)
-                      ;;       ;;     )))
-                      `((:systemverilog
-                         (:includeIndexing '["**/*.{sv,svh}"])
-                         (:excludeIndexing '["test/**/*.{sv,svh}"])
-                         (:defines nil)
-                         (:launchConfiguration "verilator -sv --lint-only -Wall")
-                         (:lintOnUnsaved t)
-                         (:formatCommand "verible-verilog-format")
-                         ;; (:formatCommand ,(string-join `("verible-verilog-format"
-                         ;;                                 "--column_limit 100"
-                         ;;                                 "--indentation_spaces"
-                         ;;                                 ,(number-to-string verilog-indent-level)
-                         ;;                                 "--line_break_penalty 2"
-                         ;;                                 "--over_column_limit_penalty 100"
-                         ;;                                 "--wrap_spaces 4")
-                         ;;                               " "))
-                         (:formatCommand ,(string-join `("verible-verilog-format"
-                                                         "--wrap_end_else_clauses true")
-                                                       " "))
-                         (:disableCompletionProvider nil)
-                         (:disableHoverProvider nil)
-                         (:disableSignatureHelpProvider nil)
-                         (:disableLinting nil)))
-                      ;;       ;; '(:svls
-                      ;;       ;;   (:settings
-                      ;;       ;;    (:systemverilog.launchConfiguration:
-                      ;;       ;;     "verilator -sv -Wall --lint-only",
-                      ;;       ;;     :systemverilog.formatCommand:
-                      ;;       ;;     "verible-verilog-format")))
-                      )
-                )
+                (add-to-list 'eglot-stay-out-of 'flymake))
+              (setq eglot-workspace-configuration
+                    '(:veridian
+                      (:settings
+                       (:syntax
+                        (:enabled :json-true
+                                  :path "verible-verilog-syntax")
+                        :format
+                        (:enable :json-false)
+                        ;; (:enabled :json-true
+                        ;;           :path "verible-verilog-format"
+                        ;;           :args ["--indentation_spaces" "3"])
+                        :diagnostics
+                        (:enabled :json-false)
+                        )))
+                    ;; `((:systemverilog
+                    ;;    (:includeIndexing '["**/*.{sv,svh}"])
+                    ;;    (:excludeIndexing '["test/**/*.{sv,svh}"])
+                    ;;    (:defines nil)
+                    ;;    (:launchConfiguration "verilator -sv --lint-only -Wall")
+                    ;;    (:lintOnUnsaved t)
+                    ;;    (:formatCommand "verible-verilog-format")
+                    ;;    ;; (:formatCommand ,(string-join `("verible-verilog-format"
+                    ;;    ;;                                 "--column_limit 100"
+                    ;;    ;;                                 "--indentation_spaces"
+                    ;;    ;;                                 ,(number-to-string verilog-indent-level)
+                    ;;    ;;                                 "--line_break_penalty 2"
+                    ;;    ;;                                 "--over_column_limit_penalty 100"
+                    ;;    ;;                                 "--wrap_spaces 4")
+                    ;;    ;;                               " "))
+                    ;;    (:formatCommand ,(string-join `("verible-verilog-format"
+                    ;;                                    "--wrap_end_else_clauses true")
+                    ;;                                  " "))
+                    ;;    (:disableCompletionProvider nil)
+                    ;;    (:disableHoverProvider nil)
+                    ;;    (:disableSignatureHelpProvider nil)
+                    ;;    (:disableLinting nil)))
+                    ;;       ;; '(:svls
+                    ;;       ;;   (:settings
+                    ;;       ;;    (:systemverilog.launchConfiguration:
+                    ;;       ;;     "verilator -sv -Wall --lint-only",
+                    ;;       ;;     :systemverilog.formatCommand:
+                    ;;       ;;     "verible-verilog-format")))
+                    )
               )
-    )
+            )
 
     ;;; @13. READER
 
@@ -1445,7 +1522,6 @@
           (cursor-type) (no-special-glyphs . t) (desktop-dont-save . t)
           (child-frame-border-width 3)))
 
-
   ;; (add-to-list 'load-path "~/.emacs.d/site-lisp/auto-save")
   ;; (require 'auto-save)
   ;; (auto-save-enable)
@@ -1653,7 +1729,9 @@
             (js-json-mode    . json-ts-mode)
             (python-mode     . python-ts-mode)
             (ruby-mode       . ruby-ts-mode)
-            (sh-mode         . bash-ts-mode))
+            (sh-mode         . bash-ts-mode)
+            ;; (verilog-mode    . verilog-ts-mode)
+            )
           treesit-font-lock-level 4
           )
     ;; (add-hook 'emacs-lisp-mode-hook
@@ -1789,10 +1867,10 @@
         completion-category-overrides '((file (styles basic partial-completion))))
 
   (defun vertico-lsp-enable ()
-    ;; (and (functionp 'lsp-bridge-mode)
-    ;;      (global-lsp-bridge-mode))
-    (and (functionp 'corfu-mode)
-         (global-corfu-mode))
+    (and (functionp 'lsp-bridge-mode)
+         (global-lsp-bridge-mode))
+    ;; (and (functionp 'corfu-mode)
+    ;;      (global-corfu-mode))
     (and (boundp 'puni-mode)
          (puni-global-mode))
     (and (boundp 'vertico-mode)
@@ -1858,7 +1936,7 @@
   (require 'citre)
   (require 'citre-config)
   (with-eval-after-load 'citre
-    (setq citre-ctags-program "/usr/bin/ctags"
+    (setq citre-ctags-program "/opt/bin/ctags"
           citre-use-project-root-when-creating-tags t
           citre-prompt-language-for-ctags-command t))
 

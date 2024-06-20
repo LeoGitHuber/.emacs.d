@@ -7,9 +7,11 @@
 (add-to-list 'default-frame-alist '(menu-bar-lines . 0))
 (add-to-list 'default-frame-alist '(tool-bar-lines . 0))
 
-(when (string-equal system-type "windows-nt")
-  (add-to-list 'default-frame-alist '(width . 180))
-  (add-to-list 'default-frame-alist '(height . 50))
+(if (string-equal system-type "windows-nt")
+    (progn
+      (add-to-list 'default-frame-alist '(width . 180))
+      (add-to-list 'default-frame-alist '(height . 50)))
+  ;; (add-to-list 'default-frame-alist '(alpha-background . 60))
   )
 
 (add-to-list 'default-frame-alist '(width . 140))

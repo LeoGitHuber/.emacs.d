@@ -427,3 +427,6 @@
 [submodule "site-lisp/math-preview"]
 	path = site-lisp/math-preview
 	url = https://gitlab.com/matsievskiysv/math-preview.git
+[submodule "site-lisp/treesit-fold"]
+	path = site-lisp/treesit-fold
+	url = https://github.com/emacs-tree-sitter/treesit-fold.git

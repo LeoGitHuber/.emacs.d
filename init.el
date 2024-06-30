@@ -343,7 +343,8 @@
       ;; (global-set-key (kbd "M-g f") 'avy-goto-line)
       ;; (global-set-key (kbd "C-c C-j") 'avy-resume)
       ))
-
+  (keymap-global-set "C-s" 'isearch-forward-regexp)
+  (keymap-global-set "C-r" 'isearch-backward-regexp)
   (keymap-global-set "C-k" 'smart-kill-line)
   ;; (keymap-global-set "M-l" 'downcase-any)
   ;; (keymap-global-set "M-c" 'capitalize-any)
@@ -1702,18 +1703,40 @@
                   'mwim-beginning-of-code-or-line-or-comment)
   (global-set-key [remap move-end-of-line] 'mwim-end-of-code-or-line)
 
+  ;; (c-add-style
+  ;;  "microsoft"
+  ;;  '("stroustrup"
+  ;;    (c-offsets-alist
+  ;;     (access-label . /)
+  ;;     (innamespace . -)
+  ;;     (inline-open . 0)
+  ;;     (inher-cont . c-lineup-multi-inher)
+  ;;     (arglist-cont-nonempty . +)
+  ;;     (template-args-cont . +))
+  ;;    )
+  ;;  )
+
   (c-add-style
-   "microsoft"
-   '("stroustrup"
+   "freebsd"
+   '(;; "bsd"
+     (c-basic-offset . 4)    ; 设置缩进为4个空格
      (c-offsets-alist
-      (access-label . /)
-      (innamespace . -)
-      (inline-open . 0)
-      (inher-cont . c-lineup-multi-inher)
-      (arglist-cont-nonempty . +)
-      (template-args-cont . +))
-     )
-   )
+      (statement-cont . c-lineup-assignments)  ; 连续语句的缩进方式
+      (case-label . 0)        ; case标签缩进为0
+      (substatement-open . 0) ; 子语句的开放括号不缩进
+      (arglist-intro . +)     ; 函数参数列表的起始缩进
+      (arglist-cont . 0)      ; 函数参数列表的续行缩进
+      (arglist-cont-nonempty . c-lineup-arglist)  ; 函数参数列表非空时的续行缩进方式
+      (arglist-close . 0)     ; 函数参数列表的关闭括号不缩进
+      (inextern-lang . 0)     ; 在extern语言中的缩进
+      (inline-open . 0)       ; 内联函数的开放括号不缩进
+      (namespace-open . 0)    ; 命名空间的开放括号不缩进
+      (innamespace . 0)       ; 在命名空间中的缩进
+      (label . 0)             ; 标签不缩进
+      )))
+
+  (add-to-list 'c-default-style '(c-mode . "freebsd"))
+  (add-to-list 'c-default-style '(c++-mode . "freebsd"))
 
   (when (treesit-available-p)
     (setq major-mode-remap-alist
@@ -1736,6 +1759,8 @@
           )
     ;; (add-hook 'emacs-lisp-mode-hook
     ;;           (lambda () (treesit-parser-create 'elisp)))
+    (setq c-ts-mode-indent-style 'bsd
+          c-ts-mode-indent-offset 4)
     )
 
   ;; (defun packages-load-after-minibuffer ()
@@ -1751,12 +1776,12 @@
 
   ;; (add-hook 'minibuffer-setup-hook 'packages-load-after-minibuffer)
 
-  (when (file-exists-p "~/.emacs.d/site-lisp/emacs-which-key/which-key.el")
-    (load "~/.emacs.d/site-lisp/emacs-which-key/which-key.el")
-    (which-key-mode t)
-    (setq which-key-max-description-length 30
-          which-key-show-remaining-keys t)
-    )
+  ;; (when (file-exists-p "~/.emacs.d/site-lisp/emacs-which-key/which-key.el")
+  ;;   (load "~/.emacs.d/site-lisp/emacs-which-key/which-key.el")
+  ;;   (which-key-mode t)
+  ;;   (setq which-key-max-description-length 30
+  ;;         which-key-show-remaining-keys t)
+  ;;   )
   (setq popper-reference-buffers
         '("\\*Messages\\*"
           "Output\\*$"

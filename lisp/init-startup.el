@@ -10,13 +10,16 @@
 ██╔══╝░░██║╚██╔╝██║██╔══██║██║░░██╗░╚═══██╗
 ███████╗██║░╚═╝░██║██║░░██║╚█████╔╝██████╔╝
 ╚══════╝╚═╝░░░░░╚═╝╚═╝░░╚═╝░╚════╝░╚═════╝░"
-   'face '(:inherit font-lock-string-face))
+   ;; 'face '(:inherit font-lock-string-face)
+   'face `(:foreground ,(face-foreground font-lock-string-face)
+                       :height 1.2)
+   )
   "ASCII Art logo for EMACS.")
 
-(defvar emacs-startup-icon-position 4
+(defvar emacs-startup-icon-position 10
   "Position for Emacs Startup's icon.")
 
-(defvar emacs-startup-space 20
+(defvar emacs-startup-space 12
   "Spaces for Emacs Startup.")
 
 (defun initial-startup-screen ()
@@ -46,8 +49,8 @@
     ;; (display-line-numbers-mode -1)
     (visual-fill-column-mode)
     (auto-save-mode -1)
-    (newline 4)
-    (insert (propertize mine-emacs-logo))
+    (newline 5)
+    (insert mine-emacs-logo)
     (let ((final-line (line-number-at-pos))
           (space-num
            (format (concat "%"
@@ -65,7 +68,17 @@
         (forward-line)
         (setq final-line (- final-line 1))))
     (newline 1)
-    (let* ((rec_file_list file-name-history)
+    (insert (propertize (concat (make-string 48 ? ) (format "Emacs started in %s" (emacs-init-time)))
+                        'face `(:foreground ,(face-foreground 'font-lock-builtin-face) :height 0.8)
+                        ))
+    (add-text-properties (line-beginning-position)
+                         (point)
+                         '(line-height 1.35))
+    (newline 1)
+    (let* ((rec_file_list (mapcar (lambda (f)
+                                    (when (file-exists-p f)
+                                      f))
+                                  (butlast file-name-history (- (length file-name-history) 15))))
            ;; (rec_file_list (recentf-time-sort))
            (top-n (if (> (length rec_file_list) 5) 5 (length rec_file_list)))
            (file-time-list
@@ -94,14 +107,14 @@
                              f)))))
                     (butlast rec_file_list (- (length rec_file_list) top-n)))))
       (insert (concat
-               (make-string 18 ? )
+               (make-string (- emacs-startup-space 2) ? )
                (make-string emacs-startup-icon-position ?─)
                " "
                (nerd-icons-octicon "nf-oct-history")
                " "
                (propertize "Recent Files " 'face 'bold 'display '(space-width 0.5))
                (make-string
-                (- fill-column emacs-startup-icon-position 50)
+                (- fill-column emacs-startup-icon-position 33)
                 ?─)
                )
               "\n")
@@ -120,14 +133,13 @@
                                 (format (concat
                                          (make-string emacs-startup-space ? )
                                          "%s ")
-                                        ;; (nerd-icons-icon-for-file file)
                                         (if (directory-name-p file)
                                             (nerd-icons-icon-for-dir file)
                                           (nerd-icons-icon-for-file file)))
                                 (propertize (if (and (< len (- fill-column 18))
-                                                     (< (length file) 31))
+                                                     (< (length file) 50))
                                                 file
-                                              (concat (truncate-string-to-width file 28)
+                                              (concat (truncate-string-to-width file 47)
                                                       "..."))
                                             ;; 'follow-link t
                                             'face
@@ -143,10 +155,11 @@
                                                      "%Y-%m-%d %T"
                                                      (file-attribute-modification-time (file-attributes file)))
                                                     ))
-                                (make-string emacs-startup-space ? )
+                                ;; (make-string emacs-startup-space ? )
                                 )
                                ;; 'mouse-face `(:background ,(face-background 'highlight)
                                ;;                           :foreground nil)
+                               'line-height 2
                                'mouse-face 'highlight
                                'cursor nil
                                'help-echo file
@@ -168,8 +181,63 @@
                                    )
                                  )
                                ))
-           (insert "\n")))
-       file-time-list))
+           (add-text-properties (line-beginning-position) (point) '(line-height 1.4))
+           (newline 1)
+           ))
+       file-time-list)
+      (insert (concat
+               (make-string (- emacs-startup-space 2) ? )
+               (make-string emacs-startup-icon-position ?─)
+               " "
+               (nerd-icons-octicon "nf-oct-project_roadmap")
+               " "
+               (propertize "Projects " 'face 'bold 'display '(space-width 0.8))
+               ;; " "
+               (make-string
+                (- fill-column emacs-startup-icon-position 30)
+                ?─)
+               )
+              "\n")
+      (add-text-properties (- (line-beginning-position) (- fill-column 30))
+                           (point) '(line-height 1.5 line-spacing 0.3))
+      (seq-do (lambda (d)
+                (insert (propertize (concat
+                                     (format (concat
+                                              (make-string emacs-startup-space ? )
+                                              "%s ")
+                                             (nerd-icons-icon-for-dir d))
+                                     (propertize (if (< (length d) (- fill-column 18))
+                                                     d
+                                                   (concat (truncate-string-to-width d
+                                                                                     (- fill-column 21))
+                                                           "..."))
+                                                 'face
+                                                 '(:inherit link :underline nil))
+                                     )
+                                    'mouse-face 'highlight
+                                    'cursor nil
+                                    'help-echo d
+                                    'follow-link nil
+                                    'keymap
+                                    (define-keymap
+                                      "<return>"
+                                      (lambda ()
+                                        (interactive)
+                                        (find-file (get-text-property (point) 'help-echo)))
+                                      "<mouse-1>"
+                                      (lambda (e)
+                                        (interactive "e")
+                                        (find-file (get-text-property
+                                                    (posn-point (event-start e))
+                                                    'help-echo))
+                                        )
+                                      )
+                                    ))
+                (add-text-properties (line-beginning-position) (point) '(line-height 1.4))
+                (newline 1)
+                )
+              (project-known-project-roots))
+      )
     (setq buffer-read-only t))
   (remove-hook 'emacs-startup-hook 'initial-startup-screen)
   (prefer-coding-system 'gbk)

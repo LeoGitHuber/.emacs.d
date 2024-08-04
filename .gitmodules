@@ -430,3 +430,18 @@
 [submodule "site-lisp/treesit-fold"]
 	path = site-lisp/treesit-fold
 	url = https://github.com/emacs-tree-sitter/treesit-fold.git
+[submodule "site-lisp/emacs-format-all-the-code"]
+	path = site-lisp/emacs-format-all-the-code
+	url = https://github.com/lassik/emacs-format-all-the-code.git
+[submodule "site-lisp/separedit.el"]
+	path = site-lisp/separedit.el
+	url = https://github.com/twlz0ne/separedit.el.git
+[submodule "site-lisp/haki"]
+	path = site-lisp/haki
+	url = https://github.com/idlip/haki.git
+[submodule "site-lisp/Emacs-VSCode-Default-High-Contrast"]
+	path = site-lisp/Emacs-VSCode-Default-High-Contrast
+	url = https://github.com/komali2/Emacs-VSCode-Default-High-Contrast.git
+[submodule "site-lisp/ace-window"]
+	path = site-lisp/ace-window
+	url = https://github.com/abo-abo/ace-window.git

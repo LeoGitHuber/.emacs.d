@@ -285,6 +285,8 @@
     ;; (add-hook hook 'flycheck-mode)
     )
 
+  (require 'project)
+
   ;;; @3. ICONS
 
   ;; (load "~/.emacs.d/self-develop/modeline-setting.el")
@@ -1069,6 +1071,10 @@
              :unnarrowed t)
             ("p" "Programming" entry "* Notes:\n%?"
              :target (file+head "Programming/${slug}.org"
+                                "#+TITLE: ${title}\n#+FILETAGS: %^g\n#+CREATED: %U\n#+MODIFIED: \n\n")
+             :unnarrowed t)
+            ("k" "Knowledge" entry "* Notes:\n%?"
+             :target (file+head "Knowledge/${slug}.org"
                                 "#+TITLE: ${title}\n#+FILETAGS: %^g\n#+CREATED: %U\n#+MODIFIED: \n\n")
              :unnarrowed t)))
     (org-roam-db-autosync-mode))
@@ -1856,6 +1862,9 @@
      indent-bars-no-descend-string t
      indent-bars-treesit-ignore-blank-lines-types '("module")
      indent-bars-width-frac 0.15
+     indent-bars-color '(highlight :face-bg t :blend 0.7)
+     ;; indent-bars-prefer-character t
+     ;; indent-bars-no-stipple-char ?\⎸
      ))
 
   ;; (add-to-list 'load-path "~/.emacs.d/site-lisp/consult")
@@ -1870,8 +1879,11 @@
     (consult-customize
      consult-buffer
      :preview-key '(:debounce 0.4 "M-."))
-    (setq xref-show-xrefs-function 'consult-xref
-          xref-show-definitions-function 'consult-xref))
+    )
+  (setq xref-show-xrefs-function 'consult-xref
+        xref-show-definitions-function 'consult-xref)
+
+  (keymap-global-set "C-." 'embark-act)
 
     ;;; Theme
   (dolist (hook '(prog-mode-hook text-mode-hook cuda-mode-hook))
@@ -1892,10 +1904,10 @@
         completion-category-overrides '((file (styles basic partial-completion))))
 
   (defun vertico-lsp-enable ()
-    (and (functionp 'lsp-bridge-mode)
-         (global-lsp-bridge-mode))
-    ;; (and (functionp 'corfu-mode)
-    ;;      (global-corfu-mode))
+    ;; (and (functionp 'lsp-bridge-mode)
+    ;;      (global-lsp-bridge-mode))
+    (and (functionp 'corfu-mode)
+         (global-corfu-mode))
     (and (boundp 'puni-mode)
          (puni-global-mode))
     (and (boundp 'vertico-mode)
@@ -1961,9 +1973,11 @@
   (require 'citre)
   (require 'citre-config)
   (with-eval-after-load 'citre
-    (setq citre-ctags-program "/opt/bin/ctags"
-          citre-use-project-root-when-creating-tags t
-          citre-prompt-language-for-ctags-command t))
+    (setq citre-use-project-root-when-creating-tags t
+          citre-prompt-language-for-ctags-command t)
+    (when (file-exists-p "/opt/bin/ctags")
+      (setq citre-ctags-program "/opt/bin/ctags"))
+    )
 
   ;; (with-eval-after-load 'citre-ctags
   ;;   (setq citre-ctags-program "/usr/bin/ctags"))

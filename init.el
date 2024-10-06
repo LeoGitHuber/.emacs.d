@@ -77,7 +77,12 @@
   ;; (load "~/.emacs.d/lisp/init-base.el")
   (setq eat-kill-buffer-on-exit t
         css-indent-offset 2
-        set-mark-command-repeat-pop t)
+        set-mark-command-repeat-pop t
+        other-window-scroll-default 'get-lru-window
+        backup-directory-alist '(("." . "~/.emacs.d/backup"))
+        ispell-dictionary "en_US"
+        ;; ispell-program-name "hunspell"
+        )
 
   ;;; @1. GC
 
@@ -159,8 +164,8 @@
         ;; flymake-autoresize-margins nil
         )
 
-  (setq-default left-fringe-width 1
-                left-margin-width 1)
+  (setq-default ;; left-fringe-width 1
+   left-margin-width 1)
 
   ;; (with-eval-after-load 'flymake
 
@@ -587,6 +592,7 @@
      acm-enable-telega nil
      acm-enable-tabnine nil
      acm-enable-citre t
+     acm-enable-capf t
      ;; lsp-bridge-enable-log t
      lsp-bridge-enable-signature-help t
      lsp-bridge-enable-inlay-hint t
@@ -917,6 +923,7 @@
      '((emacs-lisp . t)
        (python . t)
        (jupyter . t)))
+    (keymap-set org-mode-map "C-c b" 'org-cite-insert)
     )
 
   (add-hook 'org-mode-hook
@@ -1020,6 +1027,15 @@
 
   (add-hook 'org-mode-hook #'org-modern-indent-mode 100)
 
+  (with-eval-after-load 'denote
+    (setq denote-directory "~/Documents/Personal/denote"))
+
+  (with-eval-after-load 'org-noter
+    (setq org-noter-notes-search-path '("~/Documents/Personal/denote")
+          org-noter-auto-save-last-location t)
+    )
+
+  (keymap-global-set "C-c n n" 'org-noter)
   (keymap-global-set "C-c n f" 'org-roam-node-find)
   (setq org-roam-directory "~/Documents/Personal/org-roam"    ; 设置 org-roam 笔记的默认目录，缺省值 /home/leo/org-roam
         org-roam-db-gc-threshold most-positive-fixnum
@@ -1225,20 +1241,21 @@
 
   ;; (require 'calibredb)
 
-  ;; (add-to-list 'load-path "~/.emacs.d/site-lisp/nov-xwidget")
+  (add-to-list 'load-path "~/.emacs.d/site-lisp/nov-xwidget")
   ;; (require 'nov-xwidget)
-  ;; (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
+  (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
   ;; ;; (evil-set-initial-state 'nov-mode 'emacs)
-  ;; ;; (add-hook 'nov-mode-hook '(lambda() (turn-off-evil-mode)))
   ;; ;; (define-key nov-mode-map (kbd "o") 'nov-xwidget-view)
   ;; (evil-define-key 'normal nov-mode-map (kbd "o") 'nov-xwidget-view)
   ;; (add-hook 'nov-mode-hook 'nov-xwidget-inject-all-files)
   ;; (add-hook 'nov-xwidget-webkit-mode-hook '(lambda() (xwidget-webkit-zoom (xwidget-webkit-current-session) 1.5)))
-  ;; (setq nov-text-width t)
   ;; (setq visual-fill-column-center-text t)
-  ;; ;; (add-hook 'nov-mode-hook 'visual-line-mode)
-  ;; ;; (add-hook 'nov-mode-hook 'visual-fill-column-mode)
-  ;; ;; (add-hook 'nov-mode-hook '(lambda() (set-fill-column 100)))
+  (with-eval-after-load 'nov
+    (setq nov-text-width t)
+    (add-hook 'nov-mode-hook 'visual-line-mode)
+    (add-hook 'nov-mode-hook 'visual-fill-column-mode)
+    (add-hook 'nov-mode-hook '(lambda() (set-fill-column 100)))
+    )
 
     ;;; @14. HYDRA
 
@@ -1368,9 +1385,34 @@
     ;;; @15. LATEX-NODE
   (load "~/.emacs.d/lisp/latex-node.el")
 
-    ;;; @16. LATEX
-
+  ;;; @16. LATEX
   ;; On demand loading, leads to faster startup time.
+  (with-eval-after-load 'citar
+    (setq org-cite-global-bibliography '("/run/media/kunh/Elements/Zotero Bib/My Library.bib")
+          citar-notes-paths '("~/Documents/Personal/denote")
+          citar-library-paths '("/run/media/kunh/Elements/Zotero Library")
+          org-cite-insert-processor 'citar
+          org-cite-follow-processor 'citar
+          org-cite-activate-processor 'citar
+          citar-bibliography org-cite-global-bibliography)
+    (citar-embark-mode)
+    (citar-denote-mode)
+    )
+  (add-hook 'LaTeX-mode-hook 'citar-capf-setup)
+  (add-hook 'org-mode-hook 'citar-capf-setup)
+  ;; (keymap-global-set "C-c c c" 'citar-create-note)
+  (keymap-global-set "C-c c n" 'citar-denote-open-note)
+  (keymap-global-set "C-c c d" 'citar-denote-dwim)
+  (keymap-global-set "C-c c e" 'citar-denote-open-reference-entry)
+  (keymap-global-set "C-c c a" 'citar-denote-add-citekey)
+  (keymap-global-set "C-c c k" 'citar-denote-remove-citekey)
+  (keymap-global-set "C-c c r" 'citar-denote-find-reference)
+  (keymap-global-set "C-c c l" 'citar-denote-link-reference)
+  (keymap-global-set "C-c c f" 'citar-denote-find-citation)
+  (keymap-global-set "C-c c x" 'citar-denote-nocite)
+  (keymap-global-set "C-c c y" 'citar-denote-cite-nocite)
+  (keymap-global-set "C-c c z" 'citar-denote-nobib)
+
   (pdf-loader-install)
 
   (eval-after-load 'info
@@ -1863,6 +1905,7 @@
      indent-bars-treesit-ignore-blank-lines-types '("module")
      indent-bars-width-frac 0.15
      indent-bars-color '(highlight :face-bg t :blend 0.7)
+     indent-bars-display-on-blank-lines nil
      ;; indent-bars-prefer-character t
      ;; indent-bars-no-stipple-char ?\⎸
      ))
@@ -1884,6 +1927,8 @@
         xref-show-definitions-function 'consult-xref)
 
   (keymap-global-set "C-." 'embark-act)
+  (with-eval-after-load 'embark
+    (add-hook 'embark-collect-mode-hook 'consult-preview-at-point-mode))
 
     ;;; Theme
   (dolist (hook '(prog-mode-hook text-mode-hook cuda-mode-hook))
@@ -1904,10 +1949,10 @@
         completion-category-overrides '((file (styles basic partial-completion))))
 
   (defun vertico-lsp-enable ()
-    ;; (and (functionp 'lsp-bridge-mode)
-    ;;      (global-lsp-bridge-mode))
-    (and (functionp 'corfu-mode)
-         (global-corfu-mode))
+    (and (functionp 'lsp-bridge-mode)
+         (global-lsp-bridge-mode))
+    ;; (and (functionp 'corfu-mode)
+    ;;      (global-corfu-mode))
     (and (boundp 'puni-mode)
          (puni-global-mode))
     (and (boundp 'vertico-mode)
@@ -1989,4 +2034,329 @@
     (setq highlight-indent-guides-method 'character
           highlight-indent-guides-responsive 'top
           highlight-indent-guides-suppress-auto-error t))
+
+  (setq dape-configs
+        `((attach
+           modes nil
+           ensure (lambda (config)
+                    (unless (plist-get config 'port)
+                      (user-error "Missing `port' property")))
+           host "localhost"
+           :request "attach")
+          (launch
+           modes nil
+           command-cwd dape-command-cwd
+           ensure (lambda (config)
+                    (unless (plist-get config 'command)
+                      (user-error "Missing `command' property")))
+           :request "launch")
+          ,@(let ((codelldb
+                   `(ensure dape-ensure-command
+                            command-cwd dape-command-cwd
+                            command ,(file-name-concat dape-adapter-dir
+                                                       "codelldb"
+                                                       "extension"
+                                                       "adapter"
+                                                       "codelldb")
+                            port :autoport
+                            :type "lldb"
+                            :request "launch"
+                            :cwd "."))
+                  (common `(:args [] :stopOnEntry nil)))
+              `((codelldb-cc
+                 modes (c-mode c-ts-mode c++-mode c++-ts-mode)
+                 command-args ("--port" :autoport)
+                 ,@codelldb
+                 :program "a.out"
+                 ,@common)
+                (codelldb-rust
+                 modes (rust-mode rust-ts-mode)
+                 command-args ("--port" :autoport
+                               "--settings" "{\"sourceLanguages\":[\"rust\"]}")
+                 ,@codelldb
+                 :program (lambda ()
+                            (file-name-concat "target" "debug"
+                                              (thread-first (dape-cwd)
+                                                            (directory-file-name)
+                                                            (file-name-split)
+                                                            (last)
+                                                            (car))))
+                 ,@common)))
+          (cpptools
+           modes (c-mode c-ts-mode c++-mode c++-ts-mode)
+           ensure dape-ensure-command
+           command-cwd dape-command-cwd
+           command ,(file-name-concat dape-adapter-dir
+                                      "cpptools"
+                                      "extension"
+                                      "debugAdapters"
+                                      "bin"
+                                      "OpenDebugAD7")
+           fn (lambda (config)
+                ;; For MI=GDB the :program path need to be absolute
+                (let ((program (plist-get config :program)))
+                  (if (file-name-absolute-p program)
+                      config
+                    (thread-last (tramp-file-local-name (dape--guess-root config))
+                                 (expand-file-name program)
+                                 (plist-put config :program)))))
+           :type "cppdbg"
+           :request "launch"
+           :cwd "."
+           :program "a.out"
+           :MIMode ,(seq-find 'executable-find '("lldb" "gdb")))
+          ,@(let ((debugpy
+                   `(modes (python-mode python-ts-mode)
+                           ensure (lambda (config)
+                                    (dape-ensure-command config)
+                                    (let ((python (dape-config-get config 'command)))
+                                      (unless (zerop
+                                               (call-process-shell-command
+                                                (format "%s -c \"import debugpy.adapter\"" python)))
+                                        (user-error "%s module debugpy is not installed" python))))
+                           command "python3"
+                           command-args ("-m" "debugpy.adapter" "--host" "0.0.0.0" "--port" :autoport)
+                           port :autoport
+                           :request "launch"
+                           :type "python"
+                           :cwd dape-cwd))
+                  (common
+                   `(:args []
+                           :justMyCode nil
+                           :console "integratedTerminal"
+                           :showReturnValue t
+                           :stopOnEntry nil)))
+              `((debugpy ,@debugpy
+                         :program dape-buffer-default
+                         ,@common)
+                (debugpy-module ,@debugpy
+                                :module (lambda ()
+                                          (thread-first default-directory
+                                                        (directory-file-name)
+                                                        (file-name-split)
+                                                        (last)
+                                                        (car)))
+                                ,@common)))
+          (dlv
+           modes (go-mode go-ts-mode)
+           ensure dape-ensure-command
+           command "dlv"
+           command-args ("dap" "--listen" "127.0.0.1::autoport")
+           command-cwd dape-command-cwd
+           port :autoport
+           :request "launch"
+           :type "debug"
+           :cwd "."
+           :program ".")
+          (flutter
+           ensure dape-ensure-command
+           modes (dart-mode)
+           command "flutter"
+           command-args ("debug_adapter")
+           command-cwd dape-command-cwd
+           :type "dart"
+           :cwd "."
+           :program "lib/main.dart"
+           :toolArgs ["-d" "all"])
+          (gdb
+           ensure (lambda (config)
+                    (dape-ensure-command config)
+                    (let* ((default-directory
+                            (or (dape-config-get config 'command-cwd)
+                                default-directory))
+                           (output (shell-command-to-string "gdb --version"))
+                           (version (save-match-data
+                                      (when (string-match "GNU gdb \\(?:(.*) \\)?\\([0-9.]+\\)" output)
+                                        (string-to-number (match-string 1 output))))))
+                      (unless (>= version 14.1)
+                        (user-error "Requires gdb version >= 14.1"))))
+           modes (c-mode c-ts-mode c++-mode c++-ts-mode)
+           command-cwd dape-command-cwd
+           command "gdb"
+           command-args ("--interpreter=dap")
+           :request "launch"
+           :program "a.out"
+           :args []
+           :stopAtBeginningOfMainSubprogram nil)
+          (godot
+           modes (gdscript-mode)
+           port 6006
+           :request "launch"
+           :type "server"
+           :cwd dape-cwd)
+          ,@(let ((js-debug
+                   `(ensure ,(lambda (config)
+                               (dape-ensure-command config)
+                               (when-let ((runtime-executable
+                                           (dape-config-get config :runtimeExecutable)))
+                                 (dape--ensure-executable runtime-executable))
+                               (let ((dap-debug-server-path
+                                      (car (plist-get config 'command-args))))
+                                 (unless (file-exists-p dap-debug-server-path)
+                                   (user-error "File %S does not exist" dap-debug-server-path))))
+                            command "node"
+                            command-args (,(expand-file-name
+                                            (file-name-concat dape-adapter-dir
+                                                              "js-debug"
+                                                              "src"
+                                                              "dapDebugServer.js"))
+                                          :autoport)
+                            port :autoport)))
+              `((js-debug-node
+                 modes (js-mode js-ts-mode)
+                 ,@js-debug
+                 :type "pwa-node"
+                 :cwd dape-cwd
+                 :program dape-buffer-default
+                 :console "internalConsole")
+                (js-debug-ts-node
+                 modes (typescript-mode typescript-ts-mode)
+                 ,@js-debug
+                 :type "pwa-node"
+                 :runtimeExecutable "ts-node"
+                 :cwd dape-cwd
+                 :program dape-buffer-default
+                 :console "internalConsole")
+	            (js-debug-node-attach
+                 modes (js-mode js-ts-mode typescript-mode typescript-ts-mode)
+                 ,@js-debug
+                 :type "pwa-node"
+	             :request "attach"
+	             :port 9229)
+                (js-debug-chrome
+                 modes (js-mode js-ts-mode typescript-mode typescript-ts-mode)
+                 ,@js-debug
+                 :type "pwa-chrome"
+                 :url "http://localhost:3000"
+                 :webRoot dape-cwd)))
+          ,@(let ((lldb-common
+                   `(modes (c-mode c-ts-mode c++-mode c++-ts-mode rust-mode rust-ts-mode rustic-mode)
+                           ensure dape-ensure-command
+                           command-cwd dape-command-cwd
+                           :cwd "."
+                           :program "a.out")))
+              `((lldb-vscode
+                 command "lldb-vscode"
+                 :type "lldb-vscode"
+                 ,@lldb-common)
+                (lldb-dap
+                 command "lldb-dap"
+                 :type "lldb-dap"
+                 ,@lldb-common)))
+          (netcoredbg
+           modes (csharp-mode csharp-ts-mode)
+           ensure dape-ensure-command
+           command "netcoredbg"
+           command-args ["--interpreter=vscode"]
+           :request "launch"
+           :cwd dape-cwd
+           :program (lambda ()
+                      (let ((dlls
+                             (file-expand-wildcards
+                              (file-name-concat "bin" "Debug" "*" "*.dll"))))
+                        (if dlls
+                            (file-relative-name
+                             (file-relative-name (car dlls)))
+                          ".dll"
+                          (dape-cwd))))
+           :stopAtEntry nil)
+          (rdbg
+           modes (ruby-mode ruby-ts-mode)
+           ensure dape-ensure-command
+           command "rdbg"
+           command-args ("-O" "--host" "0.0.0.0" "--port" :autoport "-c" "--" :-c)
+           fn (lambda (config)
+                (plist-put config 'command-args
+                           (mapcar (lambda (arg)
+                                     (if (eq arg :-c)
+                                         (plist-get config '-c)
+                                       arg))
+                                   (plist-get config 'command-args))))
+           port :autoport
+           command-cwd dape-command-cwd
+           :type "Ruby"
+           ;; -- examples:
+           ;; rails server
+           ;; bundle exec ruby foo.rb
+           ;; bundle exec rake test
+           -c (lambda ()
+                (format "ruby %s"
+                        (or (dape-buffer-default) ""))))
+          (jdtls
+           modes (java-mode java-ts-mode)
+           ensure (lambda (config)
+                    (let ((file (dape-config-get config :filePath)))
+                      (unless (and (stringp file) (file-exists-p file))
+                        (user-error "Unable to find locate :filePath `%s'" file))
+                      (with-current-buffer (find-file-noselect file)
+                        (unless (eglot-current-server)
+                          (user-error "No eglot instance active in buffer %s" (current-buffer)))
+                        (unless (seq-contains-p (eglot--server-capable :executeCommandProvider :commands)
+        			                            "vscode.java.resolveClasspath")
+        	              (user-error "Jdtls instance does not bundle java-debug-server, please install")))))
+           fn (lambda (config)
+                (with-current-buffer
+                    (find-file-noselect (dape-config-get config :filePath))
+                  (if-let ((server (eglot-current-server)))
+	                  (pcase-let ((`[,module-paths ,class-paths]
+			                       (eglot-execute-command server
+                                                          "vscode.java.resolveClasspath"
+					                                      (vector (plist-get config :mainClass)
+                                                                  (plist-get config :projectName))))
+                                  (port (eglot-execute-command server
+		                                                       "vscode.java.startDebugSession" nil)))
+	                    (thread-first config
+                                      (plist-put 'port port)
+			                          (plist-put :modulePaths module-paths)
+			                          (plist-put :classPaths class-paths)))
+                    server)))
+           ,@(cl-flet ((resolve-main-class (key)
+                         (ignore-errors
+                           (let* ((main-classes
+                                   (eglot-execute-command (eglot-current-server)
+                                                          "vscode.java.resolveMainClass"
+                                                          (file-name-nondirectory
+                                                           (directory-file-name (dape-cwd)))))
+                                  (main-class
+                                   (or (seq-find (lambda(val)
+                                                   (equal (plist-get val :filePath)
+                                                          (buffer-file-name)))
+                                                 main-classes)
+                                       (aref main-classes 0))))
+                             (plist-get main-class key)))))
+               `(:filePath
+                 ,(lambda ()
+                    (or (resolve-main-class :filePath)
+                        (expand-file-name (dape-buffer-default) (dape-cwd))))
+                 :mainClass
+                 ,(lambda ()
+                    (or (resolve-main-class :mainClass) ""))
+                 :projectName
+                 ,(lambda ()
+                    (or (resolve-main-class :projectName) ""))))
+           :args ""
+           :stopOnEntry nil
+           :type "java"
+           :request "launch"
+           :vmArgs " -XX:+ShowCodeDetailsInExceptionMessages"
+           :console "integratedConsole"
+           :internalConsoleOptions "neverOpen")
+          (xdebug
+           modes (php-mode php-ts-mode)
+           ensure (lambda (config)
+                    (dape-ensure-command config)
+                    (let ((dap-debug-server-path
+                           (car (plist-get config 'command-args))))
+                      (unless (file-exists-p dap-debug-server-path)
+                        (user-error "File %S does not exist" dap-debug-server-path))))
+           command "node"
+           command-args (,(expand-file-name
+                           (file-name-concat dape-adapter-dir
+                                             "php-debug"
+                                             "extension"
+                                             "out"
+                                             "phpDebug.js")))
+           :type "php"
+           :port 9003))
+        )
   )

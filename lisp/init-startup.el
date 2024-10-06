@@ -73,15 +73,50 @@
                         ))
     (add-text-properties (line-beginning-position)
                          (point)
-                         '(line-height 1.35))
+                         '(line-height 1.35 v-adjust 0.3))
     (newline 1)
-    (let* ((rec_file_list (mapcar (lambda (f)
-                                    (when (file-exists-p f)
-                                      f))
-                                  (butlast file-name-history (- (length file-name-history) 15))))
-           ;; (rec_file_list (recentf-time-sort))
-           (top-n (if (> (length rec_file_list) 5) 5 (length rec_file_list)))
-           (file-time-list
+    (let
+        ;; ((rec_file_list (mapcar (lambda (f)
+        ;;                           (when (file-exists-p f)
+        ;;                             f))
+        ;;                         (butlast file-name-history (- (length file-name-history) 15))))
+        ;;  ;; (rec_file_list (recentf-time-sort))
+        ;;  (top-n (if (> (length rec_file_list) 5) 5 (length rec_file_list)))
+        ;;  (file-time-list
+        ;;   (mapcar (lambda (f)
+        ;;             ;; Copy from `marginalia--time' function
+        ;;             (let ((time (file-attribute-modification-time (file-attributes f)))
+        ;;                   (time--relative
+        ;;                    '((100 "sec" 1) (6000 "min" 60.0) (108000 "hour" 3600.0)
+        ;;                      (34560000 "day" 86400.0) (nil "year" 31557600.0))))
+        ;;               (if (< (float-time (time-since time)) 1209600)
+        ;;                   (progn
+        ;;                     (setq time (max 0 (float-time (time-since time))))
+        ;;                     (let ((sts time--relative) here)
+        ;;                       (while (and (car (setq here (pop sts)))
+        ;;                                   (<= (car here) time)))
+        ;;                       (setq time (round time (caddr here)))
+        ;;                       (cons (format "%s %s%s ago" time (cadr here) (if (= time 1) "" "s")) f)))
+        ;;                 (let ((system-time-locale "C"))
+        ;;                   (cons
+        ;;                    (format-time-string
+        ;;                     (if (> (decoded-time-year (decode-time (current-time)))
+        ;;                            (decoded-time-year (decode-time time)))
+        ;;                         " %Y %b %d"
+        ;;                       "%b %d %H:%M")
+        ;;                     time)
+        ;;                    f)))))
+        ;;           (butlast rec_file_list (- (length rec_file_list) top-n)))))
+        ((rec_file_list '())
+         (top-n)
+         (file-time-list))
+      (seq-do (lambda (f)
+                (when (file-exists-p f)
+                  (add-to-list 'rec_file_list f)))
+              file-name-history)
+      (setq rec_file_list (nreverse rec_file_list))
+      (setq top-n (if (> (length rec_file_list) 5) 5 (length rec_file_list)))
+      (setq file-time-list
             (mapcar (lambda (f)
                       ;; Copy from `marginalia--time' function
                       (let ((time (file-attribute-modification-time (file-attributes f)))
@@ -105,7 +140,7 @@
                                 "%b %d %H:%M")
                               time)
                              f)))))
-                    (butlast rec_file_list (- (length rec_file_list) top-n)))))
+                    (butlast rec_file_list (- (length rec_file_list) top-n))))
       (insert (concat
                (make-string (- emacs-startup-space 2) ? )
                (make-string emacs-startup-icon-position ?─)

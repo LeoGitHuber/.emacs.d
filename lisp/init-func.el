@@ -436,7 +436,7 @@ If you experience stuttering, increase this.")
     ;;                 "LXGW WenKai Screen" "Source Han Sans CN" 12.0)
     ;; (set-en_cn-font "InputMono" "Source Han Serif CN" "Palatino Linotyp"
     ;;                 "LXGW WenKai Screen" "Source Han Sans CN" 12.0)
-    (set-en_cn-font "PragmataPro Nerd Font" "FZLTHProGBK" "Input Serif"
+    (set-en_cn-font "PragmataPro Nerd Font" "FZYouSongJ GBK" "FZYouSongJ GBK"
                     "LXGW WenKai Screen" "Source Han Sans CN" 13.0)
     ;;   )
     ;; Maple Mono NF --- Maple Mono SC NF, HarmonyOS Sans SC
@@ -480,7 +480,7 @@ If you experience stuttering, increase this.")
                               :background mode-line-box-p)
           )))
     (if (or
-         (>= (string-to-number (substring (current-time-string) 11 13)) 19)
+         (>= (string-to-number (substring (current-time-string) 11 13)) 24)
          (<= (string-to-number (substring (current-time-string) 11 13)) 6))
         (if (string-prefix-p "modus" (symbol-name (cadr themes_chosen)))
             (progn

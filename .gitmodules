@@ -445,3 +445,42 @@
 [submodule "site-lisp/ace-window"]
 	path = site-lisp/ace-window
 	url = https://github.com/abo-abo/ace-window.git
+[submodule "site-lisp/standard-themes"]
+	path = site-lisp/standard-themes
+	url = https://github.com/protesilaos/standard-themes.git
+[submodule "site-lisp/embark-consult"]
+	path = site-lisp/embark-consult
+	url = https://github.com/emacs-straight/embark-consult.git
+[submodule "site-lisp/nord"]
+	path = site-lisp/nord
+	url = https://github.com/nordtheme/emacs.git
+[submodule "site-lisp/org-zettel-ref-mode"]
+	path = site-lisp/org-zettel-ref-mode
+	url = https://github.com/yibie/org-zettel-ref-mode.git
+[submodule "site-lisp/ebib"]
+	path = site-lisp/ebib
+	url = https://github.com/joostkremers/ebib.git
+[submodule "site-lisp/citar"]
+	path = site-lisp/citar
+	url = https://github.com/emacs-citar/citar.git
+[submodule "site-lisp/org-roam-bibtex"]
+	path = site-lisp/org-roam-bibtex
+	url = https://github.com/org-roam/org-roam-bibtex.git
+[submodule "site-lisp/denote"]
+	path = site-lisp/denote
+	url = https://github.com/protesilaos/denote.git
+[submodule "site-lisp/citar-denote"]
+	path = site-lisp/citar-denote
+	url = https://github.com/pprevos/citar-denote.git
+[submodule "site-lisp/denote-explore"]
+	path = site-lisp/denote-explore
+	url = https://github.com/pprevos/denote-explore.git
+[submodule "site-lisp/parsebib"]
+	path = site-lisp/parsebib
+	url = https://github.com/joostkremers/parsebib.git
+[submodule "site-lisp/emacs-load-relative"]
+	path = site-lisp/emacs-load-relative
+	url = https://github.com/rocky/emacs-load-relative.git
+[submodule "site-lisp/org-noter"]
+	path = site-lisp/org-noter
+	url = https://github.com/weirdNox/org-noter.git

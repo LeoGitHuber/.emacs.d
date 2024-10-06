@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defvar latex-node-directory "~/Personal/LaTeX-nodes/"
+(defvar latex-node-directory "~/Documents/Personal/LaTeX-nodes/"
   "Directory to store LaTeX files.")
 
 (defvar latex-node-template "~/.emacs.d/lisp/template.tex"

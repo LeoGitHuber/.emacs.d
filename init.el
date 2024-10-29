@@ -82,6 +82,7 @@
         backup-directory-alist '(("." . "~/.emacs.d/backup"))
         ispell-dictionary "en_US"
         ;; ispell-program-name "hunspell"
+        ;; package-quickstart nil
         )
 
   ;;; @1. GC
@@ -158,10 +159,14 @@
         ;;   (warning "​​​​" compilation-warning)
         ;;   (note "​​​​" compilation-info))
         ;; `((error "​​​​󰅙​​​​" diagnostics-error)
-        `((error "​​​​󰅙​​​" diagnostics-error)
+        ;; `((error "​​​​󰅙​​​" diagnostics-error)
+        ;;   (warning "​​​​​​​​" diagnostics-warn)
+        ;;   (note "" diagnostics-info))
+        `((error ,(nerd-icons-octicon "nf-oct-x_circle_fill") diagnostics-error)
           (warning "​​​​​​​​" diagnostics-warn)
           (note "" diagnostics-info))
         ;; flymake-autoresize-margins nil
+        flymake-show-diagnostics-at-end-of-line t
         )
 
   (setq-default ;; left-fringe-width 1
@@ -809,7 +814,7 @@
           ;; rime-deactivate-when-exit-minibuffer t
           rime-inline-ascii-trigger 'shift-l
           )
-    (keymap-set rime-mode-map "M-y" 'rime-force-enable)
+    (keymap-set rime-mode-map "M-o" 'rime-force-enable)
     ;; (with-eval-after-load 'tex
     ;;   (add-to-list 'rime-disable-predicates
     ;;                'rime-predicate-tex-advance-p))
@@ -885,39 +890,40 @@
           prettify-symbols-unprettify-at-point 'right-edge
           org-image-actual-width nil
           ;; org-todo-keywords '((sequence "     " "     "))
-          org-preview-latex-process-alist '((dvipng :programs
-                                                    ("latex" "dvipng")
-                                                    :description "dvi > png" :message "you need to install the programs: latex and dvipng." :image-input-type "dvi" :image-output-type "png" :image-size-adjust
-                                                    (1.0 . 1.0)
-                                                    :latex-compiler
-                                                    ("latex -interaction nonstopmode -output-directory %o %f")
-                                                    :image-converter
-                                                    ("dvipng -D %D -T tight -o %O %f")
-                                                    :transparent-image-converter
-                                                    ("dvipng -D %D -T tight -bg Transparent -o %O %f"))
-                                            (dvisvgm :programs
-                                                     ("latex" "dvisvgm")
-                                                     :description "dvi > svg" :message "you need to install the programs: latex and dvisvgm." :image-input-type "xdv" :image-output-type "svg" :image-size-adjust
-                                                     (1.0 . 1.0)
-                                                     :latex-compiler
-                                                     ("xelatex -no-pdf -interaction nonstopmode -output-directory %o %f")
-                                                     :image-converter
-                                                     ("dvisvgm %f --no-fonts --exact-bbox --scale=%S --output=%O"))
-                                            (imagemagick :programs
-                                                         ("latex" "convert")
-                                                         :description "pdf > png" :message "you need to install the programs: latex and imagemagick." :image-input-type "pdf" :image-output-type "png" :image-size-adjust
-                                                         (1.0 . 1.0)
-                                                         :latex-compiler
-                                                         ("pdflatex -interaction nonstopmode -output-directory %o %f")
-                                                         :image-converter
-                                                         ("convert -density %D -trim -antialias %f -quality 100 %O")))
+          ;; org-preview-latex-process-alist '((dvipng :programs
+          ;;                                           ("latex" "dvipng")
+          ;;                                           :description "dvi > png" :message "you need to install the programs: latex and dvipng." :image-input-type "dvi" :image-output-type "png" :image-size-adjust
+          ;;                                           (1.0 . 1.0)
+          ;;                                           :latex-compiler
+          ;;                                           ("latex -interaction nonstopmode -output-directory %o %f")
+          ;;                                           :image-converter
+          ;;                                           ("dvipng -D %D -T tight -o %O %f")
+          ;;                                           :transparent-image-converter
+          ;;                                           ("dvipng -D %D -T tight -bg Transparent -o %O %f"))
+          ;;                                   (dvisvgm :programs
+          ;;                                            ("latex" "dvisvgm")
+          ;;                                            :description "dvi > svg" :message "you need to install the programs: latex and dvisvgm." :image-input-type "xdv" :image-output-type "svg" :image-size-adjust
+          ;;                                            (1.0 . 1.0)
+          ;;                                            :latex-compiler
+          ;;                                            ("xelatex -no-pdf -interaction nonstopmode -output-directory %o %f")
+          ;;                                            :image-converter
+          ;;                                            ("dvisvgm %f --no-fonts --exact-bbox --scale=%S --output=%O"))
+          ;;                                   (imagemagick :programs
+          ;;                                                ("latex" "convert")
+          ;;                                                :description "pdf > png" :message "you need to install the programs: latex and imagemagick." :image-input-type "pdf" :image-output-type "png" :image-size-adjust
+          ;;                                                (1.0 . 1.0)
+          ;;                                                :latex-compiler
+          ;;                                                ("pdflatex -interaction nonstopmode -output-directory %o %f")
+          ;;                                                :image-converter
+          ;;                                                ("convert -density %D -trim -antialias %f -quality 100 %O")))
           ;; org-preview-latex-default-process 'dvisvgm
           org-format-latex-header "\\documentclass[10pt]{article}\n\\usepackage[usenames]{color}\n[DEFAULT-PACKAGES]\n[PACKAGES]\n\\pagestyle{empty}  % do not remove\n% The settings below are copied from fullpage.sty\n
           \\usepackage{xeCJK,tikz,caption,float,makecell,circuitikz,array}\n
           \\usetikzlibrary{shapes,arrows,calc,arrows.meta}\n
           \\usetikzlibrary{circuits.logic.IEC,calc}\n
           \\renewcommand{\\arraystretch}{1.3}\n
-          \\setlength{\\textwidth}{\\paperwidth}\n\\addtolength{\\textwidth}{-3cm}\n\\setlength{\\oddsidemargin}{1.5cm}\n\\addtolength{\\oddsidemargin}{-2.54cm}\n\\setlength{\\evensidemargin}{\\oddsidemargin}\n\\setlength{\\textheight}{\\paperheight}\n\\addtolength{\\textheight}{-\\headheight}\n\\addtolength{\\textheight}{-\\headsep}\n\\addtolength{\\textheight}{-\\footskip}\n\\addtolength{\\textheight}{-3cm}\n\\setlength{\\topmargin}{1.5cm}\n\\addtolength{\\topmargin}{-2.54cm}\n")
+          \\setlength{\\textwidth}{\\paperwidth}\n\\addtolength{\\textwidth}{-3cm}\n\\setlength{\\oddsidemargin}{1.5cm}\n\\addtolength{\\oddsidemargin}{-2.54cm}\n\\setlength{\\evensidemargin}{\\oddsidemargin}\n\\setlength{\\textheight}{\\paperheight}\n\\addtolength{\\textheight}{-\\headheight}\n\\addtolength{\\textheight}{-\\headsep}\n\\addtolength{\\textheight}{-\\footskip}\n\\addtolength{\\textheight}{-3cm}\n\\setlength{\\topmargin}{1.5cm}\n\\addtolength{\\topmargin}{-2.54cm}\n"
+          )
     (org-babel-do-load-languages
      'org-babel-load-languages
      '((emacs-lisp . t)
@@ -961,7 +967,7 @@
               (variable-pitch-mode)
               ;; (company-mode)
               ;; (corfu-mode)
-              ;; (visual-line-mode)
+              (visual-line-mode)
               (valign-mode)))
 
   ;; (with-eval-after-load 'org
@@ -1028,16 +1034,16 @@
   (add-hook 'org-mode-hook #'org-modern-indent-mode 100)
 
   (with-eval-after-load 'denote
-    (setq denote-directory "~/Documents/Personal/denote"))
+    (setq denote-directory "/run/media/kunh/Elements/Personal/denote"))
 
   (with-eval-after-load 'org-noter
-    (setq org-noter-notes-search-path '("~/Documents/Personal/denote")
+    (setq org-noter-notes-search-path '("/run/media/kunh/Elements/Personal/denote")
           org-noter-auto-save-last-location t)
     )
 
   (keymap-global-set "C-c n n" 'org-noter)
   (keymap-global-set "C-c n f" 'org-roam-node-find)
-  (setq org-roam-directory "~/Documents/Personal/org-roam"    ; 设置 org-roam 笔记的默认目录，缺省值 /home/leo/org-roam
+  (setq org-roam-directory "/run/media/kunh/Elements/Personal/org-roam"    ; 设置 org-roam 笔记的默认目录，缺省值 /home/leo/org-roam
         org-roam-db-gc-threshold most-positive-fixnum
         org-roam-mode-sections '(org-roam-backlinks-section
                                  org-roam-reflinks-section
@@ -1232,7 +1238,7 @@
 
   (with-eval-after-load 'pdf-tools
     (setq pdf-view-use-scaling t
-          pdf-view-continuous nil
+          pdf-view-continuous t
           pdf-anot-list-format '((page . 3)
                                  (type . 10)
                                  (contents . 50)
@@ -1389,7 +1395,7 @@
   ;; On demand loading, leads to faster startup time.
   (with-eval-after-load 'citar
     (setq org-cite-global-bibliography '("/run/media/kunh/Elements/Zotero Bib/My Library.bib")
-          citar-notes-paths '("~/Documents/Personal/denote")
+          citar-notes-paths '("/run/media/kunh/Elements/Personal/denote")
           citar-library-paths '("/run/media/kunh/Elements/Zotero Library")
           org-cite-insert-processor 'citar
           org-cite-follow-processor 'citar
@@ -1418,12 +1424,12 @@
   (eval-after-load 'info
     '(add-to-list 'Info-directory-list "/usr/local/share/info"))
 
-  (eval-after-load "tex-mode"
-    '(progn
-       (load "auctex.el" nil t t)
-       (load "preview-latex.el" nil t t)
-       ;; (require 'org-table)
-       ))
+  ;; (eval-after-load "tex-mode"
+  ;;   '(progn
+  ;;      (load "auctex.el" nil t t)
+  ;;      (load "preview-latex.el" nil t t)
+  ;;      ;; (require 'org-table)
+  ;;      ))
 
   ;; (defun orgtbl-next-field-maybe ()
   ;;   "Combine `lsp-bridge-mode', `cdlatex-mode' and `orgtlr-mode'."
@@ -1436,6 +1442,8 @@
   ;;       (org-table-next-field))))
 
   (with-eval-after-load 'tex
+    (load "auctex.el" nil t t)
+    (load "preview-latex.el" nil t t)
     (add-hook 'cdlatex-tab-hook
               (lambda ()
                 (and (bound-and-true-p lsp-bidge-mode)
@@ -1486,6 +1494,7 @@
             (lambda()
               (electric-indent-local-mode)
               (setq display-tex-shell-buffer-action nil)
+              (LaTeX-mode)
               (visual-line-mode)
               (TeX-fold-mode 1)
               (turn-on-cdlatex)
@@ -1887,7 +1896,8 @@
 
   (setq popper-display-function 'popper-display-popup-adaptive
         fit-window-to-buffer-horizontally t)
-  (keymap-global-set "C-`" 'popper-toggle)
+  ;; (keymap-global-set "C-`" 'popper-toggle)
+  (keymap-global-set "C-<tab>" 'popper-toggle)
   (keymap-global-set "M-`" 'popper-cycle)
   (keymap-global-set "C-M-`" 'popper-toggle-type)
   (popper-mode +1)
@@ -2360,3 +2370,6 @@
            :port 9003))
         )
   )
+
+(provide 'init)
+;;; init.el ends here

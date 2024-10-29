@@ -436,7 +436,7 @@ If you experience stuttering, increase this.")
     ;;                 "LXGW WenKai Screen" "Source Han Sans CN" 12.0)
     ;; (set-en_cn-font "InputMono" "Source Han Serif CN" "Palatino Linotyp"
     ;;                 "LXGW WenKai Screen" "Source Han Sans CN" 12.0)
-    (set-en_cn-font "PragmataPro Nerd Font" "FZYouSongJ GBK" "FZYouSongJ GBK"
+    (set-en_cn-font "PragmataPro Liga" "FZYouSongJ GBK" "FZYouSongJ GBK"
                     "LXGW WenKai Screen" "Source Han Sans CN" 13.0)
     ;;   )
     ;; Maple Mono NF --- Maple Mono SC NF, HarmonyOS Sans SC
@@ -506,7 +506,7 @@ If you experience stuttering, increase this.")
               )))
       (progn
         ;; (load-theme (car themes_chosen) t)
-        ;; (ef-themes-select-light (car themes_chosen))
+        (ef-themes-select-light (car themes_chosen))
         (when (eq custom-enabled-themes nil)
           ;; (set-face-bold 'font-lock-keyword-face t)
           ;; (set-face-bold 'font-lock-builtin-face t)

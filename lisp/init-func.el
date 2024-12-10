@@ -480,7 +480,7 @@ If you experience stuttering, increase this.")
                               :background mode-line-box-p)
           )))
     (if (or
-         (>= (string-to-number (substring (current-time-string) 11 13)) 24)
+         (>= (string-to-number (substring (current-time-string) 11 13)) 20)
          (<= (string-to-number (substring (current-time-string) 11 13)) 6))
         (if (string-prefix-p "modus" (symbol-name (cadr themes_chosen)))
             (progn
@@ -506,7 +506,7 @@ If you experience stuttering, increase this.")
               )))
       (progn
         ;; (load-theme (car themes_chosen) t)
-        (ef-themes-select-light (car themes_chosen))
+        ;; (ef-themes-select-light (car themes_chosen))
         (when (eq custom-enabled-themes nil)
           ;; (set-face-bold 'font-lock-keyword-face t)
           ;; (set-face-bold 'font-lock-builtin-face t)

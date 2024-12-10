@@ -163,7 +163,7 @@
         ;;   (warning "​​​​​​​​" diagnostics-warn)
         ;;   (note "" diagnostics-info))
         `((error ,(nerd-icons-octicon "nf-oct-x_circle_fill") diagnostics-error)
-          (warning "​​​​​​​​" diagnostics-warn)
+          (warning "​​​​​​" diagnostics-warn)
           (note "" diagnostics-info))
         ;; flymake-autoresize-margins nil
         flymake-show-diagnostics-at-end-of-line t
@@ -1250,6 +1250,8 @@
   (add-to-list 'load-path "~/.emacs.d/site-lisp/nov-xwidget")
   ;; (require 'nov-xwidget)
   (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
+  (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
+  (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-ts-mode))
   ;; ;; (evil-set-initial-state 'nov-mode 'emacs)
   ;; ;; (define-key nov-mode-map (kbd "o") 'nov-xwidget-view)
   ;; (evil-define-key 'normal nov-mode-map (kbd "o") 'nov-xwidget-view)
@@ -1421,9 +1423,6 @@
 
   (pdf-loader-install)
 
-  (eval-after-load 'info
-    '(add-to-list 'Info-directory-list "/usr/local/share/info"))
-
   ;; (eval-after-load "tex-mode"
   ;;   '(progn
   ;;      (load "auctex.el" nil t t)
@@ -1466,14 +1465,14 @@
                   ;; preview-dvipng-command "dvipng -picky -noghostscript %x -o %m/prev%%03d.png"
                   )
     ;; (add-to-list 'TeX-view-program-list '("sioyek" "sioyek --page %(outpage) %o"))
-    (add-to-list 'TeX-view-program-selection '(output-pdf "Sioyek"))
+    ;; (add-to-list 'TeX-view-program-selection '(output-pdf "Sioyek"))
+    (add-to-list 'TeX-view-program-selection '(output-pdf "Okular"))
     (with-eval-after-load 'eaf
       (add-to-list 'TeX-view-program-list '("eaf" eaf-pdf-synctex-forward-view))
       (add-to-list 'TeX-view-program-selection '(output-pdf "eaf")))
     )
 
-
-  (dolist (hook '(LaTeX-mode-hook TeX-mode-hook tex-mode-hook))
+  (dolist (hook '(LaTeX-mode-hook tex-mode-hook))
     (add-hook hook
               (lambda()
                 (auctex-latexmk-setup)
@@ -1541,8 +1540,11 @@
   (setq global-auto-revert-non-file-buffers t
         auto-revert-interval 1)
 
-  (with-eval-after-load 'info
-    (add-to-list 'Info-directory-list "/usr/local/texlive/2023/texmf-dist/doc/info"))
+  (when (eq system-type 'gnu/linux)
+    (with-eval-after-load 'info
+      (add-to-list 'Info-directory-list "/usr/local/texlive/2023/texmf-dist/doc/info")
+      (add-to-list 'Info-directory-list "/usr/local/share/info")))
+
 
   ;; (setq hl-line-range-function 'hl-current-line-range)
   (global-hl-line-mode)
@@ -1644,7 +1646,8 @@
     (setq recentf-max-saved-items 1000
           recentf-exclude `("/tmp/" "/ssh:"
                             ,(concat user-emacs-directory
-                                     "lib/.*-autoloads\\.el\\'")))
+                                     "lib/.*-autoloads\\.el\\'"))
+          yas-snippet-dirs (list (expand-file-name "~/.emacs.d/snippets")))
     (add-to-list 'recentf-exclude no-littering-var-directory)
     (add-to-list 'recentf-exclude no-littering-etc-directory))
   (save-place-mode t)
@@ -1959,8 +1962,15 @@
         completion-category-overrides '((file (styles basic partial-completion))))
 
   (defun vertico-lsp-enable ()
-    (and (functionp 'lsp-bridge-mode)
-         (global-lsp-bridge-mode))
+    ;; (and (functionp 'lsp-bridge-mode)
+    ;;      (global-lsp-bridge-mode))
+    (require 'lsp-bridge)
+    (remove-hook 'lsp-bridge-default-mode-hooks 'LaTeX-mode-hook)
+    (remove-hook 'lsp-bridge-default-mode-hooks 'latex-mode-hook)
+    (remove-hook 'lsp-bridge-default-mode-hooks 'Tex-latex-mode-hook)
+    (remove-hook 'lsp-bridge-default-mode-hooks 'typescript-ts-mode-hook)
+    (remove-hook 'lsp-bridge-default-mode-hooks 'typescript-mode-hook)
+    (global-lsp-bridge-mode)
     ;; (and (functionp 'corfu-mode)
     ;;      (global-corfu-mode))
     (and (boundp 'puni-mode)
@@ -2030,7 +2040,7 @@
   (with-eval-after-load 'citre
     (setq citre-use-project-root-when-creating-tags t
           citre-prompt-language-for-ctags-command t)
-    (when (file-exists-p "/opt/bin/ctags")
+    (when (and (eq system-type 'gnu/linux) (file-exists-p "/opt/bin/ctags"))
       (setq citre-ctags-program "/opt/bin/ctags"))
     )
 

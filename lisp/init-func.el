@@ -80,18 +80,20 @@
     (beginning-of-line)))
 
 ;;;###autoload
-(defun set-en_cn-font (en-font cn-font serif-font sans-font source-font f-size)
-  "EN-FONT for English, CN-FONT for Chinese, F-SIZE represents font size.
-Set Font for both of English and Chinese characters."
+(defun set-en_cn-font (en-font cn-font serif-font sans-font source-font en-size cn-size)
+  "EN-FONT, CN-FONT mean font-family.  EN-SIZE, CN-SIZE mean font size.
+And Set SERIF-FONT, SANS-FONT and SOURCE-FONT."
   (set-face-attribute
    'default nil
    :font (font-spec
           :name en-font
           :weight 'regular
           ;; :slant 'normal
-          :size f-size))
+          :size en-size))
   (dolist (charset '(kana han symbol cjk-misc bopomofo))
-    (set-fontset-font "fontset-default" charset (font-spec :family cn-font)))
+    (if (equal en-size cn-size)
+        (set-fontset-font "fontset-default" charset (font-spec :family cn-font))
+      (set-fontset-font "fontset-default" charset (font-spec :family cn-font :size cn-size))))
   (create-fontset-from-fontset-spec
    (font-xlfd-name
     (font-spec :family en-font
@@ -109,10 +111,19 @@ Set Font for both of English and Chinese characters."
        (font-xlfd-name
         (font-spec :family serif-font
                    :registry registry)))
-      (set-fontset-font registry 'han
-                        (font-spec :family (cdr sp)))
-      (set-fontset-font registry 'cjk-misc
-                        (font-spec :family (cdr sp)))))
+      (if (equal en-size cn-size)
+          (progn
+            (set-fontset-font registry 'han
+                              (font-spec :family (cdr sp)))
+            (set-fontset-font registry 'cjk-misc
+                              (font-spec :family (cdr sp))))
+        (progn
+          (set-fontset-font registry 'han
+                            (font-spec :family (cdr sp) :size cn-size))
+          (set-fontset-font registry 'cjk-misc
+                            (font-spec :family (cdr sp) :size cn-size)))
+        )
+      ))
   (with-eval-after-load 'org
     (set-face-attribute 'variable-pitch nil
                         :family serif-font
@@ -432,12 +443,14 @@ If you experience stuttering, increase this.")
   "Setup display graphic for GUI Emacs and Emacsclient."
   (when (display-graphic-p)
     ;; (if (not windows-system-p)
-    ;; (set-en_cn-font "BlexMono Nerd Font" "Source Han Serif CN" "Input Serif"
-    ;;                 "LXGW WenKai Screen" "Source Han Sans CN" 12.0)
+    ;; (set-en_cn-font "BlexMono Nerd Font" "FZYouSongJ GBK" "Input Serif"
+    ;;                 "LXGW WenKai Screen" "Source Han Sans CN" 11.0)
     ;; (set-en_cn-font "InputMono" "Source Han Serif CN" "Palatino Linotyp"
+    ;;                 "LXGW WenKai Screen" "Source Han Sans CN" 10.0)
+    ;; (set-en_cn-font "PragmataPro Liga" "FZYouSongJ GBK" "FZYouSongJ GBK"
     ;;                 "LXGW WenKai Screen" "Source Han Sans CN" 12.0)
-    (set-en_cn-font "PragmataPro Liga" "FZYouSongJ GBK" "FZYouSongJ GBK"
-                    "LXGW WenKai Screen" "Source Han Sans CN" 13.0)
+    (set-en_cn-font "Fantasque Sans Mono" "FZYouSongJ GBK" "Bookerly"
+                    "LXGW WenKai Screen" "Source Han Sans CN" 13.0 13.0)
     ;;   )
     ;; Maple Mono NF --- Maple Mono SC NF, HarmonyOS Sans SC
     ;; PragmataPro Mono Liga --- SimHei

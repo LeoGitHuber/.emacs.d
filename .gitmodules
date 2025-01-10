@@ -124,9 +124,6 @@
 [submodule "site-lisp/org-bars"]
 	path = site-lisp/org-bars
 	url = https://github.com/tonyaldon/org-bars.git
-[submodule "site-lisp/holo-layer"]
-	path = site-lisp/holo-layer
-	url = https://github.com/manateelazycat/holo-layer.git
 [submodule "site-lisp/compat"]
 	path = site-lisp/compat
 	url = https://github.com/emacs-compat/compat.git
@@ -262,9 +259,6 @@
 [submodule "site-lisp/emacs-kaolin-themes"]
 	path = site-lisp/emacs-kaolin-themes
 	url = https://github.com/ogdenwebb/emacs-kaolin-themes.git
-[submodule "site-lisp/centaur-tabs"]
-	path = site-lisp/centaur-tabs
-	url = https://github.com/ema2159/centaur-tabs.git
 [submodule "site-lisp/powerline"]
 	path = site-lisp/powerline
 	url = https://github.com/milkypostman/powerline.git
@@ -472,3 +466,9 @@
 [submodule "site-lisp/color-theme-sanityinc-tomorrow"]
 	path = site-lisp/color-theme-sanityinc-tomorrow
 	url = https://github.com/purcell/color-theme-sanityinc-tomorrow.git
+[submodule "site-lisp/yasnippet-snippets"]
+	path = site-lisp/yasnippet-snippets
+	url = https://github.com/AndreaCrotti/yasnippet-snippets.git
+[submodule "site-lisp/tempel-collection"]
+	path = site-lisp/tempel-collection
+	url = https://github.com/Crandel/tempel-collection.git

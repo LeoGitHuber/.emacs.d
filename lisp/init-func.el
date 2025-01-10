@@ -3,6 +3,7 @@
 ;;; Code:
 
 (require 'subr-x)
+(require 'cl-seq)
 
 ;;;###autoload
 (defun kill-or-save (arg)

@@ -1,7 +1,8 @@
 ;;; Init.el --- Emacs Configuration --- -*- lexical-binding: t; -*-
 ;;; Commentary:
+;;; Code:
 
-(add-to-list 'load-path "~/.emacs.d/site-lisp/benchmark-init-el")
+;; (add-to-list 'load-path "~/.emacs.d/site-lisp/benchmark-init-el")
 
 (defvar windows-system-p
   (string-equal system-type "windows-nt")
@@ -14,9 +15,9 @@
 ;;   (require 'benchmark-init-loaddefs)
 ;;   )
 
-(require 'benchmark-init)
+;; (require 'benchmark-init)
 
-(benchmark-init/activate)
+;; (benchmark-init/activate)
 ;; (add-hook 'after-init-hook 'benchmark-init/deactivate)
 (setq custom-file "~/.emacs.d/custom.el"
       load-prefer-newer t)
@@ -345,7 +346,7 @@
 
   ;;; @5. KEYBINDINGS
 
-  (add-to-list 'load-path "~/.emacs.d/site-lisp/combobulate")
+  ;; (add-to-list 'load-path "~/.emacs.d/site-lisp/combobulate")
 
   (keymap-global-set "M-p" 'pop-to-mark-command)
 
@@ -562,7 +563,7 @@
                    . ("texlab")))
     (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
     (add-hook 'eglot-managed-mode-hook 'corfu-mode)
-    (add-hook 'eglot-managed-mode-hook 'yas-minor-mode)
+    ;; (add-hook 'eglot-managed-mode-hook 'yas-minor-mode)
     ;; (when (and windows-system-p (string-match-p "29" emacs-version))
     ;;   (eglot-booster-mode))
     (eglot-booster-mode)
@@ -784,6 +785,7 @@
                    (or (= #x24 rime--current-input-key)
                        (= #x5c rime--current-input-key))
                    (or (= (point) (line-beginning-position))
+                       (= #xff0c (char-before))
                        (= #x20 (char-before))
                        (rime-predicate-after-ascii-char-p)))
               (and (> (point) (save-excursion (back-to-indentation) (point)))
@@ -1441,31 +1443,31 @@
 
   (pdf-loader-install)
 
-  ;; (eval-after-load "tex-mode"
-  ;;   '(progn
-  ;;      (load "auctex.el" nil t t)
-  ;;      (load "preview-latex.el" nil t t)
-  ;;      ;; (require 'org-table)
-  ;;      ))
+  (eval-after-load "tex-mode"
+    '(progn
+       (load "auctex.el" nil t t)
+       (load "preview-latex.el" nil t t)
+       ;; (require 'org-table)
+       ))
 
-  ;; (defun orgtbl-next-field-maybe ()
-  ;;   "Combine `lsp-bridge-mode', `cdlatex-mode' and `orgtlr-mode'."
-  ;;   (interactive)
-  ;;   (if (and (bound-and-true-p lsp-bridge-mode)
-  ;;            (acm-frame-visible-p acm-menu-frame))
-  ;;       (acm-complete)
-  ;;     (if (bound-and-true-p cdlatex-mode)
-  ;;         (cdlatex-tab)
-  ;;       (org-table-next-field))))
+  (defun orgtbl-next-field-maybe ()
+    "Combine `lsp-bridge-mode', `cdlatex-mode' and `orgtlr-mode'."
+    (interactive)
+    (if (and (bound-and-true-p lsp-bridge-mode)
+             (acm-frame-visible-p acm-menu-frame))
+        (acm-complete)
+      (if (bound-and-true-p cdlatex-mode)
+          (cdlatex-tab)
+        (org-table-next-field))))
 
   (with-eval-after-load 'tex
-    (load "auctex.el" nil t t)
-    (load "preview-latex.el" nil t t)
+    ;; (load "auctex.el" nil t t)
+    ;; (load "preview-latex.el" nil t t)
     (add-hook 'cdlatex-tab-hook
               (lambda ()
                 (and (bound-and-true-p lsp-bidge-mode)
                      (acm-frame-visible-p acm-menu-frame))))
-    (load "~/.emacs.d/lisp/auctex-latexmk.el")
+    ;; (load "~/.emacs.d/lisp/auctex-latexmk.el")
     (setq TeX-auto-save t
           TeX-parse-self t
           TeX-fold-auto t
@@ -1486,56 +1488,32 @@
                   )
     ;; (add-to-list 'TeX-view-program-list '("sioyek" "sioyek --page %(outpage) %o"))
     ;; (add-to-list 'TeX-view-program-selection '(output-pdf "Sioyek"))
-    (add-to-list 'TeX-view-program-selection '(output-pdf "Okular"))
+    (add-to-list 'TeX-view-program-selection '(output-pdf "PDF Tools"))
     (with-eval-after-load 'eaf
       (add-to-list 'TeX-view-program-list '("eaf" eaf-pdf-synctex-forward-view))
       (add-to-list 'TeX-view-program-selection '(output-pdf "eaf")))
+    (add-to-list 'TeX-command-list '("XeLaTeX" "%`xelatex -shell-escape --syntex=1%(mode)%' %t" TeX-run-TeX nil t))
+    (add-to-list 'texmathp-tex-commands1 '("lstlisting" env-off))
     )
 
   (dolist (hook '(LaTeX-mode-hook tex-mode-hook))
     (add-hook hook
               (lambda()
-                (auctex-latexmk-setup)
-                (electric-indent-local-mode)
-                (add-to-list 'TeX-command-list '("XeLaTeX" "%`xelatex -shell-escape --syntex=1%(mode)%' %t" TeX-run-TeX nil t))
+                ;; (auctex-latexmk-setup)
+                ;; (electric-indent-local-mode)
                 (setq TeX-command-default "XeLaTeX")
-                (add-to-list 'texmathp-tex-commands1 '("lstlisting" env-off))
-                (TeX-global-PDF-mode)
+                ;; (TeX-global-PDF-mode)
+                (TeX-PDF-mode-on)
                 (TeX-fold-mode 1)
                 (turn-on-cdlatex)
                 (turn-on-reftex)
+                (visual-line-mode)
                 ;; (keymap-set cdlatex-mode-map "<tab>" 'cdlatex-tab-maybe)
                 ;; (turn-on-orgtbl)
                 ;; (keymap-set orgtbl-mode-map "<tab>" 'orgtbl-next-field-maybe)
                 )))
 
-  (add-hook 'tex-mode-hook
-            (lambda()
-              ;; (electric-indent-local-mode)
-              (setq display-tex-shell-buffer-action nil)
-              (LaTeX-mode)
-              (visual-line-mode)
-              (TeX-fold-mode 1)
-              (turn-on-cdlatex)
-              (turn-on-reftex)
-              ;; (turn-on-orgtbl)
-              ;; (keymap-set orgtbl-mode-map "<tab>" 'orgtbl-next-field-maybe)
-              ))
-
-    ;;; @17. BASE
-  ;; (defun enable-after-meow ()
-  ;;   "Modes enable after meow insert."
-  ;;   (unless (bound-and-true-p lsp-bridge-mode)
-  ;;     (global-lsp-bridge-mode)
-  ;;     (lsp-bridge-mode)
-  ;;     )
-  ;;   (remove-hook 'meow-insert-enter-hook #'enable-after-meow))
-
-  ;; (when (bound-and-true-p meow-mode)
-  ;;   (add-hook 'meow-insert-enter-hook #'enable-after-meow))
-
-  ;; (global-lsp-bridge-mode)
-
+  ;;; @17. BASE
   (add-hook 'emacs-startup-hook
             (lambda () (setq gc-cons-threshold better-gc-cons-threshold)))
 
@@ -2002,11 +1980,18 @@
     (and (boundp 'vertico-mode)
          (progn
            (require 'orderless)
+           (setq enable-recursive-minibuffers t)
            (vertico-mode)
            (vertico-reverse-mode)
            (vertico-indexed-mode)
            (vertico-mouse-mode)
+           (vertico-multiform-mode)
            (marginalia-mode)
+           (setq vertico-multiform-categories
+                 '((file grid)
+                   (consult-grep buffer)
+                   (consult-ripgrep buffer)))
+           (keymap-global-set "C-'" #'vertico-suspend)
            (keymap-set vertico-map "?" #'minibuffer-completion-help)
            (keymap-set vertico-map "M-RET" #'minibuffer-force-complete-and-exit)
            (keymap-set vertico-map "M-TAB" #'minibuffer-complete)
@@ -2014,7 +1999,8 @@
          (keymap-set minibuffer-mode-map "C-w" 'backward-kill-word))
     (remove-hook 'pre-command-hook #'vertico-lsp-enable))
 
-  (add-hook 'pre-command-hook #'vertico-lsp-enable)
+  ;; (add-hook 'pre-command-hook #'vertico-lsp-enable)
+  (vertico-lsp-enable)
 
   (with-eval-after-load 'vertico (setq vertico-cycle t))
   (setq-default completion-styles '(orderless basic))

@@ -2,30 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(with-eval-after-load 'popper
-  (setq popper-reference-buffers '("\\*Messages\\*"
-								   "Output\\*$"
-								   "\\*Async Shell Command\\*"
-								   "Go-Translate"
-								   help-mode
-								   helpful-mode
-								   compilation-mode
-								   youdao-dictionary-mode)
-		popper-window-height  (lambda (win)
-								(fit-window-to-buffer
-								 win
-								 (floor (frame-height) 2))))
-  (keymap-global-set "M-`" 'popper-toggle-latest)  ;; shadow tmm-menubar
-  (keymap-global-set "C-M-`" 'popper-toggle-type))
-;; (popper-mode t)
-;; (popper-echo-mode t)
-
-(with-eval-after-load 'sort-tab
-  (dolist (face '(sort-tab-other-tab-face sort-tab-current-tab-face sort-tab-separator-face))
-	(set-face-attribute face nil :font (font-spec
-										:name "JetBrains Mono"
-										:size 10.0))))
-
 (with-eval-after-load 'evil
   (evil-set-undo-system 'undo-redo)
   (setq-default evil-want-abbrev-expand-on-insert-exit nil)
@@ -85,6 +61,33 @@
 ;; (add-hook 'emacs-lisp-mode 'company-mode)
 ;; (add-hook 'company-mode-hook 'company-box-mode)
 ;; (add-hook 'lsp-mode-hook 'company-mode)
+;; (add-hook 'company-mode-hook
+;;           (lambda ()
+;;             (setq company-tooltip-align-annotations t
+;;                   company-tooltip-limit 12
+;;                   company-idle-delay 0
+;;                   company-echo-delay (if (display-graphic-p) nil 0)
+;;                   company-minimum-prefix-length 1
+;;                   company-icon-margin 3
+;;                   company-require-match nil
+;;                   company-dabbrev-ignore-case nil
+;;                   company-dabbrev-downcase nil
+;;                   company-global-modes '(not erc-mode message-mode help-mode
+;;                                              gud-mode eshell-mode shell-mode)
+;;                   company-backends '((company-capf :with company-yasnippet)
+;;                                      (company-dabbrev-code company-keywords company-files)
+;;                                      company-dabbrev))
+;;             (define-key company-active-map (kbd "C-h") 'delete-backward-char)
+;;             (define-key company-active-map (kbd "<tab>") 'company-complete-selection)
+;;             ;; (setq company-box-icons-alist 'company-box-icons-idea)
+;;             (setq company-box-scrollbar 'inherit)
+;;             (company-box-mode t)
+;;             (advice-add 'company-capf :around #'company-completion-styles)))
+
+;; (defun company-completion-styles (capf-fn &rest args)
+;;   (let ((completion-styles '(basic partial-completion)))
+;;     (apply capf-fn args)))
+
 
 ;; (add-to-list 'load-path "~/.emacs.d/site-lisp/awesome-tab")
 ;; (require 'awesome-tab)

@@ -403,11 +403,33 @@ use `cm/autoloads-file' as TARGET."
   (add-hook 'meow-insert-exit-hook
             (lambda ()
               (and buffer-file-name
-                   (save-buffer))))
-  )
+                   (save-buffer)))))
+
+(defun lsp-booster--advice-final-command (old-fn cmd &optional test?)
+  "Prepend emacs-lsp-booster command to lsp CMD."
+  (let ((orig-result (funcall old-fn cmd test?)))
+    (if (and (not test?)                             ;; for check lsp-server-present?
+             (not (file-remote-p default-directory)) ;; see lsp-resolve-final-command, it would add extra shell wrapper
+             lsp-use-plists
+             (not (functionp 'json-rpc-connection))  ;; native json-rpc
+             (executable-find "emacs-lsp-booster"))
+        (progn
+          (message "Using emacs-lsp-booster for %s!" orig-result)
+          (cons "emacs-lsp-booster" orig-result))
+      orig-result)))
 
 (defun lsp-enable-startup ()
   "Enable `eglot' or `lsp-mode' for LSP."
+  ;; (and (functionp 'lsp-bridge-mode)
+  ;;      (global-lsp-bridge-mode))
+  ;; (require 'lsp-bridge)
+  (with-eval-after-load 'lsp-bridge
+    (remove-hook 'lsp-bridge-default-mode-hooks 'LaTeX-mode-hook)
+    (remove-hook 'lsp-bridge-default-mode-hooks 'latex-mode-hook)
+    (remove-hook 'lsp-bridge-default-mode-hooks 'Tex-latex-mode-hook)
+    (remove-hook 'lsp-bridge-default-mode-hooks 'typescript-ts-mode-hook)
+    (remove-hook 'lsp-bridge-default-mode-hooks 'typescript-mode-hook)
+    (global-lsp-bridge-mode))
   (dolist (hook '(prog-mdoe-hook
                   cuda-mode-hook
                   TeX-mode-hook
@@ -416,14 +438,62 @@ use `cm/autoloads-file' as TARGET."
                   emacs-lisp-mode-hook
                   js-mode-hook
                   js-ts-mode-hook))
-    (add-hook hook 'corfu-mode)
+    ;; (and (functionp 'corfu-mode)
+    ;;      (global-corfu-mode))
+    (unless global-corfu-mode
+      (and (functionp 'corfu-mode)
+           (add-hook hook 'corfu-mode)))
     (add-hook hook (lambda ()
                      (unless (derived-mode-p 'emacs-lisp-mode 'lisp-mode
                                              ;; 'verilog-mode
                                              'makefile-mode 'snippet-mode)
-                       ;; (lsp-deferred)
-                       (eglot-ensure)
-                       )))))
+                       (with-eval-after-load 'lsp
+                         (lsp-deferred))
+                       (eglot-ensure)))))
+  (with-eval-after-load 'lsp-mode
+    (with-eval-after-load 'lsp-ui
+      (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
+      (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references))
+    (setq lsp-keymap-prefix "C-c l"
+          ;; lsp-keep-workspace-alive nil
+          ;; lsp-signature-auto-activate nil
+          lsp-modeline-code-actions-enable nil
+          lsp-modeline-diagnostics-enable nil
+          lsp-modeline-workspace-status-enable nil
+          lsp-headerline-breadcrumb-enable t
+          lsp-semantic-tokens-enable t
+          ;; lsp-progress-spinner-type 'progress-bar-filled
+          lsp-enable-file-watchers nil
+          lsp-enable-folding nil
+          lsp-enable-symbol-highlighting nil
+          lsp-enable-text-document-color nil
+          lsp-enable-indentation nil
+          lsp-enable-on-type-formatting nil
+          lsp-enable-indentation nil
+          ;; lsp-diagnostics-disabled-modes '(markdown-mode gfm-mode)  ;; For diagnostics
+          ;; lsp-lens-enable nil  ;; Reference Lens
+          ;; lsp-ui-doc-show-with-cursor nil  ;; ui
+          lsp-completion-provider :none
+          lsp-prefer-flymake t
+          lsp-ui-flycheck-enable nil
+          lsp-enable-relative-indentation t)
+    ;; (keymap-set lsp-mode-map "C-c C-d" 'lsp-describe-thing-at-point)
+    (defun lsp-booster--advice-json-parse (old-fn &rest args)
+      "Try to parse bytecode instead of json."
+      (or
+       (when (equal (following-char) ?#)
+         (let ((bytecode (read (current-buffer))))
+           (when (byte-code-function-p bytecode)
+             (funcall bytecode))))
+       (apply old-fn args)))
+    (advice-add (if (progn (require 'json)
+                           (fboundp 'json-parse-buffer))
+                    'json-parse-buffer
+                  'json-read)
+                :around
+                #'lsp-booster--advice-json-parse)
+    (advice-add 'lsp-resolve-final-command :around #'lsp-booster--advice-final-command)
+    (add-hook 'lsp-mode-hook 'corfu-mode)))
 
 (defvar better-gc-cons-threshold (* 32 1024 1024) ;; 128mb
   "The default value to use for `gc-cons-threshold'.
@@ -444,14 +514,14 @@ If you experience stuttering, increase this.")
   "Setup display graphic for GUI Emacs and Emacsclient."
   (when (display-graphic-p)
     ;; (if (not windows-system-p)
-    ;; (set-en_cn-font "BlexMono Nerd Font" "FZYouSongJ GBK" "Input Serif"
-    ;;                 "LXGW WenKai Screen" "Source Han Sans CN" 11.0)
+    ;; (set-en_cn-font "BlexMono Nerd Font Mono Medium" "FZYouSongJ GBK" "Bookerly"
+    ;;                 "LXGW WenKai Screen" "Source Han Sans CN" 11.0 11.0)
     ;; (set-en_cn-font "InputMono" "Source Han Serif CN" "Palatino Linotyp"
     ;;                 "LXGW WenKai Screen" "Source Han Sans CN" 10.0)
     ;; (set-en_cn-font "PragmataPro Liga" "FZYouSongJ GBK" "FZYouSongJ GBK"
     ;;                 "LXGW WenKai Screen" "Source Han Sans CN" 12.0)
     (set-en_cn-font "Fantasque Sans Mono" "FZYouSongJ GBK" "Bookerly"
-                    "LXGW WenKai Screen" "Source Han Sans CN" 13.0 13.0)
+                    "LXGW WenKai Screen" "Source Han Sans CN" 14.0 14.0)
     ;;   )
     ;; Maple Mono NF --- Maple Mono SC NF, HarmonyOS Sans SC
     ;; PragmataPro Mono Liga --- SimHei
@@ -494,7 +564,7 @@ If you experience stuttering, increase this.")
                               :background mode-line-box-p)
           )))
     (if (or
-         (>= (string-to-number (substring (current-time-string) 11 13)) 20)
+         (>= (string-to-number (substring (current-time-string) 11 13)) 17)
          (<= (string-to-number (substring (current-time-string) 11 13)) 6))
         (if (string-prefix-p "modus" (symbol-name (cadr themes_chosen)))
             (progn

@@ -472,3 +472,12 @@
 [submodule "site-lisp/tempel-collection"]
 	path = site-lisp/tempel-collection
 	url = https://github.com/Crandel/tempel-collection.git
+[submodule "site-lisp/saveplace-pdf-view"]
+	path = site-lisp/saveplace-pdf-view
+	url = https://github.com/nicolaisingh/saveplace-pdf-view.git
+[submodule "site-lisp/adaptive-wrap"]
+	path = site-lisp/adaptive-wrap
+	url = https://github.com/emacsmirror/adaptive-wrap.git
+[submodule "site-lisp/company-mode"]
+	path = site-lisp/company-mode
+	url = https://github.com/company-mode/company-mode.git

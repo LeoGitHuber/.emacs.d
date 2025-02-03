@@ -159,7 +159,7 @@
     "Face for flymake Info."
     :group 'flymake)
 
-  (setq flymake-no-changes-timeout nil
+  (setq flymake-no-changes-timeout 0.1
         flymake-indicator-type 'margins
         flymake-autoresize-margins nil
         flymake-margin-indicators-string
@@ -377,11 +377,6 @@
   ;; (keymap-global-set "M-l" 'downcase-any)
   ;; (keymap-global-set "M-c" 'capitalize-any)
   (keymap-global-set "C-w" 'kill-or-save)
-  (add-hook 'puni-mode-hook
-            (lambda ()
-              (keymap-set puni-mode-map "M-w" 'puni-kill-region)
-              (keymap-set puni-mode-map "M-k" 'puni-backward-kill-line)
-              (keymap-unset puni-mode-map "C-w")))
 
   (keymap-set isearch-mode-map "C-h" 'isearch-del-char)
   (keymap-global-set "C-h" 'backward-delete-char-untabify)
@@ -450,98 +445,31 @@
 
   (lsp-enable-startup)
 
-  (with-eval-after-load 'lsp-mode
-    (with-eval-after-load 'lsp-ui
-      (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
-      (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references))
-    (setq lsp-keymap-prefix "C-c l"
-          ;; lsp-keep-workspace-alive nil
-          ;; lsp-signature-auto-activate nil
-          lsp-modeline-code-actions-enable nil
-          lsp-modeline-diagnostics-enable nil
-          lsp-modeline-workspace-status-enable nil
-          lsp-headerline-breadcrumb-enable t
-          lsp-semantic-tokens-enable t
-          ;; lsp-progress-spinner-type 'progress-bar-filled
-          lsp-enable-file-watchers nil
-          lsp-enable-folding nil
-          lsp-enable-symbol-highlighting nil
-          lsp-enable-text-document-color nil
-
-          lsp-enable-indentation nil
-          lsp-enable-on-type-formatting nil
-
-          lsp-enable-indentation nil
-
-          ;; For diagnostics
-          ;; lsp-diagnostics-disabled-modes '(markdown-mode gfm-mode)
-
-          ;; Reference Lens
-          ;; lsp-lens-enable nil
-
-          ;; ui
-          ;; lsp-ui-doc-show-with-cursor nil
-          lsp-completion-provider :none
-          lsp-prefer-flymake t
-          lsp-ui-flycheck-enable nil
-          lsp-enable-relative-indentation t
-          )
-    ;; (keymap-set lsp-mode-map "C-c C-d" 'lsp-describe-thing-at-point)
-    (defun lsp-booster--advice-json-parse (old-fn &rest args)
-      "Try to parse bytecode instead of json."
-      (or
-       (when (equal (following-char) ?#)
-         (let ((bytecode (read (current-buffer))))
-           (when (byte-code-function-p bytecode)
-             (funcall bytecode))))
-       (apply old-fn args)))
-    (advice-add (if (progn (require 'json)
-                           (fboundp 'json-parse-buffer))
-                    'json-parse-buffer
-                  'json-read)
-                :around
-                #'lsp-booster--advice-json-parse)
-
-    (defun lsp-booster--advice-final-command (old-fn cmd &optional test?)
-      "Prepend emacs-lsp-booster command to lsp CMD."
-      (let ((orig-result (funcall old-fn cmd test?)))
-        (if (and (not test?)                             ;; for check lsp-server-present?
-                 (not (file-remote-p default-directory)) ;; see lsp-resolve-final-command, it would add extra shell wrapper
-                 lsp-use-plists
-                 (not (functionp 'json-rpc-connection))  ;; native json-rpc
-                 (executable-find "emacs-lsp-booster"))
-            (progn
-              (message "Using emacs-lsp-booster for %s!" orig-result)
-              (cons "emacs-lsp-booster" orig-result))
-          orig-result)))
-    (advice-add 'lsp-resolve-final-command :around #'lsp-booster--advice-final-command)
-    (add-hook 'lsp-mode-hook 'corfu-mode)
-    )
-
   (with-eval-after-load 'corfu
     (setq corfu-auto t
           corfu-cycle t
           ;; corfu-quit-no-match 'separator  ;; t
-          corfu-auto-prefix 1
+          corfu-auto-prefix 2
           corfu-auto-delay 0
           corfu-preview-current t
-          corfu-quit-no-match t
+          corfu-on-exact-match 'show
+          ;; corfu-quit-no-match t
           ;; corfu-preselect 'prompt
-          corfu-quit-at-boundary t)
+          ;; corfu-quit-at-boundary t
+          )
     (when (boundp 'meow-insert-exit-hook)
       (add-hook 'meow-insert-exit-hook 'corfu-quit))
     (keymap-set corfu-map "<tab>" 'corfu-insert)
     ;; (keymap-set corfu-map "<backtab>" 'corfu-previous)
     ;; (keymap-set corfu-map "S-<return>" 'corfu-insert)
     ;; (keymap-unset corfu-map "RET")
-    (add-to-list 'completion-at-point-functions 'cape-file)
-    ;; (add-to-list 'completion-at-point-functions #'cape-dabbrev)
-    ;; (add-to-list 'completion-at-point-functions #'cape-elisp-block)
     (add-hook 'corfu-mode-hook 'corfu-popupinfo-mode)
     (with-eval-after-load 'corfu-popupinfo
       (setq corfu-popupinfo-delay '(0.1 . 0.1)))
-    ;; (add-to-list 'corfu-margin-formatters 'kind-icon-margin-formatter)
     (add-to-list 'corfu-margin-formatters 'nerd-icons-corfu-formatter))
+
+  (yas-global-mode 1)
+  (yas-minor-mode-on)
 
   (with-eval-after-load 'yasnippet
     (add-hook 'yas-keymap-disable-hook
@@ -553,49 +481,85 @@
                     (frame-visible-p corfu--frame)))
                  (when (boundp 'acm-menu-frame)
                    (and (frame-live-p acm-menu-frame)
-                        (frame-visible-p acm-menu-frame)))
-                 ))))
+                        (frame-visible-p acm-menu-frame)))))))
 
+  ;; (require 'tempel)
+  ;; (require 'tempel-collection)
+  (with-eval-after-load 'tempel
+    (defun tempel-setup-capf ()
+      ;; Add the Tempel Capf to `completion-at-point-functions'.
+      ;; `tempel-expand' only triggers on exact matches. Alternatively use
+      ;; `tempel-complete' if you want to see all matches, but then you
+      ;; should also configure `tempel-trigger-prefix', such that Tempel
+      ;; does not trigger too often when you don't expect it. NOTE: We add
+      ;; `tempel-expand' *before* the main programming mode Capf, such
+      ;; that it will be tried first.
+      (setq-local completion-at-point-functions
+                  (cons #'tempel-complete
+                        completion-at-point-functions)))
+    (add-hook 'prog-mode-hook 'tempel-setup-capf)
+    (add-hook 'text-mode-hook 'tempel-setup-capf))
+
+  (require 'cape)
+  (add-hook 'completion-at-point-functions #'cape-file)
+  ;; (add-hook 'completion-at-point-functions #'cape-dabbrev)
+  ;; (add-hook 'completion-at-point-functions #'cape-elisp-block)
+
+  (require 'company)
   (with-eval-after-load 'eglot
     (setq eglot-send-changes-idle-time 0)
     (add-to-list 'eglot-server-programs
                  '((tex-mode context-mode texinfo-mode bibtex-mode)
                    . ("texlab")))
-    (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
-    (add-hook 'eglot-managed-mode-hook 'corfu-mode)
-    ;; (add-hook 'eglot-managed-mode-hook 'yas-minor-mode)
+    ;; (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
+    (defun my/eglot-capf ()
+      ;; (setq-local completion-at-point-functions
+      ;;             (list (cape-capf-super
+      ;;                    #'eglot-completion-at-point
+      ;;                    ;; #'tempel-complete
+      ;;                    ;; (mapcar #'cape-company-to-capf
+      ;;                    ;;         (list #'company-yasnippet))
+      ;;                    (cape-company-to-capf #'company-yasnippet)
+      ;;                    #'cape-file)))
+      ;; (let* ((temp-functions '()))
+      ;;   (dolist (fun completion-at-point-functions)
+      ;;     (when (not (eq fun 't))
+      ;;       (add-to-list 'temp-functions fun)))
+      ;;   (add-to-list 'temp-functions (cape-company-to-capf #'company-yasnippet))
+      ;;   (add-to-list 'temp-functions (cape-company-to-capf #'company-files))
+      ;;   (setq-local completion-at-point-functions (list (apply #'cape-capf-super temp-functions)))
+      ;; (setq temp-functions (append (list (cape-capf-super
+      ;;                                     (cape-company-to-capf #'company-yasnippet)
+      ;;                                     (cape-company-to-capf #'company-files)
+      ;;                                     ))
+      ;;                              (reverse temp-functions)))
+      (setq-local completion-at-point-functions (list (cape-capf-super
+                                                       #'eglot-completion-at-point
+                                                       (cape-company-to-capf #'company-yasnippet)
+                                                       (cape-company-to-capf #'company-files))))
+      ;; (setq-local completion-at-point-functions
+      ;;             (append (list
+      ;;                      ;; #'tempel-complete
+      ;;                      ;; (mapcar #'cape-company-to-capf
+      ;;                      ;;         (list #'company-yasnippet))
+      ;;                      (cape-capf-super
+      ;;                       (cape-company-to-capf #'company-yasnippet)
+      ;;                       (cape-company-to-capf #'company-files)
+      ;;                       #'cape-file))
+      ;;                     completion-at-point-functions))
+      )
+    (add-hook 'eglot-managed-mode-hook #'my/eglot-capf)
     ;; (when (and windows-system-p (string-match-p "29" emacs-version))
     ;;   (eglot-booster-mode))
     (eglot-booster-mode)
     )
 
-  (add-hook 'company-mode-hook
+  (add-hook 'LaTeX-mode-hook
             (lambda ()
-              (setq company-tooltip-align-annotations t
-                    company-tooltip-limit 12
-                    company-idle-delay 0
-                    company-echo-delay (if (display-graphic-p) nil 0)
-                    company-minimum-prefix-length 1
-                    company-icon-margin 3
-                    company-require-match nil
-                    company-dabbrev-ignore-case nil
-                    company-dabbrev-downcase nil
-                    company-global-modes '(not erc-mode message-mode help-mode
-                                               gud-mode eshell-mode shell-mode)
-                    company-backends '((company-capf :with company-yasnippet)
-                                       (company-dabbrev-code company-keywords company-files)
-                                       company-dabbrev))
-              (define-key company-active-map (kbd "C-h") 'delete-backward-char)
-              (define-key company-active-map (kbd "<tab>") 'company-complete-selection)
-              ;; (setq company-box-icons-alist 'company-box-icons-idea)
-              (setq company-box-scrollbar 'inherit)
-              (company-box-mode t)))
-
-  (defun company-completion-styles (capf-fn &rest args)
-    (let ((completion-styles '(basic partial-completion)))
-      (apply capf-fn args)))
-
-  (advice-add 'company-capf :around #'company-completion-styles)
+              ;; (add-to-list 'completion-at-point-functions #'cape-tex)
+              (setq-local completion-at-point-functions
+                          (append (list #'cape-tex) completion-at-point-functions))
+              ))
 
   (with-eval-after-load 'lsp-bridge
     (add-hook 'lsp-bridge-mode-hook 'yas/minor-mode)
@@ -643,47 +607,6 @@
     ;; (add-to-list 'lsp-bridge-single-lang-server-mode-list '((verilog-mode) . "veridian"))
     ;; (add-to-list 'lsp-bridge-single-lang-server-mode-list '((verilog-mode) . "svls"))
     )
-
-  (with-eval-after-load 'kind-icon
-    (setq kind-icon-use-icons nil
-          kind-icon-mapping
-          `(
-            (array ,(nerd-icons-codicon "nf-cod-symbol_array") :face font-lock-type-face)
-            (boolean ,(nerd-icons-codicon "nf-cod-symbol_boolean") :face font-lock-builtin-face)
-            (class ,(nerd-icons-codicon "nf-cod-symbol_class") :face font-lock-type-face)
-            (color ,(nerd-icons-codicon "nf-cod-symbol_color") :face success)
-            (command ,(nerd-icons-codicon "nf-cod-terminal") :face default)
-            (constant ,(nerd-icons-codicon "nf-cod-symbol_constant") :face font-lock-constant-face)
-            (constructor ,(nerd-icons-codicon "nf-cod-triangle_right") :face font-lock-function-name-face)
-            (enummember ,(nerd-icons-codicon "nf-cod-symbol_enum_member") :face font-lock-builtin-face)
-            (enum-member ,(nerd-icons-codicon "nf-cod-symbol_enum_member") :face font-lock-builtin-face)
-            (enum ,(nerd-icons-codicon "nf-cod-symbol_enum") :face font-lock-builtin-face)
-            (event ,(nerd-icons-codicon "nf-cod-symbol_event") :face font-lock-warning-face)
-            (field ,(nerd-icons-codicon "nf-cod-symbol_field") :face font-lock-variable-name-face)
-            (file ,(nerd-icons-codicon "nf-cod-symbol_file") :face font-lock-string-face)
-            (folder ,(nerd-icons-codicon "nf-cod-folder") :face font-lock-doc-face)
-            (interface ,(nerd-icons-codicon "nf-cod-symbol_interface") :face font-lock-type-face)
-            (keyword ,(nerd-icons-codicon "nf-cod-symbol_keyword") :face font-lock-keyword-face)
-            (macro ,(nerd-icons-codicon "nf-cod-symbol_misc") :face font-lock-keyword-face)
-            (magic ,(nerd-icons-codicon "nf-cod-wand") :face font-lock-builtin-face)
-            (method ,(nerd-icons-codicon "nf-cod-symbol_method") :face font-lock-function-name-face)
-            (function ,(nerd-icons-codicon "nf-cod-symbol_method") :face font-lock-function-name-face)
-            (module ,(nerd-icons-codicon "nf-cod-file_submodule") :face font-lock-preprocessor-face)
-            (numeric ,(nerd-icons-codicon "nf-cod-symbol_numeric") :face font-lock-builtin-face)
-            (operator ,(nerd-icons-codicon "nf-cod-symbol_operator") :face font-lock-comment-delimiter-face)
-            (param ,(nerd-icons-codicon "nf-cod-symbol_parameter") :face default)
-            (property ,(nerd-icons-codicon "nf-cod-symbol_property") :face font-lock-variable-name-face)
-            (reference ,(nerd-icons-codicon "nf-cod-references") :face font-lock-variable-name-face)
-            (snippet ,(nerd-icons-codicon "nf-cod-symbol_snippet") :face font-lock-string-face)
-            (string ,(nerd-icons-codicon "nf-cod-symbol_string") :face font-lock-string-face)
-            (struct ,(nerd-icons-codicon "nf-cod-symbol_structure") :face font-lock-variable-name-face)
-            (text ,(nerd-icons-codicon "nf-cod-text_size") :face font-lock-doc-face)
-            (typeparameter ,(nerd-icons-codicon "nf-cod-list_unordered") :face font-lock-type-face)
-            (type-parameter ,(nerd-icons-codicon "nf-cod-list_unordered") :face font-lock-type-face)
-            (unit ,(nerd-icons-codicon "nf-cod-symbol_ruler") :face font-lock-constant-face)
-            (value ,(nerd-icons-codicon "nf-cod-symbol_field") :face font-lock-builtin-face)
-            (variable ,(nerd-icons-codicon "nf-cod-symbol_variable") :face font-lock-variable-name-face)
-            (t ,(nerd-icons-codicon "nf-cod-code") :face font-lock-warning-face))))
 
   ;;; @7. DIRED
 
@@ -774,8 +697,8 @@
 
   Can be used in `rime-disable-predicates' and `rime-inline-predicates'."
       (and (fboundp 'meow-mode)
-           (meow-normal-mode-p)
-           ))
+           (or (meow-normal-mode-p)
+               (meow-beacon-mode-p))))
     (defun rime-predicate-tex-advance-p ()
       "If point is inside a (La)TeX math environment, or a (La)TeX command."
       (if (derived-mode-p 'tex-mode)
@@ -786,6 +709,10 @@
                        (= #x5c rime--current-input-key))
                    (or (= (point) (line-beginning-position))
                        (= #xff0c (char-before))
+                       (= #x3001 (char-before))
+                       (= #x3002 (char-before))
+                       (= #xff08 (char-before))
+                       (= #xff1b (char-before))
                        (= #x20 (char-before))
                        (rime-predicate-after-ascii-char-p)))
               (and (> (point) (save-excursion (back-to-indentation) (point)))
@@ -947,8 +874,7 @@
      '((emacs-lisp . t)
        (python . t)
        (jupyter . t)))
-    (keymap-set org-mode-map "C-c b" 'org-cite-insert)
-    )
+    (keymap-set org-mode-map "C-c b" 'org-cite-insert))
 
   (add-hook 'org-mode-hook
             (lambda ()
@@ -1023,9 +949,7 @@
           '(
             ;; (?- . "-")
             (?* . "•")
-            (?+ . "‣"))
-          ))
-
+            (?+ . "‣"))))
 
   ;; (add-hook 'org-agenda-finalize-hook 'org-modern-agenda)
 
@@ -1046,8 +970,7 @@
                           time-stamp-end "$"
                           time-stamp-format "\[%Y-%m-%d %3a %H:%M\]")
               (setq org-list-allow-alphabetical t)
-              (add-hook 'before-save-hook 'time-stamp nil 'local)
-              ))
+              (add-hook 'before-save-hook 'time-stamp nil 'local)))
 
   (add-hook 'org-mode-hook #'org-modern-indent-mode 100)
 
@@ -1085,8 +1008,7 @@
   ;;      Show org-roam buffer iff the current buffer has a org-roam file
   ;;      (xor (org-roam-file-p) (eq 'visible (org-roam-buffer--visibility))))
   ;;     (org-roam-buffer-toggle)))
-  ;;   (add-hook 'window-buffer-change-functions 'my/org-roam-buffer-show)
-  ;;   )
+  ;;   (add-hook 'window-buffer-change-functions 'my/org-roam-buffer-show))
 
   (with-eval-after-load 'org-roam
     (add-hook 'org-roam-mode-hook (lambda ()
@@ -1426,7 +1348,7 @@
     (citar-embark-mode)
     (citar-denote-mode)
     )
-  (add-hook 'LaTeX-mode-hook 'citar-capf-setup)
+  ;; (add-hook 'LaTeX-mode-hook 'citar-capf-setup)
   (add-hook 'org-mode-hook 'citar-capf-setup)
   ;; (keymap-global-set "C-c c c" 'citar-create-note)
   (keymap-global-set "C-c c n" 'citar-denote-open-note)
@@ -1477,7 +1399,7 @@
           ;; preview-pdf-color-adjust-method nil
           cdlatex-paired-parens "$[{("
           )
-    (setq-default TeX-master nil
+    (setq-default TeX-master t
                   TeX-engine 'xetex
                   ;; preview-scale-function 0.6
                   ;; preview-LaTeX-command '("%`%l -no-pdf \"\\nonstopmode\\nofiles\
@@ -1496,11 +1418,15 @@
     (add-to-list 'texmathp-tex-commands1 '("lstlisting" env-off))
     )
 
+  (setq adaptive-wrap-extra-indent 0)
+
   (dolist (hook '(LaTeX-mode-hook tex-mode-hook))
     (add-hook hook
               (lambda()
                 ;; (auctex-latexmk-setup)
                 ;; (electric-indent-local-mode)
+                (electric-indent-mode -1)
+                (adaptive-wrap-prefix-mode)
                 (setq TeX-command-default "XeLaTeX")
                 ;; (TeX-global-PDF-mode)
                 (TeX-PDF-mode-on)
@@ -1650,6 +1576,7 @@
           yas-snippet-dirs (list (expand-file-name "~/.emacs.d/snippets")))
     (add-to-list 'recentf-exclude no-littering-var-directory)
     (add-to-list 'recentf-exclude no-littering-etc-directory))
+  (require 'saveplace-pdf-view)
   (save-place-mode t)
   (setq history-length 10000
         history-delete-duplicates t
@@ -1693,7 +1620,9 @@
 
   ;; (setq desktop-path (list user-emacs-directory))
   ;;   desktop-auto-save-timeout 600)
-  ;; (desktop-save-mode 1)
+  (desktop-save-mode 1)
+  (with-eval-after-load 'desktop
+    (setq desktop-restore-frames nil))
 
   (setq comment-auto-fill-only-comments t)
   (setq whitespace-style '(face trailing))
@@ -1729,8 +1658,34 @@
   (add-to-list 'auto-mode-alist '("\\.lua\\'" . lua-ts-mode))
 
 
-  (add-to-list 'load-path "~/.emacs.d/site-lisp/magit/lisp")
   (add-to-list 'load-path "~/.emacs.d/site-lisp/with-editor/lisp")
+  (add-to-list 'load-path "~/.emacs.d/site-lisp/dash.el")
+  (add-to-list 'load-path "~/.emacs.d/site-lisp/compat")
+  (add-to-list 'load-path "~/.emacs.d/site-lisp/magit/lisp")
+  ;; (require 'magit)
+
+  (with-eval-after-load 'magit
+    (setq magit-diff-refine-hunk t
+          magit-log-section-commit-count 20
+          magit-status-sections-hook '(magit-insert-status-headers
+                                       magit-insert-merge-log
+                                       magit-insert-rebase-sequence
+                                       magit-insert-am-sequence
+                                       magit-insert-sequencer-sequence
+                                       magit-insert-bisect-output
+                                       magit-insert-bisect-rest
+                                       magit-insert-bisect-log
+                                       magit-insert-untracked-files
+                                       magit-insert-unstaged-changes
+                                       magit-insert-staged-changes
+                                       magit-insert-stashes
+                                       magit-insert-unpushed-to-pushremote
+                                       ;; magit-insert-unpushed-to-upstream-or-recent
+                                       magit-insert-unpushed-to-upstream
+                                       magit-insert-recent-commits
+                                       magit-insert-unpulled-from-pushremote
+                                       magit-insert-unpulled-from-upstream)))
+
   (dolist
       (hook
        '(emacs-lisp-mode-hook
@@ -1741,14 +1696,11 @@
   ;; (dolist (mode '(verilog-mode org-mode term-mode))
   ;;   (add-to-list 'aggressive-indent-excluded-modes mode))
 
-  (dolist (hook '(term-mode-hook))
-    (add-hook hook #'puni-disable-puni-mode))
-
     ;;; Visual Repalcement
   (keymap-global-set "C-c r" 'vr/replace)
   (keymap-global-set "C-c m" 'vr/mc-mark)
 
-  (add-hook 'prog-mode-hook 'hs-minor-mode)
+  ;; (add-hook 'prog-mode-hook 'hs-minor-mode)
 
   ;; 折叠代码块，以下是额外启用了 :box t 属性使得提示更加明显
   (defconst hideshow-folded-face
@@ -1778,27 +1730,27 @@
   ;;    )
   ;;  )
 
-  (c-add-style
-   "freebsd"
-   '(;; "bsd"
-     (c-basic-offset . 4)    ; 设置缩进为4个空格
-     (c-offsets-alist
-      (statement-cont . c-lineup-assignments)  ; 连续语句的缩进方式
-      (case-label . 0)        ; case标签缩进为0
-      (substatement-open . 0) ; 子语句的开放括号不缩进
-      (arglist-intro . +)     ; 函数参数列表的起始缩进
-      (arglist-cont . 0)      ; 函数参数列表的续行缩进
-      (arglist-cont-nonempty . c-lineup-arglist)  ; 函数参数列表非空时的续行缩进方式
-      (arglist-close . 0)     ; 函数参数列表的关闭括号不缩进
-      (inextern-lang . 0)     ; 在extern语言中的缩进
-      (inline-open . 0)       ; 内联函数的开放括号不缩进
-      (namespace-open . 0)    ; 命名空间的开放括号不缩进
-      (innamespace . 0)       ; 在命名空间中的缩进
-      (label . 0)             ; 标签不缩进
-      )))
+  ;; (c-add-style
+  ;;  "freebsd"
+  ;;  '(;; "bsd"
+  ;;    (c-basic-offset . 4)    ; 设置缩进为4个空格
+  ;;    (c-offsets-alist
+  ;;     (statement-cont . c-lineup-assignments)  ; 连续语句的缩进方式
+  ;;     (case-label . 0)        ; case标签缩进为0
+  ;;     (substatement-open . 0) ; 子语句的开放括号不缩进
+  ;;     (arglist-intro . +)     ; 函数参数列表的起始缩进
+  ;;     (arglist-cont . 0)      ; 函数参数列表的续行缩进
+  ;;     (arglist-cont-nonempty . c-lineup-arglist)  ; 函数参数列表非空时的续行缩进方式
+  ;;     (arglist-close . 0)     ; 函数参数列表的关闭括号不缩进
+  ;;     (inextern-lang . 0)     ; 在extern语言中的缩进
+  ;;     (inline-open . 0)       ; 内联函数的开放括号不缩进
+  ;;     (namespace-open . 0)    ; 命名空间的开放括号不缩进
+  ;;     (innamespace . 0)       ; 在命名空间中的缩进
+  ;;     (label . 0)             ; 标签不缩进
+  ;;     )))
 
-  (add-to-list 'c-default-style '(c-mode . "freebsd"))
-  (add-to-list 'c-default-style '(c++-mode . "freebsd"))
+  ;; (add-to-list 'c-default-style '(c-mode . "freebsd"))
+  ;; (add-to-list 'c-default-style '(c++-mode . "freebsd"))
 
   (when (treesit-available-p)
     (setq major-mode-remap-alist
@@ -1821,8 +1773,8 @@
           )
     ;; (add-hook 'emacs-lisp-mode-hook
     ;;           (lambda () (treesit-parser-create 'elisp)))
-    (setq c-ts-mode-indent-style 'bsd
-          c-ts-mode-indent-offset 4)
+    ;; (setq c-ts-mode-indent-style 'bsd
+    ;;       c-ts-mode-indent-offset 4)
     )
 
   ;; (defun packages-load-after-minibuffer ()
@@ -1866,8 +1818,7 @@
      (floor (frame-height) 6)
      (floor (frame-width) 2)
      ;; (floor (frame-width) 2)
-     (floor (* (frame-width) 17) 35)
-     ))
+     (floor (* (frame-width) 17) 35)))
 
   (defun popper--auto-fit-window-height (win)
     "Determine the height of popup window WIN by fitting it to the buffer's content."
@@ -1937,6 +1888,11 @@
     (consult-customize
      consult-buffer
      :preview-key '(:debounce 0.4 "M-."))
+    (setq consult-project-function
+          (lambda (may-prompt)
+            (or
+             (vc-root-dir)
+             (consult--default-project-function may-prompt))))
     )
   (setq xref-show-xrefs-function 'consult-xref
         xref-show-definitions-function 'consult-xref)
@@ -1963,46 +1919,39 @@
   (setq completion-styles '(orderless basic)
         completion-category-overrides '((file (styles basic partial-completion))))
 
-  (defun vertico-lsp-enable ()
-    ;; (and (functionp 'lsp-bridge-mode)
-    ;;      (global-lsp-bridge-mode))
-    ;; (require 'lsp-bridge)
-    ;; (remove-hook 'lsp-bridge-default-mode-hooks 'LaTeX-mode-hook)
-    ;; (remove-hook 'lsp-bridge-default-mode-hooks 'latex-mode-hook)
-    ;; (remove-hook 'lsp-bridge-default-mode-hooks 'Tex-latex-mode-hook)
-    ;; (remove-hook 'lsp-bridge-default-mode-hooks 'typescript-ts-mode-hook)
-    ;; (remove-hook 'lsp-bridge-default-mode-hooks 'typescript-mode-hook)
-    ;; (global-lsp-bridge-mode)
-    (and (functionp 'corfu-mode)
-         (global-corfu-mode))
-    (and (boundp 'puni-mode)
-         (puni-global-mode))
-    (and (boundp 'vertico-mode)
-         (progn
-           (require 'orderless)
-           (setq enable-recursive-minibuffers t)
-           (vertico-mode)
-           (vertico-reverse-mode)
-           (vertico-indexed-mode)
-           (vertico-mouse-mode)
-           (vertico-multiform-mode)
-           (marginalia-mode)
-           (setq vertico-multiform-categories
-                 '((file grid)
-                   (consult-grep buffer)
-                   (consult-ripgrep buffer)))
-           (keymap-global-set "C-'" #'vertico-suspend)
-           (keymap-set vertico-map "?" #'minibuffer-completion-help)
-           (keymap-set vertico-map "M-RET" #'minibuffer-force-complete-and-exit)
-           (keymap-set vertico-map "M-TAB" #'minibuffer-complete)
-           (keymap-set vertico-map "C-w" 'vertico-directory-delete-word))
-         (keymap-set minibuffer-mode-map "C-w" 'backward-kill-word))
-    (remove-hook 'pre-command-hook #'vertico-lsp-enable))
+  (and (boundp 'puni-mode)
+       (puni-global-mode))
+  (with-eval-after-load 'puni
+    (add-hook 'puni-mode-hook
+              (lambda ()
+                (keymap-set puni-mode-map "M-w" 'puni-kill-region)
+                (keymap-set puni-mode-map "M-k" 'puni-backward-kill-line)
+                (keymap-unset puni-mode-map "C-w")
+                ))
+    (dolist (hook '(term-mode-hook))
+      (add-hook hook #'puni-disable-puni-mode)))
+  (if (boundp 'vertico-mode)
+      (progn
+        (require 'orderless)
+        (setq enable-recursive-minibuffers t)
+        (vertico-mode)
+        (vertico-reverse-mode)
+        (vertico-indexed-mode)
+        (vertico-mouse-mode)
+        (vertico-multiform-mode)
+        (marginalia-mode)
+        (setq vertico-multiform-categories
+              '((file grid)
+                (consult-grep buffer)
+                (consult-ripgrep buffer))
+              vertico-cycle t)
+        (keymap-global-set "C-'" #'vertico-suspend)
+        (keymap-set vertico-map "?" #'minibuffer-completion-help)
+        (keymap-set vertico-map "M-RET" #'minibuffer-force-complete-and-exit)
+        (keymap-set vertico-map "M-TAB" #'minibuffer-complete)
+        (keymap-set vertico-map "C-w" 'vertico-directory-delete-word))
+    (keymap-set minibuffer-mode-map "C-w" 'backward-kill-word))
 
-  ;; (add-hook 'pre-command-hook #'vertico-lsp-enable)
-  (vertico-lsp-enable)
-
-  (with-eval-after-load 'vertico (setq vertico-cycle t))
   (setq-default completion-styles '(orderless basic))
   (setq completion-styles '(basic partial-completion orderless)
         completion-category-overrides
@@ -2063,8 +2012,7 @@
   (with-eval-after-load 'highlight-indent-guides
     (setq highlight-indent-guides-method 'character
           highlight-indent-guides-responsive 'top
-          highlight-indent-guides-suppress-auto-error t))
-  )
+          highlight-indent-guides-suppress-auto-error t)))
 
 (provide 'init)
 ;;; init.el ends here

@@ -81,10 +81,31 @@
       (indent-according-to-mode)
     (beginning-of-line)))
 
+(defvar code-font "CaskaydiaCove Nerd Font"  ;; "Fantasque Sans Mono", "InputMono"
+  "Font for coding.")
+
+(defvar cjk-font "Sarasa Gothic SC"  ;; "FZYouSongJ GBK"
+  "CJK font.")
+
+(defvar serif-font "Bookerly" ;; Palatino Linotype
+  "Serif font.")
+
+(defvar cjk-sans-font "LXGW WenKai Screen"
+  "CJK sans font.")
+
+(defvar verbatim-font "Source Han Sans CN"
+  "Font for verbatim.")
+
+;; Maple Mono NF --- Maple Mono SC NF, HarmonyOS Sans SC
+;; PragmataPro Mono Liga --- SimHei
+;; Hack --- HarmonyOS Sans SC
+;; JetBrainsMono NF
+;; Iosevka Fixed --- Input Mono
+
 ;;;###autoload
-(defun set-en_cn-font (en-font cn-font serif-font sans-font source-font en-size cn-size)
+(defun set-en_cn-font (en-font cn-font serif-font sans-font verbatim-font en-size cn-size)
   "EN-FONT, CN-FONT mean font-family.  EN-SIZE, CN-SIZE mean font size.
-And Set SERIF-FONT, SANS-FONT and SOURCE-FONT."
+And Set SERIF-FONT, SANS-FONT and VERBATIM-FONT."
   (set-face-attribute
    'default nil
    :font (font-spec
@@ -101,12 +122,12 @@ And Set SERIF-FONT, SANS-FONT and SOURCE-FONT."
     (font-spec :family en-font
                :registry "fontset-variable pitch verbatim")))
   (set-fontset-font "fontset-variable pitch verbatim" 'han
-                    (font-spec :family source-font))
+                    (font-spec :family verbatim-font))
   (set-fontset-font "fontset-variable pitch verbatim" 'cjk-misc
-                    (font-spec :family source-font))
+                    (font-spec :family verbatim-font))
   (dolist (sp `(("regular" . ,cn-font)
                 ("italic" . ,sans-font)
-                ;; ("verbatim" . ,source-font)
+                ;; ("verbatim" . ,verbatim-font)
 		        ))
     (let ((registry (concat "fontset-variable pitch " (car sp))))
       (create-fontset-from-fontset-spec
@@ -198,13 +219,13 @@ And Set SERIF-FONT, SANS-FONT and SOURCE-FONT."
     (when (not (file-exists-p generated-autoload-file))
       (with-current-buffer (find-file-noselect generated-autoload-file)
         (insert ";;") ;; create the file with non-zero size to appease autoload
-        (save-buffer)))
-    (mapcar #'update-directory-autoloads
-            '("" "modes" "git/org-fu"))
+(save-buffer)))
+(mapcar #'update-directory-autoloads
+        '("" "modes" "git/org-fu"))
 
-    (cd "personal")
-    (setq generated-autoload-file (expand-file-name "loaddefs.el"))
-    (update-directory-autoloads "")))
+(cd "personal")
+(setq generated-autoload-file (expand-file-name "loaddefs.el"))
+(update-directory-autoloads "")))
 
 ;;;###autoload
 (defun hl-current-line-range ()
@@ -515,24 +536,9 @@ If you experience stuttering, increase this.")
   "Setup display graphic for GUI Emacs and Emacsclient."
   (when (display-graphic-p)
     ;; (if (not windows-system-p)
-    ;; (set-en_cn-font "BlexMono Nerd Font Mono Medium" "FZYouSongJ GBK" "Bookerly"
-    ;;                 "LXGW WenKai Screen" "Source Han Sans CN" 11.0 11.0)
-    ;; (set-en_cn-font "InputMono" "Source Han Serif CN" "Palatino Linotyp"
-    ;;                 "LXGW WenKai Screen" "Source Han Sans CN" 10.0)
-    ;; (set-en_cn-font "PragmataPro Liga" "FZYouSongJ GBK" "FZYouSongJ GBK"
-    ;;                 "LXGW WenKai Screen" "Source Han Sans CN" 12.0)
-    ;; (set-en_cn-font "Fantasque Sans Mono" "FZYouSongJ GBK" "Bookerly"
-    ;;                 "LXGW WenKai Screen" "Source Han Sans CN" 14.0 14.0)
-    ;; (set-en_cn-font "PragmataProLiga Nerd Font Mono" "FZYouSongJ GBK" "Bookerly"
-    ;;                 "LXGW WenKai Screen" "Source Han Sans CN" 13.0 13.0)
-    (set-en_cn-font "CaskaydiaCove Nerd Font" "Sarasa Gothic SC" "Bookerly"
-                    "LXGW WenKai Screen" "Source Han Sans CN" 12.0 11.0)
+    (set-en_cn-font code-font cjk-font serif-font
+                    cjk-sans-font verbatim-font 12.0 11.0)
     ;;   )
-    ;; Maple Mono NF --- Maple Mono SC NF, HarmonyOS Sans SC
-    ;; PragmataPro Mono Liga --- SimHei
-    ;; Hack --- HarmonyOS Sans SC
-    ;; JetBrainsMono NF
-    ;; "Iosevka Fixed"    ;; Input Mono
     (setq frame-title-format
           '((:eval (if (buffer-file-name)
                        (abbreviate-file-name
@@ -616,7 +622,7 @@ If you experience stuttering, increase this.")
                             :font (font-spec
                                    ;; "JetBrainsMono NF" "Monego Ligatures" "Maple Mono NF"
                                    :name
-                                   "BlexMono Nerd Font"
+                                   code-font
                                    :size
                                    11.0)
                             :underline
@@ -628,7 +634,7 @@ If you experience stuttering, increase this.")
                             :box nil
                             :font (font-spec
                                    :name
-                                   "BlexMono Nerd Font"
+                                   code-font
                                    :size 11.0))
         ))
     (set-face-attribute

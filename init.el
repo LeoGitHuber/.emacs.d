@@ -23,7 +23,8 @@
       load-prefer-newer t)
 (load "~/.emacs.d/custom.el")
 
-(let ((file-name-handler-alist nil))
+(let ((file-name-handler-alist nil)
+      (nonandroidp (not (eq system-type 'android))))
   ;; (require 'package)
   ;; (package-initialize)
 
@@ -634,9 +635,10 @@
         cns-recent-segmentation-limit 20
         cns-debug nil)
 
-  (require 'cns nil t)
-  (when (featurep 'cns)
-    (add-hook 'find-file-hook 'cns-auto-enable))
+  (when nonandroidp
+    (require 'cns nil t)
+    (when (featurep 'cns)
+      (add-hook 'find-file-hook 'cns-auto-enable)))
 
   ;; @9. INPUT
 
@@ -756,8 +758,6 @@
   ;; (global-set-key "\M-j" 'pyim-toggle-input-ascii)
 
   ;; @10. EAF
-
-  ;; (require 'eaf)
 
   (with-eval-after-load 'eaf
     (require 'eaf-pdf-viewer)
@@ -1653,8 +1653,9 @@
 
   (define-key global-map [remap list-buffers] 'ibuffer)
 
-  (require 'indent-bars)
-  (add-hook 'prog-mode-hook 'indent-bars-mode)
+  (when nonandroidp
+    (require 'indent-bars)
+    (add-hook 'prog-mode-hook 'indent-bars-mode))
   (with-eval-after-load 'indent-bars
     (setq ;; indent-bars-pattern "."
      ;; indent-bars-highlight-current-depth
@@ -1784,8 +1785,9 @@
   ;;           org-roam-mode-hook))
   ;;   (add-hook hook 'hide-mode-line-mode))
 
-  (require 'citre)
-  (require 'citre-config)
+  (when nonandroidp
+    (require 'citre)
+    (require 'citre-config))
   (with-eval-after-load 'citre
     (setq citre-use-project-root-when-creating-tags t
           citre-prompt-language-for-ctags-command t)

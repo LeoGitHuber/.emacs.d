@@ -5,9 +5,10 @@
 ;;; Code:
 
 (add-to-list 'default-frame-alist '(menu-bar-lines . 0))
-(add-to-list 'default-frame-alist '(tool-bar-lines . 0))
+(when (not (eq system-type 'android))
+  (add-to-list 'default-frame-alist '(tool-bar-lines . 0)))
 
-(if (string-equal system-type "windows-nt")
+(if (eq system-type 'windows-nt)
     (progn
       (add-to-list 'default-frame-alist '(width . 180))
       (add-to-list 'default-frame-alist '(height . 50)))

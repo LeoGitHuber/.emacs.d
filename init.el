@@ -60,22 +60,6 @@
   (add-to-list 'load-path "~/.emacs.d/site-lisp/pdf-tools/lisp")
   (add-to-list 'load-path "~/.emacs.d/site-lisp/verilog-ext")
   (load "~/.emacs.d/site-lisp/loaddefs.el")
-  ;; (load "~/.emacs.d/lisp/init-gc.el")
-  ;; (load "~/.emacs.d/lisp/init-icons.el")
-  ;; (load "~/.emacs.d/lisp/init-meow.el")
-  ;; (load "~/.emacs.d/lisp/init-keybindings.el")
-  ;; (load "~/.emacs.d/lisp/init-lsp.el")
-  ;; (load "~/.emacs.d/lisp/init-dired.el")
-  ;; (load "~/.emacs.d/lisp/init-chinese.el")
-  ;; (load "~/.emacs.d/lisp/init-input.el")
-  ;; (load "~/.emacs.d/lisp/init-eaf.el")
-  ;; (load "~/.emacs.d/lisp/init-org.el")
-  ;; (load "~/.emacs.d/lisp/init-verilog.el")
-  ;; (load "~/.emacs.d/lisp/init-reader.el")
-  ;; (load "~/.emacs.d/lisp/init-hydra.el")
-  ;; (load "~/.emacs.d/lisp/latex-node.el")
-  ;; (load "~/.emacs.d/lisp/init-latex.el")
-  ;; (load "~/.emacs.d/lisp/init-base.el")
   (setq eat-kill-buffer-on-exit t
         css-indent-offset 2
         set-mark-command-repeat-pop t
@@ -88,8 +72,8 @@
 
   ;;; @1. GC
 
-  (add-hook 'minibuffer-setup-hook 'gc-minibuffer-setup-hook)
-  (add-hook 'minibuffer-exit-hook 'gc-minibuffer-exit-hook)
+  ;; (add-hook 'minibuffer-setup-hook 'gc-minibuffer-setup-hook)
+  ;; (add-hook 'minibuffer-exit-hook 'gc-minibuffer-exit-hook)
 
   ;;; @2. flymake and flycheck
 
@@ -126,7 +110,8 @@
   (add-to-list 'load-path "~/.emacs.d/site-lisp/nerd-icons-dired")
 
   (require 'nerd-icons)
-  ;; (setq nerd-icons-font-family "InputMono Nerd Font")
+  (setq nerd-icons-font-family "CaskaydiaCove Nerd Font")
+  ;; (setq nerd-icons-font-family "PragmataProLiga Nerd Font Mono")
 
   (defface diagnostics-error
     '(
@@ -144,14 +129,6 @@
     "Face for flymake Warn."
     :group 'flymake)
 
-  ;; (defface diagnostics-info
-  ;;   '((((background dark)) :background "#090c10" :foreground "#75beff" :box (:line-width (5 . -1) :color "#000000"))
-  ;;     ;; (((background light)) :foreground "#75beff" :box (:line-width (5 . -1) :color "white"))
-  ;;     (((background light)) :foreground "#1155ff" :box (:line-width (5 . -1) :color "white"))
-  ;;     )
-  ;;   "Face for flymake Info."
-  ;;   :group 'flymake)
-
   (defface diagnostics-info
     '((((background dark)) :background "#090c10" :foreground "#75beff" :color "#000000")
       (((background light)) :foreground "#1155ff" :color "white")
@@ -161,27 +138,27 @@
 
   (setq flymake-no-changes-timeout 0.1
         flymake-indicator-type 'margins
-        flymake-autoresize-margins nil
+        flymake-autoresize-margins t
         flymake-margin-indicators-string
         ;; `((error "​​​​󰅙" compilation-error)
         ;;   (warning "​​​​" compilation-warning)
         ;;   (note "​​​​" compilation-info))
         ;; `((error "​​​​󰅙​​​​" diagnostics-error)
-        ;; `((error "​​​​󰅙​​​" diagnostics-error)
-        ;;   (warning "​​​​​​​​" diagnostics-warn)
-        ;;   (note "" diagnostics-info))
-        `((error ,(nerd-icons-octicon "nf-oct-x_circle_fill") diagnostics-error)
-          ;; (warning "​​​​​​" diagnostics-warn)
-          (warning ,(nerd-icons-faicon "nf-fa-warning") diagnostics-warn)
-          ;; (note "" diagnostics-info))
-          (note ,(nerd-icons-faicon "nf-fa-info") diagnostics-info))
+        `((error "​​​󰅙​​​​​" diagnostics-error)
+          ;; (warning "​​​​​​​​" diagnostics-warn)
+          (warning "​​​​​​​​" diagnostics-warn)
+          ;; (note "​​​​​​​​" diagnostics-info)
+          (note "​​​​​​" diagnostics-info)
+          )
+        ;; `((error ,(nerd-icons-octicon "nf-oct-x_circle_fill") diagnostics-error)
+        ;;   (warning ,(nerd-icons-faicon "nf-fa-warning") diagnostics-warn)
+        ;;   (note ,(nerd-icons-faicon "nf-fa-info") diagnostics-info))
         flymake-show-diagnostics-at-end-of-line t
         )
 
-  (setq-default left-margin-width 1)
+  ;; (setq-default left-margin-width 1)
 
   ;; (with-eval-after-load 'flymake
-
   ;;   (defvar verilog--flymake-proc nil
   ;;     "A flymake verilog process.")
 
@@ -299,9 +276,7 @@
   ;;   )
 
   (dolist (hook '(prog-mode-hook))
-    (add-hook hook 'flymake-mode)
-    ;; (add-hook hook 'flycheck-mode)
-    )
+    (add-hook hook 'flymake-mode))
 
   (require 'project)
 
@@ -309,7 +284,6 @@
 
   ;; (load "~/.emacs.d/self-develop/modeline-setting.el")
 
-  (add-hook 'dired-mode-hook 'nerd-icons-dired-mode)
 
   (with-eval-after-load 'treemacs
     (require 'treemacs-nerd-icons)
@@ -317,12 +291,6 @@
   (add-hook 'ibuffer-mode-hook 'nerd-icons-ibuffer-mode)
 
   (with-eval-after-load 'all-the-icons (load "~/.emacs.d/self-develop/all-the-icons-diy.el"))
-
-  ;; (with-eval-after-load 'nerd-icons
-  ;;   (setq fc-info (nerd-icons-codicon "nf-cod-question" :face '(:inherit flycheck-info-my))
-  ;;     fc-warning (nerd-icons-codicon "nf-cod-warning" :face '(:inherit flycheck-warn))
-  ;;     fc-error (nerd-icons-codicon "nf-cod-error" :face '(:inherit flycheck-error-my)))
-  ;;   )
 
   (load "~/.emacs.d/lisp/init-startup.el")
 
@@ -342,7 +310,6 @@
   ;; (setq xclip-method 'wl-copy
   ;;       xclip-program "wl-copy")
   ;; (xclip-mode)
-  (setq select-enable-primary t)
 
   ;;; @5. KEYBINDINGS
 
@@ -363,7 +330,7 @@
 
       ;; Avy
       (keymap-set isearch-mode-map "M-j" 'avy-isearch)
-      (keymap-global-set "C-'" 'avy-goto-char-in-line)
+      (keymap-global-set "M-'" 'avy-goto-char-in-line)
       ;; (global-set-key (kbd "C-:") 'avy-goto-char)
       ;; (global-set-key (kbd "M-g c") 'avy-goto-char-timer)
       ;; (global-set-key (kbd "M-g w") 'avy-goto-word-1)
@@ -371,11 +338,10 @@
       ;; (global-set-key (kbd "M-g f") 'avy-goto-line)
       ;; (global-set-key (kbd "C-c C-j") 'avy-resume)
       ))
+  (keymap-global-set "M-'" 'avy-goto-char-in-line)
   (keymap-global-set "C-s" 'isearch-forward-regexp)
   (keymap-global-set "C-r" 'isearch-backward-regexp)
   (keymap-global-set "C-k" 'smart-kill-line)
-  ;; (keymap-global-set "M-l" 'downcase-any)
-  ;; (keymap-global-set "M-c" 'capitalize-any)
   (keymap-global-set "C-w" 'kill-or-save)
 
   (keymap-set isearch-mode-map "C-h" 'isearch-del-char)
@@ -457,8 +423,6 @@
           ;; corfu-preselect 'prompt
           ;; corfu-quit-at-boundary t
           )
-    (when (boundp 'meow-insert-exit-hook)
-      (add-hook 'meow-insert-exit-hook 'corfu-quit))
     (keymap-set corfu-map "<tab>" 'corfu-insert)
     ;; (keymap-set corfu-map "<backtab>" 'corfu-previous)
     ;; (keymap-set corfu-map "S-<return>" 'corfu-insert)
@@ -483,8 +447,6 @@
                    (and (frame-live-p acm-menu-frame)
                         (frame-visible-p acm-menu-frame)))))))
 
-  ;; (require 'tempel)
-  ;; (require 'tempel-collection)
   (with-eval-after-load 'tempel
     (defun tempel-setup-capf ()
       ;; Add the Tempel Capf to `completion-at-point-functions'.
@@ -507,7 +469,8 @@
 
   (require 'company)
   (with-eval-after-load 'eglot
-    (setq eglot-send-changes-idle-time 0)
+    (setq eglot-send-changes-idle-time 0
+          eglot-code-action-indications '(eglot-hint))
     (add-to-list 'eglot-server-programs
                  '((tex-mode context-mode texinfo-mode bibtex-mode)
                    . ("texlab")))
@@ -549,8 +512,6 @@
       ;;                     completion-at-point-functions))
       )
     (add-hook 'eglot-managed-mode-hook #'my/eglot-capf)
-    ;; (when (and windows-system-p (string-match-p "29" emacs-version))
-    ;;   (eglot-booster-mode))
     (eglot-booster-mode)
     )
 
@@ -591,89 +552,85 @@
      acm-backend-search-file-words-candidate-min-length 3
      acm-backend-yas-candidate-min-length 1
      ;; lsp-bridge-python-command "python3"
-     ;; This will cause `org-roam-node-find' get wrong and I don't know why.
+     ;; This will cause `org-roam-node-find' went wrong and I don't know why.
      ;; lsp-bridge-enable-org-babel t
      ;; lsp-bridge-c-lsp-server "clangd"
-     ;; lsp-bridge-user-langserver-dir "~/.emacs.d/lisp/langserver"
-     ;; lsp-bridge-user-multiserver-dir "~/.emacs.d/lisp/multilangserver"
      )
-    ;; (add-to-list 'lsp-bridge-multi-lang-server-mode-list
-    ;;              '((verilog-mode) . "verilog"))
-    ;; (add-to-list 'lsp-bridge-multi-lang-server-extension-list
-    ;;              '(("v" "sv") . "verilog"))
-    ;; (setf (cdr (assoc 'verilog-mode lsp-bridge-single-lang-server-mode-list)) '("svlangserver"))
-    ;; (add-to-list 'lsp-bridge-single-lang-server-mode-list '((verilog-mode) . "svlangserver"))
-    ;; (add-to-list 'lsp-bridge-single-lang-server-mode-list '((verilog-mode) . "verible"))
-    ;; (add-to-list 'lsp-bridge-single-lang-server-mode-list '((verilog-mode) . "veridian"))
-    ;; (add-to-list 'lsp-bridge-single-lang-server-mode-list '((verilog-mode) . "svls"))
     )
 
   ;;; @7. DIRED
 
+  (setq dired-mouse-drag-files t
+        mouse-drag-and-drop-region-cross-program t
+        delete-by-moving-to-trash t
+        dired-movement-style 'cycle
+        dired-omit-mode t
+        )
   (add-to-list 'load-path "~/.emacs.d/site-lisp/dirvish")
   (add-to-list 'load-path "~/.emacs.d/site-lisp/dirvish/extensions")
-  (add-hook 'dired-mode-hook
-            (lambda ()
-              (or (boundp 'diredfl-mode)
-                  (load "~/.emacs.d/site-lisp/diredfl/diredfl.el"))
-              (toggle-truncate-lines)
-              (diredfl-mode)
-              ;; (require 'image-dired)
-              ;; (require 'dirvish)
-              ))
-  (with-eval-after-load 'dired
-    (setq dired-listing-switches
-          "-l --almost-all --human-readable --time-style=long-iso --group-directories-first --no-group"
-          dired-dwim-target t
-          dired-mouse-drag-files t
-          dired-auto-revert-buffer t
-          dired-do-revert-buffer t
-          mouse-drag-and-drop-region-cross-program t
-          dired-kill-when-opening-new-dired-buffer t
-          dired-recursive-copies 'always
-          ;; dired-recursive-deletes 'always
-          delete-by-moving-to-trash t
-          image-dired-thumb-size 256
-          image-dired-marking-shows-next nil)
-    (defun dired-open-externally (&optional arg)
-      "Open marked or current file in operating system's default application."
-      (interactive "P")
-      (dired-map-over-marks
-       (embark-open-externally (dired-get-filename))
-       arg))
-    (keymap-set dired-mode-map "e" 'dired-open-externally))
+  ;; (add-hook 'dired-mode-hook
+  ;;           (lambda ()
+  ;;             (or (boundp 'diredfl-mode)
+  ;;                 (load "~/.emacs.d/site-lisp/diredfl/diredfl.el"))
+  ;;             (toggle-truncate-lines)
+  ;;             (diredfl-mode)
+  ;;             ;; (require 'image-dired)
+  ;;             ;; (require 'dirvish)
+  ;;             ))
+  ;; (with-eval-after-load 'dired
+  ;;   (setq dired-listing-switches
+  ;;         "-l --almost-all --human-readable --time-style=long-iso --group-directories-first --no-group"
+  ;;         dired-dwim-target t
+  ;;         dired-mouse-drag-files t
+  ;;         dired-auto-revert-buffer t
+  ;;         dired-do-revert-buffer t
+  ;;         mouse-drag-and-drop-region-cross-program t
+  ;;         dired-kill-when-opening-new-dired-buffer t
+  ;;         dired-recursive-copies 'always
+  ;;         ;; dired-recursive-deletes 'always
+  ;;         image-dired-thumb-size 256
+  ;;         image-dired-marking-shows-next nil)
+  ;;   (defun dired-open-externally (&optional arg)
+  ;;     "Open marked or current file in operating system's default application."
+  ;;     (interactive "P")
+  ;;     (dired-map-over-marks
+  ;;      (embark-open-externally (dired-get-filename))
+  ;;      arg))
+  ;;   (keymap-set dired-mode-map "e" 'dired-open-externally))
+  (dirvish-override-dired-mode)
 
   (with-eval-after-load 'dirvish
-    ;; (dirvish-peek-mode)
-    ;; (require 'dirvish-side)
-    (dirvish-override-dired-mode)
-    (dirvish-side-follow-mode)
-    ;; (add-hook 'dirvish-setup-hook 'dirvish-emerge-mode)
-    (setq dirvish-attributes '(vc-state nerd-icons file-size subtree-state collapse file-time)
-          dirvish-side-width 35
-          dirvish-emerge-groups '(("Recent files" (predicate . recent-files-2h))
-                                  ("Video" (extensions "mp4" "mkv" "webm"))
-                                  ("Pictures" (extensions "jpg" "png" "jpeg" "svg" "gif"))
-                                  ("Audio" (extensions "mp3" "flac" "wav" "ape" "aac"))
-                                  ("Archives" (extensions "gz" "rar" "zip")))
-          dirvish-path-separators '(" ~" " /" "/")
-          ;; dirvish-hide-details nil
-          dirvish-mode-line-height 20
-          ;; dirvish-show-media-properties t
-          ;; Turn off media cache, but it will slow down the speed of media preview
-          dirvish-media-auto-cache-threshold nil
-          ;; dirvish-preview-dispatch (remove 'epub dirvish-preview-dispatch)
+    ;;   ;; (dirvish-peek-mode)
+    ;;   ;; (require 'dirvish-side)
+    ;;   (dirvish-override-dired-mode)
+    ;;   (dirvish-side-follow-mode)
+    ;;   ;; (add-hook 'dirvish-setup-hook 'dirvish-emerge-mode)
+    (setq dirvish-attributes '(vc-state nerd-icons git-msg file-size subtree-state collapse file-time)
+          dirvish-side-attributes '(vc-state nerd-icons subtree-state collapse)
+          ;;         dirvish-emerge-groups '(("Recent files" (predicate . recent-files-2h))
+          ;;                                 ("Video" (extensions "mp4" "mkv" "webm"))
+          ;;                                 ("Pictures" (extensions "jpg" "png" "jpeg" "svg" "gif"))
+          ;;                                 ("Audio" (extensions "mp3" "flac" "wav" "ape" "aac"))
+          ;;                                 ("Archives" (extensions "gz" "rar" "zip")))
+          ;;         dirvish-path-separators '(" ~" " /" "/")
+          ;;         ;; dirvish-hide-details nil
+          ;;         dirvish-mode-line-height 20
+          ;;         ;; dirvish-show-media-properties t
+          ;;         ;; Turn off media cache, but it will slow down the speed of media preview
+          ;;         dirvish-media-auto-cache-threshold nil
+          ;;         ;; dirvish-preview-dispatch (remove 'epub dirvish-preview-dispatch)
           )
-    (keymap-set dirvish-mode-map "TAB" #'dirvish-toggle-subtree))
+    (keymap-set dirvish-mode-map "TAB" #'dirvish-toggle-subtree)
+    )
+
+  (unless (bound-and-true-p dirvish-override-dired-mode)
+    (add-hook 'dired-mode-hook 'nerd-icons-dired-mode))
 
   ;; @8. CHINESE
 
   (add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-chinese-word-segmentation")
   (setq cns-prog "~/.emacs.d/site-lisp/emacs-chinese-word-segmentation/cnws"
         cns-dict-directory "~/.emacs.d/site-lisp/emacs-chinese-word-segmentation/cppjieba/dict"
-        ;; To use other program for word segmentation, set cns-process-shell-command:
-        ;; cns-process-shell-command "word_segmentation_program arg1 arg2..."
-        ;; disable debug output, default is t
         cns-recent-segmentation-limit 20
         cns-debug nil)
 
@@ -732,6 +689,7 @@
                          ))))
         (rime-predicate-after-ascii-char-p)))
     (keymap-set rime-mode-map "s-`" 'rime-send-keybinding)
+    (keymap-set rime-mode-map "C-`" 'rime-send-keybinding)
     ;; (define-key rime-mode-map (kbd "Shift") 'rime-send-keybinding)
     (define-key rime-mode-map (kbd "C-t") 'rime-inline-ascii)
     (define-key minibuffer-mode-map (kbd "C-t") 'rime-inline-ascii)
@@ -742,9 +700,6 @@
           rime-translate-keybindings '("C-f" "C-b" "C-n" "C-p" "C-g" "<left>" "<right>" "<up>" "<down>" "<prior>" "<next>" "<delete>" "C-h")
           rime-posframe-properties (list :internal-border-width 3)
           rime-posframe-style 'vertical
-          ;; (list :font "Source Han Serif SC"
-          ;; :background-color "#333333"
-          ;; :internal-border-width 10)
           rime-disable-predicates
           '(rime-predicate-space-after-cc-p
             rime-predicate-current-uppercase-letter-p
@@ -765,7 +720,6 @@
     ;;                'rime-predicate-tex-advance-p))
     )
 
-  ;; (keymap-global-set "C-\\" 'rime-commit-and-toggle-input-method)
   (defun rime-commit1-and-toggle-input-method ()
     "Commit the 1st item if exists, then toggle input method."
     (interactive)
@@ -873,7 +827,7 @@
      'org-babel-load-languages
      '((emacs-lisp . t)
        (python . t)
-       (jupyter . t)))
+       ))
     (keymap-set org-mode-map "C-c b" 'org-cite-insert))
 
   (add-hook 'org-mode-hook
@@ -1043,136 +997,20 @@
 
     ;;; @12. VERILOG
 
-  ;; (with-eval-after-load 'verilog-mode
-  ;;   ;; (with-eval-after-load 'lsp-mode
-  ;;   ;;   (add-to-list 'lsp-language-id-configuration '(verilog-mode . "verilog"))
-  ;;   ;;   (lsp-register-client
-  ;;   ;;    (make-lsp-client :new-connection (lsp-stdio-connection '("svls"))
-  ;;   ;;             :major-modes '(verilog-mode)
-  ;;   ;;             :priority -1)))
-  ;;   ;; (with-eval-after-load 'lsp-mode
-  ;;   ;;   (require 'lsp-verilog)
-  ;;   ;;   (custom-set-variables
-  ;;   ;;    '(lsp-clients-svlangserver-launchConfiguration "verilator -sv --lint-only -Wall")
-  ;;   ;;    '(lsp-clients-svlangserver-formatCommand "verible-verilog-format")))
-  ;;   (setq verilog-indent-lists t
-  ;;         verilog-auto-delete-trailing-whitespace t
-  ;;         verilog-align-ifelse t
-  ;;         verilog-auto-inst-param-value t
-  ;;         verilog-auto-inst-vector t
-  ;;         verilog-auto-lineup 'all
-  ;;         verilog-auto-newline t
-  ;;         verilog-auto-save-policy nil
-  ;;         verilog-auto-template-warn-unused t
-  ;;         verilog-case-indent 2
-  ;;         verilog-cexp-indent 2
-  ;;         verilog-highlight-grouping-keywords t
-  ;;         verilog-highlight-modules t
-  ;;         verilog-indent-level 3
-  ;;         verilog-indent-level-behavioral 3
-  ;;         verilog-indent-level-declaration 3
-  ;;         verilog-indent-level-module 3
-  ;;         ;; verilog-tab-to-comment t
-  ;;         verilog-ts-indent-level 3
-  ;;         verilog-ext-feature-list '(;; font-lock
-  ;;                                    xref
-  ;;                                    capf
-  ;;                                    hierarchy
-  ;;                                    eglot
-  ;;                                    ;; lsp
-  ;;                                    flycheck
-  ;;                                    ;; beautify
-  ;;                                    navigation
-  ;;                                    ;; template
-  ;;                                    ;; formatter
-  ;;                                    ;; compilation
-  ;;                                    ;; imenu
-  ;;                                    which-func
-  ;;                                    hideshow
-  ;;                                    typedefs
-  ;;                                    time-stamp
-  ;;                                    block-end-comments
-  ;;                                    ports
-  ;;                                    )
-  ;;         verilog-ext-hierarchy-backend 'builtin
-  ;;         )
-  ;;   ;; (require 'verilog-ext)
-  ;;   ;; (verilog-ext-mode-setup)
-  ;;   ;; (verilog-ext-eglot-set-server 've-veridian)
-  ;;   ;; (verilog-ext-eglot-set-server 've-svlangserver)
-
-  ;;   (with-eval-after-load 'apheleia
-  ;;     (push '(verilog-mode . verible) apheleia-mode-alist)
-  ;;     (push '(verilog-ts-mode . verible) apheleia-mode-alist)
-  ;;     (push `(verible . ("verible-verilog-format"
-  ;;                        "--column_limit" "100"
-  ;;                        "--indentation_spaces",(number-to-string verilog-indent-level)
-  ;;                        "--line_break_penalty" "2"
-  ;;                        "--over_column_limit_penalty" "100"
-  ;;                        "--wrap_spaces" "3"
-  ;;                        "--try_wrap_long_lines"
-  ;;                        "-"))
-  ;;           apheleia-formatters))
-
-  (add-hook 'verilog-mode-hook
+  (add-hook 'verilog-ts-mode-hook
             (lambda ()
-              (apheleia-mode)
-              (setq indent-bars-spacing-override verilog-indent-level)
-              (indent-bars-reset)
-              ;; (eglot-ensure)
-              (when (boundp 'eglot-server-programs)
-                (add-to-list 'eglot-server-programs
-                             ;; '(verilog-mode . ("svlangserver"))
-                             ;; '(verilog-mode . ("svls"))
-                             ;; '(verilog-mode . ("vls"))
-                             '(verilog-mode . ("veridian"))
-                             )
-                (add-to-list 'eglot-stay-out-of 'flymake))
-              (setq eglot-workspace-configuration
-                    '(:veridian
-                      (:settings
-                       (:syntax
-                        (:enabled :json-true
-                                  :path "verible-verilog-syntax")
-                        :format
-                        (:enable :json-false)
-                        ;; (:enabled :json-true
-                        ;;           :path "verible-verilog-format"
-                        ;;           :args ["--indentation_spaces" "3"])
-                        :diagnostics
-                        (:enabled :json-false)
-                        )))
-                    ;; `((:systemverilog
-                    ;;    (:includeIndexing '["**/*.{sv,svh}"])
-                    ;;    (:excludeIndexing '["test/**/*.{sv,svh}"])
-                    ;;    (:defines nil)
-                    ;;    (:launchConfiguration "verilator -sv --lint-only -Wall")
-                    ;;    (:lintOnUnsaved t)
-                    ;;    (:formatCommand "verible-verilog-format")
-                    ;;    ;; (:formatCommand ,(string-join `("verible-verilog-format"
-                    ;;    ;;                                 "--column_limit 100"
-                    ;;    ;;                                 "--indentation_spaces"
-                    ;;    ;;                                 ,(number-to-string verilog-indent-level)
-                    ;;    ;;                                 "--line_break_penalty 2"
-                    ;;    ;;                                 "--over_column_limit_penalty 100"
-                    ;;    ;;                                 "--wrap_spaces 4")
-                    ;;    ;;                               " "))
-                    ;;    (:formatCommand ,(string-join `("verible-verilog-format"
-                    ;;                                    "--wrap_end_else_clauses true")
-                    ;;                                  " "))
-                    ;;    (:disableCompletionProvider nil)
-                    ;;    (:disableHoverProvider nil)
-                    ;;    (:disableSignatureHelpProvider nil)
-                    ;;    (:disableLinting nil)))
-                    ;;       ;; '(:svls
-                    ;;       ;;   (:settings
-                    ;;       ;;    (:systemverilog.launchConfiguration:
-                    ;;       ;;     "verilator -sv -Wall --lint-only",
-                    ;;       ;;     :systemverilog.formatCommand:
-                    ;;       ;;     "verible-verilog-format")))
+              (require 'eglot)
+              (setq indent-bars-spacing-override verilog-ts-indent-level
+                    verilog-auto-endcomments nil
+                    verilog-case-indent 4
+                    verilog-indent-level 4
+                    verilog-indent-level-module 4
+                    verilog-indent-level-behavioral 4
+                    verilog-indent-level-declaration 4
+                    verilog-cexp-indent 4
+                    verilog-auto-newline nil
                     )
-              )
-            )
+              (indent-bars-reset)))
 
     ;;; @13. READER
 
@@ -1192,7 +1030,6 @@
   (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
   (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
   (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-ts-mode))
-  ;; ;; (evil-set-initial-state 'nov-mode 'emacs)
   ;; ;; (define-key nov-mode-map (kbd "o") 'nov-xwidget-view)
   ;; (evil-define-key 'normal nov-mode-map (kbd "o") 'nov-xwidget-view)
   ;; (add-hook 'nov-mode-hook 'nov-xwidget-inject-all-files)
@@ -1440,25 +1277,19 @@
                 )))
 
   ;;; @17. BASE
-  (add-hook 'emacs-startup-hook
-            (lambda () (setq gc-cons-threshold better-gc-cons-threshold)))
+  ;; (add-hook 'emacs-startup-hook
+  ;;           (lambda () (setq gc-cons-threshold better-gc-cons-threshold)))
 
   (setq frame-title-format
         '((:eval (if (buffer-file-name)
                      (abbreviate-file-name (buffer-file-name))
                    "%b"))))
 
-  ;; Emacs 28 后不再需要设置系统编码，以下是以前的设置
-  ;; UTF-8 as default encoding
-  ;; (set-language-environment "UTF-8")
-  ;; (set-default-coding-systems 'utf-8)
-  ;; (set-keyboard-coding-system 'utf-8-unix)
-  ;; (prefer-coding-system 'utf-8)
-  ;; do this especially on Windows, else python output problem
-  ;; (set-terminal-coding-system 'utf-8-unix)
-
   (electric-pair-mode)
   (pixel-scroll-precision-mode)
+  (setq pixel-scroll-precision-interpolate-page t)
+  (defalias 'scroll-up-command 'pixel-scroll-interpolate-down)
+  (defalias 'scroll-down-command 'pixel-scroll-interpolate-up)
   (global-subword-mode)
   (global-auto-revert-mode)
   (setq global-auto-revert-non-file-buffers t
@@ -1470,9 +1301,8 @@
       (add-to-list 'Info-directory-list "/usr/local/share/info")))
 
 
-  ;; (setq hl-line-range-function 'hl-current-line-range)
   (setq hl-line-sticky-flag nil
-        hl-line-overlay t)
+        hl-line-overlay nil)
   (global-hl-line-mode)
   (dolist
       (hook
@@ -1491,12 +1321,11 @@
 
   (delete-selection-mode)
 
-  ;; (setq-default cursor-type '(bar . 3))
-
   (setq show-paren-when-point-inside-paren t
         show-paren-when-point-in-periphery t
         show-paren-delay 0
         show-paren-context-when-offscreen 'child-frame
+        blink-matching-paren-highlight-offscreen t
         show-paren--context-child-frame-parameters
         '((visibility) (width . 0) (height . 0) (min-width . t)
           (min-height . t) (no-accept-focus . t) (no-focus-on-map . t)
@@ -1508,9 +1337,6 @@
           (cursor-type) (no-special-glyphs . t) (desktop-dont-save . t)
           (child-frame-border-width 3)))
 
-  ;; (add-to-list 'load-path "~/.emacs.d/site-lisp/auto-save")
-  ;; (require 'auto-save)
-  ;; (auto-save-enable)
   (with-eval-after-load 'auto-save
     (setq auto-save-delete-trailing-whitespace t
           auto-save-disable-predicates
@@ -1519,12 +1345,13 @@
                "gpg"
                (file-name-extension (buffer-name)) t)))))
 
-  (setq auto-save-visited-interval 1
-        ;; auto-save-timeout 30
-        ;; auto-save-interval 10
-        auto-save-no-message t
-        )
+  (setq
+   ;; auto-save-timeout 30
+   ;; auto-save-interval 10
+   auto-save-no-message t
+   )
 
+  (setq auto-save-visited-interval 1)
   (auto-save-visited-mode)
 
   (add-hook 'before-save-hook
@@ -1618,8 +1445,6 @@
   (dolist (mode '(prog-mode-hook TeX-mode-hook cuda-mode-hook))
     (add-hook mode (lambda () (display-line-numbers-mode t))))
 
-  ;; (setq desktop-path (list user-emacs-directory))
-  ;;   desktop-auto-save-timeout 600)
   (desktop-save-mode 1)
   (with-eval-after-load 'desktop
     (setq desktop-restore-frames nil))
@@ -1656,6 +1481,7 @@
   (add-to-list 'auto-mode-alist '("\\.pdf\\'" . pdf-view-mode))
   (add-to-list 'auto-mode-alist '("\\.ya?ml\\'" . yaml-ts-mode))
   (add-to-list 'auto-mode-alist '("\\.lua\\'" . lua-ts-mode))
+  (add-to-list 'auto-mode-alist '("\\.scala\\'" . scala-mode))
 
 
   (add-to-list 'load-path "~/.emacs.d/site-lisp/with-editor/lisp")
@@ -1718,19 +1544,6 @@
   (global-set-key [remap move-end-of-line] 'mwim-end-of-code-or-line)
 
   ;; (c-add-style
-  ;;  "microsoft"
-  ;;  '("stroustrup"
-  ;;    (c-offsets-alist
-  ;;     (access-label . /)
-  ;;     (innamespace . -)
-  ;;     (inline-open . 0)
-  ;;     (inher-cont . c-lineup-multi-inher)
-  ;;     (arglist-cont-nonempty . +)
-  ;;     (template-args-cont . +))
-  ;;    )
-  ;;  )
-
-  ;; (c-add-style
   ;;  "freebsd"
   ;;  '(;; "bsd"
   ;;    (c-basic-offset . 4)    ; 设置缩进为4个空格
@@ -1767,35 +1580,14 @@
             (python-mode     . python-ts-mode)
             (ruby-mode       . ruby-ts-mode)
             (sh-mode         . bash-ts-mode)
-            ;; (verilog-mode    . verilog-ts-mode)
+            (verilog-mode    . verilog-ts-mode)
             )
           treesit-font-lock-level 4
           )
     ;; (add-hook 'emacs-lisp-mode-hook
     ;;           (lambda () (treesit-parser-create 'elisp)))
-    ;; (setq c-ts-mode-indent-style 'bsd
-    ;;       c-ts-mode-indent-offset 4)
     )
 
-  ;; (defun packages-load-after-minibuffer ()
-  ;;   (when (file-exists-p "~/.emacs.d/site-lisp/emacs-which-key/which-key.el")
-  ;;     (load "~/.emacs.d/site-lisp/emacs-which-key/which-key.el")
-  ;;     (which-key-mode t)
-  ;;     (setq which-key-max-description-length 30
-  ;;         which-key-show-remaining-keys t)
-  ;;     )
-  ;;   (when (file-exists-p "~/.emacs.d/site-lisp/popper")
-  ;;     (popper-mode +1))
-  ;;   (remove-hook 'minibuffer-setup-hook 'packages-load-after-minibuffer))
-
-  ;; (add-hook 'minibuffer-setup-hook 'packages-load-after-minibuffer)
-
-  ;; (when (file-exists-p "~/.emacs.d/site-lisp/emacs-which-key/which-key.el")
-  ;;   (load "~/.emacs.d/site-lisp/emacs-which-key/which-key.el")
-  ;;   (which-key-mode t)
-  ;;   (setq which-key-max-description-length 30
-  ;;         which-key-show-remaining-keys t)
-  ;;   )
   (setq popper-reference-buffers
         '("\\*Messages\\*"
           "Output\\*$"
@@ -1861,6 +1653,7 @@
 
   (define-key global-map [remap list-buffers] 'ibuffer)
 
+  (require 'indent-bars)
   (add-hook 'prog-mode-hook 'indent-bars-mode)
   (with-eval-after-load 'indent-bars
     (setq ;; indent-bars-pattern "."
@@ -1869,9 +1662,9 @@
      indent-bars-treesit-support t
      indent-bars-no-descend-string t
      indent-bars-treesit-ignore-blank-lines-types '("module")
-     indent-bars-width-frac 0.15
+     indent-bars-width-frac 0.2
      indent-bars-color '(highlight :face-bg t :blend 0.7)
-     indent-bars-display-on-blank-lines nil
+     indent-bars-display-on-blank-lines t
      ;; indent-bars-prefer-character t
      ;; indent-bars-no-stipple-char ?\⎸
      ))
@@ -1892,8 +1685,7 @@
           (lambda (may-prompt)
             (or
              (vc-root-dir)
-             (consult--default-project-function may-prompt))))
-    )
+             (consult--default-project-function may-prompt)))))
   (setq xref-show-xrefs-function 'consult-xref
         xref-show-definitions-function 'consult-xref)
 
@@ -1901,12 +1693,9 @@
   (with-eval-after-load 'embark
     (add-hook 'embark-collect-mode-hook 'consult-preview-at-point-mode))
 
-    ;;; Theme
+  ;;; Theme
   (dolist (hook '(prog-mode-hook text-mode-hook cuda-mode-hook))
-    ;; (add-hook hook 'rainbow-mode)
-    (add-hook hook 'colorful-mode)
-    )
-  ;; (load "~/.emacs.d/site-lisp/rainbow-delimiters/rainbow-delimiters.el")
+    (add-hook hook 'colorful-mode))
   (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 
   ;; (require 'color-theme-sanityinc-tomorrow)
@@ -1919,17 +1708,6 @@
   (setq completion-styles '(orderless basic)
         completion-category-overrides '((file (styles basic partial-completion))))
 
-  (and (boundp 'puni-mode)
-       (puni-global-mode))
-  (with-eval-after-load 'puni
-    (add-hook 'puni-mode-hook
-              (lambda ()
-                (keymap-set puni-mode-map "M-w" 'puni-kill-region)
-                (keymap-set puni-mode-map "M-k" 'puni-backward-kill-line)
-                (keymap-unset puni-mode-map "C-w")
-                ))
-    (dolist (hook '(term-mode-hook))
-      (add-hook hook #'puni-disable-puni-mode)))
   (if (boundp 'vertico-mode)
       (progn
         (require 'orderless)
@@ -1951,6 +1729,18 @@
         (keymap-set vertico-map "M-TAB" #'minibuffer-complete)
         (keymap-set vertico-map "C-w" 'vertico-directory-delete-word))
     (keymap-set minibuffer-mode-map "C-w" 'backward-kill-word))
+  (and (boundp 'puni-mode)
+       (require 'puni)
+       (puni-global-mode))
+  (with-eval-after-load 'puni
+    (add-hook 'puni-mode-hook
+              (lambda ()
+                (keymap-set puni-mode-map "M-w" 'puni-kill-region)
+                (keymap-set puni-mode-map "M-k" 'puni-backward-kill-line)
+                (keymap-unset puni-mode-map "C-w")
+                ))
+    (dolist (hook '(term-mode-hook minibuffer-mode-hook))
+      (add-hook hook #'puni-disable-puni-mode)))
 
   (setq-default completion-styles '(orderless basic))
   (setq completion-styles '(basic partial-completion orderless)
@@ -2002,9 +1792,6 @@
     (when (and (eq system-type 'gnu/linux) (file-exists-p "/opt/bin/ctags"))
       (setq citre-ctags-program "/opt/bin/ctags"))
     )
-
-  ;; (with-eval-after-load 'citre-ctags
-  ;;   (setq citre-ctags-program "/usr/bin/ctags"))
 
   (when (boundp 'hl-todo)
     (global-hl-todo-mode))

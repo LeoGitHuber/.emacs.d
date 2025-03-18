@@ -481,3 +481,15 @@
 [submodule "site-lisp/company-mode"]
 	path = site-lisp/company-mode
 	url = https://github.com/company-mode/company-mode.git
+[submodule "site-lisp/llama"]
+	path = site-lisp/llama
+	url = https://github.com/tarsius/llama.git
+[submodule "site-lisp/emacs-scala-mode"]
+	path = site-lisp/emacs-scala-mode
+	url = https://github.com/hvesalai/emacs-scala-mode
+[submodule "site-lisp/emacs-sbt-mode"]
+	path = site-lisp/emacs-sbt-mode
+	url = https://github.com/hvesalai/emacs-sbt-mode.git
+[submodule "site-lisp/paw"]
+	path = site-lisp/paw
+	url = https://github.com/chenyanming/paw.git

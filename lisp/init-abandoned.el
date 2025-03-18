@@ -28,6 +28,9 @@
 
 ;;; Abandoned Setting
 
+;; (dolist (hook '(prog-mode-hook text-mode-hook cuda-mode-hook))
+;;   (add-hook hook 'rainbow-mode))
+
 ;;; Emacs-application-framework
 
 ;; (add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-application-framework")

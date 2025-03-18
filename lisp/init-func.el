@@ -69,6 +69,7 @@
   (if (not (member major-mode '(org-mode)))
       (indent-according-to-mode)
     (beginning-of-line)))
+
 ;;;###autoload
 (defun open-newline-below (arg)
   "Move to the next ARG line (like vi) and then opens a line."
@@ -302,7 +303,6 @@ use `cm/autoloads-file' as TARGET."
 ;;                         (t (time-less-p t2 t1)))))
 ;;       (mapcar #'car))))
 
-
 (defun meow-yank-forward ()
   "Yank forward."
   (interactive)
@@ -400,10 +400,11 @@ use `cm/autoloads-file' as TARGET."
    '("M-q" . ignore)
    '("<escape>" . ignore))
   (meow-define-keys 'insert '("M-q" . meow-insert-exit))
-  (add-hook 'meow-insert-exit-hook
-            (lambda ()
-              (and buffer-file-name
-                   (save-buffer)))))
+  ;; (add-hook 'meow-insert-exit-hook
+  ;;           (lambda ()
+  ;;             (and buffer-file-name
+  ;;                  (save-buffer))))
+  )
 
 (defun lsp-booster--advice-final-command (old-fn cmd &optional test?)
   "Prepend emacs-lsp-booster command to lsp CMD."
@@ -520,8 +521,12 @@ If you experience stuttering, increase this.")
     ;;                 "LXGW WenKai Screen" "Source Han Sans CN" 10.0)
     ;; (set-en_cn-font "PragmataPro Liga" "FZYouSongJ GBK" "FZYouSongJ GBK"
     ;;                 "LXGW WenKai Screen" "Source Han Sans CN" 12.0)
-    (set-en_cn-font "Fantasque Sans Mono" "FZYouSongJ GBK" "Bookerly"
-                    "LXGW WenKai Screen" "Source Han Sans CN" 14.0 14.0)
+    ;; (set-en_cn-font "Fantasque Sans Mono" "FZYouSongJ GBK" "Bookerly"
+    ;;                 "LXGW WenKai Screen" "Source Han Sans CN" 14.0 14.0)
+    ;; (set-en_cn-font "PragmataProLiga Nerd Font Mono" "FZYouSongJ GBK" "Bookerly"
+    ;;                 "LXGW WenKai Screen" "Source Han Sans CN" 13.0 13.0)
+    (set-en_cn-font "CaskaydiaCove Nerd Font" "Sarasa Gothic SC" "Bookerly"
+                    "LXGW WenKai Screen" "Source Han Sans CN" 12.0 11.0)
     ;;   )
     ;; Maple Mono NF --- Maple Mono SC NF, HarmonyOS Sans SC
     ;; PragmataPro Mono Liga --- SimHei
@@ -564,7 +569,7 @@ If you experience stuttering, increase this.")
                               :background mode-line-box-p)
           )))
     (if (or
-         (>= (string-to-number (substring (current-time-string) 11 13)) 17)
+         (>= (string-to-number (substring (current-time-string) 11 13)) 18)
          (<= (string-to-number (substring (current-time-string) 11 13)) 6))
         (if (string-prefix-p "modus" (symbol-name (cadr themes_chosen)))
             (progn

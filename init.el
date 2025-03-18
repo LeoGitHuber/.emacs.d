@@ -45,6 +45,9 @@
   ;;       eldoc-documentation-function 'eldoc-documentation-compose
   ;;       )
 
+  (when (not nonandroidp)
+    (setq tool-bar-position 'bottom
+          touch-screen-display-keyboard t))
   ;;; Emacs Default Setting
   (load "~/.emacs.d/lisp/init-func.el")
 

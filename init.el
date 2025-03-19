@@ -46,8 +46,8 @@
   ;;       )
 
   (when (not nonandroidp)
-    (setq tool-bar-position 'bottom
-          touch-screen-display-keyboard t))
+    (setopt tool-bar-position 'bottom)
+    (setq touch-screen-display-keyboard t))
   ;;; Emacs Default Setting
   (load "~/.emacs.d/lisp/init-func.el")
 

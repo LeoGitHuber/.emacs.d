@@ -358,6 +358,8 @@
   (keymap-global-set "C-x f" 'find-file)
   (keymap-global-set "C-z" 'vundo)
   (global-set-key [remap comment-dwim] 'comment-or-uncomment)
+  (keymap-global-set "C-c a" 'shift-number-up)
+  (keymap-global-set "C-c x" 'shift-numbers-down)
 
   ;; @ Fingertip
   ;; (dolist (hook '(emacs-lisp-mode-hook c-mode-hook lisp-mode-hook))
@@ -434,6 +436,7 @@
     (add-hook 'corfu-mode-hook 'corfu-popupinfo-mode)
     (with-eval-after-load 'corfu-popupinfo
       (setq corfu-popupinfo-delay '(0.1 . 0.1)))
+    (setq nerd-icons-corfu--space (propertize " " 'display '(space :width 0.8)))
     (add-to-list 'corfu-margin-formatters 'nerd-icons-corfu-formatter))
 
   (yas-global-mode 1)
@@ -1044,7 +1047,7 @@
     (setq nov-text-width t)
     (add-hook 'nov-mode-hook 'visual-line-mode)
     (add-hook 'nov-mode-hook 'visual-fill-column-mode)
-    (add-hook 'nov-mode-hook '(lambda() (set-fill-column 100)))
+    (add-hook 'nov-mode-hook '(lambda() (set-fill-column 150)))
     )
 
     ;;; @14. HYDRA
@@ -1394,9 +1397,8 @@
   ;;               (savehist-mode t))))
 
 
-  ;; (rquire 'no-littering)
   (repeat-mode)
-  (load "~/.emacs.d/site-lisp/no-littering/no-littering.el")
+  (require 'no-littering)
   (with-eval-after-load 'no-littering
     (recentf-mode t)
     (setq recentf-max-saved-items 1000
@@ -1647,7 +1649,6 @@
 
   (setq popper-display-function 'popper-display-popup-adaptive
         fit-window-to-buffer-horizontally t)
-  ;; (keymap-global-set "C-`" 'popper-toggle)
   (keymap-global-set "C-<tab>" 'popper-toggle)
   (keymap-global-set "M-`" 'popper-cycle)
   (keymap-global-set "C-M-`" 'popper-toggle-type)
@@ -1669,16 +1670,12 @@
      indent-bars-width-frac 0.2
      indent-bars-color '(highlight :face-bg t :blend 0.7)
      indent-bars-display-on-blank-lines t
-     ;; indent-bars-prefer-character t
-     ;; indent-bars-no-stipple-char ?\⎸
      ))
 
-  ;; (add-to-list 'load-path "~/.emacs.d/site-lisp/consult")
-  ;; (require 'consult)
-  ;; (load "~/.emacs.d/site-lisp/consult/consult-xref.el")
+  (require 'consult)
 
-  (autoload 'consult-buffer "consult" nil t)
-  (autoload 'consult-line "consult" nil t)
+  ;; (autoload 'consult-buffer "consult" nil t)
+  ;; (autoload 'consult-line "consult" nil t)
   (keymap-global-set "C-x l" 'consult-line)
   (keymap-global-set "C-x b" 'consult-buffer)
   (with-eval-after-load 'consult
@@ -1772,8 +1769,10 @@
       )
     "Set for themes for dark and light mode.")
 
-  (setup-display-graphic)
-  (add-hook 'server-after-make-frame-hook 'setup-display-graphic)
+  (setup-display-graphic nil nil 6 17 nil)
+  (add-hook 'server-after-make-frame-hook
+            '(lambda ()
+               (setup-display-graphic nil nil 6 19 nil)))
 
   ;; (load "~/.emacs.d/lisp/ultimate-tab.el")
 

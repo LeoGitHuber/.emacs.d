@@ -1,5 +1,5 @@
 \documentclass[11pt, a4paper]{article}
-\usepackage{geometry, setspace, titlesec, titletoc, indentfirst, graphicx, amsmath, unicode-math, float, cite, cases, makecell, array, subcaption, caption, listings, enumitem, xeCJKfntef}
+\usepackage{geometry, setspace, titlesec, titletoc, indentfirst, graphicx, amsmath, unicode-math, float, cite, cases, makecell, array, subcaption, caption, listings, enumitem, xeCJKfntef, minted}
 \usepackage{xeCJK}
 \usepackage{fontspec}
 \usepackage[bookmarksopen=true]{hyperref}
@@ -34,6 +34,12 @@
 
 \geometry{inner=1.25in, outer=1.25in, top=1in, bottom=1in}
 \onehalfspacing
+
+%%% Set the space of list
+\setlist[itemize]{itemsep=5pt, parsep=0pt}
+\setlist[description]{itemsep=4pt, parsep=0pt}
+
+%%% Set fonts
 % \setCJKmainfont{SimSun}[AutoFakeBold]    % rm罗马
 \setCJKmainfont{FZYouSongJ GBK}[BoldFont=FZLanTingHei-B-GBK, ItalicFont=AR PL UKai CN]
 % \setCJKsansfont{SimHei}[AutoFakeBold]    % sf无衬线
@@ -56,6 +62,18 @@
   % basicstyle=\zihao{5}\linespread{1.5}\rmfamily
   basicstyle=\ttfamily
 }
+
+\definecolor{codebg}{HTML}{F6F8FA}
+\setminted[sh]{
+  bgcolor=codebg,
+  baselinestretch=1,
+  fontsize=\scriptsize
+}
+\setmintedinline[sh]{
+  bgcolor=codebg,
+}
+\newminted[sh]{sh}{}
+\newmintinline{sh}{}
 
 \renewcommand\tablename{表}
 \renewcommand\figurename{图}

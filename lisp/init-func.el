@@ -532,12 +532,12 @@ If you experience stuttering, increase this.")
   (garbage-collect)
   (setq gc-cons-threshold better-gc-cons-threshold))
 
-(defun setup-display-graphic ()
-  "Setup display graphic for GUI Emacs and Emacsclient."
+(defun setup-display-graphic (modelineq cfborderq dayon dayoff themesetq)
+  "Setup display graphic for GUI Emacs and Emacsclient with MODELINEQ, CFBORDERQ, DAYON, DAYOFF, THEMESETQ."
   (when (display-graphic-p)
     ;; (if (not windows-system-p)
     (set-en_cn-font code-font cjk-font serif-font
-                    cjk-sans-font verbatim-font 12.0 11.0)
+                    cjk-sans-font verbatim-font 12.0 12.0)
     ;;   )
     (setq frame-title-format
           '((:eval (if (buffer-file-name)
@@ -564,83 +564,81 @@ If you experience stuttering, increase this.")
     ;;   (set-face-attribute 'tooltip nil))
 
     ;; Set this face for `show-paren-mode' context appearance when offscreen.
-    (let ((mode-line-box-p (face-attribute 'mode-line-highlight :box)))
-      (when (not (eq mode-line-box-p 'unspecified))
-        (if (consp mode-line-box-p)
+    (when cfborderq
+      (let ((mode-line-box-p (face-attribute 'mode-line-highlight :box)))
+        (when (not (eq mode-line-box-p 'unspecified))
+          (if (consp mode-line-box-p)
+              (set-face-attribute 'child-frame-border
+                                  nil
+                                  :background (nth 3 mode-line-box-p))
             (set-face-attribute 'child-frame-border
                                 nil
-                                :background (nth 3 mode-line-box-p))
-          (set-face-attribute 'child-frame-border
-                              nil
-                              :background mode-line-box-p)
-          )))
-    (if (or
-         (>= (string-to-number (substring (current-time-string) 11 13)) 18)
-         (<= (string-to-number (substring (current-time-string) 11 13)) 6))
-        (if (string-prefix-p "modus" (symbol-name (cadr themes_chosen)))
-            (progn
-              (setq modus-themes-org-blocks 'gray-background
-                    modus-themes-bold-constructs t
-                    modus-themes-italic-constructs t)
-              (require-theme 'modus-themes)
-              (if (string-match-p "29" emacs-version)
-                  (load-theme 'modus-vivendi)
-                (load-theme (car (cdr themes_chosen)) t))
-              (set-face-attribute 'modus-themes-heading-1 nil :height 1.25))
-          (if (equal (cadr themes_chosen) 'manoj-dark)
-              (progn
-                (load-theme (car (cdr themes_chosen)) t)
-                (set-face-foreground 'hl-line 'unspecified)
-                (set-face-background 'fringe 'unspecified))
-            (if (string-match "ef-" (symbol-name (cadr themes_chosen)))
-                (ef-themes-select-dark (cadr themes_chosen))
-              (progn
-                (load-theme (cadr themes_chosen) t)
-                (setq doom-rouge-brighter-comments t
-                      doom-rouge-brighter-tabs t))
-              )))
-      (progn
-        ;; (load-theme (car themes_chosen) t)
-        ;; (ef-themes-select-light (car themes_chosen))
-        (when (eq custom-enabled-themes nil)
-          ;; (set-face-bold 'font-lock-keyword-face t)
-          ;; (set-face-bold 'font-lock-builtin-face t)
-          (set-face-background 'highlight "#DFEAEC")
-          (set-face-background 'fringe 'unspecified)
-          (set-face-attribute 'line-number-current-line nil :foreground
-                              "#000000" :background "#C4C4C4" :weight
-                              'bold)
-          (set-face-bold 'font-lock-keyword-face 't)
-          )
-        (setq modus-themes-org-blocks 'gray-background
-              modus-themes-bold-constructs t
-              modus-themes-italic-constructs t)))
-    (if (equal (frame-parameter nil 'background-mode) 'dark)
-        (set-face-attribute 'mode-line nil
-                            :background "black"
-                            :box nil
-                            :font (font-spec
-                                   ;; "JetBrainsMono NF" "Monego Ligatures" "Maple Mono NF"
-                                   :name
-                                   code-font
-                                   :size
-                                   11.0)
-                            :underline
-                            (face-foreground 'mode-line-emphasis))
-      (progn
-        (set-face-attribute 'mode-line nil
-                            :background "#F4F7FA"
-                            ;; :background "white"
-                            :box nil
-                            :font (font-spec
-                                   :name
-                                   code-font
-                                   :size 11.0))
-        ))
-    (set-face-attribute
-     'mode-line-inactive nil
-     :inherit 'mode-line
-     :box nil)
+                                :background mode-line-box-p)
+            ))))
+    (if themesetq
+        (if (or
+             (>= (string-to-number (substring (current-time-string) 11 13)) dayoff)
+             (<= (string-to-number (substring (current-time-string) 11 13)) dayon))
+            (if (string-prefix-p "modus" (symbol-name (cadr themes_chosen)))
+                (progn
+                  (setq modus-themes-org-blocks 'gray-background
+                        modus-themes-bold-constructs t
+                        modus-themes-italic-constructs t)
+                  (require-theme 'modus-themes)
+                  (set-face-attribute 'modus-themes-heading-1 nil :height 1.25))
+              (if (equal (cadr themes_chosen) 'manoj-dark)
+                  (progn
+                    (load-theme (car (cdr themes_chosen)) t)
+                    (set-face-foreground 'hl-line 'unspecified)
+                    (set-face-background 'fringe 'unspecified))
+                ))
+          (progn
+            ;; (load-theme (car themes_chosen) t)
+            (when (eq custom-enabled-themes nil)
+              ;; (set-face-bold 'font-lock-keyword-face t)
+              ;; (set-face-bold 'font-lock-builtin-face t)
+              (set-face-background 'highlight "#DFEAEC")
+              (set-face-background 'fringe 'unspecified)
+              (set-face-attribute 'line-number-current-line nil :foreground
+                                  "#000000" :background "#C4C4C4" :weight
+                                  'bold)
+              (set-face-bold 'font-lock-keyword-face 't)
+              )
+            (setq modus-themes-org-blocks 'gray-background
+                  modus-themes-bold-constructs t
+                  modus-themes-italic-constructs t)))
+      (if (or
+           (>= (string-to-number (substring (current-time-string) 11 13)) dayoff)
+           (<= (string-to-number (substring (current-time-string) 11 13)) dayon))
+          (standard-themes-select 'standard-dark)
+        (standard-themes-select 'standard-light)))
+    (when modelineq
+      (if (equal (frame-parameter nil 'background-mode) 'dark)
+          (set-face-attribute 'mode-line nil
+                              :background "black"
+                              :box nil
+                              :font (font-spec
+                                     ;; "JetBrainsMono NF" "Monego Ligatures" "Maple Mono NF"
+                                     :name
+                                     code-font
+                                     :size
+                                     11.0)
+                              :underline
+                              (face-foreground 'mode-line-emphasis))
+        (progn
+          (set-face-attribute 'mode-line nil
+                              :background "#F4F7FA"
+                              ;; :background "white"
+                              :box nil
+                              :font (font-spec
+                                     :name
+                                     code-font
+                                     :size 11.0))
+          ))
+      (set-face-attribute
+       'mode-line-inactive nil
+       :inherit 'mode-line
+       :box nil))
     ))
 
 (provide 'init-func)

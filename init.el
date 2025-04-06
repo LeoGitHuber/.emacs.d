@@ -359,7 +359,7 @@
   (keymap-global-set "C-z" 'vundo)
   (global-set-key [remap comment-dwim] 'comment-or-uncomment)
   (keymap-global-set "C-c a" 'shift-number-up)
-  (keymap-global-set "C-c x" 'shift-numbers-down)
+  (keymap-global-set "C-c x" 'shift-number-down)
 
   ;; @ Fingertip
   ;; (dolist (hook '(emacs-lisp-mode-hook c-mode-hook lisp-mode-hook))

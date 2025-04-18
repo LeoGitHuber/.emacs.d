@@ -499,3 +499,6 @@
 [submodule "site-lisp/emacs-shift-number"]
 	path = site-lisp/emacs-shift-number
 	url = https://codeberg.org/ideasman42/emacs-shift-number.git
+[submodule "site-lisp/meow-tree-sitter"]
+	path = site-lisp/meow-tree-sitter
+	url = https://github.com/skissue/meow-tree-sitter.git

@@ -81,7 +81,7 @@
       (indent-according-to-mode)
     (beginning-of-line)))
 
-(defvar code-font "CaskaydiaCove Nerd Font"  ;; "Fantasque Sans Mono", "InputMono"
+(defvar code-font "Consolas"  ;; "Fantasque Sans Mono", "InputMono"
   "Font for coding.")
 
 (defvar cjk-font "Sarasa Gothic SC"  ;; "FZYouSongJ GBK"
@@ -462,7 +462,7 @@ use `cm/autoloads-file' as TARGET."
                   js-ts-mode-hook))
     ;; (and (functionp 'corfu-mode)
     ;;      (global-corfu-mode))
-    (unless global-corfu-mode
+    (when (intern-soft "global-corfu-mode")
       (and (functionp 'corfu-mode)
            (add-hook hook 'corfu-mode)))
     (add-hook hook (lambda ()

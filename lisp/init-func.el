@@ -332,6 +332,33 @@ use `cm/autoloads-file' as TARGET."
       (meow--execute-kbd-macro meow--kbd-yank))
     ))
 
+(defvar meow--selection-record nil
+  "Variable that saves marker before meow exit selection.")
+
+(defvar meow--selection-count nil
+  "Variable that saves last position before meow exit selection.")
+
+(defun meow--pre-cancel-selection()
+  "Save positions of meow selection before its exit."
+  (when meow--selection-history
+    (let* ((start (cadar meow--selection-history))
+           (end (cadr (cdar meow--selection-history)))
+           (line (+ (count-lines start end) 1)))
+      (setq meow--selection-record
+            (set-marker (mark-marker) start))
+      (if (> start end)
+          (setq meow--selection-count (- line))
+        (setq meow--selection-count line))
+      (deactivate-mark t)
+      )))
+
+(defun meow-reselect ()
+  "Meow reselect region."
+  (interactive)
+  (goto-char meow--selection-record)
+  (meow-line meow--selection-count)
+  )
+
 (defun meow-setup ()
   (setq meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
   (meow-motion-overwrite-define-key
@@ -421,6 +448,8 @@ use `cm/autoloads-file' as TARGET."
    '("M-q" . ignore)
    '("<escape>" . ignore))
   (meow-define-keys 'insert '("M-q" . meow-insert-exit))
+  (meow-define-keys 'normal '("V" . meow-reselect))
+  (advice-add 'meow--cancel-selection :before (lambda() (meow--pre-cancel-selection)))
   ;; (add-hook 'meow-insert-exit-hook
   ;;           (lambda ()
   ;;             (and buffer-file-name
@@ -618,7 +647,6 @@ If you experience stuttering, increase this.")
                               :background "black"
                               :box nil
                               :font (font-spec
-                                     ;; "JetBrainsMono NF" "Monego Ligatures" "Maple Mono NF"
                                      :name
                                      code-font
                                      :size

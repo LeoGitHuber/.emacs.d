@@ -112,9 +112,7 @@
 ;; :size 13.0))  ;; 等距更纱黑体
 ;; (setq buffer-face-mode-face 'width-font-face)
 ;; (buffer-face-mode))
-;; (add-hook 'org-mode-hook 'org-buffer-face-mode-variable)
-
-;; (setq org-hide-emphasis-markers t))
+;; (add-hook 'org-mode-hook 'org-buffer-face-mode-variable))
 
 ;; Org-superstar
 ;; (add-hook 'org-mode-hook 'org-superstar-mode)
@@ -123,23 +121,23 @@
 
 (with-eval-after-load 'org-modern
   (setq org-modern-todo t
-    org-modern-table nil
-    org-modern-tag t
-    org-modern-priority t
-    org-modern-keyword t
-    org-modern-block-name t
-    org-modern-horizontal-rule t
-    org-modern-statistics t
-    org-modern-timestamp t
-    ;; org-modern-hide-stars t
-    org-modern-checkbox nil
-    ;; org-modern-star nil
-    org-modern-list
-    '(
-      ;; (?- . "-")
-      (?* . "•")
-      (?+ . "‣"))
-    ))
+        org-modern-table nil
+        org-modern-tag t
+        org-modern-priority t
+        org-modern-keyword t
+        org-modern-block-name t
+        org-modern-horizontal-rule t
+        org-modern-statistics t
+        org-modern-timestamp t
+        ;; org-modern-hide-stars t
+        org-modern-checkbox nil
+        ;; org-modern-star nil
+        org-modern-list
+        '(
+          ;; (?- . "-")
+          (?* . "•")
+          (?+ . "‣"))
+        ))
 
 
 ;; (add-hook 'org-agenda-finalize-hook 'org-modern-agenda)

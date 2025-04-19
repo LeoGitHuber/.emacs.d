@@ -258,13 +258,13 @@
              (setq len (length str))
              (setq author 0))))
     (insert (propertize " " 'display `(space :align-to ,(- fill-column emacs-startup-space 70))))
-    (insert char_sides)
-    (insert " ")
+    (insert char_sides
+            " ")
     (if (<= len max-len)
         (progn
-          (insert str)
-          (insert (make-string (- max-len len) ? ))
-          (insert " ")
+          (insert str
+                  (make-string (- max-len len) ? )
+                  " ")
           (setq start max-len))
       (let ((continue 1)
             (pre-str (substring str 0 max-len))
@@ -310,13 +310,10 @@
             (insert char_sides)
             (newline)
             (insert (propertize " " 'display `(space :align-to ,(- fill-column emacs-startup-space 70))))
-            (insert char_sides)
-            (insert " ")
+            (insert char_sides " ")
             (if (<= (length suf-str) max-len)
                 (progn
-                  (insert suf-str)
-                  (insert (make-string (- max-len (length suf-str)) ? ))
-                  (insert " ")
+                  (insert suf-str (make-string (- max-len (length suf-str)) ? ) " ")
                   (setq continue nil)
                   )
               (progn
@@ -329,24 +326,14 @@
       (if (= author 1)
           (progn
             (insert (propertize " " 'display `(space :align-to ,(- fill-column emacs-startup-space 70))))
-            (insert char_sides)
-            (insert " ")
-            (insert (make-string (- max-len (length str2)) ? ))
-            (insert str2)
-            (insert " ")
-            (insert char_sides)
+            (insert char_sides " " (make-string (- max-len (length str2)) ? ) str2 " " char_sides)
             (newline))
         (save-excursion
           (beginning-of-buffer)
           (search-forward (string char_sides))
           (beginning-of-line)
           (insert (propertize " " 'display `(space :align-to ,(- fill-column emacs-startup-space 70))))
-          (insert char_sides)
-          (insert " ")
-          (insert str2)
-          (insert (make-string (- max-len (length str2)) ? ))
-          (insert " ")
-          (insert char_sides)
+          (insert char_sides " " str2 (make-string (- max-len (length str2)) ? ) " " char_sides)
           (newline))))
     (emacs-startup-create-box-cover (+ max-len 2))
     (insert emacs-cow)
@@ -362,19 +349,20 @@
           (setq bp (+ bp 1)))))
     (add-face-text-property begin-point (point) 'emacs-cow-color)))
 
-(defun initial-startup-screen ()
-  "Initial startup buffer."
-  (let ((buffer (generate-new-buffer "*Emacs*")))
-    (switch-to-buffer buffer)
+(defun initial-startup-screen (scratch switch)
+  "Initial startup buffer with SCRATCH, SWITCH."
+  (let ((buffer (if scratch
+                    (get-buffer "*scratch*")
+                  (generate-new-buffer "*Emacs*"))))
+    (when switch
+      (switch-to-buffer buffer))
     (with-current-buffer buffer
+      (when scratch
+        (when (bound-and-true-p indent-bars-mode)
+          (indent-bars-mode -1))
+        (rename-buffer "*Emacs*"))
       (fundamental-mode)
       (erase-buffer)
-      ;; (when (bound-and-true-p meow-mode)
-      ;;   (meow-insert-mode))
-      ;; (keymap-local-set "h" 'backward-char)
-      ;; (keymap-local-set "l" 'forward-char)
-      ;; (keymap-local-set "j" 'next-line)
-      ;; (keymap-local-set "k" 'previous-line)
       ;; (keymap-local-set "s" 'scratch-buffer)
       ;; (keymap-local-set "f" 'find-file)
       ;; (if (functionp 'consult-buffer)
@@ -390,7 +378,7 @@
       ;; (display-line-numbers-mode -1)
       (visual-fill-column-mode)
       (auto-save-mode -1)
-      (newline 5)
+      (newline 7)
       ;; (insert mine-emacs-logo)
       ;; (let ((final-line (line-number-at-pos))
       ;;       (space-num
@@ -626,11 +614,13 @@
                 (project-known-project-roots))
         )
       (setq buffer-read-only t)))
-  (remove-hook 'emacs-startup-hook 'initial-startup-screen)
+  ;; (remove-hook 'emacs-startup-hook 'initial-startup-screen)
   (prefer-coding-system 'gbk)
   (prefer-coding-system 'utf-8))
 
-(add-hook 'emacs-startup-hook 'initial-startup-screen)
+(add-hook 'emacs-startup-hook
+          (lambda()
+            (initial-startup-screen t nil)))
 
 (provide 'init-startup)
 ;;; init-startup.el ends here.

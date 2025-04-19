@@ -376,6 +376,7 @@
 
 ;; @ Helpful
 
+(require 'helpful)
 (keymap-global-set "M-?" 'help-command)
 
 (with-eval-after-load 'help
@@ -1113,7 +1114,7 @@
 
 (keymap-global-set "C-M-;" 'hydra-eMove/body)
 
-;; (require 'rect)
+(require 'rect)
 
 (defhydra hydra-rectangle (:body-pre (rectangle-mark-mode t)
                                      :color pink
@@ -1135,10 +1136,10 @@
   ("r" (if (region-active-p)
            (deactivate-mark)
          (rectangle-mark-mode t)) nil)
-  ("y" yank-rectangle nil)
+  ("y" kill-rectangle nil)
   ("u" undo nil)
   ("s" string-rectangle nil)
-  ("p" kill-rectangle nil)
+  ("p" yank-rectangle nil)
   ("o" nil nil))
 
 (keymap-global-set "C-x SPC" 'hydra-rectangle/body)
@@ -1680,6 +1681,7 @@
 (require 'vertico-indexed)
 (require 'vertico-mouse)
 (require 'vertico-multiform)
+(require 'vertico-sort)
 (require 'embark)
 (require 'marginalia)
 (require 'standard-themes)

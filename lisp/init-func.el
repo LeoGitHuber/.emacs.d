@@ -84,7 +84,7 @@
 (defvar code-font "Consolas"  ;; "Fantasque Sans Mono", "InputMono"
   "Font for coding.")
 
-(defvar cjk-font "Sarasa Gothic SC"  ;; "FZYouSongJ GBK"
+(defvar cjk-font "Microsoft YaHei"  ;; "FZYouSongJ GBK" "Sarasa Gothic SC"
   "CJK font.")
 
 (defvar serif-font "Bookerly" ;; Palatino Linotype
@@ -113,7 +113,7 @@ And Set SERIF-FONT, SANS-FONT and VERBATIM-FONT."
           :weight 'regular
           ;; :slant 'normal
           :size en-size))
-  (dolist (charset '(kana han symbol cjk-misc bopomofo))
+  (dolist (charset '(kana han cjk-misc bopomofo))
     (if (equal en-size cn-size)
         (set-fontset-font "fontset-default" charset (font-spec :family cn-font))
       (set-fontset-font "fontset-default" charset (font-spec :family cn-font :size cn-size))))
@@ -343,20 +343,28 @@ use `cm/autoloads-file' as TARGET."
   (when meow--selection-history
     (let* ((start (cadar meow--selection-history))
            (end (cadr (cdar meow--selection-history)))
-           (line (+ (count-lines start end) 1)))
-      (setq meow--selection-record
-            (set-marker (mark-marker) start))
-      (if (> start end)
-          (setq meow--selection-count (- line))
-        (setq meow--selection-count line))
-      (deactivate-mark t)
+           (line ))
+      (if (and (<= start (point-max)) (<= end (point-max)))
+          (progn
+            (setq line (+ (count-lines start end) 1))
+            (setq-local meow--selection-record
+                        (set-marker (mark-marker) start))
+            (if (> start end)
+                (setq-local meow--selection-count (- line))
+              (setq-local meow--selection-count line))
+            (deactivate-mark t))
+        (setq-local meow--selection-record nil
+                    meow--selection-count nil))
       )))
 
 (defun meow-reselect ()
   "Meow reselect region."
   (interactive)
-  (goto-char meow--selection-record)
-  (meow-line meow--selection-count)
+  (if meow--selection-record
+      (progn
+        (goto-char meow--selection-record)
+        (meow-line meow--selection-count))
+    (message "No previous recorded selection."))
   )
 
 (defun meow-setup ()
@@ -566,7 +574,7 @@ If you experience stuttering, increase this.")
   (when (display-graphic-p)
     ;; (if (not windows-system-p)
     (set-en_cn-font code-font cjk-font serif-font
-                    cjk-sans-font verbatim-font 12.0 12.0)
+                    cjk-sans-font verbatim-font 12.0 10.0)
     ;;   )
     (setq frame-title-format
           '((:eval (if (buffer-file-name)

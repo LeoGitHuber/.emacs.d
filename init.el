@@ -30,9 +30,9 @@
   (setq touch-screen-display-keyboard t))
   ;;; Emacs Default Setting
 ;; (load "~/.emacs.d/lisp/init-func.el")
-;; (add-to-list 'load-path "~/.emacs.d/lisp")
+(add-to-list 'load-path "~/.emacs.d/lisp")
 ;; (add-to-list 'load-path "~/.emacs.d/lisp/init-func.el")
-;; (require 'init-func)
+(require 'init-func)
 (load "~/.emacs.d/lisp/init-func.el")
 (let ((packages (find-subdir-recursively "~/.emacs.d/site-lisp")))
   (setq load-path (append load-path packages)))
@@ -45,7 +45,7 @@
 (add-to-list 'load-path "~/.emacs.d/site-lisp/vertico/extensions")
 (add-to-list 'load-path "~/.emacs.d/site-lisp/themes/themes")
 (add-to-list 'load-path "~/.emacs.d/site-lisp/pdf-tools/lisp")
-(load "~/.emacs.d/site-lisp/loaddefs.el")
+;; (load "~/.emacs.d/site-lisp/loaddefs.el")
 (setq eat-kill-buffer-on-exit t
       css-indent-offset 2
       set-mark-command-repeat-pop t
@@ -62,7 +62,7 @@
 ;; (add-hook 'minibuffer-exit-hook 'gc-minibuffer-exit-hook)
 
   ;;; @2. flymake and flycheck
-
+(require 'flycheck)
 (with-eval-after-load 'flycheck
   (flycheck-def-config-file-var flycheck-verilog-verilator-command-file verilog-verilator "commands.f")
   (flycheck-define-checker verilog-verilator
@@ -92,6 +92,7 @@
   )
 
 (require 'nerd-icons)
+(require 'nerd-icons-corfu)
 (setq nerd-icons-font-family "CaskaydiaCove Nerd Font")
 ;; (setq nerd-icons-font-family "PragmataProLiga Nerd Font Mono")
 
@@ -281,6 +282,7 @@
   ;;; @4. MEOW
 (require 'meow)
 (meow-setup)
+(meow-global-mode 1)
 
 (setq meow-use-cursor-position-hack t
       meow-use-clipboard t
@@ -296,6 +298,9 @@
 
   ;;; @5. KEYBINDINGS
 
+(require 'puni)
+(require 'vundo)
+(require 'avy)
 (keymap-global-set "M-p" 'pop-to-mark-command)
 
 (unless (bound-and-true-p meow-mode)
@@ -422,7 +427,7 @@
     (setq corfu-popupinfo-delay '(0.1 . 0.1)))
   (setq nerd-icons-corfu--space (propertize " " 'display '(space :width 0.8)))
   (add-to-list 'corfu-margin-formatters 'nerd-icons-corfu-formatter))
-
+(require 'verilog-ts-mode)
 (add-hook 'verilog-mode-hook 'corfu-mode)
 (add-hook 'verilog-ts-mode-hook 'corfu-mode)
 
@@ -1465,6 +1470,7 @@
 (with-eval-after-load 'magit
   (setq magit-diff-refine-hunk t
         magit-log-section-commit-count 20
+        magit-auto-revert-counter 10
         magit-status-sections-hook '(magit-insert-status-headers
                                      magit-insert-merge-log
                                      magit-insert-rebase-sequence
@@ -1511,6 +1517,7 @@
   (keymap-global-set "C->" 'mc/mark-next-like-this)
   (keymap-set mc/keymap (kbd "<return>") nil))
 
+(require 'mwim)
 (global-set-key [remap move-beginning-of-line]
                 'mwim-beginning-of-code-or-line-or-comment)
 (global-set-key [remap move-end-of-line] 'mwim-end-of-code-or-line)
@@ -1757,7 +1764,7 @@
     )
   "Set for themes for dark and light mode.")
 
-(setup-display-graphic nil nil 6 17 nil)
+(setup-display-graphic nil nil 6 19 nil)
 (add-hook 'server-after-make-frame-hook
           '(lambda ()
              (setup-display-graphic nil nil 6 19 nil)))

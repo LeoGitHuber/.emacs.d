@@ -495,14 +495,23 @@
                   (file (cdr c))
                   (len (length (concat time file))))
              (insert (propertize (concat
+                                  ;; (propertize
+                                  ;;  (format (concat
+                                  ;;           (make-string emacs-startup-space ? )
+                                  ;;           "%s ")
+                                  ;;          (if (directory-name-p file)
+                                  ;;              (nerd-icons-icon-for-dir file)
+                                  ;;            (nerd-icons-icon-for-file file)))
+                                  ;;  'display '(raise 0.25)
+                                  ;;  )
                                   (propertize
-                                   (format (concat
-                                            (make-string emacs-startup-space ? )
-                                            "%s ")
-                                           (if (directory-name-p file)
-                                               (nerd-icons-icon-for-dir file)
-                                             (nerd-icons-icon-for-file file)))
-                                   'display '(raise 0.25)
+                                   (concat
+                                    (make-string emacs-startup-space ? )
+                                    (if (directory-name-p file)
+                                        (nerd-icons-icon-for-dir file)
+                                      (nerd-icons-icon-for-file file))
+                                    " ")
+                                   'display '(raise 0.1)
                                    )
                                   (propertize (if (and (< len (- fill-column 18))
                                                        (<= (length file) emacs-startup-filename-length))

@@ -502,3 +502,18 @@
 [submodule "site-lisp/meow-tree-sitter"]
 	path = site-lisp/meow-tree-sitter
 	url = https://github.com/skissue/meow-tree-sitter.git
+[submodule "site-lisp/nordic-night"]
+	path = site-lisp/nordic-night
+	url = https://codeberg.org/ashton314/nordic-night.git
+[submodule "site-lisp/timu-macos-theme"]
+	path = site-lisp/timu-macos-theme
+	url = https://gitlab.com/aimebertrand/timu-macos-theme.git
+[submodule "site-lisp/qml-ts-mode"]
+	path = site-lisp/qml-ts-mode
+	url = https://github.com/xhcoding/qml-ts-mode.git
+[submodule "site-lisp/emacs-reader"]
+	path = site-lisp/emacs-reader
+	url = https://codeberg.org/divyaranjan/emacs-reader.git
+[submodule "site-lisp/transient"]
+	path = site-lisp/transient
+	url = https://github.com/magit/transient.git

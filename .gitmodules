@@ -496,9 +496,6 @@
 [submodule "site-lisp/eshell-syntax-highlighting"]
 	path = site-lisp/eshell-syntax-highlighting
 	url = https://github.com/akreisher/eshell-syntax-highlighting.git
-[submodule "site-lisp/emacs-shift-number"]
-	path = site-lisp/emacs-shift-number
-	url = https://codeberg.org/ideasman42/emacs-shift-number.git
 [submodule "site-lisp/meow-tree-sitter"]
 	path = site-lisp/meow-tree-sitter
 	url = https://github.com/skissue/meow-tree-sitter.git
@@ -517,3 +514,9 @@
 [submodule "site-lisp/transient"]
 	path = site-lisp/transient
 	url = https://github.com/magit/transient.git
+[submodule "site-lisp/yasnippet-capf"]
+	path = site-lisp/yasnippet-capf
+	url = https://github.com/elken/yasnippet-capf.git
+[submodule "site-lisp/flyover"]
+	path = site-lisp/flyover
+	url = https://github.com/konrad1977/flyover.git

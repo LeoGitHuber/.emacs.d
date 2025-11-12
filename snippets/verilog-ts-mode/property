@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# key: pr
+# --
+
+property ${1:p_};
+    ${2:@(posedge ${3:clk})${4: disable iff (${5:!resetn})}}
+        $0${6:a ##1 b};
+endproperty

@@ -520,3 +520,36 @@
 [submodule "site-lisp/flyover"]
 	path = site-lisp/flyover
 	url = https://github.com/konrad1977/flyover.git
+[submodule "site-lisp/rg.el"]
+	path = site-lisp/rg.el
+	url = https://github.com/dajva/rg.el.git
+[submodule "site-lisp/Emacs-wgrep"]
+	path = site-lisp/Emacs-wgrep
+	url = https://github.com/mhayashi1120/Emacs-wgrep.git
+[submodule "site-lisp/scala-ts-mode"]
+	path = site-lisp/scala-ts-mode
+	url = https://github.com/KaranAhlawat/scala-ts-mode.git
+[submodule "site-lisp/ETML"]
+	path = site-lisp/ETML
+	url = https://github.com/Kinneyzhang/ETML.git
+[submodule "site-lisp/emacs-kp"]
+	path = site-lisp/emacs-kp
+	url = https://github.com/Kinneyzhang/emacs-kp.git
+[submodule "site-lisp/zenburn-emacs"]
+	path = site-lisp/zenburn-emacs
+	url = https://github.com/bbatsov/zenburn-emacs.git
+[submodule "site-lisp/cond-let"]
+	path = site-lisp/cond-let
+	url = https://github.com/tarsius/cond-let.git
+[submodule "site-lisp/emacs-kdl-mode"]
+	path = site-lisp/emacs-kdl-mode
+	url = https://github.com/taquangtrung/emacs-kdl-mode.git
+[submodule "site-lisp/shrface"]
+	path = site-lisp/shrface
+	url = https://github.com/chenyanming/shrface.git
+[submodule "site-lisp/calibredb.el"]
+	path = site-lisp/calibredb.el
+	url = https://github.com/chenyanming/calibredb.el.git
+[submodule "site-lisp/spacious-padding"]
+	path = site-lisp/spacious-padding
+	url = https://github.com/protesilaos/spacious-padding.git

@@ -81,16 +81,20 @@
       (indent-according-to-mode)
     (beginning-of-line)))
 
-(defvar code-font "Consolas"  ;; "Fantasque Sans Mono", "InputMono"
+;; "IBM Plex Mono" "Fantasque Sans Mono", "InputMono", "Monaspace Neon"
+;; (defvar code-font "Cascadia Code NF" ;; "Hack"
+;;   "Font for coding.")
+(defvar code-font "Aporetic Serif Mono" ;; "Hack"
   "Font for coding.")
 
-(defvar cjk-font "Microsoft YaHei"  ;; "FZYouSongJ GBK" "Sarasa Gothic SC"
+;; "Microsoft YaHei" "FZYouSongJ GBK" "Sarasa Gothic SC"
+(defvar cjk-font "LXGW Bright Code GB" ;; "LXGW WenKai Mono"
   "CJK font.")
 
-(defvar serif-font "Bookerly" ;; Palatino Linotype
+(defvar serif-font "Source Han Serif CN" ;; "Bookerly" ;; Palatino Linotype
   "Serif font.")
 
-(defvar cjk-sans-font "LXGW WenKai Screen"
+(defvar cjk-sans-font "Source Han Sans CN" ;; "LXGW WenKai Screen"
   "CJK sans font.")
 
 (defvar verbatim-font "Source Han Sans CN"
@@ -456,12 +460,28 @@ use `cm/autoloads-file' as TARGET."
    '("M-q" . ignore)
    '("<escape>" . ignore))
   (meow-define-keys 'insert '("M-q" . meow-insert-exit))
-  (meow-define-keys 'normal '("V" . meow-reselect))
-  (advice-add 'meow--cancel-selection :before (lambda() (meow--pre-cancel-selection)))
+  ;; (meow-define-keys 'normal '("V" . meow-reselect))
+  ;; (advice-add 'meow--cancel-selection :before (lambda() (meow--pre-cancel-selection)))
   ;; (add-hook 'meow-insert-exit-hook
   ;;           (lambda ()
   ;;             (and buffer-file-name
   ;;                  (save-buffer))))
+  )
+
+(defun increment-number-at-point (args)
+  "Increment number of current point with ARGS times."
+  (interactive "p")
+  (let ((bounds (bounds-of-thing-at-point 'number)))
+    (if bounds
+        (let* ((num-str (buffer-substring-no-properties (car bounds) (cdr bounds)))
+               (num (string-to-number num-str))
+               (p (point)))
+          (delete-region (car bounds) (cdr bounds))
+          (insert (number-to-string (+ num args)))
+          (goto-char p))
+      (message "No number at current point.")
+      )
+    )
   )
 
 (defun lsp-booster--advice-final-command (old-fn cmd &optional test?)
@@ -488,27 +508,24 @@ use `cm/autoloads-file' as TARGET."
     (remove-hook 'lsp-bridge-default-mode-hooks 'Tex-latex-mode-hook)
     (remove-hook 'lsp-bridge-default-mode-hooks 'typescript-ts-mode-hook)
     (remove-hook 'lsp-bridge-default-mode-hooks 'typescript-mode-hook)
+    (remove-hook 'lsp-bridge-default-mode-hooks 'scala-ts-mode-hook)
     (global-lsp-bridge-mode))
-  (dolist (hook '(prog-mdoe-hook
+  (dolist (hook '(prog-mode-hook
                   cuda-mode-hook
                   TeX-mode-hook
-                  c-ts-mode-hook c++-ts-mode-hook
-                  python-ts-mode-hook python-ts-mode-hook
-                  emacs-lisp-mode-hook
-                  js-mode-hook
-                  js-ts-mode-hook))
-    ;; (and (functionp 'corfu-mode)
-    ;;      (global-corfu-mode))
+                  ))
     (when (intern-soft "global-corfu-mode")
       (and (functionp 'corfu-mode)
            (add-hook hook 'corfu-mode)))
     (add-hook hook (lambda ()
                      (unless (derived-mode-p 'emacs-lisp-mode 'lisp-mode
-                                             ;; 'verilog-mode
-                                             'makefile-mode 'snippet-mode)
-                       (with-eval-after-load 'lsp
-                         (lsp-deferred))
-                       (eglot-ensure)))))
+                                             'makefile-mode 'snippet-mode
+                                             'kdl-mode 'tcl-mode)
+                       ;; (with-eval-after-load 'lsp
+                       ;;   (lsp-deferred))
+                       (eglot-ensure)
+                       )))
+    )
   (with-eval-after-load 'lsp-mode
     (with-eval-after-load 'lsp-ui
       (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
@@ -569,12 +586,12 @@ If you experience stuttering, increase this.")
   (garbage-collect)
   (setq gc-cons-threshold better-gc-cons-threshold))
 
-(defun setup-display-graphic (modelineq cfborderq dayon dayoff themesetq)
-  "Setup display graphic for GUI Emacs and Emacsclient with MODELINEQ, CFBORDERQ, DAYON, DAYOFF, THEMESETQ."
+(defun setup-display-graphic (modelineq cfborderq dayon dayoff themesetq fontsize)
+  "Setup display graphic for GUI Emacs and Emacsclient with MODELINEQ, CFBORDERQ, DAYON, DAYOFF, THEMESETQ, FONTSIZE."
   (when (display-graphic-p)
     ;; (if (not windows-system-p)
     (set-en_cn-font code-font cjk-font serif-font
-                    cjk-sans-font verbatim-font 12.0 10.0)
+                    cjk-sans-font verbatim-font fontsize fontsize)
     ;;   )
     (setq frame-title-format
           '((:eval (if (buffer-file-name)
@@ -612,43 +629,19 @@ If you experience stuttering, increase this.")
                                 nil
                                 :background mode-line-box-p)
             ))))
-    (if themesetq
-        (if (or
-             (>= (string-to-number (substring (current-time-string) 11 13)) dayoff)
-             (<= (string-to-number (substring (current-time-string) 11 13)) dayon))
-            (if (string-prefix-p "modus" (symbol-name (cadr themes_chosen)))
-                (progn
-                  (setq modus-themes-org-blocks 'gray-background
-                        modus-themes-bold-constructs t
-                        modus-themes-italic-constructs t)
-                  (require-theme 'modus-themes)
-                  (set-face-attribute 'modus-themes-heading-1 nil :height 1.25))
-              (if (equal (cadr themes_chosen) 'manoj-dark)
-                  (progn
-                    (load-theme (car (cdr themes_chosen)) t)
-                    (set-face-foreground 'hl-line 'unspecified)
-                    (set-face-background 'fringe 'unspecified))
-                ))
-          (progn
-            ;; (load-theme (car themes_chosen) t)
-            (when (eq custom-enabled-themes nil)
-              ;; (set-face-bold 'font-lock-keyword-face t)
-              ;; (set-face-bold 'font-lock-builtin-face t)
-              (set-face-background 'highlight "#DFEAEC")
-              (set-face-background 'fringe 'unspecified)
-              (set-face-attribute 'line-number-current-line nil :foreground
-                                  "#000000" :background "#C4C4C4" :weight
-                                  'bold)
-              (set-face-bold 'font-lock-keyword-face 't)
-              )
-            (setq modus-themes-org-blocks 'gray-background
-                  modus-themes-bold-constructs t
-                  modus-themes-italic-constructs t)))
-      (if (or
-           (>= (string-to-number (substring (current-time-string) 11 13)) dayoff)
-           (<= (string-to-number (substring (current-time-string) 11 13)) dayon))
-          (standard-themes-select 'standard-dark)
-        (standard-themes-select 'standard-light)))
+    (if (or
+         (>= (string-to-number (substring (current-time-string) 11 13)) dayoff)
+         (<= (string-to-number (substring (current-time-string) 11 13)) dayon))
+        ;; (standard-themes-select 'standard-dark)
+        ;; (color-theme-sanityinc-tomorrow-bright)
+        (progn
+          (setq modus-themes-org-blocks 'gray-background
+                modus-themes-bold-constructs t
+                modus-themes-italic-constructs t)
+          (load-theme 'modus-vivendi-deuteranopia t)
+          )
+      (load-theme 'modus-operandi-tritanopia)
+      )
     (when modelineq
       (if (equal (frame-parameter nil 'background-mode) 'dark)
           (set-face-attribute 'mode-line nil
@@ -671,10 +664,38 @@ If you experience stuttering, increase this.")
                                      code-font
                                      :size 11.0))
           ))
+
       (set-face-attribute
        'mode-line-inactive nil
        :inherit 'mode-line
        :box nil))
+
+    (dolist (face '((flymake-note-echo-at-eol . success)
+                    (flymake-warning-echo-at-eol . warning)
+                    (flymake-error-echo-at-eol . error)))
+      (let* ((ff (car face))
+             (ef (cdr face))
+             (fc (face-foreground ef))
+             (fg ())
+             (bg ()))
+        (set-face-italic ff nil)
+        (set-face-foreground ff fc)
+        (if (or
+             (>= (string-to-number (substring (current-time-string) 11 13)) dayoff)
+             (<= (string-to-number (substring (current-time-string) 11 13)) dayon))
+            (progn
+              (setq bg (flymake--darken-bg fc 80))
+              (setq fg fc)
+              )
+          (progn
+            (setq bg (flymake--lighten-fg fc 1000))
+            (setq fg (flymake--darken-bg fc 50))
+            ))
+        (set-face-attribute ff nil :box bg)
+        (set-face-background ff bg)
+        (set-face-foreground ff fg)
+        ))
+    (set-face-attribute 'flymake-end-of-line-diagnostics-face nil :box nil)
     ))
 
 (provide 'init-func)

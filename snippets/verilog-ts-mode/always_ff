@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# key: af
+# --
+
+always${4:_ff} @(posedge ${1:`verilog-ext-template-clock`}) begin${3: : label}
+    if (${2:`(verilog-ext-template-reset-condition)`}) begin
+
+    end
+    else begin
+        $0
+    end
+end $3

@@ -69,53 +69,53 @@
               )))))
     )
 
-  (defun verilog-flymake-detect (report-fn &rest _args)
+  (defun verilator-flymake-detect (report-fn &rest _args)
     "A Flymake backend for verilog.
-Spawn an verilog lsp process that byte-compiles a file representing the
+Spawn an verilator process that byte-compiles a file representing the
 current buffer state and calls REPORT-FN when done."
-    (when verilog--flymake-proc
-      (when (process-live-p verilog--flymake-proc)
-        (kill-process verilog--flymake-proc)))
+    ;; (when verilog--flymake-proc
+    ;;   (when (process-live-p verilog--flymake-proc)
+    ;;     (kill-process verilog--flymake-proc)))
     (let ((source-buffer (current-buffer))
           (coding-system-for-write 'utf-8-unix)
           (coding-system-for-read 'utf-8))
       (save-restriction
         (widen)
         (let* ((output-buffer (generate-new-buffer " *verilog-flymake*")))
-          (setq verilog--flymake-proc
-                (make-process
-                 :name "verilog-flymake-process"
-                 :buffer output-buffer
-                 :command (append verilog-flymake-command
-                                  (list (buffer-file-name source-buffer)))
-                 :connection-type 'pipe
-                 :sentinel
-                 (lambda (proc _event)
-                   (unless (process-live-p proc)
-                     (unwind-protect
-                         (cond
-                          ((not (and (buffer-live-p source-buffer)
-                                     (eq proc (with-current-buffer source-buffer
-                                                verilog--flymake-proc))))
-                           (flymake-log :warning
-                                        "verilog-flymake process %s obsolete" proc))
-                          ((memq (process-status proc) '(exit signal))
-                           (verilog-flymake-done report-fn
-                                                 source-buffer
-                                                 verilog--flymake-output-buffer
-                                                 ))
-                          (t
-                           (funcall report-fn
-                                    :panic
-                                    :explanation
-                                    (format "process %s died" proc))))
-                       (kill-buffer verilog--flymake-output-buffer)
-                       )))
-                 :stderr verilog--flymake-output-buffer
-                 :noquery t))))))
+          (setq-local verilog--flymake-proc
+                      (make-process
+                       :name "verilog-flymake-process"
+                       :buffer output-buffer
+                       :command (append verilog-flymake-command
+                                        (list (buffer-file-name source-buffer)))
+                       :connection-type 'pipe
+                       :sentinel
+                       (lambda (proc _event)
+                         (unless (process-live-p proc)
+                           (unwind-protect
+                               (cond
+                                ((not (and (buffer-live-p source-buffer)
+                                           (eq proc (with-current-buffer source-buffer
+                                                      verilog--flymake-proc))))
+                                 (flymake-log :warning
+                                              "verilog-flymake process %s obsolete" proc))
+                                ((memq (process-status proc) '(exit signal))
+                                 (verilog-flymake-done report-fn
+                                                       source-buffer
+                                                       verilog--flymake-output-buffer
+                                                       ))
+                                (t
+                                 (funcall report-fn
+                                          :panic
+                                          :explanation
+                                          (format "process %s died" proc))))
+                             (kill-buffer verilog--flymake-output-buffer)
+                             )))
+                       :stderr verilog--flymake-output-buffer
+                       :noquery t))))))
 
   (defun verilog-setup-flymake-backend ()
-    (add-hook 'flymake-diagnostic-functions 'verilog-flymake-detect nil t))
+    (add-hook 'flymake-diagnostic-functions 'verilator-flymake-detect nil t))
 
   (add-hook 'verilog-mode-hook 'verilog-setup-flymake-backend)
 

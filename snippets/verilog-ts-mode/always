@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# key: always
+# --
+
+always @(${1:condition}) begin
+   $0
+end

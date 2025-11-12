@@ -56,70 +56,47 @@
       ;; package-quickstart nil
       )
 
-  ;;; @1. GC
-
-;; (add-hook 'minibuffer-setup-hook 'gc-minibuffer-setup-hook)
-;; (add-hook 'minibuffer-exit-hook 'gc-minibuffer-exit-hook)
-
-  ;;; @2. flymake and flycheck
-(require 'flycheck)
+;;; @2. flymake and flycheck
 (with-eval-after-load 'flycheck
-  (flycheck-def-config-file-var flycheck-verilog-verilator-command-file verilog-verilator "commands.f")
-  (flycheck-define-checker verilog-verilator
-    "A Verilog syntax checker using the Verilator Verilog HDL simulator.
-
-  See URL `https://www.veripool.org/wiki/verilator'."
-    ;; https://verilator.org/guide/latest/exe_verilator.html
-    ;;   The three flags -y, +incdir+<dir> and -I<dir> have similar effect;
-    ;;   +incdir+<dir> and -y are fairly standard across Verilog tools while -I<dir> is used by many C++ compilers.
-    :command ("verilator" "--lint-only" "-Wall" "-Wno-fatal" "--timing"
-              "--bbox-unsup" ; Blackbox unsupported language features to avoid errors on verification sources
-              "--bbox-sys"  ;  Blackbox unknown $system calls
-              (option-list "-I" nil concat)
-              (option-list "-I" nil concat)
-              (config-file "-f" flycheck-verilog-verilator-command-file)
-              (eval (remove buffer-file-name nil))
-              (eval (remove buffer-file-name nil))
-              source)
-    :error-patterns
-    ((warning line-start "%Warning-" (zero-or-more not-newline) ": " (file-name) ":" line ":" column ": " (message) line-end)
-     (error   line-start "%Error: Internal Error: "                  (file-name) ":" line ":" column ": " (message) line-end)
-     (error   line-start "%Error: "                                  (file-name) ":" line ":" column ": " (message) line-end)
-     (error   line-start "%Error-"   (zero-or-more not-newline) ": " (file-name) ":" line ":" column ": " (message) line-end))
-    :modes (verilog-mode verilog-ts-mode))
   (add-hook 'flycheck-mode-hook '(lambda ()
-                                   (flycheck-set-indication-mode 'left-margin)))
-  )
+                                   (flycheck-set-indication-mode 'left-margin))))
 
 (require 'nerd-icons)
 (require 'nerd-icons-corfu)
-(setq nerd-icons-font-family "CaskaydiaCove Nerd Font")
+;; (setq nerd-icons-font-family "CaskaydiaCove Nerd Font Mono")
+(setq nerd-icons-font-family "Consolas Nerd Font Mono")
 ;; (setq nerd-icons-font-family "PragmataProLiga Nerd Font Mono")
 
 (defface diagnostics-error
-  '(
-    (((background dark)) :background "#090c10" :foreground "#f85149" :family "Consolas Nerd Font Mono")
-    (((background light)) :foreground "#cb2431" :family "Consolas Nerd Font Mono")
+  `(
+    ;; (((background dark)) :background "#090c10" :foreground "#f85149" :family ,nerd-icons-font-family)
+    ;; (((background light)) :foreground "#cb2431" :family ,nerd-icons-font-family)
+    (((background dark)) :foreground "#f85149" :family ,nerd-icons-font-family)
+    (((background light)) :foreground "#cb2431" :family ,nerd-icons-font-family)
     )
   "Face for flymake Error."
   :group 'flymake)
 
 (defface diagnostics-warn
-  '(
-    (((background dark)) :background "#090c10" :foreground "#f0883e" :family "Consolas Nerd Font Mono")
-    (((background light)) :foreground "#bf8803" :family "Consolas Nerd Font Mono")
+  `(
+    ;; (((background dark)) :background "#090c10" :foreground "#f0883e" :family ,nerd-icons-font-family)
+    ;; (((background light)) :foreground "#bf8803" :family ,nerd-icons-font-family)
+    (((background dark)) :foreground "#f0883e" :family ,nerd-icons-font-family)
+    (((background light)) :foreground "#bf8803" :family ,nerd-icons-font-family)
     )
   "Face for flymake Warn."
   :group 'flymake)
 
 (defface diagnostics-info
-  '((((background dark)) :background "#090c10" :foreground "#75beff" :color "#000000" :family "Consolas Nerd Font Mono")
-    (((background light)) :foreground "#1155ff" :color "white" :family "Consolas Nerd Font Mono")
+  ;; `((((background dark)) :background "#090c10" :foreground "#75beff" :color "#000000" :family ,nerd-icons-font-family)
+  ;;   (((background light)) :foreground "#1155ff" :color "white" :family ,nerd-icons-font-family)
+  `((((background dark)) :foreground "#75beff" :family ,nerd-icons-font-family)
+    (((background light)) :foreground "#1155ff" :family ,nerd-icons-font-family)
     )
   "Face for flymake Info."
   :group 'flymake)
 
-(setq flymake-no-changes-timeout 0.1
+(setq flymake-no-changes-timeout nil
       flymake-indicator-type 'margins
       flymake-autoresize-margins t
       flymake-margin-indicators-string
@@ -127,147 +104,54 @@
       ;;   (warning "​​​​" compilation-warning)
       ;;   (note "​​​​" compilation-info))
       ;; `((error "​​​​󰅙​​​​" diagnostics-error)
-      `((error "​​​󰅙​​​​​" diagnostics-error)
+      `((error "​​​​󰅙​​​​" diagnostics-error)
         ;; (warning "​​​​​​​​" diagnostics-warn)
         (warning "​​​​​​​​" diagnostics-warn)
         ;; (note "​​​​​​​​" diagnostics-info)
-        (note "​​​​​​" diagnostics-info)
+        (note "​​​​​​​" diagnostics-info)
         )
       ;; `((error ,(nerd-icons-octicon "nf-oct-x_circle_fill") diagnostics-error)
       ;;   (warning ,(nerd-icons-faicon "nf-fa-warning") diagnostics-warn)
       ;;   (note ,(nerd-icons-faicon "nf-fa-info") diagnostics-info))
-      flymake-show-diagnostics-at-end-of-line t
+      flymake-show-diagnostics-at-end-of-line 'fancy
+      elisp-flymake-byte-compile-load-path (cons "./" load-path)
       )
-
-;; (setq-default left-margin-width 1)
-
-;; (with-eval-after-load 'flymake
-;;   (defvar verilog--flymake-proc nil
-;;     "A flymake verilog process.")
-
-;;   (defvar verilog-flymake-command '("verilator" "--lint-only" "-Wall" "-Wno-fatal" "--timing"
-;;                                      "--bbox-unsup" "--bbox-sys")
-;;     "Command for verilog's flymake.")
-
-;;   (defvar verilog--flymake-output-buffer " *stderr of verilog-flymake*"
-;;     "Buffer for verilog's flymake output.")
-
-;;   (defun verilog-flymake-done (report-fn
-;;                                source-buffer
-;;                                output-buffer)
-;;     (with-current-buffer source-buffer
-;;       (save-excursion
-;;         (save-restriction
-;;           (with-current-buffer output-buffer
-;;             (goto-char (point-min))
-;;             (let ((diags))
-;;               (while (search-forward-regexp
-;;                       "^\\(%.*\\): .*:\\([0-9]+\\):\\([0-9]+\\): \\(.*\\)$"
-;;                       nil t)
-;;                 (let* ((msg (match-string 4))
-;;                        (level-msg (match-string 1))
-;;                        (line (string-to-number (match-string 2)))
-;;                        (locate-string)
-;;                        (cal)
-;;                        (beg)
-;;                        (end)
-;;                        (level))
-;;                   (setq level (cond
-;;                                ((string-match-p "%Error" level-msg) ':error)
-;;                                ((string-match-p "%Warning" level-msg) ':warning)
-;;                                (t :note)))
-;;                   (search-forward-regexp "\\(\\^~*\\)" nil t)
-;;                   (setq cal (length (match-string 1)))
-;;                   (let ((current (point))
-;;                         (line-beginning (line-beginning-position)))
-;;                     (forward-line -1)
-;;                     (forward-char (- current line-beginning))
-;;                     (setq locate-string (buffer-substring-no-properties (- (point) cal) (point))))
-;;                   (setq beg (with-current-buffer source-buffer
-;;                               (save-excursion
-;;                                 (save-restriction
-;;                                   (goto-char (point-min))
-;;                                   (or (equal line 1)
-;;                                       (forward-line (- line 1)))
-;;                                   (search-forward locate-string nil t)
-;;                                   (- (point) cal)
-;;                                   ))))
-;;                   (setq end (+ beg cal))
-;;                   (setq diags
-;;                         (cons (flymake-make-diagnostic
-;;                                source-buffer beg end level msg)
-;;                               diags))
-;;                   ))
-;;               (funcall report-fn diags)
-;;               )))))
-;;     )
-
-;;   (defun verilog-flymake-detect (report-fn &rest _args)
-;;     "A Flymake backend for verilog.
-;; Spawn an verilog lsp process that byte-compiles a file representing the
-;; current buffer state and calls REPORT-FN when done."
-;;     (when verilog--flymake-proc
-;;       (when (process-live-p verilog--flymake-proc)
-;;         (kill-process verilog--flymake-proc)))
-;;     (let ((source-buffer (current-buffer))
-;;           (coding-system-for-write 'utf-8-unix)
-;;           (coding-system-for-read 'utf-8))
-;;       (save-restriction
-;;         (widen)
-;;         (let* ((output-buffer (generate-new-buffer " *verilog-flymake*")))
-;;           (setq verilog--flymake-proc
-;;                 (make-process
-;;                  :name "verilog-flymake-process"
-;;                  :buffer output-buffer
-;;                  :command (append verilog-flymake-command
-;;                                   (list (buffer-file-name source-buffer)))
-;;                  :connection-type 'pipe
-;;                  :sentinel
-;;                  (lambda (proc _event)
-;;                    (unless (process-live-p proc)
-;;                      (unwind-protect
-;;                          (cond
-;;                           ((not (and (buffer-live-p source-buffer)
-;;                                      (eq proc (with-current-buffer source-buffer
-;;                                                 verilog--flymake-proc))))
-;;                            (flymake-log :warning
-;;                                         "verilog-flymake process %s obsolete" proc))
-;;                           ((memq (process-status proc) '(exit signal))
-;;                            (verilog-flymake-done report-fn
-;;                                                  source-buffer
-;;                                                  verilog--flymake-output-buffer
-;;                                                  ))
-;;                           (t
-;;                            (funcall report-fn
-;;                                     :panic
-;;                                     :explanation
-;;                                     (format "process %s died" proc))))
-;;                        (kill-buffer verilog--flymake-output-buffer)
-;;                        )))
-;;                  :stderr verilog--flymake-output-buffer
-;;                  :noquery t))))))
-
-;;   (defun verilog-setup-flymake-backend ()
-;;     (add-hook 'flymake-diagnostic-functions 'verilog-flymake-detect nil t))
-
-;;   ;; (add-hook 'verilog-mode-hook 'verilog-setup-flymake-backend)
-
-;;   ;; (defun sanityinc/enable-flymake-flycheck ()
-;;   ;;   (setq-local flymake-diagnostic-functions
-;;   ;;               (seq-uniq (append flymake-diagnostic-functions
-;;   ;;                                 (flymake-flycheck-all-chained-diagnostic-functions)))))
-;;   )
 
 (require 'flymake)
 (dolist (hook '(prog-mode-hook))
   (add-hook hook 'flymake-mode))
+
+(set-face-attribute 'flymake-end-of-line-diagnostics-face nil :box nil)
+
+(defun flymake--rgb-to-hex (r g b)
+  "Convert R G B components to hex color string."
+  (format "#%02x%02x%02x" r g b))
+
+(defun flymake--darken-bg (bg percent)
+  "Darken BG with PERCENT for flymake eol."
+  (apply #'flymake--rgb-to-hex (mapcar (lambda (component)
+                                         (min 255
+                                              (floor (* component (- 100 percent) 0.01))))
+                                       (mapcar (lambda (x) (/ x 256)) (color-values bg)))))
+
+(defun flymake--lighten-fg (bg percent)
+  "Lighten BG with PERCENT for flymake eol."
+  (apply #'flymake--rgb-to-hex (mapcar (lambda (component)
+                                         (let ((c (floor (* component (+ 100 percent) 0.01))))
+                                           (if (equal c 0)
+                                               200
+                                             (min 255 c))))
+                                       (mapcar (lambda (x) (/ x 256)) (color-values bg)))))
+
+;; (require 'flyover)
+;; (setq flyover-virtual-line-icon "╰──")
+;; (add-hook 'flymake-mode-hook #'flyover-mode)
 
 (require 'project)
 
   ;;; @3. ICONS
 
 ;; (load "~/.emacs.d/self-develop/modeline-setting.el")
-
 
 (with-eval-after-load 'treemacs
   (require 'treemacs-nerd-icons)
@@ -339,8 +223,6 @@
 (keymap-global-set "C-x f" 'find-file)
 (keymap-global-set "C-z" 'vundo)
 (global-set-key [remap comment-dwim] 'comment-or-uncomment)
-(keymap-global-set "C-c a" 'shift-number-up)
-(keymap-global-set "C-c x" 'shift-number-down)
 
 ;; @ Fingertip
 ;; (dolist (hook '(emacs-lisp-mode-hook c-mode-hook lisp-mode-hook))
@@ -395,14 +277,238 @@
   (define-key global-map [remap downcase-word] 'downcase-any)
   (define-key global-map [remap capitalize-word] 'capitalize-any))
 
-  ;;; @6. LSP
+(setq elisp-fontify-semantically t)
+(require 'scala-mode)
+(require 'scala-ts-mode)
+(require 'kdl-mode)
+(when (treesit-available-p)
+  (setq major-mode-remap-alist
+        '((c-mode          . c-ts-mode)
+          (c++-mode        . c++-ts-mode)
+          (c-or-c++-mode . c-or-c++-ts-mode)
+          (conf-toml-mode  . toml-ts-mode)
+          (csharp-mode     . csharp-ts-mode)
+          (css-mode        . css-ts-mode)
+          (java-mode       . java-ts-mode)
+          (js-mode         . js-ts-mode)
+          (javascript-mode . js-ts-mode)
+          (js-json-mode    . json-ts-mode)
+          (python-mode     . python-ts-mode)
+          (ruby-mode       . ruby-ts-mode)
+          (sh-mode         . bash-ts-mode)
+          (verilog-mode    . verilog-ts-mode)
+          )
+        treesit-font-lock-level 4
+        )
+  ;; (add-hook 'emacs-lisp-mode-hook
+  ;;           (lambda () (treesit-parser-create 'elisp)))
+  (require 'qml-ts-mode)
+  )
 
+(add-to-list 'auto-mode-alist '("\\.pdf\\'" . pdf-view-mode))
+(add-to-list 'auto-mode-alist '("\\.ya?ml\\'" . yaml-ts-mode))
+(add-to-list 'auto-mode-alist '("\\.lua\\'" . lua-ts-mode))
+(add-to-list 'auto-mode-alist '("\\.scala\\'" . scala-mode))
+(add-to-list 'auto-mode-alist '("\\.kdl\\'" . kdl-mode))
+(add-to-list 'auto-mode-alist '("\\.do\\'" . tcl-mode))
+(add-to-list 'auto-mode-alist '("\\.xdc\\'" . tcl-mode))
+(add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
+(add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-ts-mode))
+(add-to-list 'auto-mode-alist
+             '("\\.\\(?:md\\|markdown\\|mkd\\|mdown\\|mkdn\\|mdwn\\)\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("README\\.md\\'" . gfm-mode))
+(with-eval-after-load 'typescript-ts-mode
+  (setq typescript-ts-mode-indent-offset 4))
+(with-eval-after-load 'css-mode
+  (setq css-indent-offset 4))
+
+
+(require 'eldoc-box)
+(require 'calibredb)
+(require 'nov)
+(require 'nov-xwidget)
+(require 'shrface)
+(add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
+;; ;; (define-key nov-mode-map (kbd "o") 'nov-xwidget-view)
+;; (evil-define-key 'normal nov-mode-map (kbd "o") 'nov-xwidget-view)
+;; (add-hook 'nov-mode-hook 'nov-xwidget-inject-all-files)
+;; (add-hook 'nov-xwidget-webkit-mode-hook '(lambda() (xwidget-webkit-zoom (xwidget-webkit-current-session) 1.5)))
+;; (setq visual-fill-column-center-text t)
+(with-eval-after-load 'shrface
+  (defun shrface-nov-setup ()
+    (unless shrface-toggle-bullets
+      (shrface-regexp))
+    (set-visited-file-name nil t)
+    (setq tab-width 8)
+    (if (string-equal system-type "android")
+        (setq-local touch-screen-enable-hscroll nil)))
+
+  (defun shrface-remove-blank-lines-at-the-end (start end)
+    "A fix for `shr--remove-blank-lines-at-the-end' which will remove image at the end of the document."
+    (save-restriction
+      (save-excursion
+        (narrow-to-region start end)
+        (goto-char end)
+        (when (and (re-search-backward "[^ \n]" nil t)
+                   (not (eobp)))
+          (forward-line 1)
+          (delete-region (point) (min (1+ (point)) (point-max)))))))
+
+  (defun shrface-shr-tag-pre-highlight (pre)
+    "Highlighting code in PRE."
+    (let* ((shr-folding-mode 'none)
+           (shr-current-font 'default)
+           (code (with-temp-buffer
+                   (shr-generic pre)
+                   ;; (indent-rigidly (point-min) (point-max) 2)
+                   (buffer-string)))
+           (lang (or (shr-tag-pre-highlight-guess-language-attr pre)
+                     (let ((sym (language-detection-string code)))
+                       (and sym (symbol-name sym)))))
+           (mode (and lang
+                      (shr-tag-pre-highlight--get-lang-mode lang))))
+      (shr-ensure-newline)
+      (shr-ensure-newline)
+      (setq start (point))
+      (insert
+       ;; (propertize (concat "#+BEGIN_SRC " lang "\n") 'face 'org-block-begin-line)
+       (or (and (fboundp mode)
+                (with-demoted-errors "Error while fontifying: %S"
+                  (shr-tag-pre-highlight-fontify code mode)))
+           code)
+       ;; (propertize "#+END_SRC" 'face 'org-block-end-line )
+       )
+      (shr-ensure-newline)
+      (setq end (point))
+      (pcase (frame-parameter nil 'background-mode)
+        ('light
+         (add-face-text-property start end '(:background "#D8DEE9" :extend t)))
+        ('dark
+         (add-face-text-property start end '(:background "#292b2e" :extend t))))
+      (shr-ensure-newline)
+      (insert "\n")))
+
+  (defvar shrface-nov-rendering-functions
+    (append '((img . nov-render-img)
+              (svg . nov-render-svg)
+              (title . nov-render-title)
+              (pre . shrface-shr-tag-pre-highlight)
+              (code . shrface-tag-code)
+              (form . eww-tag-form)
+              (input . eww-tag-input)
+              (button . eww-form-submit)
+              (textarea . eww-tag-textarea)
+              (select . eww-tag-select)
+              (link . eww-tag-link)
+              (meta . eww-tag-meta))
+            shrface-supported-faces-alist))
+
+  (defun shrface-nov-render-html ()
+    (require 'eww)
+    (let ((shrface-org nil)
+          (shr-bullet (concat (char-to-string shrface-item-bullet) " "))
+          (shr-table-vertical-line "|")
+          (shr-width 7000) ;; make it large enough, it would not fill the column (use visual-line-mode/writeroom-mode instead)
+          (shr-indentation 0) ;; remove all unnecessary indentation
+          (tab-width 8)
+          (shr-external-rendering-functions shrface-nov-rendering-functions)
+          (shrface-toggle-bullets nil)
+          (shrface-href-versatile t)
+          (shr-use-fonts nil)           ; nil to use default font
+          (shr-map nov-mode-map))
+
+      ;; HACK: `shr-external-rendering-functions' doesn't cover
+      ;; every usage of `shr-tag-img'
+      (cl-letf (((symbol-function 'shr-tag-img) 'nov-render-img))
+        (shr-render-region (point-min) (point-max)))
+      ;; workaround, need a delay to update the header line
+      ;; (run-with-timer 0.01 nil 'shrface-update-header-line)
+      ;; workaround, show annotations when document updates
+      (shrface-show-all-annotations)))
+  )
+
+(with-eval-after-load 'nov
+  (setq nov-text-width t)
+  (add-hook 'nov-mode-hook #'eldoc-mode)
+  (add-hook 'nov-mode-hook #'eldoc-box-hover-mode)
+  ;; (add-hook 'nov-mode-hook #'org-indent-mode)
+  ;; (add-hook 'nov-mode-hook #'shrface-nov-setup)
+  ;; (setq nov-render-html-function #'shrface-nov-render-html)
+  ;; (advice-add 'shr--remove-blank-lines-at-the-end :override #'shrface-remove-blank-lines-at-the-end)
+  (add-hook 'nov-mode-hook #'visual-line-mode)
+  ;; (add-hook 'nov-mode-hook #'visual-fill-column-mode)
+  ;; (add-hook 'nov-mode-hook #'(lambda() (set-fill-column 150)))
+  (add-hook 'nov-mode-hook #'(lambda ()
+                               (face-remap-add-relative 'variable-pitch :family "Charter" :height 1.4)))
+  )
+
+(require 'pdf-tools)
+(require 'pdf-occur)
+(require 'pdf-history)
+(require 'pdf-isearch)
+(require 'pdf-links)
+(require 'pdf-outline)
+(require 'pdf-misc)
+(require 'pdf-annot)
+(require 'pdf-sync)
+(require 'pdf-cache)
+;; (require 'pdf-virtual)
+;; (require 'pdf-loader)
+;; (with-eval-after-load 'pdf-tools
+;;   (setq pdf-view-use-scaling t
+;;         pdf-view-continuous t
+;;         pdf-anot-list-format '((page . 3)
+;;                                (type . 10)
+;;                                (contents . 50)
+;;                                (date . 24)))
+;;   (pdf-tools-install))
+
+;; (pdf-loader-install)
+(add-hook 'pdf-view-mode-hook 'pdf-history-minor-mode)
+(add-hook 'pdf-view-mode-hook 'pdf-isearch-minor-mode)
+(add-hook 'pdf-view-mode-hook 'pdf-links-minor-mode)
+(add-hook 'pdf-view-mode-hook 'pdf-outline-minor-mode)
+(add-hook 'pdf-view-mode-hook 'pdf-misc-size-indication-minor-mode)
+(add-hook 'pdf-view-mode-hook 'pdf-misc-context-menu-minor-mode)
+(add-hook 'pdf-view-mode-hook 'pdf-annot-minor-mode)
+(add-hook 'pdf-view-mode-hook 'pdf-sync-minor-mode)
+(add-hook 'pdf-view-mode-hook 'pdf-cache-prefetch-minor-mode)
+
+
+;;; @6. LSP
+
+(require 'markdown-mode)
+(define-key markdown-mode-map (kbd "C-c C-e") #'markdown-do)
 (add-to-list 'load-path "~/.emacs.d/site-lisp/corfu/extensions")
 (require 'corfu)
 (require 'corfu-popupinfo)
 (require 'yasnippet)
+(require 'yasnippet-capf)
 (yas-global-mode 1)
 (yas-minor-mode-on)
+
+(with-eval-after-load 'tempel
+  (defun tempel-setup-capf ()
+    (setq-local completion-at-point-functions
+                (cons #'tempel-complete
+                      completion-at-point-functions)))
+  (add-hook 'prog-mode-hook 'tempel-setup-capf)
+  (add-hook 'text-mode-hook 'tempel-setup-capf))
+
+;; (with-eval-after-load 'yasnippet
+;;   (add-hook 'yas-keymap-disable-hook
+;;             (lambda()
+;;               (or
+;;                (when (boundp 'corfu--frame)
+;;                  (and
+;;                   (frame-live-p corfu--frame)
+;;                   (frame-visible-p corfu--frame)))
+;;                (when (boundp 'acm-menu-frame)
+;;                  (and (frame-live-p acm-menu-frame)
+;;                       (frame-visible-p acm-menu-frame)))))))
+
+(require 'cape)
+(add-hook 'completion-at-point-functions #'cape-file)
 
 (lsp-enable-startup)
 
@@ -427,97 +533,65 @@
     (setq corfu-popupinfo-delay '(0.1 . 0.1)))
   (setq nerd-icons-corfu--space (propertize " " 'display '(space :width 0.8)))
   (add-to-list 'corfu-margin-formatters 'nerd-icons-corfu-formatter))
-(require 'verilog-ts-mode)
-(add-hook 'verilog-mode-hook 'corfu-mode)
-(add-hook 'verilog-ts-mode-hook 'corfu-mode)
 
-(with-eval-after-load 'yasnippet
-  (add-hook 'yas-keymap-disable-hook
-            (lambda()
-              (or
-               (when (boundp 'corfu--frame)
-                 (and
-                  (frame-live-p corfu--frame)
-                  (frame-visible-p corfu--frame)))
-               (when (boundp 'acm-menu-frame)
-                 (and (frame-live-p acm-menu-frame)
-                      (frame-visible-p acm-menu-frame)))))))
+(defun yas-setup-capf ()
+  "Set capf for yasnippets."
+  (setq-local completion-at-point-functions
+              (cons #'yasnippet-capf
+                    completion-at-point-functions)))
 
-(with-eval-after-load 'tempel
-  (defun tempel-setup-capf ()
-    ;; Add the Tempel Capf to `completion-at-point-functions'.
-    ;; `tempel-expand' only triggers on exact matches. Alternatively use
-    ;; `tempel-complete' if you want to see all matches, but then you
-    ;; should also configure `tempel-trigger-prefix', such that Tempel
-    ;; does not trigger too often when you don't expect it. NOTE: We add
-    ;; `tempel-expand' *before* the main programming mode Capf, such
-    ;; that it will be tried first.
-    (setq-local completion-at-point-functions
-                (cons #'tempel-complete
-                      completion-at-point-functions)))
-  (add-hook 'prog-mode-hook 'tempel-setup-capf)
-  (add-hook 'text-mode-hook 'tempel-setup-capf))
+(add-hook 'prog-mode-hook 'yas-setup-capf)
 
-(require 'cape)
-(add-hook 'completion-at-point-functions #'cape-file)
-;; (add-hook 'completion-at-point-functions #'cape-dabbrev)
-;; (add-hook 'completion-at-point-functions #'cape-elisp-block)
+(setq yas-prompt-functions '(yas-no-prompt))
 
-(require 'company)
 (require 'eglot)
 (with-eval-after-load 'eglot
+  (add-to-list 'eglot-server-programs
+               '((verilog-mode verilog-ts-mode) .
+                 ("verible-verilog-ls"
+                  "--push_diagnostic_notifications"
+                  "--rules"
+                  "-explicit-function-lifetime,
+                  -explicit-parameter-storage-type,
+                  -unpacked-dimensions-range-ordering,
+                  -forbid-line-continuations,
+                  -parameter-name-style,
+                  -line-length,
+                  -always-comb"
+                  ;; "--assignment_statement_alignment" "align"
+                  ;; "--case_items_alignment" "align"
+                  ;; "--class_member_variable_alignment" "align"
+                  ;; "--distribution_items_alignment" "align"
+                  ;; "--enum_assignment_statement_alignment" "align"
+                  ;; "--formal_parameters_alignment" "align"
+                  ;; "--module_net_variable_alignment" "align"
+                  ;; "--named_parameter_alignment" "align"
+                  ;; "--named_port_alignment" "align"
+                  ;; "--port_declarations_alignment" "align"
+                  ;; "--struct_union_members_alignment" "align"
+                  ;; "--try_wrap_long_lines" "align"
+                  )
+                 ))
+  ;; (add-to-list 'eglot-server-programs
+  ;;              `((scala-mode scala-ts-mode)
+  ;;                . ,(alist-get 'scala-mode eglot-server-programs)))
+  (add-to-list 'eglot-server-programs
+               `((scala-mode scala-ts-mode)
+                 . ("env" "JAVA_HOME=/usr/lib64/jvm/java-21-openjdk-21" "metals-emacs")))
+  (setq project-vc-extra-root-markers '(".dir-locals.el"))
   (setq eglot-send-changes-idle-time 0
         eglot-code-action-indications '(eglot-hint))
-  (add-to-list 'eglot-server-programs
-               '((tex-mode context-mode texinfo-mode bibtex-mode)
-                 . ("texlab")))
+  ;; (cl-defmethod eglot-handle-notification :after
+  ;;   (_server (_method (eql textDocument/publishDiagnostics)) &key uri
+  ;;            &allow-other-keys)
+  ;;   (when-let ((buffer (find-buffer-visiting (eglot-uri-to-path uri))))
+  ;;     (with-current-buffer buffer
+  ;;       (if (and (eq nil flymake-no-changes-timeout)
+  ;;                (not (buffer-modified-p)))
+  ;;           (flymake-start t)))))
   ;; (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
-  (defun my/eglot-capf ()
-    ;; (setq-local completion-at-point-functions
-    ;;             (list (cape-capf-super
-    ;;                    #'eglot-completion-at-point
-    ;;                    ;; #'tempel-complete
-    ;;                    ;; (mapcar #'cape-company-to-capf
-    ;;                    ;;         (list #'company-yasnippet))
-    ;;                    (cape-company-to-capf #'company-yasnippet)
-    ;;                    #'cape-file)))
-    ;; (let* ((temp-functions '()))
-    ;;   (dolist (fun completion-at-point-functions)
-    ;;     (when (not (eq fun 't))
-    ;;       (add-to-list 'temp-functions fun)))
-    ;;   (add-to-list 'temp-functions (cape-company-to-capf #'company-yasnippet))
-    ;;   (add-to-list 'temp-functions (cape-company-to-capf #'company-files))
-    ;;   (setq-local completion-at-point-functions (list (apply #'cape-capf-super temp-functions)))
-    ;; (setq temp-functions (append (list (cape-capf-super
-    ;;                                     (cape-company-to-capf #'company-yasnippet)
-    ;;                                     (cape-company-to-capf #'company-files)
-    ;;                                     ))
-    ;;                              (reverse temp-functions)))
-    (setq-local completion-at-point-functions (list (cape-capf-super
-                                                     #'eglot-completion-at-point
-                                                     (cape-company-to-capf #'company-yasnippet)
-                                                     (cape-company-to-capf #'company-files))))
-    ;; (setq-local completion-at-point-functions
-    ;;             (append (list
-    ;;                      ;; #'tempel-complete
-    ;;                      ;; (mapcar #'cape-company-to-capf
-    ;;                      ;;         (list #'company-yasnippet))
-    ;;                      (cape-capf-super
-    ;;                       (cape-company-to-capf #'company-yasnippet)
-    ;;                       (cape-company-to-capf #'company-files)
-    ;;                       #'cape-file))
-    ;;                     completion-at-point-functions))
-    )
-  (add-hook 'eglot-managed-mode-hook #'my/eglot-capf)
   ;; (eglot-booster-mode)
   )
-
-(add-hook 'LaTeX-mode-hook
-          (lambda ()
-            ;; (add-to-list 'completion-at-point-functions #'cape-tex)
-            (setq-local completion-at-point-functions
-                        (append (list #'cape-tex) completion-at-point-functions))
-            ))
 
 (with-eval-after-load 'lsp-bridge
   (add-hook 'lsp-bridge-mode-hook 'yas/minor-mode)
@@ -537,7 +611,8 @@
    acm-enable-tabnine nil
    acm-enable-citre t
    acm-enable-capf t
-   ;; lsp-bridge-enable-log t
+   lsp-bridge-enable-log t
+   lsp-bridge-log-level 'debug
    lsp-bridge-enable-signature-help t
    lsp-bridge-enable-inlay-hint t
    lsp-bridge-enable-diagnostics nil
@@ -592,11 +667,11 @@
 ;;      arg))
 ;;   (keymap-set dired-mode-map "e" 'dired-open-externally))
 (require 'dirvish)
+(require 'dirvish-side)
 (dirvish-override-dired-mode)
 
 (with-eval-after-load 'dirvish
   ;;   ;; (dirvish-peek-mode)
-  ;;   (dirvish-override-dired-mode)
   ;;   (dirvish-side-follow-mode)
   ;;   ;; (add-hook 'dirvish-setup-hook 'dirvish-emerge-mode)
   (setq dirvish-attributes '(vc-state nerd-icons git-msg file-size subtree-state collapse file-time)
@@ -635,8 +710,8 @@
 ;; @9. INPUT
 
 (with-eval-after-load 'rime
-  (set-face-attribute 'rime-default-face nil :height 1.2)
-  (set-face-attribute 'rime-highlight-candidate-face nil :height 1.2)
+  ;; (set-face-attribute 'rime-default-face nil :height 1.2)
+  ;; (set-face-attribute 'rime-highlight-candidate-face nil :height 1.2)
   (set-face-attribute 'rime-preedit-face nil :underline t
                       :inverse-video 'unspecified)
   (defun rime-predicate-meow-mode-p ()
@@ -686,7 +761,7 @@
   (define-key rime-mode-map (kbd "C-t") 'rime-inline-ascii)
   (define-key minibuffer-mode-map (kbd "C-t") 'rime-inline-ascii)
   (setq default-input-method "rime"
-        rime-user-data-dir "~/.local/share/fcitx5/rime"    ;; "~/.emacs.d/rime/"
+        rime-user-data-dir "~/.emacs.d/rime"    ;; "~/.emacs.d/rime/"
         rime-show-candidate 'posframe
         rime-show-preedit 't
         rime-translate-keybindings '("C-f" "C-b" "C-n" "C-p" "C-g" "<left>" "<right>" "<up>" "<down>" "<prior>" "<next>" "<delete>" "C-h")
@@ -721,32 +796,12 @@
 
 (keymap-global-set "C-\\" 'rime-commit1-and-toggle-input-method)
 
-;; (setq default-input-method "pyim")
-;; (setq pyim-page-length 7)
-;; (setq pyim-page-posframe-border-width 3)
-;; (pyim-default-scheme 'wubi)
-;; (setq pyim-page-tooltip 'posframe)
-;; (if (string-equal (symbol-name (car custom-enabled-themes)) "modus-operandi")
-;; (progn
-;; (set-face-attribute 'pyim-page nil :inherit 'default :background "#EEE1B3" :foreground "#000000")
-;; (set-face-attribute 'pyim-page-border nil :inherit 'pyim-page :background "#000000"))
-;; (set-face-attribute 'pyim-page-border nil :inherit 'pyim-page :background "#D7DCC8"))
-
-;; ;; (pyim-wbdict-v86-single-enable)
-;; (pyim-wbdict-v98-morphe-enable)
-;; (setq-default pyim-english-input-switch-functions
-;; '(pyim-probe-isearch-mode
-;; pyim-probe-dynamic-english
-;; pyim-probe-programe-mode
-;; pyim-probe-org-structure-template))
 ;; (global-set-key "\C-\\" 'toggle-input-method)
-;; (global-set-key "\M-i" #'pyim-convert-string-at-point)
-
-;; (global-set-key "\M-p" 'pyim-process-toggle-input-ascii)
-;; (global-set-key "\M-j" 'pyim-toggle-input-ascii)
 
 ;; @11. ORG
-
+;; (require 'markdown-ts-mode)
+;; (markdown-ts-setup)
+(require 'org)
 (add-to-list 'load-path "~/.emacs.d/site-lisp/org-roam")
 (add-to-list 'load-path "~/.emacs.d/site-lisp/org-modern-indent")
 (add-to-list 'load-path "~/.emacs.d/site-lisp/org-modern")
@@ -764,6 +819,8 @@
 ;;                         'append)
 
 (with-eval-after-load 'org
+  (require 'org-modern)
+  (require 'org-modern-indent)
   (global-org-modern-mode)
   (setq org-hide-emphasis-markers t
         org-pretty-entities t
@@ -817,6 +874,7 @@
             (electric-indent-local-mode)
             (setq-local company-backends '(company-files company-keywords))
             (setq org-appear-autolinks t)
+            (require 'org-appear)
             (org-appear-mode)
             (org-cdlatex-mode)
             (custom-theme-set-faces
@@ -845,9 +903,8 @@
              '(org-block-end-line ((t (:inherit fixed-pitch))))
              '(fill-column-indicator ((t (:inherit (shadow fixed-pitch))))))
             (variable-pitch-mode)
-            ;; (company-mode)
-            ;; (corfu-mode)
             (visual-line-mode)
+            (require 'valign)
             (valign-mode)))
 
 ;; (with-eval-after-load 'org
@@ -906,19 +963,24 @@
             (setq org-list-allow-alphabetical t)
             (add-hook 'before-save-hook 'time-stamp nil 'local)))
 
-(add-hook 'org-mode-hook #'org-modern-indent-mode 100)
+(with-eval-after-load 'org-modern-indent
+  (add-hook 'org-mode-hook #'org-modern-indent-mode 90))
 
-(with-eval-after-load 'denote
-  (setq denote-directory "/run/media/kunh/Elements/Personal/denote"))
+(setq denote-directory "~/Documents/Personal/denote")
 
 (with-eval-after-load 'org-noter
-  (setq org-noter-notes-search-path '("/run/media/kunh/Elements/Personal/denote")
+  (setq org-noter-notes-search-path `(,denote-directory)
         org-noter-auto-save-last-location t)
   )
 
+(add-to-list 'load-path "~/.emacs.d/site-lisp/with-editor/lisp")
+(add-to-list 'load-path "~/.emacs.d/site-lisp/magit/lisp")
+(load "~/.emacs.d/site-lisp/transient/lisp/transient.el")
+(require 'magit)
+(require 'org-roam)
 (keymap-global-set "C-c n n" 'org-noter)
 (keymap-global-set "C-c n f" 'org-roam-node-find)
-(setq org-roam-directory "/run/media/kunh/Elements/Personal/org-roam"    ; 设置 org-roam 笔记的默认目录，缺省值 /home/leo/org-roam
+(setq org-roam-directory "~/Documents/Personal/org-roam"    ; 设置 org-roam 笔记的默认目录，缺省值 /home/leo/org-roam
       org-roam-db-gc-threshold most-positive-fixnum
       org-roam-mode-sections '(org-roam-backlinks-section
                                org-roam-reflinks-section
@@ -975,56 +1037,69 @@
            :unnarrowed t)))
   (org-roam-db-autosync-mode))
 
-    ;;; @12. VERILOG
+;;; @12. VERILOG
+(require 'verilog-ts-mode)
+(setq verilog-indent-level 2
+      verilog-indent-level-declaration 2
+      verilog-indent-level-module 2
+      verilog-indent-level-behavioral 2
+      verilog-auto-newline nil
+      verilog-ts-indent-level 2
+      )
 
-(add-hook 'verilog-ts-mode-hook
-          (lambda ()
-            (require 'eglot)
-            (setq indent-bars-spacing-override verilog-ts-indent-level
-                  verilog-auto-endcomments nil
-                  verilog-case-indent 4
-                  verilog-indent-level 4
-                  verilog-indent-level-module 4
-                  verilog-indent-level-behavioral 4
-                  verilog-indent-level-declaration 4
-                  verilog-cexp-indent 4
-                  verilog-auto-newline nil
-                  )
-            (indent-bars-reset)))
+(defconst verilog-hs-block-start-keywords-re
+  (eval-when-compile
+    (concat "\\("
+            "\\(" (regexp-opt '("(" "{" "[")) "\\)"
+            "\\|"
+            "\\(" (verilog-regexp-words
+                   '("begin"
+                     "fork"
+                     "clocking"
+                     "function"
+                     "module"
+                     "covergroup"
+                     "property"
+                     "task"
+                     "generate"
+                     "`ifdef" "`ifndef"))
+            "\\)" "\\)")))
 
-    ;;; @13. READER
+(defconst verilog-hs-block-end-keywords-re
+  (eval-when-compile
+    (concat "\\("
+            "\\(" (regexp-opt '(")" "}" "]")) "\\)"
+            "\\|"
+            "\\(" (verilog-regexp-words
+                   '("end"
+                     "join" "join_any" "join_none"
+                     "endclocking"
+                     "endfunction"
+                     "endmodule"
+                     "endgroup"
+                     "endproperty"
+                     "endtask"
+                     "endgenerate"
+                     "`endif"))
+            "\\)" "\\)")))
 
-(require 'pdf-tools)
-(require 'pdf-occur)
-(require 'pdf-loader)
-(with-eval-after-load 'pdf-tools
-  (setq pdf-view-use-scaling t
-        pdf-view-continuous t
-        pdf-anot-list-format '((page . 3)
-                               (type . 10)
-                               (contents . 50)
-                               (date . 24)))
-  (pdf-tools-install))
-
-;; (require 'calibredb)
-
-;; (require 'nov-xwidget)
-(add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
-(add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
-(add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-ts-mode))
-;; ;; (define-key nov-mode-map (kbd "o") 'nov-xwidget-view)
-;; (evil-define-key 'normal nov-mode-map (kbd "o") 'nov-xwidget-view)
-;; (add-hook 'nov-mode-hook 'nov-xwidget-inject-all-files)
-;; (add-hook 'nov-xwidget-webkit-mode-hook '(lambda() (xwidget-webkit-zoom (xwidget-webkit-current-session) 1.5)))
-;; (setq visual-fill-column-center-text t)
-(setq typescript-ts-mode-indent-offset 4
-      css-indent-offset 4)
-(with-eval-after-load 'nov
-  (setq nov-text-width t)
-  (add-hook 'nov-mode-hook 'visual-line-mode)
-  (add-hook 'nov-mode-hook 'visual-fill-column-mode)
-  (add-hook 'nov-mode-hook '(lambda() (set-fill-column 150)))
-  )
+(defun verilog-ext-hs-setup ()
+  "Configure `hideshow'."
+  (dolist (mode '((verilog-mode    . verilog-forward-sexp-function)
+                  (verilog-ts-mode . verilog-ts-forward-sexp)))
+    (add-to-list 'hs-special-modes-alist `(,(car mode)
+                                           ,verilog-hs-block-start-keywords-re
+                                           ,verilog-hs-block-end-keywords-re
+                                           nil
+                                           ,(cdr mode))))
+  (dolist (hook '(verilog-mode-hook verilog-ts-mode-hook))
+    (add-hook hook #'hs-minor-mode))
+  ;; Workaround to enable `hideshow' on first file visit with lazy loading using
+  ;; :config section with `use-package'
+  (when (member major-mode '(verilog-mode verilog-ts-mode))
+    (hs-minor-mode 1)))
+(verilog-ext-hs-setup)
+;; (setq verilog-linter "verilator --lint-only")
 
 ;;; @14. HYDRA
 (require 'hydra)
@@ -1050,7 +1125,7 @@
   ("Y" avy-copy-region))
 
 (defhydra hydra-zoom (global-map "<f2>")
-  "zoom"
+  "Zoom."
   ("g" text-scale-increase "in")
   ("l" text-scale-decrease "out")
   ("r" (text-scale-set 0) "reset")
@@ -1157,37 +1232,43 @@
 ;; On demand loading, leads to faster startup time.
 (with-eval-after-load 'citar
   (setq org-cite-global-bibliography '("/run/media/kunh/Elements/Zotero Bib/My Library.bib")
-        citar-notes-paths '("/run/media/kunh/Elements/Personal/denote")
+        citar-notes-paths '("~/Documents/Personal/denote")
         citar-library-paths '("/run/media/kunh/Elements/Zotero Library")
         org-cite-insert-processor 'citar
         org-cite-follow-processor 'citar
         org-cite-activate-processor 'citar
         citar-bibliography org-cite-global-bibliography)
+  (require 'citar-embark)
   (citar-embark-mode)
+  (require 'citar-denote)
   (citar-denote-mode)
   )
-;; (add-hook 'LaTeX-mode-hook 'citar-capf-setup)
-(add-hook 'org-mode-hook 'citar-capf-setup)
-;; (keymap-global-set "C-c c c" 'citar-create-note)
-(keymap-global-set "C-c c n" 'citar-denote-open-note)
-(keymap-global-set "C-c c d" 'citar-denote-dwim)
-(keymap-global-set "C-c c e" 'citar-denote-open-reference-entry)
-(keymap-global-set "C-c c a" 'citar-denote-add-citekey)
-(keymap-global-set "C-c c k" 'citar-denote-remove-citekey)
-(keymap-global-set "C-c c r" 'citar-denote-find-reference)
-(keymap-global-set "C-c c l" 'citar-denote-link-reference)
-(keymap-global-set "C-c c f" 'citar-denote-find-citation)
-(keymap-global-set "C-c c x" 'citar-denote-nocite)
-(keymap-global-set "C-c c y" 'citar-denote-cite-nocite)
-(keymap-global-set "C-c c z" 'citar-denote-nobib)
 
-(pdf-loader-install)
+;; (require 'citar-capf)
+;; (add-hook 'org-mode-hook 'citar-capf-setup)
+;; ;; (keymap-global-set "C-c c c" 'citar-create-note)
+;; (keymap-global-set "C-c c n" 'citar-denote-open-note)
+;; (keymap-global-set "C-c c d" 'citar-denote-dwim)
+;; (keymap-global-set "C-c c e" 'citar-denote-open-reference-entry)
+;; (keymap-global-set "C-c c a" 'citar-denote-add-citekey)
+;; (keymap-global-set "C-c c k" 'citar-denote-remove-citekey)
+;; (keymap-global-set "C-c c r" 'citar-denote-find-reference)
+;; (keymap-global-set "C-c c l" 'citar-denote-link-reference)
+;; (keymap-global-set "C-c c f" 'citar-denote-find-citation)
+;; (keymap-global-set "C-c c x" 'citar-denote-nocite)
+;; (keymap-global-set "C-c c y" 'citar-denote-cite-nocite)
+;; (keymap-global-set "C-c c z" 'citar-denote-nobib)
 
 (eval-after-load "tex-mode"
   '(progn
-     (load "auctex.el" nil t t)
-     (load "preview-latex.el" nil t t)
+     ;; (load "auctex.el" nil t t)
+     ;; (load "preview-latex.el" nil t t)
+     ;; (load "preview-latex.el" nil t t)
      ;; (require 'org-table)
+     (require 'auctex)
+     (require 'cdlatex)
+     (load "~/.emacs.d/site-lisp/auctex/tex.el")
+     (load "~/.emacs.d/site-lisp/auctex/latex.el")
      ))
 
 (defun orgtbl-next-field-maybe ()
@@ -1207,7 +1288,6 @@
             (lambda ()
               (and (bound-and-true-p lsp-bidge-mode)
                    (acm-frame-visible-p acm-menu-frame))))
-  ;; (load "~/.emacs.d/lisp/auctex-latexmk.el")
   (setq TeX-auto-save t
         TeX-parse-self t
         TeX-fold-auto t
@@ -1236,26 +1316,34 @@
   (add-to-list 'texmathp-tex-commands1 '("lstlisting" env-off))
   )
 
-(setq adaptive-wrap-extra-indent 0)
-
 (dolist (hook '(LaTeX-mode-hook tex-mode-hook))
   (add-hook hook
             (lambda()
               ;; (auctex-latexmk-setup)
               ;; (electric-indent-local-mode)
               (electric-indent-mode -1)
-              (adaptive-wrap-prefix-mode)
+              ;; (require 'adaptive-warp)
+              ;; (setq adaptive-wrap-extra-indent 0)
+              ;; (adaptive-wrap-prefix-mode)
               (setq TeX-command-default "XeLaTeX")
               ;; (TeX-global-PDF-mode)
               (TeX-PDF-mode-on)
+              (LaTeX-math-mode 1)
+              (setq TeX-electric-math t)
               (TeX-fold-mode 1)
               (turn-on-cdlatex)
               (turn-on-reftex)
               (visual-line-mode)
+              (outline-minor-mode)
               ;; (keymap-set cdlatex-mode-map "<tab>" 'cdlatex-tab-maybe)
               ;; (turn-on-orgtbl)
               ;; (keymap-set orgtbl-mode-map "<tab>" 'orgtbl-next-field-maybe)
+              ;; (citar-capf-setup)
+              ;; (setq-local completion-at-point-functions
+              ;;             (append (list #'cape-tex) completion-at-point-functions))
               )))
+(keymap-set outline-minor-mode-map "C-<tab>" 'outline-toggle-children)
+;; (keymap-set outline-minor-mode-map "M-[" 'outline-toggle-children)
 
   ;;; @17. BASE
 ;; (add-hook 'emacs-startup-hook
@@ -1276,10 +1364,10 @@
 (setq global-auto-revert-non-file-buffers t
       auto-revert-interval 1)
 
-(when (eq system-type 'gnu/linux)
-  (with-eval-after-load 'info
-    (add-to-list 'Info-directory-list "/usr/local/texlive/2024/texmf-dist/doc/info")
-    (add-to-list 'Info-directory-list "/usr/local/share/info")))
+;; (when (eq system-type 'gnu/linux)
+;;   (with-eval-after-load 'info
+;;     (add-to-list 'Info-directory-list "/usr/local/texlive/2024/texmf-dist/doc/info")
+;;     (add-to-list 'Info-directory-list "/usr/local/share/info")))
 
 
 (setq hl-line-sticky-flag nil
@@ -1329,6 +1417,8 @@
 (setq
  ;; auto-save-timeout 30
  ;; auto-save-interval 10
+ auto-save-default nil
+ save-silently t
  auto-save-no-message t
  )
 
@@ -1457,16 +1547,6 @@
                   (load "~/.emacs.d/site-lisp/iscroll/iscroll.el"))
               (iscroll-mode))))
 
-(add-to-list 'auto-mode-alist '("\\.pdf\\'" . pdf-view-mode))
-(add-to-list 'auto-mode-alist '("\\.ya?ml\\'" . yaml-ts-mode))
-(add-to-list 'auto-mode-alist '("\\.lua\\'" . lua-ts-mode))
-(add-to-list 'auto-mode-alist '("\\.scala\\'" . scala-mode))
-
-
-(add-to-list 'load-path "~/.emacs.d/site-lisp/with-editor/lisp")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/magit/lisp")
-(require 'magit)
-
 (with-eval-after-load 'magit
   (setq magit-diff-refine-hunk t
         magit-log-section-commit-count 20
@@ -1490,6 +1570,7 @@
                                      magit-insert-unpulled-from-pushremote
                                      magit-insert-unpulled-from-upstream)))
 
+(require 'aggressive-indent)
 (dolist
     (hook
      '(emacs-lisp-mode-hook
@@ -1500,72 +1581,25 @@
 ;; (dolist (mode '(verilog-mode org-mode term-mode))
 ;;   (add-to-list 'aggressive-indent-excluded-modes mode))
 
-    ;;; Visual Repalcement
-(keymap-global-set "C-c r" 'vr/replace)
-(keymap-global-set "C-c m" 'vr/mc-mark)
+;;; Visual Repalcement
+(keymap-global-set "C-c r" 'replace-regexp)
 
-;; (add-hook 'prog-mode-hook 'hs-minor-mode)
-
+(require 'hideshow)
+(dolist (hook '(emacs-lisp-mode-hook c-mode-hook c-ts-mode-hook c++-mode-hook c++-ts-mode-hook
+                                     verilog-mode-hook verilog-ts-mode-hook))
+  (add-hook hook 'hs-minor-mode))
 ;; 折叠代码块，以下是额外启用了 :box t 属性使得提示更加明显
 (defconst hideshow-folded-face
   '(:inherit font-lock-comment-face :box t))
 
 (setq hs-set-up-overlay 'hideshow-folded-overlay-fn)
-
-(with-eval-after-load 'multiple-cursors
-  (keymap-global-set "C-S-c C-S-c" 'mc/edit-lines)
-  (keymap-global-set "C->" 'mc/mark-next-like-this)
-  (keymap-set mc/keymap (kbd "<return>") nil))
+;; (keymap-global-set "C-<tab>" 'hs-toggle-hiding)
+(keymap-set hs-minor-mode-map "C-<tab>" 'hs-toggle-hiding)
 
 (require 'mwim)
 (global-set-key [remap move-beginning-of-line]
                 'mwim-beginning-of-code-or-line-or-comment)
 (global-set-key [remap move-end-of-line] 'mwim-end-of-code-or-line)
-
-;; (c-add-style
-;;  "freebsd"
-;;  '(;; "bsd"
-;;    (c-basic-offset . 4)    ; 设置缩进为4个空格
-;;    (c-offsets-alist
-;;     (statement-cont . c-lineup-assignments)  ; 连续语句的缩进方式
-;;     (case-label . 0)        ; case标签缩进为0
-;;     (substatement-open . 0) ; 子语句的开放括号不缩进
-;;     (arglist-intro . +)     ; 函数参数列表的起始缩进
-;;     (arglist-cont . 0)      ; 函数参数列表的续行缩进
-;;     (arglist-cont-nonempty . c-lineup-arglist)  ; 函数参数列表非空时的续行缩进方式
-;;     (arglist-close . 0)     ; 函数参数列表的关闭括号不缩进
-;;     (inextern-lang . 0)     ; 在extern语言中的缩进
-;;     (inline-open . 0)       ; 内联函数的开放括号不缩进
-;;     (namespace-open . 0)    ; 命名空间的开放括号不缩进
-;;     (innamespace . 0)       ; 在命名空间中的缩进
-;;     (label . 0)             ; 标签不缩进
-;;     )))
-
-;; (add-to-list 'c-default-style '(c-mode . "freebsd"))
-;; (add-to-list 'c-default-style '(c++-mode . "freebsd"))
-
-(when (treesit-available-p)
-  (setq major-mode-remap-alist
-        '((c-mode          . c-ts-mode)
-          (c++-mode        . c++-ts-mode)
-          (c-or-c++-mode . c-or-c++-ts-mode)
-          (conf-toml-mode  . toml-ts-mode)
-          (csharp-mode     . csharp-ts-mode)
-          (css-mode        . css-ts-mode)
-          (java-mode       . java-ts-mode)
-          (js-mode         . js-ts-mode)
-          (javascript-mode . js-ts-mode)
-          (js-json-mode    . json-ts-mode)
-          (python-mode     . python-ts-mode)
-          (ruby-mode       . ruby-ts-mode)
-          (sh-mode         . bash-ts-mode)
-          (verilog-mode    . verilog-ts-mode)
-          )
-        treesit-font-lock-level 4
-        )
-  ;; (add-hook 'emacs-lisp-mode-hook
-  ;;           (lambda () (treesit-parser-create 'elisp)))
-  )
 
 (setq popper-reference-buffers
       '("\\*Messages\\*"
@@ -1600,9 +1634,9 @@
 
 (defun popper-display-popup-adaptive (buffer &optional alist)
   "Display popup-buffer BUFFER at the bottom of the screen.
-  ALIST is an association list of action symbols and values.  See
-  Info node `(elisp) Buffer Display Action Alists' for details of
-  such alists."
+ALIST is an association list of action symbols and values.  See
+Info node `(elisp) Buffer Display Action Alists' for details of
+such alists."
   (if (and (> (window-pixel-height) (window-pixel-width))
            (or (and popper-open-popup-alist
                     (eq (window-parameter (caar popper-open-popup-alist) 'window-side)
@@ -1626,9 +1660,10 @@
 
 (require 'popper)
 (require 'popper-echo)
-(keymap-global-set "C-<tab>" 'popper-toggle)
+(keymap-global-set "M-<tab>" 'popper-toggle)
 (keymap-global-set "M-`" 'popper-cycle)
 (keymap-global-set "C-M-`" 'popper-toggle-type)
+;; (global-tab-line-mode +1)
 (popper-mode +1)
 (popper-echo-mode +1)
 
@@ -1643,14 +1678,102 @@
    ;; '(:face default :blend 0.4)
    indent-bars-treesit-support t
    indent-bars-no-descend-string t
+   indent-bars-no-descend-lists t
    indent-bars-treesit-ignore-blank-lines-types '("module")
    indent-bars-width-frac 0.2
    indent-bars-color '(highlight :face-bg t :blend 0.7)
    indent-bars-display-on-blank-lines t
-   ))
+   )
+  (defun indent-bars--guess-spacing ()
+    "Get indentation spacing of current buffer.
+Adapted from `highlight-indentation-mode'."
+    (cond
+     (indent-bars-spacing-override)
+     ((and (derived-mode-p 'verilog-mode) (boundp 'verilog-indent-level))
+      verilog-indent-level)
+     ((and (derived-mode-p 'ada-mode) (boundp 'ada-indent))
+      ada-indent)
+     ((and (derived-mode-p 'ada-ts-mode) (boundp 'ada-ts-mode-indent-offset))
+      ada-ts-mode-indent-offset)
+     ((and (derived-mode-p 'gpr-mode) (boundp 'gpr-indent))
+      gpr-indent)
+     ((and (derived-mode-p 'gpr-ts-mode) (boundp 'gpr-ts-mode-indent-offset))
+      gpr-ts-mode-indent-offset)
+     ((and (derived-mode-p 'python-mode) (boundp 'py-indent-offset))
+      py-indent-offset)
+     ((and (derived-mode-p 'python-mode 'python-base-mode) (boundp 'python-indent-offset))
+      python-indent-offset)
+     ((and (derived-mode-p 'ruby-mode) (boundp 'ruby-indent-level))
+      ruby-indent-level)
+     ((and (derived-mode-p 'scala-mode) (boundp 'scala-indent:step))
+      scala-indent:step)
+     ((and (derived-mode-p 'scala-mode) (boundp 'scala-mode-indent:step))
+      scala-mode-indent:step)
+     ((and (derived-mode-p 'scala-ts-mode) (boundp 'scala-ts-indent-offset))
+      scala-ts-indent-offset)
+     ((and (derived-mode-p 'rust-ts-mode) (boundp 'rust-ts-mode-indent-offset))
+      rust-ts-mode-indent-offset)
+     ((and (or (derived-mode-p 'scss-mode) (derived-mode-p 'css-mode))
+	       (boundp 'css-indent-offset))
+      css-indent-offset)
+     ((and (derived-mode-p 'nxml-mode) (boundp 'nxml-child-indent))
+      nxml-child-indent)
+     ((and (derived-mode-p 'coffee-mode) (boundp 'coffee-tab-width))
+      coffee-tab-width)
+     ((and (derived-mode-p 'js-mode) (boundp 'js-indent-level))
+      js-indent-level)
+     ((and (derived-mode-p 'js2-mode) (boundp 'js2-basic-offset))
+      js2-basic-offset)
+     ((and (derived-mode-p 'typescript-ts-mode) (boundp 'typescript-ts-mode-indent-offset))
+      typescript-ts-mode-indent-offset)
+     ((and (derived-mode-p 'sws-mode) (boundp 'sws-tab-width))
+      sws-tab-width)
+     ((and (derived-mode-p 'web-mode) (boundp 'web-mode-markup-indent-offset))
+      web-mode-markup-indent-offset)
+     ((and (derived-mode-p 'web-mode) (boundp 'web-mode-html-offset)) ; old var
+      web-mode-html-offset)
+     ((and (local-variable-p 'c-basic-offset) (numberp c-basic-offset))
+      c-basic-offset)
+     ((and (local-variable-p 'c-ts-common-indent-offset)
+	       (symbolp c-ts-common-indent-offset)
+	       (numberp (symbol-value c-ts-common-indent-offset)))
+      (symbol-value c-ts-common-indent-offset))
+     ((and (derived-mode-p 'yaml-mode) (boundp 'yaml-indent-offset))
+      yaml-indent-offset)
+     ((and (derived-mode-p 'yaml-pro-mode) (boundp 'yaml-pro-indent))
+      yaml-pro-indent)
+     ((and (derived-mode-p 'elixir-mode) (boundp 'elixir-smie-indent-basic))
+      elixir-smie-indent-basic)
+     ((and (derived-mode-p 'lisp-data-mode) (boundp 'lisp-body-indent))
+      lisp-body-indent)
+     ((and (derived-mode-p 'cobol-mode) (boundp 'cobol-tab-width))
+      cobol-tab-width)
+     ((or (derived-mode-p 'go-ts-mode) (derived-mode-p 'go-mode))
+      tab-width)
+     ((derived-mode-p 'nix-mode)
+      tab-width)
+     ((derived-mode-p 'makefile-mode)
+      tab-width)
+     ((and (derived-mode-p 'nix-ts-mode) (boundp 'nix-ts-mode-indent-offset))
+      nix-ts-mode-indent-offset)
+     ((and (derived-mode-p 'json-ts-mode) (boundp 'json-ts-mode-indent-offset))
+      json-ts-mode-indent-offset)
+     ((and (derived-mode-p 'json-mode) (boundp 'js-indent-level))
+      js-indent-level)
+     ((and (derived-mode-p 'sh-base-mode) (boundp 'sh-basic-offset))
+      sh-basic-offset)
+     ((and (derived-mode-p 'java-ts-mode) (boundp 'java-ts-mode-indent-offset))
+      java-ts-mode-indent-offset)
+     ((and (derived-mode-p 'tcl-mode) (boundp 'tcl-indent-level))
+      tcl-indent-level)
+     ((and (derived-mode-p 'haml-mode) (boundp 'haml-indent-offset))
+      haml-indent-offset)
+     ((and (boundp 'standard-indent) standard-indent))
+     (t 4))) 				; backup
+  )
 
 (require 'consult)
-
+(require 'consult-xref)
 ;; (autoload 'consult-buffer "consult" nil t)
 ;; (autoload 'consult-line "consult" nil t)
 (keymap-global-set "C-x l" 'consult-line)
@@ -1687,8 +1810,10 @@
 (require 'vertico-reverse)
 (require 'vertico-indexed)
 (require 'vertico-mouse)
+(require 'vertico-buffer)
 (require 'vertico-multiform)
 (require 'vertico-sort)
+(require 'vertico-suspend)
 (require 'embark)
 (require 'marginalia)
 (require 'standard-themes)
@@ -1718,7 +1843,8 @@
             '((file grid)
               (consult-grep buffer)
               (consult-ripgrep buffer))
-            vertico-cycle t)
+            vertico-cycle t
+            vertico-sort-function 'vertico-sort-history-alpha)
       (keymap-global-set "C-'" #'vertico-suspend)
       (keymap-set vertico-map "?" #'minibuffer-completion-help)
       (keymap-set vertico-map "M-RET" #'minibuffer-force-complete-and-exit)
@@ -1745,8 +1871,8 @@
 
 ;; @ Windows Control
 
-;; (load "~/.emacs.d/site-lisp/emacs-winum/winum.el")
-;; (winum-mode)
+;; (require 'winum)
+;; (require 'ace-window)
 
 ;; @ UI
 (dolist (hook '(prog-mode-hook text-mode-hook))
@@ -1764,10 +1890,13 @@
     )
   "Set for themes for dark and light mode.")
 
-(setup-display-graphic nil nil 6 19 nil)
+;; (require 'timu-macos-theme)
+;; (require 'nordic-night-theme)
+(require 'color-theme-sanityinc-tomorrow)
+(setup-display-graphic nil nil 6 17 nil 16)
 (add-hook 'server-after-make-frame-hook
           '(lambda ()
-             (setup-display-graphic nil nil 6 19 nil)))
+             (setup-display-graphic nil nil 6 17 nil 16)))
 
 ;; (load "~/.emacs.d/lisp/ultimate-tab.el")
 
@@ -1819,6 +1948,8 @@
   (setq highlight-indent-guides-method 'character
         highlight-indent-guides-responsive 'top
         highlight-indent-guides-suppress-auto-error t))
+
+(require 'yuck-mode)
 
 (provide 'init)
 ;;; init.el ends here

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# key: @
+# --
+
+@(${1:posedge `verilog-ext-template-clock`})$0

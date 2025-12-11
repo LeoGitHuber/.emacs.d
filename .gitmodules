@@ -553,3 +553,9 @@
 [submodule "site-lisp/spacious-padding"]
 	path = site-lisp/spacious-padding
 	url = https://github.com/protesilaos/spacious-padding.git
+[submodule "site-lisp/rose-pine"]
+	path = site-lisp/rose-pine
+	url = https://github.com/LuciusChen/rose-pine.git
+[submodule "site-lisp/mason.el"]
+	path = site-lisp/mason.el
+	url = https://github.com/deirn/mason.el.git

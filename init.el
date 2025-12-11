@@ -106,7 +106,8 @@
       ;; `((error "​​​​󰅙​​​​" diagnostics-error)
       `((error "​​​​󰅙​​​​" diagnostics-error)
         ;; (warning "​​​​​​​​" diagnostics-warn)
-        (warning "​​​​​​​​" diagnostics-warn)
+        ;; (warning "​​​​​​​​" diagnostics-warn)
+        (warning "​​ " diagnostics-warn)
         ;; (note "​​​​​​​​" diagnostics-info)
         (note "​​​​​​​" diagnostics-info)
         )
@@ -545,7 +546,10 @@
 (setq yas-prompt-functions '(yas-no-prompt))
 
 (require 'eglot)
+(require 'dape)
 (with-eval-after-load 'eglot
+  (setq my/pyright-uvx-command '("uv" "tool" "run" "--from" "python-lsp-server[all]" "pyright-langserver" "--stdio"))
+  (add-to-list 'eglot-server-programs `(python-ts-mode . ,my/pyright-uvx-command))
   (add-to-list 'eglot-server-programs
                '((verilog-mode verilog-ts-mode) .
                  ("verible-verilog-ls"
@@ -968,6 +972,7 @@
 
 (setq denote-directory "~/Documents/Personal/denote")
 
+(require 'org-noter)
 (with-eval-after-load 'org-noter
   (setq org-noter-notes-search-path `(,denote-directory)
         org-noter-auto-save-last-location t)
@@ -1893,10 +1898,11 @@ Adapted from `highlight-indentation-mode'."
 ;; (require 'timu-macos-theme)
 ;; (require 'nordic-night-theme)
 (require 'color-theme-sanityinc-tomorrow)
-(setup-display-graphic nil nil 6 17 nil 16)
+(require 'rose-pine)
+(setup-display-graphic nil nil 6 16 nil 16)
 (add-hook 'server-after-make-frame-hook
           '(lambda ()
-             (setup-display-graphic nil nil 6 17 nil 16)))
+             (setup-display-graphic nil nil 6 16 nil 16)))
 
 ;; (load "~/.emacs.d/lisp/ultimate-tab.el")
 

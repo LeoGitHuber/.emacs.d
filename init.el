@@ -64,8 +64,11 @@
 (require 'nerd-icons)
 (require 'nerd-icons-corfu)
 ;; (setq nerd-icons-font-family "CaskaydiaCove Nerd Font Mono")
-(setq nerd-icons-font-family "Consolas Nerd Font Mono")
 ;; (setq nerd-icons-font-family "PragmataProLiga Nerd Font Mono")
+(setq nerd-icons-font-family
+      (if (eq system-type 'gnu/linux)
+          "Consolas Nerd Font Mono"
+        "Symbols Nerd Font Mono"))
 
 (defface diagnostics-error
   `(
@@ -279,7 +282,7 @@
   (define-key global-map [remap capitalize-word] 'capitalize-any))
 
 (setq elisp-fontify-semantically t)
-(require 'scala-mode)
+;; (require 'scala-mode)
 (require 'scala-ts-mode)
 (require 'kdl-mode)
 (when (treesit-available-p)
@@ -442,39 +445,39 @@
   (add-hook 'nov-mode-hook #'(lambda ()
                                (face-remap-add-relative 'variable-pitch :family "Charter" :height 1.4)))
   )
+(when (eq system-type 'gnu/linux)
+  (require 'pdf-tools)
+  (require 'pdf-occur)
+  (require 'pdf-history)
+  (require 'pdf-isearch)
+  (require 'pdf-links)
+  (require 'pdf-outline)
+  (require 'pdf-misc)
+  (require 'pdf-annot)
+  (require 'pdf-sync)
+  (require 'pdf-cache)
+  ;; (require 'pdf-virtual)
+  ;; (require 'pdf-loader)
+  ;; (with-eval-after-load 'pdf-tools
+  ;;   (setq pdf-view-use-scaling t
+  ;;         pdf-view-continuous t
+  ;;         pdf-anot-list-format '((page . 3)
+  ;;                                (type . 10)
+  ;;                                (contents . 50)
+  ;;                                (date . 24)))
+  ;;   (pdf-tools-install))
 
-(require 'pdf-tools)
-(require 'pdf-occur)
-(require 'pdf-history)
-(require 'pdf-isearch)
-(require 'pdf-links)
-(require 'pdf-outline)
-(require 'pdf-misc)
-(require 'pdf-annot)
-(require 'pdf-sync)
-(require 'pdf-cache)
-;; (require 'pdf-virtual)
-;; (require 'pdf-loader)
-;; (with-eval-after-load 'pdf-tools
-;;   (setq pdf-view-use-scaling t
-;;         pdf-view-continuous t
-;;         pdf-anot-list-format '((page . 3)
-;;                                (type . 10)
-;;                                (contents . 50)
-;;                                (date . 24)))
-;;   (pdf-tools-install))
-
-;; (pdf-loader-install)
-(add-hook 'pdf-view-mode-hook 'pdf-history-minor-mode)
-(add-hook 'pdf-view-mode-hook 'pdf-isearch-minor-mode)
-(add-hook 'pdf-view-mode-hook 'pdf-links-minor-mode)
-(add-hook 'pdf-view-mode-hook 'pdf-outline-minor-mode)
-(add-hook 'pdf-view-mode-hook 'pdf-misc-size-indication-minor-mode)
-(add-hook 'pdf-view-mode-hook 'pdf-misc-context-menu-minor-mode)
-(add-hook 'pdf-view-mode-hook 'pdf-annot-minor-mode)
-(add-hook 'pdf-view-mode-hook 'pdf-sync-minor-mode)
-(add-hook 'pdf-view-mode-hook 'pdf-cache-prefetch-minor-mode)
-
+  ;; (pdf-loader-install)
+  (add-hook 'pdf-view-mode-hook 'pdf-history-minor-mode)
+  (add-hook 'pdf-view-mode-hook 'pdf-isearch-minor-mode)
+  (add-hook 'pdf-view-mode-hook 'pdf-links-minor-mode)
+  (add-hook 'pdf-view-mode-hook 'pdf-outline-minor-mode)
+  (add-hook 'pdf-view-mode-hook 'pdf-misc-size-indication-minor-mode)
+  (add-hook 'pdf-view-mode-hook 'pdf-misc-context-menu-minor-mode)
+  (add-hook 'pdf-view-mode-hook 'pdf-annot-minor-mode)
+  (add-hook 'pdf-view-mode-hook 'pdf-sync-minor-mode)
+  (add-hook 'pdf-view-mode-hook 'pdf-cache-prefetch-minor-mode)
+  )
 
 ;;; @6. LSP
 
@@ -985,8 +988,7 @@
 (require 'org-roam)
 (keymap-global-set "C-c n n" 'org-noter)
 (keymap-global-set "C-c n f" 'org-roam-node-find)
-(setq org-roam-directory "~/Documents/Personal/org-roam"    ; 设置 org-roam 笔记的默认目录，缺省值 /home/leo/org-roam
-      org-roam-db-gc-threshold most-positive-fixnum
+(setq org-roam-db-gc-threshold most-positive-fixnum
       org-roam-mode-sections '(org-roam-backlinks-section
                                org-roam-reflinks-section
                                org-roam-unlinked-references-section))
@@ -1039,8 +1041,7 @@
           ("k" "Knowledge" entry "* Notes:\n%?"
            :target (file+head "Knowledge/${slug}.org"
                               "#+TITLE: ${title}\n#+FILETAGS: %^g\n#+CREATED: %U\n#+MODIFIED: \n\n")
-           :unnarrowed t)))
-  (org-roam-db-autosync-mode))
+           :unnarrowed t))))
 
 ;;; @12. VERILOG
 (require 'verilog-ts-mode)
@@ -1264,17 +1265,11 @@
 ;; (keymap-global-set "C-c c y" 'citar-denote-cite-nocite)
 ;; (keymap-global-set "C-c c z" 'citar-denote-nobib)
 
-(eval-after-load "tex-mode"
-  '(progn
-     ;; (load "auctex.el" nil t t)
-     ;; (load "preview-latex.el" nil t t)
-     ;; (load "preview-latex.el" nil t t)
-     ;; (require 'org-table)
-     (require 'auctex)
-     (require 'cdlatex)
-     (load "~/.emacs.d/site-lisp/auctex/tex.el")
-     (load "~/.emacs.d/site-lisp/auctex/latex.el")
-     ))
+(require 'auctex)
+(require 'cdlatex)
+(require 'tex-fold)
+(require 'font-latex)
+(require 'tex-bar)
 
 (defun orgtbl-next-field-maybe ()
   "Combine `lsp-bridge-mode', `cdlatex-mode' and `orgtlr-mode'."
@@ -1287,8 +1282,6 @@
       (org-table-next-field))))
 
 (with-eval-after-load 'tex
-  ;; (load "auctex.el" nil t t)
-  ;; (load "preview-latex.el" nil t t)
   (add-hook 'cdlatex-tab-hook
             (lambda ()
               (and (bound-and-true-p lsp-bidge-mode)
@@ -1879,7 +1872,6 @@ Adapted from `highlight-indentation-mode'."
 ;; (require 'winum)
 ;; (require 'ace-window)
 
-;; @ UI
 (dolist (hook '(prog-mode-hook text-mode-hook))
   (add-hook hook 'display-fill-column-indicator-mode))
 ;; (global-display-fill-column-indicator-mode)
@@ -1899,10 +1891,6 @@ Adapted from `highlight-indentation-mode'."
 ;; (require 'nordic-night-theme)
 (require 'color-theme-sanityinc-tomorrow)
 (require 'rose-pine)
-(setup-display-graphic nil nil 6 16 nil 16)
-(add-hook 'server-after-make-frame-hook
-          '(lambda ()
-             (setup-display-graphic nil nil 6 16 nil 16)))
 
 ;; (load "~/.emacs.d/lisp/ultimate-tab.el")
 
@@ -1931,8 +1919,6 @@ Adapted from `highlight-indentation-mode'."
 (with-eval-after-load 'citre
   (setq citre-use-project-root-when-creating-tags t
         citre-prompt-language-for-ctags-command t)
-  (when (and (eq system-type 'gnu/linux) (file-exists-p "/opt/bin/ctags"))
-    (setq citre-ctags-program "/opt/bin/ctags"))
   (defvar citre-elisp-backend
     (citre-xref-backend-to-citre-backend
      ;; This is the xref backend name
@@ -1956,6 +1942,26 @@ Adapted from `highlight-indentation-mode'."
         highlight-indent-guides-suppress-auto-error t))
 
 (require 'yuck-mode)
+
+(if (eq system-type 'gnu/linux)
+    (progn
+      (when (file-exists-p "/opt/bin/ctags")
+        (setq citre-ctags-program "/opt/bin/ctags"))
+      (setq org-roam-directory "~/Documents/Personal/org-roam")
+      (setup-display-graphic nil nil 6 17 nil 16)
+      (add-hook 'server-after-make-frame-hook
+                '(lambda ()
+                   (setup-display-graphic nil nil 6 17 nil 16)))
+      )
+  (progn
+    (setq org-roam-directory "d:/Documents/Personal/org-roam")
+    (setup-display-graphic nil nil 6 17 nil 26)
+    (add-hook 'server-after-make-frame-hook
+              '(lambda ()
+                 (setup-display-graphic nil nil 6 17 nil 26)))
+    )
+  )
+(org-roam-db-autosync-mode)
 
 (provide 'init)
 ;;; init.el ends here

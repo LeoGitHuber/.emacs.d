@@ -635,10 +635,11 @@ If you experience stuttering, increase this.")
         ;; (standard-themes-select 'standard-dark)
         ;; (color-theme-sanityinc-tomorrow-bright)
         (progn
-          (setq modus-themes-org-blocks 'gray-background
-                modus-themes-bold-constructs t
-                modus-themes-italic-constructs t)
-          (load-theme 'modus-vivendi-deuteranopia t)
+          ;; (setq modus-themes-org-blocks 'gray-background
+          ;;       modus-themes-bold-constructs t
+          ;;       modus-themes-italic-constructs t)
+          ;; (load-theme 'modus-vivendi-deuteranopia t)
+          (load-theme 'rose-pine-night)
           )
       (load-theme 'modus-operandi-tritanopia)
       )

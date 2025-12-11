@@ -18,15 +18,11 @@
     )
   )
 
-;; 以下方式与上面相同
 ;; (push '(undecorated . t) default-frame-alist)
 ;; (push '(vertical-scroll-bar) default-frame-alist)
-;; (push '(alpha-background . 85) default-frame-alist)
 ;; (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 (scroll-bar-mode -1)
-
-;; (load-theme 'modus-operandi t)
 
 (setq package-quickstart nil
       ;; package-enable-at-startup nil

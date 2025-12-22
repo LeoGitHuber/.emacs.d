@@ -551,7 +551,7 @@
 (require 'eglot)
 (require 'dape)
 (with-eval-after-load 'eglot
-  (setq my/pyright-uvx-command '("uv" "tool" "run" "--from" "python-lsp-server[all]" "pyright-langserver" "--stdio"))
+  (setq my/pyright-uvx-command '("uvx" "--from" "pyright" "pyright-langserver" "--stdio"))
   (add-to-list 'eglot-server-programs `(python-ts-mode . ,my/pyright-uvx-command))
   (add-to-list 'eglot-server-programs
                '((verilog-mode verilog-ts-mode) .

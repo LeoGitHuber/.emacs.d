@@ -285,6 +285,7 @@
 ;; (require 'scala-mode)
 (require 'scala-ts-mode)
 (require 'kdl-mode)
+(require 'yuck-mode)
 (when (treesit-available-p)
   (setq major-mode-remap-alist
         '((c-mode          . c-ts-mode)
@@ -1941,8 +1942,7 @@ Adapted from `highlight-indentation-mode'."
         highlight-indent-guides-responsive 'top
         highlight-indent-guides-suppress-auto-error t))
 
-(require 'yuck-mode)
-
+(require 'eat)
 (if (eq system-type 'gnu/linux)
     (progn
       (when (file-exists-p "/opt/bin/ctags")

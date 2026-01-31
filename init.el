@@ -8,9 +8,9 @@
   (eq system-type 'windows-nt)
   "Judge whether it's Windows system.")
 
-(defvar android-system-p
+(defvar non-android-p
   (not (eq system-type 'android))
-  "Judge whether it's Android system.")
+  "Judge whether it isn't Android system.")
 
 ;; (if windows-system-p
 ;;     (progn
@@ -25,7 +25,7 @@
       load-prefer-newer t)
 (load "~/.emacs.d/custom.el")
 
-(when (not android-system-p)
+(when (not non-android-p)
   (setopt tool-bar-position 'bottom)
   (setq touch-screen-display-keyboard t))
   ;;; Emacs Default Setting
@@ -56,7 +56,6 @@
       ;; package-quickstart nil
       )
 
-;;; @2. flymake and flycheck
 (with-eval-after-load 'flycheck
   (add-hook 'flycheck-mode-hook '(lambda ()
                                    (flycheck-set-indication-mode 'left-margin))))
@@ -153,19 +152,15 @@
 
 (require 'project)
 
-  ;;; @3. ICONS
-
-;; (load "~/.emacs.d/self-develop/modeline-setting.el")
+;;; @3. ICONS
 
 (with-eval-after-load 'treemacs
   (require 'treemacs-nerd-icons)
   (treemacs-load-theme "nerd-icons"))
-(add-hook 'ibuffer-mode-hook 'nerd-icons-ibuffer-mode)
 
 (with-eval-after-load 'all-the-icons (load "~/.emacs.d/self-develop/all-the-icons-diy.el"))
 
-;; (require 'init-startup)
-(load "~/.emacs.d/lisp/init-startup.el")
+(require 'init-startup)
 
   ;;; @4. MEOW
 (require 'meow)
@@ -218,6 +213,7 @@
 (keymap-global-set "C-w" 'kill-or-save)
 
 (keymap-set isearch-mode-map "C-h" 'isearch-del-char)
+(keymap-set isearch-mode-map "C-'" 'avy-isearch)
 (keymap-global-set "C-h" 'backward-delete-char-untabify)
 (keymap-global-set "C-x k" 'kill-current-buffer)
 (keymap-global-set "C-x C-r" 'restart-emacs)
@@ -226,6 +222,7 @@
 ;; @ Efficiency
 (keymap-global-set "C-x f" 'find-file)
 (keymap-global-set "C-z" 'vundo)
+
 (global-set-key [remap comment-dwim] 'comment-or-uncomment)
 
 ;; @ Fingertip
@@ -329,127 +326,33 @@
 
 
 (require 'eldoc-box)
+(require 'eldoc-mouse)
 (require 'calibredb)
 (require 'nov)
 (require 'nov-xwidget)
 (require 'shrface)
+(require 'nov-highlights)
+(require 'etaf)
 (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
-;; ;; (define-key nov-mode-map (kbd "o") 'nov-xwidget-view)
-;; (evil-define-key 'normal nov-mode-map (kbd "o") 'nov-xwidget-view)
-;; (add-hook 'nov-mode-hook 'nov-xwidget-inject-all-files)
-;; (add-hook 'nov-xwidget-webkit-mode-hook '(lambda() (xwidget-webkit-zoom (xwidget-webkit-current-session) 1.5)))
-;; (setq visual-fill-column-center-text t)
-(with-eval-after-load 'shrface
-  (defun shrface-nov-setup ()
-    (unless shrface-toggle-bullets
-      (shrface-regexp))
-    (set-visited-file-name nil t)
-    (setq tab-width 8)
-    (if (string-equal system-type "android")
-        (setq-local touch-screen-enable-hscroll nil)))
-
-  (defun shrface-remove-blank-lines-at-the-end (start end)
-    "A fix for `shr--remove-blank-lines-at-the-end' which will remove image at the end of the document."
-    (save-restriction
-      (save-excursion
-        (narrow-to-region start end)
-        (goto-char end)
-        (when (and (re-search-backward "[^ \n]" nil t)
-                   (not (eobp)))
-          (forward-line 1)
-          (delete-region (point) (min (1+ (point)) (point-max)))))))
-
-  (defun shrface-shr-tag-pre-highlight (pre)
-    "Highlighting code in PRE."
-    (let* ((shr-folding-mode 'none)
-           (shr-current-font 'default)
-           (code (with-temp-buffer
-                   (shr-generic pre)
-                   ;; (indent-rigidly (point-min) (point-max) 2)
-                   (buffer-string)))
-           (lang (or (shr-tag-pre-highlight-guess-language-attr pre)
-                     (let ((sym (language-detection-string code)))
-                       (and sym (symbol-name sym)))))
-           (mode (and lang
-                      (shr-tag-pre-highlight--get-lang-mode lang))))
-      (shr-ensure-newline)
-      (shr-ensure-newline)
-      (setq start (point))
-      (insert
-       ;; (propertize (concat "#+BEGIN_SRC " lang "\n") 'face 'org-block-begin-line)
-       (or (and (fboundp mode)
-                (with-demoted-errors "Error while fontifying: %S"
-                  (shr-tag-pre-highlight-fontify code mode)))
-           code)
-       ;; (propertize "#+END_SRC" 'face 'org-block-end-line )
-       )
-      (shr-ensure-newline)
-      (setq end (point))
-      (pcase (frame-parameter nil 'background-mode)
-        ('light
-         (add-face-text-property start end '(:background "#D8DEE9" :extend t)))
-        ('dark
-         (add-face-text-property start end '(:background "#292b2e" :extend t))))
-      (shr-ensure-newline)
-      (insert "\n")))
-
-  (defvar shrface-nov-rendering-functions
-    (append '((img . nov-render-img)
-              (svg . nov-render-svg)
-              (title . nov-render-title)
-              (pre . shrface-shr-tag-pre-highlight)
-              (code . shrface-tag-code)
-              (form . eww-tag-form)
-              (input . eww-tag-input)
-              (button . eww-form-submit)
-              (textarea . eww-tag-textarea)
-              (select . eww-tag-select)
-              (link . eww-tag-link)
-              (meta . eww-tag-meta))
-            shrface-supported-faces-alist))
-
-  (defun shrface-nov-render-html ()
-    (require 'eww)
-    (let ((shrface-org nil)
-          (shr-bullet (concat (char-to-string shrface-item-bullet) " "))
-          (shr-table-vertical-line "|")
-          (shr-width 7000) ;; make it large enough, it would not fill the column (use visual-line-mode/writeroom-mode instead)
-          (shr-indentation 0) ;; remove all unnecessary indentation
-          (tab-width 8)
-          (shr-external-rendering-functions shrface-nov-rendering-functions)
-          (shrface-toggle-bullets nil)
-          (shrface-href-versatile t)
-          (shr-use-fonts nil)           ; nil to use default font
-          (shr-map nov-mode-map))
-
-      ;; HACK: `shr-external-rendering-functions' doesn't cover
-      ;; every usage of `shr-tag-img'
-      (cl-letf (((symbol-function 'shr-tag-img) 'nov-render-img))
-        (shr-render-region (point-min) (point-max)))
-      ;; workaround, need a delay to update the header line
-      ;; (run-with-timer 0.01 nil 'shrface-update-header-line)
-      ;; workaround, show annotations when document updates
-      (shrface-show-all-annotations)))
-  )
 
 (with-eval-after-load 'nov
   (setq nov-text-width t)
+  (nov-highlights-global-mode-enable)
   (add-hook 'nov-mode-hook #'eldoc-mode)
   (add-hook 'nov-mode-hook #'eldoc-box-hover-mode)
-  ;; (add-hook 'nov-mode-hook #'org-indent-mode)
-  ;; (add-hook 'nov-mode-hook #'shrface-nov-setup)
-  ;; (setq nov-render-html-function #'shrface-nov-render-html)
-  ;; (advice-add 'shr--remove-blank-lines-at-the-end :override #'shrface-remove-blank-lines-at-the-end)
   (add-hook 'nov-mode-hook #'visual-line-mode)
-  ;; (add-hook 'nov-mode-hook #'visual-fill-column-mode)
-  ;; (add-hook 'nov-mode-hook #'(lambda() (set-fill-column 150)))
   (add-hook 'nov-mode-hook #'(lambda ()
-                               (face-remap-add-relative 'variable-pitch :family "Charter" :height 1.4)))
+                               (setq-local line-spacing 0.25)
+                               (face-remap-add-relative 'variable-pitch :family "Charter" :height 1.2)
+                               ))
   )
+
 (when (eq system-type 'gnu/linux)
   (require 'pdf-tools)
-  (require 'pdf-occur)
+  (require 'pdf-roll)
   (require 'pdf-history)
+  (require 'pdf-view)
+  (require 'pdf-occur)
   (require 'pdf-isearch)
   (require 'pdf-links)
   (require 'pdf-outline)
@@ -478,6 +381,7 @@
   (add-hook 'pdf-view-mode-hook 'pdf-annot-minor-mode)
   (add-hook 'pdf-view-mode-hook 'pdf-sync-minor-mode)
   (add-hook 'pdf-view-mode-hook 'pdf-cache-prefetch-minor-mode)
+  (add-hook 'pdf-view-mode-hook 'pdf-view-roll-minor-mode)
   )
 
 ;;; @6. LSP
@@ -550,10 +454,13 @@
 (setq yas-prompt-functions '(yas-no-prompt))
 
 (require 'eglot)
+(require 'eglot-booster)
 (require 'dape)
 (with-eval-after-load 'eglot
-  (setq my/pyright-uvx-command '("uvx" "--from" "pyright" "pyright-langserver" "--stdio"))
-  (add-to-list 'eglot-server-programs `(python-ts-mode . ,my/pyright-uvx-command))
+  (setq my/pyright-uvx-command '("pyright-langserver" "--stdio"))
+  ;; (setq my/pyright-uvx-command '("pyrefly" "lsp"))
+  ;; (setq my/pyright-uvx-command '("pylsp"))
+  ;; (add-to-list 'eglot-server-programs `((python-ts-mode python-mode) . ,my/pyright-uvx-command))
   (add-to-list 'eglot-server-programs
                '((verilog-mode verilog-ts-mode) .
                  ("verible-verilog-ls"
@@ -598,7 +505,6 @@
   ;;                (not (buffer-modified-p)))
   ;;           (flymake-start t)))))
   ;; (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
-  ;; (eglot-booster-mode)
   )
 
 (with-eval-after-load 'lsp-bridge
@@ -703,14 +609,22 @@
 (unless (bound-and-true-p dirvish-override-dired-mode)
   (add-hook 'dired-mode-hook 'nerd-icons-dired-mode))
 
+
+(defun set-font-for-dired ()
+  "Set font for Dired."
+  (face-remap-add-relative 'default :family "IBM Plex Mono" :height 95))
+(add-hook 'dired-mode-hook 'set-font-for-dired)
+
+
 ;; @8. CHINESE
 
 (setq cns-prog "~/.emacs.d/site-lisp/emacs-chinese-word-segmentation/cnws"
       cns-dict-directory "~/.emacs.d/site-lisp/emacs-chinese-word-segmentation/cppjieba/dict"
       cns-recent-segmentation-limit 20
-      cns-debug nil)
+      cns-debug nil
+      cns-process-type 'shell)
 
-(when android-system-p
+(when non-android-p
   (require 'cns nil t)
   (when (featurep 'cns)
     (add-hook 'find-file-hook 'cns-auto-enable)))
@@ -877,6 +791,7 @@
      ))
   (keymap-set org-mode-map "C-c b" 'org-cite-insert))
 
+(require 'valign)
 (add-hook 'org-mode-hook
           (lambda ()
             (electric-indent-local-mode)
@@ -899,21 +814,31 @@
              '(org-special-keyword ((t (:inherit fixed-pitch))))
              '(org-verbatim
                ((((background light))
-                 (:foreground "#e74c3c"
-                              :box (:line-width 1 :color "#e1e4e5")
-                              :inherit fixed-pitch))
+                 (
+                  :foreground "#9e3a00"
+                  :background "#faece4"
+                  :box (:line-width (3 . 1) :color "#faece4")
+                  :inherit fixed-pitch))
                 (((background dark))
-                 (:background "#343942"
-                              :foreground "#E6EDF3"
-                              :inherit fixed-pitch))))
+                 (
+                  ;; :foreground "#E6EDF3"
+                  ;; :background "#343942"
+                  :foreground "#ec9369"
+                  :background "#1c130f"
+                  :box (:line-width (3 . 1) :color "#1c130f")
+                  :inherit fixed-pitch))))
              '(org-meta-line ((t (:inherit (font-lock-comment-face fixed-pitch)))))
              '(org-block-begin-line ((t (:inherit fixed-pitch))))
              '(org-block-end-line ((t (:inherit fixed-pitch))))
              '(fill-column-indicator ((t (:inherit (shadow fixed-pitch))))))
             (variable-pitch-mode)
             (visual-line-mode)
-            (require 'valign)
-            (valign-mode)))
+            (valign-mode)
+            ;; (text-scale-increase 1)
+            ))
+(add-hook 'markdown-mode-hook
+          (lambda ()
+            (text-scale-increase 1)))
 
 ;; (with-eval-after-load 'org
 ;; (defun org-buffer-face-mode-variable ()
@@ -1374,9 +1299,10 @@
 (global-hl-line-mode)
 (dolist
     (hook
-     '(eshell-mode-hook shell-mode-hook term-mode-hook
-                        messages-buffer-mode-hook
-                        eat-mode-hook))
+     '(
+       eshell-mode-hook shell-mode-hook term-mode-hook messages-buffer-mode-hook nov-mode-hook
+       eat-mode-hook org-mode-hook markdown-mode-hook markdown-view-mode-hook
+       ))
   (add-hook hook (lambda ()
                    (setq-local global-hl-line-mode nil))))
 
@@ -1508,9 +1434,14 @@
                 (top-bottom left-bracket right-bracket top-right-angle
                             top-left-angle)
                 (empty-line . empty-line) (unknown . question-mark))
-              visual-fill-column-center-text t)
+              ;; visual-fill-column-center-text t
+              )
 
-(dolist (mode '(prog-mode-hook TeX-mode-hook cuda-mode-hook))
+(dolist (mode '(prog-mode-hook
+                toml-ts-mode-hook
+                TeX-mode-hook
+                cuda-mode-hook
+                ))
   (add-hook mode (lambda () (display-line-numbers-mode t))))
 
 (desktop-save-mode 1)
@@ -1668,7 +1599,7 @@ such alists."
 
 (define-key global-map [remap list-buffers] 'ibuffer)
 
-(when android-system-p
+(when non-android-p
   (require 'indent-bars)
   (add-hook 'prog-mode-hook 'indent-bars-mode))
 (with-eval-after-load 'indent-bars
@@ -1798,10 +1729,6 @@ Adapted from `highlight-indentation-mode'."
   (add-hook hook 'colorful-mode))
 (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 
-;; (require 'color-theme-sanityinc-tomorrow)
-;; (color-theme-sanityinc-tomorrow-bright)
-;; (color-theme-sanityinc-tomorrow-bright)
-
 ;; @ Minibuffer Setting
 (require 'vertico)
 (require 'vertico-grid)
@@ -1892,6 +1819,7 @@ Adapted from `highlight-indentation-mode'."
 ;; (require 'nordic-night-theme)
 (require 'color-theme-sanityinc-tomorrow)
 (require 'rose-pine)
+(require 'gruber-darker-theme)
 
 ;; (load "~/.emacs.d/lisp/ultimate-tab.el")
 
@@ -1906,7 +1834,7 @@ Adapted from `highlight-indentation-mode'."
 ;;           org-roam-mode-hook))
 ;;   (add-hook hook 'hide-mode-line-mode))
 
-(when android-system-p
+(when non-android-p
   (require 'citre)
   (require 'citre-config)
   (defun citre-jump+ ()
@@ -1942,16 +1870,20 @@ Adapted from `highlight-indentation-mode'."
         highlight-indent-guides-responsive 'top
         highlight-indent-guides-suppress-auto-error t))
 
-(require 'eat)
+;; (require 'eat)
+
 (if (eq system-type 'gnu/linux)
     (progn
       (when (file-exists-p "/opt/bin/ctags")
         (setq citre-ctags-program "/opt/bin/ctags"))
       (setq org-roam-directory "~/Documents/Personal/org-roam")
-      (setup-display-graphic nil nil 6 17 nil 16)
+      (setup-display-graphic nil nil 6 15 nil 15)
       (add-hook 'server-after-make-frame-hook
                 '(lambda ()
-                   (setup-display-graphic nil nil 6 17 nil 16)))
+                   (setup-display-graphic nil nil 6 15 nil 15)))
+      ;; (setenv "PATH" (concat (getenv "PATH") ":/home/kunh/.local/bin"))
+      (add-to-list 'exec-path "/home/kunh/.local/bin")
+      (add-to-list 'exec-path "/home/kunh/.cargo/bin")
       )
   (progn
     (setq org-roam-directory "d:/Documents/Personal/org-roam")
@@ -1961,7 +1893,34 @@ Adapted from `highlight-indentation-mode'."
                  (setup-display-graphic nil nil 6 17 nil 26)))
     )
   )
+
+(with-eval-after-load 'eglot
+  (eglot-booster-mode))
+
 (org-roam-db-autosync-mode)
+
+(require 'lexdb-ldoce)
+(require 'lexdb-oald)
+(require 'lexdb-ode)
+(setq lexdb-dictionaries
+      '((:id ldoce
+             :type ldoce
+             :name "朗文当代"
+             :db-file "~/dicts/LDOCE6.db"
+             :audio-dir "~/dicts/audio/"
+             :priority 1)
+        (:id oald
+             :type oald
+             :name "牛津双解"
+             :db-file "~/dicts/OALD4_EC.db"
+             :priority 2)
+        (:id ode
+             :type ode
+             :name "牛津英语"
+             :db-file "~/dicts/ODE_Living_Online.db"
+             :priority 3)))
+(lexdb-init)
+(keymap-global-set "C-c d" 'lexdb-search)
 
 (provide 'init)
 ;;; init.el ends here

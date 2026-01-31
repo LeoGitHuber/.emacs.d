@@ -84,14 +84,15 @@
 ;; "IBM Plex Mono" "Fantasque Sans Mono", "InputMono", "Monaspace Neon"
 ;; (defvar code-font "Cascadia Code NF" ;; "Hack"
 ;;   "Font for coding.")
-(defvar code-font "Aporetic Serif Mono" ;; "Hack"
+;; (defvar code-font "Aporetic Serif Mono" ;; "Hack"
+(defvar code-font "Lilex"
   "Font for coding.")
 
 ;; "Microsoft YaHei" "FZYouSongJ GBK" "Sarasa Gothic SC"
 (defvar cjk-font "LXGW Bright Code GB" ;; "LXGW WenKai Mono"
   "CJK font.")
 
-(defvar serif-font "Source Han Serif CN" ;; "Bookerly" ;; Palatino Linotype
+(defvar serif-font "Libre Baskerville" ;; "Bookerly" ;; Palatino Linotype
   "Serif font.")
 
 (defvar cjk-sans-font "Source Han Sans CN" ;; "LXGW WenKai Screen"
@@ -518,9 +519,10 @@ use `cm/autoloads-file' as TARGET."
       (and (functionp 'corfu-mode)
            (add-hook hook 'corfu-mode)))
     (add-hook hook (lambda ()
-                     (unless (derived-mode-p 'emacs-lisp-mode 'lisp-mode
-                                             'makefile-mode 'snippet-mode
-                                             'kdl-mode 'tcl-mode)
+                     (unless (derived-mode-p 'emacs-lisp-mode 'lisp-mode 'makefile-mode
+                                             'snippet-mode 'kdl-mode 'tcl-mode
+                                             ;; 'python-ts-mode 'python-mode
+                                             )
                        ;; (with-eval-after-load 'lsp
                        ;;   (lsp-deferred))
                        (eglot-ensure)
@@ -603,16 +605,8 @@ If you experience stuttering, increase this.")
           large-hscroll-threshold 1000
           syntax-wholeline-max 1000)
 
-    ;; ;; Enable Ligatures Feature, more info: https://github.com/mickeynp/ligature.el
-    ;; (global-ligature-mode)
-    ;; ;; PragmataPro Font Ligature Support
-    ;; (ligature-pragmatapro-setup)
-    ;; Set icon for truncation
-    ;; (setq truncate-string-ellipsis (nerd-icons-mdicon "nf-md-arrow_down_right"))
-
     (setq x-underline-at-descent-line t)
 
-    ;; Don't use help echo tooltips
     ;; (setq x-gtk-use-system-tooltips nil)
     ;; (unless (symbol-value x-gtk-use-system-tooltips)
     ;;   (set-face-attribute 'tooltip nil))
@@ -638,10 +632,11 @@ If you experience stuttering, increase this.")
           ;; (setq modus-themes-org-blocks 'gray-background
           ;;       modus-themes-bold-constructs t
           ;;       modus-themes-italic-constructs t)
-          ;; (load-theme 'modus-vivendi-deuteranopia t)
-          (load-theme 'rose-pine-night)
+          (load-theme 'modus-vivendi t)
+          ;; (load-theme 'rose-pine-night)
+          ;; (load-theme 'gruber-darker)
           )
-      (load-theme 'modus-operandi-tritanopia)
+      ;; (load-theme 'modus-operandi-tritanopia)
       )
     (when modelineq
       (if (equal (frame-parameter nil 'background-mode) 'dark)
@@ -665,38 +660,37 @@ If you experience stuttering, increase this.")
                                      code-font
                                      :size 11.0))
           ))
-
       (set-face-attribute
        'mode-line-inactive nil
        :inherit 'mode-line
        :box nil))
 
-    (dolist (face '((flymake-note-echo-at-eol . success)
-                    (flymake-warning-echo-at-eol . warning)
-                    (flymake-error-echo-at-eol . error)))
-      (let* ((ff (car face))
-             (ef (cdr face))
-             (fc (face-foreground ef))
-             (fg ())
-             (bg ()))
-        (set-face-italic ff nil)
-        (set-face-foreground ff fc)
-        (if (or
-             (>= (string-to-number (substring (current-time-string) 11 13)) dayoff)
-             (<= (string-to-number (substring (current-time-string) 11 13)) dayon))
-            (progn
-              (setq bg (flymake--darken-bg fc 80))
-              (setq fg fc)
-              )
-          (progn
-            (setq bg (flymake--lighten-fg fc 1000))
-            (setq fg (flymake--darken-bg fc 50))
-            ))
-        (set-face-attribute ff nil :box bg)
-        (set-face-background ff bg)
-        (set-face-foreground ff fg)
-        ))
-    (set-face-attribute 'flymake-end-of-line-diagnostics-face nil :box nil)
+    ;; (dolist (face '((flymake-note-echo-at-eol . success)
+    ;;                 (flymake-warning-echo-at-eol . warning)
+    ;;                 (flymake-error-echo-at-eol . error)))
+    ;;   (let* ((ff (car face))
+    ;;          (ef (cdr face))
+    ;;          (fc (face-foreground ef))
+    ;;          (fg ())
+    ;;          (bg ()))
+    ;;     (set-face-italic ff nil)
+    ;;     (set-face-foreground ff fc)
+    ;;     (if (or
+    ;;          (>= (string-to-number (substring (current-time-string) 11 13)) dayoff)
+    ;;          (<= (string-to-number (substring (current-time-string) 11 13)) dayon))
+    ;;         (progn
+    ;;           (setq bg (flymake--darken-bg fc 80))
+    ;;           (setq fg fc)
+    ;;           )
+    ;;       (progn
+    ;;         (setq bg (flymake--lighten-fg fc 1000))
+    ;;         (setq fg (flymake--darken-bg fc 50))
+    ;;         ))
+    ;;     (set-face-attribute ff nil :box bg)
+    ;;     (set-face-background ff bg)
+    ;;     (set-face-foreground ff fg)
+    ;;     ))
+    ;; (set-face-attribute 'flymake-end-of-line-diagnostics-face nil :box nil)
     ))
 
 (provide 'init-func)

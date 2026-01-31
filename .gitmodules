@@ -559,3 +559,42 @@
 [submodule "site-lisp/mason.el"]
 	path = site-lisp/mason.el
 	url = https://github.com/deirn/mason.el.git
+[submodule "site-lisp/eldoc-mouse"]
+	path = site-lisp/eldoc-mouse
+	url = https://github.com/huangfeiyu/eldoc-mouse.git
+[submodule "site-lisp/nov-highlights"]
+	path = site-lisp/nov-highlights
+	url = https://github.com/emacselements/nov-highlights.git
+[submodule "site-lisp/justify-kp"]
+	path = site-lisp/justify-kp
+	url = https://github.com/Fuco1/justify-kp.git
+[submodule "site-lisp/etaf"]
+	path = site-lisp/etaf
+	url = https://github.com/Kinneyzhang/etaf.git
+[submodule "site-lisp/gruber-darker-theme"]
+	path = site-lisp/gruber-darker-theme
+	url = https://github.com/Eason0210/gruber-darker-theme.git
+[submodule "site-lisp/lexdb"]
+	path = site-lisp/lexdb
+	url = https://github.com/LuciusChen/lexdb.git
+[submodule "site-lisp/koishi-theme.el"]
+	path = site-lisp/koishi-theme.el
+	url = https://github.com/gynamics/koishi-theme.el.git
+[submodule "site-lisp/agent-shell"]
+	path = site-lisp/agent-shell
+	url = https://github.com/xenodium/agent-shell.git
+[submodule "site-lisp/agent-shell-manager"]
+	path = site-lisp/agent-shell-manager
+	url = https://github.com/jethrokuan/agent-shell-manager.git
+[submodule "site-lisp/agent-shell-attention.el"]
+	path = site-lisp/agent-shell-attention.el
+	url = https://github.com/ultronozm/agent-shell-attention.el.git
+[submodule "site-lisp/agent-review"]
+	path = site-lisp/agent-review
+	url = https://github.com/nineluj/agent-review.git
+[submodule "site-lisp/acp.el"]
+	path = site-lisp/acp.el
+	url = https://github.com/xenodium/acp.el.git
+[submodule "site-lisp/shell-maker"]
+	path = site-lisp/shell-maker
+	url = https://github.com/xenodium/shell-maker.git

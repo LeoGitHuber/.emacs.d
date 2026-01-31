@@ -4,6 +4,13 @@
 
 ;;; Code:
 
+
+;; Allow potentially-dangerous elisp features for *my* config files only.
+(let ((dir (abbreviate-file-name (file-name-as-directory user-emacs-directory))))
+  (cond
+   ((boundp 'trusted-content) (add-to-list 'trusted-content dir))
+   ((boundp 'trusted-files)   (add-to-list 'trusted-files dir))))
+
 (add-to-list 'default-frame-alist '(menu-bar-lines . 0))
 (when (not (eq system-type 'android))
   (add-to-list 'default-frame-alist '(tool-bar-lines . 0)))
@@ -63,6 +70,7 @@
       ;; ad-redefinition-action 'accept
       ;; make-backup-files t   ;; 设置是否生成备份文件，例如 configuration.org~
       auto-mode-case-fold nil
+      warning-minimum-level :error
       )
 
 (setq-default pgtk-wait-for-event-timeout 0

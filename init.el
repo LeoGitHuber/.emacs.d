@@ -4,6 +4,8 @@
 
 ;; (add-to-list 'load-path "~/.emacs.d/site-lisp/benchmark-init-el")
 
+;;; Bootstrap
+
 (defvar windows-system-p
   (eq system-type 'windows-nt)
   "Judge whether it's Windows system.")
@@ -23,29 +25,32 @@
 ;; (add-hook 'after-init-hook 'benchmark-init/deactivate)
 (setq custom-file "~/.emacs.d/custom.el"
       load-prefer-newer t)
-(load "~/.emacs.d/custom.el")
+(load custom-file)
 
 (when (not non-android-p)
   (setopt tool-bar-position 'bottom)
   (setq touch-screen-display-keyboard t))
-  ;;; Emacs Default Setting
+
+;;; Load path and core helpers
 ;; (load "~/.emacs.d/lisp/init-func.el")
 (add-to-list 'load-path "~/.emacs.d/lisp")
 ;; (add-to-list 'load-path "~/.emacs.d/lisp/init-func.el")
 (require 'init-func)
-(load "~/.emacs.d/lisp/init-func.el")
 (let ((packages (find-subdir-recursively "~/.emacs.d/site-lisp")))
   (setq load-path (append load-path packages)))
-(add-to-list 'load-path "~/.emacs.d/site-lisp")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/treemacs/src/elisp")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/treemacs/src/extra/")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/lsp-mode/clients")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/lsp-mode/scripts")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/lsp-mode/docs")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/vertico/extensions")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/themes/themes")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/pdf-tools/lisp")
+(dolist (path '("~/.emacs.d/site-lisp"
+                "~/.emacs.d/site-lisp/treemacs/src/elisp"
+                "~/.emacs.d/site-lisp/treemacs/src/extra/"
+                "~/.emacs.d/site-lisp/lsp-mode/clients"
+                "~/.emacs.d/site-lisp/lsp-mode/scripts"
+                "~/.emacs.d/site-lisp/lsp-mode/docs"
+                "~/.emacs.d/site-lisp/vertico/extensions"
+                "~/.emacs.d/site-lisp/themes/themes"
+                "~/.emacs.d/site-lisp/pdf-tools/lisp"))
+  (add-to-list 'load-path path))
 ;; (load "~/.emacs.d/site-lisp/loaddefs.el")
+
+;;; Core settings
 (setq eat-kill-buffer-on-exit t
       css-indent-offset 2
       set-mark-command-repeat-pop t
@@ -56,6 +61,15 @@
       ;; package-quickstart nil
       )
 
+;;; GC / Performance
+(add-hook 'emacs-startup-hook
+          (lambda ()
+            (setq gc-cons-threshold better-gc-cons-threshold
+                  gc-cons-percentage 0.1)))
+(add-hook 'minibuffer-setup-hook #'gc-minibuffer-setup-hook)
+(add-hook 'minibuffer-exit-hook #'gc-minibuffer-exit-hook)
+
+;;; Diagnostics / icons
 (with-eval-after-load 'flycheck
   (add-hook 'flycheck-mode-hook '(lambda ()
                                    (flycheck-set-indication-mode 'left-margin))))
@@ -98,7 +112,7 @@
   "Face for flymake Info."
   :group 'flymake)
 
-(setq flymake-no-changes-timeout nil
+(setq flymake-no-changes-timeout 0.5
       flymake-indicator-type 'margins
       flymake-autoresize-margins t
       flymake-margin-indicators-string
@@ -152,7 +166,7 @@
 
 (require 'project)
 
-;;; @3. ICONS
+;;; Icons
 
 (with-eval-after-load 'treemacs
   (require 'treemacs-nerd-icons)
@@ -162,7 +176,7 @@
 
 (require 'init-startup)
 
-  ;;; @4. MEOW
+;;; Meow
 (require 'meow)
 (meow-setup)
 (meow-global-mode 1)
@@ -173,13 +187,11 @@
       meow--kbd-kill-region "M-w"
       meow--kbd-kill-ring-save "C-w")
 
-(meow-global-mode)
-
 ;; (setq xclip-method 'wl-copy
 ;;       xclip-program "wl-copy")
 ;; (xclip-mode)
 
-  ;;; @5. KEYBINDINGS
+;;; Keybindings
 
 (require 'puni)
 (require 'vundo)
@@ -198,7 +210,6 @@
 
     ;; Avy
     (keymap-set isearch-mode-map "M-j" 'avy-isearch)
-    (keymap-global-set "M-'" 'avy-goto-char-in-line)
     ;; (global-set-key (kbd "C-:") 'avy-goto-char)
     ;; (global-set-key (kbd "M-g c") 'avy-goto-char-timer)
     ;; (global-set-key (kbd "M-g w") 'avy-goto-word-1)
@@ -219,13 +230,13 @@
 (keymap-global-set "C-x C-r" 'restart-emacs)
 (keymap-global-set "C-c g" 'consult-ripgrep)
 (keymap-global-set "C-c f" 'consult-fd)
-;; @ Efficiency
+;; Efficiency
 (keymap-global-set "C-x f" 'find-file)
 (keymap-global-set "C-z" 'vundo)
 
 (global-set-key [remap comment-dwim] 'comment-or-uncomment)
 
-;; @ Fingertip
+;;; Fingertip
 ;; (dolist (hook '(emacs-lisp-mode-hook c-mode-hook lisp-mode-hook))
 ;;   (add-hook hook 'fingertip-mode))
 (with-eval-after-load 'fingertip
@@ -262,7 +273,7 @@
   ;; ("C-j" . fingertip-jump-up)
   )
 
-;; @ Helpful
+;;; Helpful
 
 (require 'helpful)
 (keymap-global-set "M-?" 'help-command)
@@ -278,6 +289,7 @@
   (define-key global-map [remap downcase-word] 'downcase-any)
   (define-key global-map [remap capitalize-word] 'capitalize-any))
 
+;;; Language modes / Treesit
 (setq elisp-fontify-semantically t)
 ;; (require 'scala-mode)
 (require 'scala-ts-mode)
@@ -307,32 +319,34 @@
   (require 'qml-ts-mode)
   )
 
-(add-to-list 'auto-mode-alist '("\\.pdf\\'" . pdf-view-mode))
-(add-to-list 'auto-mode-alist '("\\.ya?ml\\'" . yaml-ts-mode))
-(add-to-list 'auto-mode-alist '("\\.lua\\'" . lua-ts-mode))
-(add-to-list 'auto-mode-alist '("\\.scala\\'" . scala-mode))
-(add-to-list 'auto-mode-alist '("\\.kdl\\'" . kdl-mode))
-(add-to-list 'auto-mode-alist '("\\.do\\'" . tcl-mode))
-(add-to-list 'auto-mode-alist '("\\.xdc\\'" . tcl-mode))
-(add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
-(add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-ts-mode))
-(add-to-list 'auto-mode-alist
-             '("\\.\\(?:md\\|markdown\\|mkd\\|mdown\\|mkdn\\|mdwn\\)\\'" . markdown-mode))
-(add-to-list 'auto-mode-alist '("README\\.md\\'" . gfm-mode))
+(dolist (entry '(("\\.pdf\\'" . pdf-view-mode)
+                 ("\\.ya?ml\\'" . yaml-ts-mode)
+                 ("\\.lua\\'" . lua-ts-mode)
+                 ("\\.scala\\'" . scala-mode)
+                 ("\\.kdl\\'" . kdl-mode)
+                 ("\\.do\\'" . tcl-mode)
+                 ("\\.xdc\\'" . tcl-mode)
+                 ("\\.ts\\'" . typescript-ts-mode)
+                 ("\\.tsx\\'" . typescript-ts-mode)
+                 ("\\.\\(?:md\\|markdown\\|mkd\\|mdown\\|mkdn\\|mdwn\\)\\'" . markdown-mode)
+                 ("README\\.md\\'" . gfm-mode)))
+  (add-to-list 'auto-mode-alist entry))
 (with-eval-after-load 'typescript-ts-mode
   (setq typescript-ts-mode-indent-offset 4))
 (with-eval-after-load 'css-mode
   (setq css-indent-offset 4))
 
 
-(require 'eldoc-box)
-(require 'eldoc-mouse)
-(require 'calibredb)
-(require 'nov)
-(require 'nov-xwidget)
-(require 'shrface)
-(require 'nov-highlights)
-(require 'etaf)
+;;; Reading / Documents
+(dolist (feature '(eldoc-box
+                   eldoc-mouse
+                   calibredb
+                   nov
+                   nov-xwidget
+                   shrface
+                   nov-highlights
+                   etaf))
+  (require feature))
 (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
 
 (with-eval-after-load 'nov
@@ -348,18 +362,19 @@
   )
 
 (when (eq system-type 'gnu/linux)
-  (require 'pdf-tools)
-  (require 'pdf-roll)
-  (require 'pdf-history)
-  (require 'pdf-view)
-  (require 'pdf-occur)
-  (require 'pdf-isearch)
-  (require 'pdf-links)
-  (require 'pdf-outline)
-  (require 'pdf-misc)
-  (require 'pdf-annot)
-  (require 'pdf-sync)
-  (require 'pdf-cache)
+  (dolist (feature '(pdf-tools
+                     pdf-roll
+                     pdf-history
+                     pdf-view
+                     pdf-occur
+                     pdf-isearch
+                     pdf-links
+                     pdf-outline
+                     pdf-misc
+                     pdf-annot
+                     pdf-sync
+                     pdf-cache))
+    (require feature))
   ;; (require 'pdf-virtual)
   ;; (require 'pdf-loader)
   ;; (with-eval-after-load 'pdf-tools
@@ -384,7 +399,7 @@
   (add-hook 'pdf-view-mode-hook 'pdf-view-roll-minor-mode)
   )
 
-;;; @6. LSP
+;;; Completion / LSP
 
 (require 'markdown-mode)
 (define-key markdown-mode-map (kbd "C-c C-e") #'markdown-do)
@@ -544,7 +559,7 @@
    )
   )
 
-  ;;; @7. DIRED
+;;; Dired
 
 (setq dired-mouse-drag-files t
       mouse-drag-and-drop-region-cross-program t
@@ -616,7 +631,7 @@
 (add-hook 'dired-mode-hook 'set-font-for-dired)
 
 
-;; @8. CHINESE
+;;; Chinese
 
 (setq cns-prog "~/.emacs.d/site-lisp/emacs-chinese-word-segmentation/cnws"
       cns-dict-directory "~/.emacs.d/site-lisp/emacs-chinese-word-segmentation/cppjieba/dict"
@@ -629,7 +644,7 @@
   (when (featurep 'cns)
     (add-hook 'find-file-hook 'cns-auto-enable)))
 
-;; @9. INPUT
+;;; Input method
 
 (with-eval-after-load 'rime
   ;; (set-face-attribute 'rime-default-face nil :height 1.2)
@@ -720,17 +735,18 @@
 
 ;; (global-set-key "\C-\\" 'toggle-input-method)
 
-;; @11. ORG
+;;; Org
 ;; (require 'markdown-ts-mode)
 ;; (markdown-ts-setup)
 (require 'org)
-(add-to-list 'load-path "~/.emacs.d/site-lisp/org-roam")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/org-modern-indent")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/org-modern")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/org-appear")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/org-bars")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/emacsql")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/org-visual-outline")
+(dolist (path '("~/.emacs.d/site-lisp/org-roam"
+                "~/.emacs.d/site-lisp/org-modern-indent"
+                "~/.emacs.d/site-lisp/org-modern"
+                "~/.emacs.d/site-lisp/org-appear"
+                "~/.emacs.d/site-lisp/org-bars"
+                "~/.emacs.d/site-lisp/emacsql"
+                "~/.emacs.d/site-lisp/org-visual-outline"))
+  (add-to-list 'load-path path))
 
 ;; Hide spaces of chinese inline block
 ;; (font-lock-add-keywords 'org-mode
@@ -834,11 +850,11 @@
             (variable-pitch-mode)
             (visual-line-mode)
             (valign-mode)
-            ;; (text-scale-increase 1)
             ))
-(add-hook 'markdown-mode-hook
-          (lambda ()
-            (text-scale-increase 1)))
+(dolist (mode '(markdown-mode-hook org-mode-hook))
+  (add-hook mode
+            (lambda ()
+              (text-scale-increase 1))))
 
 ;; (with-eval-after-load 'org
 ;; (defun org-buffer-face-mode-variable ()
@@ -907,8 +923,9 @@
         org-noter-auto-save-last-location t)
   )
 
-(add-to-list 'load-path "~/.emacs.d/site-lisp/with-editor/lisp")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/magit/lisp")
+(dolist (path '("~/.emacs.d/site-lisp/with-editor/lisp"
+                "~/.emacs.d/site-lisp/magit/lisp"))
+  (add-to-list 'load-path path))
 (load "~/.emacs.d/site-lisp/transient/lisp/transient.el")
 (require 'magit)
 (require 'org-roam)
@@ -969,7 +986,7 @@
                               "#+TITLE: ${title}\n#+FILETAGS: %^g\n#+CREATED: %U\n#+MODIFIED: \n\n")
            :unnarrowed t))))
 
-;;; @12. VERILOG
+;;; Verilog
 (require 'verilog-ts-mode)
 (setq verilog-indent-level 2
       verilog-indent-level-declaration 2
@@ -1023,17 +1040,15 @@
                                            ,verilog-hs-block-start-keywords-re
                                            ,verilog-hs-block-end-keywords-re
                                            nil
-                                           ,(cdr mode))))
-  (dolist (hook '(verilog-mode-hook verilog-ts-mode-hook))
-    (add-hook hook #'hs-minor-mode))
-  ;; Workaround to enable `hideshow' on first file visit with lazy loading using
-  ;; :config section with `use-package'
-  (when (member major-mode '(verilog-mode verilog-ts-mode))
-    (hs-minor-mode 1)))
+                                           ,(cdr mode)))))
 (verilog-ext-hs-setup)
 ;; (setq verilog-linter "verilator --lint-only")
 
-;;; @14. HYDRA
+(dolist (hook '(prog-mode-hook))
+  (add-hook hook #'hs-minor-mode))
+
+
+;;; Hydra
 (require 'hydra)
 
 (defhydra hydra-avy (global-map "M-g" :exit t :hint nil)
@@ -1156,11 +1171,11 @@
 
 (keymap-global-set "C-x SPC" 'hydra-rectangle/body)
 
-    ;;; @15. LATEX-NODE
+;;; LaTeX node
 ;; (require 'latex-node)
 (load "~/.emacs.d/lisp/latex-node.el")
 
-  ;;; @16. LATEX
+;;; LaTeX
 ;; On demand loading, leads to faster startup time.
 (with-eval-after-load 'citar
   (setq org-cite-global-bibliography '("/run/media/kunh/Elements/Zotero Bib/My Library.bib")
@@ -1269,7 +1284,7 @@
 (keymap-set outline-minor-mode-map "C-<tab>" 'outline-toggle-children)
 ;; (keymap-set outline-minor-mode-map "M-[" 'outline-toggle-children)
 
-  ;;; @17. BASE
+;;; Core behavior
 ;; (add-hook 'emacs-startup-hook
 ;;           (lambda () (setq gc-cons-threshold better-gc-cons-threshold)))
 
@@ -1359,7 +1374,7 @@
              (+ (point) 1)
              (point-max))))
 
-(dolist (hook '(TeX-mode-hook dired-mode-hook))
+(dolist (hook '(TeX-mode-hook dired-mode-hook markdown-mode-hook markdown-view-mode-hook))
   (add-hook hook 'toggle-truncate-lines))
 
 ;; (add-hook 'emacs-startup-hook ;; 'after-init-hook
@@ -1511,7 +1526,7 @@
 ;; (dolist (mode '(verilog-mode org-mode term-mode))
 ;;   (add-to-list 'aggressive-indent-excluded-modes mode))
 
-;;; Visual Repalcement
+;;; Visual Replacement
 (keymap-global-set "C-c r" 'replace-regexp)
 
 (require 'hideshow)
@@ -1724,35 +1739,37 @@ Adapted from `highlight-indentation-mode'."
 (with-eval-after-load 'embark
   (add-hook 'embark-collect-mode-hook 'consult-preview-at-point-mode))
 
-  ;;; Theme
+;;; Appearance helpers
 (dolist (hook '(prog-mode-hook text-mode-hook cuda-mode-hook))
   (add-hook hook 'colorful-mode))
 (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 
-;; @ Minibuffer Setting
-(require 'vertico)
-(require 'vertico-grid)
-(require 'vertico-directory)
-(require 'vertico-reverse)
-(require 'vertico-indexed)
-(require 'vertico-mouse)
-(require 'vertico-buffer)
-(require 'vertico-multiform)
-(require 'vertico-sort)
-(require 'vertico-suspend)
-(require 'embark)
-(require 'marginalia)
-(require 'standard-themes)
-(require 'rainbow-delimiters)
-(require 'visual-fill-column)
-(require 'colorful-mode)
-(require 'indent-bars)
-(require 'indent-bars-ts)
-(require 'symbol-overlay)
-(require 'aggressive-indent)
-(require 'orderless)
+;;; Minibuffer / Completion UI
+(dolist (feature '(vertico
+                   vertico-grid
+                   vertico-directory
+                   vertico-reverse
+                   vertico-indexed
+                   vertico-mouse
+                   vertico-buffer
+                   vertico-multiform
+                   vertico-sort
+                   vertico-suspend
+                   embark
+                   marginalia
+                   standard-themes
+                   rainbow-delimiters
+                   visual-fill-column
+                   colorful-mode
+                   indent-bars
+                   indent-bars-ts
+                   symbol-overlay
+                   aggressive-indent
+                   orderless))
+  (require feature))
 
-(setq completion-styles '(orderless basic)
+(setq-default completion-styles '(basic partial-completion orderless))
+(setq completion-styles '(basic partial-completion orderless)
       completion-category-overrides '((file (styles basic partial-completion))))
 
 (if (boundp 'vertico-mode)
@@ -1790,12 +1807,8 @@ Adapted from `highlight-indentation-mode'."
   (dolist (hook '(term-mode-hook minibuffer-mode-hook))
     (add-hook hook #'puni-disable-puni-mode)))
 
-(setq-default completion-styles '(orderless basic))
-(setq completion-styles '(basic partial-completion orderless)
-      completion-category-overrides
-      '((file (styles basic partial-completion))))
 
-;; @ Windows Control
+;;; Layout
 
 ;; (require 'winum)
 ;; (require 'ace-window)
@@ -1804,6 +1817,7 @@ Adapted from `highlight-indentation-mode'."
   (add-hook hook 'display-fill-column-indicator-mode))
 ;; (global-display-fill-column-indicator-mode)
 
+;;; Themes
 (defvar themes_chosen
   '(;;; Light theme
     ;; modus-operandi-tritanopia

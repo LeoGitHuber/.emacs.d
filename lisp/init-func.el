@@ -5,6 +5,8 @@
 (require 'subr-x)
 (require 'cl-seq)
 
+;;; Editing helpers
+
 ;;;###autoload
 (defun kill-or-save (arg)
   "Kill or save ARG words."
@@ -81,6 +83,8 @@
       (indent-according-to-mode)
     (beginning-of-line)))
 
+;;; Font and typography
+
 ;; "IBM Plex Mono" "Fantasque Sans Mono", "InputMono", "Monaspace Neon"
 ;; (defvar code-font "Cascadia Code NF" ;; "Hack"
 ;;   "Font for coding.")
@@ -92,7 +96,8 @@
 (defvar cjk-font "LXGW Bright Code GB" ;; "LXGW WenKai Mono"
   "CJK font.")
 
-(defvar serif-font "Libre Baskerville" ;; "Bookerly" ;; Palatino Linotype
+;; (defvar serif-font "Libre Baskerville" ;; "Bookerly" ;; Palatino Linotype
+(defvar serif-font "Merriweather"
   "Serif font.")
 
 (defvar cjk-sans-font "Source Han Sans CN" ;; "LXGW WenKai Screen"
@@ -188,10 +193,14 @@ And Set SERIF-FONT, SANS-FONT and VERBATIM-FONT."
     )
   )
 
-(defun insert-tab-char()
+;;; Editing helpers (misc)
+
+(defun insert-tab-char ()
   "Insert a tab char. (ASCII 9, \t)."
   (interactive)
   (insert "\t"))
+
+;;; Commenting / folding
 
 ;;;###autoload
 (defun comment-or-uncomment ()
@@ -212,8 +221,10 @@ And Set SERIF-FONT, SANS-FONT and VERBATIM-FONT."
 (defun hideshow-folded-overlay-fn (ov)
   (when (eq 'code (overlay-get ov 'hs))
     (let* ((nlines (count-lines (overlay-start ov) (overlay-end ov)))
-             (info (format " ... #%d " nlines)))
-        (overlay-put ov 'display (propertize info 'face hideshow-folded-face)))))
+           (info (format " ... #%d " nlines)))
+      (overlay-put ov 'display (propertize info 'face hideshow-folded-face)))))
+
+;;; Autoload maintenance
 
 ;;;###autoload
 (defun update-all-autoloads ()
@@ -224,13 +235,15 @@ And Set SERIF-FONT, SANS-FONT and VERBATIM-FONT."
     (when (not (file-exists-p generated-autoload-file))
       (with-current-buffer (find-file-noselect generated-autoload-file)
         (insert ";;") ;; create the file with non-zero size to appease autoload
-(save-buffer)))
-(mapcar #'update-directory-autoloads
-        '("" "modes" "git/org-fu"))
+        (save-buffer)))
+    (mapcar #'update-directory-autoloads
+            '("" "modes" "git/org-fu"))
 
-(cd "personal")
-(setq generated-autoload-file (expand-file-name "loaddefs.el"))
-(update-directory-autoloads "")))
+    (cd "personal")
+    (setq generated-autoload-file (expand-file-name "loaddefs.el"))
+    (update-directory-autoloads "")))
+
+;;; Misc utilities
 
 ;;;###autoload
 (defun hl-current-line-range ()
@@ -268,6 +281,8 @@ The resulting list contains all items that appear in LIST1 but not LIST2."
   (shell-command (format "grim -l 0 -g \"$(slurp)\" %s" place) nil nil)
   (kill-new (format "[[file:%s][]]" place)))
 
+;;; Filesystem helpers
+
 (defun find-subdir-recursively (dir)
   "Find all subdirectories in DIR.
 
@@ -292,6 +307,8 @@ Dot-directories and directories contain `.nosearch' will be skipped."
          (subdir (butlast (mapcar #'abbreviate-file-name (find-subdir-recursively dir)) but)))
     (nconc subdir
            (mapcar #'abbreviate-file-name (mapcan #'find-dir-recursively subdir)))))
+
+;;; Autoload generation
 
 (defvar autoloads-file "~/.emacs.d/site-lisp/loaddefs.el"
   "File with all of autoload setting.")
@@ -329,13 +346,14 @@ use `cm/autoloads-file' as TARGET."
 ;;                         (t (time-less-p t2 t1)))))
 ;;       (mapcar #'car))))
 
+;;; Meow helpers
+
 (defun meow-yank-forward ()
   "Yank forward."
   (interactive)
   (let ((select-enable-clipboard meow-use-clipboard))
     (save-excursion
-      (meow--execute-kbd-macro meow--kbd-yank))
-    ))
+      (meow--execute-kbd-macro meow--kbd-yank))))
 
 (defvar meow--selection-record nil
   "Variable that saves marker before meow exit selection.")
@@ -343,12 +361,12 @@ use `cm/autoloads-file' as TARGET."
 (defvar meow--selection-count nil
   "Variable that saves last position before meow exit selection.")
 
-(defun meow--pre-cancel-selection()
+(defun meow--pre-cancel-selection ()
   "Save positions of meow selection before its exit."
   (when meow--selection-history
     (let* ((start (cadar meow--selection-history))
            (end (cadr (cdar meow--selection-history)))
-           (line ))
+           (line))
       (if (and (<= start (point-max)) (<= end (point-max)))
           (progn
             (setq line (+ (count-lines start end) 1))
@@ -359,8 +377,7 @@ use `cm/autoloads-file' as TARGET."
               (setq-local meow--selection-count line))
             (deactivate-mark t))
         (setq-local meow--selection-record nil
-                    meow--selection-count nil))
-      )))
+                    meow--selection-count nil)))))
 
 (defun meow-reselect ()
   "Meow reselect region."
@@ -369,8 +386,7 @@ use `cm/autoloads-file' as TARGET."
       (progn
         (goto-char meow--selection-record)
         (meow-line meow--selection-count))
-    (message "No previous recorded selection."))
-  )
+    (message "No previous recorded selection.")))
 
 (defun meow-setup ()
   (setq meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
@@ -485,6 +501,8 @@ use `cm/autoloads-file' as TARGET."
     )
   )
 
+;;; LSP helpers
+
 (defun lsp-booster--advice-final-command (old-fn cmd &optional test?)
   "Prepend emacs-lsp-booster command to lsp CMD."
   (let ((orig-result (funcall old-fn cmd test?)))
@@ -520,7 +538,7 @@ use `cm/autoloads-file' as TARGET."
            (add-hook hook 'corfu-mode)))
     (add-hook hook (lambda ()
                      (unless (derived-mode-p 'emacs-lisp-mode 'lisp-mode 'makefile-mode
-                                             'snippet-mode 'kdl-mode 'tcl-mode
+                                             'snippet-mode 'kdl-mode 'tcl-mode 'bash-mode 'bash-ts-mode
                                              ;; 'python-ts-mode 'python-mode
                                              )
                        ;; (with-eval-after-load 'lsp
@@ -573,6 +591,8 @@ use `cm/autoloads-file' as TARGET."
     (advice-add 'lsp-resolve-final-command :around #'lsp-booster--advice-final-command)
     (add-hook 'lsp-mode-hook 'corfu-mode)))
 
+;;; GC / performance
+
 (defvar better-gc-cons-threshold (* 32 1024 1024) ;; 128mb
   "The default value to use for `gc-cons-threshold'.
 If you experience freezing, decrease this.
@@ -587,6 +607,8 @@ If you experience stuttering, increase this.")
   "Turn on garbage collection after minibuffer exit."
   (garbage-collect)
   (setq gc-cons-threshold better-gc-cons-threshold))
+
+;;; Display setup
 
 (defun setup-display-graphic (modelineq cfborderq dayon dayoff themesetq fontsize)
   "Setup display graphic for GUI Emacs and Emacsclient with MODELINEQ, CFBORDERQ, DAYON, DAYOFF, THEMESETQ, FONTSIZE."

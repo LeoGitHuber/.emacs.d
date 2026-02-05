@@ -598,3 +598,9 @@
 [submodule "site-lisp/shell-maker"]
 	path = site-lisp/shell-maker
 	url = https://github.com/xenodium/shell-maker.git
+[submodule "site-lisp/olivetti"]
+	path = site-lisp/olivetti
+	url = https://github.com/rnkn/olivetti.git
+[submodule "site-lisp/mixed-pitch"]
+	path = site-lisp/mixed-pitch
+	url = https://gitlab.com/jabranham/mixed-pitch.git

@@ -14,7 +14,11 @@ transient
 **/auto/
 blink-search.db
 *~
-loaddefs.el
 \#*\#
+.cask/
+**/*.elc
+tramp
 server
+dump.el
 temp.el
+loaddefs.el

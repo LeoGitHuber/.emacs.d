@@ -1,6 +1,7 @@
 \documentclass[11pt, a4paper]{article}
-\usepackage{geometry, setspace, titlesec, titletoc, indentfirst, graphicx, amsmath, unicode-math, float, cite, cases, makecell, array, subcaption, caption, listings, enumitem, xeCJKfntef, minted}
-\usepackage{xeCJK}
+\usepackage{geometry, setspace, titlesec, titletoc, indentfirst, graphicx, amsmath, unicode-math, float, cite, cases, makecell, array, subcaption, caption, listings, enumitem, minted}
+% \usepackage{xeCJK, xeCJKfntef}
+\usepackage{ctex, lua-ul}
 \usepackage{fontspec}
 \usepackage[bookmarksopen=true]{hyperref}
 \usepackage{bookmark}
@@ -39,21 +40,15 @@
 \setlist[itemize]{itemsep=5pt, parsep=0pt}
 \setlist[description]{itemsep=4pt, parsep=0pt}
 
+\let\CJKunderline\underline
 %%% Set fonts
 % \setCJKmainfont{SimSun}[AutoFakeBold]    % rm罗马
-\setCJKmainfont{FZYouSongJ GBK}[BoldFont=FZLanTingHei-B-GBK, ItalicFont=AR PL UKai CN]
+% \setCJKmainfont{FZYouSongJ GBK}[BoldFont=FZLanTingHei-B-GBK, ItalicFont=AR PL UKai CN]
 % \setCJKsansfont{SimHei}[AutoFakeBold]    % sf无衬线
 
 % \setmainfont{Times New Roman}  % Windows setting
-\setmainfont{TeX Gyre Termes}[
-  Path=/usr/local/texlive/2024/texmf-dist/fonts/opentype/public/tex-gyre/,
-  Extension=.otf,
-  UprightFont=texgyretermes-regular,
-  BoldFont=texgyretermes-bold,
-  ItalicFont=texgyretermes-italic,
-  BoldItalicFont=texgyretermes-bolditalic
-]
-\setmathfont{texgyretermes-math.otf}
+\setmainfont{TeX Gyre Termes}
+\setmathfont{TeX Gyre Termes Math}
 \xeCJKsetup{CJKspace=true}
 
 \lstset{

@@ -2,10 +2,8 @@
 ;;; Commentary:
 ;;; Code:
 
-;; (add-to-list 'load-path "~/.emacs.d/site-lisp/benchmark-init-el")
 
 
-;;;; 01 Startup and Bootstrap
 ;; Index:
 ;; 01 Startup and Bootstrap
 ;; 02 Core Behavior
@@ -53,7 +51,6 @@
            "~/.emacs.d/site-lisp/pdf-tools/lisp"))
   (add-to-list 'load-path path))
 
-;; (load "~/.emacs.d/site-lisp/loaddefs.el")
 
 ;;; Core settings
 (setq eat-kill-buffer-on-exit t
@@ -85,8 +82,6 @@
 (require 'nerd-icons)
 (require 'nerd-icons-corfu)
 
-;; (setq nerd-icons-font-family "CaskaydiaCove Nerd Font Mono")
-;; (setq nerd-icons-font-family "PragmataProLiga Nerd Font Mono")
 (setq nerd-icons-font-family
       (if (eq system-type 'gnu/linux)
           "Consolas Nerd Font Mono"
@@ -94,8 +89,6 @@
 
 (defface diagnostics-error
   `(
-    ;; (((background dark)) :background "#090c10" :foreground "#f85149" :family ,nerd-icons-font-family)
-    ;; (((background light)) :foreground "#cb2431" :family ,nerd-icons-font-family)
     (((background dark))
      :foreground "#f85149"
      :family ,nerd-icons-font-family)
@@ -107,8 +100,6 @@
 
 (defface diagnostics-warn
   `(
-    ;; (((background dark)) :background "#090c10" :foreground "#f0883e" :family ,nerd-icons-font-family)
-    ;; (((background light)) :foreground "#bf8803" :family ,nerd-icons-font-family)
     (((background dark))
      :foreground "#f0883e"
      :family ,nerd-icons-font-family)
@@ -119,8 +110,6 @@
   :group 'flymake)
 
 (defface diagnostics-info
-  ;; `((((background dark)) :background "#090c10" :foreground "#75beff" :color "#000000" :family ,nerd-icons-font-family)
-  ;;   (((background light)) :foreground "#1155ff" :color "white" :family ,nerd-icons-font-family)
   `((((background dark))
      :foreground "#75beff"
      :family ,nerd-icons-font-family)
@@ -134,19 +123,9 @@
       flymake-indicator-type 'margins
       flymake-autoresize-margins t
       flymake-margin-indicators-string
-      ;; `((error "​​​​󰅙" compilation-error)
-      ;;   (warning "​​​​" compilation-warning)
-      ;;   (note "​​​​" compilation-info))
-      ;; `((error "​​​​󰅙​​​​" diagnostics-error)
       `((error "​​​​󰅙​​​​" diagnostics-error)
-        ;; (warning "​​​​​​​​" diagnostics-warn)
-        ;; (warning "​​​​​​​​" diagnostics-warn)
         (warning "​​ " diagnostics-warn)
-        ;; (note "​​​​​​​​" diagnostics-info)
         (note "​​​​​​​" diagnostics-info))
-      ;; `((error ,(nerd-icons-octicon "nf-oct-x_circle_fill") diagnostics-error)
-      ;;   (warning ,(nerd-icons-faicon "nf-fa-warning") diagnostics-warn)
-      ;;   (note ,(nerd-icons-faicon "nf-fa-info") diagnostics-info))
       flymake-show-diagnostics-at-end-of-line 'fancy
       elisp-flymake-byte-compile-load-path (cons "./" load-path))
 
@@ -197,7 +176,6 @@
 
 (require 'init-startup)
 
-;;;; 02 Core Behavior
 
 ;;; Core behavior
 
@@ -224,10 +202,6 @@
 (setq global-auto-revert-non-file-buffers t
       auto-revert-interval 1)
 
-;; (when (eq system-type 'gnu/linux)
-;;   (with-eval-after-load 'info
-;;     (add-to-list 'Info-directory-list "/usr/local/texlive/2024/texmf-dist/doc/info")
-;;     (add-to-list 'Info-directory-list "/usr/local/share/info")))
 
 
 (setq hl-line-sticky-flag nil
@@ -318,29 +292,6 @@
   (add-hook hook '(lambda ()
                     (setq truncate-lines t))))
 
-;; (add-hook 'emacs-startup-hook ;; 'after-init-hook
-;;           (lambda ()
-;;             (unless (bound-and-true-p recentf-mode)
-;;               (recentf-mode t)
-;;               (setq recentf-max-saved-items 1000
-;;                 recentf-exclude `("/tmp/" "/ssh:"
-;;                                       ,(concat user-emacs-directory
-;;                                                "lib/.*-autoloads\\.el\\'"))))
-;;             (unless (boundp 'no-littering-etc-directory)
-;;               ;; (rquire 'no-littering)
-;;               (load "~/.emacs.d/site-lisp/no-littering/no-littering.el")
-;;               (with-eval-after-load 'no-littering
-;;               (add-to-list 'recentf-exclude no-littering-var-directory)
-;;               (add-to-list 'recentf-exclude no-littering-etc-directory)))
-;;             ;; (fset 'yes-or-no-p 'y-or-n-p)
-;;             (unless (bound-and-true-p save-place-mode)
-;;               (save-place-mode t))
-;;             (unless (bound-and-true-p savehist-mode)
-;;               (setq history-length 10000
-;;                 history-delete-duplicates t
-;;                 savehist-save-minibuffer-history t)
-;;               (savehist-mode t))))
-
 
 (repeat-mode)
 
@@ -429,8 +380,6 @@
 (autoload 'symbol-overlay-mode "symbol-overlay" nil t)
 (add-hook 'prog-mode-hook #'symbol-overlay-mode)
 
-;; (electric-indent-mode -1)
-;; (follow-mode)
 
 ;; Smoothly scrolling over image
 (unless (>= (string-to-number emacs-version) 30)
@@ -470,11 +419,8 @@
 (dolist (hook '(emacs-lisp-mode-hook yuck-mode-hook python-ts-mode python-mode scss-mode-hook))
   (add-hook hook 'aggressive-indent-mode))
 
-;; (dolist (mode '(verilog-mode org-mode term-mode))
-;;   (add-to-list 'aggressive-indent-excluded-modes mode))
 
 
-;;;; 03 Editing Workflow
 
 ;;; Meow
 (require 'meow)
@@ -489,10 +435,6 @@
       meow--kbd-kill-region "M-w"
       meow--kbd-kill-ring-save "C-w")
 
-;; (setq xclip-method 'wl-copy
-;;       xclip-program "wl-copy")
-;; (xclip-mode)
-
 ;;; Keybindings
 
 (require 'puni)
@@ -505,19 +447,7 @@
   (progn
     (keymap-global-set "M-j" 'open-newline-above)
     (keymap-global-set "C-j" 'open-newline-below)
-    ;; (keymap-global-set "M-N" 'windmove-down)
-    ;; (keymap-global-set "M-P" 'windmove-up)
-    ;; (keymap-global-set "M-I" 'windmove-right)
-    ;; (keymap-global-set "M-O" 'windmove-left)
-    ;;replace =isearch-delete-char= with =isearch-del-char=
-    ;; Avy
     (keymap-set isearch-mode-map "M-j" 'avy-isearch)
-    ;; (global-set-key (kbd "C-:") 'avy-goto-char)
-    ;; (global-set-key (kbd "M-g c") 'avy-goto-char-timer)
-    ;; (global-set-key (kbd "M-g w") 'avy-goto-word-1)
-    ;; (global-set-key (kbd "M-g e") 'avy-goto-word-0)
-    ;; (global-set-key (kbd "M-g f") 'avy-goto-line)
-    ;; (global-set-key (kbd "C-c C-j") 'avy-resume)
     ))
 
 (keymap-global-set "M-'" 'avy-goto-char-in-line)
@@ -552,12 +482,8 @@
 (global-set-key [remap comment-dwim] 'comment-or-uncomment)
 
 ;;; Fingertip
-;; (dolist (hook '(emacs-lisp-mode-hook c-mode-hook lisp-mode-hook))
-;;   (add-hook hook 'fingertip-mode))
 (with-eval-after-load 'fingertip
   ;; 移动
-  ;; ("M-n" . fingertip-jump-left)
-  ;; ("M-p" . fingertip-jump-right)
   ;; 符号插入
   (keymap-set fingertip-mode-map "%" 'fingertip-match-paren)   ;括号跳转
   (keymap-set fingertip-mode-map "(" 'fingertip-open-round)    ;智能 (
@@ -572,20 +498,9 @@
   (keymap-set fingertip-mode-map "SPC" 'fingertip-space)       ;智能 space
   (keymap-set fingertip-mode-map "RET" 'fingertip-newline)     ;智能 newline
   ;; 删除
-  ;; ("M-o" . fingertip-backward-delete) ;向后删除
-  ;; ("C-d" . fingertip-forward-delete)  ;向前删除
-  ;; ("C-k" . fingertip-kill)            ;向前kill
   ;; 包围
-  ;; ("M-\"" . fingertip-wrap-double-quote) ;用 " " 包围对象, 或跳出字符串
-  ;; ("M-'" . fingertip-wrap-single-quote) ;用 ' ' 包围对象, 或跳出字符串
-  ;; ("M-[" . fingertip-wrap-bracket)      ;用 [ ] 包围对象
-  ;; ("M-{" . fingertip-wrap-curly)        ;用 { } 包围对象
-  ;; ("M-(" . fingertip-wrap-round)        ;用 ( ) 包围对象
-  ;; ("M-)" . fingertip-unwrap)            ;去掉包围对象
   ;; 跳出并换行缩进
-  ;; ("M-:" . fingertip-jump-out-pair-and-newline) ;跳出括号并换行
   ;; 向父节点跳动
-  ;; ("C-j" . fingertip-jump-up)
   )
 
 ;;; Helpful
@@ -731,7 +646,6 @@
 (keymap-global-set "C-x SPC" 'hydra-rectangle/body)
 
 
-;;;; 04 Completion and Navigation
 
 ;;; Completion / LSP
 
@@ -757,17 +671,6 @@
   (add-hook 'prog-mode-hook 'tempel-setup-capf)
   (add-hook 'text-mode-hook 'tempel-setup-capf))
 
-;; (with-eval-after-load 'yasnippet
-;;   (add-hook 'yas-keymap-disable-hook
-;;             (lambda()
-;;               (or
-;;                (when (boundp 'corfu--frame)
-;;                  (and
-;;                   (frame-live-p corfu--frame)
-;;                   (frame-visible-p corfu--frame)))
-;;                (when (boundp 'acm-menu-frame)
-;;                  (and (frame-live-p acm-menu-frame)
-;;                       (frame-visible-p acm-menu-frame)))))))
 
 (require 'cape)
 
@@ -788,9 +691,6 @@
         ;; corfu-quit-at-boundary t
         )
   (keymap-set corfu-map "<tab>" 'corfu-insert)
-  ;; (keymap-set corfu-map "<backtab>" 'corfu-previous)
-  ;; (keymap-set corfu-map "S-<return>" 'corfu-insert)
-  ;; (keymap-unset corfu-map "RET")
   (add-hook 'corfu-mode-hook 'corfu-popupinfo-mode)
   (with-eval-after-load 'corfu-popupinfo
     (setq corfu-popupinfo-delay '(0.1 . 0.1)))
@@ -811,37 +711,19 @@
 
 (with-eval-after-load 'eglot
   (setq my/pyright-uvx-command '("pyright-langserver" "--stdio"))
-  ;; (setq my/pyright-uvx-command '("pyrefly" "lsp"))
-  ;; (setq my/pyright-uvx-command '("pylsp"))
-  ;; (add-to-list 'eglot-server-programs `((python-ts-mode python-mode) . ,my/pyright-uvx-command))
   (add-to-list
    'eglot-server-programs
    '((verilog-mode verilog-ts-mode)
      .
      ("verible-verilog-ls" "--push_diagnostic_notifications" "--rules"
-      "-explicit-function-lifetime,
+     "-explicit-function-lifetime,
                   -explicit-parameter-storage-type,
                   -unpacked-dimensions-range-ordering,
                   -forbid-line-continuations,
                   -parameter-name-style,
                   -line-length,
                   -always-comb"
-      ;; "--assignment_statement_alignment" "align"
-      ;; "--case_items_alignment" "align"
-      ;; "--class_member_variable_alignment" "align"
-      ;; "--distribution_items_alignment" "align"
-      ;; "--enum_assignment_statement_alignment" "align"
-      ;; "--formal_parameters_alignment" "align"
-      ;; "--module_net_variable_alignment" "align"
-      ;; "--named_parameter_alignment" "align"
-      ;; "--named_port_alignment" "align"
-      ;; "--port_declarations_alignment" "align"
-      ;; "--struct_union_members_alignment" "align"
-      ;; "--try_wrap_long_lines" "align"
       )))
-  ;; (add-to-list 'eglot-server-programs
-  ;;              `((scala-mode scala-ts-mode)
-  ;;                . ,(alist-get 'scala-mode eglot-server-programs)))
   (add-to-list
    'eglot-server-programs
    `((scala-mode scala-ts-mode)
@@ -850,15 +732,6 @@
   (setq project-vc-extra-root-markers '(".dir-locals.el"))
   (setq eglot-send-changes-idle-time 0
         eglot-code-action-indications '(eglot-hint))
-  ;; (cl-defmethod eglot-handle-notification :after
-  ;;   (_server (_method (eql textDocument/publishDiagnostics)) &key uri
-  ;;            &allow-other-keys)
-  ;;   (when-let ((buffer (find-buffer-visiting (eglot-uri-to-path uri))))
-  ;;     (with-current-buffer buffer
-  ;;       (if (and (eq nil flymake-no-changes-timeout)
-  ;;                (not (buffer-modified-p)))
-  ;;           (flymake-start t)))))
-  ;; (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
   )
 
 (with-eval-after-load 'lsp-bridge
@@ -980,7 +853,6 @@
 
 (setq hs-set-up-overlay 'hideshow-folded-overlay-fn)
 
-;; (keymap-global-set "C-<tab>" 'hs-toggle-hiding)
 (keymap-set hs-minor-mode-map "C-<tab>" 'hs-toggle-hiding)
 
 (require 'mwim)
@@ -1010,7 +882,6 @@
    win (frame-height)
    (floor (frame-height) 6)
    (floor (frame-width) 2)
-   ;; (floor (frame-width) 2)
    (floor (* (frame-width) 17) 35)))
 
 (defun popper--auto-fit-window-height (win)
@@ -1051,7 +922,6 @@ such alists."
 
 (keymap-global-set "C-M-`" 'popper-toggle-type)
 
-;; (global-tab-line-mode +1)
 (popper-mode +1)
 
 (popper-echo-mode +1)
@@ -1199,8 +1069,6 @@ Adapted from `highlight-indentation-mode'."
 (require 'consult)
 (require 'consult-xref)
 
-;; (autoload 'consult-buffer "consult" nil t)
-;; (autoload 'consult-line "consult" nil t)
 (keymap-global-set "C-x l" 'consult-line)
 
 (keymap-global-set "C-x b" 'consult-buffer)
@@ -1225,12 +1093,10 @@ Adapted from `highlight-indentation-mode'."
 (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 
 
-;;;; 05 Programming Languages
 
 ;;; Language modes / Treesit
 (setq elisp-fontify-semantically t)
 
-;; (require 'scala-mode)
 (require 'scala-ts-mode)
 (require 'kdl-mode)
 (require 'yuck-mode)
@@ -1252,8 +1118,6 @@ Adapted from `highlight-indentation-mode'."
           (sh-mode . bash-ts-mode)
           (verilog-mode . verilog-ts-mode))
         treesit-font-lock-level 4)
-  ;; (add-hook 'emacs-lisp-mode-hook
-  ;;           (lambda () (treesit-parser-create 'elisp)))
   (require 'qml-ts-mode))
 
 (dolist (entry
@@ -1338,7 +1202,6 @@ Adapted from `highlight-indentation-mode'."
 
 (verilog-ext-hs-setup)
 
-;; (setq verilog-linter "verilator --lint-only")
 
 (dolist (hook '(prog-mode-hook))
   (add-hook hook #'hs-minor-mode))
@@ -1352,57 +1215,14 @@ Adapted from `highlight-indentation-mode'."
       dired-omit-mode t)
 
 (add-to-list 'load-path "~/.emacs.d/site-lisp/dirvish/extensions")
-
-;; (add-hook 'dired-mode-hook
-;;           (lambda ()
-;;             (or (boundp 'diredfl-mode)
-;;                 (load "~/.emacs.d/site-lisp/diredfl/diredfl.el"))
-;;             (toggle-truncate-lines)
-;;             (diredfl-mode)
-;;             ))
-;; (with-eval-after-load 'dired
-;;   (setq dired-listing-switches
-;;         "-l --almost-all --human-readable --time-style=long-iso --group-directories-first --no-group"
-;;         dired-dwim-target t
-;;         dired-mouse-drag-files t
-;;         dired-auto-revert-buffer t
-;;         dired-do-revert-buffer t
-;;         mouse-drag-and-drop-region-cross-program t
-;;         dired-kill-when-opening-new-dired-buffer t
-;;         dired-recursive-copies 'always
-;;         ;; dired-recursive-deletes 'always
-;;         image-dired-thumb-size 256
-;;         image-dired-marking-shows-next nil)
-;;   (defun dired-open-externally (&optional arg)
-;;     "Open marked or current file in operating system's default application."
-;;     (interactive "P")
-;;     (dired-map-over-marks
-;;      (embark-open-externally (dired-get-filename))
-;;      arg))
-;;   (keymap-set dired-mode-map "e" 'dired-open-externally))
 (require 'dirvish)
 (require 'dirvish-side)
 
 (dirvish-override-dired-mode)
 
 (with-eval-after-load 'dirvish
-  ;;   ;; (dirvish-peek-mode)
-  ;;   (dirvish-side-follow-mode)
-  ;;   ;; (add-hook 'dirvish-setup-hook 'dirvish-emerge-mode)
   (setq dirvish-attributes '(vc-state nerd-icons git-msg file-size subtree-state collapse file-time)
         dirvish-side-attributes '(vc-state nerd-icons subtree-state collapse)
-        ;;         dirvish-emerge-groups '(("Recent files" (predicate . recent-files-2h))
-        ;;                                 ("Video" (extensions "mp4" "mkv" "webm"))
-        ;;                                 ("Pictures" (extensions "jpg" "png" "jpeg" "svg" "gif"))
-        ;;                                 ("Audio" (extensions "mp3" "flac" "wav" "ape" "aac"))
-        ;;                                 ("Archives" (extensions "gz" "rar" "zip")))
-        ;;         dirvish-path-separators '(" ~" " /" "/")
-        ;;         ;; dirvish-hide-details nil
-        ;;         dirvish-mode-line-height 20
-        ;;         ;; dirvish-show-media-properties t
-        ;;         ;; Turn off media cache, but it will slow down the speed of media preview
-        ;;         dirvish-media-auto-cache-threshold nil
-        ;;         ;; dirvish-preview-dispatch (remove 'epub dirvish-preview-dispatch)
         )
   (keymap-set dirvish-mode-map "TAB" #'dirvish-toggle-subtree))
 
@@ -1418,7 +1238,6 @@ Adapted from `highlight-indentation-mode'."
 (add-hook 'dired-mode-hook 'set-font-for-dired)
 
 
-;;;; 06 Input and Reading
 
 ;;; Chinese
 
@@ -1436,8 +1255,6 @@ Adapted from `highlight-indentation-mode'."
 ;;; Input method
 
 (with-eval-after-load 'rime
-  ;; (set-face-attribute 'rime-default-face nil :height 1.2)
-  ;; (set-face-attribute 'rime-highlight-candidate-face nil :height 1.2)
   (set-face-attribute 'rime-preedit-face nil
                       :underline t
                       :inverse-video 'unspecified)
@@ -1493,7 +1310,6 @@ Adapted from `highlight-indentation-mode'."
       (rime-predicate-after-ascii-char-p)))
   (keymap-set rime-mode-map "s-`" 'rime-send-keybinding)
   (keymap-set rime-mode-map "C-`" 'rime-send-keybinding)
-  ;; (define-key rime-mode-map (kbd "Shift") 'rime-send-keybinding)
   (define-key rime-mode-map (kbd "C-t") 'rime-inline-ascii)
   (define-key minibuffer-mode-map (kbd "C-t") 'rime-inline-ascii)
   (setq default-input-method "rime"
@@ -1527,9 +1343,6 @@ Adapted from `highlight-indentation-mode'."
         ;; rime-deactivate-when-exit-minibuffer t
         rime-inline-ascii-trigger 'shift-l)
   (keymap-set rime-mode-map "M-o" 'rime-force-enable)
-  ;; (with-eval-after-load 'tex
-  ;;   (add-to-list 'rime-disable-predicates
-  ;;                'rime-predicate-tex-advance-p))
   )
 
 (defun rime-commit1-and-toggle-input-method ()
@@ -1542,7 +1355,6 @@ Adapted from `highlight-indentation-mode'."
 
 (keymap-global-set "C-\\" 'rime-commit1-and-toggle-input-method)
 
-;; (global-set-key "\C-\\" 'toggle-input-method)
 
 ;;; Reading / Documents
 (dolist (feature '(eldoc-box eldoc-mouse calibredb nov nov-xwidget shrface nov-highlights etaf))
@@ -1579,16 +1391,6 @@ Adapted from `highlight-indentation-mode'."
              pdf-sync
              pdf-cache))
     (require feature))
-  ;; (require 'pdf-virtual)
-  ;; (require 'pdf-loader)
-  ;; (with-eval-after-load 'pdf-tools
-  ;;   (setq pdf-view-use-scaling t
-  ;;         pdf-view-continuous t
-  ;;         pdf-anot-list-format '((page . 3)
-  ;;                                (type . 10)
-  ;;                                (contents . 50)
-  ;;                                (date . 24)))
-  ;;   (pdf-tools-install))
   (add-hook 'pdf-view-mode-hook 'pdf-history-minor-mode)
   (add-hook 'pdf-view-mode-hook 'pdf-isearch-minor-mode)
   (add-hook 'pdf-view-mode-hook 'pdf-links-minor-mode)
@@ -1601,11 +1403,8 @@ Adapted from `highlight-indentation-mode'."
   (add-hook 'pdf-view-mode-hook 'pdf-view-roll-minor-mode))
 
 
-;;;; 07 Knowledge Management
 
 ;;; Org
-;; (require 'markdown-ts-mode)
-;; (markdown-ts-setup)
 (dolist (path
          '("~/.emacs.d/site-lisp/org-roam"
            "~/.emacs.d/site-lisp/org-modern-indent"
@@ -1627,50 +1426,13 @@ Adapted from `highlight-indentation-mode'."
 (setq olivetti-style 'fancy
       olivetti-margin-width 5)
 
-;; Hide spaces of chinese inline block
-;; (font-lock-add-keywords 'org-mode
-;;                         '(("\\cc\\( \\)[/+*_=~][^a-zA-Z0-9/+*_=~\n]+?[/+*_=~]\\( \\)?\\cc?"
-;;                            (1 (prog1 () (compose-region (match-beginning 1) (match-end 1) ""))))
-;;                           ("\\cc?\\( \\)?[/+*_=~][^a-zA-Z0-9/+*_=~\n]+?[/+*_=~]\\( \\)\\cc"
-;;                            (2 (prog1 () (compose-region (match-beginning 2) (match-end 2) "")))))
-;;                         'append)
-
 (with-eval-after-load 'org
-  ;; (global-org-modern-mode)
   (setq org-hide-emphasis-markers t
         org-pretty-entities t
         prettify-symbols-mode t
         prettify-symbols-unprettify-at-point 'right-edge
         org-image-actual-width nil
         org-list-allow-alphabetical t
-        ;; org-todo-keywords '((sequence "     " "     "))
-        ;; org-preview-latex-process-alist '((dvipng :programs
-        ;;                                           ("latex" "dvipng")
-        ;;                                           :description "dvi > png" :message "you need to install the programs: latex and dvipng." :image-input-type "dvi" :image-output-type "png" :image-size-adjust
-        ;;                                           (1.0 . 1.0)
-        ;;                                           :latex-compiler
-        ;;                                           ("latex -interaction nonstopmode -output-directory %o %f")
-        ;;                                           :image-converter
-        ;;                                           ("dvipng -D %D -T tight -o %O %f")
-        ;;                                           :transparent-image-converter
-        ;;                                           ("dvipng -D %D -T tight -bg Transparent -o %O %f"))
-        ;;                                   (dvisvgm :programs
-        ;;                                            ("latex" "dvisvgm")
-        ;;                                            :description "dvi > svg" :message "you need to install the programs: latex and dvisvgm." :image-input-type "xdv" :image-output-type "svg" :image-size-adjust
-        ;;                                            (1.0 . 1.0)
-        ;;                                            :latex-compiler
-        ;;                                            ("xelatex -no-pdf -interaction nonstopmode -output-directory %o %f")
-        ;;                                            :image-converter
-        ;;                                            ("dvisvgm %f --no-fonts --exact-bbox --scale=%S --output=%O"))
-        ;;                                   (imagemagick :programs
-        ;;                                                ("latex" "convert")
-        ;;                                                :description "pdf > png" :message "you need to install the programs: latex and imagemagick." :image-input-type "pdf" :image-output-type "png" :image-size-adjust
-        ;;                                                (1.0 . 1.0)
-        ;;                                                :latex-compiler
-        ;;                                                ("pdflatex -interaction nonstopmode -output-directory %o %f")
-        ;;                                                :image-converter
-        ;;                                                ("convert -density %D -trim -antialias %f -quality 100 %O")))
-        ;; org-preview-latex-default-process 'dvisvgm
         org-format-latex-header
         "\\documentclass[10pt]{article}\n\\usepackage[usenames]{color}\n[DEFAULT-PACKAGES]\n[PACKAGES]\n\\pagestyle{empty}  % do not remove\n% The settings below are copied from fullpage.sty\n
           \\usepackage{xeCJK,tikz,caption,float,makecell,circuitikz,array}\n
@@ -1691,7 +1453,6 @@ Adapted from `highlight-indentation-mode'."
                time-stamp-end "$"
                time-stamp-format "\[%Y-%m-%d %3a %H:%M\]"
                company-backends '(company-files company-keywords))
-   ;; (org-modern-indent-mode)
    (electric-indent-local-mode)
    (org-appear-mode)
    (org-cdlatex-mode)
@@ -1699,13 +1460,6 @@ Adapted from `highlight-indentation-mode'."
    (mixed-pitch-mode)
    (custom-theme-set-faces
     'user
-    ;;  '(org-block ((t (:inherit fixed-pitch))))
-    ;;  '(org-code ((((background light))
-    ;;               (:foreground "#1F2328"
-    ;;                            :background "#EFF1F3"
-    ;;                            :inherit fixed-pitch))
-    ;;              (((background dark)) (:inherit fixed-pitch))))
-    ;;  '(org-special-keyword ((t (:inherit fixed-pitch))))
     '(org-verbatim
       ((((background light))
         (:foreground "#9e3a00"
@@ -1714,44 +1468,15 @@ Adapted from `highlight-indentation-mode'."
                :color "#faece4")))
        (((background dark))
         (
-         ;; :foreground "#E6EDF3"
-         ;; :background "#343942"
          :foreground
          "#ec9369"
          :background "#1c130f"
          :box (:line-width (3 . 1)
                :color "#1c130f")))))
-    ;;  '(org-meta-line ((t (:inherit (font-lock-comment-face fixed-pitch)))))
-    ;;  '(org-block-begin-line ((t (:inherit fixed-pitch))))
-    ;;  '(org-block-end-line ((t (:inherit fixed-pitch))))
-    ;;  '(fill-column-indicator ((t (:inherit (shadow fixed-pitch)))))
     )
-   ;; (variable-pitch-mode)
    (visual-line-mode)
    (valign-mode)))
 
-;; (add-hook 'markdown-mode-hook
-;;           (lambda ()
-;;             (olivetti-mode)
-;;             (text-scale-increase 1)))
-
-;; (with-eval-after-load 'org
-;; (defun org-buffer-face-mode-variable ()
-;; (interactive)
-;; (make-face 'width-font-face)
-;; (set-face-attribute 'width-font-face nil :font (font-spec :name "LXGW WenKai Mono";; :name "Sarasa Mono SC"
-;; ;; :weight 'semibold
-;; :size 13.0))  ;; 等距更纱黑体
-;; (setq buffer-face-mode-face 'width-font-face)
-;; (buffer-face-mode))
-;; (add-hook 'org-mode-hook 'org-buffer-face-mode-variable)
-
-;; (setq org-hide-emphasis-markers t))
-
-;; Org-superstar
-;; (add-hook 'org-mode-hook 'org-superstar-mode)
-
-;; Org-modern
 
 (with-eval-after-load 'org-modern
   (setq org-modern-todo t
@@ -1763,25 +1488,19 @@ Adapted from `highlight-indentation-mode'."
         org-modern-horizontal-rule t
         org-modern-statistics t
         org-modern-timestamp t
-        ;; org-modern-hide-stars t
         org-modern-checkbox nil
-        ;; org-modern-star nil
         org-modern-list
         '(
-          ;; (?- . "-")
           (?* . "•")
           (?+ . "‣"))))
 
-;; (add-hook 'org-agenda-finalize-hook 'org-modern-agenda)
 
 
-;; (add-hook 'org-mode-hook 'word-wrap-whitespace-mode)
 
 (setq-default org-startup-folded 'overview
               org-startup-with-inline-images t
               org-startup-indented t)
 
-;; (setq-default org-highlight-latex-and-related '(native latex script entities))
 
 (add-hook
  'org-mode-hook
@@ -1811,31 +1530,10 @@ Adapted from `highlight-indentation-mode'."
 (setq org-roam-db-gc-threshold most-positive-fixnum
       org-roam-mode-sections '(org-roam-backlinks-section org-roam-reflinks-section org-roam-unlinked-references-section))
 
-;; (add-to-list 'display-buffer-alist
-;;        '("\\*org-roam*\\*"
-;;          (display-buffer-in-side-window)
-;;          (side . right)
-;;          (window-width . 0.15)))
-
-;; (with-eval-after-load 'org-roam
-;;   Auto toggle org-roam-buffer.
-;;   (defun my/org-roam-buffer-show (_)
-;;   (if (and
-;;      Don't do anything if we're in the minibuffer or in the calendar
-;;      (not (minibufferp))
-;;      (not (> 120 (frame-width)))
-;;      (not (bound-and-true-p olivetti-mode))
-;;      (not (derived-mode-p 'calendar-mode))
-;;      Show org-roam buffer iff the current buffer has a org-roam file
-;;      (xor (org-roam-file-p) (eq 'visible (org-roam-buffer--visibility))))
-;;     (org-roam-buffer-toggle)))
-;;   (add-hook 'window-buffer-change-functions 'my/org-roam-buffer-show))
-
 (with-eval-after-load 'org-roam
   (add-hook
    'org-roam-mode-hook
    (lambda ()
-     ;; (turn-on-visual-line-mode)
      (word-wrap-whitespace-mode)))
   (setq org-roam-database-connector 'sqlite-builtin
         org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag))
@@ -1873,7 +1571,6 @@ Adapted from `highlight-indentation-mode'."
            :unnarrowed t))))
 
 ;;; LaTeX node
-;; (require 'latex-node)
 (load "~/.emacs.d/lisp/latex-node.el")
 
 ;;; LaTeX
@@ -1891,20 +1588,6 @@ Adapted from `highlight-indentation-mode'."
   (require 'citar-denote)
   (citar-denote-mode))
 
-;; (require 'citar-capf)
-;; (add-hook 'org-mode-hook 'citar-capf-setup)
-;; ;; (keymap-global-set "C-c c c" 'citar-create-note)
-;; (keymap-global-set "C-c c n" 'citar-denote-open-note)
-;; (keymap-global-set "C-c c d" 'citar-denote-dwim)
-;; (keymap-global-set "C-c c e" 'citar-denote-open-reference-entry)
-;; (keymap-global-set "C-c c a" 'citar-denote-add-citekey)
-;; (keymap-global-set "C-c c k" 'citar-denote-remove-citekey)
-;; (keymap-global-set "C-c c r" 'citar-denote-find-reference)
-;; (keymap-global-set "C-c c l" 'citar-denote-link-reference)
-;; (keymap-global-set "C-c c f" 'citar-denote-find-citation)
-;; (keymap-global-set "C-c c x" 'citar-denote-nocite)
-;; (keymap-global-set "C-c c y" 'citar-denote-cite-nocite)
-;; (keymap-global-set "C-c c z" 'citar-denote-nobib)
 
 (require 'auctex)
 (require 'cdlatex)
@@ -1912,7 +1595,6 @@ Adapted from `highlight-indentation-mode'."
 (require 'font-latex)
 (require 'tex-bar)
 (require 'preview)
-;; (require 'preview-dvisvgm)
 (require 'color)
 
 (defun orgtbl-next-field-maybe ()
@@ -1934,10 +1616,6 @@ Adapted from `highlight-indentation-mode'."
   (setq TeX-auto-save t
         TeX-parse-self t
         TeX-fold-auto t
-        ;; TeX-expand-list '(("%x" TeX-active-master-with-quotes "xdv" t))
-        ;; preview-image-type 'dvipng
-        ;; preview-scale 1.2
-        ;; preview-pdf-color-adjust-method nil
         cdlatex-paired-parens "$[{("
         TeX-save-query nil
         tex-suscript-height-ratio 0.8)
@@ -1968,10 +1646,6 @@ Adapted from `highlight-indentation-mode'."
           (lambda ()
             (preview-dvisvgm-command
              "dvisvgm --no-fonts --currentcolor %d --page=- --output=\"%m/prev%3p.svg\""))))
-  ;; (set-face-attribute 'preview-face nil
-  ;;                     :inherit nil
-  ;;                     :foreground (face-attribute 'default :foreground nil 'default)
-  ;;                     :background 'unspecified)
   (setq-default TeX-master t
                 TeX-engine 'luatex
                 TeX-command-extra-options "-synctex=1 -shell-escape")
@@ -2038,7 +1712,6 @@ Adapted from `highlight-indentation-mode'."
              (("∨" . 0)
               ("lor"))
              (1 ("textnormal" "mathrm"))
-             ;; ("({1})∕({2})" ("frac" "dfrac" "tfrac" "cfrac"))
              ))
     (add-to-list 'LaTeX-fold-math-spec-list x))
   (dolist (x
@@ -2150,11 +1823,6 @@ Possible values: 'math (default) or 'all.")
   (dolist (pair
            '(("\\land" . ?∧)
              ("\\lor" . ?∨)
-             ;; ("\\dots"  . ?…)
-             ;; ("\\ldots" . ?…)
-             ;; ("\\cdots" . ?⋯)
-             ;; ("\\vdots" . ?⋮)
-             ;; ("\\ddots" . ?⋱)
              ))
     (add-to-list 'tex--prettify-symbols-alist pair)))
 
@@ -2165,11 +1833,8 @@ Possible values: 'math (default) or 'all.")
      (setq-local TeX-command-default "LaTeXMk" ;; "XeLaTeX"
                  )
      (setq TeX-electric-math t)
-     ;; (auctex-latexmk-setup)
-     ;; (electric-indent-local-mode)
      (font-latex-add-keywords '(("CJKunderline" "{")) 'underline-command)
      (electric-indent-mode -1)
-     ;; (TeX-global-PDF-mode)
      (TeX-PDF-mode-on)
      (LaTeX-math-mode 1)
      (TeX-fold-mode 1)
@@ -2179,12 +1844,6 @@ Possible values: 'math (default) or 'all.")
      (outline-minor-mode)
      (olivetti-mode)
      (mixed-pitch-mode)
-     ;; (keymap-set cdlatex-mode-map "<tab>" 'cdlatex-tab-maybe)
-     ;; (turn-on-orgtbl)
-     ;; (keymap-set orgtbl-mode-map "<tab>" 'orgtbl-next-field-maybe)
-     ;; (citar-capf-setup)
-     ;; (setq-local completion-at-point-functions
-     ;;             (append (list #'cape-tex) completion-at-point-functions))
      (face-remap-add-relative 'font-latex-superscript-face '(:height 0.8))
      (face-remap-add-relative 'font-latex-subscript-face '(:height 0.8))
      (run-with-idle-timer 0 nil
@@ -2192,19 +1851,15 @@ Possible values: 'math (default) or 'all.")
                             (when (buffer-live-p buf)
                               (with-current-buffer buf
                                 (font-lock-ensure) ; 先确保字体化
-                                ;; (TeX-fold-buffer)
                                 )))
                           (current-buffer)))))
 
 (keymap-set outline-minor-mode-map "C-<tab>" 'outline-toggle-children)
 
 
-;;;; 08 UI Themes and Platform
 
 ;;; Layout
 
-;; (require 'winum)
-;; (require 'ace-window)
 
 (dolist (hook '(prog-mode-hook))
   (add-hook hook 'display-fill-column-indicator-mode))
@@ -2220,25 +1875,9 @@ Possible values: 'math (default) or 'all.")
     modus-vivendi-tritanopia)
   "Set for themes for dark and light mode.")
 
-;; (require 'timu-macos-theme)
-;; (require 'nordic-night-theme)
 (require 'color-theme-sanityinc-tomorrow)
 (require 'rose-pine)
 (require 'gruber-darker-theme)
-
-;; (load "~/.emacs.d/lisp/ultimate-tab.el")
-
-;; (load "~/.emacs.d/site-lisp/password-store/contrib/emacs/password-store.el")
-
-;; (dolist (hook '(
-;;           ;; completion-list-mode-hook
-;;           ;; completion-in-region-mode-hook
-;;           term-mode-hook
-;;           ;; shell-mode-hook
-;;           messages-buffer-mode-hook
-;;           org-roam-mode-hook))
-;;   (add-hook hook 'hide-mode-line-mode))
-
 (when non-android-p
   (require 'citre)
   (require 'citre-config)
@@ -2276,7 +1915,6 @@ Possible values: 'math (default) or 'all.")
         highlight-indent-guides-responsive 'top
         highlight-indent-guides-suppress-auto-error t))
 
-;; (require 'eat)
 
 (if (eq system-type 'gnu/linux)
     (progn
@@ -2287,7 +1925,6 @@ Possible values: 'math (default) or 'all.")
       (add-hook
        'server-after-make-frame-hook '(lambda ()
                                         (setup-display-graphic nil nil 6 17 nil 13)))
-      ;; (setenv "PATH" (concat (getenv "PATH") ":/home/kunh/.local/bin"))
       (add-to-list 'exec-path "/home/kunh/.local/bin")
       (add-to-list 'exec-path "/home/kunh/.cargo/bin"))
   (progn

@@ -6,7 +6,6 @@
 (require 'cl-seq)
 
 
-;;;; 01 Editing Commands
 ;; Index:
 ;; 01 Editing Commands
 ;; 02 Commenting and Folding
@@ -118,7 +117,6 @@
           (goto-char p))
       (message "No number at current point."))))
 
-;;;; 02 Commenting and Folding
 
 ;;; Commenting / folding
 
@@ -148,7 +146,6 @@
            (info (format " ... #%d " nlines)))
       (overlay-put ov 'display (propertize info 'face hideshow-folded-face)))))
 
-;;;; 03 Utilities
 
 ;;; Misc utilities
 
@@ -188,7 +185,6 @@ The resulting list contains all items that appear in LIST1 but not LIST2."
   (shell-command (format "grim -l 0 -g \"$(slurp)\" %s" place) nil nil)
   (kill-new (format "[[file:%s][]]" place)))
 
-;;;; 04 Filesystem and Autoload
 
 ;;; Filesystem helpers
 
@@ -205,14 +201,11 @@ Dot-directories and directories contain `.nosearch' will be skipped."
     (cl-remove-if-not #'file-directory-p)
     (cl-remove-if (lambda (d)
                     (string-suffix-p "test" d)))
-    ;; (cl-remove-if (lambda (d)
-    ;;                 (string-suffix-p "helpful" d)))
     (cl-remove-if (lambda (d)
                     (file-exists-p (expand-file-name ".nosearch" d))))))
 
 (defun find-dir-recursively (dir &optional but)
   "Find all `.el' files in DIR and its subdirectories."
-  ;; (let ((subdir (mapcar #'abbreviate-file-name (find-subdir-recursively dir))))
   (let* ((but (or but 0))
          (subdir (butlast (mapcar #'abbreviate-file-name (find-subdir-recursively dir)) but)))
     (nconc subdir (mapcar #'abbreviate-file-name (mapcan #'find-dir-recursively subdir)))))
@@ -235,26 +228,6 @@ use `cm/autoloads-file' as TARGET."
          (dir (or dir site-lisp-directory)))
     (loaddefs-generate (find-dir-recursively dir) target nil nil nil t)))
 
-;; (defun recentf-time-sort ()
-;;   "Sort recentf file list."
-;;   (when recentf-mode
-;;     (thread-last
-;;       recentf-list
-;;       ;; Use modification time, since getting file access time seems to count as
-;;       ;; accessing the file, ruining future uses.
-;;       (mapcar (lambda (f)
-;;                 (cons f (file-attribute-access-time (file-attributes f)))))
-;;       (seq-sort (pcase-lambda (`(,f1 . ,t1) `(,f2 . ,t2))
-;;                   ;; Want existing, most recent, local files first.
-;;                   (cond ((or (not (file-exists-p f1))
-;;                              (file-remote-p f1))
-;;                          nil)
-;;                         ((or (not (file-exists-p f2))
-;;                              (file-remote-p f2))
-;;                          t)
-;;                         (t (time-less-p t2 t1)))))
-;;       (mapcar #'car))))
-
 ;;; Autoload maintenance
 
 ;;;###autoload
@@ -271,7 +244,6 @@ use `cm/autoloads-file' as TARGET."
     (setq generated-autoload-file (expand-file-name "loaddefs.el"))
     (update-directory-autoloads "")))
 
-;;;; 05 Meow Helpers
 
 ;;; Meow helpers
 
@@ -401,16 +373,9 @@ use `cm/autoloads-file' as TARGET."
    '("M-q" . ignore)
    '("<escape>" . ignore))
   (meow-define-keys 'insert '("M-q" . meow-insert-exit))
-  ;; (meow-define-keys 'normal '("V" . meow-reselect))
-  ;; (advice-add 'meow--cancel-selection :before (lambda() (meow--pre-cancel-selection)))
-  ;; (add-hook 'meow-insert-exit-hook
-  ;;           (lambda ()
-  ;;             (and buffer-file-name
-  ;;                  (save-buffer))))
   )
 
 
-;;;; 06 LSP Helpers
 
 ;;; LSP helpers
 
@@ -430,9 +395,6 @@ use `cm/autoloads-file' as TARGET."
 
 (defun lsp-enable-startup ()
   "Enable `eglot' or `lsp-mode' for LSP."
-  ;; (and (functionp 'lsp-bridge-mode)
-  ;;      (global-lsp-bridge-mode))
-  ;; (require 'lsp-bridge)
   (with-eval-after-load 'lsp-bridge
     (remove-hook 'lsp-bridge-default-mode-hooks 'LaTeX-mode-hook)
     (remove-hook 'lsp-bridge-default-mode-hooks 'latex-mode-hook)
@@ -459,8 +421,6 @@ use `cm/autoloads-file' as TARGET."
                 'bash-ts-mode
                 ;; 'python-ts-mode 'python-mode
                 )
-         ;; (with-eval-after-load 'lsp
-         ;;   (lsp-deferred))
          (eglot-ensure)))))
   (with-eval-after-load 'lsp-mode
     (with-eval-after-load 'lsp-ui
@@ -490,7 +450,6 @@ use `cm/autoloads-file' as TARGET."
           lsp-prefer-flymake t
           lsp-ui-flycheck-enable nil
           lsp-enable-relative-indentation t)
-    ;; (keymap-set lsp-mode-map "C-c C-d" 'lsp-describe-thing-at-point)
     (defun lsp-booster--advice-json-parse (old-fn &rest args)
       "Try to parse bytecode instead of json."
       (or
@@ -510,7 +469,6 @@ use `cm/autoloads-file' as TARGET."
     (add-hook 'lsp-mode-hook 'corfu-mode)))
 
 
-;;;; 07 GC and Performance
 
 ;;; GC / performance
 
@@ -529,13 +487,10 @@ If you experience stuttering, increase this.")
   (garbage-collect)
   (setq gc-cons-threshold better-gc-cons-threshold))
 
-;;;; 08 Fonts and Display
 
 ;;; Font and typography
 
 ;; "IBM Plex Mono" "Fantasque Sans Mono", "InputMono", "Monaspace Neon"
-;; (defvar code-font "Cascadia Code NF" ;; "Hack"
-;;   "Font for coding.")
 ;; "Lilex" "Aporetic Serif Mono" ;; "Hack"
 (defvar code-font "PragmataPro Mono Liga"
   "Font for coding.")
@@ -569,7 +524,6 @@ If you experience stuttering, increase this.")
   (add-to-list 'default-frame-alist (cons 'font (concat en-font "-" (number-to-string fontsize))))
   (set-fontset-font t 'han cn-font)
   ;; 只放大中文字体，保证中英文在 org 表格中可以对齐
-  ;; (add-to-list 'face-font-rescale-alist '("FZLiuGongQuanKaiShuJF" . 1.2))
   )
 
 ;;;###autoload
@@ -598,7 +552,6 @@ If you experience stuttering, increase this.")
   (dolist (sp
            `(("regular" . ,cn-font)
              ("italic" . ,sans-font)
-             ;; ("verbatim" . ,verbatim-font)
              ))
     (let ((registry (concat "fontset-variable pitch " (car sp))))
       (create-fontset-from-fontset-spec
@@ -643,8 +596,6 @@ If you experience stuttering, increase this.")
 (defun setup-display-graphic (modelineq cfborderq dayon dayoff themesetq fontsize)
   "Setup display graphic for GUI Emacs and Emacsclient with MODELINEQ, CFBORDERQ, DAYON, DAYOFF, THEMESETQ, FONTSIZE."
   (when (display-graphic-p)
-    ;; (set-en_cn-font_old code-font cjk-font serif-font
-    ;;                     cjk-sans-font verbatim-font fontsize fontsize)
     (set-en_cn-font code-font cjk-font serif-font fontsize)
     (setq frame-title-format
           '((:eval
@@ -656,9 +607,6 @@ If you experience stuttering, increase this.")
           large-hscroll-threshold 1000
           syntax-wholeline-max 1000)
     (setq x-underline-at-descent-line t)
-    ;; (setq x-gtk-use-system-tooltips nil)
-    ;; (unless (symbol-value x-gtk-use-system-tooltips)
-    ;;   (set-face-attribute 'tooltip nil))
     ;; Set this face for `show-paren-mode' context appearance when offscreen.
     (when cfborderq
       (let ((mode-line-box-p (face-attribute 'mode-line-highlight :box)))
@@ -668,17 +616,11 @@ If you experience stuttering, increase this.")
             (set-face-attribute 'child-frame-border nil :background mode-line-box-p)))))
     (if (or (>= (string-to-number (substring (current-time-string) 11 13)) dayoff)
             (<= (string-to-number (substring (current-time-string) 11 13)) dayon))
-        ;; (standard-themes-select 'standard-dark)
-        ;; (color-theme-sanityinc-tomorrow-bright)
         (progn
-          ;; (setq modus-themes-org-blocks 'gray-background
           ;;       modus-themes-bold-constructs t
           ;;       modus-themes-italic-constructs t)
           (load-theme 'modus-vivendi t)
-          ;; (load-theme 'rose-pine-night)
-          ;; (load-theme 'gruber-darker)
           )
-      ;; (load-theme 'modus-operandi-tritanopia)
       )
     (when modelineq
       (if (equal (frame-parameter nil 'background-mode) 'dark)
@@ -697,35 +639,9 @@ If you experience stuttering, increase this.")
                               :font (font-spec
                                      :name code-font
                                      :size 11.0))))
-      (set-face-attribute 'mode-line-inactive nil
-                          :inherit 'mode-line
-                          :box nil))
-    ;; (dolist (face '((flymake-note-echo-at-eol . success)
-    ;;                 (flymake-warning-echo-at-eol . warning)
-    ;;                 (flymake-error-echo-at-eol . error)))
-    ;;   (let* ((ff (car face))
-    ;;          (ef (cdr face))
-    ;;          (fc (face-foreground ef))
-    ;;          (fg ())
-    ;;          (bg ()))
-    ;;     (set-face-italic ff nil)
-    ;;     (set-face-foreground ff fc)
-    ;;     (if (or
-    ;;          (>= (string-to-number (substring (current-time-string) 11 13)) dayoff)
-    ;;          (<= (string-to-number (substring (current-time-string) 11 13)) dayon))
-    ;;         (progn
-    ;;           (setq bg (flymake--darken-bg fc 80))
-    ;;           (setq fg fc)
-    ;;           )
-    ;;       (progn
-    ;;         (setq bg (flymake--lighten-fg fc 1000))
-    ;;         (setq fg (flymake--darken-bg fc 50))
-    ;;         ))
-    ;;     (set-face-attribute ff nil :box bg)
-    ;;     (set-face-background ff bg)
-    ;;     (set-face-foreground ff fg)
-    ;;     ))
-    ;; (set-face-attribute 'flymake-end-of-line-diagnostics-face nil :box nil)
+          (set-face-attribute 'mode-line-inactive nil
+                              :inherit 'mode-line
+                              :box nil))
     ))
 
 (provide 'init-func)

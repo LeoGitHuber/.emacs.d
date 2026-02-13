@@ -604,3 +604,12 @@
 [submodule "site-lisp/mixed-pitch"]
 	path = site-lisp/mixed-pitch
 	url = https://gitlab.com/jabranham/mixed-pitch.git
+[submodule "site-lisp/preview-dvisvgm"]
+	path = site-lisp/preview-dvisvgm
+	url = https://github.com/TobiasZawada/preview-dvisvgm.git
+[submodule "site-lisp/emacs-elisp-autofmt"]
+	path = site-lisp/emacs-elisp-autofmt
+	url = https://codeberg.org/ideasman42/emacs-elisp-autofmt.git
+[submodule "site-lisp/prettier-elisp"]
+	path = site-lisp/prettier-elisp
+	url = https://github.com/KarimAziev/prettier-elisp.git

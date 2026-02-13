@@ -35,7 +35,8 @@
   (interactive "p")
   (save-excursion
     (if (region-active-p)
-        (downcase-region (region-beginning) (region-end))
+        (downcase-region (region-beginning)
+                         (region-end))
       (progn
         (left-word)
         (downcase-word arg)))))
@@ -46,7 +47,8 @@
   (interactive "p")
   (save-excursion
     (if (region-active-p)
-        (upcase-region (region-beginning) (region-end))
+        (upcase-region (region-beginning)
+                       (region-end))
       (progn
         (left-word)
         (upcase-word arg)))))
@@ -57,7 +59,8 @@
   (interactive "p")
   (save-excursion
     (if (region-active-p)
-        (capitalize-region (region-beginning) (region-end))
+        (capitalize-region (region-beginning)
+                           (region-end))
       (progn
         (left-word)
         (capitalize-word arg)))))
@@ -88,16 +91,16 @@
 ;; "IBM Plex Mono" "Fantasque Sans Mono", "InputMono", "Monaspace Neon"
 ;; (defvar code-font "Cascadia Code NF" ;; "Hack"
 ;;   "Font for coding.")
-;; (defvar code-font "Aporetic Serif Mono" ;; "Hack"
-(defvar code-font "Lilex"
+;; "Lilex" "Aporetic Serif Mono" ;; "Hack"
+(defvar code-font "JetBrainsMono Nerd Font"
   "Font for coding.")
 
 ;; "Microsoft YaHei" "FZYouSongJ GBK" "Sarasa Gothic SC"
 (defvar cjk-font "LXGW Bright Code GB" ;; "LXGW WenKai Mono"
   "CJK font.")
 
-;; (defvar serif-font "Libre Baskerville" ;; "Bookerly" ;; Palatino Linotype
-(defvar serif-font "Merriweather"
+;; "Merriweather" "Libre Baskerville" ;; "Bookerly" ;; Palatino Linotype
+(defvar serif-font "Helvetica Neue"
   "Serif font.")
 
 (defvar cjk-sans-font "Source Han Sans CN" ;; "LXGW WenKai Screen"
@@ -113,50 +116,61 @@
 ;; Iosevka Fixed --- Input Mono
 
 ;;;###autoload
-(defun set-en_cn-font (en-font cn-font serif-font sans-font verbatim-font en-size cn-size)
+(defun set-en_cn-font (en-font cn-font serif-font fontsize)
+  "Set EN-FONT, CN-FONT and SERIF-FONT with FONTSIZE."
+  (set-face-attribute 'variable-pitch nil :font (concat serif-font "-" (number-to-string fontsize)))
+  (set-face-attribute 'fixed-pitch nil :font (concat en-font "-" (number-to-string fontsize)))
+  (set-face-attribute 'default nil :font (concat en-font "-" (number-to-string fontsize)))
+  (add-to-list 'default-frame-alist (cons 'font (concat en-font "-" (number-to-string fontsize))))
+  (set-fontset-font t 'han cn-font)
+  ;; 只放大中文字体，保证中英文在 org 表格中可以对齐
+  ;; (add-to-list 'face-font-rescale-alist '("FZLiuGongQuanKaiShuJF" . 1.2))
+  )
+
+;;;###autoload
+(defun set-en_cn-font_old (en-font cn-font serif-font sans-font verbatim-font en-size cn-size)
   "EN-FONT, CN-FONT mean font-family.  EN-SIZE, CN-SIZE mean font size.
-And Set SERIF-FONT, SANS-FONT and VERBATIM-FONT."
-  (set-face-attribute
-   'default nil
-   :font (font-spec
-          :name en-font
-          :weight 'regular
-          ;; :slant 'normal
-          :size en-size))
+  And Set SERIF-FONT, SANS-FONT and VERBATIM-FONT."
+  (set-face-attribute 'default nil
+                      :font
+                      (font-spec
+                       :name en-font
+                       :weight 'regular
+                       ;; :slant 'normal
+                       :size en-size))
   (dolist (charset '(kana han cjk-misc bopomofo))
     (if (equal en-size cn-size)
         (set-fontset-font "fontset-default" charset (font-spec :family cn-font))
-      (set-fontset-font "fontset-default" charset (font-spec :family cn-font :size cn-size))))
+      (set-fontset-font "fontset-default" charset (font-spec
+                                                   :family cn-font
+                                                   :size cn-size))))
   (create-fontset-from-fontset-spec
-   (font-xlfd-name
-    (font-spec :family en-font
-               :registry "fontset-variable pitch verbatim")))
-  (set-fontset-font "fontset-variable pitch verbatim" 'han
-                    (font-spec :family verbatim-font))
-  (set-fontset-font "fontset-variable pitch verbatim" 'cjk-misc
-                    (font-spec :family verbatim-font))
-  (dolist (sp `(("regular" . ,cn-font)
-                ("italic" . ,sans-font)
-                ;; ("verbatim" . ,verbatim-font)
-		        ))
+   (font-xlfd-name (font-spec
+                    :family en-font
+                    :registry "fontset-variable pitch verbatim")))
+  (set-fontset-font "fontset-variable pitch verbatim" 'han (font-spec :family verbatim-font))
+  (set-fontset-font "fontset-variable pitch verbatim" 'cjk-misc (font-spec :family verbatim-font))
+  (dolist (sp
+           `(("regular" . ,cn-font)
+             ("italic" . ,sans-font)
+             ;; ("verbatim" . ,verbatim-font)
+             ))
     (let ((registry (concat "fontset-variable pitch " (car sp))))
       (create-fontset-from-fontset-spec
-       (font-xlfd-name
-        (font-spec :family serif-font
-                   :registry registry)))
+       (font-xlfd-name (font-spec
+                        :family serif-font
+                        :registry registry)))
       (if (equal en-size cn-size)
           (progn
-            (set-fontset-font registry 'han
-                              (font-spec :family (cdr sp)))
-            (set-fontset-font registry 'cjk-misc
-                              (font-spec :family (cdr sp))))
+            (set-fontset-font registry 'han (font-spec :family (cdr sp)))
+            (set-fontset-font registry 'cjk-misc (font-spec :family (cdr sp))))
         (progn
-          (set-fontset-font registry 'han
-                            (font-spec :family (cdr sp) :size cn-size))
-          (set-fontset-font registry 'cjk-misc
-                            (font-spec :family (cdr sp) :size cn-size)))
-        )
-      ))
+          (set-fontset-font registry 'han (font-spec
+                                           :family (cdr sp)
+                                           :size cn-size))
+          (set-fontset-font registry 'cjk-misc (font-spec
+                                                :family (cdr sp)
+                                                :size cn-size))))))
   (with-eval-after-load 'org
     (set-face-attribute 'variable-pitch nil
                         :family serif-font
@@ -165,33 +179,19 @@ And Set SERIF-FONT, SANS-FONT and VERBATIM-FONT."
                         :family en-font
                         ;; :fontset "fontset-variable pitch regular"
                         )
-    (defface org-emphasis-italic
-      '((default :inherit italic))
+    (defface org-emphasis-italic '((default :inherit italic))
       "My italic emphasis for Org.")
     (set-face-attribute 'org-emphasis-italic nil :fontset "fontset-variable pitch italic")
-    (defface org-emphasis-verbatim
-      '((default :inherit org-verbatim))
-      "My verbatim emphasis for Org.")
     (set-face-attribute 'org-verbatim nil :fontset "fontset-variable pitch verbatim")
-    (defface org-emphasis-code
-      '((default :inherit org-code))
-      "My code emphasis for Org.")
     (set-face-attribute 'org-code nil :fontset "fontset-variable pitch verbatim")
     (set-face-attribute 'org-block nil :fontset "fontset-variable pitch verbatim")
-
     (setq org-emphasis-alist
           '(("*" bold)
             ("/" org-emphasis-italic)
             ("_" underline)
             ("=" org-verbatim verbatim)
             ("~" org-code verbatim)
-            ("+" (:strike-through t))))
-    ;; (set-face-attribute 'fixed-pitch nil
-    ;;                     :font (font-spec :name en-font))
-    ;; (set-face-attribute 'org-block nil
-    ;;                     :fontset )
-    )
-  )
+            ("+" (:strike-through t))))))
 
 ;;; Editing helpers (misc)
 
@@ -207,20 +207,24 @@ And Set SERIF-FONT, SANS-FONT and VERBATIM-FONT."
   (interactive)
   (if (region-active-p)
       (progn
-        (kill-ring-save (region-beginning) (region-end))
-        (comment-or-uncomment-region (region-beginning) (region-end)))
+        (kill-ring-save (region-beginning)
+                        (region-end))
+        (comment-or-uncomment-region (region-beginning)
+                                     (region-end)))
     (if (save-excursion
           (beginning-of-line)
           (looking-at "\\s-*$"))
         (progn
           (call-interactively 'comment-dwim)
           (next-line))
-      (comment-or-uncomment-region (line-beginning-position) (line-end-position)))))
+      (comment-or-uncomment-region (line-beginning-position)
+                                   (line-end-position)))))
 
 ;;;###autoload
 (defun hideshow-folded-overlay-fn (ov)
   (when (eq 'code (overlay-get ov 'hs))
-    (let* ((nlines (count-lines (overlay-start ov) (overlay-end ov)))
+    (let* ((nlines (count-lines (overlay-start ov)
+                                (overlay-end ov)))
            (info (format " ... #%d " nlines)))
       (overlay-put ov 'display (propertize info 'face hideshow-folded-face)))))
 
@@ -230,15 +234,12 @@ And Set SERIF-FONT, SANS-FONT and VERBATIM-FONT."
 (defun update-all-autoloads ()
   (interactive)
   (cd "~/.emacs.d")
-  (let ((generated-autoload-file
-         (expand-file-name "loaddefs.el")))
+  (let ((generated-autoload-file (expand-file-name "loaddefs.el")))
     (when (not (file-exists-p generated-autoload-file))
       (with-current-buffer (find-file-noselect generated-autoload-file)
         (insert ";;") ;; create the file with non-zero size to appease autoload
         (save-buffer)))
-    (mapcar #'update-directory-autoloads
-            '("" "modes" "git/org-fu"))
-
+    (mapcar #'update-directory-autoloads '("" "modes" "git/org-fu"))
     (cd "personal")
     (setq generated-autoload-file (expand-file-name "loaddefs.el"))
     (update-directory-autoloads "")))
@@ -248,7 +249,8 @@ And Set SERIF-FONT, SANS-FONT and VERBATIM-FONT."
 ;;;###autoload
 (defun hl-current-line-range ()
   "Function for `hl-line-range-function'."
-  (cons (line-beginning-position) (+ 1 (line-end-position))))
+  (cons (line-beginning-position)
+        (+ 1 (line-end-position))))
 
 (defun get-pure-cons (list1 list2)
   "Combine LIST1 and LIST2.
@@ -261,7 +263,8 @@ The resulting list contains all items that appear in LIST1 but not LIST2."
         (n2 0))
     (while (<= n1 num1)
       (while (<= n2 num2)
-        (if (eq (nth n1 list1) (nth n2 list2))
+        (if (eq (nth n1 list1)
+                (nth n2 list2))
             (progn
               (setq n2 (+ 1 num2))
               (setq compute 1))
@@ -275,9 +278,7 @@ The resulting list contains all items that appear in LIST1 but not LIST2."
 
 (defun screen-capture (place &rest _)
   "Use grim to capture screen and store it into PLACE."
-  (interactive
-   (find-file-read-args "Store into: "
-                        (confirm-nonexistent-file-or-buffer)))
+  (interactive (find-file-read-args "Store into: " (confirm-nonexistent-file-or-buffer)))
   (shell-command (format "grim -l 0 -g \"$(slurp)\" %s" place) nil nil)
   (kill-new (format "[[file:%s][]]" place)))
 
@@ -287,26 +288,26 @@ The resulting list contains all items that appear in LIST1 but not LIST2."
   "Find all subdirectories in DIR.
 
 Dot-directories and directories contain `.nosearch' will be skipped."
-  (thread-last (directory-files dir nil)
-               (cl-remove-if (lambda (f)
-                               (string-prefix-p "." f)))
-               (mapcar (lambda (d) (expand-file-name d dir)))
-               (cl-remove-if-not #'file-directory-p)
-               (cl-remove-if (lambda (d)
-                               (string-suffix-p "test" d)))
-               ;; (cl-remove-if (lambda (d)
-               ;;                 (string-suffix-p "helpful" d)))
-               (cl-remove-if (lambda (d)
-                               (file-exists-p (expand-file-name ".nosearch"
-                                                                d))))))
+  (thread-last
+    (directory-files dir nil)
+    (cl-remove-if (lambda (f)
+                    (string-prefix-p "." f)))
+    (mapcar (lambda (d)
+              (expand-file-name d dir)))
+    (cl-remove-if-not #'file-directory-p)
+    (cl-remove-if (lambda (d)
+                    (string-suffix-p "test" d)))
+    ;; (cl-remove-if (lambda (d)
+    ;;                 (string-suffix-p "helpful" d)))
+    (cl-remove-if (lambda (d)
+                    (file-exists-p (expand-file-name ".nosearch" d))))))
 
 (defun find-dir-recursively (dir &optional but)
   "Find all `.el' files in DIR and its subdirectories."
   ;; (let ((subdir (mapcar #'abbreviate-file-name (find-subdir-recursively dir))))
   (let* ((but (or but 0))
          (subdir (butlast (mapcar #'abbreviate-file-name (find-subdir-recursively dir)) but)))
-    (nconc subdir
-           (mapcar #'abbreviate-file-name (mapcan #'find-dir-recursively subdir)))))
+    (nconc subdir (mapcar #'abbreviate-file-name (mapcan #'find-dir-recursively subdir)))))
 
 ;;; Autoload generation
 
@@ -367,11 +368,11 @@ use `cm/autoloads-file' as TARGET."
     (let* ((start (cadar meow--selection-history))
            (end (cadr (cdar meow--selection-history)))
            (line))
-      (if (and (<= start (point-max)) (<= end (point-max)))
+      (if (and (<= start (point-max))
+               (<= end (point-max)))
           (progn
             (setq line (+ (count-lines start end) 1))
-            (setq-local meow--selection-record
-                        (set-marker (mark-marker) start))
+            (setq-local meow--selection-record (set-marker (mark-marker) start))
             (if (> start end)
                 (setq-local meow--selection-count (- line))
               (setq-local meow--selection-count line))
@@ -391,10 +392,7 @@ use `cm/autoloads-file' as TARGET."
 (defun meow-setup ()
   (setq meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
   (meow-motion-overwrite-define-key
-   '("j" . meow-next)
-   '("k" . meow-prev)
-   '("M-q" . ignore)
-   '("<escape>" . ignore))
+   '("j" . meow-next) '("k" . meow-prev) '("M-q" . ignore) '("<escape>" . ignore))
   (meow-leader-define-key
    ;; SPC j/k will run the original command in MOTION state.
    '("j" . "H-j")
@@ -490,27 +488,27 @@ use `cm/autoloads-file' as TARGET."
   (interactive "p")
   (let ((bounds (bounds-of-thing-at-point 'number)))
     (if bounds
-        (let* ((num-str (buffer-substring-no-properties (car bounds) (cdr bounds)))
+        (let* ((num-str (buffer-substring-no-properties (car bounds)
+                                                        (cdr bounds)))
                (num (string-to-number num-str))
                (p (point)))
-          (delete-region (car bounds) (cdr bounds))
+          (delete-region (car bounds)
+                         (cdr bounds))
           (insert (number-to-string (+ num args)))
           (goto-char p))
-      (message "No number at current point.")
-      )
-    )
-  )
+      (message "No number at current point."))))
 
 ;;; LSP helpers
 
 (defun lsp-booster--advice-final-command (old-fn cmd &optional test?)
   "Prepend emacs-lsp-booster command to lsp CMD."
   (let ((orig-result (funcall old-fn cmd test?)))
-    (if (and (not test?)                             ;; for check lsp-server-present?
-             (not (file-remote-p default-directory)) ;; see lsp-resolve-final-command, it would add extra shell wrapper
-             lsp-use-plists
-             (not (functionp 'json-rpc-connection))  ;; native json-rpc
-             (executable-find "emacs-lsp-booster"))
+    (if (and
+         (not test?) ;; for check lsp-server-present?
+         (not (file-remote-p default-directory)) ;; see lsp-resolve-final-command, it would add extra shell wrapper
+         lsp-use-plists
+         (not (functionp 'json-rpc-connection)) ;; native json-rpc
+         (executable-find "emacs-lsp-booster"))
         (progn
           (message "Using emacs-lsp-booster for %s!" orig-result)
           (cons "emacs-lsp-booster" orig-result))
@@ -529,23 +527,27 @@ use `cm/autoloads-file' as TARGET."
     (remove-hook 'lsp-bridge-default-mode-hooks 'typescript-mode-hook)
     (remove-hook 'lsp-bridge-default-mode-hooks 'scala-ts-mode-hook)
     (global-lsp-bridge-mode))
-  (dolist (hook '(prog-mode-hook
-                  cuda-mode-hook
-                  TeX-mode-hook
-                  ))
+  (dolist (hook '(prog-mode-hook cuda-mode-hook TeX-mode-hook))
     (when (intern-soft "global-corfu-mode")
       (and (functionp 'corfu-mode)
            (add-hook hook 'corfu-mode)))
-    (add-hook hook (lambda ()
-                     (unless (derived-mode-p 'emacs-lisp-mode 'lisp-mode 'makefile-mode
-                                             'snippet-mode 'kdl-mode 'tcl-mode 'bash-mode 'bash-ts-mode
-                                             ;; 'python-ts-mode 'python-mode
-                                             )
-                       ;; (with-eval-after-load 'lsp
-                       ;;   (lsp-deferred))
-                       (eglot-ensure)
-                       )))
-    )
+    (add-hook
+     hook
+     (lambda ()
+       (unless (derived-mode-p
+                'emacs-lisp-mode
+                'lisp-mode
+                'makefile-mode
+                'snippet-mode
+                'kdl-mode
+                'tcl-mode
+                'bash-mode
+                'bash-ts-mode
+                ;; 'python-ts-mode 'python-mode
+                )
+         ;; (with-eval-after-load 'lsp
+         ;;   (lsp-deferred))
+         (eglot-ensure)))))
   (with-eval-after-load 'lsp-mode
     (with-eval-after-load 'lsp-ui
       (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
@@ -569,7 +571,8 @@ use `cm/autoloads-file' as TARGET."
           ;; lsp-diagnostics-disabled-modes '(markdown-mode gfm-mode)  ;; For diagnostics
           ;; lsp-lens-enable nil  ;; Reference Lens
           ;; lsp-ui-doc-show-with-cursor nil  ;; ui
-          lsp-completion-provider :none
+          lsp-completion-provider
+          :none
           lsp-prefer-flymake t
           lsp-ui-flycheck-enable nil
           lsp-enable-relative-indentation t)
@@ -582,12 +585,13 @@ use `cm/autoloads-file' as TARGET."
            (when (byte-code-function-p bytecode)
              (funcall bytecode))))
        (apply old-fn args)))
-    (advice-add (if (progn (require 'json)
-                           (fboundp 'json-parse-buffer))
-                    'json-parse-buffer
-                  'json-read)
-                :around
-                #'lsp-booster--advice-json-parse)
+    (advice-add
+     (if (progn
+           (require 'json)
+           (fboundp 'json-parse-buffer))
+         'json-parse-buffer
+       'json-read)
+     :around #'lsp-booster--advice-json-parse)
     (advice-add 'lsp-resolve-final-command :around #'lsp-booster--advice-final-command)
     (add-hook 'lsp-mode-hook 'corfu-mode)))
 
@@ -613,41 +617,31 @@ If you experience stuttering, increase this.")
 (defun setup-display-graphic (modelineq cfborderq dayon dayoff themesetq fontsize)
   "Setup display graphic for GUI Emacs and Emacsclient with MODELINEQ, CFBORDERQ, DAYON, DAYOFF, THEMESETQ, FONTSIZE."
   (when (display-graphic-p)
-    ;; (if (not windows-system-p)
-    (set-en_cn-font code-font cjk-font serif-font
-                    cjk-sans-font verbatim-font fontsize fontsize)
-    ;;   )
+    ;; (set-en_cn-font_old code-font cjk-font serif-font
+    ;;                     cjk-sans-font verbatim-font fontsize fontsize)
+    (set-en_cn-font code-font cjk-font serif-font fontsize)
     (setq frame-title-format
-          '((:eval (if (buffer-file-name)
-                       (abbreviate-file-name
-                        (buffer-name))
-                     "%b")))
+          '((:eval
+             (if (buffer-file-name)
+                 (abbreviate-file-name (buffer-name))
+               "%b")))
           bidi-inhibit-bpa t
           long-line-threshold 1000
           large-hscroll-threshold 1000
           syntax-wholeline-max 1000)
-
     (setq x-underline-at-descent-line t)
-
     ;; (setq x-gtk-use-system-tooltips nil)
     ;; (unless (symbol-value x-gtk-use-system-tooltips)
     ;;   (set-face-attribute 'tooltip nil))
-
     ;; Set this face for `show-paren-mode' context appearance when offscreen.
     (when cfborderq
       (let ((mode-line-box-p (face-attribute 'mode-line-highlight :box)))
         (when (not (eq mode-line-box-p 'unspecified))
           (if (consp mode-line-box-p)
-              (set-face-attribute 'child-frame-border
-                                  nil
-                                  :background (nth 3 mode-line-box-p))
-            (set-face-attribute 'child-frame-border
-                                nil
-                                :background mode-line-box-p)
-            ))))
-    (if (or
-         (>= (string-to-number (substring (current-time-string) 11 13)) dayoff)
-         (<= (string-to-number (substring (current-time-string) 11 13)) dayon))
+              (set-face-attribute 'child-frame-border nil :background (nth 3 mode-line-box-p))
+            (set-face-attribute 'child-frame-border nil :background mode-line-box-p)))))
+    (if (or (>= (string-to-number (substring (current-time-string) 11 13)) dayoff)
+            (<= (string-to-number (substring (current-time-string) 11 13)) dayon))
         ;; (standard-themes-select 'standard-dark)
         ;; (color-theme-sanityinc-tomorrow-bright)
         (progn
@@ -666,27 +660,20 @@ If you experience stuttering, increase this.")
                               :background "black"
                               :box nil
                               :font (font-spec
-                                     :name
-                                     code-font
-                                     :size
-                                     11.0)
-                              :underline
-                              (face-foreground 'mode-line-emphasis))
+                                     :name code-font
+                                     :size 11.0)
+                              :underline (face-foreground 'mode-line-emphasis))
         (progn
           (set-face-attribute 'mode-line nil
                               :background "#F4F7FA"
                               ;; :background "white"
                               :box nil
                               :font (font-spec
-                                     :name
-                                     code-font
-                                     :size 11.0))
-          ))
-      (set-face-attribute
-       'mode-line-inactive nil
-       :inherit 'mode-line
-       :box nil))
-
+                                     :name code-font
+                                     :size 11.0))))
+      (set-face-attribute 'mode-line-inactive nil
+                          :inherit 'mode-line
+                          :box nil))
     ;; (dolist (face '((flymake-note-echo-at-eol . success)
     ;;                 (flymake-warning-echo-at-eol . warning)
     ;;                 (flymake-error-echo-at-eol . error)))

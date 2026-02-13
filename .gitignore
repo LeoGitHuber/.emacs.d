@@ -21,4 +21,5 @@ tramp
 server
 dump.el
 temp.el
+themes
 loaddefs.el

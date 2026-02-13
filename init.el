@@ -4,6 +4,18 @@
 
 ;; (add-to-list 'load-path "~/.emacs.d/site-lisp/benchmark-init-el")
 
+
+;;;; 01 Startup and Bootstrap
+;; Index:
+;; 01 Startup and Bootstrap
+;; 02 Core Behavior
+;; 03 Editing Workflow
+;; 04 Completion and Navigation
+;; 05 Programming Languages
+;; 06 Input and Reading
+;; 07 Knowledge Management
+;; 08 UI Themes and Platform
+
 ;;; Bootstrap
 
 (defvar windows-system-p (eq system-type 'windows-nt)
@@ -184,6 +196,286 @@
   (load "~/.emacs.d/self-develop/all-the-icons-diy.el"))
 
 (require 'init-startup)
+
+;;;; 02 Core Behavior
+
+;;; Core behavior
+
+(setq frame-title-format
+      '((:eval
+         (if (buffer-file-name)
+             (abbreviate-file-name (buffer-file-name))
+           "%b"))))
+
+(electric-pair-mode)
+
+(pixel-scroll-precision-mode)
+
+(setq pixel-scroll-precision-interpolate-page t)
+
+(defalias 'scroll-up-command 'pixel-scroll-interpolate-down)
+
+(defalias 'scroll-down-command 'pixel-scroll-interpolate-up)
+
+(global-subword-mode)
+
+(global-auto-revert-mode)
+
+(setq global-auto-revert-non-file-buffers t
+      auto-revert-interval 1)
+
+;; (when (eq system-type 'gnu/linux)
+;;   (with-eval-after-load 'info
+;;     (add-to-list 'Info-directory-list "/usr/local/texlive/2024/texmf-dist/doc/info")
+;;     (add-to-list 'Info-directory-list "/usr/local/share/info")))
+
+
+(setq hl-line-sticky-flag nil
+      hl-line-overlay nil)
+
+(global-hl-line-mode)
+
+(dolist (hook
+         '(eshell-mode-hook
+           shell-mode-hook
+           term-mode-hook
+           messages-buffer-mode-hook
+           eat-mode-hook
+           org-mode-hook
+           markdown-mode-hook
+           markdown-view-mode-hook
+           nov-mode-hook
+           tex-mode-hook
+           TeX-mode-hook
+           LaTeX-mode-hook))
+  (add-hook hook (lambda ()
+                   (setq-local global-hl-line-mode nil))))
+
+(setq electric-pair-inhibit-predicate 'electric-pair-conservative-inhibit
+      scroll-preserve-screen-position t
+      scroll-margin 0
+      scroll-conservatively 97
+      eldoc-idle-delay 0.2)
+
+(delete-selection-mode)
+
+(setq show-paren-when-point-inside-paren t
+      show-paren-when-point-in-periphery t
+      show-paren-delay 0
+      show-paren-context-when-offscreen 'child-frame
+      blink-matching-paren-highlight-offscreen t
+      show-paren--context-child-frame-parameters
+      '((visibility)
+        (width . 0)
+        (height . 0)
+        (min-width . t)
+        (min-height . t)
+        (no-accept-focus . t)
+        (no-focus-on-map . t)
+        (border-width . 0)
+        (child-frame-border-width . 1)
+        (left-fringe . 0)
+        (right-fringe . 0)
+        (vertical-scroll-bars)
+        (horizontal-scroll-bars)
+        (menu-bar-lines . 0)
+        (tool-bar-lines . 0)
+        (tab-bar-lines . 0)
+        (no-other-frame . t)
+        (no-other-window . t)
+        (no-delete-other-windows . t)
+        (unsplittable . t)
+        (undecorated . t)
+        (cursor-type)
+        (no-special-glyphs . t)
+        (desktop-dont-save . t)
+        (child-frame-border-width 3)))
+
+(with-eval-after-load 'auto-save
+  (setq auto-save-delete-trailing-whitespace t
+        auto-save-disable-predicates '((lambda () (string-suffix-p "gpg" (file-name-extension (buffer-name)) t)))))
+
+(setq
+ ;; auto-save-timeout 30
+ ;; auto-save-interval 10
+ auto-save-default nil
+ save-silently t
+ auto-save-no-message t)
+
+(setq auto-save-visited-interval 1)
+
+(auto-save-visited-mode)
+
+(add-hook
+ 'before-save-hook
+ (lambda ()
+   (delete-trailing-whitespace (point-min)
+                               (- (line-beginning-position) 1))
+   (delete-trailing-whitespace (+ (point) 1)
+                               (point-max))))
+
+(dolist (hook '(TeX-mode-hook dired-mode-hook markdown-mode-hook markdown-view-mode-hook))
+  (add-hook hook '(lambda ()
+                    (setq truncate-lines t))))
+
+;; (add-hook 'emacs-startup-hook ;; 'after-init-hook
+;;           (lambda ()
+;;             (unless (bound-and-true-p recentf-mode)
+;;               (recentf-mode t)
+;;               (setq recentf-max-saved-items 1000
+;;                 recentf-exclude `("/tmp/" "/ssh:"
+;;                                       ,(concat user-emacs-directory
+;;                                                "lib/.*-autoloads\\.el\\'"))))
+;;             (unless (boundp 'no-littering-etc-directory)
+;;               ;; (rquire 'no-littering)
+;;               (load "~/.emacs.d/site-lisp/no-littering/no-littering.el")
+;;               (with-eval-after-load 'no-littering
+;;               (add-to-list 'recentf-exclude no-littering-var-directory)
+;;               (add-to-list 'recentf-exclude no-littering-etc-directory)))
+;;             ;; (fset 'yes-or-no-p 'y-or-n-p)
+;;             (unless (bound-and-true-p save-place-mode)
+;;               (save-place-mode t))
+;;             (unless (bound-and-true-p savehist-mode)
+;;               (setq history-length 10000
+;;                 history-delete-duplicates t
+;;                 savehist-save-minibuffer-history t)
+;;               (savehist-mode t))))
+
+
+(repeat-mode)
+
+(require 'no-littering)
+
+(with-eval-after-load 'no-littering
+  (recentf-mode t)
+  (setq recentf-max-saved-items 1000
+        recentf-exclude `("/tmp/" "/ssh:" ,(concat user-emacs-directory "lib/.*-autoloads\\.el\\'"))
+        yas-snippet-dirs (list (expand-file-name "~/.emacs.d/snippets")))
+  (add-to-list 'recentf-exclude no-littering-var-directory)
+  (add-to-list 'recentf-exclude no-littering-etc-directory))
+
+(require 'saveplace-pdf-view)
+
+(save-place-mode t)
+
+(setq history-length 10000
+      history-delete-duplicates t
+      savehist-save-minibuffer-history t)
+
+(savehist-mode t)
+
+(setq recentf-max-menu-items 5
+      ring-bell-function 'ignore
+      isearch-lazy-count t
+      isearch-wrap-pause 'no
+      lazy-highlight-cleanup nil
+      ;; 处理中英文断行不分割问题，需要开启 toggle-word-wrap 和
+      ;; visual-line-mode 才能体现
+      word-wrap-by-category t)
+
+(setq-default tab-width 4
+              tab-always-indent t
+              tab-first-completion 'word-or-paren-or-punct
+              indent-tabs-mode nil
+              ;; bidi-display-reordering 'left-to-right
+              bidi-display-reordering nil
+              ;; bidi-paragraph-direction 'left-to-right
+              ;; bidi-paragraph-direction nil
+              ;; display-fill-column-indicator-character 124
+              fringe-indicator-alist
+              '((truncation () right-arrow)
+                (continuation () right-curly-arrow)
+                (overlay-arrow . right-triangle)
+                (up . up-arrow)
+                (down . down-arrow)
+                (top top-left-angle top-right-angle)
+                (bottom bottom-left-angle bottom-right-angle top-right-angle top-left-angle)
+                (top-bottom left-bracket right-bracket top-right-angle top-left-angle)
+                (empty-line . empty-line)
+                (unknown . question-mark))
+              ;; visual-fill-column-center-text t
+              )
+
+(dolist (mode
+         '(prog-mode-hook
+           toml-ts-mode-hook
+           ;; TeX-mode-hook
+           cuda-mode-hook))
+  (add-hook mode (lambda ()
+                   (display-line-numbers-mode t))))
+
+(desktop-save-mode 1)
+
+(with-eval-after-load 'desktop
+  (setq desktop-restore-frames nil))
+
+(setq comment-auto-fill-only-comments t)
+
+(setq whitespace-style '(face trailing))
+
+(setq-default whitespace-display-mappings
+              '(
+                ;; space -> · else .
+                (space-mark 32 [183] [46])
+                ;; new line -> ¬ else $
+                (newline-mark ?\n [172 ?\n] [36 ?\n])
+                ;; carriage return (Windows) -> ¶ else #
+                (newline-mark ?\r [182] [35])
+                ;; tabs -> » else >
+                (tab-mark ?\t [187 ?\t] [62 ?\t])))
+
+(add-hook 'prog-mode-hook #'whitespace-mode)
+
+(autoload 'symbol-overlay-mode "symbol-overlay" nil t)
+(add-hook 'prog-mode-hook #'symbol-overlay-mode)
+
+;; (electric-indent-mode -1)
+;; (follow-mode)
+
+;; Smoothly scrolling over image
+(unless (>= (string-to-number emacs-version) 30)
+  (add-hook
+   'text-mode-hook
+   (lambda ()
+     (or (boundp 'iscroll-mode)
+         (load "~/.emacs.d/site-lisp/iscroll/iscroll.el"))
+     (iscroll-mode))))
+
+(with-eval-after-load 'magit
+  (setq magit-diff-refine-hunk t
+        magit-log-section-commit-count 20
+        magit-auto-revert-counter 10
+        magit-status-sections-hook
+        '(magit-insert-status-headers
+          magit-insert-merge-log
+          magit-insert-rebase-sequence
+          magit-insert-am-sequence
+          magit-insert-sequencer-sequence
+          magit-insert-bisect-output
+          magit-insert-bisect-rest
+          magit-insert-bisect-log
+          magit-insert-untracked-files
+          magit-insert-unstaged-changes
+          magit-insert-staged-changes
+          magit-insert-stashes
+          magit-insert-unpushed-to-pushremote
+          ;; magit-insert-unpushed-to-upstream-or-recent
+          magit-insert-unpushed-to-upstream
+          magit-insert-recent-commits
+          magit-insert-unpulled-from-pushremote
+          magit-insert-unpulled-from-upstream)))
+
+(require 'aggressive-indent)
+
+(dolist (hook '(emacs-lisp-mode-hook yuck-mode-hook python-ts-mode python-mode scss-mode-hook))
+  (add-hook hook 'aggressive-indent-mode))
+
+;; (dolist (mode '(verilog-mode org-mode term-mode))
+;;   (add-to-list 'aggressive-indent-excluded-modes mode))
+
+
+;;;; 03 Editing Workflow
+
 ;;; Meow
 (require 'meow)
 
@@ -313,110 +605,133 @@
   (define-key global-map [remap downcase-word] 'downcase-any)
   (define-key global-map [remap capitalize-word] 'capitalize-any))
 
-;;; Language modes / Treesit
-(setq elisp-fontify-semantically t)
+;;; Hydra
+(require 'hydra)
 
-;; (require 'scala-mode)
-(require 'scala-ts-mode)
-(require 'kdl-mode)
-(require 'yuck-mode)
+(defhydra hydra-avy (global-map "M-g"
+                                :exit t
+                                :hint nil)
+  "
+   Line^^       Region^^        Goto
+  ----------------------------------------------------------
+   [_y_] yank   [_Y_] yank      [_c_] timed char  [_C_] char
+   [_m_] move   [_M_] move      [_w_] word        [_W_] any word
+   [_k_] kill   [_K_] kill      [_l_] line        [_L_] end of line"
+  ("c" avy-goto-char-timer)
+  ("C" avy-goto-char)
+  ("w" avy-goto-word-1)
+  ("W" avy-goto-word-0)
+  ("l" avy-goto-line)
+  ("L" avy-goto-end-of-line)
+  ("m" avy-move-line)
+  ("M" avy-move-region)
+  ("k" avy-kill-whole-line)
+  ("K" avy-kill-region)
+  ("y" avy-copy-line)
+  ("Y" avy-copy-region))
 
-(when (treesit-available-p)
-  (setq major-mode-remap-alist
-        '((c-mode . c-ts-mode)
-          (c++-mode . c++-ts-mode)
-          (c-or-c++-mode . c-or-c++-ts-mode)
-          (conf-toml-mode . toml-ts-mode)
-          (csharp-mode . csharp-ts-mode)
-          (css-mode . css-ts-mode)
-          (java-mode . java-ts-mode)
-          (js-mode . js-ts-mode)
-          (javascript-mode . js-ts-mode)
-          (js-json-mode . json-ts-mode)
-          (python-mode . python-ts-mode)
-          (ruby-mode . ruby-ts-mode)
-          (sh-mode . bash-ts-mode)
-          (verilog-mode . verilog-ts-mode))
-        treesit-font-lock-level 4)
-  ;; (add-hook 'emacs-lisp-mode-hook
-  ;;           (lambda () (treesit-parser-create 'elisp)))
-  (require 'qml-ts-mode))
+(defhydra hydra-zoom (global-map "<f2>")
+  "Zoom."
+  ("g" text-scale-increase "in")
+  ("l" text-scale-decrease "out")
+  ("r" (text-scale-set 0) "reset")
+  ("q" nil "quit"))
 
-(dolist (entry
-         '(("\\.pdf\\'" . pdf-view-mode)
-           ("\\.ya?ml\\'" . yaml-ts-mode)
-           ("\\.lua\\'" . lua-ts-mode)
-           ("\\.scala\\'" . scala-mode)
-           ("\\.kdl\\'" . kdl-mode)
-           ("\\.do\\'" . tcl-mode)
-           ("\\.xdc\\'" . tcl-mode)
-           ("\\.ts\\'" . typescript-ts-mode)
-           ("\\.tsx\\'" . typescript-ts-mode)
-           ("\\.\\(?:md\\|markdown\\|mkd\\|mdown\\|mkdn\\|mdwn\\)\\'" . markdown-mode)
-           ("README\\.md\\'" . gfm-mode)))
-  (add-to-list 'auto-mode-alist entry))
+(defhydra hydra-window (:color pink)
+  "
+         Split:                   Move:
+    ╭──────────────────────╯ ╭──────────────────────╯
+       _v_ vertical            _j_ down
+       _h_ horizontal          _k_ up
+       _V_ even vertical       _J_ swap down
+       _H_ even horizontal     _K_ swap up
+       _s_ swap                _L_ swap right
+    ╰──────────────────────╮ _l_ right
+       _D_lt   _d_lt all         _o_nly this
+       _B_ur   _b_ur all         _a_ce  this
+       _m_inimize              _z_en
+       _q_uit                  _f_ullscreen
+    "
+  ("<left>" windmove-left)
+  ("<down>" windmove-down)
+  ("<up>" windmove-up)
+  ("<right>" windmove-right)
+  ("j" windmove-down)
+  ("k" windmove-up)
+  ("l" windmove-right)
+  ("o" delete-other-windows)
+  ("a" ace-swap-window)
+  ("D" delete-window :color blue)
+  ("B" balance-windows)
+  ("s" ace-swap-window)
+  ("m" minimize-window)
+  ("z" toggle-maximize-buffer)
+  ("f" toggle-frame-fullscreen)
+  ("v" split-window-right)
+  ("h" split-window-below)
+  ("V" split-window-right-and-focus)
+  ("H" split-window-below-and-focus)
+  ("d" kill-buffer-and-window)
+  ("b" kill-buffer-and-window)
+  ("L" transpose-frame)
+  ("K" buf-move-up)
+  ("J" buf-move-down)
+  ("q" nil :color blue))
 
-(with-eval-after-load 'typescript-ts-mode
-  (setq typescript-ts-mode-indent-offset 4))
+(global-set-key (kbd "C-c w") 'hydra-window/body)
 
-(with-eval-after-load 'css-mode
-  (setq css-indent-offset 4))
+(defhydra hydra-eMove ()
+  "
+   Line^^           char^^              word^^              Page^^
+  ---------------------------------------------------------------------
+   [_j_] next       [_l_] forward       [_F_] Forward         [_v_] up
+   [_k_] previous   [_h_] backward      [_B_] Backward        [_V_] down
+   "
+  ("j" next-line nil)
+  ("k" previous-line nil)
+  ("v" scroll-uppp nil)
+  ("V" scroll-down nil)
+  ("l" forward-char nil)
+  ("h" backward-char nil)
+  ("F" forward-word nil)
+  ("B" backward-word nil)
+  ("q" nil "quit"))
 
-;;; Reading / Documents
-(dolist (feature '(eldoc-box eldoc-mouse calibredb nov nov-xwidget shrface nov-highlights etaf))
-  (require feature))
+(keymap-global-set "C-M-;" 'hydra-eMove/body)
 
-(add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
+(require 'rect)
 
-(with-eval-after-load 'nov
-  (setq nov-text-width t)
-  (nov-highlights-global-mode-enable)
-  (add-hook 'nov-mode-hook #'eldoc-mode)
-  (add-hook 'nov-mode-hook #'eldoc-box-hover-mode)
-  (add-hook 'nov-mode-hook #'visual-line-mode)
-  (add-hook
-   'nov-mode-hook
-   #'(lambda ()
-       (setq-local line-spacing 0.25)
-       (face-remap-add-relative 'variable-pitch
-        :family "Charter"
-        :height 1.2))))
+(defhydra hydra-rectangle (:body-pre (rectangle-mark-mode t)
+                           :color pink
+                           :post (deactivate-mark))
+  "
+    ^_k_^     _d_elete    _s_tring
+  _h_   _l_   _o_k        _y_ank
+    ^_j_^     _n_ew-copy  _r_eset
+  ^^^^        _e_xchange  _u_ndo
+  ^^^^        ^ ^         _p_aste
+  "
+  ("h" rectangle-backward-char nil)
+  ("l" rectangle-forward-char nil)
+  ("k" rectangle-previous-line nil)
+  ("j" rectangle-next-line nil)
+  ("e" hydra-ex-point-mark nil)
+  ("n" copy-rectangle-as-kill nil)
+  ("d" delete-rectangle nil)
+  ("r" (if (region-active-p)
+           (deactivate-mark)
+         (rectangle-mark-mode t))
+   nil)
+  ("y" kill-rectangle nil)
+  ("u" undo nil)
+  ("s" string-rectangle nil)
+  ("p" yank-rectangle nil)
+  ("o" nil nil))
 
-(when (eq system-type 'gnu/linux)
-  (dolist (feature
-           '(pdf-tools
-             pdf-roll
-             pdf-history
-             pdf-view
-             pdf-occur
-             pdf-isearch
-             pdf-links
-             pdf-outline
-             pdf-misc
-             pdf-annot
-             pdf-sync
-             pdf-cache))
-    (require feature))
-  ;; (require 'pdf-virtual)
-  ;; (require 'pdf-loader)
-  ;; (with-eval-after-load 'pdf-tools
-  ;;   (setq pdf-view-use-scaling t
-  ;;         pdf-view-continuous t
-  ;;         pdf-anot-list-format '((page . 3)
-  ;;                                (type . 10)
-  ;;                                (contents . 50)
-  ;;                                (date . 24)))
-  ;;   (pdf-tools-install))
-  (add-hook 'pdf-view-mode-hook 'pdf-history-minor-mode)
-  (add-hook 'pdf-view-mode-hook 'pdf-isearch-minor-mode)
-  (add-hook 'pdf-view-mode-hook 'pdf-links-minor-mode)
-  (add-hook 'pdf-view-mode-hook 'pdf-outline-minor-mode)
-  (add-hook 'pdf-view-mode-hook 'pdf-misc-size-indication-minor-mode)
-  (add-hook 'pdf-view-mode-hook 'pdf-misc-context-menu-minor-mode)
-  (add-hook 'pdf-view-mode-hook 'pdf-annot-minor-mode)
-  (add-hook 'pdf-view-mode-hook 'pdf-sync-minor-mode)
-  (add-hook 'pdf-view-mode-hook 'pdf-cache-prefetch-minor-mode)
-  (add-hook 'pdf-view-mode-hook 'pdf-view-roll-minor-mode))
+(keymap-global-set "C-x SPC" 'hydra-rectangle/body)
+
+
+;;;; 04 Completion and Navigation
 
 ;;; Completion / LSP
 
@@ -580,6 +895,454 @@
    ;; lsp-bridge-c-lsp-server "clangd"
    ))
 
+;;; Minibuffer / Completion UI
+(dolist (feature
+         '(vertico
+           vertico-grid
+           vertico-directory
+           vertico-reverse
+           vertico-indexed
+           vertico-mouse
+           vertico-buffer
+           vertico-multiform
+           vertico-sort
+           vertico-suspend
+           embark
+           marginalia
+           standard-themes
+           rainbow-delimiters
+           visual-fill-column
+           colorful-mode
+           indent-bars
+           indent-bars-ts
+           symbol-overlay
+           aggressive-indent
+           orderless))
+  (require feature))
+
+(setq-default completion-styles '(basic partial-completion orderless))
+
+(setq completion-styles '(basic partial-completion orderless)
+      completion-category-overrides '((file (styles basic partial-completion))))
+
+(if (boundp 'vertico-mode)
+    (progn
+      (require 'orderless)
+      (setq enable-recursive-minibuffers t)
+      (vertico-mode)
+      (vertico-reverse-mode)
+      (vertico-indexed-mode)
+      (vertico-mouse-mode)
+      (vertico-multiform-mode)
+      (marginalia-mode)
+      (setq vertico-multiform-categories '((file grid) (consult-grep buffer) (consult-ripgrep buffer))
+            vertico-cycle t
+            vertico-sort-function 'vertico-sort-history-alpha)
+      (keymap-global-set "C-'" #'vertico-suspend)
+      (keymap-set vertico-map "?" #'minibuffer-completion-help)
+      (keymap-set vertico-map "M-RET" #'minibuffer-force-complete-and-exit)
+      (keymap-set vertico-map "M-TAB" #'minibuffer-complete)
+      (keymap-set vertico-map "C-w" 'vertico-directory-delete-word))
+  (keymap-set minibuffer-mode-map "C-w" 'backward-kill-word))
+
+(and (boundp 'puni-mode)
+     (require 'puni)
+     (puni-global-mode))
+
+(with-eval-after-load 'puni
+  (add-hook
+   'puni-mode-hook
+   (lambda ()
+     (keymap-set puni-mode-map "M-w" 'puni-kill-region)
+     (keymap-set puni-mode-map "M-k" 'puni-backward-kill-line)
+     (keymap-unset puni-mode-map "C-w")))
+  (dolist (hook '(term-mode-hook minibuffer-mode-hook))
+    (add-hook hook #'puni-disable-puni-mode)))
+
+;;; Visual Replacement
+(keymap-global-set "C-c r" 'replace-regexp)
+
+(require 'hideshow)
+
+(dolist (hook
+         '(emacs-lisp-mode-hook
+           c-mode-hook
+           c-ts-mode-hook
+           c++-mode-hook
+           c++-ts-mode-hook
+           verilog-mode-hook
+           verilog-ts-mode-hook))
+  (add-hook hook 'hs-minor-mode))
+
+;; 折叠代码块，以下是额外启用了 :box t 属性使得提示更加明显
+(defconst hideshow-folded-face '(:inherit font-lock-comment-face
+                                 :box t))
+
+(setq hs-set-up-overlay 'hideshow-folded-overlay-fn)
+
+;; (keymap-global-set "C-<tab>" 'hs-toggle-hiding)
+(keymap-set hs-minor-mode-map "C-<tab>" 'hs-toggle-hiding)
+
+(require 'mwim)
+
+(global-set-key [remap move-beginning-of-line] 'mwim-beginning-of-code-or-line-or-comment)
+
+(global-set-key [remap move-end-of-line] 'mwim-end-of-code-or-line)
+
+(setq popper-reference-buffers
+      '("\\*Messages\\*"
+        "Output\\*$"
+        "\\*Async Shell Command\\*"
+        "Go-Translate"
+        "*compilation*"
+        "*Warning*"
+        "*tex-shell*"
+        "*Compile-Log*"
+        "*xref*"
+        help-mode
+        helpful-mode
+        compilation-mode
+        youdao-dictionary-mode))
+
+(defun popper--fit-window-width (win)
+  "Determine the height of popup window WIN by fitting it to the buffer's content."
+  (fit-window-to-buffer
+   win (frame-height)
+   (floor (frame-height) 6)
+   (floor (frame-width) 2)
+   ;; (floor (frame-width) 2)
+   (floor (* (frame-width) 17) 35)))
+
+(defun popper--auto-fit-window-height (win)
+  "Determine the height of popup window WIN by fitting it to the buffer's content."
+  (fit-window-to-buffer win (floor (frame-height) 2)
+                        (floor (* (frame-height) 2) 5)))
+
+(defun popper-display-popup-adaptive (buffer &optional alist)
+  "Display popup-buffer BUFFER at the bottom of the screen.
+ALIST is an association list of action symbols and values.  See
+Info node `(elisp) Buffer Display Action Alists' for details of
+such alists."
+  (if (and (> (window-pixel-height)
+              (window-pixel-width))
+           (or (and popper-open-popup-alist
+                    (eq (window-parameter (caar popper-open-popup-alist) 'window-side) 'bottom))
+               (not popper-open-popup-alist)))
+      (display-buffer-in-side-window
+       buffer
+       (append
+        alist `((window-height . popper--auto-fit-window-height)
+                (side . bottom)
+                (slot . 1))))
+    (display-buffer-in-side-window
+     buffer (append alist `((window-width . popper--fit-window-width)
+                            (side . right)
+                            (slot . 1))))))
+
+(setq popper-display-function 'popper-display-popup-adaptive
+      fit-window-to-buffer-horizontally t)
+
+(require 'popper)
+(require 'popper-echo)
+
+(keymap-global-set "M-<tab>" 'popper-toggle)
+
+(keymap-global-set "M-`" 'popper-cycle)
+
+(keymap-global-set "C-M-`" 'popper-toggle-type)
+
+;; (global-tab-line-mode +1)
+(popper-mode +1)
+
+(popper-echo-mode +1)
+
+(define-key global-map [remap list-buffers] 'ibuffer)
+
+(when non-android-p
+  (require 'indent-bars)
+  (add-hook 'prog-mode-hook 'indent-bars-mode))
+
+(with-eval-after-load 'indent-bars
+  (setq ;; indent-bars-pattern "."
+   ;; indent-bars-highlight-current-depth
+   ;; '(:face default :blend 0.4)
+   indent-bars-treesit-support t
+   indent-bars-no-descend-string t
+   indent-bars-no-descend-lists t
+   indent-bars-treesit-ignore-blank-lines-types '("module")
+   indent-bars-width-frac 0.2
+   indent-bars-color '(highlight :face-bg t :blend 0.7)
+   indent-bars-display-on-blank-lines t)
+  (defun indent-bars--guess-spacing ()
+    "Get indentation spacing of current buffer.
+Adapted from `highlight-indentation-mode'."
+    (cond (indent-bars-spacing-override)
+          ((and (derived-mode-p 'verilog-mode)
+                (boundp 'verilog-indent-level))
+           verilog-indent-level)
+          ((and (derived-mode-p 'ada-mode)
+                (boundp 'ada-indent))
+           ada-indent)
+          ((and (derived-mode-p 'ada-ts-mode)
+                (boundp 'ada-ts-mode-indent-offset))
+           ada-ts-mode-indent-offset)
+          ((and (derived-mode-p 'gpr-mode)
+                (boundp 'gpr-indent))
+           gpr-indent)
+          ((and (derived-mode-p 'gpr-ts-mode)
+                (boundp 'gpr-ts-mode-indent-offset))
+           gpr-ts-mode-indent-offset)
+          ((and (derived-mode-p 'python-mode)
+                (boundp 'py-indent-offset))
+           py-indent-offset)
+          ((and (derived-mode-p 'python-mode 'python-base-mode)
+                (boundp 'python-indent-offset))
+           python-indent-offset)
+          ((and (derived-mode-p 'ruby-mode)
+                (boundp 'ruby-indent-level))
+           ruby-indent-level)
+          ((and (derived-mode-p 'scala-mode)
+                (boundp 'scala-indent:step))
+           scala-indent:step)
+          ((and (derived-mode-p 'scala-mode)
+                (boundp 'scala-mode-indent:step))
+           scala-mode-indent:step)
+          ((and (derived-mode-p 'scala-ts-mode)
+                (boundp 'scala-ts-indent-offset))
+           scala-ts-indent-offset)
+          ((and (derived-mode-p 'rust-ts-mode)
+                (boundp 'rust-ts-mode-indent-offset))
+           rust-ts-mode-indent-offset)
+          ((and (or (derived-mode-p 'scss-mode)
+                    (derived-mode-p 'css-mode))
+                (boundp 'css-indent-offset))
+           css-indent-offset)
+          ((and (derived-mode-p 'nxml-mode)
+                (boundp 'nxml-child-indent))
+           nxml-child-indent)
+          ((and (derived-mode-p 'coffee-mode)
+                (boundp 'coffee-tab-width))
+           coffee-tab-width)
+          ((and (derived-mode-p 'js-mode)
+                (boundp 'js-indent-level))
+           js-indent-level)
+          ((and (derived-mode-p 'js2-mode)
+                (boundp 'js2-basic-offset))
+           js2-basic-offset)
+          ((and (derived-mode-p 'typescript-ts-mode)
+                (boundp 'typescript-ts-mode-indent-offset))
+           typescript-ts-mode-indent-offset)
+          ((and (derived-mode-p 'sws-mode)
+                (boundp 'sws-tab-width))
+           sws-tab-width)
+          ((and (derived-mode-p 'web-mode)
+                (boundp 'web-mode-markup-indent-offset))
+           web-mode-markup-indent-offset)
+          ((and (derived-mode-p 'web-mode)
+                (boundp 'web-mode-html-offset)) ; old var
+           web-mode-html-offset)
+          ((and (local-variable-p 'c-basic-offset)
+                (numberp c-basic-offset))
+           c-basic-offset)
+          ((and (local-variable-p 'c-ts-common-indent-offset)
+                (symbolp c-ts-common-indent-offset)
+                (numberp (symbol-value c-ts-common-indent-offset)))
+           (symbol-value c-ts-common-indent-offset))
+          ((and (derived-mode-p 'yaml-mode)
+                (boundp 'yaml-indent-offset))
+           yaml-indent-offset)
+          ((and (derived-mode-p 'yaml-pro-mode)
+                (boundp 'yaml-pro-indent))
+           yaml-pro-indent)
+          ((and (derived-mode-p 'elixir-mode)
+                (boundp 'elixir-smie-indent-basic))
+           elixir-smie-indent-basic)
+          ((and (derived-mode-p 'lisp-data-mode)
+                (boundp 'lisp-body-indent))
+           lisp-body-indent)
+          ((and (derived-mode-p 'cobol-mode)
+                (boundp 'cobol-tab-width))
+           cobol-tab-width)
+          ((or (derived-mode-p 'go-ts-mode)
+               (derived-mode-p 'go-mode))
+           tab-width)
+          ((derived-mode-p 'nix-mode)
+           tab-width)
+          ((derived-mode-p 'makefile-mode)
+           tab-width)
+          ((and (derived-mode-p 'nix-ts-mode)
+                (boundp 'nix-ts-mode-indent-offset))
+           nix-ts-mode-indent-offset)
+          ((and (derived-mode-p 'json-ts-mode)
+                (boundp 'json-ts-mode-indent-offset))
+           json-ts-mode-indent-offset)
+          ((and (derived-mode-p 'json-mode)
+                (boundp 'js-indent-level))
+           js-indent-level)
+          ((and (derived-mode-p 'sh-base-mode)
+                (boundp 'sh-basic-offset))
+           sh-basic-offset)
+          ((and (derived-mode-p 'java-ts-mode)
+                (boundp 'java-ts-mode-indent-offset))
+           java-ts-mode-indent-offset)
+          ((and (derived-mode-p 'tcl-mode)
+                (boundp 'tcl-indent-level))
+           tcl-indent-level)
+          ((and (derived-mode-p 'haml-mode)
+                (boundp 'haml-indent-offset))
+           haml-indent-offset)
+          ((and (boundp 'standard-indent) standard-indent))
+          (t
+           4)))                         ; backup
+  )
+
+(require 'consult)
+(require 'consult-xref)
+
+;; (autoload 'consult-buffer "consult" nil t)
+;; (autoload 'consult-line "consult" nil t)
+(keymap-global-set "C-x l" 'consult-line)
+
+(keymap-global-set "C-x b" 'consult-buffer)
+
+(with-eval-after-load 'consult
+  (consult-customize consult-buffer :preview-key '(:debounce 0.4 "M-."))
+  (setq consult-project-function
+        (lambda (may-prompt) (or (vc-root-dir) (consult--default-project-function may-prompt)))))
+
+(setq xref-show-xrefs-function 'consult-xref
+      xref-show-definitions-function 'consult-xref)
+
+(keymap-global-set "C-." 'embark-act)
+
+(with-eval-after-load 'embark
+  (add-hook 'embark-collect-mode-hook 'consult-preview-at-point-mode))
+
+;;; Appearance helpers
+(dolist (hook '(prog-mode-hook text-mode-hook cuda-mode-hook))
+  (add-hook hook 'colorful-mode))
+
+(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+
+
+;;;; 05 Programming Languages
+
+;;; Language modes / Treesit
+(setq elisp-fontify-semantically t)
+
+;; (require 'scala-mode)
+(require 'scala-ts-mode)
+(require 'kdl-mode)
+(require 'yuck-mode)
+
+(when (treesit-available-p)
+  (setq major-mode-remap-alist
+        '((c-mode . c-ts-mode)
+          (c++-mode . c++-ts-mode)
+          (c-or-c++-mode . c-or-c++-ts-mode)
+          (conf-toml-mode . toml-ts-mode)
+          (csharp-mode . csharp-ts-mode)
+          (css-mode . css-ts-mode)
+          (java-mode . java-ts-mode)
+          (js-mode . js-ts-mode)
+          (javascript-mode . js-ts-mode)
+          (js-json-mode . json-ts-mode)
+          (python-mode . python-ts-mode)
+          (ruby-mode . ruby-ts-mode)
+          (sh-mode . bash-ts-mode)
+          (verilog-mode . verilog-ts-mode))
+        treesit-font-lock-level 4)
+  ;; (add-hook 'emacs-lisp-mode-hook
+  ;;           (lambda () (treesit-parser-create 'elisp)))
+  (require 'qml-ts-mode))
+
+(dolist (entry
+         '(("\\.pdf\\'" . pdf-view-mode)
+           ("\\.ya?ml\\'" . yaml-ts-mode)
+           ("\\.lua\\'" . lua-ts-mode)
+           ("\\.scala\\'" . scala-mode)
+           ("\\.kdl\\'" . kdl-mode)
+           ("\\.do\\'" . tcl-mode)
+           ("\\.xdc\\'" . tcl-mode)
+           ("\\.ts\\'" . typescript-ts-mode)
+           ("\\.tsx\\'" . typescript-ts-mode)
+           ("\\.\\(?:md\\|markdown\\|mkd\\|mdown\\|mkdn\\|mdwn\\)\\'" . markdown-mode)
+           ("README\\.md\\'" . gfm-mode)))
+  (add-to-list 'auto-mode-alist entry))
+
+(with-eval-after-load 'typescript-ts-mode
+  (setq typescript-ts-mode-indent-offset 4))
+
+(with-eval-after-load 'css-mode
+  (setq css-indent-offset 4))
+
+;;; Verilog
+(require 'verilog-ts-mode)
+
+(setq verilog-indent-level 2
+      verilog-indent-level-declaration 2
+      verilog-indent-level-module 2
+      verilog-indent-level-behavioral 2
+      verilog-auto-newline nil
+      verilog-ts-indent-level 2)
+
+(defconst verilog-hs-block-start-keywords-re
+  (eval-when-compile
+    (concat
+     "\\(" "\\(" (regexp-opt '("(" "{" "[")) "\\)" "\\|" "\\("
+     (verilog-regexp-words
+      '("begin"
+        "fork"
+        "clocking"
+        "function"
+        "module"
+        "covergroup"
+        "property"
+        "task"
+        "generate"
+        "`ifdef"
+        "`ifndef"))
+     "\\)" "\\)")))
+
+(defconst verilog-hs-block-end-keywords-re
+  (eval-when-compile
+    (concat
+     "\\(" "\\(" (regexp-opt '(")" "}" "]")) "\\)" "\\|" "\\("
+     (verilog-regexp-words
+      '("end"
+        "join"
+        "join_any"
+        "join_none"
+        "endclocking"
+        "endfunction"
+        "endmodule"
+        "endgroup"
+        "endproperty"
+        "endtask"
+        "endgenerate"
+        "`endif"))
+     "\\)" "\\)")))
+
+(defun verilog-ext-hs-setup ()
+  "Configure `hideshow'."
+  (dolist (mode
+           '((verilog-mode . verilog-forward-sexp-function)
+             (verilog-ts-mode . verilog-ts-forward-sexp)))
+    (add-to-list
+     'hs-special-modes-alist
+     `(,(car mode)
+       ,verilog-hs-block-start-keywords-re
+       ,verilog-hs-block-end-keywords-re
+       nil
+       ,(cdr mode)))))
+
+(verilog-ext-hs-setup)
+
+;; (setq verilog-linter "verilator --lint-only")
+
+(dolist (hook '(prog-mode-hook))
+  (add-hook hook #'hs-minor-mode))
+
 ;;; Dired
 
 (setq dired-mouse-drag-files t
@@ -653,6 +1416,9 @@
                            :height 95))
 
 (add-hook 'dired-mode-hook 'set-font-for-dired)
+
+
+;;;; 06 Input and Reading
 
 ;;; Chinese
 
@@ -777,6 +1543,65 @@
 (keymap-global-set "C-\\" 'rime-commit1-and-toggle-input-method)
 
 ;; (global-set-key "\C-\\" 'toggle-input-method)
+
+;;; Reading / Documents
+(dolist (feature '(eldoc-box eldoc-mouse calibredb nov nov-xwidget shrface nov-highlights etaf))
+  (require feature))
+
+(add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
+
+(with-eval-after-load 'nov
+  (setq nov-text-width t)
+  (nov-highlights-global-mode-enable)
+  (add-hook 'nov-mode-hook #'eldoc-mode)
+  (add-hook 'nov-mode-hook #'eldoc-box-hover-mode)
+  (add-hook 'nov-mode-hook #'visual-line-mode)
+  (add-hook
+   'nov-mode-hook
+   #'(lambda ()
+       (setq-local line-spacing 0.25)
+       (face-remap-add-relative 'variable-pitch
+        :family "Charter"
+        :height 1.2))))
+
+(when (eq system-type 'gnu/linux)
+  (dolist (feature
+           '(pdf-tools
+             pdf-roll
+             pdf-history
+             pdf-view
+             pdf-occur
+             pdf-isearch
+             pdf-links
+             pdf-outline
+             pdf-misc
+             pdf-annot
+             pdf-sync
+             pdf-cache))
+    (require feature))
+  ;; (require 'pdf-virtual)
+  ;; (require 'pdf-loader)
+  ;; (with-eval-after-load 'pdf-tools
+  ;;   (setq pdf-view-use-scaling t
+  ;;         pdf-view-continuous t
+  ;;         pdf-anot-list-format '((page . 3)
+  ;;                                (type . 10)
+  ;;                                (contents . 50)
+  ;;                                (date . 24)))
+  ;;   (pdf-tools-install))
+  (add-hook 'pdf-view-mode-hook 'pdf-history-minor-mode)
+  (add-hook 'pdf-view-mode-hook 'pdf-isearch-minor-mode)
+  (add-hook 'pdf-view-mode-hook 'pdf-links-minor-mode)
+  (add-hook 'pdf-view-mode-hook 'pdf-outline-minor-mode)
+  (add-hook 'pdf-view-mode-hook 'pdf-misc-size-indication-minor-mode)
+  (add-hook 'pdf-view-mode-hook 'pdf-misc-context-menu-minor-mode)
+  (add-hook 'pdf-view-mode-hook 'pdf-annot-minor-mode)
+  (add-hook 'pdf-view-mode-hook 'pdf-sync-minor-mode)
+  (add-hook 'pdf-view-mode-hook 'pdf-cache-prefetch-minor-mode)
+  (add-hook 'pdf-view-mode-hook 'pdf-view-roll-minor-mode))
+
+
+;;;; 07 Knowledge Management
 
 ;;; Org
 ;; (require 'markdown-ts-mode)
@@ -1046,198 +1871,6 @@
             "Knowledge/${slug}.org"
             "#+TITLE: ${title}\n#+FILETAGS: %^g\n#+CREATED: %U\n#+MODIFIED: \n\n")
            :unnarrowed t))))
-
-;;; Verilog
-(require 'verilog-ts-mode)
-
-(setq verilog-indent-level 2
-      verilog-indent-level-declaration 2
-      verilog-indent-level-module 2
-      verilog-indent-level-behavioral 2
-      verilog-auto-newline nil
-      verilog-ts-indent-level 2)
-
-(defconst verilog-hs-block-start-keywords-re
-  (eval-when-compile
-    (concat
-     "\\(" "\\(" (regexp-opt '("(" "{" "[")) "\\)" "\\|" "\\("
-     (verilog-regexp-words
-      '("begin"
-        "fork"
-        "clocking"
-        "function"
-        "module"
-        "covergroup"
-        "property"
-        "task"
-        "generate"
-        "`ifdef"
-        "`ifndef"))
-     "\\)" "\\)")))
-
-(defconst verilog-hs-block-end-keywords-re
-  (eval-when-compile
-    (concat
-     "\\(" "\\(" (regexp-opt '(")" "}" "]")) "\\)" "\\|" "\\("
-     (verilog-regexp-words
-      '("end"
-        "join"
-        "join_any"
-        "join_none"
-        "endclocking"
-        "endfunction"
-        "endmodule"
-        "endgroup"
-        "endproperty"
-        "endtask"
-        "endgenerate"
-        "`endif"))
-     "\\)" "\\)")))
-
-(defun verilog-ext-hs-setup ()
-  "Configure `hideshow'."
-  (dolist (mode
-           '((verilog-mode . verilog-forward-sexp-function)
-             (verilog-ts-mode . verilog-ts-forward-sexp)))
-    (add-to-list
-     'hs-special-modes-alist
-     `(,(car mode)
-       ,verilog-hs-block-start-keywords-re
-       ,verilog-hs-block-end-keywords-re
-       nil
-       ,(cdr mode)))))
-
-(verilog-ext-hs-setup)
-
-;; (setq verilog-linter "verilator --lint-only")
-
-(dolist (hook '(prog-mode-hook))
-  (add-hook hook #'hs-minor-mode))
-
-;;; Hydra
-(require 'hydra)
-
-(defhydra hydra-avy (global-map "M-g"
-                                :exit t
-                                :hint nil)
-  "
-   Line^^       Region^^        Goto
-  ----------------------------------------------------------
-   [_y_] yank   [_Y_] yank      [_c_] timed char  [_C_] char
-   [_m_] move   [_M_] move      [_w_] word        [_W_] any word
-   [_k_] kill   [_K_] kill      [_l_] line        [_L_] end of line"
-  ("c" avy-goto-char-timer)
-  ("C" avy-goto-char)
-  ("w" avy-goto-word-1)
-  ("W" avy-goto-word-0)
-  ("l" avy-goto-line)
-  ("L" avy-goto-end-of-line)
-  ("m" avy-move-line)
-  ("M" avy-move-region)
-  ("k" avy-kill-whole-line)
-  ("K" avy-kill-region)
-  ("y" avy-copy-line)
-  ("Y" avy-copy-region))
-
-(defhydra hydra-zoom (global-map "<f2>")
-  "Zoom."
-  ("g" text-scale-increase "in")
-  ("l" text-scale-decrease "out")
-  ("r" (text-scale-set 0) "reset")
-  ("q" nil "quit"))
-
-(defhydra hydra-window (:color pink)
-  "
-         Split:                   Move:
-    ╭──────────────────────╯ ╭──────────────────────╯
-       _v_ vertical            _j_ down
-       _h_ horizontal          _k_ up
-       _V_ even vertical       _J_ swap down
-       _H_ even horizontal     _K_ swap up
-       _s_ swap                _L_ swap right
-    ╰──────────────────────╮ _l_ right
-       _D_lt   _d_lt all         _o_nly this
-       _B_ur   _b_ur all         _a_ce  this
-       _m_inimize              _z_en
-       _q_uit                  _f_ullscreen
-    "
-  ("<left>" windmove-left)
-  ("<down>" windmove-down)
-  ("<up>" windmove-up)
-  ("<right>" windmove-right)
-  ("j" windmove-down)
-  ("k" windmove-up)
-  ("l" windmove-right)
-  ("o" delete-other-windows)
-  ("a" ace-swap-window)
-  ("D" delete-window :color blue)
-  ("B" balance-windows)
-  ("s" ace-swap-window)
-  ("m" minimize-window)
-  ("z" toggle-maximize-buffer)
-  ("f" toggle-frame-fullscreen)
-  ("v" split-window-right)
-  ("h" split-window-below)
-  ("V" split-window-right-and-focus)
-  ("H" split-window-below-and-focus)
-  ("d" kill-buffer-and-window)
-  ("b" kill-buffer-and-window)
-  ("L" transpose-frame)
-  ("K" buf-move-up)
-  ("J" buf-move-down)
-  ("q" nil :color blue))
-
-(global-set-key (kbd "C-c w") 'hydra-window/body)
-
-(defhydra hydra-eMove ()
-  "
-   Line^^           char^^              word^^              Page^^
-  ---------------------------------------------------------------------
-   [_j_] next       [_l_] forward       [_F_] Forward         [_v_] up
-   [_k_] previous   [_h_] backward      [_B_] Backward        [_V_] down
-   "
-  ("j" next-line nil)
-  ("k" previous-line nil)
-  ("v" scroll-uppp nil)
-  ("V" scroll-down nil)
-  ("l" forward-char nil)
-  ("h" backward-char nil)
-  ("F" forward-word nil)
-  ("B" backward-word nil)
-  ("q" nil "quit"))
-
-(keymap-global-set "C-M-;" 'hydra-eMove/body)
-
-(require 'rect)
-
-(defhydra hydra-rectangle (:body-pre (rectangle-mark-mode t)
-                           :color pink
-                           :post (deactivate-mark))
-  "
-    ^_k_^     _d_elete    _s_tring
-  _h_   _l_   _o_k        _y_ank
-    ^_j_^     _n_ew-copy  _r_eset
-  ^^^^        _e_xchange  _u_ndo
-  ^^^^        ^ ^         _p_aste
-  "
-  ("h" rectangle-backward-char nil)
-  ("l" rectangle-forward-char nil)
-  ("k" rectangle-previous-line nil)
-  ("j" rectangle-next-line nil)
-  ("e" hydra-ex-point-mark nil)
-  ("n" copy-rectangle-as-kill nil)
-  ("d" delete-rectangle nil)
-  ("r" (if (region-active-p)
-           (deactivate-mark)
-         (rectangle-mark-mode t))
-   nil)
-  ("y" kill-rectangle nil)
-  ("u" undo nil)
-  ("s" string-rectangle nil)
-  ("p" yank-rectangle nil)
-  ("o" nil nil))
-
-(keymap-global-set "C-x SPC" 'hydra-rectangle/body)
 
 ;;; LaTeX node
 ;; (require 'latex-node)
@@ -1565,607 +2198,8 @@ Possible values: 'math (default) or 'all.")
 
 (keymap-set outline-minor-mode-map "C-<tab>" 'outline-toggle-children)
 
-;;; Core behavior
 
-(setq frame-title-format
-      '((:eval
-         (if (buffer-file-name)
-             (abbreviate-file-name (buffer-file-name))
-           "%b"))))
-
-(electric-pair-mode)
-
-(pixel-scroll-precision-mode)
-
-(setq pixel-scroll-precision-interpolate-page t)
-
-(defalias 'scroll-up-command 'pixel-scroll-interpolate-down)
-
-(defalias 'scroll-down-command 'pixel-scroll-interpolate-up)
-
-(global-subword-mode)
-
-(global-auto-revert-mode)
-
-(setq global-auto-revert-non-file-buffers t
-      auto-revert-interval 1)
-
-;; (when (eq system-type 'gnu/linux)
-;;   (with-eval-after-load 'info
-;;     (add-to-list 'Info-directory-list "/usr/local/texlive/2024/texmf-dist/doc/info")
-;;     (add-to-list 'Info-directory-list "/usr/local/share/info")))
-
-
-(setq hl-line-sticky-flag nil
-      hl-line-overlay nil)
-
-(global-hl-line-mode)
-
-(dolist (hook
-         '(eshell-mode-hook
-           shell-mode-hook
-           term-mode-hook
-           messages-buffer-mode-hook
-           eat-mode-hook
-           org-mode-hook
-           markdown-mode-hook
-           markdown-view-mode-hook
-           nov-mode-hook
-           tex-mode-hook
-           TeX-mode-hook
-           LaTeX-mode-hook))
-  (add-hook hook (lambda ()
-                   (setq-local global-hl-line-mode nil))))
-
-(setq electric-pair-inhibit-predicate 'electric-pair-conservative-inhibit
-      scroll-preserve-screen-position t
-      scroll-margin 0
-      scroll-conservatively 97
-      eldoc-idle-delay 0.2)
-
-(delete-selection-mode)
-
-(setq show-paren-when-point-inside-paren t
-      show-paren-when-point-in-periphery t
-      show-paren-delay 0
-      show-paren-context-when-offscreen 'child-frame
-      blink-matching-paren-highlight-offscreen t
-      show-paren--context-child-frame-parameters
-      '((visibility)
-        (width . 0)
-        (height . 0)
-        (min-width . t)
-        (min-height . t)
-        (no-accept-focus . t)
-        (no-focus-on-map . t)
-        (border-width . 0)
-        (child-frame-border-width . 1)
-        (left-fringe . 0)
-        (right-fringe . 0)
-        (vertical-scroll-bars)
-        (horizontal-scroll-bars)
-        (menu-bar-lines . 0)
-        (tool-bar-lines . 0)
-        (tab-bar-lines . 0)
-        (no-other-frame . t)
-        (no-other-window . t)
-        (no-delete-other-windows . t)
-        (unsplittable . t)
-        (undecorated . t)
-        (cursor-type)
-        (no-special-glyphs . t)
-        (desktop-dont-save . t)
-        (child-frame-border-width 3)))
-
-(with-eval-after-load 'auto-save
-  (setq auto-save-delete-trailing-whitespace t
-        auto-save-disable-predicates '((lambda () (string-suffix-p "gpg" (file-name-extension (buffer-name)) t)))))
-
-(setq
- ;; auto-save-timeout 30
- ;; auto-save-interval 10
- auto-save-default nil
- save-silently t
- auto-save-no-message t)
-
-(setq auto-save-visited-interval 1)
-
-(auto-save-visited-mode)
-
-(add-hook
- 'before-save-hook
- (lambda ()
-   (delete-trailing-whitespace (point-min)
-                               (- (line-beginning-position) 1))
-   (delete-trailing-whitespace (+ (point) 1)
-                               (point-max))))
-
-(dolist (hook '(TeX-mode-hook dired-mode-hook markdown-mode-hook markdown-view-mode-hook))
-  (add-hook hook '(lambda ()
-                    (setq truncate-lines t))))
-
-;; (add-hook 'emacs-startup-hook ;; 'after-init-hook
-;;           (lambda ()
-;;             (unless (bound-and-true-p recentf-mode)
-;;               (recentf-mode t)
-;;               (setq recentf-max-saved-items 1000
-;;                 recentf-exclude `("/tmp/" "/ssh:"
-;;                                       ,(concat user-emacs-directory
-;;                                                "lib/.*-autoloads\\.el\\'"))))
-;;             (unless (boundp 'no-littering-etc-directory)
-;;               ;; (rquire 'no-littering)
-;;               (load "~/.emacs.d/site-lisp/no-littering/no-littering.el")
-;;               (with-eval-after-load 'no-littering
-;;               (add-to-list 'recentf-exclude no-littering-var-directory)
-;;               (add-to-list 'recentf-exclude no-littering-etc-directory)))
-;;             ;; (fset 'yes-or-no-p 'y-or-n-p)
-;;             (unless (bound-and-true-p save-place-mode)
-;;               (save-place-mode t))
-;;             (unless (bound-and-true-p savehist-mode)
-;;               (setq history-length 10000
-;;                 history-delete-duplicates t
-;;                 savehist-save-minibuffer-history t)
-;;               (savehist-mode t))))
-
-
-(repeat-mode)
-
-(require 'no-littering)
-
-(with-eval-after-load 'no-littering
-  (recentf-mode t)
-  (setq recentf-max-saved-items 1000
-        recentf-exclude `("/tmp/" "/ssh:" ,(concat user-emacs-directory "lib/.*-autoloads\\.el\\'"))
-        yas-snippet-dirs (list (expand-file-name "~/.emacs.d/snippets")))
-  (add-to-list 'recentf-exclude no-littering-var-directory)
-  (add-to-list 'recentf-exclude no-littering-etc-directory))
-
-(require 'saveplace-pdf-view)
-
-(save-place-mode t)
-
-(setq history-length 10000
-      history-delete-duplicates t
-      savehist-save-minibuffer-history t)
-
-(savehist-mode t)
-
-(setq recentf-max-menu-items 5
-      ring-bell-function 'ignore
-      isearch-lazy-count t
-      isearch-wrap-pause 'no
-      lazy-highlight-cleanup nil
-      ;; 处理中英文断行不分割问题，需要开启 toggle-word-wrap 和
-      ;; visual-line-mode 才能体现
-      word-wrap-by-category t)
-
-(setq-default tab-width 4
-              tab-always-indent t
-              tab-first-completion 'word-or-paren-or-punct
-              indent-tabs-mode nil
-              ;; bidi-display-reordering 'left-to-right
-              bidi-display-reordering nil
-              ;; bidi-paragraph-direction 'left-to-right
-              ;; bidi-paragraph-direction nil
-              ;; display-fill-column-indicator-character 124
-              fringe-indicator-alist
-              '((truncation () right-arrow)
-                (continuation () right-curly-arrow)
-                (overlay-arrow . right-triangle)
-                (up . up-arrow)
-                (down . down-arrow)
-                (top top-left-angle top-right-angle)
-                (bottom bottom-left-angle bottom-right-angle top-right-angle top-left-angle)
-                (top-bottom left-bracket right-bracket top-right-angle top-left-angle)
-                (empty-line . empty-line)
-                (unknown . question-mark))
-              ;; visual-fill-column-center-text t
-              )
-
-(dolist (mode
-         '(prog-mode-hook
-           toml-ts-mode-hook
-           ;; TeX-mode-hook
-           cuda-mode-hook))
-  (add-hook mode (lambda ()
-                   (display-line-numbers-mode t))))
-
-(desktop-save-mode 1)
-
-(with-eval-after-load 'desktop
-  (setq desktop-restore-frames nil))
-
-(setq comment-auto-fill-only-comments t)
-
-(setq whitespace-style '(face trailing))
-
-(setq-default whitespace-display-mappings
-              '(
-                ;; space -> · else .
-                (space-mark 32 [183] [46])
-                ;; new line -> ¬ else $
-                (newline-mark ?\n [172 ?\n] [36 ?\n])
-                ;; carriage return (Windows) -> ¶ else #
-                (newline-mark ?\r [182] [35])
-                ;; tabs -> » else >
-                (tab-mark ?\t [187 ?\t] [62 ?\t])))
-
-(add-hook 'prog-mode-hook #'whitespace-mode)
-
-(add-hook 'prog-mode-hook #'symbol-overlay-mode)
-
-;; (electric-indent-mode -1)
-;; (follow-mode)
-
-;; Smoothly scrolling over image
-(unless (>= (string-to-number emacs-version) 30)
-  (add-hook
-   'text-mode-hook
-   (lambda ()
-     (or (boundp 'iscroll-mode)
-         (load "~/.emacs.d/site-lisp/iscroll/iscroll.el"))
-     (iscroll-mode))))
-
-(with-eval-after-load 'magit
-  (setq magit-diff-refine-hunk t
-        magit-log-section-commit-count 20
-        magit-auto-revert-counter 10
-        magit-status-sections-hook
-        '(magit-insert-status-headers
-          magit-insert-merge-log
-          magit-insert-rebase-sequence
-          magit-insert-am-sequence
-          magit-insert-sequencer-sequence
-          magit-insert-bisect-output
-          magit-insert-bisect-rest
-          magit-insert-bisect-log
-          magit-insert-untracked-files
-          magit-insert-unstaged-changes
-          magit-insert-staged-changes
-          magit-insert-stashes
-          magit-insert-unpushed-to-pushremote
-          ;; magit-insert-unpushed-to-upstream-or-recent
-          magit-insert-unpushed-to-upstream
-          magit-insert-recent-commits
-          magit-insert-unpulled-from-pushremote
-          magit-insert-unpulled-from-upstream)))
-
-(require 'aggressive-indent)
-
-(dolist (hook '(emacs-lisp-mode-hook yuck-mode-hook python-ts-mode python-mode scss-mode-hook))
-  (add-hook hook 'aggressive-indent-mode))
-
-;; (dolist (mode '(verilog-mode org-mode term-mode))
-;;   (add-to-list 'aggressive-indent-excluded-modes mode))
-
-;;; Visual Replacement
-(keymap-global-set "C-c r" 'replace-regexp)
-
-(require 'hideshow)
-
-(dolist (hook
-         '(emacs-lisp-mode-hook
-           c-mode-hook
-           c-ts-mode-hook
-           c++-mode-hook
-           c++-ts-mode-hook
-           verilog-mode-hook
-           verilog-ts-mode-hook))
-  (add-hook hook 'hs-minor-mode))
-
-;; 折叠代码块，以下是额外启用了 :box t 属性使得提示更加明显
-(defconst hideshow-folded-face '(:inherit font-lock-comment-face
-                                 :box t))
-
-(setq hs-set-up-overlay 'hideshow-folded-overlay-fn)
-
-;; (keymap-global-set "C-<tab>" 'hs-toggle-hiding)
-(keymap-set hs-minor-mode-map "C-<tab>" 'hs-toggle-hiding)
-
-(require 'mwim)
-
-(global-set-key [remap move-beginning-of-line] 'mwim-beginning-of-code-or-line-or-comment)
-
-(global-set-key [remap move-end-of-line] 'mwim-end-of-code-or-line)
-
-(setq popper-reference-buffers
-      '("\\*Messages\\*"
-        "Output\\*$"
-        "\\*Async Shell Command\\*"
-        "Go-Translate"
-        "*compilation*"
-        "*Warning*"
-        "*tex-shell*"
-        "*Compile-Log*"
-        "*xref*"
-        help-mode
-        helpful-mode
-        compilation-mode
-        youdao-dictionary-mode))
-
-(defun popper--fit-window-width (win)
-  "Determine the height of popup window WIN by fitting it to the buffer's content."
-  (fit-window-to-buffer
-   win (frame-height)
-   (floor (frame-height) 6)
-   (floor (frame-width) 2)
-   ;; (floor (frame-width) 2)
-   (floor (* (frame-width) 17) 35)))
-
-(defun popper--auto-fit-window-height (win)
-  "Determine the height of popup window WIN by fitting it to the buffer's content."
-  (fit-window-to-buffer win (floor (frame-height) 2)
-                        (floor (* (frame-height) 2) 5)))
-
-(defun popper-display-popup-adaptive (buffer &optional alist)
-  "Display popup-buffer BUFFER at the bottom of the screen.
-ALIST is an association list of action symbols and values.  See
-Info node `(elisp) Buffer Display Action Alists' for details of
-such alists."
-  (if (and (> (window-pixel-height)
-              (window-pixel-width))
-           (or (and popper-open-popup-alist
-                    (eq (window-parameter (caar popper-open-popup-alist) 'window-side) 'bottom))
-               (not popper-open-popup-alist)))
-      (display-buffer-in-side-window
-       buffer
-       (append
-        alist `((window-height . popper--auto-fit-window-height)
-                (side . bottom)
-                (slot . 1))))
-    (display-buffer-in-side-window
-     buffer (append alist `((window-width . popper--fit-window-width)
-                            (side . right)
-                            (slot . 1))))))
-
-(setq popper-display-function 'popper-display-popup-adaptive
-      fit-window-to-buffer-horizontally t)
-
-(require 'popper)
-(require 'popper-echo)
-
-(keymap-global-set "M-<tab>" 'popper-toggle)
-
-(keymap-global-set "M-`" 'popper-cycle)
-
-(keymap-global-set "C-M-`" 'popper-toggle-type)
-
-;; (global-tab-line-mode +1)
-(popper-mode +1)
-
-(popper-echo-mode +1)
-
-(define-key global-map [remap list-buffers] 'ibuffer)
-
-(when non-android-p
-  (require 'indent-bars)
-  (add-hook 'prog-mode-hook 'indent-bars-mode))
-
-(with-eval-after-load 'indent-bars
-  (setq ;; indent-bars-pattern "."
-   ;; indent-bars-highlight-current-depth
-   ;; '(:face default :blend 0.4)
-   indent-bars-treesit-support t
-   indent-bars-no-descend-string t
-   indent-bars-no-descend-lists t
-   indent-bars-treesit-ignore-blank-lines-types '("module")
-   indent-bars-width-frac 0.2
-   indent-bars-color '(highlight :face-bg t :blend 0.7)
-   indent-bars-display-on-blank-lines t)
-  (defun indent-bars--guess-spacing ()
-    "Get indentation spacing of current buffer.
-Adapted from `highlight-indentation-mode'."
-    (cond (indent-bars-spacing-override)
-          ((and (derived-mode-p 'verilog-mode)
-                (boundp 'verilog-indent-level))
-           verilog-indent-level)
-          ((and (derived-mode-p 'ada-mode)
-                (boundp 'ada-indent))
-           ada-indent)
-          ((and (derived-mode-p 'ada-ts-mode)
-                (boundp 'ada-ts-mode-indent-offset))
-           ada-ts-mode-indent-offset)
-          ((and (derived-mode-p 'gpr-mode)
-                (boundp 'gpr-indent))
-           gpr-indent)
-          ((and (derived-mode-p 'gpr-ts-mode)
-                (boundp 'gpr-ts-mode-indent-offset))
-           gpr-ts-mode-indent-offset)
-          ((and (derived-mode-p 'python-mode)
-                (boundp 'py-indent-offset))
-           py-indent-offset)
-          ((and (derived-mode-p 'python-mode 'python-base-mode)
-                (boundp 'python-indent-offset))
-           python-indent-offset)
-          ((and (derived-mode-p 'ruby-mode)
-                (boundp 'ruby-indent-level))
-           ruby-indent-level)
-          ((and (derived-mode-p 'scala-mode)
-                (boundp 'scala-indent:step))
-           scala-indent:step)
-          ((and (derived-mode-p 'scala-mode)
-                (boundp 'scala-mode-indent:step))
-           scala-mode-indent:step)
-          ((and (derived-mode-p 'scala-ts-mode)
-                (boundp 'scala-ts-indent-offset))
-           scala-ts-indent-offset)
-          ((and (derived-mode-p 'rust-ts-mode)
-                (boundp 'rust-ts-mode-indent-offset))
-           rust-ts-mode-indent-offset)
-          ((and (or (derived-mode-p 'scss-mode)
-                    (derived-mode-p 'css-mode))
-                (boundp 'css-indent-offset))
-           css-indent-offset)
-          ((and (derived-mode-p 'nxml-mode)
-                (boundp 'nxml-child-indent))
-           nxml-child-indent)
-          ((and (derived-mode-p 'coffee-mode)
-                (boundp 'coffee-tab-width))
-           coffee-tab-width)
-          ((and (derived-mode-p 'js-mode)
-                (boundp 'js-indent-level))
-           js-indent-level)
-          ((and (derived-mode-p 'js2-mode)
-                (boundp 'js2-basic-offset))
-           js2-basic-offset)
-          ((and (derived-mode-p 'typescript-ts-mode)
-                (boundp 'typescript-ts-mode-indent-offset))
-           typescript-ts-mode-indent-offset)
-          ((and (derived-mode-p 'sws-mode)
-                (boundp 'sws-tab-width))
-           sws-tab-width)
-          ((and (derived-mode-p 'web-mode)
-                (boundp 'web-mode-markup-indent-offset))
-           web-mode-markup-indent-offset)
-          ((and (derived-mode-p 'web-mode)
-                (boundp 'web-mode-html-offset)) ; old var
-           web-mode-html-offset)
-          ((and (local-variable-p 'c-basic-offset)
-                (numberp c-basic-offset))
-           c-basic-offset)
-          ((and (local-variable-p 'c-ts-common-indent-offset)
-                (symbolp c-ts-common-indent-offset)
-                (numberp (symbol-value c-ts-common-indent-offset)))
-           (symbol-value c-ts-common-indent-offset))
-          ((and (derived-mode-p 'yaml-mode)
-                (boundp 'yaml-indent-offset))
-           yaml-indent-offset)
-          ((and (derived-mode-p 'yaml-pro-mode)
-                (boundp 'yaml-pro-indent))
-           yaml-pro-indent)
-          ((and (derived-mode-p 'elixir-mode)
-                (boundp 'elixir-smie-indent-basic))
-           elixir-smie-indent-basic)
-          ((and (derived-mode-p 'lisp-data-mode)
-                (boundp 'lisp-body-indent))
-           lisp-body-indent)
-          ((and (derived-mode-p 'cobol-mode)
-                (boundp 'cobol-tab-width))
-           cobol-tab-width)
-          ((or (derived-mode-p 'go-ts-mode)
-               (derived-mode-p 'go-mode))
-           tab-width)
-          ((derived-mode-p 'nix-mode)
-           tab-width)
-          ((derived-mode-p 'makefile-mode)
-           tab-width)
-          ((and (derived-mode-p 'nix-ts-mode)
-                (boundp 'nix-ts-mode-indent-offset))
-           nix-ts-mode-indent-offset)
-          ((and (derived-mode-p 'json-ts-mode)
-                (boundp 'json-ts-mode-indent-offset))
-           json-ts-mode-indent-offset)
-          ((and (derived-mode-p 'json-mode)
-                (boundp 'js-indent-level))
-           js-indent-level)
-          ((and (derived-mode-p 'sh-base-mode)
-                (boundp 'sh-basic-offset))
-           sh-basic-offset)
-          ((and (derived-mode-p 'java-ts-mode)
-                (boundp 'java-ts-mode-indent-offset))
-           java-ts-mode-indent-offset)
-          ((and (derived-mode-p 'tcl-mode)
-                (boundp 'tcl-indent-level))
-           tcl-indent-level)
-          ((and (derived-mode-p 'haml-mode)
-                (boundp 'haml-indent-offset))
-           haml-indent-offset)
-          ((and (boundp 'standard-indent) standard-indent))
-          (t
-           4)))                         ; backup
-  )
-
-(require 'consult)
-(require 'consult-xref)
-
-;; (autoload 'consult-buffer "consult" nil t)
-;; (autoload 'consult-line "consult" nil t)
-(keymap-global-set "C-x l" 'consult-line)
-
-(keymap-global-set "C-x b" 'consult-buffer)
-
-(with-eval-after-load 'consult
-  (consult-customize consult-buffer :preview-key '(:debounce 0.4 "M-."))
-  (setq consult-project-function
-        (lambda (may-prompt) (or (vc-root-dir) (consult--default-project-function may-prompt)))))
-
-(setq xref-show-xrefs-function 'consult-xref
-      xref-show-definitions-function 'consult-xref)
-
-(keymap-global-set "C-." 'embark-act)
-
-(with-eval-after-load 'embark
-  (add-hook 'embark-collect-mode-hook 'consult-preview-at-point-mode))
-
-;;; Appearance helpers
-(dolist (hook '(prog-mode-hook text-mode-hook cuda-mode-hook))
-  (add-hook hook 'colorful-mode))
-
-(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
-
-;;; Minibuffer / Completion UI
-(dolist (feature
-         '(vertico
-           vertico-grid
-           vertico-directory
-           vertico-reverse
-           vertico-indexed
-           vertico-mouse
-           vertico-buffer
-           vertico-multiform
-           vertico-sort
-           vertico-suspend
-           embark
-           marginalia
-           standard-themes
-           rainbow-delimiters
-           visual-fill-column
-           colorful-mode
-           indent-bars
-           indent-bars-ts
-           symbol-overlay
-           aggressive-indent
-           orderless))
-  (require feature))
-
-(setq-default completion-styles '(basic partial-completion orderless))
-
-(setq completion-styles '(basic partial-completion orderless)
-      completion-category-overrides '((file (styles basic partial-completion))))
-
-(if (boundp 'vertico-mode)
-    (progn
-      (require 'orderless)
-      (setq enable-recursive-minibuffers t)
-      (vertico-mode)
-      (vertico-reverse-mode)
-      (vertico-indexed-mode)
-      (vertico-mouse-mode)
-      (vertico-multiform-mode)
-      (marginalia-mode)
-      (setq vertico-multiform-categories '((file grid) (consult-grep buffer) (consult-ripgrep buffer))
-            vertico-cycle t
-            vertico-sort-function 'vertico-sort-history-alpha)
-      (keymap-global-set "C-'" #'vertico-suspend)
-      (keymap-set vertico-map "?" #'minibuffer-completion-help)
-      (keymap-set vertico-map "M-RET" #'minibuffer-force-complete-and-exit)
-      (keymap-set vertico-map "M-TAB" #'minibuffer-complete)
-      (keymap-set vertico-map "C-w" 'vertico-directory-delete-word))
-  (keymap-set minibuffer-mode-map "C-w" 'backward-kill-word))
-
-(and (boundp 'puni-mode)
-     (require 'puni)
-     (puni-global-mode))
-
-(with-eval-after-load 'puni
-  (add-hook
-   'puni-mode-hook
-   (lambda ()
-     (keymap-set puni-mode-map "M-w" 'puni-kill-region)
-     (keymap-set puni-mode-map "M-k" 'puni-backward-kill-line)
-     (keymap-unset puni-mode-map "C-w")))
-  (dolist (hook '(term-mode-hook minibuffer-mode-hook))
-    (add-hook hook #'puni-disable-puni-mode)))
+;;;; 08 UI Themes and Platform
 
 ;;; Layout
 
@@ -2249,10 +2283,10 @@ Adapted from `highlight-indentation-mode'."
       (when (file-exists-p "/opt/bin/ctags")
         (setq citre-ctags-program "/opt/bin/ctags"))
       (setq org-roam-directory "~/Documents/Personal/org-roam")
-      (setup-display-graphic nil nil 6 19 nil 12)
+      (setup-display-graphic nil nil 6 17 nil 13)
       (add-hook
        'server-after-make-frame-hook '(lambda ()
-                                        (setup-display-graphic nil nil 6 19 nil 12)))
+                                        (setup-display-graphic nil nil 6 17 nil 13)))
       ;; (setenv "PATH" (concat (getenv "PATH") ":/home/kunh/.local/bin"))
       (add-to-list 'exec-path "/home/kunh/.local/bin")
       (add-to-list 'exec-path "/home/kunh/.cargo/bin"))
@@ -2286,6 +2320,7 @@ Adapted from `highlight-indentation-mode'."
 (lexdb-init)
 
 (keymap-global-set "C-c d" 'lexdb-search)
+
 
 (provide 'init)
 ;;; init.el ends here

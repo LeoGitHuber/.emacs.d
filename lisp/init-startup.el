@@ -2,6 +2,15 @@
 ;;; Commentary:
 ;;; Code:
 
+
+;;;; 01 Visual Assets
+;; Index:
+;; 01 Visual Assets
+;; 02 Quote Library
+;; 03 Render Helpers
+;; 04 Startup Screen Entry
+;; 05 Startup Hook
+
 (defvar mine-emacs-logo
   (propertize
    "███████╗███╗░░░███╗░█████╗░░█████╗░░██████╗
@@ -63,6 +72,9 @@
 
 (defvar emacs-startup-box-width 56
   "The width of box.")
+
+
+;;;; 02 Quote Library
 
 (defvar emacs-startup-predefined-quotes
   (list
@@ -221,6 +233,9 @@
    )
   "Great Words.")
 
+
+;;;; 03 Render Helpers
+
 (defun emacs-startup-create-box-cover (len)
   "Create a box cover at LEN."
   (progn
@@ -348,6 +363,8 @@
           (insert (propertize " " 'display `(space :align-to ,(- fill-column emacs-startup-space 70))))
           (setq bp (+ bp 1)))))
     (add-face-text-property begin-point (point) 'emacs-cow-color)))
+
+;;;; 04 Startup Screen Entry
 
 (defun initial-startup-screen (scratch switch)
   "Initial startup buffer with SCRATCH, SWITCH."
@@ -626,6 +643,9 @@
   ;; (remove-hook 'emacs-startup-hook 'initial-startup-screen)
   (prefer-coding-system 'gbk)
   (prefer-coding-system 'utf-8))
+
+
+;;;; 05 Startup Hook
 
 (add-hook 'emacs-startup-hook
           (lambda()

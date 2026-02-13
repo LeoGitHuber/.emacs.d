@@ -5,6 +5,18 @@
 (require 'subr-x)
 (require 'cl-seq)
 
+
+;;;; 01 Editing Commands
+;; Index:
+;; 01 Editing Commands
+;; 02 Commenting and Folding
+;; 03 Utilities
+;; 04 Filesystem and Autoload
+;; 05 Meow Helpers
+;; 06 LSP Helpers
+;; 07 GC and Performance
+;; 08 Fonts and Display
+
 ;;; Editing helpers
 
 ;;;###autoload
@@ -85,120 +97,28 @@
   (if (not (member major-mode '(org-mode)))
       (indent-according-to-mode)
     (beginning-of-line)))
-
-;;; Font and typography
-
-;; "IBM Plex Mono" "Fantasque Sans Mono", "InputMono", "Monaspace Neon"
-;; (defvar code-font "Cascadia Code NF" ;; "Hack"
-;;   "Font for coding.")
-;; "Lilex" "Aporetic Serif Mono" ;; "Hack"
-(defvar code-font "JetBrainsMono Nerd Font"
-  "Font for coding.")
-
-;; "Microsoft YaHei" "FZYouSongJ GBK" "Sarasa Gothic SC"
-(defvar cjk-font "LXGW Bright Code GB" ;; "LXGW WenKai Mono"
-  "CJK font.")
-
-;; "Merriweather" "Libre Baskerville" ;; "Bookerly" ;; Palatino Linotype
-(defvar serif-font "Helvetica Neue"
-  "Serif font.")
-
-(defvar cjk-sans-font "Source Han Sans CN" ;; "LXGW WenKai Screen"
-  "CJK sans font.")
-
-(defvar verbatim-font "Source Han Sans CN"
-  "Font for verbatim.")
-
-;; Maple Mono NF --- Maple Mono SC NF, HarmonyOS Sans SC
-;; PragmataPro Mono Liga --- SimHei
-;; Hack --- HarmonyOS Sans SC
-;; JetBrainsMono NF
-;; Iosevka Fixed --- Input Mono
-
-;;;###autoload
-(defun set-en_cn-font (en-font cn-font serif-font fontsize)
-  "Set EN-FONT, CN-FONT and SERIF-FONT with FONTSIZE."
-  (set-face-attribute 'variable-pitch nil :font (concat serif-font "-" (number-to-string fontsize)))
-  (set-face-attribute 'fixed-pitch nil :font (concat en-font "-" (number-to-string fontsize)))
-  (set-face-attribute 'default nil :font (concat en-font "-" (number-to-string fontsize)))
-  (add-to-list 'default-frame-alist (cons 'font (concat en-font "-" (number-to-string fontsize))))
-  (set-fontset-font t 'han cn-font)
-  ;; 只放大中文字体，保证中英文在 org 表格中可以对齐
-  ;; (add-to-list 'face-font-rescale-alist '("FZLiuGongQuanKaiShuJF" . 1.2))
-  )
-
-;;;###autoload
-(defun set-en_cn-font_old (en-font cn-font serif-font sans-font verbatim-font en-size cn-size)
-  "EN-FONT, CN-FONT mean font-family.  EN-SIZE, CN-SIZE mean font size.
-  And Set SERIF-FONT, SANS-FONT and VERBATIM-FONT."
-  (set-face-attribute 'default nil
-                      :font
-                      (font-spec
-                       :name en-font
-                       :weight 'regular
-                       ;; :slant 'normal
-                       :size en-size))
-  (dolist (charset '(kana han cjk-misc bopomofo))
-    (if (equal en-size cn-size)
-        (set-fontset-font "fontset-default" charset (font-spec :family cn-font))
-      (set-fontset-font "fontset-default" charset (font-spec
-                                                   :family cn-font
-                                                   :size cn-size))))
-  (create-fontset-from-fontset-spec
-   (font-xlfd-name (font-spec
-                    :family en-font
-                    :registry "fontset-variable pitch verbatim")))
-  (set-fontset-font "fontset-variable pitch verbatim" 'han (font-spec :family verbatim-font))
-  (set-fontset-font "fontset-variable pitch verbatim" 'cjk-misc (font-spec :family verbatim-font))
-  (dolist (sp
-           `(("regular" . ,cn-font)
-             ("italic" . ,sans-font)
-             ;; ("verbatim" . ,verbatim-font)
-             ))
-    (let ((registry (concat "fontset-variable pitch " (car sp))))
-      (create-fontset-from-fontset-spec
-       (font-xlfd-name (font-spec
-                        :family serif-font
-                        :registry registry)))
-      (if (equal en-size cn-size)
-          (progn
-            (set-fontset-font registry 'han (font-spec :family (cdr sp)))
-            (set-fontset-font registry 'cjk-misc (font-spec :family (cdr sp))))
-        (progn
-          (set-fontset-font registry 'han (font-spec
-                                           :family (cdr sp)
-                                           :size cn-size))
-          (set-fontset-font registry 'cjk-misc (font-spec
-                                                :family (cdr sp)
-                                                :size cn-size))))))
-  (with-eval-after-load 'org
-    (set-face-attribute 'variable-pitch nil
-                        :family serif-font
-                        :fontset "fontset-variable pitch regular")
-    (set-face-attribute 'fixed-pitch nil
-                        :family en-font
-                        ;; :fontset "fontset-variable pitch regular"
-                        )
-    (defface org-emphasis-italic '((default :inherit italic))
-      "My italic emphasis for Org.")
-    (set-face-attribute 'org-emphasis-italic nil :fontset "fontset-variable pitch italic")
-    (set-face-attribute 'org-verbatim nil :fontset "fontset-variable pitch verbatim")
-    (set-face-attribute 'org-code nil :fontset "fontset-variable pitch verbatim")
-    (set-face-attribute 'org-block nil :fontset "fontset-variable pitch verbatim")
-    (setq org-emphasis-alist
-          '(("*" bold)
-            ("/" org-emphasis-italic)
-            ("_" underline)
-            ("=" org-verbatim verbatim)
-            ("~" org-code verbatim)
-            ("+" (:strike-through t))))))
-
 ;;; Editing helpers (misc)
 
 (defun insert-tab-char ()
   "Insert a tab char. (ASCII 9, \t)."
   (interactive)
   (insert "\t"))
+(defun increment-number-at-point (args)
+  "Increment number of current point with ARGS times."
+  (interactive "p")
+  (let ((bounds (bounds-of-thing-at-point 'number)))
+    (if bounds
+        (let* ((num-str (buffer-substring-no-properties (car bounds)
+                                                        (cdr bounds)))
+               (num (string-to-number num-str))
+               (p (point)))
+          (delete-region (car bounds)
+                         (cdr bounds))
+          (insert (number-to-string (+ num args)))
+          (goto-char p))
+      (message "No number at current point."))))
+
+;;;; 02 Commenting and Folding
 
 ;;; Commenting / folding
 
@@ -228,21 +148,7 @@
            (info (format " ... #%d " nlines)))
       (overlay-put ov 'display (propertize info 'face hideshow-folded-face)))))
 
-;;; Autoload maintenance
-
-;;;###autoload
-(defun update-all-autoloads ()
-  (interactive)
-  (cd "~/.emacs.d")
-  (let ((generated-autoload-file (expand-file-name "loaddefs.el")))
-    (when (not (file-exists-p generated-autoload-file))
-      (with-current-buffer (find-file-noselect generated-autoload-file)
-        (insert ";;") ;; create the file with non-zero size to appease autoload
-        (save-buffer)))
-    (mapcar #'update-directory-autoloads '("" "modes" "git/org-fu"))
-    (cd "personal")
-    (setq generated-autoload-file (expand-file-name "loaddefs.el"))
-    (update-directory-autoloads "")))
+;;;; 03 Utilities
 
 ;;; Misc utilities
 
@@ -281,6 +187,8 @@ The resulting list contains all items that appear in LIST1 but not LIST2."
   (interactive (find-file-read-args "Store into: " (confirm-nonexistent-file-or-buffer)))
   (shell-command (format "grim -l 0 -g \"$(slurp)\" %s" place) nil nil)
   (kill-new (format "[[file:%s][]]" place)))
+
+;;;; 04 Filesystem and Autoload
 
 ;;; Filesystem helpers
 
@@ -346,6 +254,24 @@ use `cm/autoloads-file' as TARGET."
 ;;                          t)
 ;;                         (t (time-less-p t2 t1)))))
 ;;       (mapcar #'car))))
+
+;;; Autoload maintenance
+
+;;;###autoload
+(defun update-all-autoloads ()
+  (interactive)
+  (cd "~/.emacs.d")
+  (let ((generated-autoload-file (expand-file-name "loaddefs.el")))
+    (when (not (file-exists-p generated-autoload-file))
+      (with-current-buffer (find-file-noselect generated-autoload-file)
+        (insert ";;") ;; create the file with non-zero size to appease autoload
+        (save-buffer)))
+    (mapcar #'update-directory-autoloads '("" "modes" "git/org-fu"))
+    (cd "personal")
+    (setq generated-autoload-file (expand-file-name "loaddefs.el"))
+    (update-directory-autoloads "")))
+
+;;;; 05 Meow Helpers
 
 ;;; Meow helpers
 
@@ -483,20 +409,8 @@ use `cm/autoloads-file' as TARGET."
   ;;                  (save-buffer))))
   )
 
-(defun increment-number-at-point (args)
-  "Increment number of current point with ARGS times."
-  (interactive "p")
-  (let ((bounds (bounds-of-thing-at-point 'number)))
-    (if bounds
-        (let* ((num-str (buffer-substring-no-properties (car bounds)
-                                                        (cdr bounds)))
-               (num (string-to-number num-str))
-               (p (point)))
-          (delete-region (car bounds)
-                         (cdr bounds))
-          (insert (number-to-string (+ num args)))
-          (goto-char p))
-      (message "No number at current point."))))
+
+;;;; 06 LSP Helpers
 
 ;;; LSP helpers
 
@@ -595,6 +509,9 @@ use `cm/autoloads-file' as TARGET."
     (advice-add 'lsp-resolve-final-command :around #'lsp-booster--advice-final-command)
     (add-hook 'lsp-mode-hook 'corfu-mode)))
 
+
+;;;; 07 GC and Performance
+
 ;;; GC / performance
 
 (defvar better-gc-cons-threshold (* 32 1024 1024) ;; 128mb
@@ -611,6 +528,115 @@ If you experience stuttering, increase this.")
   "Turn on garbage collection after minibuffer exit."
   (garbage-collect)
   (setq gc-cons-threshold better-gc-cons-threshold))
+
+;;;; 08 Fonts and Display
+
+;;; Font and typography
+
+;; "IBM Plex Mono" "Fantasque Sans Mono", "InputMono", "Monaspace Neon"
+;; (defvar code-font "Cascadia Code NF" ;; "Hack"
+;;   "Font for coding.")
+;; "Lilex" "Aporetic Serif Mono" ;; "Hack"
+(defvar code-font "PragmataPro Mono Liga"
+  "Font for coding.")
+
+;; "Microsoft YaHei" "FZYouSongJ GBK" "Sarasa Gothic SC"
+(defvar cjk-font "LXGW Bright Code GB" ;; "LXGW WenKai Mono"
+  "CJK font.")
+
+;; "Merriweather" "Libre Baskerville" ;; "Bookerly" ;; Palatino Linotype
+(defvar serif-font "Helvetica Neue"
+  "Serif font.")
+
+(defvar cjk-sans-font "Source Han Sans CN" ;; "LXGW WenKai Screen"
+  "CJK sans font.")
+
+(defvar verbatim-font "Source Han Sans CN"
+  "Font for verbatim.")
+
+;; Maple Mono NF --- Maple Mono SC NF, HarmonyOS Sans SC
+;; PragmataPro Mono Liga --- SimHei
+;; Hack --- HarmonyOS Sans SC
+;; JetBrainsMono NF
+;; Iosevka Fixed --- Input Mono
+
+;;;###autoload
+(defun set-en_cn-font (en-font cn-font serif-font fontsize)
+  "Set EN-FONT, CN-FONT and SERIF-FONT with FONTSIZE."
+  (set-face-attribute 'variable-pitch nil :font (concat serif-font "-" (number-to-string fontsize)))
+  (set-face-attribute 'fixed-pitch nil :font (concat en-font "-" (number-to-string fontsize)))
+  (set-face-attribute 'default nil :font (concat en-font "-" (number-to-string fontsize)))
+  (add-to-list 'default-frame-alist (cons 'font (concat en-font "-" (number-to-string fontsize))))
+  (set-fontset-font t 'han cn-font)
+  ;; 只放大中文字体，保证中英文在 org 表格中可以对齐
+  ;; (add-to-list 'face-font-rescale-alist '("FZLiuGongQuanKaiShuJF" . 1.2))
+  )
+
+;;;###autoload
+(defun set-en_cn-font_old (en-font cn-font serif-font sans-font verbatim-font en-size cn-size)
+  "EN-FONT, CN-FONT mean font-family.  EN-SIZE, CN-SIZE mean font size.
+  And Set SERIF-FONT, SANS-FONT and VERBATIM-FONT."
+  (set-face-attribute 'default nil
+                      :font
+                      (font-spec
+                       :name en-font
+                       :weight 'regular
+                       ;; :slant 'normal
+                       :size en-size))
+  (dolist (charset '(kana han cjk-misc bopomofo))
+    (if (equal en-size cn-size)
+        (set-fontset-font "fontset-default" charset (font-spec :family cn-font))
+      (set-fontset-font "fontset-default" charset (font-spec
+                                                   :family cn-font
+                                                   :size cn-size))))
+  (create-fontset-from-fontset-spec
+   (font-xlfd-name (font-spec
+                    :family en-font
+                    :registry "fontset-variable pitch verbatim")))
+  (set-fontset-font "fontset-variable pitch verbatim" 'han (font-spec :family verbatim-font))
+  (set-fontset-font "fontset-variable pitch verbatim" 'cjk-misc (font-spec :family verbatim-font))
+  (dolist (sp
+           `(("regular" . ,cn-font)
+             ("italic" . ,sans-font)
+             ;; ("verbatim" . ,verbatim-font)
+             ))
+    (let ((registry (concat "fontset-variable pitch " (car sp))))
+      (create-fontset-from-fontset-spec
+       (font-xlfd-name (font-spec
+                        :family serif-font
+                        :registry registry)))
+      (if (equal en-size cn-size)
+          (progn
+            (set-fontset-font registry 'han (font-spec :family (cdr sp)))
+            (set-fontset-font registry 'cjk-misc (font-spec :family (cdr sp))))
+        (progn
+          (set-fontset-font registry 'han (font-spec
+                                           :family (cdr sp)
+                                           :size cn-size))
+          (set-fontset-font registry 'cjk-misc (font-spec
+                                                :family (cdr sp)
+                                                :size cn-size))))))
+  (with-eval-after-load 'org
+    (set-face-attribute 'variable-pitch nil
+                        :family serif-font
+                        :fontset "fontset-variable pitch regular")
+    (set-face-attribute 'fixed-pitch nil
+                        :family en-font
+                        ;; :fontset "fontset-variable pitch regular"
+                        )
+    (defface org-emphasis-italic '((default :inherit italic))
+      "My italic emphasis for Org.")
+    (set-face-attribute 'org-emphasis-italic nil :fontset "fontset-variable pitch italic")
+    (set-face-attribute 'org-verbatim nil :fontset "fontset-variable pitch verbatim")
+    (set-face-attribute 'org-code nil :fontset "fontset-variable pitch verbatim")
+    (set-face-attribute 'org-block nil :fontset "fontset-variable pitch verbatim")
+    (setq org-emphasis-alist
+          '(("*" bold)
+            ("/" org-emphasis-italic)
+            ("_" underline)
+            ("=" org-verbatim verbatim)
+            ("~" org-code verbatim)
+            ("+" (:strike-through t))))))
 
 ;;; Display setup
 

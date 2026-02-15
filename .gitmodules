@@ -613,3 +613,6 @@
 [submodule "site-lisp/prettier-elisp"]
 	path = site-lisp/prettier-elisp
 	url = https://github.com/KarimAziev/prettier-elisp.git
+[submodule "site-lisp/ligature.el"]
+	path = site-lisp/ligature.el
+	url = https://github.com/mickeynp/ligature.el.git

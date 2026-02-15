@@ -1,0 +1,54 @@
+# Rime table
+#@/db_name	wubi
+#@/db_type	tabledb
+#@/rime_version	1.10.0
+#@/tick	107
+对	cf	4
+码	dcg	2
+三	dg	2
+戚	dhi	2
+不是	dhjg	1
+一	g	10
+一个	ggwh	2
+点	hko	4
+鸿	iaq	1
+波	ib	1
+波动	ibfc	1
+源	idr	2
+源	idri	2
+光学	igip	1
+光谱	igyu	6
+测试	imya	7
+是	j	2
+时间	jfuj	2
+映射	jmtm	4
+蚋	jmw	2
+昆	jxx	1
+蚍	jxx	2
+被	pub	4
+空间	pwuj	2
+多	qq	4
+希望	rdyn	2
+李	sb	2
+很好	tvvb	2
+很	tvy	1
+好	vb	1
+隶	vi	2
+录	viu	2
+如此	vkhx	2
+个	wh	6
+保证	wkyg	4
+任意	wtuj	4
+位置	wulf	4
+信息	wyth	4
+结果	xfjs	7
+维	xwyg	2
+编码	xydc	8
+编译	xyyc	4
+记	yn	2
+刻录	ynvi	2
+记录	ynvi	2
+亮	yp	14
+这	yp	10
+这	ypi	1
+这是	ypjg	21

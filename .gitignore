@@ -23,3 +23,8 @@ dump.el
 temp.el
 themes
 loaddefs.el
+rime/build/
+rime/*.userdb/
+rime/installation.yaml
+rime/user.yaml
+rime/sync/

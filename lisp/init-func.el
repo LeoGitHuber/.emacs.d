@@ -16,6 +16,12 @@
 ;; 07 GC and Performance
 ;; 08 Fonts and Display
 
+;; Add new helpers under the nearest numbered section below.
+
+;;; ============================================================================
+;;; 01 Editing Commands
+;;; ============================================================================
+
 ;;; Editing helpers
 
 ;;;###autoload
@@ -118,6 +124,10 @@
       (message "No number at current point."))))
 
 
+;;; ============================================================================
+;;; 02 Commenting and Folding
+;;; ============================================================================
+
 ;;; Commenting / folding
 
 ;;;###autoload
@@ -146,6 +156,10 @@
            (info (format " ... #%d " nlines)))
       (overlay-put ov 'display (propertize info 'face hideshow-folded-face)))))
 
+
+;;; ============================================================================
+;;; 03 Utilities
+;;; ============================================================================
 
 ;;; Misc utilities
 
@@ -185,6 +199,10 @@ The resulting list contains all items that appear in LIST1 but not LIST2."
   (shell-command (format "grim -l 0 -g \"$(slurp)\" %s" place) nil nil)
   (kill-new (format "[[file:%s][]]" place)))
 
+
+;;; ============================================================================
+;;; 04 Filesystem and Autoload
+;;; ============================================================================
 
 ;;; Filesystem helpers
 
@@ -244,6 +262,10 @@ use `cm/autoloads-file' as TARGET."
     (setq generated-autoload-file (expand-file-name "loaddefs.el"))
     (update-directory-autoloads "")))
 
+
+;;; ============================================================================
+;;; 05 Meow Helpers
+;;; ============================================================================
 
 ;;; Meow helpers
 
@@ -377,6 +399,10 @@ use `cm/autoloads-file' as TARGET."
 
 
 
+;;; ============================================================================
+;;; 06 LSP Helpers
+;;; ============================================================================
+
 ;;; LSP helpers
 
 (defun lsp-booster--advice-final-command (old-fn cmd &optional test?)
@@ -470,6 +496,10 @@ use `cm/autoloads-file' as TARGET."
 
 
 
+;;; ============================================================================
+;;; 07 GC and Performance
+;;; ============================================================================
+
 ;;; GC / performance
 
 (defvar better-gc-cons-threshold (* 32 1024 1024) ;; 128mb
@@ -488,11 +518,15 @@ If you experience stuttering, increase this.")
   (setq gc-cons-threshold better-gc-cons-threshold))
 
 
+;;; ============================================================================
+;;; 08 Fonts and Display
+;;; ============================================================================
+
 ;;; Font and typography
 
 ;; "IBM Plex Mono" "Fantasque Sans Mono", "InputMono", "Monaspace Neon"
 ;; "Lilex" "Aporetic Serif Mono" ;; "Hack"
-(defvar code-font "PragmataPro Mono Liga"
+(defvar code-font "Pragmasevka Nerd Font"
   "Font for coding.")
 
 ;; "Microsoft YaHei" "FZYouSongJ GBK" "Sarasa Gothic SC"

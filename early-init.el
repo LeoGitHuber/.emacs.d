@@ -4,21 +4,35 @@
 
 ;;; Code:
 
+;; Index:
+;; 01 Security
+;; 02 Frame/UI Defaults
+;; 03 Startup Optimizations
+;; 04 Startup / Interaction
+;; 05 Scrolling Behavior
+;; 06 Performance / IO
+;; 07 Environment
 
-;;; Security
+;;; ============================================================================
+;;; 01 Security
+;;; ============================================================================
 ;; Allow potentially-dangerous elisp features for *my* config files only.
 (let ((dir (abbreviate-file-name (file-name-as-directory user-emacs-directory))))
   (cond
    ((boundp 'trusted-content) (add-to-list 'trusted-content dir))
    ((boundp 'trusted-files)   (add-to-list 'trusted-files dir))))
 
-;;; Frame/UI defaults
+;;; ============================================================================
+;;; 02 Frame/UI Defaults
+;;; ============================================================================
 (add-to-list 'default-frame-alist '(menu-bar-lines . 0))
 (unless (eq system-type 'android)
   (add-to-list 'default-frame-alist '(tool-bar-lines . 0)))
 (scroll-bar-mode -1)
 
-;;; Startup optimizations
+;;; ============================================================================
+;;; 03 Startup Optimizations
+;;; ============================================================================
 (defvar my/original-file-name-handler-alist file-name-handler-alist)
 (defvar my/original-gc-cons-threshold gc-cons-threshold)
 (defvar my/original-gc-cons-percentage gc-cons-percentage)
@@ -40,7 +54,9 @@
 ;; (push '(vertical-scroll-bar) default-frame-alist)
 ;; (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
-;;; Startup / interaction
+;;; ============================================================================
+;;; 04 Startup / Interaction
+;;; ============================================================================
 (setq package-quickstart nil
       ;; package-enable-at-startup nil
       ;; package--init-file-ensure t
@@ -55,7 +71,9 @@
       auto-mode-case-fold nil
       warning-minimum-level :error)
 
-;;; Scrolling behavior
+;;; ============================================================================
+;;; 05 Scrolling Behavior
+;;; ============================================================================
 (setq scroll-step 1
       scroll-margin 1
       hscroll-step 1
@@ -64,7 +82,9 @@
       scroll-up-aggressively 0.01
       scroll-down-aggressively 0.01)
 
-;;; Performance / IO
+;;; ============================================================================
+;;; 06 Performance / IO
+;;; ============================================================================
 (setq inhibit-compacting-font-caches t
       jit-lock-defer-time 0
       process-adaptive-read-buffering nil
@@ -78,7 +98,9 @@
               ;; mode-line-format nil
               )
 
-;;; Environment
+;;; ============================================================================
+;;; 07 Environment
+;;; ============================================================================
 (setenv "LSP_USE_PLISTS" "true")    ;; https://emacs-lsp.github.io/lsp-mode/page/performance/#use-plists-for-deserialization
 
 ;;; early-init.el ends here.

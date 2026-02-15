@@ -14,6 +14,12 @@
 ;; 07 Knowledge Management
 ;; 08 UI Themes and Platform
 
+;; Add new settings under the nearest numbered section below.
+
+;;; ============================================================================
+;;; 01 Startup and Bootstrap
+;;; ============================================================================
+
 ;;; Bootstrap
 
 (defvar windows-system-p (eq system-type 'windows-nt)
@@ -176,6 +182,9 @@
 
 (require 'init-startup)
 
+;;; ============================================================================
+;;; 02 Core Behavior
+;;; ============================================================================
 
 ;;; Core behavior
 
@@ -422,6 +431,10 @@
 
 
 
+;;; ============================================================================
+;;; 03 Editing Workflow
+;;; ============================================================================
+
 ;;; Meow
 (require 'meow)
 
@@ -646,6 +659,10 @@
 (keymap-global-set "C-x SPC" 'hydra-rectangle/body)
 
 
+
+;;; ============================================================================
+;;; 04 Completion and Navigation
+;;; ============================================================================
 
 ;;; Completion / LSP
 
@@ -1094,6 +1111,10 @@ Adapted from `highlight-indentation-mode'."
 
 
 
+;;; ============================================================================
+;;; 05 Programming Languages
+;;; ============================================================================
+
 ;;; Language modes / Treesit
 (setq elisp-fontify-semantically t)
 
@@ -1205,6 +1226,10 @@ Adapted from `highlight-indentation-mode'."
 
 (dolist (hook '(prog-mode-hook))
   (add-hook hook #'hs-minor-mode))
+
+;;; ============================================================================
+;;; 06 Input and Reading
+;;; ============================================================================
 
 ;;; Dired
 
@@ -1403,6 +1428,10 @@ Adapted from `highlight-indentation-mode'."
   (add-hook 'pdf-view-mode-hook 'pdf-view-roll-minor-mode))
 
 
+
+;;; ============================================================================
+;;; 07 Knowledge Management
+;;; ============================================================================
 
 ;;; Org
 (dolist (path
@@ -1858,8 +1887,28 @@ Possible values: 'math (default) or 'all.")
 
 
 
-;;; Layout
+;;; ============================================================================
+;;; 08 UI Themes and Platform
+;;; ============================================================================
 
+(require 'ligature)
+
+;; ligature.el requires explicit rules; enabling alone does not add mappings.
+(ligature-set-ligatures 't '("www"))
+(ligature-set-ligatures
+ 'prog-mode
+ '("|||>" "<|||" "<==>" "<!--" "####" "~~>" "***" "||=" "||>"
+   ":::" "::=" ":=" "=:=" "==>" "=!=" "=>>=" "<="
+   "=<<" "=/=" ">-" ">>-" ">>=" ">>>" "<*" "<*>"
+   "<|" "<|>" "<$" "<$>" "<!--" "<-" "<--" "<->"
+   "<+" "<+>" "</" "</>" "/>" "/*" "*/" "//" "///"
+   "&&" "||" "!!" "!=" "!==" "==" "===" "=>"
+   "=<<" "=>>" ">=" ">>" "<<<" ">>>" "->" "->>"
+   "<-" "<<-" "<=>" "<=<" "<==" "<||" "<&&" "++"
+   "--" "::" "..." ".." "__"))
+(global-ligature-mode t)
+
+;;; Layout
 
 (dolist (hook '(prog-mode-hook))
   (add-hook hook 'display-fill-column-indicator-mode))
@@ -1921,10 +1970,10 @@ Possible values: 'math (default) or 'all.")
       (when (file-exists-p "/opt/bin/ctags")
         (setq citre-ctags-program "/opt/bin/ctags"))
       (setq org-roam-directory "~/Documents/Personal/org-roam")
-      (setup-display-graphic nil nil 6 17 nil 13)
+      (setup-display-graphic nil nil 6 17 nil 12)
       (add-hook
        'server-after-make-frame-hook '(lambda ()
-                                        (setup-display-graphic nil nil 6 17 nil 13)))
+                                        (setup-display-graphic nil nil 6 17 nil 12)))
       (add-to-list 'exec-path "/home/kunh/.local/bin")
       (add-to-list 'exec-path "/home/kunh/.cargo/bin"))
   (progn

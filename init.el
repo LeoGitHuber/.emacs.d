@@ -86,12 +86,13 @@
                                    (flycheck-set-indication-mode 'left-margin))))
 
 (require 'nerd-icons)
-(require 'nerd-icons-corfu)
+;; (require 'nerd-icons-corfu)
+(require 'kind-icon)
 
 (setq nerd-icons-font-family
       (if (eq system-type 'gnu/linux)
-          "Consolas Nerd Font Mono"
-        "Symbols Nerd Font Mono"))
+          ;; "Consolas Nerd Font Mono"
+          "Symbols Nerd Font Mono"))
 
 (defface diagnostics-error
   `(
@@ -711,8 +712,12 @@
   (add-hook 'corfu-mode-hook 'corfu-popupinfo-mode)
   (with-eval-after-load 'corfu-popupinfo
     (setq corfu-popupinfo-delay '(0.1 . 0.1)))
-  (setq nerd-icons-corfu--space (propertize " " 'display '(space :width 0.8)))
-  (add-to-list 'corfu-margin-formatters 'nerd-icons-corfu-formatter))
+  (with-eval-after-load 'nerd-icons-corfu
+    (setq nerd-icons-corfu--space (propertize " " 'display '(space :width 0.8)))
+    (add-to-list 'corfu-margin-formatters 'nerd-icons-corfu-formatter))
+  (with-eval-after-load 'kind-icon
+    (add-to-list 'corfu-margin-formatters 'kind-icon-margin-formatter))
+  )
 
 (defun yas-setup-capf ()
   "Set capf for yasnippets."
@@ -819,13 +824,19 @@
     (progn
       (require 'orderless)
       (setq enable-recursive-minibuffers t)
+      (add-hook 'rfn-eshadow-update-overlay-hook #'vertico-directory-tidy)
       (vertico-mode)
       (vertico-reverse-mode)
       (vertico-indexed-mode)
       (vertico-mouse-mode)
       (vertico-multiform-mode)
       (marginalia-mode)
-      (setq vertico-multiform-categories '((file grid) (consult-grep buffer) (consult-ripgrep buffer))
+      (setq vertico-multiform-categories
+            '((file
+               (vertico-sort-function . vertico-sort-directories-first)
+               (:keymap . vertico-directory-map))
+              (consult-grep buffer)
+              (consult-ripgrep buffer))
             vertico-cycle t
             vertico-sort-function 'vertico-sort-history-alpha)
       (keymap-global-set "C-'" #'vertico-suspend)
@@ -1454,6 +1465,14 @@ Adapted from `highlight-indentation-mode'."
 
 (setq olivetti-style 'fancy
       olivetti-margin-width 5)
+
+(with-eval-after-load 'mixed-pitch
+  (with-eval-after-load 'corfu
+    ;; mixed-pitch 通过 face-remapping-alist 把 default 变成 variable-pitch，
+    ;; corfu 的 popup buffer 继承后就会变比例字体；这里直接在 corfu buffer 里禁用 remap。
+    (define-advice corfu--make-buffer (:around (oldfun &rest args))
+      (let ((face-remapping-alist nil))
+        (apply oldfun args)))))
 
 (with-eval-after-load 'org
   (setq org-hide-emphasis-markers t

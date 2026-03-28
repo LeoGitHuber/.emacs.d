@@ -130,9 +130,12 @@
       flymake-indicator-type 'margins
       flymake-autoresize-margins t
       flymake-margin-indicators-string
-      `((error "​​​​󰅙​​​​" diagnostics-error)
-        (warning "​​ " diagnostics-warn)
-        (note "​​​​​​​" diagnostics-info))
+      ;; `((error "​​​​󰅙​​​​" diagnostics-error)
+      ;;   (warning "​​ " diagnostics-warn)
+      ;;   (note "​​​​​​​" diagnostics-info))
+      `((error "󰅙 " diagnostics-error)
+        (warning " " diagnostics-warn)
+        (note " " diagnostics-info))
       flymake-show-diagnostics-at-end-of-line 'fancy
       elisp-flymake-byte-compile-load-path (cons "./" load-path))
 
@@ -360,7 +363,7 @@
 (dolist (mode
          '(prog-mode-hook
            toml-ts-mode-hook
-           ;; TeX-mode-hook
+           TeX-mode-hook
            cuda-mode-hook))
   (add-hook mode (lambda ()
                    (display-line-numbers-mode t))))
@@ -422,15 +425,16 @@
           magit-insert-unpushed-to-upstream
           magit-insert-recent-commits
           magit-insert-unpulled-from-pushremote
-          magit-insert-unpulled-from-upstream)))
+          magit-insert-unpulled-from-upstream)
+        magit-display-buffer-function 'magit-display-buffer-fullframe-status-v1))
 
 (require 'aggressive-indent)
 
 (dolist (hook '(emacs-lisp-mode-hook yuck-mode-hook python-ts-mode python-mode scss-mode-hook))
   (add-hook hook 'aggressive-indent-mode))
 
-
-
+(dolist (hook '(rust-ts-mode-hook))
+  (add-hook hook 'electric-indent-mode))
 
 ;;; ============================================================================
 ;;; 03 Editing Workflow
@@ -738,7 +742,7 @@
    '((verilog-mode verilog-ts-mode)
      .
      ("verible-verilog-ls" "--push_diagnostic_notifications" "--rules"
-     "-explicit-function-lifetime,
+      "-explicit-function-lifetime,
                   -explicit-parameter-storage-type,
                   -unpacked-dimensions-range-ordering,
                   -forbid-line-continuations,
@@ -751,44 +755,45 @@
    `((scala-mode scala-ts-mode)
      .
      ("env" "JAVA_HOME=/usr/lib64/jvm/java-21-openjdk-21" "metals-emacs")))
+  ;; (add-to-list 'eglot-server-programs `((LaTeX-mode latex-mode tex-mode) . ("texlab")))
   (setq project-vc-extra-root-markers '(".dir-locals.el"))
   (setq eglot-send-changes-idle-time 0
         eglot-code-action-indications '(eglot-hint))
   )
 
-(with-eval-after-load 'lsp-bridge
-  (add-hook 'lsp-bridge-mode-hook 'yas/minor-mode)
-  (add-hook 'c++-ts-mode-hook (lambda ()
-                                (setq-local lsp-bridge-inlay-hint-overlays t)))
-  (keymap-set yas-keymap "<tab>" 'acm-complete-or-expand-yas-snippet)
-  (setq ;; acm-candidate-match-function 'orderless-flex
-   ;; acm-enable-icon t
-   ;; acm-enable-doc t
-   acm-enable-yas t
-   acm-enable-tempel t
-   acm-enable-quick-access nil
-   acm-enable-search-file-words t
-   acm-enable-telega nil
-   acm-enable-tabnine nil
-   acm-enable-citre t
-   acm-enable-capf t
-   lsp-bridge-enable-log t
-   lsp-bridge-log-level 'debug
-   lsp-bridge-enable-signature-help t
-   lsp-bridge-enable-inlay-hint t
-   lsp-bridge-enable-diagnostics nil
-   lsp-bridge-complete-manually nil
-   ;; lsp-bridge-enable-profile t
-   ;; lsp-bridge-multi-lang-server-mode-list nil
-   acm-backend-lsp-candidate-min-length 2
-   acm-backend-elisp-candidate-min-length 2
-   acm-backend-search-file-words-candidate-min-length 3
-   acm-backend-yas-candidate-min-length 1
-   ;; lsp-bridge-python-command "python3"
-   ;; This will cause `org-roam-node-find' went wrong and I don't know why.
-   ;; lsp-bridge-enable-org-babel t
-   ;; lsp-bridge-c-lsp-server "clangd"
-   ))
+  (with-eval-after-load 'lsp-bridge
+    (add-hook 'lsp-bridge-mode-hook 'yas/minor-mode)
+    (add-hook 'c++-ts-mode-hook (lambda ()
+                                  (setq-local lsp-bridge-inlay-hint-overlays t)))
+    (keymap-set yas-keymap "<tab>" 'acm-complete-or-expand-yas-snippet)
+    (setq ;; acm-candidate-match-function 'orderless-flex
+     ;; acm-enable-icon t
+     ;; acm-enable-doc t
+     acm-enable-yas t
+     acm-enable-tempel t
+     acm-enable-quick-access nil
+     acm-enable-search-file-words t
+     acm-enable-telega nil
+     acm-enable-tabnine nil
+     acm-enable-citre t
+     acm-enable-capf t
+     lsp-bridge-enable-log t
+     lsp-bridge-log-level 'debug
+     lsp-bridge-enable-signature-help t
+     lsp-bridge-enable-inlay-hint t
+     lsp-bridge-enable-diagnostics nil
+     lsp-bridge-complete-manually nil
+     ;; lsp-bridge-enable-profile t
+     ;; lsp-bridge-multi-lang-server-mode-list nil
+     acm-backend-lsp-candidate-min-length 2
+     acm-backend-elisp-candidate-min-length 2
+     acm-backend-search-file-words-candidate-min-length 3
+     acm-backend-yas-candidate-min-length 1
+     ;; lsp-bridge-python-command "python3"
+     ;; This will cause `org-roam-node-find' went wrong and I don't know why.
+     ;; lsp-bridge-enable-org-babel t
+     ;; lsp-bridge-c-lsp-server "clangd"
+     ))
 
 ;;; Minibuffer / Completion UI
 (dolist (feature
@@ -871,6 +876,9 @@
            c-ts-mode-hook
            c++-mode-hook
            c++-ts-mode-hook
+           python-mode-hook
+           python-ts-mode-hook
+           rust-ts-mode-hook
            verilog-mode-hook
            verilog-ts-mode-hook))
   (add-hook hook 'hs-minor-mode))
@@ -1234,9 +1242,6 @@ Adapted from `highlight-indentation-mode'."
 
 (verilog-ext-hs-setup)
 
-
-(dolist (hook '(prog-mode-hook))
-  (add-hook hook #'hs-minor-mode))
 
 ;;; ============================================================================
 ;;; 06 Input and Reading
@@ -2002,8 +2007,9 @@ Possible values: 'math (default) or 'all.")
      'server-after-make-frame-hook '(lambda ()
                                       (setup-display-graphic nil nil 6 17 nil 26)))))
 
-(with-eval-after-load 'eglot
-  (eglot-booster-mode))
+;; (with-eval-after-load 'eglot-booster
+;;   (setq eglot-booster-io-only t)
+;;   (eglot-booster-mode))
 
 (org-roam-db-autosync-mode)
 

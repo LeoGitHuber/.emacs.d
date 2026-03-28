@@ -1516,16 +1516,16 @@ Adapted from `highlight-indentation-mode'."
     '(org-verbatim
       ((((background light))
         (:foreground "#9e3a00"
-         :background "#faece4"
-         :box (:line-width (3 . 1)
-               :color "#faece4")))
+                     :background "#faece4"
+                     :box (:line-width (3 . 1)
+                                       :color "#faece4")))
        (((background dark))
         (
          :foreground
          "#ec9369"
          :background "#1c130f"
          :box (:line-width (3 . 1)
-               :color "#1c130f")))))
+                           :color "#1c130f")))))
     )
    (visual-line-mode)
    (valign-mode)))
@@ -1893,12 +1893,12 @@ Possible values: 'math (default) or 'all.")
      (TeX-fold-mode 1)
      (turn-on-cdlatex)
      (turn-on-reftex)
-     (visual-line-mode)
-     (outline-minor-mode)
-     (olivetti-mode)
-     (mixed-pitch-mode)
-     (face-remap-add-relative 'font-latex-superscript-face '(:height 0.8))
-     (face-remap-add-relative 'font-latex-subscript-face '(:height 0.8))
+     ;; (visual-line-mode)
+     ;; (outline-minor-mode)
+     ;; (olivetti-mode)
+     ;; (mixed-pitch-mode)
+     ;; (face-remap-add-relative 'font-latex-superscript-face '(:height 0.8))
+     ;; (face-remap-add-relative 'font-latex-subscript-face '(:height 0.8))
      (run-with-idle-timer 0 nil
                           (lambda (buf)
                             (when (buffer-live-p buf)
@@ -1951,6 +1951,8 @@ Possible values: 'math (default) or 'all.")
 (require 'color-theme-sanityinc-tomorrow)
 (require 'rose-pine)
 (require 'gruber-darker-theme)
+(require 'catppuccin-theme)
+
 (when non-android-p
   (require 'citre)
   (require 'citre-config)
@@ -1994,10 +1996,10 @@ Possible values: 'math (default) or 'all.")
       (when (file-exists-p "/opt/bin/ctags")
         (setq citre-ctags-program "/opt/bin/ctags"))
       (setq org-roam-directory "~/Documents/Personal/org-roam")
-      (setup-display-graphic nil nil 6 17 nil 12)
+      (setup-display-graphic nil nil 6 15 nil 12)
       (add-hook
        'server-after-make-frame-hook '(lambda ()
-                                        (setup-display-graphic nil nil 6 17 nil 12)))
+                                        (setup-display-graphic nil nil 6 15 nil 12)))
       (add-to-list 'exec-path "/home/kunh/.local/bin")
       (add-to-list 'exec-path "/home/kunh/.cargo/bin"))
   (progn

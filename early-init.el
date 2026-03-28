@@ -49,7 +49,7 @@
 ;; (when (eq system-type 'windows-nt)
 ;;   (add-to-list 'default-frame-alist '(width . 180))
 ;;   (add-to-list 'default-frame-alist '(height . 50)))
-;; (add-to-list 'default-frame-alist '(alpha-background . 90))
+;; (add-to-list 'default-frame-alist '(alpha-background . 94))
 ;; (push '(undecorated . t) default-frame-alist)
 ;; (push '(vertical-scroll-bar) default-frame-alist)
 ;; (add-to-list 'default-frame-alist '(fullscreen . maximized))

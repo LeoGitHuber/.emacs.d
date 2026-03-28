@@ -5,7 +5,6 @@
 (require 'subr-x)
 (require 'cl-seq)
 
-
 ;; Index:
 ;; 01 Editing Commands
 ;; 02 Commenting and Folding
@@ -102,12 +101,14 @@
   (if (not (member major-mode '(org-mode)))
       (indent-according-to-mode)
     (beginning-of-line)))
+
 ;;; Editing helpers (misc)
 
 (defun insert-tab-char ()
   "Insert a tab char. (ASCII 9, \t)."
   (interactive)
   (insert "\t"))
+
 (defun increment-number-at-point (args)
   "Increment number of current point with ARGS times."
   (interactive "p")
@@ -122,7 +123,6 @@
           (insert (number-to-string (+ num args)))
           (goto-char p))
       (message "No number at current point."))))
-
 
 ;;; ============================================================================
 ;;; 02 Commenting and Folding
@@ -155,7 +155,6 @@
                                 (overlay-end ov)))
            (info (format " ... #%d " nlines)))
       (overlay-put ov 'display (propertize info 'face hideshow-folded-face)))))
-
 
 ;;; ============================================================================
 ;;; 03 Utilities
@@ -198,7 +197,6 @@ The resulting list contains all items that appear in LIST1 but not LIST2."
   (interactive (find-file-read-args "Store into: " (confirm-nonexistent-file-or-buffer)))
   (shell-command (format "grim -l 0 -g \"$(slurp)\" %s" place) nil nil)
   (kill-new (format "[[file:%s][]]" place)))
-
 
 ;;; ============================================================================
 ;;; 04 Filesystem and Autoload
@@ -261,7 +259,6 @@ use `cm/autoloads-file' as TARGET."
     (cd "personal")
     (setq generated-autoload-file (expand-file-name "loaddefs.el"))
     (update-directory-autoloads "")))
-
 
 ;;; ============================================================================
 ;;; 05 Meow Helpers
@@ -394,10 +391,7 @@ use `cm/autoloads-file' as TARGET."
    '("'" . repeat)
    '("M-q" . ignore)
    '("<escape>" . ignore))
-  (meow-define-keys 'insert '("M-q" . meow-insert-exit))
-  )
-
-
+  (meow-define-keys 'insert '("M-q" . meow-insert-exit)))
 
 ;;; ============================================================================
 ;;; 06 LSP Helpers
@@ -494,8 +488,6 @@ use `cm/autoloads-file' as TARGET."
     (advice-add 'lsp-resolve-final-command :around #'lsp-booster--advice-final-command)
     (add-hook 'lsp-mode-hook 'corfu-mode)))
 
-
-
 ;;; ============================================================================
 ;;; 07 GC and Performance
 ;;; ============================================================================
@@ -516,7 +508,6 @@ If you experience stuttering, increase this.")
   "Turn on garbage collection after minibuffer exit."
   (garbage-collect)
   (setq gc-cons-threshold better-gc-cons-threshold))
-
 
 ;;; ============================================================================
 ;;; 08 Fonts and Display
@@ -585,8 +576,7 @@ If you experience stuttering, increase this.")
   (set-fontset-font "fontset-variable pitch verbatim" 'cjk-misc (font-spec :family verbatim-font))
   (dolist (sp
            `(("regular" . ,cn-font)
-             ("italic" . ,sans-font)
-             ))
+             ("italic" . ,sans-font)))
     (let ((registry (concat "fontset-variable pitch " (car sp))))
       (create-fontset-from-fontset-spec
        (font-xlfd-name (font-spec
@@ -648,14 +638,15 @@ If you experience stuttering, increase this.")
           (if (consp mode-line-box-p)
               (set-face-attribute 'child-frame-border nil :background (nth 3 mode-line-box-p))
             (set-face-attribute 'child-frame-border nil :background mode-line-box-p)))))
-    (if (or (>= (string-to-number (substring (current-time-string) 11 13)) dayoff)
-            (<= (string-to-number (substring (current-time-string) 11 13)) dayon))
-        (progn
-          ;;       modus-themes-bold-constructs t
-          ;;       modus-themes-italic-constructs t)
-          (load-theme 'modus-vivendi t)
-          )
-      )
+    (let ((hour (string-to-number (format-time-string "%H"))))
+      (if (or (>= hour dayoff)
+              (<= hour dayon))
+          (progn
+            ;; modus-themes-bold-constructs t
+            ;; modus-themes-italic-constructs t)
+            (load-theme 'modus-vivendi t)
+            ;; (load-theme 'catppuccin :no-confirm)
+            )))
     (when modelineq
       (if (equal (frame-parameter nil 'background-mode) 'dark)
           (set-face-attribute 'mode-line nil
@@ -673,10 +664,9 @@ If you experience stuttering, increase this.")
                               :font (font-spec
                                      :name code-font
                                      :size 11.0))))
-          (set-face-attribute 'mode-line-inactive nil
-                              :inherit 'mode-line
-                              :box nil))
-    ))
+      (set-face-attribute 'mode-line-inactive nil
+                          :inherit 'mode-line
+                          :box nil))))
 
 (provide 'init-func)
 ;;; init-func.el ends here.

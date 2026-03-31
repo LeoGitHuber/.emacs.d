@@ -756,7 +756,8 @@
      .
      ("env" "JAVA_HOME=/usr/lib64/jvm/java-21-openjdk-21" "metals-emacs")))
   ;; (add-to-list 'eglot-server-programs `((LaTeX-mode latex-mode tex-mode) . ("texlab")))
-  (setq project-vc-extra-root-markers '(".dir-locals.el"))
+  (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
+  (setq project-vc-extra-root-markers '("Cargo.toml" ".dir-locals.el"))
   (setq eglot-send-changes-idle-time 0
         eglot-code-action-indications '(eglot-hint))
   )
@@ -807,6 +808,7 @@
            vertico-multiform
            vertico-sort
            vertico-suspend
+           vertico-repeat
            embark
            marginalia
            standard-themes
@@ -1104,6 +1106,8 @@ Adapted from `highlight-indentation-mode'."
 
 (require 'consult)
 (require 'consult-xref)
+(require 'consult-imenu)
+(require 'consult-eglot)
 
 (keymap-global-set "C-x l" 'consult-line)
 
@@ -1996,10 +2000,10 @@ Possible values: 'math (default) or 'all.")
       (when (file-exists-p "/opt/bin/ctags")
         (setq citre-ctags-program "/opt/bin/ctags"))
       (setq org-roam-directory "~/Documents/Personal/org-roam")
-      (setup-display-graphic nil nil 6 15 nil 12)
+      (setup-display-graphic nil nil 6 15 nil 13)
       (add-hook
        'server-after-make-frame-hook '(lambda ()
-                                        (setup-display-graphic nil nil 6 15 nil 12)))
+                                        (setup-display-graphic nil nil 6 15 nil 13)))
       (add-to-list 'exec-path "/home/kunh/.local/bin")
       (add-to-list 'exec-path "/home/kunh/.cargo/bin"))
   (progn

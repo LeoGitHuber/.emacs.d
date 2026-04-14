@@ -619,3 +619,9 @@
 [submodule "site-lisp/catppuccin-theme"]
 	path = site-lisp/catppuccin-theme
 	url = https://github.com/catppuccin/emacs.git
+[submodule "site-lisp/super-save"]
+	path = site-lisp/super-save
+	url = https://github.com/bbatsov/super-save.git
+[submodule "site-lisp/diff-hl"]
+	path = site-lisp/diff-hl
+	url = https://github.com/dgutov/diff-hl.git

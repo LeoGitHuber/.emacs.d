@@ -567,25 +567,50 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
              (abbreviate-file-name (buffer-file-name))
            "%b"))))
 
+(require 'elec-pair)
+(require 'pixel-scroll)
 (electric-pair-mode)
 
 (pixel-scroll-precision-mode)
 
-(setq pixel-scroll-precision-interpolate-page t)
+(setq pixel-scroll-precision-interpolate-page t
+      pixel-scroll-precision-use-momentum nil
+      redisplay-skip-fontification-on-input t)
 
-(defalias 'scroll-up-command 'pixel-scroll-interpolate-down)
+(defun my/scroll-command-with-remap (command)
+  "Call COMMAND while honoring any active command remapping."
+  (let ((remapped (or (command-remapping command) command)))
+    (call-interactively remapped)))
 
-(defalias 'scroll-down-command 'pixel-scroll-interpolate-up)
+(defun my/scroll-down-centralize ()
+  "Scroll down one page and recenter, similar to emacs-solo."
+  (interactive)
+  (my/scroll-command-with-remap 'scroll-up-command)
+  (recenter))
+
+(defun my/scroll-up-centralize ()
+  "Scroll up one page and keep the viewport centered when possible."
+  (interactive)
+  (my/scroll-command-with-remap 'scroll-down-command)
+  (unless (= (window-start) (point-min))
+    (recenter))
+  (when (= (window-start) (point-min))
+    (let ((midpoint (/ (window-height) 2)))
+      (goto-char (window-start))
+      (forward-line midpoint)
+      (recenter midpoint))))
+
+(keymap-global-set "C-v" #'my/scroll-down-centralize)
+(keymap-global-set "M-v" #'my/scroll-up-centralize)
 
 (global-subword-mode)
 
+(require 'autorevert)
 (global-auto-revert-mode)
 
 (setq global-auto-revert-non-file-buffers t
       auto-revert-interval 1)
-
-
-
+(require 'hl-line)
 (setq hl-line-sticky-flag nil
       hl-line-overlay nil)
 
@@ -609,9 +634,23 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
 
 (setq electric-pair-inhibit-predicate 'electric-pair-conservative-inhibit
       scroll-preserve-screen-position t
-      scroll-margin 0
-      scroll-conservatively 97
+      scroll-margin 5
+      scroll-conservatively 8
       eldoc-idle-delay 0.2)
+
+(defun my/term-reset-scrolling-vars ()
+  "Use emacs-solo-like local scrolling behavior in term buffers."
+  (setq-local scroll-conservatively 101)
+  (setq-local scroll-margin 0)
+  (setq-local scroll-step 0))
+
+(defun my/eshell-reset-scrolling-vars ()
+  "Use emacs-solo-like local scrolling behavior in Eshell."
+  (setq-local scroll-conservatively 0)
+  (setq-local scroll-margin 0))
+
+(add-hook 'term-mode-hook #'my/term-reset-scrolling-vars)
+(add-hook 'eshell-mode-hook #'my/eshell-reset-scrolling-vars)
 
 (delete-selection-mode)
 
@@ -647,37 +686,44 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
         (desktop-dont-save . t)
         (child-frame-border-width 3)))
 
-(with-eval-after-load 'auto-save
-  (setq auto-save-delete-trailing-whitespace t
-        auto-save-disable-predicates '((lambda () (string-suffix-p "gpg" (file-name-extension (buffer-name)) t)))))
+(require 'super-save)
 
-(setq
- ;; auto-save-timeout 30
- ;; auto-save-interval 10
- auto-save-default nil
- save-silently t
- auto-save-no-message t)
+(setq auto-save-default nil
+      save-silently t
+      auto-save-no-message t
+      super-save-silent t
+      super-save-auto-save-when-idle t
+      super-save-idle-duration 5
+      super-save-when-focus-lost t
+      super-save-when-buffer-switched t
+      super-save-delete-trailing-whitespace nil
+      super-save-exclude '(".gpg\\'"))
 
-(setq auto-save-visited-interval 1)
+(auto-save-visited-mode -1)
+(super-save-mode 1)
 
-(auto-save-visited-mode)
+(defun enable-buffer-local-trailing-whitespace-cleanup ()
+  "Use the built-in save hook to clean trailing whitespace in this buffer."
+  (delete-trailing-whitespace-mode 1))
 
-(add-hook
- 'before-save-hook
- (lambda ()
-   (delete-trailing-whitespace (point-min)
-                               (- (line-beginning-position) 1))
-   (delete-trailing-whitespace (+ (point) 1)
-                               (point-max))))
+(dolist (hook '(text-mode-hook
+                conf-mode-hook
+                markdown-mode-hook
+                yaml-ts-mode-hook
+                toml-ts-mode-hook
+                json-ts-mode-hook
+                emacs-lisp-mode-hook))
+  (add-hook hook #'enable-buffer-local-trailing-whitespace-cleanup))
 
 (dolist (hook '(TeX-mode-hook dired-mode-hook markdown-mode-hook markdown-view-mode-hook))
-  (add-hook hook '(lambda ()
-                    (setq truncate-lines t))))
+  (add-hook hook #'(lambda ()
+                     (setq truncate-lines t))))
 
 
 (repeat-mode)
 
 (require 'no-littering)
+(require 'recentf)
 
 (with-eval-after-load 'no-littering
   (recentf-mode t)
@@ -691,7 +737,8 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
 
 (save-place-mode t)
 
-(setq history-length 10000
+(require 'savehist)
+(setq history-length 1000
       history-delete-duplicates t
       savehist-save-minibuffer-history t)
 
@@ -729,6 +776,8 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
               ;; visual-fill-column-center-text t
               )
 
+(editorconfig-mode 1)
+
 (dolist (mode
          '(prog-mode-hook
            toml-ts-mode-hook
@@ -737,13 +786,14 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
   (add-hook mode (lambda ()
                    (display-line-numbers-mode t))))
 
+(require 'desktop)
 (desktop-save-mode 1)
 
-(with-eval-after-load 'desktop
-  (setq desktop-restore-frames nil))
+(setq desktop-restore-frames nil)
 
 (setq comment-auto-fill-only-comments t)
 
+(require 'whitespace)
 (setq whitespace-style '(face trailing))
 
 (setq-default whitespace-display-mappings

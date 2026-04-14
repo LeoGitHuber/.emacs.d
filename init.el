@@ -1919,6 +1919,10 @@ Possible values: 'math (default) or 'all.")
 ;;; 08 UI Themes and Platform
 ;;; ============================================================================
 
+;;; Mode line
+(require 'segment-line)
+(segment-line-mode 1)
+
 (require 'ligature)
 
 ;; ligature.el requires explicit rules; enabling alone does not add mappings.

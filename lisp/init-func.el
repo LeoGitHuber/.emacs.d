@@ -413,16 +413,29 @@ use `cm/autoloads-file' as TARGET."
           (cons "emacs-lsp-booster" orig-result))
       orig-result)))
 
+(defun eglot-format-buffer-maybe ()
+  "Format the current buffer when Eglot supports document formatting."
+  (when (and (derived-mode-p 'prog-mode)
+             (eglot-managed-p)
+             (eglot-server-capable :documentFormattingProvider)
+             (not (save-excursion
+                    (beginning-of-line)
+                    (looking-at-p "[[:space:]]*$"))))
+    (eglot-format-buffer)))
+
+(defun setup-eglot-format-on-save ()
+  "Enable buffer-local Eglot formatting on save for programming buffers."
+  (when (derived-mode-p 'prog-mode)
+    (when (bound-and-true-p delete-trailing-whitespace-mode)
+      (delete-trailing-whitespace-mode -1))
+    (add-hook 'before-save-hook #'eglot-format-buffer-maybe nil t)))
+
 (defun lsp-enable-startup ()
-  "Enable `eglot' or `lsp-mode' for LSP."
+  "Enable Eglot and completion helpers for programming buffers."
   (with-eval-after-load 'lsp-bridge
-    (remove-hook 'lsp-bridge-default-mode-hooks 'LaTeX-mode-hook)
-    (remove-hook 'lsp-bridge-default-mode-hooks 'latex-mode-hook)
-    (remove-hook 'lsp-bridge-default-mode-hooks 'Tex-latex-mode-hook)
-    (remove-hook 'lsp-bridge-default-mode-hooks 'typescript-ts-mode-hook)
-    (remove-hook 'lsp-bridge-default-mode-hooks 'typescript-mode-hook)
-    (remove-hook 'lsp-bridge-default-mode-hooks 'scala-ts-mode-hook)
-    (global-lsp-bridge-mode))
+    (when (bound-and-true-p global-lsp-bridge-mode)
+      (global-lsp-bridge-mode -1)))
+  (add-hook 'eglot-managed-mode-hook #'setup-eglot-format-on-save)
   (dolist (hook '(prog-mode-hook cuda-mode-hook TeX-mode-hook))
     (when (intern-soft "global-corfu-mode")
       (and (functionp 'corfu-mode)
@@ -442,51 +455,7 @@ use `cm/autoloads-file' as TARGET."
                 ;; 'python-ts-mode 'python-mode
                 )
          (eglot-ensure)))))
-  (with-eval-after-load 'lsp-mode
-    (with-eval-after-load 'lsp-ui
-      (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
-      (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references))
-    (setq lsp-keymap-prefix "C-c l"
-          ;; lsp-keep-workspace-alive nil
-          ;; lsp-signature-auto-activate nil
-          lsp-modeline-code-actions-enable nil
-          lsp-modeline-diagnostics-enable nil
-          lsp-modeline-workspace-status-enable nil
-          lsp-headerline-breadcrumb-enable t
-          lsp-semantic-tokens-enable t
-          ;; lsp-progress-spinner-type 'progress-bar-filled
-          lsp-enable-file-watchers nil
-          lsp-enable-folding nil
-          lsp-enable-symbol-highlighting nil
-          lsp-enable-text-document-color nil
-          lsp-enable-indentation nil
-          lsp-enable-on-type-formatting nil
-          lsp-enable-indentation nil
-          ;; lsp-diagnostics-disabled-modes '(markdown-mode gfm-mode)  ;; For diagnostics
-          ;; lsp-lens-enable nil  ;; Reference Lens
-          ;; lsp-ui-doc-show-with-cursor nil  ;; ui
-          lsp-completion-provider
-          :none
-          lsp-prefer-flymake t
-          lsp-ui-flycheck-enable nil
-          lsp-enable-relative-indentation t)
-    (defun lsp-booster--advice-json-parse (old-fn &rest args)
-      "Try to parse bytecode instead of json."
-      (or
-       (when (equal (following-char) ?#)
-         (let ((bytecode (read (current-buffer))))
-           (when (byte-code-function-p bytecode)
-             (funcall bytecode))))
-       (apply old-fn args)))
-    (advice-add
-     (if (progn
-           (require 'json)
-           (fboundp 'json-parse-buffer))
-         'json-parse-buffer
-       'json-read)
-     :around #'lsp-booster--advice-json-parse)
-    (advice-add 'lsp-resolve-final-command :around #'lsp-booster--advice-final-command)
-    (add-hook 'lsp-mode-hook 'corfu-mode)))
+  )
 
 ;;; ============================================================================
 ;;; 07 GC and Performance

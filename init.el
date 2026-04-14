@@ -57,37 +57,41 @@
            "~/.emacs.d/site-lisp/pdf-tools/lisp"))
   (add-to-list 'load-path path))
 
+(defun my/refresh-elisp-flymake-byte-compile-load-path ()
+  "Keep Elisp Flymake byte compilation aligned with the current `load-path'."
+  (setq elisp-flymake-byte-compile-load-path
+        (cons "./"
+              (mapcar #'expand-file-name load-path))))
+
+(my/refresh-elisp-flymake-byte-compile-load-path)
+
 
 ;;; Core settings
-(setq eat-kill-buffer-on-exit t
-      css-indent-offset 2
-      set-mark-command-repeat-pop t
+(setq set-mark-command-repeat-pop t
       other-window-scroll-default 'get-lru-window
       backup-directory-alist '(("." . "~/.emacs.d/backup"))
-      ispell-dictionary "en_US"
-      ;; ispell-program-name "hunspell"
       ;; package-quickstart nil
       nobreak-char-display nil)
 
 ;;; GC / Performance
-(add-hook
- 'emacs-startup-hook
- (lambda ()
-   (setq gc-cons-threshold better-gc-cons-threshold
-         gc-cons-percentage 0.1)))
+;; (add-hook
+;;  'emacs-startup-hook
+;;  (lambda ()
+;;    (setq gc-cons-threshold better-gc-cons-threshold
+;;          gc-cons-percentage 0.1)))
 
-(add-hook 'minibuffer-setup-hook #'gc-minibuffer-setup-hook)
+;; (add-hook 'minibuffer-setup-hook #'gc-minibuffer-setup-hook)
 
-(add-hook 'minibuffer-exit-hook #'gc-minibuffer-exit-hook)
+;; (add-hook 'minibuffer-exit-hook #'gc-minibuffer-exit-hook)
 
 ;;; Diagnostics / icons
 (with-eval-after-load 'flycheck
-  (add-hook 'flycheck-mode-hook '(lambda ()
-                                   (flycheck-set-indication-mode 'left-margin))))
+  (add-hook 'flycheck-mode-hook #'(lambda ()
+                                    (flycheck-set-indication-mode 'left-margin))))
 
 (require 'nerd-icons)
-;; (require 'nerd-icons-corfu)
-(require 'kind-icon)
+(require 'nerd-icons-corfu)
+;; (require 'kind-icon)
 
 (setq nerd-icons-font-family
       (if (eq system-type 'gnu/linux)
@@ -856,11 +860,8 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
 
 (require 'aggressive-indent)
 
-(dolist (hook '(emacs-lisp-mode-hook yuck-mode-hook python-ts-mode python-mode scss-mode-hook))
+(dolist (hook '(emacs-lisp-mode-hook yuck-mode-hook))
   (add-hook hook 'aggressive-indent-mode))
-
-(dolist (hook '(rust-ts-mode-hook))
-  (add-hook hook 'electric-indent-mode))
 
 ;;; ============================================================================
 ;;; 03 Editing Workflow
@@ -886,6 +887,8 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
 (require 'avy)
 
 (keymap-global-set "M-p" 'pop-to-mark-command)
+
+(keymap-global-set "M-o" 'other-window)
 
 (unless (bound-and-true-p meow-mode)
   (progn
@@ -926,6 +929,8 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
 (global-set-key [remap comment-dwim] 'comment-or-uncomment)
 
 ;;; Fingertip
+(defvar fingertip-mode-map)
+
 (with-eval-after-load 'fingertip
   ;; 移动
   ;; 符号插入
@@ -951,7 +956,7 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
 
 (require 'helpful)
 
-(keymap-global-set "M-?" 'help-command)
+(keymap-global-set "C-?" 'help-command)
 
 (with-eval-after-load 'help
   (define-key global-map [remap describe-function] 'helpful-function)
@@ -1048,7 +1053,7 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
    "
   ("j" next-line nil)
   ("k" previous-line nil)
-  ("v" scroll-uppp nil)
+  ("v" scroll-up nil)
   ("V" scroll-down nil)
   ("l" forward-char nil)
   ("h" backward-char nil)
@@ -1060,9 +1065,10 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
 
 (require 'rect)
 
-(defhydra hydra-rectangle (:body-pre (rectangle-mark-mode t)
-                           :color pink
-                           :post (deactivate-mark))
+(defhydra hydra-rectangle
+  (:body-pre (rectangle-mark-mode t)
+   :color pink
+   :post (deactivate-mark))
   "
     ^_k_^     _d_elete    _s_tring
   _h_   _l_   _o_k        _y_ank
@@ -1102,6 +1108,7 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
 (define-key markdown-mode-map (kbd "C-c C-e") #'markdown-do)
 
 (add-to-list 'load-path "~/.emacs.d/site-lisp/corfu/extensions")
+(my/refresh-elisp-flymake-byte-compile-load-path)
 
 (require 'corfu)
 (require 'corfu-popupinfo)
@@ -1141,12 +1148,11 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
   (keymap-set corfu-map "<tab>" 'corfu-insert)
   (add-hook 'corfu-mode-hook 'corfu-popupinfo-mode)
   (with-eval-after-load 'corfu-popupinfo
-    (setq corfu-popupinfo-delay '(0.1 . 0.1)))
-  (with-eval-after-load 'nerd-icons-corfu
-    (setq nerd-icons-corfu--space (propertize " " 'display '(space :width 0.8)))
-    (add-to-list 'corfu-margin-formatters 'nerd-icons-corfu-formatter))
+    (setq corfu-popupinfo-delay '(2.0 . 0.5)))
   (with-eval-after-load 'kind-icon
-    (add-to-list 'corfu-margin-formatters 'kind-icon-margin-formatter))
+    (setq corfu-margin-formatters '(kind-icon-margin-formatter)))
+  (with-eval-after-load 'nerd-icons-corfu
+    (setq corfu-margin-formatters '(nerd-icons-corfu-formatter)))
   )
 
 (defun yas-setup-capf ()
@@ -1158,7 +1164,6 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
 (setq yas-prompt-functions '(yas-no-prompt))
 
 (require 'eglot)
-(require 'eglot-booster)
 (require 'dape)
 
 (with-eval-after-load 'eglot
@@ -1276,8 +1281,12 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
       (keymap-set vertico-map "?" #'minibuffer-completion-help)
       (keymap-set vertico-map "M-RET" #'minibuffer-force-complete-and-exit)
       (keymap-set vertico-map "M-TAB" #'minibuffer-complete)
-      (keymap-set vertico-map "C-w" 'vertico-directory-delete-word))
-  (keymap-set minibuffer-mode-map "C-w" 'backward-kill-word))
+      (keymap-set vertico-map "C-w" 'vertico-directory-delete-word)
+      (add-hook 'minibuffer-setup-hook #'vertico-repeat-save)
+      (keymap-global-set "C-c v" #'vertico-repeat)
+      )
+  (keymap-set minibuffer-mode-map "C-w" 'backward-kill-word)
+  )
 
 (and (boundp 'puni-mode)
      (require 'puni)
@@ -1325,70 +1334,35 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
 
 (global-set-key [remap move-end-of-line] 'mwim-end-of-code-or-line)
 
-(setq popper-reference-buffers
-      '("\\*Messages\\*"
-        "Output\\*$"
-        "\\*Async Shell Command\\*"
-        "Go-Translate"
-        "*compilation*"
-        "*Warning*"
-        "*tex-shell*"
-        "*Compile-Log*"
-        "*xref*"
-        help-mode
-        helpful-mode
-        compilation-mode
-        youdao-dictionary-mode))
-
-(defun popper--fit-window-width (win)
-  "Determine the height of popup window WIN by fitting it to the buffer's content."
-  (fit-window-to-buffer
-   win (frame-height)
-   (floor (frame-height) 6)
-   (floor (frame-width) 2)
-   (floor (* (frame-width) 17) 35)))
-
-(defun popper--auto-fit-window-height (win)
-  "Determine the height of popup window WIN by fitting it to the buffer's content."
-  (fit-window-to-buffer win (floor (frame-height) 2)
-                        (floor (* (frame-height) 2) 5)))
-
-(defun popper-display-popup-adaptive (buffer &optional alist)
-  "Display popup-buffer BUFFER at the bottom of the screen.
-ALIST is an association list of action symbols and values.  See
-Info node `(elisp) Buffer Display Action Alists' for details of
-such alists."
-  (if (and (> (window-pixel-height)
-              (window-pixel-width))
-           (or (and popper-open-popup-alist
-                    (eq (window-parameter (caar popper-open-popup-alist) 'window-side) 'bottom))
-               (not popper-open-popup-alist)))
-      (display-buffer-in-side-window
-       buffer
-       (append
-        alist `((window-height . popper--auto-fit-window-height)
-                (side . bottom)
-                (slot . 1))))
-    (display-buffer-in-side-window
-     buffer (append alist `((window-width . popper--fit-window-width)
-                            (side . right)
-                            (slot . 1))))))
-
-(setq popper-display-function 'popper-display-popup-adaptive
-      fit-window-to-buffer-horizontally t)
-
 (require 'popper)
 (require 'popper-echo)
 
-(keymap-global-set "M-<tab>" 'popper-toggle)
+;; Keep popup management close to the common public Popper setups:
+;; a small popup allowlist, project grouping, and standard global keys.
+(setq popper-reference-buffers
+      '("\\*Messages\\*"
+        "\\*Warnings\\*"
+        "Output\\*$"
+        "\\*Async Shell Command\\*"
+        "\\*Compile-Log\\*"
+        "\\*xref\\*"
+        "\\*tex-shell\\*"
+        "Go-Translate"
+        help-mode
+        helpful-mode
+        compilation-mode
+        flymake-diagnostics-buffer-mode
+        youdao-dictionary-mode)
+      popper-group-function #'popper-group-by-project
+      popper-display-control t
+      popper-tab-line-mode nil)
 
-(keymap-global-set "M-`" 'popper-cycle)
+(keymap-global-set "C-`" #'popper-toggle)
+(keymap-global-set "M-`" #'popper-cycle)
+(keymap-set window-prefix-map "p" #'popper-toggle-type)
 
-(keymap-global-set "C-M-`" 'popper-toggle-type)
-
-(popper-mode +1)
-
-(popper-echo-mode +1)
+(add-hook 'after-init-hook #'popper-mode)
+(add-hook 'after-init-hook #'popper-echo-mode)
 
 (define-key global-map [remap list-buffers] 'ibuffer)
 
@@ -1407,136 +1381,27 @@ such alists."
    indent-bars-width-frac 0.2
    indent-bars-color '(highlight :face-bg t :blend 0.7)
    indent-bars-display-on-blank-lines t)
-  (defun indent-bars--guess-spacing ()
-    "Get indentation spacing of current buffer.
-Adapted from `highlight-indentation-mode'."
-    (cond (indent-bars-spacing-override)
-          ((and (derived-mode-p 'verilog-mode)
-                (boundp 'verilog-indent-level))
-           verilog-indent-level)
-          ((and (derived-mode-p 'ada-mode)
-                (boundp 'ada-indent))
-           ada-indent)
-          ((and (derived-mode-p 'ada-ts-mode)
-                (boundp 'ada-ts-mode-indent-offset))
-           ada-ts-mode-indent-offset)
-          ((and (derived-mode-p 'gpr-mode)
-                (boundp 'gpr-indent))
-           gpr-indent)
-          ((and (derived-mode-p 'gpr-ts-mode)
-                (boundp 'gpr-ts-mode-indent-offset))
-           gpr-ts-mode-indent-offset)
-          ((and (derived-mode-p 'python-mode)
-                (boundp 'py-indent-offset))
-           py-indent-offset)
-          ((and (derived-mode-p 'python-mode 'python-base-mode)
-                (boundp 'python-indent-offset))
-           python-indent-offset)
-          ((and (derived-mode-p 'ruby-mode)
-                (boundp 'ruby-indent-level))
-           ruby-indent-level)
-          ((and (derived-mode-p 'scala-mode)
-                (boundp 'scala-indent:step))
-           scala-indent:step)
-          ((and (derived-mode-p 'scala-mode)
-                (boundp 'scala-mode-indent:step))
-           scala-mode-indent:step)
-          ((and (derived-mode-p 'scala-ts-mode)
-                (boundp 'scala-ts-indent-offset))
-           scala-ts-indent-offset)
-          ((and (derived-mode-p 'rust-ts-mode)
-                (boundp 'rust-ts-mode-indent-offset))
-           rust-ts-mode-indent-offset)
-          ((and (or (derived-mode-p 'scss-mode)
-                    (derived-mode-p 'css-mode))
-                (boundp 'css-indent-offset))
-           css-indent-offset)
-          ((and (derived-mode-p 'nxml-mode)
-                (boundp 'nxml-child-indent))
-           nxml-child-indent)
-          ((and (derived-mode-p 'coffee-mode)
-                (boundp 'coffee-tab-width))
-           coffee-tab-width)
-          ((and (derived-mode-p 'js-mode)
-                (boundp 'js-indent-level))
-           js-indent-level)
-          ((and (derived-mode-p 'js2-mode)
-                (boundp 'js2-basic-offset))
-           js2-basic-offset)
-          ((and (derived-mode-p 'typescript-ts-mode)
-                (boundp 'typescript-ts-mode-indent-offset))
-           typescript-ts-mode-indent-offset)
-          ((and (derived-mode-p 'sws-mode)
-                (boundp 'sws-tab-width))
-           sws-tab-width)
-          ((and (derived-mode-p 'web-mode)
-                (boundp 'web-mode-markup-indent-offset))
-           web-mode-markup-indent-offset)
-          ((and (derived-mode-p 'web-mode)
-                (boundp 'web-mode-html-offset)) ; old var
-           web-mode-html-offset)
-          ((and (local-variable-p 'c-basic-offset)
-                (numberp c-basic-offset))
-           c-basic-offset)
-          ((and (local-variable-p 'c-ts-common-indent-offset)
-                (symbolp c-ts-common-indent-offset)
-                (numberp (symbol-value c-ts-common-indent-offset)))
-           (symbol-value c-ts-common-indent-offset))
-          ((and (derived-mode-p 'yaml-mode)
-                (boundp 'yaml-indent-offset))
-           yaml-indent-offset)
-          ((and (derived-mode-p 'yaml-pro-mode)
-                (boundp 'yaml-pro-indent))
-           yaml-pro-indent)
-          ((and (derived-mode-p 'elixir-mode)
-                (boundp 'elixir-smie-indent-basic))
-           elixir-smie-indent-basic)
-          ((and (derived-mode-p 'lisp-data-mode)
-                (boundp 'lisp-body-indent))
-           lisp-body-indent)
-          ((and (derived-mode-p 'cobol-mode)
-                (boundp 'cobol-tab-width))
-           cobol-tab-width)
-          ((or (derived-mode-p 'go-ts-mode)
-               (derived-mode-p 'go-mode))
-           tab-width)
-          ((derived-mode-p 'nix-mode)
-           tab-width)
-          ((derived-mode-p 'makefile-mode)
-           tab-width)
-          ((and (derived-mode-p 'nix-ts-mode)
-                (boundp 'nix-ts-mode-indent-offset))
-           nix-ts-mode-indent-offset)
-          ((and (derived-mode-p 'json-ts-mode)
-                (boundp 'json-ts-mode-indent-offset))
-           json-ts-mode-indent-offset)
-          ((and (derived-mode-p 'json-mode)
-                (boundp 'js-indent-level))
-           js-indent-level)
-          ((and (derived-mode-p 'sh-base-mode)
-                (boundp 'sh-basic-offset))
-           sh-basic-offset)
-          ((and (derived-mode-p 'java-ts-mode)
-                (boundp 'java-ts-mode-indent-offset))
-           java-ts-mode-indent-offset)
-          ((and (derived-mode-p 'tcl-mode)
-                (boundp 'tcl-indent-level))
-           tcl-indent-level)
-          ((and (derived-mode-p 'haml-mode)
-                (boundp 'haml-indent-offset))
-           haml-indent-offset)
-          ((and (boundp 'standard-indent) standard-indent))
-          (t
-           4)))                         ; backup
-  )
+  (add-hook 'verilog-mode-hook
+            (lambda ()
+              (setq-local indent-bars-spacing-override verilog-indent-level)))
+  (add-hook 'verilog-ts-mode-hook
+            (lambda ()
+              (setq-local indent-bars-spacing-override verilog-ts-indent-level))))
 
 (require 'consult)
 (require 'consult-xref)
 (require 'consult-imenu)
 (require 'consult-eglot)
+(require 'project)
+
+(autoload 'eldoc-box-help-at-point "eldoc-box" nil t)
 
 (keymap-global-set "C-x l" 'consult-line)
 
+;; `consult-buffer' 同时展示 buffer 和虚拟 file source：
+;; - `B SPC' 仅看当前 project 的 buffers
+;; - `F SPC' 仅看当前 project 的 files/recent files
+;; - `p SPC' 同时看当前 project 相关 source（buffers/files/roots）
 (keymap-global-set "C-x b" 'consult-buffer)
 
 (with-eval-after-load 'consult
@@ -1544,8 +1409,34 @@ Adapted from `highlight-indentation-mode'."
   (setq consult-project-function
         (lambda (may-prompt) (or (vc-root-dir) (consult--default-project-function may-prompt)))))
 
+(add-to-list 'display-buffer-alist
+             '((category . xref-jump)
+               (display-buffer-reuse-window
+                display-buffer-in-previous-window
+                display-buffer-same-window)
+               (reusable-frames . nil)
+               (inhibit-switch-frame . t)))
+
 (setq xref-show-xrefs-function 'consult-xref
       xref-show-definitions-function 'consult-xref)
+
+(keymap-global-set "M-." 'xref-find-definitions)
+(keymap-global-set "M-," 'xref-go-back)
+(keymap-global-set "C-M-," 'xref-go-forward)
+(keymap-global-set "M-?" 'xref-find-references)
+
+(keymap-set project-prefix-map "b" 'consult-project-buffer)
+
+(keymap-global-set "C-c l d" 'xref-find-definitions)
+(keymap-global-set "C-c l r" 'xref-find-references)
+(keymap-global-set "C-c l b" 'xref-go-back)
+(keymap-global-set "C-c h" 'eldoc-box-help-at-point)
+(keymap-global-set "C-c l h" 'eldoc-box-help-at-point)
+(keymap-global-set "C-c l a" 'eglot-code-actions)
+(keymap-global-set "C-c l R" 'eglot-rename)
+(keymap-global-set "C-c l s" 'consult-eglot-symbols)
+(keymap-global-set "C-c l e" 'flymake-show-buffer-diagnostics)
+(keymap-global-set "C-c l f" 'eglot-format-buffer)
 
 (keymap-global-set "C-." 'embark-act)
 
@@ -1572,22 +1463,28 @@ Adapted from `highlight-indentation-mode'."
 (require 'yuck-mode)
 
 (when (treesit-available-p)
-  (setq major-mode-remap-alist
-        '((c-mode . c-ts-mode)
-          (c++-mode . c++-ts-mode)
-          (c-or-c++-mode . c-or-c++-ts-mode)
-          (conf-toml-mode . toml-ts-mode)
-          (csharp-mode . csharp-ts-mode)
-          (css-mode . css-ts-mode)
-          (java-mode . java-ts-mode)
-          (js-mode . js-ts-mode)
-          (javascript-mode . js-ts-mode)
-          (js-json-mode . json-ts-mode)
-          (python-mode . python-ts-mode)
-          (ruby-mode . ruby-ts-mode)
-          (sh-mode . bash-ts-mode)
-          (verilog-mode . verilog-ts-mode))
-        treesit-font-lock-level 4)
+  (require 'treesit-auto)
+  (setq treesit-font-lock-level 4
+        treesit-auto-install 'prompt
+        treesit-auto-langs '(bash
+                             c
+                             cpp
+                             css
+                             go
+                             java
+                             javascript
+                             json
+                             lua
+                             python
+                             ruby
+                             rust
+                             toml
+                             tsx
+                             typescript
+                             yaml
+                             verilog))
+  (treesit-auto-add-to-auto-mode-alist treesit-auto-langs)
+  (global-treesit-auto-mode 1)
   (require 'qml-ts-mode))
 
 (dolist (entry
@@ -1686,6 +1583,7 @@ Adapted from `highlight-indentation-mode'."
       dired-omit-mode t)
 
 (add-to-list 'load-path "~/.emacs.d/site-lisp/dirvish/extensions")
+(my/refresh-elisp-flymake-byte-compile-load-path)
 (require 'dirvish)
 (require 'dirvish-side)
 
@@ -1699,16 +1597,6 @@ Adapted from `highlight-indentation-mode'."
 
 (unless (bound-and-true-p dirvish-override-dired-mode)
   (add-hook 'dired-mode-hook 'nerd-icons-dired-mode))
-
-(defun set-font-for-dired ()
-  "Set font for Dired."
-  (face-remap-add-relative 'default
-                           :family "IBM Plex Mono"
-                           :height 95))
-
-(add-hook 'dired-mode-hook 'set-font-for-dired)
-
-
 
 ;;; Chinese
 
@@ -1889,6 +1777,7 @@ Adapted from `highlight-indentation-mode'."
            "~/.emacs.d/site-lisp/emacsql"
            "~/.emacs.d/site-lisp/org-visual-outline"))
   (add-to-list 'load-path path))
+(my/refresh-elisp-flymake-byte-compile-load-path)
 
 (require 'org)
 (require 'valign)
@@ -2000,6 +1889,7 @@ Adapted from `highlight-indentation-mode'."
 
 (dolist (path '("~/.emacs.d/site-lisp/with-editor/lisp" "~/.emacs.d/site-lisp/magit/lisp"))
   (add-to-list 'load-path path))
+(my/refresh-elisp-flymake-byte-compile-load-path)
 
 (load "~/.emacs.d/site-lisp/transient/lisp/transient.el")
 

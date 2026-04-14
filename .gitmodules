@@ -619,9 +619,18 @@
 [submodule "site-lisp/catppuccin-theme"]
 	path = site-lisp/catppuccin-theme
 	url = https://github.com/catppuccin/emacs.git
+[submodule "site-lisp/solarized-emacs"]
+	path = site-lisp/solarized-emacs
+	url = https://github.com/bbatsov/solarized-emacs.git
+[submodule "site-lisp/ultra-scroll"]
+	path = site-lisp/ultra-scroll
+	url = https://github.com/jdtsmith/ultra-scroll.git
 [submodule "site-lisp/super-save"]
 	path = site-lisp/super-save
 	url = https://github.com/bbatsov/super-save.git
 [submodule "site-lisp/diff-hl"]
 	path = site-lisp/diff-hl
 	url = https://github.com/dgutov/diff-hl.git
+[submodule "site-lisp/rimel"]
+	path = site-lisp/rimel
+	url = https://github.com/jixiuf/rimel.git

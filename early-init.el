@@ -89,7 +89,8 @@
       jit-lock-defer-time 0
       process-adaptive-read-buffering nil
       read-process-output-max (* 1024 1024)
-      frame-inhibit-implied-resize t)
+      ;; frame-inhibit-implied-resize t
+      )
 
 (setq-default pgtk-wait-for-event-timeout 0
               truncate-lines t

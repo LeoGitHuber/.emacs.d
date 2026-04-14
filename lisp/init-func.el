@@ -516,8 +516,8 @@ If you experience stuttering, increase this.")
 ;;; Font and typography
 
 ;; "IBM Plex Mono" "Fantasque Sans Mono", "InputMono", "Monaspace Neon"
-;; "Lilex" "Aporetic Serif Mono" ;; "Hack"
-(defvar code-font "Pragmasevka Nerd Font"
+;; "Lilex Nerd Font" "Aporetic Serif Mono" "Hack" "Pragmasevka Nerd Font"
+(defvar code-font "Iosevka Nerd Font Mono"
   "Font for coding.")
 
 ;; "Microsoft YaHei" "FZYouSongJ GBK" "Sarasa Gothic SC"
@@ -541,12 +541,20 @@ If you experience stuttering, increase this.")
 ;; Iosevka Fixed --- Input Mono
 
 ;;;###autoload
-(defun set-en_cn-font (en-font cn-font serif-font fontsize)
-  "Set EN-FONT, CN-FONT and SERIF-FONT with FONTSIZE."
-  (set-face-attribute 'variable-pitch nil :font (concat serif-font "-" (number-to-string fontsize)))
-  (set-face-attribute 'fixed-pitch nil :font (concat en-font "-" (number-to-string fontsize)))
-  (set-face-attribute 'default nil :font (concat en-font "-" (number-to-string fontsize)))
-  (add-to-list 'default-frame-alist (cons 'font (concat en-font "-" (number-to-string fontsize))))
+(defun set-en_cn-font (en-font cn-font serif-font font-height)
+  "Set EN-FONT, CN-FONT and SERIF-FONT with FONT-HEIGHT."
+  (set-face-attribute 'variable-pitch nil
+                      :family serif-font
+                      :height font-height)
+  (set-face-attribute 'fixed-pitch nil
+                      :family en-font
+                      :height font-height)
+  (set-face-attribute 'default nil
+                      :family en-font
+                      :height font-height)
+  ;; `set-face-attribute' already seeds defaults for future frames.
+  ;; Drop stale frame font parameters so size comes from face `:height'.
+  (setq default-frame-alist (assq-delete-all 'font default-frame-alist))
   (set-fontset-font t 'han cn-font)
   ;; 只放大中文字体，保证中英文在 org 表格中可以对齐
   )
@@ -554,7 +562,7 @@ If you experience stuttering, increase this.")
 ;;;###autoload
 (defun set-en_cn-font_old (en-font cn-font serif-font sans-font verbatim-font en-size cn-size)
   "EN-FONT, CN-FONT mean font-family.  EN-SIZE, CN-SIZE mean font size.
-  And Set SERIF-FONT, SANS-FONT and VERBATIM-FONT."
+And Set SERIF-FONT, SANS-FONT and VERBATIM-FONT."
   (set-face-attribute 'default nil
                       :font
                       (font-spec
@@ -617,10 +625,10 @@ If you experience stuttering, increase this.")
 
 ;;; Display setup
 
-(defun setup-display-graphic (modelineq cfborderq dayon dayoff themesetq fontsize)
-  "Setup display graphic for GUI Emacs and Emacsclient with MODELINEQ, CFBORDERQ, DAYON, DAYOFF, THEMESETQ, FONTSIZE."
+(defun setup-display-graphic (modelineq cfborderq dayon dayoff theme-preset font-height)
+  "Setup GUI Emacs and Emacsclient with MODELINEQ, CFBORDERQ, DAYON, DAYOFF, THEME-PRESET, and FONT-HEIGHT."
   (when (display-graphic-p)
-    (set-en_cn-font code-font cjk-font serif-font fontsize)
+    (set-en_cn-font code-font cjk-font serif-font font-height)
     (setq frame-title-format
           '((:eval
              (if (buffer-file-name)
@@ -638,35 +646,36 @@ If you experience stuttering, increase this.")
           (if (consp mode-line-box-p)
               (set-face-attribute 'child-frame-border nil :background (nth 3 mode-line-box-p))
             (set-face-attribute 'child-frame-border nil :background mode-line-box-p)))))
-    (let ((hour (string-to-number (format-time-string "%H"))))
-      (if (or (>= hour dayoff)
-              (<= hour dayon))
-          (progn
-            ;; modus-themes-bold-constructs t
-            ;; modus-themes-italic-constructs t)
-            (load-theme 'modus-vivendi t)
-            ;; (load-theme 'catppuccin :no-confirm)
-            )))
+    (if theme-preset
+        (my/apply-theme-preset theme-preset t)
+      (let ((hour (string-to-number (format-time-string "%H"))))
+        (if (or (>= hour dayoff)
+                (<= hour dayon))
+            (progn
+              (my/apply-theme-preset 'modus-vivendi t)
+              ))))
     (when modelineq
       (if (equal (frame-parameter nil 'background-mode) 'dark)
           (set-face-attribute 'mode-line nil
                               :background "black"
                               :box nil
-                              :font (font-spec
-                                     :name code-font
-                                     :size 11.0)
+                              :family code-font
+                              :height font-height
                               :underline (face-foreground 'mode-line-emphasis))
         (progn
           (set-face-attribute 'mode-line nil
                               :background "#F4F7FA"
                               ;; :background "white"
                               :box nil
-                              :font (font-spec
-                                     :name code-font
-                                     :size 11.0))))
+                              :family code-font
+                              :height font-height)))
       (set-face-attribute 'mode-line-inactive nil
                           :inherit 'mode-line
-                          :box nil))))
+                          :box nil))
+    (when (fboundp 'segment-line-refresh-faces)
+      (segment-line-refresh-faces))
+    (when (fboundp 'my/flymake-refresh-fancy-theme)
+      (my/flymake-refresh-fancy-theme))))
 
 (provide 'init-func)
 ;;; init-func.el ends here.

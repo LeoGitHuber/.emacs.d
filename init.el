@@ -1956,19 +1956,7 @@ Possible values: 'math (default) or 'all.")
 (require 'rose-pine)
 (require 'gruber-darker-theme)
 (require 'catppuccin-theme)
-
-(when non-android-p
-  (require 'citre)
-  (require 'citre-config)
-  (defun citre-jump+ ()
-    (interactive)
-    (condition-case _
-        (citre-jump)
-      (error
-       (let* ((xref-prompt-for-identifier nil))
-         (call-interactively #'xref-find-definitions)))))
-  (keymap-global-set "M-." 'citre-jump+)
-  (keymap-global-set "M-," 'citre-jump-back))
+(require 'init-theme)
 
 (with-eval-after-load 'citre
   (setq citre-use-project-root-when-creating-tags t
@@ -2000,22 +1988,20 @@ Possible values: 'math (default) or 'all.")
       (when (file-exists-p "/opt/bin/ctags")
         (setq citre-ctags-program "/opt/bin/ctags"))
       (setq org-roam-directory "~/Documents/Personal/org-roam")
-      (setup-display-graphic nil nil 6 15 nil 13)
+      (setup-display-graphic nil nil 6 10 my/theme-preset 105)
       (add-hook
-       'server-after-make-frame-hook '(lambda ()
-                                        (setup-display-graphic nil nil 6 15 nil 13)))
+       'server-after-make-frame-hook
+       #'(lambda ()
+           (setup-display-graphic nil nil 6 10 my/theme-preset 105)))
       (add-to-list 'exec-path "/home/kunh/.local/bin")
       (add-to-list 'exec-path "/home/kunh/.cargo/bin"))
   (progn
     (setq org-roam-directory "d:/Documents/Personal/org-roam")
-    (setup-display-graphic nil nil 6 17 nil 26)
+    (setup-display-graphic nil nil 6 17 my/theme-preset 105)
     (add-hook
-     'server-after-make-frame-hook '(lambda ()
-                                      (setup-display-graphic nil nil 6 17 nil 26)))))
-
-;; (with-eval-after-load 'eglot-booster
-;;   (setq eglot-booster-io-only t)
-;;   (eglot-booster-mode))
+     'server-after-make-frame-hook
+     #'(lambda ()
+         (setup-display-graphic nil nil 6 17 my/theme-preset 105)))))
 
 (org-roam-db-autosync-mode)
 

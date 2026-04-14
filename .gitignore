@@ -28,3 +28,6 @@ rime/*.userdb/
 rime/installation.yaml
 rime/user.yaml
 rime/sync/
+*.neoc
+/.cache/
+/etc/

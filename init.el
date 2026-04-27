@@ -1253,10 +1253,11 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
            orderless))
   (require feature))
 
-(setq-default completion-styles '(basic partial-completion orderless))
+;; (setq-default completion-styles '(basic partial-completion orderless))
+(setq-default completion-styles '(flex))
 
-(setq completion-styles '(basic partial-completion orderless)
-      completion-category-overrides '((file (styles basic partial-completion))))
+;; (setq completion-styles '(basic partial-completion orderless)
+;;       completion-category-overrides '((file (styles basic partial-completion))))
 
 (if (boundp 'vertico-mode)
     (progn
@@ -1409,13 +1410,13 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
   (setq consult-project-function
         (lambda (may-prompt) (or (vc-root-dir) (consult--default-project-function may-prompt)))))
 
-(add-to-list 'display-buffer-alist
-             '((category . xref-jump)
-               (display-buffer-reuse-window
-                display-buffer-in-previous-window
-                display-buffer-same-window)
-               (reusable-frames . nil)
-               (inhibit-switch-frame . t)))
+;; (add-to-list 'display-buffer-alist
+;;              '((category . xref-jump)
+;;                (display-buffer-reuse-window
+;;                 display-buffer-in-previous-window
+;;                 display-buffer-same-window)
+;;                (reusable-frames . nil)
+;;                (inhibit-switch-frame . t)))
 
 (setq xref-show-xrefs-function 'consult-xref
       xref-show-definitions-function 'consult-xref)

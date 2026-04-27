@@ -29,7 +29,7 @@
 ;; 		fc-error (nerd-icons-codicon "nf-cod-error" :face '(:inherit flycheck-error-my)))
 ;;   )
 
-(load "~/.emacs.d/lisp/init-startup.el")
+(require 'init-startup)
 
 (provide 'init-icons)
 ;;; init-icons.el ends here.

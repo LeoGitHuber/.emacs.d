@@ -2,17 +2,31 @@
 ;;; Commentary:
 ;;; Code:
 
+(require 'seq)
+(require 'subr-x)
+
+(declare-function nerd-icons-icon-for-dir "nerd-icons")
+(declare-function nerd-icons-icon-for-file "nerd-icons")
+(declare-function nerd-icons-octicon "nerd-icons")
+(declare-function visual-fill-column-mode "visual-fill-column")
+(declare-function project-known-project-roots "project")
+(defvar recentf-list)
+
 
 ;; Index:
 ;; 01 Visual Assets
 ;; 02 Quote Library
 ;; 03 Render Helpers
 ;; 04 Startup Screen Entry
-;; 05 Startup Hook
+;; 05 Startup Configuration
 
 ;;; ============================================================================
 ;;; 01 Visual Assets
 ;;; ============================================================================
+
+(defgroup emacs-startup nil
+  "Custom startup screen."
+  :group 'startup)
 
 (defvar mine-emacs-logo
   (propertize
@@ -22,7 +36,7 @@
 ██╔══╝░░██║╚██╔╝██║██╔══██║██║░░██╗░╚═══██╗
 ███████╗██║░╚═╝░██║██║░░██║╚█████╔╝██████╔╝
 ╚══════╝╚═╝░░░░░╚═╝╚═╝░░╚═╝░╚════╝░╚═════╝░"
-   'face `(:foreground ,(face-foreground font-lock-string-face)
+   'face `(:foreground ,(face-foreground 'font-lock-string-face)
                        :height 1.2)
    )
   "ASCII Art logo for EMACS.")
@@ -38,7 +52,8 @@
     (((background light)) :foreground "#407040")
     (((background dark)) :foreground "#659965")
     )
-  "Face for cow and words.")
+  "Face for cow and words."
+  :group 'emacs-startup)
 
 (defvar emacs-cow
   "
@@ -244,343 +259,411 @@
 ;;; 03 Render Helpers
 ;;; ============================================================================
 
-(defun emacs-startup-create-box-cover (len)
-  "Create a box cover at LEN."
-  (progn
-    (save-excursion
-      (beginning-of-buffer)
-      (search-forward (string (cadr emacs-startup-char_sides)))
-      (beginning-of-line)
-      (insert (propertize " " 'display `(space :align-to ,(- fill-column emacs-startup-space 70))))
-      (insert (cadr emacs-startup-char_top_left))
-      (insert (make-string len (cadr emacs-startup-char_top_bottom)))
-      (insert (cadr emacs-startup-char_top_right))
-      (newline))
-    (insert (propertize " " 'display `(space :align-to ,(- fill-column emacs-startup-space 70))))
-    (insert (cadr emacs-startup-char_bottom_left))
-    (insert (make-string len (cadr emacs-startup-char_top_bottom)))
-    (insert (cadr emacs-startup-char_bottom_right))))
+(defvar initial-startup-screen-buffer-name "*Emacs*"
+  "Buffer name for the custom startup screen.")
+
+(defvar initial-startup-screen-recent-limit 10
+  "Maximum number of recent files shown on the startup screen.")
+
+(defvar initial-startup-screen-project-limit 10
+  "Maximum number of project roots shown on the startup screen.")
+
+(defvar initial-startup-screen-row-raise 0.2
+  "Vertical raise used to center row text in taller startup lines.")
+
+(defvar initial-startup-screen-section-raise 0.2
+  "Vertical raise used to center section headers in taller startup lines.")
+
+(defun initial-startup-screen--align-indent ()
+  "Return the display-aligned indentation used by the banner."
+  (propertize
+   " "
+   'display `(space :align-to ,(max 0 (- fill-column emacs-startup-space 70)))))
+
+(defun initial-startup-screen--pad-right (string width)
+  "Pad STRING on the right to WIDTH display columns."
+  (concat string (make-string (max 0 (- width (string-width string))) ? )))
+
+(defun initial-startup-screen--pad-left (string width)
+  "Pad STRING on the left to WIDTH display columns."
+  (concat (make-string (max 0 (- width (string-width string))) ? ) string))
+
+(defun initial-startup-screen--truncate-right (string width)
+  "Truncate STRING to WIDTH display columns."
+  (if (<= (string-width string) width)
+      string
+    (truncate-string-to-width string (max 0 width) nil nil t)))
+
+(defun initial-startup-screen--truncate-left (string width)
+  "Keep the tail of STRING within WIDTH display columns."
+  (cond
+   ((<= width 0) "")
+   ((<= (string-width string) width) string)
+   ((<= width 3) (truncate-string-to-width string width))
+   (t
+    (let* ((prefix "...")
+           (tail-width (- width (string-width prefix)))
+           (start-column (max 0 (- (string-width string) tail-width))))
+      (concat prefix
+              (truncate-string-to-width
+               string (string-width string) start-column))))))
+
+(defun initial-startup-screen--vcenter (string raise &rest properties)
+  "Return STRING with vertical RAISE plus PROPERTIES."
+  (apply #'propertize string 'display `(raise ,raise) properties))
+
+(defun initial-startup-screen--quote-parts (quote)
+  "Return (BODY TITLE AUTHOR) from QUOTE."
+  (let* ((strings (seq-filter #'stringp quote))
+         (first (car strings))
+         (second (cadr strings)))
+    (cond
+     ((null first) (list "" nil nil))
+     ((null second) (list first nil nil))
+     ((or (string-prefix-p "- " second)
+          (string-suffix-p "said." second))
+      (list first nil second))
+     (t
+      (list second first nil)))))
+
+(defun initial-startup-screen--wrap-text (text width)
+  "Wrap TEXT to WIDTH columns."
+  (with-temp-buffer
+    (let ((fill-column width))
+      (insert text)
+      (fill-region (point-min) (point-max))
+      (split-string (string-trim-right (buffer-string)) "\n" t))))
+
+(defun initial-startup-screen--insert-box-line (text width &optional align-right)
+  "Insert one startup quote box line with TEXT and WIDTH.
+When ALIGN-RIGHT is non-nil, right-align TEXT."
+  (insert (initial-startup-screen--align-indent))
+  (insert (cadr emacs-startup-char_sides)
+          " "
+          (if align-right
+              (initial-startup-screen--pad-left text width)
+            (initial-startup-screen--pad-right text width))
+          " "
+          (cadr emacs-startup-char_sides))
+  (newline))
+
+(defun initial-startup-screen--box-border-line (left right width)
+  "Return a quote box border line with LEFT, RIGHT, and WIDTH."
+  (concat (string left)
+          (make-string (+ width 2) (cadr emacs-startup-char_top_bottom))
+          (string right)))
+
+(defun initial-startup-screen--box-content-line (text width &optional align-right)
+  "Return a quote box content line containing TEXT within WIDTH.
+When ALIGN-RIGHT is non-nil, right-align TEXT."
+  (concat (string (cadr emacs-startup-char_sides))
+          " "
+          (if align-right
+              (initial-startup-screen--pad-left text width)
+            (initial-startup-screen--pad-right text width))
+          " "
+          (string (cadr emacs-startup-char_sides))))
+
+(defun initial-startup-screen--cow-lines ()
+  "Return the cow art lines without changing indentation."
+  (let ((lines (split-string emacs-cow "\n")))
+    (setq lines (seq-drop-while #'string-blank-p lines))
+    (nreverse (seq-drop-while #'string-blank-p (nreverse lines)))))
 
 (defun emacs-startup-create-a-cow ()
-  "Create a cow to greet."
-  (let* ((start 0)
-         (max-len (if (= start 0) emacs-startup-box-width start))
-         (char_sides (cadr emacs-startup-char_sides))
-         (str-quote (nth (random (length emacs-startup-predefined-quotes)) emacs-startup-predefined-quotes))
-         (str (car str-quote))
-         (str2 (cadr str-quote))
-         (author nil)
-         (len (length str))
-         (begin-point (point)))
-    (and (stringp str2)
-         (if (or (string-prefix-p "- " str2) (string-suffix-p "said." str2))
-             (setq author 1)
-           (progn
-             (setq str (cadr str-quote))
-             (setq str2 (car str-quote))
-             (setq len (length str))
-             (setq author 0))))
-    (insert (propertize " " 'display `(space :align-to ,(- fill-column emacs-startup-space 70))))
-    (insert char_sides
-            " ")
-    (if (<= len max-len)
-        (progn
-          (insert str
-                  (make-string (- max-len len) ? )
-                  " ")
-          (setq start max-len))
-      (let ((continue 1)
-            (pre-str (substring str 0 max-len))
-            (suf-str (substring str max-len)))
-        (while continue
-          (if (string-suffix-p "[ !,.]" pre-str)
-              (progn
-                (insert pre-str)
-                (if (or (string-suffix-p "[!,.]" pre-str) (> start 0))
-                    (insert " ")
-                  (progn
-                    (setq max-len (- max-len 1))
-                    (setq start max-len))))
-            (let ((pre-sp (- max-len
-                             (with-temp-buffer
-                               (insert pre-str)
-                               (end-of-line)
-                               (search-backward " "))))
-                  (pos-sp (or (string-match " " suf-str) (length suf-str))))
-              (if (and (= start 0) (< pos-sp 5) (> pre-sp pos-sp))
-                  (progn
-                    (insert pre-str)
-                    (insert (substring suf-str 0 pos-sp))
-                    (insert " ")
-                    (setq max-len (+ max-len pos-sp))
-                    (setq start max-len)
-                    (if (= (length suf-str) pos-sp)
-                        (setq suf-str nil
-                              continue nil)
-                      (setq suf-str (substring suf-str (+ pos-sp 1)))))
-                (progn
-                  (insert (substring pre-str 0 (- max-len pre-sp)))
-                  (if (= start 0)
-                      (progn
-                        (setq max-len (- max-len pre-sp 1))
-                        (setq start max-len)
-                        (setq suf-str (concat (substring pre-str (+ max-len 1)) suf-str)))
-                    (progn
-                      (insert (make-string (+ pre-sp 1) ? ))
-                      (setq suf-str (concat (substring pre-str (- max-len pre-sp)) suf-str)))))
-                )))
-          (when suf-str
-            (insert char_sides)
-            (newline)
-            (insert (propertize " " 'display `(space :align-to ,(- fill-column emacs-startup-space 70))))
-            (insert char_sides " ")
-            (if (<= (length suf-str) max-len)
-                (progn
-                  (insert suf-str (make-string (- max-len (length suf-str)) ? ) " ")
-                  (setq continue nil)
-                  )
-              (progn
-                (setq pre-str (substring suf-str 0 max-len))
-                (setq suf-str (substring suf-str max-len))))
-            ))))
-    (insert char_sides)
-    (newline)
+  "Create the quote banner."
+  (let* ((begin-point (point))
+         (quote (nth (random (length emacs-startup-predefined-quotes))
+                     emacs-startup-predefined-quotes))
+         (parts (initial-startup-screen--quote-parts quote))
+         (body (nth 0 parts))
+         (title (nth 1 parts))
+         (author (nth 2 parts))
+         (width emacs-startup-box-width)
+         (box-lines
+          (list
+           (initial-startup-screen--box-border-line
+            (cadr emacs-startup-char_top_left)
+            (cadr emacs-startup-char_top_right)
+            width))))
+    (when title
+      (setq box-lines
+            (append
+             box-lines
+             (list
+              (initial-startup-screen--box-content-line
+               (initial-startup-screen--truncate-right title width)
+               width)))))
+    (dolist (line (initial-startup-screen--wrap-text body width))
+      (setq box-lines
+            (append box-lines
+                    (list (initial-startup-screen--box-content-line
+                           line width)))))
     (when author
-      (if (= author 1)
-          (progn
-            (insert (propertize " " 'display `(space :align-to ,(- fill-column emacs-startup-space 70))))
-            (insert char_sides " " (make-string (- max-len (length str2)) ? ) str2 " " char_sides)
-            (newline))
-        (save-excursion
-          (beginning-of-buffer)
-          (search-forward (string char_sides))
-          (beginning-of-line)
-          (insert (propertize " " 'display `(space :align-to ,(- fill-column emacs-startup-space 70))))
-          (insert char_sides " " str2 (make-string (- max-len (length str2)) ? ) " " char_sides)
-          (newline))))
-    (emacs-startup-create-box-cover (+ max-len 2))
-    (insert emacs-cow)
-    (let ((ep (- (line-number-at-pos) 1))
-          (bp))
-      (save-excursion
-        (search-backward (string (cadr emacs-startup-char_bottom_left)))
-        (setq bp (line-number-at-pos))
-        (while (not (= ep bp))
-          (line-move 1)
-          (beginning-of-line)
-          (insert (propertize " " 'display `(space :align-to ,(- fill-column emacs-startup-space 70))))
-          (setq bp (+ bp 1)))))
+      (setq box-lines
+            (append
+             box-lines
+             (list
+              (initial-startup-screen--box-content-line
+               (initial-startup-screen--truncate-left author width)
+               width t)))))
+    (setq box-lines
+          (append
+           box-lines
+           (list
+            (initial-startup-screen--box-border-line
+             (cadr emacs-startup-char_bottom_left)
+             (cadr emacs-startup-char_bottom_right)
+             width))))
+    (let* ((cow-lines (initial-startup-screen--cow-lines))
+           (box-width (apply #'max (mapcar #'string-width box-lines)))
+           (cow-width (apply #'max (mapcar #'string-width cow-lines)))
+           (cow-offset (max 0 (- box-width cow-width 2))))
+      (dolist (line box-lines)
+        (insert (initial-startup-screen--align-indent))
+        (insert line)
+        (newline))
+      (newline)
+      (dolist (line cow-lines)
+        (insert (initial-startup-screen--align-indent))
+        (insert (make-string cow-offset ? ) line)
+        (newline)))
     (add-face-text-property begin-point (point) 'emacs-cow-color)))
+
+(defun initial-startup-screen--octicon (name fallback)
+  "Return nerd-icons octicon NAME, or FALLBACK when unavailable."
+  (if (fboundp 'nerd-icons-octicon)
+      (nerd-icons-octicon name)
+    fallback))
+
+(defun initial-startup-screen--file-icon (file)
+  "Return an icon for FILE with a plain-text fallback."
+  (cond
+   ((and (file-directory-p file) (fboundp 'nerd-icons-icon-for-dir))
+    (nerd-icons-icon-for-dir file))
+   ((fboundp 'nerd-icons-icon-for-file)
+    (nerd-icons-icon-for-file file))
+   ((file-directory-p file) "[D]")
+   (t "[F]")))
+
+(defun initial-startup-screen--insert-section-header (title icon)
+  "Insert section header with TITLE and ICON."
+  (let* ((start (point))
+         (prefix (concat
+                  (make-string (max 0 (- emacs-startup-space 2)) ? )
+                  (make-string emacs-startup-icon-position ?─)
+                  " "
+                  (initial-startup-screen--vcenter
+                   icon initial-startup-screen-section-raise)
+                  " "
+                  (initial-startup-screen--vcenter
+                   title initial-startup-screen-section-raise
+                   'face 'bold)
+                  (propertize " " 'display '(space-width 0.8))))
+         (dash-count (max 0 (- fill-column (string-width prefix)))))
+    (insert prefix (make-string dash-count ?─) "\n")
+    (add-text-properties start (point) '(line-height 1.5 line-spacing 0.3))))
+
+(defun initial-startup-screen--target-at (position)
+  "Return startup target at POSITION."
+  (or (get-text-property position 'initial-startup-target)
+      (and (> position (point-min))
+           (get-text-property (1- position) 'initial-startup-target))))
+
+(defun initial-startup-screen-open-at-point ()
+  "Open startup target at point."
+  (interactive)
+  (let ((target (initial-startup-screen--target-at (point))))
+    (when target
+      (find-file target))))
+
+(defun initial-startup-screen-open-mouse (event)
+  "Open startup target clicked by mouse EVENT."
+  (interactive "e")
+  (let* ((position (posn-point (event-start event)))
+         (target (and position (initial-startup-screen--target-at position))))
+    (when target
+      (find-file target))))
+
+(defvar initial-startup-screen-link-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map (kbd "RET") #'initial-startup-screen-open-at-point)
+    (define-key map [mouse-1] #'initial-startup-screen-open-mouse)
+    map)
+  "Keymap for clickable startup screen rows.")
+
+(defun initial-startup-screen--insert-link-line
+    (target label icon &optional suffix tooltip truncate-left)
+  "Insert a clickable line for TARGET with LABEL and ICON.
+Optional SUFFIX is aligned at the right edge.  TOOLTIP overrides
+the default help text.  When TRUNCATE-LEFT is non-nil, keep the
+tail of LABEL."
+  (let* ((start (point))
+         (suffix (or suffix ""))
+         (suffix-width (if (string-empty-p suffix) 0 (1+ (string-width suffix))))
+         (label-width (max 10 (- fill-column
+                                  emacs-startup-space
+                                  (string-width icon)
+                                  suffix-width
+                                  4)))
+         (display-label (if truncate-left
+                            (initial-startup-screen--truncate-left label label-width)
+                          (initial-startup-screen--truncate-right label label-width))))
+    (insert (make-string emacs-startup-space ? )
+            (initial-startup-screen--vcenter
+             icon initial-startup-screen-row-raise)
+            " "
+            (initial-startup-screen--vcenter
+             display-label initial-startup-screen-row-raise
+             'face '(:inherit link :underline nil)))
+    (unless (string-empty-p suffix)
+      (insert (propertize
+               " "
+               'display `(space :align-to
+                                ,(max (+ emacs-startup-space 20)
+                                      (- fill-column
+                                         (string-width suffix)
+                                         emacs-startup-space)))))
+      (insert (initial-startup-screen--vcenter
+               suffix initial-startup-screen-row-raise
+               'face '(:inherit font-lock-keyword-face))))
+    (add-text-properties
+     start (point)
+     (list 'line-height 1.4
+           'mouse-face 'highlight
+           'cursor nil
+           'pointer 'hand
+           'help-echo (or tooltip target)
+           'follow-link t
+           'keymap initial-startup-screen-link-map
+           'initial-startup-target target))
+    (newline)))
+
+(defun initial-startup-screen--format-relative-time (time)
+  "Return a compact relative display for TIME."
+  (let ((age (max 0 (floor (float-time (time-subtract (current-time) time))))))
+    (if (< age 1209600)
+        (let* ((unit (cond
+                      ((< age 60) (list age "sec"))
+                      ((< age 3600) (list (/ age 60) "min"))
+                      ((< age 86400) (list (/ age 3600) "hour"))
+                      (t (list (/ age 86400) "day"))))
+               (value (max 1 (car unit)))
+               (label (cadr unit)))
+          (format "%d %s%s ago" value label (if (= value 1) "" "s")))
+      (let ((system-time-locale "C"))
+        (format-time-string
+         (if (> (decoded-time-year (decode-time (current-time)))
+                (decoded-time-year (decode-time time)))
+             " %Y %b %d"
+           "%b %d %H:%M")
+         time)))))
+
+(defun initial-startup-screen--recent-files ()
+  "Return recent local files as (TIME . FILE) pairs."
+  (let ((files (if (and (boundp 'recentf-list) recentf-list)
+                   recentf-list
+                 file-name-history))
+        (items nil)
+        (count 0))
+    (catch 'done
+      (dolist (file files)
+        (when (and (stringp file)
+                   (not (file-remote-p file)))
+          (let ((attributes (ignore-errors (file-attributes file))))
+            (when attributes
+              (push (cons (file-attribute-modification-time attributes) file) items)
+              (setq count (1+ count))
+              (when (>= count initial-startup-screen-recent-limit)
+                (throw 'done nil)))))))
+    (nreverse items)))
+
+(defun initial-startup-screen--project-roots ()
+  "Return project roots shown on the startup screen."
+  (when (fboundp 'project-known-project-roots)
+    (let ((items nil)
+          (count 0))
+      (catch 'done
+        (dolist (root (ignore-errors (project-known-project-roots)))
+          (when (and (stringp root)
+                     (not (file-remote-p root))
+                     (file-directory-p root))
+            (push root items)
+            (setq count (1+ count))
+            (when (>= count initial-startup-screen-project-limit)
+              (throw 'done nil)))))
+      (nreverse items))))
 
 
 ;;; ============================================================================
 ;;; 04 Startup Screen Entry
 ;;; ============================================================================
 
-(defun initial-startup-screen (scratch switch)
-  "Initial startup buffer with SCRATCH, SWITCH."
-  (let ((buffer (if scratch
-                    (get-buffer "*scratch*")
-                  (generate-new-buffer "*Emacs*"))))
+(defun initial-startup-screen-refresh (&optional buffer)
+  "Render the startup screen into BUFFER and return it."
+  (let ((buffer (or buffer (get-buffer-create initial-startup-screen-buffer-name))))
+    (with-current-buffer buffer
+      (let ((inhibit-read-only t))
+        (special-mode)
+        (setq buffer-read-only nil)
+        (erase-buffer)
+        (auto-save-mode -1)
+        (when (fboundp 'visual-fill-column-mode)
+          (visual-fill-column-mode 1))
+        (newline 7)
+        (emacs-startup-create-a-cow)
+        (let ((start (point)))
+          (insert (propertize
+                   (concat (make-string 48 ? )
+                           (format "Emacs started in %s" (emacs-init-time)))
+                   'face `(:foreground ,(face-foreground 'font-lock-builtin-face)
+                                       :height 0.8)
+                   'display '(raise 0.2)))
+          (add-text-properties start (point) '(line-height 1.35 v-adjust 0.3)))
+        (newline 1)
+        (initial-startup-screen--insert-section-header
+         "Recent Files"
+         (initial-startup-screen--octicon "nf-oct-history" "[H]"))
+        (dolist (entry (initial-startup-screen--recent-files))
+          (let* ((time (car entry))
+                 (file (cdr entry))
+                 (relative-time (initial-startup-screen--format-relative-time time)))
+            (initial-startup-screen--insert-link-line
+             file
+             file
+             (initial-startup-screen--file-icon file)
+             relative-time
+             (format-time-string "%Y-%m-%d %T" time)
+             t)))
+        (initial-startup-screen--insert-section-header
+         "Projects"
+         (initial-startup-screen--octicon "nf-oct-project_roadmap" "[P]"))
+        (dolist (root (initial-startup-screen--project-roots))
+          (initial-startup-screen--insert-link-line
+           root
+           root
+           (initial-startup-screen--file-icon root)))
+        (goto-char (point-min))
+        (setq buffer-read-only t)))
+    buffer))
+
+(defun initial-startup-screen (&optional _scratch switch)
+  "Return the custom startup buffer.
+Optional _SCRATCH and SWITCH are accepted for compatibility with
+older calls.  When SWITCH is non-nil, display the buffer."
+  (let ((buffer (initial-startup-screen-refresh)))
     (when switch
       (switch-to-buffer buffer))
-    (with-current-buffer buffer
-      (when scratch
-        (when (bound-and-true-p indent-bars-mode)
-          (indent-bars-mode -1))
-        (rename-buffer "*Emacs*"))
-      (fundamental-mode)
-      (erase-buffer)
-      (visual-fill-column-mode)
-      (auto-save-mode -1)
-      (newline 7)
-      (emacs-startup-create-a-cow)
-      (insert (propertize (concat (make-string 48 ? ) (format "Emacs started in %s" (emacs-init-time)))
-                          'face `(:foreground ,(face-foreground 'font-lock-builtin-face) :height 0.8)
-                          'display '(raise 0.2)
-                          ))
-      (add-text-properties (line-beginning-position)
-                           (point)
-                           '(line-height 1.35 v-adjust 0.3))
-      (newline 1)
-      (let
-          ((rec_file_list '())
-           (top-n)
-           (file-time-list))
-        (seq-do (lambda (f)
-                  (when (file-exists-p f)
-                    (add-to-list 'rec_file_list f)))
-                file-name-history)
-        (setq rec_file_list (nreverse rec_file_list))
-        (setq top-n (if (> (length rec_file_list) 5) 5 (length rec_file_list)))
-        (setq file-time-list
-              (mapcar (lambda (f)
-                        ;; Copy from `marginalia--time' function
-                        (let ((time (file-attribute-modification-time (file-attributes f)))
-                              (time--relative
-                               '((100 "sec" 1) (6000 "min" 60.0) (108000 "hour" 3600.0)
-                                 (34560000 "day" 86400.0) (nil "year" 31557600.0))))
-                          (if (< (float-time (time-since time)) 1209600)
-                              (progn
-                                (setq time (max 0 (float-time (time-since time))))
-                                (let ((sts time--relative) here)
-                                  (while (and (car (setq here (pop sts)))
-                                              (<= (car here) time)))
-                                  (setq time (round time (caddr here)))
-                                  (cons (format "%s %s%s ago" time (cadr here) (if (= time 1) "" "s")) f)))
-                            (let ((system-time-locale "C"))
-                              (cons
-                               (format-time-string
-                                (if (> (decoded-time-year (decode-time (current-time)))
-                                       (decoded-time-year (decode-time time)))
-                                    " %Y %b %d"
-                                  "%b %d %H:%M")
-                                time)
-                               f)))))
-                      (butlast rec_file_list (- (length rec_file_list) top-n))))
-        (insert (concat
-                 (make-string (- emacs-startup-space 2) ? )
-                 (make-string emacs-startup-icon-position ?─)
-                 " "
-                 (nerd-icons-octicon "nf-oct-history")
-                 " "
-                 (propertize "Recent Files " 'face 'bold 'display '(space-width 0.5))
-                 (make-string
-                  (- fill-column emacs-startup-icon-position 33)
-                  ?─)
-                 )
-                "\n")
-        (add-text-properties (- (line-beginning-position) (- fill-column 30))
-                             (point)
-                             '(line-height 1.5 line-spacing 0.3))
-        (seq-do
-         (lambda (c)
-           (let* ((time (car c))
-                  (file (cdr c))
-                  (len (length (concat time file))))
-             (insert (propertize (concat
-                                  (propertize
-                                   (concat
-                                    (make-string emacs-startup-space ? )
-                                    (if (directory-name-p file)
-                                        (nerd-icons-icon-for-dir file)
-                                      (nerd-icons-icon-for-file file))
-                                    " ")
-                                   'display '(raise 0.1)
-                                   )
-                                  (propertize (if (and (< len (- fill-column 18))
-                                                       (<= (length file) emacs-startup-filename-length))
-                                                  file
-                                                (concat "..."
-                                                        (substring file (- (length file) emacs-startup-filename-length -3))
-                                                        ))
-                                              'face
-                                              '(:inherit link :underline nil)
-                                              'display '(raise 0.25)
-                                              )
-                                  (concat (propertize " " 'display
-                                                      `(space :align-to ,(- fill-column
-                                                                            (length time)
-                                                                            emacs-startup-space)))
-                                          (propertize time 'face '(:inherit font-lock-keyword-face)
-                                                      'pointer 'arrow
-                                                      'help-echo
-                                                      (format-time-string
-                                                       "%Y-%m-%d %T"
-                                                       (file-attribute-modification-time (file-attributes file)))
-                                                      'display '(raise 0.25)
-                                                      ))
-                                  )
-                                 'line-height 2
-                                 'mouse-face 'highlight
-                                 'cursor nil
-                                 'help-echo file
-                                 'follow-link nil
-                                 'keymap
-                                 (define-keymap
-                                   "<return>"
-                                   (lambda ()
-                                     (interactive)
-                                     (find-file (get-text-property (point) 'help-echo)))
-                                   "<mouse-1>"
-                                   (lambda (e)
-                                     (interactive "e")
-                                     (find-file (get-text-property
-                                                 (posn-point (event-start e))
-                                                 'help-echo))
-                                     )
-                                   )
-                                 ))
-             (add-text-properties (line-beginning-position) (point) '(line-height 1.4))
-             (newline 1)
-             ))
-         file-time-list)
-        (insert (concat
-                 (make-string (- emacs-startup-space 2) ? )
-                 (make-string emacs-startup-icon-position ?─)
-                 " "
-                 (nerd-icons-octicon "nf-oct-project_roadmap")
-                 " "
-                 (propertize "Projects " 'face 'bold 'display '(space-width 0.8))
-                 (make-string
-                  (- fill-column emacs-startup-icon-position 30)
-                  ?─)
-                 )
-                "\n")
-        (add-text-properties (- (line-beginning-position) (- fill-column 30))
-                             (point) '(line-height 1.5 line-spacing 0.3))
-        (seq-do (lambda (d)
-                  (insert (propertize (concat
-                                       (format (concat
-                                                (make-string emacs-startup-space ? )
-                                                "%s ")
-                                               (nerd-icons-icon-for-dir d))
-                                       (propertize (if (< (length d) (- fill-column 18))
-                                                       d
-                                                     (concat (truncate-string-to-width d
-                                                                                       (- fill-column 21))
-                                                             "..."))
-                                                   'face
-                                                   '(:inherit link :underline nil))
-                                       )
-                                      'mouse-face 'highlight
-                                      'cursor nil
-                                      'help-echo d
-                                      'follow-link nil
-                                      'display '(raise 0.25)
-                                      'keymap
-                                      (define-keymap
-                                        "<return>"
-                                        (lambda ()
-                                          (interactive)
-                                          (find-file (get-text-property (point) 'help-echo)))
-                                        "<mouse-1>"
-                                        (lambda (e)
-                                          (interactive "e")
-                                          (find-file (get-text-property
-                                                      (posn-point (event-start e))
-                                                      'help-echo))
-                                          )
-                                        )
-                                      ))
-                  (add-text-properties (line-beginning-position) (point) '(line-height 1.4))
-                  (newline 1)
-                  )
-                (project-known-project-roots))
-        )
-      (setq buffer-read-only t)))
-  (prefer-coding-system 'gbk)
-  (prefer-coding-system 'utf-8))
+    buffer))
 
 
 
 ;;; ============================================================================
-;;; 05 Startup Hook
+;;; 05 Startup Configuration
 ;;; ============================================================================
 
-(add-hook 'emacs-startup-hook
-          (lambda()
-            (initial-startup-screen t nil)))
+(setq inhibit-startup-screen t
+      initial-buffer-choice #'initial-startup-screen)
 
 (provide 'init-startup)
 ;;; init-startup.el ends here.

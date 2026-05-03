@@ -1981,6 +1981,70 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
         (cdlatex-tab)
       (org-table-next-field))))
 
+(defconst my-latexmk-config-files '(".latexmkrc" "latexmkrc" ".latexmk")
+  "Project-local Latexmk configuration filenames.")
+
+(defconst my-latexmk-auto-read-config-files '(".latexmkrc" "latexmkrc")
+  "Latexmk configuration filenames read automatically from the command directory.")
+
+(defun my-latexmk--command-directory ()
+  "Return the directory where AUCTeX will run Latexmk."
+  (file-name-as-directory
+   (expand-file-name
+    (or (when (fboundp 'TeX-master-directory)
+          (ignore-errors (TeX-master-directory)))
+        default-directory))))
+
+(defun my-latexmk--project-root (&optional directory)
+  "Return the project root for DIRECTORY, or nil outside a project."
+  (let ((default-directory (file-name-as-directory
+                            (expand-file-name (or directory default-directory)))))
+    (when-let* ((project (and (fboundp 'project-current)
+                              (project-current nil))))
+      (cond
+       ((fboundp 'project-root) (project-root project))
+       ((fboundp 'project-roots) (car (project-roots project)))))))
+
+(defun my-latexmk--config-in-directory (directory)
+  "Return a Latexmk config file in DIRECTORY, or nil."
+  (catch 'config
+    (dolist (name my-latexmk-config-files)
+      (let ((file (expand-file-name name directory)))
+        (when (file-regular-p file)
+          (throw 'config file))))
+    nil))
+
+(defun my-latexmk--locate-config ()
+  "Return the nearest project-local Latexmk config for the current TeX buffer."
+  (let* ((start-dir (my-latexmk--command-directory))
+         (project-root (when-let* ((root (my-latexmk--project-root start-dir)))
+                         (file-name-as-directory (expand-file-name root))))
+         (home-dir (file-name-as-directory (expand-file-name "~")))
+         (stop-dir (or project-root home-dir))
+         (dir start-dir))
+    (catch 'config
+      (while dir
+        (when-let* ((config (my-latexmk--config-in-directory dir)))
+          (throw 'config config))
+        (let ((parent (file-name-directory (directory-file-name dir))))
+          (if (or (and stop-dir (file-equal-p dir stop-dir))
+                  (null parent)
+                  (file-equal-p parent dir))
+              (throw 'config nil)
+            (setq dir (file-name-as-directory parent))))))))
+
+(defun my-latexmk-options ()
+  "Use a project Latexmk config when present, otherwise use AUCTeX defaults."
+  (if-let* ((config (my-latexmk--locate-config)))
+      (let ((config-dir (file-name-as-directory (file-name-directory config))))
+        (if (and (member (file-name-nondirectory config)
+                         my-latexmk-auto-read-config-files)
+                 (file-equal-p config-dir (my-latexmk--command-directory)))
+            ""
+          (concat "-r " (shell-quote-argument config))))
+    (replace-regexp-in-string "\\`[ \t\n]+" ""
+                              (TeX-command-expand "%(latexmk-out)"))))
+
 (with-eval-after-load 'tex
   (add-hook
    'cdlatex-tab-hook
@@ -2032,9 +2096,10 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
   (add-to-list
    'TeX-command-list
    '("XeLaTeX" "%`xelatex -shell-escape --syntex=1%(mode)%' %t" TeX-run-TeX nil t))
+  (add-to-list 'TeX-expand-list '("%(my-latexmk-options)" my-latexmk-options))
   (setcdr
    (assoc "LaTeXMk" TeX-command-list)
-   '("latexmk -lualatex -pvc -view=none %(latexmk-out) %(file-line-error) %(output-dir) %`%(extraopts) %S%(mode)%' %t"
+   '("latexmk -pvc -view=none %(my-latexmk-options) %(file-line-error) %(output-dir) %`%(extraopts) %S%(mode)%' %t"
      TeX-run-TeX
      nil
      (LaTeX-mode docTeX-mode)

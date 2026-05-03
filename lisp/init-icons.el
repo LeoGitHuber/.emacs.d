@@ -2,9 +2,9 @@
 ;;; Commentary:
 ;;; Code:
 
-(add-to-list 'load-path "~/.emacs.d/site-lisp/nerd-icons.el")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/treemacs-nerd-icons")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/nerd-icons-dired")
+(add-to-list 'load-path (my/emacs-path "site-lisp/nerd-icons.el"))
+(add-to-list 'load-path (my/emacs-path "site-lisp/treemacs-nerd-icons"))
+(add-to-list 'load-path (my/emacs-path "site-lisp/nerd-icons-dired"))
 
 (setq nerd-icons-font-family "BlexMono Nerd Font")
 
@@ -21,7 +21,8 @@
 (add-hook 'ibuffer-mode-hook 'nerd-icons-ibuffer-mode)
 
 ;; (require 'all-the-icons)
-(with-eval-after-load 'all-the-icons (load "~/.emacs.d/self-develop/all-the-icons-diy.el"))
+(with-eval-after-load 'all-the-icons
+  (load (my/emacs-path "self-develop/all-the-icons-diy.el")))
 
 ;; (with-eval-after-load 'nerd-icons
 ;;   (setq fc-info (nerd-icons-codicon "nf-cod-question" :face '(:inherit flycheck-info-my))

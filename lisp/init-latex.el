@@ -32,7 +32,7 @@
             (lambda ()
               (and (bound-and-true-p lsp-bidge-mode)
                    (acm-frame-visible-p acm-menu-frame))))
-  (load "~/.emacs.d/lisp/auctex-latexmk.el")
+  (load (my/emacs-path "lisp/auctex-latexmk.el"))
   (setq TeX-auto-save t
         TeX-parse-self t
         ;; TeX-fold-auto t

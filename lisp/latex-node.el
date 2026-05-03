@@ -5,7 +5,7 @@
 (defvar latex-node-directory "~/Documents/Personal/LaTeX-notes/"
   "Directory to store LaTeX files.")
 
-(defvar latex-node-template "~/.emacs.d/lisp/template.tex"
+(defvar latex-node-template (expand-file-name "lisp/template.tex" user-emacs-directory)
   "Template for LaTeX node.")
 
 (defun latex-node-find-file ()

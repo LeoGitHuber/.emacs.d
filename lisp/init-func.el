@@ -204,6 +204,19 @@ The resulting list contains all items that appear in LIST1 but not LIST2."
 
 ;;; Filesystem helpers
 
+(defun my/emacs-path (path)
+  "Expand PATH relative to `user-emacs-directory'."
+  (expand-file-name path user-emacs-directory))
+
+(defun my/windows-path-to-cygwin (path)
+  "Convert PATH to a Cygwin `/cygdrive' path."
+  (let ((path (subst-char-in-string ?\\ ?/ (expand-file-name path))))
+    (if (string-match "\\`\\([[:alpha:]]\\):\\(.*\\)\\'" path)
+        (format "/cygdrive/%s%s"
+                (downcase (match-string 1 path))
+                (match-string 2 path))
+      path)))
+
 (defun find-subdir-recursively (dir)
   "Find all subdirectories in DIR.
 
@@ -228,10 +241,10 @@ Dot-directories and directories contain `.nosearch' will be skipped."
 
 ;;; Autoload generation
 
-(defvar autoloads-file "~/.emacs.d/site-lisp/loaddefs.el"
+(defvar autoloads-file (my/emacs-path "site-lisp/loaddefs.el")
   "File with all of autoload setting.")
 
-(defvar site-lisp-directory "~/.emacs.d/site-lisp"
+(defvar site-lisp-directory (my/emacs-path "site-lisp")
   "Directory contained of all third party packages.")
 
 (defun generate-autoloads (&optional dir target)
@@ -249,8 +262,8 @@ use `cm/autoloads-file' as TARGET."
 ;;;###autoload
 (defun update-all-autoloads ()
   (interactive)
-  (cd "~/.emacs.d")
-  (let ((generated-autoload-file (expand-file-name "loaddefs.el")))
+  (cd user-emacs-directory)
+  (let ((generated-autoload-file autoloads-file))
     (when (not (file-exists-p generated-autoload-file))
       (with-current-buffer (find-file-noselect generated-autoload-file)
         (insert ";;") ;; create the file with non-zero size to appease autoload

@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(add-to-list 'load-path "~/.emacs.d/site-lisp/flycheck")
+(add-to-list 'load-path (my/emacs-path "site-lisp/flycheck"))
 ;; (require 'flycheck)
 
 ;; (with-eval-after-load 'flycheck

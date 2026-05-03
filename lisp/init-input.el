@@ -3,7 +3,7 @@
 ;;; Code:
 
 ;; Input Method
-(add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-rime")
+(add-to-list 'load-path (my/emacs-path "site-lisp/emacs-rime"))
 
 (with-eval-after-load 'rime
   (set-face-attribute 'rime-default-face nil :height 1.2)
@@ -51,7 +51,7 @@ Can be used in `rime-disable-predicates' and `rime-inline-predicates'."
   (define-key rime-mode-map (kbd "C-t") 'rime-inline-ascii)
   (define-key minibuffer-mode-map (kbd "C-t") 'rime-inline-ascii)
   (setq default-input-method "rime"
-		rime-user-data-dir "~/.local/share/fcitx5/rime"    ;; "~/.emacs.d/rime/"
+		rime-user-data-dir (my/emacs-path "rime")
 		rime-show-candidate 'posframe
 		rime-show-preedit 't
 		rime-translate-keybindings '("C-f" "C-b" "C-n" "C-p" "C-g" "<left>" "<right>" "<up>" "<down>" "<prior>" "<next>" "<delete>" "C-h")

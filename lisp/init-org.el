@@ -4,13 +4,13 @@
 
 ;;; Org Mode
 
-(add-to-list 'load-path "~/.emacs.d/site-lisp/org-roam")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/org-modern-indent")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/org-modern")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/org-appear")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/org-bars")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/emacsql")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/org-visual-outline")
+(add-to-list 'load-path (my/emacs-path "site-lisp/org-roam"))
+(add-to-list 'load-path (my/emacs-path "site-lisp/org-modern-indent"))
+(add-to-list 'load-path (my/emacs-path "site-lisp/org-modern"))
+(add-to-list 'load-path (my/emacs-path "site-lisp/org-appear"))
+(add-to-list 'load-path (my/emacs-path "site-lisp/org-bars"))
+(add-to-list 'load-path (my/emacs-path "site-lisp/emacsql"))
+(add-to-list 'load-path (my/emacs-path "site-lisp/org-visual-outline"))
 
 ;; Hide spaces of chinese inline block
 ;; (font-lock-add-keywords 'org-mode

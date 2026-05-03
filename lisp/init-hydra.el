@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(add-to-list 'load-path "~/.emacs.d/site-lisp/hydra")
+(add-to-list 'load-path (my/emacs-path "site-lisp/hydra"))
 (require 'hydra)
 
 (defhydra hydra-avy (global-map "M-g" :exit t :hint nil)

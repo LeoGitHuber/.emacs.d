@@ -24,38 +24,41 @@
         package-check-signature nil)
 
   ;;; Emacs Default Setting
-  (load "~/.emacs.d/lisp/init-func.el")
+  (load (expand-file-name "lisp/init-func.el" user-emacs-directory))
 
-  (let ((packages (find-subdir-recursively "~/.emacs.d/site-lisp")))
+  (let ((packages (find-subdir-recursively (my/emacs-path "site-lisp"))))
     (setq load-path (append load-path packages)))
-  (add-to-list 'load-path "~/.emacs.d/site-lisp")
-  (add-to-list 'load-path "~/.emacs.d/site-lisp/treemacs/src/elisp")
-  (add-to-list 'load-path "~/.emacs.d/site-lisp/treemacs/src/extra/")
-  (add-to-list 'load-path "~/.emacs.d/site-lisp/lsp-mode/clients")
-  (add-to-list 'load-path "~/.emacs.d/site-lisp/lsp-mode/scripts")
-  (add-to-list 'load-path "~/.emacs.d/site-lisp/lsp-mode/docs")
-  (add-to-list 'load-path "~/.emacs.d/site-lisp/vertico/extensions")
-  (add-to-list 'load-path "~/.emacs.d/site-lisp/themes/themes")
-  (add-to-list 'load-path "~/.emacs.d/site-lisp/pdf-tools/lisp")
-  (add-to-list 'load-path "~/.emacs.d/site-lisp/verilog-ext")
-  (load "~/.emacs.d/site-lisp/loaddefs.el")
-  (load "~/.emacs.d/lisp/init-gc.el")
-  (load "~/.emacs.d/lisp/init-flymake.el")
-  (load "~/.emacs.d/lisp/init-icons.el")
-  (load "~/.emacs.d/lisp/init-meow.el")
-  (load "~/.emacs.d/lisp/init-keybindings.el")
-  (load "~/.emacs.d/lisp/init-lsp.el")
-  (load "~/.emacs.d/lisp/init-dired.el")
-  (load "~/.emacs.d/lisp/init-chinese.el")
-  (load "~/.emacs.d/lisp/init-input.el")
-  (load "~/.emacs.d/lisp/init-eaf.el")
-  (load "~/.emacs.d/lisp/init-org.el")
-  (load "~/.emacs.d/lisp/init-verilog.el")
-  (load "~/.emacs.d/lisp/init-reader.el")
-  (load "~/.emacs.d/lisp/init-hydra.el")
-  (load "~/.emacs.d/lisp/latex-node.el")
-  (load "~/.emacs.d/lisp/init-latex.el")
-  (load "~/.emacs.d/lisp/init-base.el")
+  (dolist (path
+           (mapcar #'my/emacs-path
+                   '("site-lisp"
+                     "site-lisp/treemacs/src/elisp"
+                     "site-lisp/treemacs/src/extra/"
+                     "site-lisp/lsp-mode/clients"
+                     "site-lisp/lsp-mode/scripts"
+                     "site-lisp/lsp-mode/docs"
+                     "site-lisp/vertico/extensions"
+                     "site-lisp/themes/themes"
+                     "site-lisp/pdf-tools/lisp"
+                     "site-lisp/verilog-ext")))
+    (add-to-list 'load-path path))
+  (load (my/emacs-path "site-lisp/loaddefs.el"))
+  (load (my/emacs-path "lisp/init-gc.el"))
+  (load (my/emacs-path "lisp/init-flymake.el"))
+  (load (my/emacs-path "lisp/init-icons.el"))
+  (load (my/emacs-path "lisp/init-meow.el"))
+  (load (my/emacs-path "lisp/init-keybindings.el"))
+  (load (my/emacs-path "lisp/init-lsp.el"))
+  (load (my/emacs-path "lisp/init-dired.el"))
+  (load (my/emacs-path "lisp/init-chinese.el"))
+  (load (my/emacs-path "lisp/init-input.el"))
+  (load (my/emacs-path "lisp/init-eaf.el"))
+  (load (my/emacs-path "lisp/init-org.el"))
+  (load (my/emacs-path "lisp/init-verilog.el"))
+  (load (my/emacs-path "lisp/init-reader.el"))
+  (load (my/emacs-path "lisp/init-hydra.el"))
+  (load (my/emacs-path "lisp/latex-node.el"))
+  (load (my/emacs-path "lisp/init-latex.el"))
+  (load (my/emacs-path "lisp/init-base.el"))
   )
 
 (provide 'config)

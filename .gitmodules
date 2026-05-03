@@ -562,9 +562,6 @@
 [submodule "site-lisp/eldoc-mouse"]
 	path = site-lisp/eldoc-mouse
 	url = https://github.com/huangfeiyu/eldoc-mouse.git
-[submodule "site-lisp/nov-highlights"]
-	path = site-lisp/nov-highlights
-	url = https://github.com/emacselements/nov-highlights.git
 [submodule "site-lisp/justify-kp"]
 	path = site-lisp/justify-kp
 	url = https://github.com/Fuco1/justify-kp.git

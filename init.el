@@ -28,7 +28,7 @@
 (defvar non-android-p (not (eq system-type 'android))
   "Judge whether it isn't Android system.")
 
-(setq custom-file "~/.emacs.d/custom.el"
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory)
       load-prefer-newer t)
 
 (load custom-file)
@@ -38,23 +38,24 @@
   (setq touch-screen-display-keyboard t))
 
 ;;; Load path and core helpers
-(add-to-list 'load-path "~/.emacs.d/lisp")
+(add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
 (require 'init-func)
 
-(let ((packages (find-subdir-recursively "~/.emacs.d/site-lisp")))
+(let ((packages (find-subdir-recursively (my/emacs-path "site-lisp"))))
   (setq load-path (append load-path packages)))
 
 (dolist (path
-         '("~/.emacs.d/site-lisp"
-           "~/.emacs.d/site-lisp/treemacs/src/elisp"
-           "~/.emacs.d/site-lisp/treemacs/src/extra/"
-           "~/.emacs.d/site-lisp/lsp-mode/clients"
-           "~/.emacs.d/site-lisp/lsp-mode/scripts"
-           "~/.emacs.d/site-lisp/lsp-mode/docs"
-           "~/.emacs.d/site-lisp/vertico/extensions"
-           "~/.emacs.d/site-lisp/themes/themes"
-           "~/.emacs.d/site-lisp/pdf-tools/lisp"))
+         (mapcar #'my/emacs-path
+                 '("site-lisp"
+                   "site-lisp/treemacs/src/elisp"
+                   "site-lisp/treemacs/src/extra/"
+                   "site-lisp/lsp-mode/clients"
+                   "site-lisp/lsp-mode/scripts"
+                   "site-lisp/lsp-mode/docs"
+                   "site-lisp/vertico/extensions"
+                   "site-lisp/themes/themes"
+                   "site-lisp/pdf-tools/lisp")))
   (add-to-list 'load-path path))
 
 (defun my/refresh-elisp-flymake-byte-compile-load-path ()
@@ -69,7 +70,7 @@
 ;;; Core settings
 (setq set-mark-command-repeat-pop t
       other-window-scroll-default 'get-lru-window
-      backup-directory-alist '(("." . "~/.emacs.d/backup"))
+      backup-directory-alist `(("." . ,(my/emacs-path "backup")))
       ;; package-quickstart nil
       nobreak-char-display nil)
 
@@ -555,7 +556,7 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
   (treemacs-load-theme "nerd-icons"))
 
 (with-eval-after-load 'all-the-icons
-  (load "~/.emacs.d/self-develop/all-the-icons-diy.el"))
+  (load (my/emacs-path "self-develop/all-the-icons-diy.el")))
 
 (require 'init-startup)
 
@@ -733,7 +734,7 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
   (recentf-mode t)
   (setq recentf-max-saved-items 1000
         recentf-exclude `("/tmp/" "/ssh:" ,(concat user-emacs-directory "lib/.*-autoloads\\.el\\'"))
-        yas-snippet-dirs (list (expand-file-name "~/.emacs.d/snippets")))
+        yas-snippet-dirs (list (my/emacs-path "snippets")))
   (add-to-list 'recentf-exclude no-littering-var-directory)
   (add-to-list 'recentf-exclude no-littering-etc-directory))
 
@@ -823,7 +824,7 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
    'text-mode-hook
    (lambda ()
      (or (boundp 'iscroll-mode)
-         (load "~/.emacs.d/site-lisp/iscroll/iscroll.el"))
+         (load (my/emacs-path "site-lisp/iscroll/iscroll.el")))
      (iscroll-mode))))
 
 (defvar magit-diff-refine-hunk)
@@ -1107,7 +1108,7 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
 
 (define-key markdown-mode-map (kbd "C-c C-e") #'markdown-do)
 
-(add-to-list 'load-path "~/.emacs.d/site-lisp/corfu/extensions")
+(add-to-list 'load-path (my/emacs-path "site-lisp/corfu/extensions"))
 (my/refresh-elisp-flymake-byte-compile-load-path)
 
 (require 'corfu)
@@ -1488,8 +1489,16 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
   (global-treesit-auto-mode 1)
   (require 'qml-ts-mode))
 
+(defun my/open-pdf-with-default-app ()
+  "Open the current PDF with the default Windows application."
+  (interactive)
+  (w32-shell-execute "open" (expand-file-name buffer-file-name))
+  (run-at-time 0 nil #'kill-buffer (current-buffer)))
+
 (dolist (entry
-         '(("\\.pdf\\'" . pdf-view-mode)
+         `(( "\\.pdf\\'" . ,(if windows-system-p
+                                 'my/open-pdf-with-default-app
+                                 'pdf-view-mode))
            ("\\.ya?ml\\'" . yaml-ts-mode)
            ("\\.lua\\'" . lua-ts-mode)
            ("\\.scala\\'" . scala-mode)
@@ -1583,7 +1592,7 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
       dired-movement-style 'cycle
       dired-omit-mode t)
 
-(add-to-list 'load-path "~/.emacs.d/site-lisp/dirvish/extensions")
+(add-to-list 'load-path (my/emacs-path "site-lisp/dirvish/extensions"))
 (my/refresh-elisp-flymake-byte-compile-load-path)
 (require 'dirvish)
 (require 'dirvish-side)
@@ -1601,11 +1610,19 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
 
 ;;; Chinese
 
-(setq cns-prog "~/.emacs.d/site-lisp/emacs-chinese-word-segmentation/cnws"
-      cns-dict-directory "~/.emacs.d/site-lisp/emacs-chinese-word-segmentation/cppjieba/dict"
-      cns-recent-segmentation-limit 20
+(setq cns-recent-segmentation-limit 20
       cns-debug nil
       cns-process-type 'shell)
+
+(let ((cns-root (my/emacs-path "site-lisp/emacs-chinese-word-segmentation")))
+  (if windows-system-p
+      (setq cns-cmdproxy-shell-path "D:/App/cygwin64/bin/bash.exe"
+            cns-prog (my/windows-path-to-cygwin
+                      (expand-file-name "cnws.exe" cns-root))
+            cns-dict-directory (my/windows-path-to-cygwin
+                                (expand-file-name "cppjieba/dict" cns-root)))
+    (setq cns-prog (expand-file-name "cnws" cns-root)
+          cns-dict-directory (expand-file-name "cppjieba/dict" cns-root))))
 
 (when non-android-p
   (require 'cns nil t)
@@ -1673,7 +1690,7 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
   (define-key rime-mode-map (kbd "C-t") 'rime-inline-ascii)
   (define-key minibuffer-mode-map (kbd "C-t") 'rime-inline-ascii)
   (setq default-input-method "rime"
-        rime-user-data-dir "~/.emacs.d/rime" ;; "~/.emacs.d/rime/"
+        rime-user-data-dir (my/emacs-path "rime")
         rime-show-candidate 'posframe
         rime-show-preedit 't
         rime-translate-keybindings
@@ -1717,14 +1734,13 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
 
 
 ;;; Reading / Documents
-(dolist (feature '(eldoc-box eldoc-mouse calibredb nov nov-xwidget shrface nov-highlights etaf))
+(dolist (feature '(eldoc-box eldoc-mouse calibredb nov nov-xwidget shrface etaf))
   (require feature))
 
 (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
 
 (with-eval-after-load 'nov
   (setq nov-text-width t)
-  (nov-highlights-global-mode-enable)
   (add-hook 'nov-mode-hook #'eldoc-mode)
   (add-hook 'nov-mode-hook #'eldoc-box-hover-mode)
   (add-hook 'nov-mode-hook #'visual-line-mode)
@@ -1770,13 +1786,14 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
 
 ;;; Org
 (dolist (path
-         '("~/.emacs.d/site-lisp/org-roam"
-           "~/.emacs.d/site-lisp/org-modern-indent"
-           "~/.emacs.d/site-lisp/org-modern"
-           "~/.emacs.d/site-lisp/org-appear"
-           "~/.emacs.d/site-lisp/org-bars"
-           "~/.emacs.d/site-lisp/emacsql"
-           "~/.emacs.d/site-lisp/org-visual-outline"))
+         (mapcar #'my/emacs-path
+                 '("site-lisp/org-roam"
+                   "site-lisp/org-modern-indent"
+                   "site-lisp/org-modern"
+                   "site-lisp/org-appear"
+                   "site-lisp/org-bars"
+                   "site-lisp/emacsql"
+                   "site-lisp/org-visual-outline")))
   (add-to-list 'load-path path))
 (my/refresh-elisp-flymake-byte-compile-load-path)
 
@@ -1888,11 +1905,13 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
   (setq org-noter-notes-search-path `(,denote-directory)
         org-noter-auto-save-last-location t))
 
-(dolist (path '("~/.emacs.d/site-lisp/with-editor/lisp" "~/.emacs.d/site-lisp/magit/lisp"))
+(dolist (path (mapcar #'my/emacs-path
+                      '("site-lisp/with-editor/lisp"
+                        "site-lisp/magit/lisp")))
   (add-to-list 'load-path path))
 (my/refresh-elisp-flymake-byte-compile-load-path)
 
-(load "~/.emacs.d/site-lisp/transient/lisp/transient.el")
+(load (my/emacs-path "site-lisp/transient/lisp/transient.el"))
 
 (require 'magit)
 (require 'org-roam)
@@ -1945,7 +1964,7 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
            :unnarrowed t))))
 
 ;;; LaTeX node
-(load "~/.emacs.d/lisp/latex-node.el")
+(load (my/emacs-path "lisp/latex-node.el"))
 
 ;;; LaTeX
 ;; On demand loading, leads to faster startup time.

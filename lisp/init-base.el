@@ -178,7 +178,7 @@
 
 ;; (rquire 'no-littering)
 (repeat-mode)
-(load "~/.emacs.d/site-lisp/no-littering/no-littering.el")
+(load (my/emacs-path "site-lisp/no-littering/no-littering.el"))
 (with-eval-after-load 'no-littering
   (recentf-mode t)
   (setq recentf-max-saved-items 1000
@@ -257,15 +257,24 @@
   (add-hook 'text-mode-hook
             (lambda ()
               (or (boundp 'iscroll-mode)
-                  (load "~/.emacs.d/site-lisp/iscroll/iscroll.el"))
+                  (load (my/emacs-path "site-lisp/iscroll/iscroll.el")))
               (iscroll-mode))))
 
-(add-to-list 'auto-mode-alist '("\\.pdf\\'" . pdf-view-mode))
+(defun my/open-pdf-with-default-app ()
+  "Open the current PDF with the default Windows application."
+  (interactive)
+  (w32-shell-execute "open" (expand-file-name buffer-file-name))
+  (run-at-time 0 nil #'kill-buffer (current-buffer)))
+
+(add-to-list 'auto-mode-alist
+             `("\\.pdf\\'" . ,(if (eq system-type 'windows-nt)
+                                  'my/open-pdf-with-default-app
+                                'pdf-view-mode)))
 (add-to-list 'auto-mode-alist '("\\.ya?ml\\'" . yaml-ts-mode))
 
 
-(add-to-list 'load-path "~/.emacs.d/site-lisp/magit/lisp")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/with-editor/lisp")
+(add-to-list 'load-path (my/emacs-path "site-lisp/magit/lisp"))
+(add-to-list 'load-path (my/emacs-path "site-lisp/with-editor/lisp"))
 (dolist
     (hook
      '(emacs-lisp-mode-hook
@@ -347,8 +356,8 @@
 
 ;; (add-hook 'minibuffer-setup-hook 'packages-load-after-minibuffer)
 
-(when (file-exists-p "~/.emacs.d/site-lisp/emacs-which-key/which-key.el")
-  (load "~/.emacs.d/site-lisp/emacs-which-key/which-key.el")
+(when (file-exists-p (my/emacs-path "site-lisp/emacs-which-key/which-key.el"))
+  (load (my/emacs-path "site-lisp/emacs-which-key/which-key.el"))
   (which-key-mode t)
   (setq which-key-max-description-length 30
         which-key-show-remaining-keys t)

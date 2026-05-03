@@ -4,14 +4,23 @@
 
 ;;; Emacs-Chinese
 
-(add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-chinese-word-segmentation")
-(setq cns-prog "~/.emacs.d/site-lisp/emacs-chinese-word-segmentation/cnws"
-      cns-dict-directory "~/.emacs.d/site-lisp/emacs-chinese-word-segmentation/cppjieba/dict"
-      ;; To use other program for word segmentation, set cns-process-shell-command:
-      ;; cns-process-shell-command "word_segmentation_program arg1 arg2..."
-      ;; disable debug output, default is t
-      cns-recent-segmentation-limit 20
+(add-to-list 'load-path (my/emacs-path "site-lisp/emacs-chinese-word-segmentation"))
+(setq cns-recent-segmentation-limit 20
       cns-debug nil)
+
+(let ((cns-root (my/emacs-path "site-lisp/emacs-chinese-word-segmentation")))
+  (if (eq system-type 'windows-nt)
+      (setq cns-cmdproxy-shell-path "D:/App/cygwin64/bin/bash.exe"
+            cns-prog (my/windows-path-to-cygwin
+                      (expand-file-name "cnws.exe" cns-root))
+            cns-dict-directory (my/windows-path-to-cygwin
+                                (expand-file-name "cppjieba/dict" cns-root)))
+    (setq cns-prog (expand-file-name "cnws" cns-root)
+          cns-dict-directory (expand-file-name "cppjieba/dict" cns-root)
+          ;; To use other program for word segmentation, set cns-process-shell-command:
+          ;; cns-process-shell-command "word_segmentation_program arg1 arg2..."
+          ;; disable debug output, default is t
+          )))
 
 (require 'cns nil t)
 

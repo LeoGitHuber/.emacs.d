@@ -5,6 +5,11 @@
 (require 'subr-x)
 (require 'cl-seq)
 
+(unless (fboundp 'set-local)
+  (defun set-local (variable value)
+    "Make VARIABLE buffer local and set it to VALUE."
+    (set (make-local-variable variable) value)))
+
 ;; Index:
 ;; 01 Editing Commands
 ;; 02 Commenting and Folding
@@ -497,23 +502,100 @@ If you experience stuttering, increase this.")
 
 ;;; Font and typography
 
+(defun my/font-installed-p (font-name)
+  "Return non-nil when FONT-NAME is available in the current session."
+  (and font-name
+       (find-font (font-spec :family font-name))))
+
+(defun my/first-installed-font (&rest font-names)
+  "Return the first installed font from FONT-NAMES."
+  (seq-find #'my/font-installed-p font-names))
+
 ;; "IBM Plex Mono" "Fantasque Sans Mono", "InputMono", "Monaspace Neon"
 ;; "Lilex Nerd Font" "Aporetic Serif Mono" "Hack" "Pragmasevka Nerd Font"
-(defvar code-font "Iosevka Nerd Font Mono"
+(defvar code-font
+  (cond
+   ((eq system-type 'windows-nt)
+    (or (my/first-installed-font "Cascadia Mono" "Consolas")
+        "Consolas"))
+   ((eq system-type 'gnu/linux)
+    (or (my/first-installed-font "Iosevka Nerd Font Mono"
+                                 "Iosevka Fixed"
+                                 "JetBrainsMono Nerd Font"
+                                 "DejaVu Sans Mono")
+        "Monospace"))
+   (t
+    (or (my/first-installed-font "Iosevka Nerd Font Mono"
+                                 "Menlo"
+                                 "Monaco"
+                                 "Monospace")
+        "Monospace")))
   "Font for coding.")
 
 ;; "Microsoft YaHei" "FZYouSongJ GBK" "Sarasa Gothic SC"
-(defvar cjk-font "LXGW Bright Code GB" ;; "LXGW WenKai Mono"
+(defvar cjk-font
+  (cond
+   ((eq system-type 'windows-nt)
+    (or (my/first-installed-font "Microsoft YaHei UI"
+                                 "Microsoft YaHei"
+                                 "SimHei")
+        "Microsoft YaHei UI"))
+   ((eq system-type 'gnu/linux)
+    (or (my/first-installed-font "LXGW Bright Code GB"
+                                 "LXGW WenKai Mono"
+                                 "Source Han Sans CN"
+                                 "Noto Sans CJK SC")
+        "Sans")))
   "CJK font.")
 
 ;; "Merriweather" "Libre Baskerville" ;; "Bookerly" ;; Palatino Linotype
-(defvar serif-font "Helvetica Neue"
+(defvar serif-font
+  (cond
+   ((eq system-type 'windows-nt)
+    (or (my/first-installed-font "Georgia"
+                                 "Palatino Linotype"
+                                 "Segoe UI")
+        "Georgia"))
+   ((eq system-type 'gnu/linux)
+    (or (my/first-installed-font "Helvetica Neue"
+                                 "Source Han Serif CN"
+                                 "Noto Serif CJK SC"
+                                 "DejaVu Serif")
+        "Serif"))
+   (t
+    (or (my/first-installed-font "Helvetica Neue"
+                                 "Georgia"
+                                 "Times New Roman")
+        "Serif")))
   "Serif font.")
 
-(defvar cjk-sans-font "Source Han Sans CN" ;; "LXGW WenKai Screen"
+(defvar cjk-sans-font
+  (cond
+   ((eq system-type 'windows-nt)
+    (or (my/first-installed-font "Microsoft YaHei UI"
+                                 "Microsoft YaHei"
+                                 "Segoe UI")
+        cjk-font))
+   ((eq system-type 'gnu/linux)
+    (or (my/first-installed-font "Source Han Sans CN"
+                                 "LXGW WenKai Screen"
+                                 "Noto Sans CJK SC")
+        cjk-font))
+   (t cjk-font))
   "CJK sans font.")
 
-(defvar verbatim-font "Source Han Sans CN"
+(defvar verbatim-font
+  (cond
+   ((eq system-type 'windows-nt)
+    (or (my/first-installed-font "Microsoft YaHei UI"
+                                 "Microsoft YaHei")
+        cjk-font))
+   ((eq system-type 'gnu/linux)
+    (or (my/first-installed-font "Source Han Sans CN"
+                                 "LXGW WenKai Screen"
+                                 "Noto Sans CJK SC")
+        cjk-font))
+   (t cjk-font))
   "Font for verbatim.")
 
 ;; Maple Mono NF --- Maple Mono SC NF, HarmonyOS Sans SC

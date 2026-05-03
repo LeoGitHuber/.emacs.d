@@ -95,9 +95,12 @@
 ;; (require 'kind-icon)
 
 (setq nerd-icons-font-family
-      (if (eq system-type 'gnu/linux)
-          ;; "Consolas Nerd Font Mono"
-          "Symbols Nerd Font Mono"))
+      (cond
+       ((eq system-type 'windows-nt)
+        "Symbols Nerd Font Mono")
+       ((eq system-type 'gnu/linux)
+        ;; "Consolas Nerd Font Mono"
+        "Symbols Nerd Font Mono")))
 
 (defface diagnostics-error
   `(

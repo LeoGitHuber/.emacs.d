@@ -274,11 +274,19 @@
 (defvar initial-startup-screen-section-raise 0.2
   "Vertical raise used to center section headers in taller startup lines.")
 
+(defvar initial-startup-screen-right-padding 4
+  "Display columns kept empty after right-aligned startup row suffixes.")
+
 (defun initial-startup-screen--align-indent ()
   "Return the display-aligned indentation used by the banner."
   (propertize
    " "
    'display `(space :align-to ,(max 0 (- fill-column emacs-startup-space 70)))))
+
+(defun initial-startup-screen--available-width ()
+  "Return the right edge used by startup rows.
+This follows section headers, with a small visual inset from `fill-column'."
+  (max 1 (- fill-column initial-startup-screen-right-padding)))
 
 (defun initial-startup-screen--pad-right (string width)
   "Pad STRING on the right to WIDTH display columns."
@@ -500,12 +508,20 @@ the default help text.  When TRUNCATE-LEFT is non-nil, keep the
 tail of LABEL."
   (let* ((start (point))
          (suffix (or suffix ""))
-         (suffix-width (if (string-empty-p suffix) 0 (1+ (string-width suffix))))
-         (label-width (max 10 (- fill-column
-                                  emacs-startup-space
-                                  (string-width icon)
-                                  suffix-width
-                                  4)))
+         (line-width (initial-startup-screen--available-width))
+         (icon-width (string-width icon))
+         (prefix-width (+ emacs-startup-space icon-width 1))
+         (suffix-text-width (string-width suffix))
+         (suffix-reserve (if (string-empty-p suffix)
+                             0
+                           (1+ suffix-text-width)))
+         (show-suffix (and (not (string-empty-p suffix))
+                           (>= (- line-width prefix-width suffix-reserve)
+                               8)))
+         (label-width (max 4 (min emacs-startup-filename-length
+                                  (- line-width
+                                     prefix-width
+                                     (if show-suffix suffix-reserve 0)))))
          (display-label (if truncate-left
                             (initial-startup-screen--truncate-left label label-width)
                           (initial-startup-screen--truncate-right label label-width))))
@@ -516,14 +532,11 @@ tail of LABEL."
             (initial-startup-screen--vcenter
              display-label initial-startup-screen-row-raise
              'face '(:inherit link :underline nil)))
-    (unless (string-empty-p suffix)
-      (insert (propertize
-               " "
-               'display `(space :align-to
-                                ,(max (+ emacs-startup-space 20)
-                                      (- fill-column
-                                         (string-width suffix)
-                                         emacs-startup-space)))))
+    (when show-suffix
+      (insert (make-string
+               (max 1 (- (- line-width suffix-text-width)
+                         (current-column)))
+               ? ))
       (insert (initial-startup-screen--vcenter
                suffix initial-startup-screen-row-raise
                'face '(:inherit font-lock-keyword-face))))
@@ -608,6 +621,8 @@ tail of LABEL."
         (setq buffer-read-only nil)
         (erase-buffer)
         (auto-save-mode -1)
+        (setq-local truncate-lines t
+                    word-wrap nil)
         (when (fboundp 'visual-fill-column-mode)
           (visual-fill-column-mode 1))
         (newline 7)

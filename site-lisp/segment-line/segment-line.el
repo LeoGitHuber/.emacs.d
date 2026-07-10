@@ -52,6 +52,7 @@
   '(segment-line-segment-state
     segment-line-segment-input-method
     segment-line-segment-buffer
+    segment-line-segment-popper
     segment-line-segment-project
     segment-line-segment-vc)
   "Left-hand side component list."
@@ -113,6 +114,11 @@
 
 (defcustom segment-line-enable-which-function t
   "Whether `segment-line-mode' should show current symbol information."
+  :type 'boolean
+  :group 'segment-line)
+
+(defcustom segment-line-enable-popper t
+  "Whether `segment-line-mode' should show Popper popup status."
   :type 'boolean
   :group 'segment-line)
 
@@ -223,6 +229,9 @@
 
 (defvar segment-line--theme-hooks-installed nil
   "Non-nil when Segment Line theme refresh hooks are installed.")
+
+(defvar popper-popup-status nil
+  "External buffer-local popup status provided by Popper.")
 
 (defun segment-line--face-color (face attribute &optional fallback)
   "Return FACE ATTRIBUTE as a concrete color string, falling back to FALLBACK."
@@ -727,6 +736,13 @@ Prefer `nerd-icons' when available."
      (delq nil (list (and icon (not (string-empty-p icon)) icon) name mark))
      " ")))
 
+(defun segment-line--popper-label ()
+  "Return the Popper status label for the current buffer."
+  (when (and segment-line-enable-popper
+             (boundp 'popper-popup-status)
+             (memq popper-popup-status '(popup user-popup)))
+    "POP"))
+
 (defun segment-line--state-label-and-face ()
   "Return a cons cell (LABEL . FACE) for the current editing state."
   (cond
@@ -750,6 +766,13 @@ Prefer `nerd-icons' when available."
    (segment-line--buffer-label)
    (if (segment-line--active-p) 'segment-line-chip-accent 'segment-line-inactive)
    segment-line-chip-padding))
+
+(defun segment-line-segment-popper ()
+  "Render Popper popup status."
+  (when-let* ((label (segment-line--popper-label)))
+    (segment-line--chip
+     label
+     (if (segment-line--active-p) 'segment-line-chip-note 'segment-line-inactive))))
 
 (defun segment-line-segment-input-method ()
   "Render input method segment."

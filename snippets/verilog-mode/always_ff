@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# key: af
+# key: always_ff
 # --
 
 always${4:_ff} @(posedge ${1:`verilog-ext-template-clock`}) begin${3: : label}

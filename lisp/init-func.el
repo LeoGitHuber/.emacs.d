@@ -136,24 +136,6 @@
 ;;; Commenting / folding
 
 ;;;###autoload
-(defun comment-or-uncomment ()
-  (interactive)
-  (if (region-active-p)
-      (progn
-        (kill-ring-save (region-beginning)
-                        (region-end))
-        (comment-or-uncomment-region (region-beginning)
-                                     (region-end)))
-    (if (save-excursion
-          (beginning-of-line)
-          (looking-at "\\s-*$"))
-        (progn
-          (call-interactively 'comment-dwim)
-          (next-line))
-      (comment-or-uncomment-region (line-beginning-position)
-                                   (line-end-position)))))
-
-;;;###autoload
 (defun hideshow-folded-overlay-fn (ov)
   (when (eq 'code (overlay-get ov 'hs))
     (let* ((nlines (count-lines (overlay-start ov)

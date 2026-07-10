@@ -66,6 +66,13 @@
 
 (my/refresh-elisp-flymake-byte-compile-load-path)
 
+(when (and non-android-p
+           (not windows-system-p)
+           (or (display-graphic-p) (daemonp)))
+  (require 'exec-path-from-shell)
+  (add-to-list 'exec-path-from-shell-variables "JAVA_HOME")
+  (exec-path-from-shell-initialize))
+
 
 ;;; Core settings
 (setq set-mark-command-repeat-pop t
@@ -147,7 +154,7 @@
       `((error ,(concat "󰅙" "\u200A") diagnostics-error)
         (warning ,(concat "" "\u200A") diagnostics-warn)
         (note ,(concat "" "\u200A") diagnostics-info))
-      flymake-show-diagnostics-at-end-of-line 'fancy)
+      flymake-show-diagnostics-at-end-of-line t)
 
 (defun my/flymake-apply-margin-indicators ()
   "Sync custom Flymake margin icons into diagnostic type properties."
@@ -748,7 +755,8 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
 (require 'savehist)
 (setq history-length 1000
       history-delete-duplicates t
-      savehist-save-minibuffer-history t)
+      savehist-save-minibuffer-history t
+      savehist-additional-variables '(search-ring regexp-search-ring kill-ring))
 
 (savehist-mode t)
 
@@ -759,16 +767,20 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
       lazy-highlight-cleanup nil
       ;; 处理中英文断行不分割问题，需要开启 toggle-word-wrap 和
       ;; visual-line-mode 才能体现
-      word-wrap-by-category t)
+      word-wrap-by-category t
+      read-process-output-max (* 4 1024 1024)
+      save-interprogram-paste-before-kill t
+      kill-do-not-save-duplicates t
+      ffap-machine-p-known 'reject
+      window-combination-resize t)
 
 (setq-default tab-width 4
               tab-always-indent t
               tab-first-completion 'word-or-paren-or-punct
               indent-tabs-mode nil
-              ;; bidi-display-reordering 'left-to-right
-              bidi-display-reordering nil
-              ;; bidi-paragraph-direction 'left-to-right
-              ;; bidi-paragraph-direction nil
+              bidi-display-reordering 'left-to-right
+              bidi-paragraph-direction 'left-to-right
+              bidi-inhibit-bpa t
               ;; display-fill-column-indicator-character 124
               fringe-indicator-alist
               '((truncation () right-arrow)
@@ -930,7 +942,40 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
 
 (keymap-global-set "C-z" 'vundo)
 
-(global-set-key [remap comment-dwim] 'comment-or-uncomment)
+(global-set-key [remap comment-dwim] 'comment-line)
+
+(require 'subr-x)
+(require 'newcomment)
+
+(defun my/section-comment ()
+  "Insert a section comment with current mode's comment style."
+  (interactive)
+  (comment-normalize-vars)
+  (let* ((indent (make-string (current-indentation) ?\s))
+         (start (string-trim-right comment-start))
+         (end (let ((e (string-trim (or comment-end ""))))
+                (if (string-empty-p e) "" (concat " " e))))
+         (bar (make-string 30 ?-))
+         title-pos)
+    (insert start " " bar end "\n")
+    (insert indent start " ")
+    (setq title-pos (point))
+    (insert end "\n")
+    (insert indent start " " bar end)
+    (goto-char title-pos)))
+
+(global-set-key (kbd "C-c s") #'my/section-comment)
+
+(defun my/c-c++-line-comment-setup ()
+  "Use // comments as the default line comment style in C/C++ buffers."
+  (setq-local comment-start "// "
+              comment-end ""))
+
+(dolist (hook '(c-mode-hook
+                c-ts-mode-hook
+                c++-mode-hook
+                c++-ts-mode-hook))
+  (add-hook hook #'my/c-c++-line-comment-setup))
 
 ;;; Fingertip
 (defvar fingertip-mode-map)
@@ -958,6 +1003,9 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
 
 ;;; Helpful
 
+(require 'which-key)
+(which-key-mode)
+(setq help-window-select t)
 (require 'helpful)
 
 (keymap-global-set "C-?" 'help-command)
@@ -1161,14 +1209,78 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
 
 (defun yas-setup-capf ()
   "Set capf for yasnippets."
-  (setq-local completion-at-point-functions (cons #'yasnippet-capf completion-at-point-functions)))
+  (setq-local completion-at-point-functions
+              (cons #'yasnippet-capf
+                    (remove #'yasnippet-capf completion-at-point-functions))))
 
 (add-hook 'prog-mode-hook 'yas-setup-capf)
+
+(defun my/verilog-completion-setup ()
+  "Enable Corfu and YASnippet completion reliably in Verilog buffers."
+  (when (fboundp 'yas-minor-mode)
+    (yas-minor-mode 1))
+  (yas-setup-capf)
+  (when (fboundp 'corfu-mode)
+    (setq-local corfu-auto t)
+    (corfu-mode 1)))
+
+(dolist (hook '(verilog-mode-hook verilog-ts-mode-hook))
+  (add-hook hook #'my/verilog-completion-setup))
+
+(defun my/verilog-eglot-completion-setup ()
+  "Restore Verilog snippet CAPF after Eglot adds its completion backend."
+  (when (derived-mode-p 'verilog-mode 'verilog-ts-mode)
+    (my/verilog-completion-setup)))
+
+(add-hook 'eglot-managed-mode-hook #'my/verilog-eglot-completion-setup)
 
 (setq yas-prompt-functions '(yas-no-prompt))
 
 (require 'eglot)
 (require 'dape)
+(require 'apheleia)
+
+(defconst my/verilog-format-command "verible-verilog-format"
+  "External formatter used for Verilog and SystemVerilog buffers.")
+
+(setf (alist-get 'verible-verilog-format apheleia-formatters)
+      `(,my/verilog-format-command
+        "--stdin_name" filepath
+        "--column_limit=100"
+        "--indentation_spaces=2"
+        "--assignment_statement_alignment=align"
+        "--module_net_variable_alignment=align"
+        "--port_declarations_alignment=align"
+        "--port_declarations_right_align_packed_dimensions=true"
+        "--named_port_alignment=align"
+        "--named_parameter_alignment=align"
+        "--struct_union_members_alignment=align"
+        "--case_items_alignment=align"
+        "--formal_parameters_alignment=align"
+        "--formal_parameters_indentation=indent"
+        "--port_declarations_indentation=indent"
+        "-"))
+
+(dolist (mode '(verilog-mode verilog-ts-mode))
+  (setf (alist-get mode apheleia-mode-alist) 'verible-verilog-format))
+
+(defun my/verilog-external-format-setup ()
+  "Enable external formatting for Verilog and SystemVerilog buffers."
+  (when (executable-find my/verilog-format-command)
+    (apheleia-mode 1)))
+
+(dolist (hook '(verilog-mode-hook verilog-ts-mode-hook))
+  (add-hook hook #'my/verilog-external-format-setup))
+
+(defun my/format-buffer ()
+  "Format the current buffer using the configured formatter."
+  (interactive)
+  (if (derived-mode-p 'verilog-mode 'verilog-ts-mode)
+      (progn
+        (unless (executable-find my/verilog-format-command)
+          (user-error "Cannot find %s" my/verilog-format-command))
+        (apheleia-format-buffer 'verible-verilog-format))
+    (eglot-format-buffer)))
 
 (with-eval-after-load 'eglot
   (setq my/pyright-uvx-command '("pyright-langserver" "--stdio"))
@@ -1176,60 +1288,16 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
    'eglot-server-programs
    '((verilog-mode verilog-ts-mode)
      .
-     ("verible-verilog-ls" "--push_diagnostic_notifications" "--rules"
-      "-explicit-function-lifetime,
-                  -explicit-parameter-storage-type,
-                  -unpacked-dimensions-range-ordering,
-                  -forbid-line-continuations,
-                  -parameter-name-style,
-                  -line-length,
-                  -always-comb"
-      )))
+     ("slang-server")))
   (add-to-list
    'eglot-server-programs
-   `((scala-mode scala-ts-mode)
-     .
-     ("env" "JAVA_HOME=/usr/lib64/jvm/java-21-openjdk-21" "metals-emacs")))
+   '((scala-mode scala-ts-mode) . ("metals-emacs")))
   ;; (add-to-list 'eglot-server-programs `((LaTeX-mode latex-mode tex-mode) . ("texlab")))
   (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
-  (setq project-vc-extra-root-markers '("Cargo.toml" ".dir-locals.el"))
+  (setq project-vc-extra-root-markers '("Cargo.toml" ".dir-locals.el" "build.mill"))
   (setq eglot-send-changes-idle-time 0
         eglot-code-action-indications '(eglot-hint))
   )
-
-  (with-eval-after-load 'lsp-bridge
-    (add-hook 'lsp-bridge-mode-hook 'yas/minor-mode)
-    (add-hook 'c++-ts-mode-hook (lambda ()
-                                  (setq-local lsp-bridge-inlay-hint-overlays t)))
-    (keymap-set yas-keymap "<tab>" 'acm-complete-or-expand-yas-snippet)
-    (setq ;; acm-candidate-match-function 'orderless-flex
-     ;; acm-enable-icon t
-     ;; acm-enable-doc t
-     acm-enable-yas t
-     acm-enable-tempel t
-     acm-enable-quick-access nil
-     acm-enable-search-file-words t
-     acm-enable-telega nil
-     acm-enable-tabnine nil
-     acm-enable-citre t
-     acm-enable-capf t
-     lsp-bridge-enable-log t
-     lsp-bridge-log-level 'debug
-     lsp-bridge-enable-signature-help t
-     lsp-bridge-enable-inlay-hint t
-     lsp-bridge-enable-diagnostics nil
-     lsp-bridge-complete-manually nil
-     ;; lsp-bridge-enable-profile t
-     ;; lsp-bridge-multi-lang-server-mode-list nil
-     acm-backend-lsp-candidate-min-length 2
-     acm-backend-elisp-candidate-min-length 2
-     acm-backend-search-file-words-candidate-min-length 3
-     acm-backend-yas-candidate-min-length 1
-     ;; lsp-bridge-python-command "python3"
-     ;; This will cause `org-roam-node-find' went wrong and I don't know why.
-     ;; lsp-bridge-enable-org-babel t
-     ;; lsp-bridge-c-lsp-server "clangd"
-     ))
 
 ;;; Minibuffer / Completion UI
 (dolist (feature
@@ -1258,7 +1326,12 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
   (require feature))
 
 ;; (setq-default completion-styles '(basic partial-completion orderless))
-(setq-default completion-styles '(flex))
+(setq-default completion-styles '(flex partial-completion orderless basic))
+
+(require 'wgrep)
+(setq consult-ripgrep-args
+      "rg --null --line-buffered --color=never --max-columns=1000 --path-separator /\
+ --smart-case --no-heading --with-filename --line-number --search-zip --no-ignore-parent")
 
 ;; (setq completion-styles '(basic partial-completion orderless)
 ;;       completion-category-overrides '((file (styles basic partial-completion))))
@@ -1360,7 +1433,9 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
         youdao-dictionary-mode)
       popper-group-function #'popper-group-by-project
       popper-display-control t
-      popper-tab-line-mode nil)
+      popper-tab-line-mode nil
+      ;; Keep Popper from prepending its raw "POP" token; Segment Line renders it.
+      popper-mode-line "")
 
 (keymap-global-set "C-`" #'popper-toggle)
 (keymap-global-set "M-`" #'popper-cycle)
@@ -1441,7 +1516,7 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
 (keymap-global-set "C-c l R" 'eglot-rename)
 (keymap-global-set "C-c l s" 'consult-eglot-symbols)
 (keymap-global-set "C-c l e" 'flymake-show-buffer-diagnostics)
-(keymap-global-set "C-c l f" 'eglot-format-buffer)
+(keymap-global-set "C-c l f" 'my/format-buffer)
 
 (keymap-global-set "C-." 'embark-act)
 
@@ -1463,6 +1538,7 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
 ;;; Language modes / Treesit
 (setq elisp-fontify-semantically t)
 
+(require 'scala-mode)
 (require 'scala-ts-mode)
 (require 'kdl-mode)
 (require 'yuck-mode)
@@ -1504,7 +1580,10 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
                                  'pdf-view-mode))
            ("\\.ya?ml\\'" . yaml-ts-mode)
            ("\\.lua\\'" . lua-ts-mode)
-           ("\\.scala\\'" . scala-mode)
+           ("\\.scala\\'" . scala-ts-mode)
+           ("\\.sbt\\'" . scala-ts-mode)
+           ("\\.sc\\'" . scala-ts-mode)
+           ("\\.mill\\'" . scala-ts-mode)
            ("\\.kdl\\'" . kdl-mode)
            ("\\.do\\'" . tcl-mode)
            ("\\.xdc\\'" . tcl-mode)
@@ -1520,6 +1599,25 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
 (with-eval-after-load 'css-mode
   (setq css-indent-offset 4))
 
+;;; Scala / Chisel
+(setq scala-ts-indent-offset 2)
+
+(with-eval-after-load 'scala-mode
+  (setq scala-indent:step 2
+        scala-indent:align-parameters nil
+        scala-indent:align-forms nil
+        scala-indent:indent-value-expression nil))
+
+(dolist (hook '(scala-mode-hook scala-ts-mode-hook))
+  (add-hook hook
+            (lambda ()
+              (setq-local tab-width 2
+                          indent-tabs-mode nil
+                          indent-bars-spacing-override 2))))
+
+(require 'jarchive)
+(jarchive-mode 1)
+
 ;;; Verilog
 (require 'verilog-ts-mode)
 
@@ -1527,8 +1625,20 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
       verilog-indent-level-declaration 2
       verilog-indent-level-module 2
       verilog-indent-level-behavioral 2
+      verilog-indent-level-directive 0
+      verilog-case-indent 2
+      verilog-cexp-indent 2
+      verilog-indent-lists nil
       verilog-auto-newline nil
       verilog-ts-indent-level 2)
+
+(defun my/verilog-indent-setup ()
+  "Keep Verilog buffer indentation aligned with verible-verilog-format."
+  (setq-local tab-width 2
+              indent-tabs-mode nil))
+
+(dolist (hook '(verilog-mode-hook verilog-ts-mode-hook))
+  (add-hook hook #'my/verilog-indent-setup))
 
 (defconst verilog-hs-block-start-keywords-re
   (eval-when-compile
@@ -1851,22 +1961,29 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
    (org-cdlatex-mode)
    (olivetti-mode)
    (mixed-pitch-mode)
-   (custom-theme-set-faces
-    'user
-    '(org-verbatim
-      ((((background light))
-        (:foreground "#9e3a00"
-                     :background "#faece4"
-                     :box (:line-width (3 . 1)
-                                       :color "#faece4")))
-       (((background dark))
-        (
-         :foreground
-         "#ec9369"
-         :background "#1c130f"
-         :box (:line-width (3 . 1)
-                           :color "#1c130f")))))
-    )
+   (if (and (boundp 'my/theme-preset)
+            (eq my/theme-preset 'matrix))
+       (custom-theme-set-faces
+        'user
+        '(org-verbatim
+          ((t (:foreground "#00ff71"
+                           :background "#001900"
+                           :box (:line-width (3 . 1)
+                                             :color "#001900")
+                           :inherit fixed-pitch)))))
+     (custom-theme-set-faces
+      'user
+      '(org-verbatim
+        ((((background light))
+          (:foreground "#9e3a00"
+                       :background "#faece4"
+                       :box (:line-width (3 . 1)
+                                         :color "#faece4")))
+         (((background dark))
+          (:foreground "#ec9369"
+                       :background "#1c130f"
+                       :box (:line-width (3 . 1)
+                                         :color "#1c130f")))))))
    (visual-line-mode)
    (valign-mode)))
 
@@ -1993,16 +2110,6 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
 (require 'preview)
 (require 'color)
 
-(defun orgtbl-next-field-maybe ()
-  "Combine `lsp-bridge-mode', `cdlatex-mode' and `orgtlr-mode'."
-  (interactive)
-  (if (and (bound-and-true-p lsp-bridge-mode)
-           (acm-frame-visible-p acm-menu-frame))
-      (acm-complete)
-    (if (bound-and-true-p cdlatex-mode)
-        (cdlatex-tab)
-      (org-table-next-field))))
-
 (defconst my-latexmk-config-files '(".latexmkrc" "latexmkrc" ".latexmk")
   "Project-local Latexmk configuration filenames.")
 
@@ -2068,11 +2175,6 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
                               (TeX-command-expand "%(latexmk-out)"))))
 
 (with-eval-after-load 'tex
-  (add-hook
-   'cdlatex-tab-hook
-   (lambda ()
-     (and (bound-and-true-p lsp-bidge-mode)
-          (acm-frame-visible-p acm-menu-frame))))
   (setq TeX-auto-save t
         TeX-parse-self t
         TeX-fold-auto t
@@ -2295,7 +2397,7 @@ Possible values: 'math (default) or 'all.")
                  )
      (setq TeX-electric-math t)
      (font-latex-add-keywords '(("CJKunderline" "{")) 'underline-command)
-     (electric-indent-mode -1)
+     (electric-indent-local-mode -1)
      (TeX-PDF-mode-on)
      (LaTeX-math-mode 1)
      (TeX-fold-mode 1)
@@ -2330,18 +2432,36 @@ Possible values: 'math (default) or 'all.")
 (require 'ligature)
 
 ;; ligature.el requires explicit rules; enabling alone does not add mappings.
+(defconst my/prog-mode-ligatures
+  '("|||>" "<|||" "<==>" "<!--" "####" "~~>" "***" "||=" "||>"
+    ":::" "::=" ":=" "=:=" "==>" "=!=" "=>>=" "<="
+    "=<<" "=/=" ">-" ">>-" ">>=" ">>>" "<*" "<*>"
+    "<|" "<|>" "<$" "<$>" "<!--" "<-" "<--" "<->"
+    "<+" "<+>" "</" "</>" "/>" "/*" "*/" "//" "///"
+    "&&" "||" "!!" "!=" "!==" "==" "===" "=>"
+    "=<<" "=>>" ">=" ">>" "<<<" ">>>" "->" "->>"
+    "<-" "<<-" "<=>" "<=<" "<==" "<||" "<&&" "++"
+    "--" "::" "..." ".." "__")
+  "Ligatures enabled in programming modes.")
+
 (ligature-set-ligatures 't '("www"))
+(defconst my/scala-ligatures
+  (remove ">=" my/prog-mode-ligatures)
+  "Ligatures for Scala modes where >= should stay literal.")
+
+(defconst my/verilog-ligatures
+  (remove ">=" (remove "<=" my/prog-mode-ligatures))
+  "Ligatures for Verilog modes where <= and >= should stay literal.")
+
+(ligature-set-ligatures
+ '(scala-mode scala-ts-mode)
+ my/scala-ligatures)
+(ligature-set-ligatures
+ '(verilog-mode verilog-ts-mode)
+ my/verilog-ligatures)
 (ligature-set-ligatures
  'prog-mode
- '("|||>" "<|||" "<==>" "<!--" "####" "~~>" "***" "||=" "||>"
-   ":::" "::=" ":=" "=:=" "==>" "=!=" "=>>=" "<="
-   "=<<" "=/=" ">-" ">>-" ">>=" ">>>" "<*" "<*>"
-   "<|" "<|>" "<$" "<$>" "<!--" "<-" "<--" "<->"
-   "<+" "<+>" "</" "</>" "/>" "/*" "*/" "//" "///"
-   "&&" "||" "!!" "!=" "!==" "==" "===" "=>"
-   "=<<" "=>>" ">=" ">>" "<<<" ">>>" "->" "->>"
-   "<-" "<<-" "<=>" "<=<" "<==" "<||" "<&&" "++"
-   "--" "::" "..." ".." "__"))
+ my/prog-mode-ligatures)
 (global-ligature-mode t)
 
 ;;; Layout
@@ -2350,16 +2470,6 @@ Possible values: 'math (default) or 'all.")
   (add-hook hook 'display-fill-column-indicator-mode))
 
 ;;; Themes
-(defvar themes_chosen
-  '(;;; Light theme
-    ;; modus-operandi-tritanopia
-    ef-spring
-    ;; Dark theme
-    ;; manoj-dark
-    ;; doom-rouge
-    modus-vivendi-tritanopia)
-  "Set for themes for dark and light mode.")
-
 (require 'color-theme-sanityinc-tomorrow)
 (require 'rose-pine)
 (require 'gruber-darker-theme)

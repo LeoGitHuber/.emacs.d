@@ -4,7 +4,7 @@
 
 ;;; Code:
 
-(defvar my/theme-preset 'gits
+(defvar my/theme-preset 'circadian
   "Theme preset applied to GUI frames.")
 
 (defconst my/modus-themes-directory
@@ -13,6 +13,11 @@
 
 (defvar my/theme-refresh-suppressed nil
   "Non-nil while theme changes should not trigger expensive dependent refreshes.")
+
+(defvar my/circadian-themes '(("06:00" . default)
+                              ("17:00" . modus-vivendi))
+  "Theme schedule used by `circadian'.
+The `default' entry means disabling all enabled custom themes.")
 
 (defconst my/gits-modus-palette
   '((accent-0 "#00e5ff")
@@ -97,6 +102,8 @@
 (defconst my/matrix-modus-palette
   '((accent-0 "#00ff41")
     (accent-1 "#008f11")
+    (accent-2 "#00a52a")
+    (accent-3 "#005a00")
     (bg-active bg-main)
     (bg-added "#003b00")
     (bg-added-refine "#005a00")
@@ -112,17 +119,17 @@
     (bg-line-number-active unspecified)
     (bg-line-number-inactive "#0d0208")
     (bg-main "#0d0208")
-    (bg-mark-delete "#190a10")
+    (bg-mark-delete "#102400")
     (bg-mark-select "#003b00")
     (bg-mode-line-active "#001900")
     (bg-mode-line-inactive "#001900")
-    (bg-prominent-err "#190a10")
+    (bg-prominent-err "#102400")
     (bg-prompt unspecified)
     (bg-prose-block-contents "#001600")
     (bg-prose-block-delimiter bg-prose-block-contents)
     (bg-region "#003b00")
-    (bg-removed "#190a10")
-    (bg-removed-refine "#2b1520")
+    (bg-removed "#102400")
+    (bg-removed-refine "#1b3300")
     (bg-tab-bar "#001900")
     (bg-tab-current bg-main)
     (bg-tab-other "#001900")
@@ -187,7 +194,33 @@
   "Disable all currently active custom themes."
   (mapc #'disable-theme custom-enabled-themes))
 
-(defun my/run-theme-dependent-refresh ()
+(defun my/circadian-enable-theme-advice (orig-fun theme)
+  "Extend Circadian ORIG-FUN so THEME `default' disables custom themes."
+  (if (eq theme 'default)
+      (condition-case nil
+          (progn
+            (run-hook-with-args 'circadian-before-load-theme-hook theme)
+            (my/disable-active-themes)
+            (when circadian-next-timer
+              (cancel-timer circadian-next-timer))
+            (setq circadian-next-timer nil)
+            (circadian-schedule)
+            (run-hook-with-args 'circadian-after-load-theme-hook theme))
+        (error "[circadian.el/ERROR] -> Problem loading theme %s" theme))
+    (funcall orig-fun theme)))
+
+(defun my/setup-circadian-theme ()
+  "Use Circadian to switch between Emacs default and `modus-vivendi'."
+  (my/ensure-modus-themes)
+  (require 'circadian)
+  (setq circadian-themes my/circadian-themes)
+  (unless (advice-member-p #'my/circadian-enable-theme-advice
+                           'circadian-enable-theme)
+    (advice-add 'circadian-enable-theme :around #'my/circadian-enable-theme-advice))
+  (add-hook 'circadian-after-load-theme-hook #'my/run-theme-dependent-refresh)
+  (circadian-setup))
+
+(defun my/run-theme-dependent-refresh (&optional _theme)
   "Refresh theme-dependent UI components once after theme changes settle."
   (when (fboundp 'segment-line-refresh-faces)
     (segment-line-refresh-faces))
@@ -205,6 +238,7 @@
    '(diff-file-header ((t (:foreground "#ff4466"))))
    '(diff-header ((t (:foreground "#00e5ff"))))
    '(diff-hunk-header ((t (:foreground "#ffaa00"))))
+   '(fill-column-indicator ((t (:foreground "#245a70" :background "#245a70"))))
    '(gnus-button ((t (:foreground "#00e5ff"))))
    '(gnus-group-mail-3 ((t (:foreground "#00e5ff"))))
    '(gnus-group-mail-3-empty ((t (:foreground "#00e5ff"))))
@@ -242,43 +276,584 @@
 
 (defun my/apply-matrix-theme-faces ()
   "Apply the extra face overrides used by the emacs-solo Matrix preset."
-  (custom-theme-set-faces
-   'user
-   '(change-log-acknowledgment ((t (:foreground "#00c738"))))
-   '(change-log-date ((t (:foreground "#008f11"))))
-   '(change-log-name ((t (:foreground "#00a52a"))))
-   '(diff-context ((t (:foreground "#00ff41"))))
-   '(diff-file-header ((t (:foreground "#00c738"))))
-   '(diff-header ((t (:foreground "#00ff41"))))
-   '(diff-hunk-header ((t (:foreground "#008f11"))))
-   '(flymake-warning ((t (:foreground "#00a52a"
-                                      :underline (:color "#00a52a" :style wave)))))
-   '(flymake-note ((t (:foreground "#00ff41"
-                                   :underline (:color "#00ff41" :style wave)))))
-   '(link ((t (:foreground "#00ff41"
-                           :underline (:color "#00ff41" :style line)))))
-   '(gnus-button ((t (:foreground "#00ff41"))))
-   '(gnus-group-mail-3 ((t (:foreground "#00ff41"))))
-   '(gnus-group-mail-3-empty ((t (:foreground "#00ff41"))))
-   '(gnus-header-content ((t (:foreground "#00c738"))))
-   '(gnus-header-from ((t (:foreground "#008f11"))))
-   '(gnus-header-name ((t (:foreground "#00c738"))))
-   '(gnus-header-subject ((t (:foreground "#00ff41"))))
-   '(log-view-message ((t (:foreground "#00c738"))))
-   '(match ((t (:background "#003b00" :foreground "#00ff41"))))
-   '(modus-themes-search-current ((t (:background "#00ff41" :foreground "#0d0208"))))
-   '(modus-themes-search-lazy ((t (:background "#003b00" :foreground "#00ff41"))))
-   '(newsticker-extra-face ((t (:foreground "#005a00" :height 0.8 :slant italic))))
-   '(newsticker-feed-face ((t (:foreground "#00a52a" :height 1.2 :weight bold))))
-   '(newsticker-treeview-face ((t (:foreground "#00ff41"))))
-   '(newsticker-treeview-selection-face ((t (:background "#003b00" :foreground "#00ff41"))))
-   '(tab-bar ((t (:background "#001900" :foreground "#00c738"))))
-   '(tab-bar-tab ((t (:background "#0d0208"))))
-   '(tab-bar-tab-group-current ((t (:background "#0d0208" :foreground "#00c738"))))
-   '(tab-bar-tab-group-inactive ((t (:background "#0d0208" :foreground "#005a00"))))
-   '(tab-bar-tab-inactive ((t (:background "#0d0208" :foreground "#008f11"))))
-   '(vc-dir-file ((t (:foreground "#00ff41"))))
-   '(vc-dir-header-value ((t (:foreground "#00c738"))))))
+  (let ((bg "#0d0208")
+        (bg-alt "#001600")
+        (bg-soft "#002200")
+        (bg-pop "#001900")
+        (bg-select "#003b00")
+        (bg-strong "#005a00")
+        (bg-warn "#102400")
+        (bg-warn-strong "#1b3300")
+        (fg "#00ff41")
+        (fg-bright "#00ff71")
+        (fg-soft "#00c738")
+        (fg-mid "#00a52a")
+        (fg-dim "#008f11")
+        (fg-comment "#007a1e")
+        (fg-faint "#005a00")
+        (fg-quiet "#003b00"))
+    (custom-theme-set-faces
+     'user
+     `(default ((t (:background ,bg :foreground ,fg))))
+     `(cursor ((t (:background ,fg))))
+     `(fringe ((t (:background ,bg :foreground ,fg-faint))))
+     `(border ((t (:background ,bg :foreground ,fg-quiet))))
+     `(child-frame-border ((t (:background ,fg-quiet))))
+     `(vertical-border ((t (:foreground ,fg-quiet))))
+     `(window-divider ((t (:foreground ,fg-quiet))))
+     `(window-divider-first-pixel ((t (:foreground ,fg-faint))))
+     `(window-divider-last-pixel ((t (:foreground ,fg-faint))))
+     `(internal-border ((t (:background ,fg-quiet))))
+     `(highlight ((t (:background ,bg-select :foreground ,fg))))
+     `(hl-line ((t (:background ,bg-soft :extend t))))
+     `(region ((t (:background ,bg-select :foreground ,fg :extend t))))
+     `(secondary-selection ((t (:background ,bg-pop :foreground ,fg-soft :extend t))))
+     `(shadow ((t (:foreground ,fg-faint))))
+     `(minibuffer-prompt ((t (:foreground ,fg-bright :weight bold))))
+     `(escape-glyph ((t (:foreground ,fg-bright :weight bold))))
+     `(homoglyph ((t (:foreground ,fg-bright :weight bold))))
+     `(link ((t (:foreground ,fg :underline (:color ,fg :style line)))))
+     `(link-visited ((t (:foreground ,fg-mid :underline (:color ,fg-mid :style line)))))
+     `(button ((t (:foreground ,fg :underline (:color ,fg :style line)))))
+     `(tooltip ((t (:background ,bg-pop :foreground ,fg :box (:line-width 1 :color ,fg-quiet)))))
+     `(header-line ((t (:background ,bg-alt :foreground ,fg-soft :box nil))))
+     `(mode-line ((t (:background ,bg-pop :foreground ,fg :box nil :weight semibold))))
+     `(mode-line-active ((t (:background ,bg-pop :foreground ,fg :box nil :weight semibold))))
+     `(mode-line-inactive ((t (:background ,bg-alt :foreground ,fg-dim :box nil :weight normal))))
+     `(mode-line-emphasis ((t (:foreground ,fg-bright :weight bold))))
+     `(mode-line-highlight ((t (:background ,bg-select :foreground ,fg-bright :box nil))))
+     `(line-number ((t (:background ,bg :foreground ,fg-faint))))
+     `(line-number-current-line ((t (:background ,bg :foreground ,fg :weight bold))))
+     `(show-paren-match ((t (:background ,bg-select :foreground ,fg-bright :weight bold))))
+     `(show-paren-match-expression ((t (:background ,bg-pop :foreground ,fg))))
+     `(show-paren-mismatch ((t (:background ,bg-warn :foreground ,fg-bright :weight bold))))
+     `(trailing-whitespace ((t (:background ,bg-warn-strong))))
+     `(match ((t (:background ,bg-select :foreground ,fg-bright :weight bold))))
+     `(isearch ((t (:background ,fg :foreground ,bg :weight bold))))
+     `(isearch-fail ((t (:background ,bg-warn :foreground ,fg-bright :weight bold))))
+     `(lazy-highlight ((t (:background ,bg-select :foreground ,fg-bright))))
+     `(query-replace ((t (:inherit isearch))))
+     `(success ((t (:foreground ,fg :weight semibold))))
+     `(warning ((t (:foreground ,fg-mid :weight bold))))
+     `(error ((t (:foreground ,fg-bright :weight bold))))
+     `(font-lock-builtin-face ((t (:foreground ,fg :weight semibold))))
+     `(font-lock-comment-face ((t (:foreground ,fg-comment :slant italic))))
+     `(font-lock-comment-delimiter-face ((t (:foreground ,fg-faint :slant italic))))
+     `(font-lock-constant-face ((t (:foreground ,fg :weight semibold))))
+     `(font-lock-doc-face ((t (:foreground ,fg-soft :slant italic))))
+     `(font-lock-function-name-face ((t (:foreground ,fg :weight bold))))
+     `(font-lock-keyword-face ((t (:foreground ,fg-soft :weight semibold))))
+     `(font-lock-negation-char-face ((t (:foreground ,fg-bright :weight bold))))
+     `(font-lock-preprocessor-face ((t (:foreground ,fg-soft :weight semibold))))
+     `(font-lock-regexp-grouping-backslash ((t (:foreground ,fg-bright :weight bold))))
+     `(font-lock-regexp-grouping-construct ((t (:foreground ,fg-bright :weight bold))))
+     `(font-lock-string-face ((t (:foreground ,fg-soft))))
+     `(font-lock-type-face ((t (:foreground ,fg-mid :weight semibold))))
+     `(font-lock-variable-name-face ((t (:foreground ,fg-dim))))
+     `(font-lock-warning-face ((t (:foreground ,fg-bright :weight bold :underline (:color ,fg-bright :style wave)))))
+     `(font-lock-bracket-face ((t (:foreground ,fg-soft))))
+     `(font-lock-delimiter-face ((t (:foreground ,fg-soft))))
+     `(font-lock-number-face ((t (:foreground ,fg-dim :weight semibold))))
+     `(font-lock-operator-face ((t (:foreground ,fg-bright))))
+     `(font-lock-property-name-face ((t (:foreground ,fg :weight semibold))))
+     `(font-lock-property-use-face ((t (:foreground ,fg))))
+     `(font-lock-punctuation-face ((t (:foreground ,fg-soft))))
+     `(font-lock-variable-use-face ((t (:foreground ,fg-dim))))
+     `(font-lock-misc-punctuation-face ((t (:foreground ,fg-dim))))
+     `(font-lock-escape-face ((t (:foreground ,fg-bright :weight bold))))
+     `(font-lock-function-call-face ((t (:foreground ,fg))))
+     `(completions-annotations ((t (:foreground ,fg-dim :slant italic))))
+     `(completions-common-part ((t (:foreground ,fg-bright :weight bold))))
+     `(completions-first-difference ((t (:foreground ,fg-bright :weight bold))))
+     `(completions-highlight ((t (:background ,bg-select :foreground ,fg-bright))))
+     `(corfu-default ((t (:background ,bg-alt :foreground ,fg))))
+     `(corfu-current ((t (:background ,bg-select :foreground ,fg-bright :weight semibold))))
+     `(corfu-bar ((t (:background ,fg))))
+     `(corfu-border ((t (:background ,fg-quiet))))
+     `(corfu-annotations ((t (:foreground ,fg-dim :slant italic))))
+     `(corfu-deprecated ((t (:foreground ,fg-faint :strike-through t))))
+     `(corfu-quick1 ((t (:foreground ,fg-bright :background ,bg-warn :weight bold))))
+     `(corfu-quick2 ((t (:foreground ,fg :background ,bg-select :weight bold))))
+     `(corfu-popupinfo ((t (:background ,bg-pop :foreground ,fg-soft))))
+     `(corfu-indexed ((t (:foreground ,fg-bright :weight bold))))
+     `(corfu-echo ((t (:foreground ,fg-dim :slant italic))))
+     `(vertico-current ((t (:background ,bg-select :foreground ,fg-bright :extend t))))
+     `(vertico-group-title ((t (:foreground ,fg-dim :slant italic))))
+     `(vertico-group-separator ((t (:foreground ,fg-quiet :strike-through t))))
+     `(vertico-mouse ((t (:background ,bg-pop :foreground ,fg))))
+     `(vertico-quick1 ((t (:foreground ,fg-bright :background ,bg-warn :weight bold))))
+     `(vertico-quick2 ((t (:foreground ,fg :background ,bg-select :weight bold))))
+     `(vertico-indexed ((t (:foreground ,fg-bright :weight bold))))
+     `(orderless-match-face-0 ((t (:foreground ,fg-bright :weight bold))))
+     `(orderless-match-face-1 ((t (:foreground ,fg :weight bold))))
+     `(orderless-match-face-2 ((t (:foreground ,fg-soft :weight semibold))))
+     `(orderless-match-face-3 ((t (:foreground ,fg-mid :weight semibold))))
+     `(marginalia-key ((t (:foreground ,fg-bright :weight bold))))
+     `(marginalia-documentation ((t (:foreground ,fg-dim :slant italic))))
+     `(marginalia-file-name ((t (:foreground ,fg))))
+     `(marginalia-file-owner ((t (:foreground ,fg-dim))))
+     `(marginalia-modified ((t (:foreground ,fg-bright :weight bold))))
+     `(marginalia-installed ((t (:foreground ,fg))))
+     `(marginalia-null ((t (:foreground ,fg-faint :slant italic))))
+     `(marginalia-off ((t (:foreground ,fg-faint))))
+     `(marginalia-on ((t (:foreground ,fg-bright :weight bold))))
+     `(marginalia-size ((t (:foreground ,fg-dim))))
+     `(marginalia-version ((t (:foreground ,fg-soft))))
+     `(consult-preview-line ((t (:background ,bg-pop :foreground ,fg :extend t))))
+     `(consult-highlight-match ((t (:foreground ,fg-bright :weight bold))))
+     `(consult-highlight-mark ((t (:background ,bg-select :foreground ,fg-bright))))
+     `(consult-preview-match ((t (:background ,bg-select :foreground ,fg-bright :weight bold))))
+     `(consult-narrow-indicator ((t (:foreground ,fg-bright :weight bold))))
+     `(consult-async-running ((t (:foreground ,fg :slant italic))))
+     `(consult-async-finished ((t (:foreground ,fg :weight semibold))))
+     `(consult-async-failed ((t (:foreground ,fg-bright :weight bold))))
+     `(consult-async-split ((t (:foreground ,fg-dim))))
+     `(consult-key ((t (:foreground ,fg-bright :weight bold))))
+     `(consult-file ((t (:foreground ,fg))))
+     `(consult-line-number ((t (:foreground ,fg-dim))))
+     `(consult-line-number-prefix ((t (:foreground ,fg-faint))))
+     `(consult-line-number-wrapped ((t (:foreground ,fg-faint :slant italic))))
+     `(consult-grep-context ((t (:foreground ,fg-dim))))
+     `(embark-keybinding ((t (:foreground ,fg-bright :weight bold))))
+     `(embark-keybinding-repeat ((t (:foreground ,fg :weight bold))))
+     `(embark-keymap ((t (:foreground ,fg-soft :slant italic))))
+     `(embark-target ((t (:background ,bg-select :foreground ,fg-bright :weight bold))))
+     `(embark-verbose-indicator-documentation ((t (:foreground ,fg-dim :slant italic))))
+     `(embark-verbose-indicator-title ((t (:foreground ,fg-bright :height 1.1 :weight bold))))
+     `(embark-verbose-indicator-shadowed ((t (:foreground ,fg-faint))))
+     `(embark-collect-candidate ((t (:foreground ,fg))))
+     `(embark-collect-group-title ((t (:foreground ,fg-bright :weight bold))))
+     `(embark-collect-group-separator ((t (:foreground ,fg-quiet :strike-through t))))
+     `(embark-collect-annotation ((t (:foreground ,fg-dim :slant italic))))
+     `(embark-selected ((t (:background ,bg-select :foreground ,fg-bright :weight bold))))
+     `(flymake-error ((t (:foreground ,fg-bright :underline (:color ,fg-bright :style wave) :weight bold))))
+     `(flymake-warning ((t (:foreground ,fg-mid :underline (:color ,fg-mid :style wave) :weight semibold))))
+     `(flymake-note ((t (:foreground ,fg-soft :underline (:color ,fg-soft :style wave)))))
+     `(flymake-end-of-line-diagnostics-face ((t (:foreground ,fg-dim :height 0.9))))
+     `(flymake-error-echo-at-eol ((t (:foreground ,fg-bright :weight semibold))))
+     `(flymake-warning-echo-at-eol ((t (:foreground ,fg :weight semibold))))
+     `(flymake-note-echo-at-eol ((t (:foreground ,fg-soft :weight medium))))
+     `(flymake-eol-information-face ((t (:foreground ,fg-faint :slant italic))))
+     `(diagnostics-error ((t (:foreground ,fg-bright :weight bold))))
+     `(diagnostics-warn ((t (:foreground ,fg-mid :weight bold))))
+     `(diagnostics-info ((t (:foreground ,fg-soft :weight bold))))
+     `(my/flymake-fancy-prefix-face ((t (:foreground ,fg-faint))))
+     `(my/flymake-fancy-error-face ((t (:background ,bg-warn :foreground ,fg-bright :height 0.9))))
+     `(my/flymake-fancy-warning-face ((t (:background ,bg-select :foreground ,fg-mid :height 0.9))))
+     `(my/flymake-fancy-note-face ((t (:background ,bg-pop :foreground ,fg-soft :height 0.9))))
+     `(my/flymake-fancy-error-strong-face ((t (:inherit my/flymake-fancy-error-face :weight semibold))))
+     `(my/flymake-fancy-warning-strong-face ((t (:inherit my/flymake-fancy-warning-face :weight semibold))))
+     `(my/flymake-fancy-note-strong-face ((t (:inherit my/flymake-fancy-note-face :weight semibold))))
+     `(my/flymake-fancy-error-guide-face ((t (:inherit my/flymake-fancy-prefix-face :foreground ,fg-bright))))
+     `(my/flymake-fancy-warning-guide-face ((t (:inherit my/flymake-fancy-prefix-face :foreground ,fg-mid))))
+     `(my/flymake-fancy-note-guide-face ((t (:inherit my/flymake-fancy-prefix-face :foreground ,fg-soft))))
+     `(diff-context ((t (:foreground ,fg-dim))))
+     `(diff-file-header ((t (:foreground ,fg-bright :weight bold))))
+     `(diff-header ((t (:background ,bg-alt :foreground ,fg-soft :weight semibold))))
+     `(diff-hunk-header ((t (:background ,bg-pop :foreground ,fg))))
+     `(diff-added ((t (:background ,bg-pop :foreground ,fg :extend t))))
+     `(diff-removed ((t (:background ,bg-warn :foreground ,fg-bright :extend t :strike-through t))))
+     `(diff-changed ((t (:background ,bg-select :foreground ,fg-soft :extend t))))
+     `(diff-refine-added ((t (:background ,bg-strong :foreground ,fg-bright :weight bold))))
+     `(diff-refine-removed ((t (:background ,bg-warn-strong :foreground ,fg-bright :weight bold :strike-through t))))
+     `(diff-refine-changed ((t (:background ,bg-strong :foreground ,fg-bright :weight bold))))
+     `(diff-indicator-added ((t (:foreground ,fg :weight bold))))
+     `(diff-indicator-removed ((t (:foreground ,fg-bright :weight bold))))
+     `(diff-indicator-changed ((t (:foreground ,fg-soft :weight bold))))
+     `(diff-hl-insert ((t (:foreground ,fg :background nil))))
+     `(diff-hl-delete ((t (:foreground ,fg-bright :background nil))))
+     `(diff-hl-change ((t (:foreground ,fg-soft :background nil))))
+     `(diff-hl-reference-insert ((t (:foreground ,fg :background nil))))
+     `(diff-hl-reference-delete ((t (:foreground ,fg-bright :background nil))))
+     `(diff-hl-reference-change ((t (:foreground ,fg-soft :background nil))))
+     `(diff-hl-margin-insert ((t (:foreground ,fg :background nil))))
+     `(diff-hl-margin-delete ((t (:foreground ,fg-bright :background nil))))
+     `(diff-hl-margin-change ((t (:foreground ,fg-soft :background nil))))
+     `(diff-hl-dired-insert ((t (:foreground ,fg))))
+     `(diff-hl-dired-delete ((t (:foreground ,fg-bright :strike-through t))))
+     `(diff-hl-dired-change ((t (:foreground ,fg-soft))))
+     `(diff-hl-dired-unknown ((t (:foreground ,fg-dim :slant italic))))
+     `(diff-hl-dired-ignored ((t (:foreground ,fg-faint :slant italic))))
+     `(diff-hl-reverted-hunk-highlight ((t (:background ,bg-select :foreground ,fg-bright))))
+     `(diff-hl-show-hunk-posframe ((t (:background ,bg-alt :foreground ,fg))))
+     `(diff-hl-show-hunk-posframe-button-face ((t (:foreground ,fg-bright :height 0.9 :weight bold))))
+     `(magit-section-highlight ((t (:background ,bg-soft :extend t))))
+     `(magit-section-heading ((t (:foreground ,fg-bright :weight bold))))
+     `(magit-section-secondary-heading ((t (:foreground ,fg-soft :weight semibold))))
+     `(magit-dimmed ((t (:foreground ,fg-faint))))
+     `(magit-hash ((t (:foreground ,fg-dim))))
+     `(magit-tag ((t (:foreground ,fg-bright :weight bold))))
+     `(magit-branch-local ((t (:foreground ,fg :weight semibold))))
+     `(magit-branch-current ((t (:foreground ,fg-bright :weight bold :box (:line-width -1 :color ,fg-quiet)))))
+     `(magit-branch-remote ((t (:foreground ,fg-soft :weight semibold))))
+     `(magit-branch-remote-head ((t (:foreground ,fg-bright :weight bold))))
+     `(magit-branch-upstream ((t (:foreground ,fg-mid))))
+     `(magit-branch-warning ((t (:foreground ,fg-bright :weight bold))))
+     `(magit-head ((t (:foreground ,fg-bright :weight bold))))
+     `(magit-refname ((t (:foreground ,fg-dim))))
+     `(magit-refname-stash ((t (:foreground ,fg-mid :slant italic))))
+     `(magit-refname-wip ((t (:foreground ,fg-mid :slant italic))))
+     `(magit-signature-good ((t (:foreground ,fg :weight bold))))
+     `(magit-signature-bad ((t (:foreground ,fg-bright :weight bold))))
+     `(magit-signature-untrusted ((t (:foreground ,fg-soft :weight semibold))))
+     `(magit-signature-expired ((t (:foreground ,fg-dim))))
+     `(magit-signature-error ((t (:foreground ,fg-bright :weight bold))))
+     `(magit-cherry-unmatched ((t (:foreground ,fg-mid))))
+     `(magit-cherry-equivalent ((t (:foreground ,fg))))
+     `(magit-filename ((t (:foreground ,fg))))
+     `(magit-process-ok ((t (:foreground ,fg :weight bold))))
+     `(magit-process-ng ((t (:foreground ,fg-bright :weight bold))))
+     `(magit-mode-line-process ((t (:foreground ,fg))))
+     `(magit-mode-line-process-error ((t (:foreground ,fg-bright :weight bold))))
+     `(magit-diff-file-heading ((t (:foreground ,fg-bright :weight bold))))
+     `(magit-diff-file-heading-highlight ((t (:background ,bg-soft :foreground ,fg-bright :weight bold))))
+     `(magit-diff-hunk-heading ((t (:background ,bg-pop :foreground ,fg))))
+     `(magit-diff-hunk-heading-highlight ((t (:background ,bg-select :foreground ,fg-bright :weight bold))))
+     `(magit-diff-context ((t (:foreground ,fg-dim))))
+     `(magit-diff-context-highlight ((t (:background ,bg-soft :foreground ,fg))))
+     `(magit-diff-added ((t (:background ,bg-pop :foreground ,fg))))
+     `(magit-diff-added-highlight ((t (:background ,bg-select :foreground ,fg-bright))))
+     `(magit-diff-removed ((t (:background ,bg-warn :foreground ,fg-bright :strike-through t))))
+     `(magit-diff-removed-highlight ((t (:background ,bg-warn-strong :foreground ,fg-bright :weight bold :strike-through t))))
+     `(magit-diff-base ((t (:background ,bg-select :foreground ,fg-soft))))
+     `(magit-diff-base-highlight ((t (:background ,bg-strong :foreground ,fg-bright))))
+     `(magit-diff-our ((t (:background ,bg-warn :foreground ,fg-bright :strike-through t))))
+     `(magit-diff-our-highlight ((t (:background ,bg-warn-strong :foreground ,fg-bright :weight bold :strike-through t))))
+     `(magit-diff-their ((t (:background ,bg-pop :foreground ,fg))))
+     `(magit-diff-their-highlight ((t (:background ,bg-select :foreground ,fg-bright))))
+     `(magit-diffstat-added ((t (:foreground ,fg :weight bold))))
+     `(magit-diffstat-removed ((t (:foreground ,fg-bright :weight bold))))
+     `(magit-diff-whitespace-warning ((t (:background ,bg-warn-strong :foreground ,fg-bright :weight bold))))
+     `(magit-log-author ((t (:foreground ,fg-soft))))
+     `(magit-log-date ((t (:foreground ,fg-dim))))
+     `(magit-log-graph ((t (:foreground ,fg-faint))))
+     `(change-log-acknowledgment ((t (:foreground ,fg-dim :slant italic))))
+     `(change-log-date ((t (:foreground ,fg-soft :weight semibold))))
+     `(change-log-name ((t (:foreground ,fg-bright :weight bold))))
+     `(log-view-message ((t (:foreground ,fg-soft :weight semibold))))
+     `(vc-dir-file ((t (:foreground ,fg))))
+     `(vc-dir-header-value ((t (:foreground ,fg-soft :weight semibold))))
+     `(vc-dir-directory ((t (:foreground ,fg-bright :weight bold))))
+     `(vc-dir-mark-indicator ((t (:foreground ,fg-bright :weight bold))))
+     `(org-document-title ((t (:foreground ,fg-bright :weight bold :height 1.25))))
+     `(org-document-info ((t (:foreground ,fg-soft))))
+     `(org-level-1 ((t (:foreground ,fg-bright :weight bold :height 1.18))))
+     `(org-level-2 ((t (:foreground ,fg :weight bold :height 1.12))))
+     `(org-level-3 ((t (:foreground ,fg-soft :weight semibold :height 1.06))))
+     `(org-level-4 ((t (:foreground ,fg-mid :weight semibold))))
+     `(org-level-5 ((t (:foreground ,fg :weight semibold))))
+     `(org-level-6 ((t (:foreground ,fg-soft))))
+     `(org-level-7 ((t (:foreground ,fg-mid))))
+     `(org-level-8 ((t (:foreground ,fg-dim))))
+     `(org-block ((t (:background ,bg-alt :foreground ,fg-mid :inherit fixed-pitch))))
+     `(org-block-begin-line ((t (:background ,bg-alt :foreground ,fg-faint :inherit fixed-pitch :slant italic))))
+     `(org-block-end-line ((t (:background ,bg-alt :foreground ,fg-faint :inherit fixed-pitch :slant italic))))
+     `(org-code ((t (:background ,bg-pop :foreground ,fg-soft :inherit fixed-pitch))))
+     `(org-verbatim ((t (:background ,bg-pop :foreground ,fg-bright :inherit fixed-pitch :box (:line-width (3 . 1) :color ,bg-pop)))))
+     `(org-quote ((t (:background ,bg-alt :foreground ,fg-mid :slant italic))))
+     `(org-done ((t (:foreground ,fg :weight bold))))
+     `(org-todo ((t (:foreground ,fg-bright :weight bold))))
+     `(org-date ((t (:foreground ,fg-soft :underline (:color ,fg-soft :style line)))))
+     `(org-link ((t (:foreground ,fg :underline (:color ,fg :style line)))))
+     `(org-special-keyword ((t (:foreground ,fg-dim :inherit fixed-pitch))))
+     `(org-meta-line ((t (:foreground ,fg-dim :inherit fixed-pitch :slant italic))))
+     `(org-tag ((t (:foreground ,fg-dim :weight semibold))))
+     `(org-table ((t (:foreground ,fg-soft :inherit fixed-pitch))))
+     `(org-checkbox ((t (:foreground ,fg-bright :weight bold))))
+     `(org-hide ((t (:foreground ,bg))))
+     `(org-agenda-date ((t (:foreground ,fg-soft :weight semibold))))
+     `(org-agenda-date-today ((t (:foreground ,fg-bright :weight bold))))
+     `(org-agenda-date-weekend ((t (:foreground ,fg-mid :weight semibold))))
+     `(org-agenda-structure ((t (:foreground ,fg-bright :weight bold))))
+     `(org-scheduled ((t (:foreground ,fg))))
+     `(org-scheduled-today ((t (:foreground ,fg-bright :weight bold))))
+     `(org-upcoming-deadline ((t (:foreground ,fg-soft :weight semibold))))
+     `(org-warning ((t (:foreground ,fg-bright :weight bold))))
+     `(markdown-header-face ((t (:foreground ,fg-bright :weight bold))))
+     `(markdown-header-delimiter-face ((t (:foreground ,fg-dim))))
+     `(markdown-header-rule-face ((t (:foreground ,fg-quiet))))
+     `(markdown-markup-face ((t (:foreground ,fg-dim))))
+     `(markdown-list-face ((t (:foreground ,fg-bright :weight bold))))
+     `(markdown-blockquote-face ((t (:foreground ,fg-mid :slant italic))))
+     `(markdown-code-face ((t (:background ,bg-pop :foreground ,fg-soft :inherit fixed-pitch))))
+     `(markdown-inline-code-face ((t (:background ,bg-pop :foreground ,fg-bright :inherit fixed-pitch))))
+     `(markdown-pre-face ((t (:background ,bg-alt :foreground ,fg-mid :inherit fixed-pitch))))
+     `(markdown-table-face ((t (:foreground ,fg-soft))))
+     `(markdown-language-keyword-face ((t (:foreground ,fg-bright :weight bold))))
+     `(markdown-link-face ((t (:foreground ,fg :underline (:color ,fg :style line)))))
+     `(markdown-url-face ((t (:foreground ,fg-dim :underline (:color ,fg-dim :style line)))))
+     `(markdown-missing-link-face ((t (:foreground ,fg-bright :weight bold :underline (:color ,fg-bright :style wave)))))
+     `(markdown-comment-face ((t (:foreground ,fg-dim :slant italic))))
+     `(markdown-math-face ((t (:foreground ,fg-soft))))
+     `(markdown-metadata-key-face ((t (:foreground ,fg-soft :weight semibold))))
+     `(markdown-metadata-value-face ((t (:foreground ,fg-mid))))
+     `(markdown-highlight-face ((t (:background ,bg-select :foreground ,fg-bright))))
+     `(markdown-hr-face ((t (:foreground ,fg-quiet))))
+     `(font-latex-bold-face ((t (:foreground ,fg-bright :weight bold))))
+     `(font-latex-italic-face ((t (:foreground ,fg-mid :slant italic))))
+     `(font-latex-math-face ((t (:foreground ,fg-soft))))
+     `(font-latex-sedate-face ((t (:foreground ,fg-dim))))
+     `(font-latex-string-face ((t (:foreground ,fg-mid))))
+     `(font-latex-warning-face ((t (:foreground ,fg-bright :weight bold :underline (:color ,fg-bright :style wave)))))
+     `(font-latex-verbatim-face ((t (:background ,bg-pop :foreground ,fg-bright :inherit fixed-pitch))))
+     `(font-latex-sectioning-5-face ((t (:foreground ,fg-bright :weight bold))))
+     `(rime-default-face ((t (:background ,bg-alt :foreground ,fg))))
+     `(rime-code-face ((t (:foreground ,fg-dim))))
+     `(rime-cursor-face ((t (:background ,fg :foreground ,bg))))
+     `(rime-highlight-candidate-face ((t (:background ,bg-select :foreground ,fg-bright :weight bold))))
+     `(rime-comment-face ((t (:foreground ,fg-dim :slant italic))))
+     `(rime-candidate-num-face ((t (:foreground ,fg-soft :weight semibold))))
+     `(rime-preedit-face ((t (:foreground ,fg-bright :underline (:color ,fg-bright :style line)))))
+     `(emacs-cow-color ((t (:foreground ,fg :weight medium))))
+     `(tab-bar ((t (:background ,bg :foreground ,fg-dim))))
+     `(tab-bar-tab ((t (:background ,bg-alt :foreground ,fg-bright :box (:line-width -1 :color ,fg-quiet) :weight semibold))))
+     `(tab-bar-tab-inactive ((t (:background ,bg :foreground ,fg-dim :box nil))))
+     `(tab-bar-tab-group-current ((t (:background ,bg-alt :foreground ,fg-soft :weight semibold))))
+     `(tab-bar-tab-group-inactive ((t (:background ,bg :foreground ,fg-faint))))
+     `(gnus-button ((t (:foreground ,fg :underline (:color ,fg :style line)))))
+     `(gnus-group-mail-3 ((t (:foreground ,fg))))
+     `(gnus-group-mail-3-empty ((t (:foreground ,fg-dim))))
+     `(gnus-header-content ((t (:foreground ,fg-mid))))
+     `(gnus-header-from ((t (:foreground ,fg-bright :weight bold))))
+     `(gnus-header-name ((t (:foreground ,fg-soft :weight semibold))))
+     `(gnus-header-subject ((t (:foreground ,fg :weight semibold))))
+     `(newsticker-extra-face ((t (:foreground ,fg-faint :height 0.8 :slant italic))))
+     `(newsticker-feed-face ((t (:foreground ,fg-bright :height 1.2 :weight bold))))
+     `(newsticker-treeview-face ((t (:foreground ,fg))))
+     `(newsticker-treeview-selection-face ((t (:background ,bg-select :foreground ,fg-bright)))))
+    (custom-theme-set-faces
+     'user
+     `(segment-line-chip-muted ((t (:background ,bg-pop :foreground ,fg-soft :box nil :weight medium))))
+     `(segment-line-chip-accent ((t (:background ,bg-select :foreground ,fg :box nil :weight semibold))))
+     `(segment-line-chip-subtle ((t (:background ,bg-alt :foreground ,fg-dim :box nil :weight medium))))
+     `(segment-line-chip-note ((t (:background ,bg-pop :foreground ,fg-soft :box nil :weight medium))))
+     `(segment-line-chip-success ((t (:background ,bg-select :foreground ,fg :box nil :weight semibold))))
+     `(segment-line-chip-warning ((t (:background ,bg-warn :foreground ,fg-mid :box nil :weight bold))))
+     `(segment-line-chip-error ((t (:background ,bg-warn-strong :foreground ,fg-bright :box nil :weight bold))))
+     `(segment-line-state-normal ((t (:background ,bg-select :foreground ,fg-soft :box nil :weight bold))))
+     `(segment-line-state-insert ((t (:background ,bg-select :foreground ,fg :box nil :weight bold))))
+     `(segment-line-state-motion ((t (:background ,bg-warn :foreground ,fg-mid :box nil :weight bold))))
+     `(segment-line-state-visual ((t (:background ,bg-strong :foreground ,fg-bright :box nil :weight bold))))
+     `(segment-line-state-replace ((t (:background ,bg-warn-strong :foreground ,fg-bright :box nil :weight bold))))
+     `(segment-line-state-command ((t (:background ,bg-pop :foreground ,fg-soft :box nil :weight bold))))
+     `(segment-line-inactive ((t (:background ,bg-alt :foreground ,fg-faint :box nil :weight normal)))))
+    (dolist (face '(nerd-icons-green nerd-icons-lgreen nerd-icons-dgreen))
+      (custom-theme-set-faces
+       'user
+       `(,face ((t (:foreground ,fg))))))
+    (dolist (face '(nerd-icons-red nerd-icons-lred nerd-icons-dred nerd-icons-red-alt
+                    nerd-icons-orange nerd-icons-lorange nerd-icons-dorange
+                    nerd-icons-pink nerd-icons-lpink nerd-icons-dpink))
+      (custom-theme-set-faces
+       'user
+       `(,face ((t (:foreground ,fg-bright))))))
+    (dolist (face '(nerd-icons-yellow nerd-icons-lyellow nerd-icons-dyellow
+                    nerd-icons-maroon nerd-icons-lmaroon nerd-icons-dmaroon))
+      (custom-theme-set-faces
+       'user
+       `(,face ((t (:foreground ,fg-mid))))))
+    (dolist (face '(nerd-icons-blue nerd-icons-blue-alt nerd-icons-lblue nerd-icons-dblue
+                    nerd-icons-purple nerd-icons-purple-alt nerd-icons-lpurple nerd-icons-dpurple
+                    nerd-icons-cyan nerd-icons-cyan-alt nerd-icons-lcyan nerd-icons-dcyan))
+      (custom-theme-set-faces
+       'user
+       `(,face ((t (:foreground ,fg-soft))))))
+    (dolist (face '(nerd-icons-silver nerd-icons-lsilver nerd-icons-dsilver))
+      (custom-theme-set-faces
+       'user
+       `(,face ((t (:foreground ,fg-dim))))))
+    (when (boundp 'nerd-icons-color-icons)
+      (setq nerd-icons-color-icons nil))
+    (dolist (face '(company-tooltip company-tooltip-selection company-tooltip-search
+                    company-tooltip-search-selection company-tooltip-common
+                    company-tooltip-common-selection company-tooltip-annotation
+                    company-tooltip-annotation-selection company-tooltip-deprecated
+                    company-preview company-preview-common company-scrollbar-bg
+                    company-scrollbar-fg))
+      (custom-theme-set-faces
+       'user
+       `(,face ((t (:background ,bg-alt :foreground ,fg))))))
+    (custom-theme-set-faces
+     'user
+     `(company-tooltip-selection ((t (:background ,bg-select :foreground ,fg-bright))))
+     `(company-tooltip-common ((t (:foreground ,fg-bright :weight bold))))
+     `(company-tooltip-common-selection ((t (:foreground ,fg-bright :weight bold))))
+     `(company-tooltip-annotation ((t (:foreground ,fg-dim :slant italic))))
+     `(company-tooltip-annotation-selection ((t (:foreground ,fg-soft :slant italic))))
+     `(company-scrollbar-bg ((t (:background ,bg-pop))))
+     `(company-scrollbar-fg ((t (:background ,fg-quiet)))))
+    (dolist (face '(acm-frame-default-face acm-frame-border-face acm-frame-select-face
+                    acm-deprecated-face acm-filter-face
+                    acm-backend-ctags-annotation-face
+                    acm-backend-yas-extra-info-face))
+      (custom-theme-set-faces
+       'user
+       `(,face ((t (:background ,bg-alt :foreground ,fg :box nil))))))
+    (custom-theme-set-faces
+     'user
+     `(acm-frame-select-face ((t (:background ,bg-select :foreground ,fg-bright :weight semibold))))
+     `(acm-frame-border-face ((t (:background ,fg-quiet :foreground ,fg-quiet))))
+     `(acm-filter-face ((t (:foreground ,fg-bright :weight bold))))
+     `(acm-deprecated-face ((t (:foreground ,fg-faint :strike-through t))))
+     `(lsp-bridge-font-lock-flash ((t (:background ,bg-select :foreground ,fg-bright))))
+     `(lsp-bridge-alive-mode-line ((t (:foreground ,fg :weight bold))))
+     `(lsp-bridge-kill-mode-line ((t (:foreground ,fg-bright :weight bold))))
+     `(lsp-bridge-document-highlight-face ((t (:background ,bg-select :foreground ,fg-bright))))
+     `(lsp-installation-finished-buffer-face ((t (:foreground ,fg :weight semibold))))
+     `(lsp-installation-buffer-face ((t (:foreground ,fg-soft :weight semibold)))))
+    (dolist (face '(lsp-bridge-diagnostics-error-face
+                    lsp-bridge-diagnostics-warning-face
+                    lsp-bridge-diagnostics-info-face
+                    lsp-bridge-diagnostics-hint-face
+                    lsp-treemacs-project-root-error
+                    lsp-treemacs-project-root-info
+                    lsp-treemacs-project-root-warn
+                    lsp-treemacs-file-error
+                    lsp-treemacs-file-info
+                    lsp-treemacs-file-hint
+                    lsp-treemacs-file-warn))
+      (custom-theme-set-faces
+       'user
+       `(,face ((t (:foreground ,fg :weight semibold))))))
+    (custom-theme-set-faces
+     'user
+     `(lsp-bridge-diagnostics-error-face ((t (:foreground ,fg-bright :weight bold))))
+     `(lsp-bridge-diagnostics-warning-face ((t (:foreground ,fg-mid :weight bold))))
+     `(lsp-bridge-diagnostics-info-face ((t (:foreground ,fg :weight semibold))))
+     `(lsp-bridge-diagnostics-hint-face ((t (:foreground ,fg-soft :weight medium))))
+     `(lsp-treemacs-project-root-error ((t (:foreground ,fg-bright :weight bold))))
+     `(lsp-treemacs-project-root-warn ((t (:foreground ,fg-mid :weight bold))))
+     `(lsp-treemacs-project-root-info ((t (:foreground ,fg :weight semibold))))
+     `(lsp-treemacs-file-error ((t (:foreground ,fg-bright :weight bold))))
+     `(lsp-treemacs-file-warn ((t (:foreground ,fg-mid :weight bold))))
+     `(lsp-treemacs-file-info ((t (:foreground ,fg :weight semibold))))
+     `(lsp-treemacs-file-hint ((t (:foreground ,fg-soft :weight medium)))))
+    (dolist (face '(lsp-face-highlight-textual lsp-face-highlight-read
+                    lsp-face-highlight-write lsp-face-rename
+                    eglot-highlight-symbol-face))
+      (custom-theme-set-faces
+       'user
+       `(,face ((t (:background ,bg-select :foreground ,fg-bright :weight semibold))))))
+    (dolist (face '(lsp-face-semhl-constant lsp-face-semhl-variable
+                    lsp-face-semhl-function lsp-face-semhl-method
+                    lsp-face-semhl-namespace lsp-face-semhl-comment
+                    lsp-face-semhl-keyword lsp-face-semhl-string
+                    lsp-face-semhl-number lsp-face-semhl-regexp
+                    lsp-face-semhl-operator lsp-face-semhl-type
+                    lsp-face-semhl-struct lsp-face-semhl-class
+                    lsp-face-semhl-interface lsp-face-semhl-enum
+                    lsp-face-semhl-type-parameter lsp-face-semhl-member
+                    lsp-face-semhl-property lsp-face-semhl-event
+                    lsp-face-semhl-macro lsp-face-semhl-parameter
+                    lsp-face-semhl-label lsp-face-semhl-enum-member
+                    lsp-face-semhl-modifier lsp-face-semhl-decorator
+                    lsp-face-semhl-definition lsp-face-semhl-implementation
+                    lsp-face-semhl-default-library lsp-face-semhl-static
+                    lsp-bridge-semantic-tokens-property-face
+                    lsp-bridge-semantic-tokens-class-face
+                    lsp-bridge-semantic-tokens-number-face
+                    lsp-bridge-semantic-tokens-interface-face
+                    lsp-bridge-semantic-tokens-namespace-face
+                    lsp-bridge-semantic-tokens-decorator-face
+                    lsp-bridge-semantic-tokens-regexp-face
+                    lsp-bridge-semantic-tokens-operator-face
+                    lsp-bridge-semantic-tokens-modifier-face
+                    lsp-bridge-semantic-tokens-macro-face
+                    lsp-bridge-semantic-tokens-event-face
+                    lsp-bridge-semantic-tokens-enum-member-face
+                    lsp-bridge-semantic-tokens-enum-face
+                    lsp-bridge-semantic-tokens-struct-face
+                    lsp-bridge-semantic-tokens-type-face
+                    lsp-bridge-semantic-tokens-string-face
+                    lsp-bridge-semantic-tokens-keyword-face
+                    lsp-bridge-semantic-tokens-type-parameter-face
+                    lsp-bridge-semantic-tokens-parameter-face
+                    lsp-bridge-semantic-tokens-variable-face
+                    lsp-bridge-semantic-tokens-function-face
+                    lsp-bridge-semantic-tokens-method-face
+                    lsp-bridge-semantic-tokens-comment-face
+                    lsp-bridge-semantic-tokens-global-scope-face))
+      (custom-theme-set-faces
+       'user
+       `(,face ((t (:foreground ,fg-mid))))))
+    (custom-theme-set-faces
+     'user
+     `(lsp-face-semhl-keyword ((t (:foreground ,fg-soft :weight semibold))))
+     `(lsp-face-semhl-function ((t (:foreground ,fg :weight bold))))
+     `(lsp-face-semhl-method ((t (:foreground ,fg :weight bold))))
+     `(lsp-face-semhl-definition ((t (:foreground ,fg :weight bold :underline (:color ,fg :style line)))))
+     `(lsp-face-semhl-implementation ((t (:foreground ,fg :weight bold :underline (:color ,fg-soft :style line)))))
+     `(lsp-face-semhl-type ((t (:foreground ,fg-mid :weight semibold))))
+     `(lsp-face-semhl-struct ((t (:foreground ,fg-mid :weight semibold))))
+     `(lsp-face-semhl-class ((t (:foreground ,fg-mid :weight semibold))))
+     `(lsp-face-semhl-interface ((t (:foreground ,fg-mid :weight semibold))))
+     `(lsp-face-semhl-enum ((t (:foreground ,fg-mid :weight semibold))))
+     `(lsp-face-semhl-type-parameter ((t (:foreground ,fg-mid :slant italic))))
+     `(lsp-face-semhl-namespace ((t (:foreground ,fg-dim :weight semibold))))
+     `(lsp-face-semhl-variable ((t (:foreground ,fg-dim))))
+     `(lsp-face-semhl-parameter ((t (:foreground ,fg-dim :slant italic))))
+     `(lsp-face-semhl-property ((t (:foreground ,fg :weight semibold))))
+     `(lsp-face-semhl-member ((t (:foreground ,fg-soft :weight semibold))))
+     `(lsp-face-semhl-constant ((t (:foreground ,fg :weight semibold))))
+     `(lsp-face-semhl-enum-member ((t (:foreground ,fg :weight semibold))))
+     `(lsp-face-semhl-string ((t (:foreground ,fg-soft))))
+     `(lsp-face-semhl-number ((t (:foreground ,fg-dim :weight semibold))))
+     `(lsp-face-semhl-regexp ((t (:foreground ,fg-soft :slant italic))))
+     `(lsp-face-semhl-operator ((t (:foreground ,fg-bright))))
+     `(lsp-face-semhl-macro ((t (:foreground ,fg-soft :weight semibold))))
+     `(lsp-face-semhl-decorator ((t (:foreground ,fg-soft :slant italic))))
+     `(lsp-face-semhl-label ((t (:foreground ,fg-dim :weight semibold))))
+     `(lsp-face-semhl-event ((t (:foreground ,fg-soft :weight semibold))))
+     `(lsp-face-semhl-modifier ((t (:foreground ,fg-dim :slant italic))))
+     `(lsp-face-semhl-default-library ((t (:foreground ,fg :weight semibold))))
+     `(lsp-face-semhl-static ((t (:foreground ,fg-soft :weight semibold))))
+     `(lsp-face-semhl-comment ((t (:foreground ,fg-comment :slant italic))))
+     `(lsp-face-semhl-deprecated ((t (:foreground ,fg-faint :strike-through t))))
+     `(lsp-headerline-breadcrumb-deprecated-face ((t (:foreground ,fg-faint :strike-through t))))
+     `(lsp-rust-analyzer-deprecated-modifier-face ((t (:foreground ,fg-faint :strike-through t))))
+     `(lsp-erlang-elp-deprecated-function-modifier-face ((t (:foreground ,fg-faint :strike-through t))))
+     `(lsp-bridge-semantic-tokens-keyword-face ((t (:foreground ,fg-soft :weight semibold))))
+     `(lsp-bridge-semantic-tokens-function-face ((t (:foreground ,fg :weight bold))))
+     `(lsp-bridge-semantic-tokens-method-face ((t (:foreground ,fg :weight bold))))
+     `(lsp-bridge-semantic-tokens-type-face ((t (:foreground ,fg-mid :weight semibold))))
+     `(lsp-bridge-semantic-tokens-struct-face ((t (:foreground ,fg-mid :weight semibold))))
+     `(lsp-bridge-semantic-tokens-class-face ((t (:foreground ,fg-mid :weight semibold))))
+     `(lsp-bridge-semantic-tokens-interface-face ((t (:foreground ,fg-mid :weight semibold))))
+     `(lsp-bridge-semantic-tokens-enum-face ((t (:foreground ,fg-mid :weight semibold))))
+     `(lsp-bridge-semantic-tokens-type-parameter-face ((t (:foreground ,fg-mid :slant italic))))
+     `(lsp-bridge-semantic-tokens-namespace-face ((t (:foreground ,fg-dim :weight semibold))))
+     `(lsp-bridge-semantic-tokens-variable-face ((t (:foreground ,fg-dim))))
+     `(lsp-bridge-semantic-tokens-parameter-face ((t (:foreground ,fg-dim :slant italic))))
+     `(lsp-bridge-semantic-tokens-property-face ((t (:foreground ,fg :weight semibold))))
+     `(lsp-bridge-semantic-tokens-enum-member-face ((t (:foreground ,fg :weight semibold))))
+     `(lsp-bridge-semantic-tokens-string-face ((t (:foreground ,fg-soft))))
+     `(lsp-bridge-semantic-tokens-number-face ((t (:foreground ,fg-dim :weight semibold))))
+     `(lsp-bridge-semantic-tokens-regexp-face ((t (:foreground ,fg-soft :slant italic))))
+     `(lsp-bridge-semantic-tokens-operator-face ((t (:foreground ,fg-bright))))
+     `(lsp-bridge-semantic-tokens-macro-face ((t (:foreground ,fg-soft :weight semibold))))
+     `(lsp-bridge-semantic-tokens-decorator-face ((t (:foreground ,fg-soft :slant italic))))
+     `(lsp-bridge-semantic-tokens-event-face ((t (:foreground ,fg-soft :weight semibold))))
+     `(lsp-bridge-semantic-tokens-modifier-face ((t (:foreground ,fg-dim :slant italic))))
+     `(lsp-bridge-semantic-tokens-global-scope-face ((t (:foreground ,fg :weight semibold))))
+     `(lsp-bridge-semantic-tokens-comment-face ((t (:foreground ,fg-comment :slant italic)))))
+    (dolist (face '(rainbow-delimiters-depth-1-face
+                    rainbow-delimiters-depth-2-face
+                    rainbow-delimiters-depth-3-face
+                    rainbow-delimiters-depth-4-face
+                    rainbow-delimiters-depth-5-face
+                    rainbow-delimiters-depth-6-face
+                    rainbow-delimiters-depth-7-face
+                    rainbow-delimiters-depth-8-face
+                    rainbow-delimiters-depth-9-face
+                    paren-face-match paren-face-mismatch paren-face-no-match
+                    yas-field-highlight-face))
+      (custom-theme-set-faces
+       'user
+       `(,face ((t (:background ,bg-select :foreground ,fg-bright :weight semibold))))))
+    (custom-theme-set-faces
+     'user
+     `(rainbow-delimiters-unmatched-face ((t (:foreground ,fg-bright :weight bold :underline (:color ,fg-bright :style wave)))))
+     `(yas-field-highlight-face ((t (:background ,bg-select :foreground ,fg-bright :box (:line-width -1 :color ,fg-quiet))))))))
 
 (defun my/apply-matrix-theme ()
   "Apply the emacs-solo Matrix theme preset."
@@ -297,10 +872,14 @@
 When DEFER-REFRESH is non-nil, skip the final dependent UI refresh."
   (let ((my/theme-refresh-suppressed t))
     (pcase theme-preset
+      ('default
+       (my/disable-active-themes))
       ('gits
        (my/apply-gits-theme))
       ('matrix
        (my/apply-matrix-theme))
+      ('circadian
+       (my/setup-circadian-theme))
       ((pred symbolp)
        (my/disable-active-themes)
        (load-theme theme-preset t))

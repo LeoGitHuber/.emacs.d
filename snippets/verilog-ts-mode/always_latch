@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# key: al
+# key: always_latch
 # --
 
 always_latch begin : ${1:label}

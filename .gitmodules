@@ -631,3 +631,12 @@
 [submodule "site-lisp/rimel"]
 	path = site-lisp/rimel
 	url = https://github.com/jixiuf/rimel.git
+[submodule "site-lisp/savefold.el"]
+	path = site-lisp/savefold.el
+	url = https://github.com/jcfk/savefold.el.git
+[submodule "site-lisp/circadian.el"]
+	path = site-lisp/circadian.el
+	url = https://github.com/guidoschmidt/circadian.el.git
+[submodule "site-lisp/jarchive"]
+	path = site-lisp/jarchive
+	url = https://git.sr.ht/~dannyfreeman/jarchive

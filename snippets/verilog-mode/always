@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# key: aa
+# key: always
 # --
 
 always @(${1:condition}) begin

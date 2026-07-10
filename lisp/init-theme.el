@@ -4,7 +4,8 @@
 
 ;;; Code:
 
-(defvar my/theme-preset 'circadian
+(defvar my/theme-preset
+  (if (eq system-type 'windows-nt) 'modus-vivendi 'circadian)
   "Theme preset applied to GUI frames.")
 
 (defconst my/modus-themes-directory

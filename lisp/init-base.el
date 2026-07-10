@@ -259,16 +259,32 @@
                   (load (my/emacs-path "site-lisp/iscroll/iscroll.el")))
               (iscroll-mode))))
 
-(defun my/open-pdf-with-default-app ()
-  "Open the current PDF with the default Windows application."
+(defun my/open-pdf-with-external-app ()
+  "Open the current PDF with the system's external PDF application."
   (interactive)
-  (w32-shell-execute "open" (expand-file-name buffer-file-name))
+  (unless buffer-file-name
+    (user-error "Current buffer is not visiting a PDF file"))
+  (let ((file (expand-file-name buffer-file-name)))
+    (cond
+     ((eq system-type 'windows-nt)
+      (w32-shell-execute "open" file))
+     ((eq system-type 'darwin)
+      (start-process "open-pdf" nil "open" file))
+     ((executable-find "xdg-open")
+      (start-process "open-pdf" nil "xdg-open" file))
+     (t
+      (user-error "No external PDF opener found"))))
   (run-at-time 0 nil #'kill-buffer (current-buffer)))
 
+(defun my/open-pdf ()
+  "Open PDFs with `pdf-view-mode' in GUI Linux, otherwise use an external app."
+  (interactive)
+  (if (and (eq system-type 'gnu/linux) (display-graphic-p))
+      (pdf-view-mode)
+    (my/open-pdf-with-external-app)))
+
 (add-to-list 'auto-mode-alist
-             `("\\.pdf\\'" . ,(if (eq system-type 'windows-nt)
-                                  'my/open-pdf-with-default-app
-                                'pdf-view-mode)))
+             '("\\.pdf\\'" . my/open-pdf))
 (add-to-list 'auto-mode-alist '("\\.ya?ml\\'" . yaml-ts-mode))
 
 

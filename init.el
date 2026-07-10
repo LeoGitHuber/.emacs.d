@@ -175,15 +175,38 @@
 (require 'diff-hl)
 (require 'diff-hl-dired)
 (require 'diff-hl-flydiff)
+(require 'diff-hl-margin)
 
-;; Keep VCS change markers in the left fringe so they don't compete with the
-;; current Flymake left-margin indicators.
+;; Keep VCS change markers visible across GUI and terminal frames without
+;; competing with the current Flymake left-margin indicators.
 (setq diff-hl-side 'left)
-(set-fringe-style '(2 . nil))
+(when (fboundp 'set-fringe-style)
+  (set-fringe-style '(2 . nil)))
 (setq diff-hl-bmp-max-width 2)
 (setq diff-hl-highlight-function #'diff-hl-highlight-on-fringe
       diff-hl-highlight-reference-function #'diff-hl-highlight-on-fringe
       diff-hl-draw-borders nil)
+
+(defun my/diff-hl-setup-display-backend ()
+  "Use fringe highlights in GUI frames and right-margin highlights in terminals."
+  (if (display-graphic-p)
+      (progn
+        (when (bound-and-true-p diff-hl-margin-local-mode)
+          (diff-hl-margin-local-mode -1))
+        (setq-local diff-hl-side 'left
+                    diff-hl-highlight-function #'diff-hl-highlight-on-fringe
+                    diff-hl-highlight-reference-function #'diff-hl-highlight-on-fringe)
+        (when (fboundp 'set-fringe-style)
+          (set-fringe-style '(2 . nil))))
+    (when (and (bound-and-true-p diff-hl-margin-local-mode)
+               (not (eq diff-hl-side 'right)))
+      (diff-hl-margin-local-mode -1))
+    (setq-local diff-hl-side 'right)
+    (unless (bound-and-true-p diff-hl-margin-local-mode)
+      (diff-hl-margin-local-mode 1))))
+
+(add-hook 'diff-hl-mode-on-hook #'my/diff-hl-setup-display-backend)
+(add-hook 'diff-hl-dired-mode-on-hook #'my/diff-hl-setup-display-backend)
 
 (dolist (face '(diff-hl-insert
                 diff-hl-delete
@@ -1568,16 +1591,32 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
   (global-treesit-auto-mode 1)
   (require 'qml-ts-mode))
 
-(defun my/open-pdf-with-default-app ()
-  "Open the current PDF with the default Windows application."
+(defun my/open-pdf-with-external-app ()
+  "Open the current PDF with the system's external PDF application."
   (interactive)
-  (w32-shell-execute "open" (expand-file-name buffer-file-name))
+  (unless buffer-file-name
+    (user-error "Current buffer is not visiting a PDF file"))
+  (let ((file (expand-file-name buffer-file-name)))
+    (cond
+     (windows-system-p
+      (w32-shell-execute "open" file))
+     ((eq system-type 'darwin)
+      (start-process "open-pdf" nil "open" file))
+     ((executable-find "xdg-open")
+      (start-process "open-pdf" nil "xdg-open" file))
+     (t
+      (user-error "No external PDF opener found"))))
   (run-at-time 0 nil #'kill-buffer (current-buffer)))
 
+(defun my/open-pdf ()
+  "Open PDFs with `pdf-view-mode' in GUI Linux, otherwise use an external app."
+  (interactive)
+  (if (and (eq system-type 'gnu/linux) (display-graphic-p))
+      (pdf-view-mode)
+    (my/open-pdf-with-external-app)))
+
 (dolist (entry
-         `(( "\\.pdf\\'" . ,(if windows-system-p
-                                 'my/open-pdf-with-default-app
-                                 'pdf-view-mode))
+         `(("\\.pdf\\'" . my/open-pdf)
            ("\\.ya?ml\\'" . yaml-ts-mode)
            ("\\.lua\\'" . lua-ts-mode)
            ("\\.scala\\'" . scala-ts-mode)
@@ -1847,8 +1886,11 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
 
 
 ;;; Reading / Documents
-(dolist (feature '(eldoc-box eldoc-mouse calibredb nov nov-xwidget shrface etaf))
+(dolist (feature '(eldoc-box eldoc-mouse calibredb nov shrface etaf))
   (require feature))
+
+(unless windows-system-p
+  (require 'nov-xwidget nil t))
 
 (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
 

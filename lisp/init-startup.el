@@ -440,16 +440,20 @@ When ALIGN-RIGHT is non-nil, right-align TEXT."
 
 (defun initial-startup-screen--octicon (name fallback)
   "Return nerd-icons octicon NAME, or FALLBACK when unavailable."
-  (if (fboundp 'nerd-icons-octicon)
+  (if (and (my/nerd-icons-font-available-p)
+           (fboundp 'nerd-icons-octicon))
       (nerd-icons-octicon name)
     fallback))
 
 (defun initial-startup-screen--file-icon (file)
   "Return an icon for FILE with a plain-text fallback."
   (cond
-   ((and (file-directory-p file) (fboundp 'nerd-icons-icon-for-dir))
+   ((and (my/nerd-icons-font-available-p)
+         (file-directory-p file)
+         (fboundp 'nerd-icons-icon-for-dir))
     (nerd-icons-icon-for-dir file))
-   ((fboundp 'nerd-icons-icon-for-file)
+   ((and (my/nerd-icons-font-available-p)
+         (fboundp 'nerd-icons-icon-for-file))
     (nerd-icons-icon-for-file file))
    ((file-directory-p file) "[D]")
    (t "[F]")))

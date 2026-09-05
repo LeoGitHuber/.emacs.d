@@ -7,23 +7,23 @@
 (add-to-list 'load-path (my/emacs-path "site-lisp/nerd-icons-dired"))
 
 (setq nerd-icons-font-family
-      (cond
-       ((eq system-type 'windows-nt)
-        "Symbols Nerd Font Mono")
-       (t
-        "BlexMono Nerd Font")))
+      (or (my/detect-nerd-icons-font-family)
+          "Symbols Nerd Font Mono"))
 
 (require 'nerd-icons)
 
 ;; (load "~/.emacs.d/self-develop/modeline-setting.el")
 
-(add-hook 'dired-mode-hook 'nerd-icons-dired-mode)
+(when (my/nerd-icons-font-available-p)
+  (add-hook 'dired-mode-hook 'nerd-icons-dired-mode))
 
 (with-eval-after-load 'treemacs
-  (require 'treemacs-nerd-icons)
-  (treemacs-load-theme "nerd-icons"))
+  (when (my/nerd-icons-font-available-p)
+    (require 'treemacs-nerd-icons)
+    (treemacs-load-theme "nerd-icons")))
 
-(add-hook 'ibuffer-mode-hook 'nerd-icons-ibuffer-mode)
+(when (my/nerd-icons-font-available-p)
+  (add-hook 'ibuffer-mode-hook 'nerd-icons-ibuffer-mode))
 
 ;; (require 'all-the-icons)
 (with-eval-after-load 'all-the-icons

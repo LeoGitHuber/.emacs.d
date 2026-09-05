@@ -493,6 +493,49 @@ If you experience stuttering, increase this.")
   "Return the first installed font from FONT-NAMES."
   (seq-find #'my/font-installed-p font-names))
 
+(defvar my/nerd-icons-font-candidates
+  (cond
+   ((eq system-type 'windows-nt)
+    '("Symbols Nerd Font Mono"
+      "Symbols Nerd Font"
+      "CaskaydiaMono Nerd Font Mono"
+      "CaskaydiaMono Nerd Font"
+      "Consolas Nerd Font Mono"))
+   ((eq system-type 'gnu/linux)
+    '("Symbols Nerd Font Mono"
+      "Symbols Nerd Font"
+      "Iosevka Nerd Font Mono"
+      "JetBrainsMono Nerd Font"
+      "BlexMono Nerd Font"))
+   (t
+    '("Symbols Nerd Font Mono"
+      "Symbols Nerd Font"
+      "Iosevka Nerd Font Mono"
+      "BlexMono Nerd Font")))
+  "Preferred Nerd Font families for icon rendering.")
+
+(defun my/detect-nerd-icons-font-family ()
+  "Return the first installed Nerd Font family, or nil when unavailable."
+  (apply #'my/first-installed-font my/nerd-icons-font-candidates))
+
+(defun my/nerd-icons-font-available-p ()
+  "Return non-nil when `nerd-icons-font-family' names an installed font."
+  (and (boundp 'nerd-icons-font-family)
+       nerd-icons-font-family
+       (my/font-installed-p nerd-icons-font-family)))
+
+(defun my/append-face (text face)
+  "Return a copy of TEXT with FACE appended to existing face properties."
+  (let ((copy (copy-sequence text)))
+    (add-face-text-property 0 (length copy) face 'append copy)
+    copy))
+
+(defun my/nerd-icon-glyph (icon fallback)
+  "Return ICON with Nerd Font family preserved, or FALLBACK."
+  (if (my/nerd-icons-font-available-p)
+      (my/append-face icon `(:family ,nerd-icons-font-family))
+    fallback))
+
 ;; "IBM Plex Mono" "Fantasque Sans Mono", "InputMono", "Monaspace Neon"
 ;; "Lilex Nerd Font" "Aporetic Serif Mono" "Hack" "Pragmasevka Nerd Font"
 (defvar code-font

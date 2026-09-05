@@ -459,7 +459,9 @@ This keeps expensive VC fallback work out of the mode-line redisplay path."
 
 (defun segment-line--glyph (icon fallback)
   "Return ICON when Nerd Font rendering is available, else FALLBACK."
-  (if (segment-line--icons-available-p) icon fallback))
+  (if (segment-line--icons-available-p)
+      (segment-line--append-face icon `(:family ,nerd-icons-font-family))
+    fallback))
 
 (defun segment-line--pad (text pad)
   "Pad TEXT using PAD.
@@ -544,10 +546,18 @@ Otherwise return VALUE itself."
    (delq nil (mapcar #'segment-line--render-component components))
    segment-line-separator))
 
+(defun segment-line--append-face (text face)
+  "Return a copy of TEXT with FACE appended to existing face properties."
+  (let ((copy (copy-sequence text)))
+    (add-face-text-property 0 (length copy) face 'append copy)
+    copy))
+
 (defun segment-line--chip (text face &optional pad)
   "Render TEXT with FACE and optional PAD."
   (when (and text (not (string-empty-p text)))
-    (propertize (segment-line--pad text (or pad segment-line-chip-padding)) 'face face)))
+    (segment-line--append-face
+     (segment-line--pad text (or pad segment-line-chip-padding))
+     face)))
 
 (defun segment-line--icon-for-buffer ()
   "Return an icon for the current buffer or nil.

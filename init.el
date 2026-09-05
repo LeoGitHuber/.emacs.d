@@ -58,6 +58,12 @@
                    "site-lisp/pdf-tools/lisp")))
   (add-to-list 'load-path path))
 
+;; Recent Standard Themes releases depend on the Modus support library.
+;; NeoEmacs bundles it alongside the built-in themes, outside `load-path'.
+(let ((built-in-themes-directory (expand-file-name "themes" data-directory)))
+  (when (file-directory-p built-in-themes-directory)
+    (add-to-list 'load-path built-in-themes-directory)))
+
 (defun my/refresh-elisp-flymake-byte-compile-load-path ()
   "Keep Elisp Flymake byte compilation aligned with the current `load-path'."
   (setq elisp-flymake-byte-compile-load-path
@@ -102,42 +108,46 @@
 ;; (require 'kind-icon)
 
 (setq nerd-icons-font-family
-      (cond
-       ((eq system-type 'windows-nt)
-        "Symbols Nerd Font Mono")
-       ((eq system-type 'gnu/linux)
-        ;; "Consolas Nerd Font Mono"
-        "Symbols Nerd Font Mono")))
+      (or (my/detect-nerd-icons-font-family)
+          "Symbols Nerd Font Mono"))
+
+(defvar my/use-nerd-icons-p
+  (my/nerd-icons-font-available-p)
+  "Whether a usable Nerd Font is available for icon UI.")
 
 (defface diagnostics-error
-  `(
-    (((background dark))
+  `((((background dark))
      :foreground "#f85149"
-     :family ,nerd-icons-font-family)
+     ,@(when my/use-nerd-icons-p
+         `(:family ,nerd-icons-font-family)))
     (((background light))
      :foreground "#cb2431"
-     :family ,nerd-icons-font-family))
+     ,@(when my/use-nerd-icons-p
+         `(:family ,nerd-icons-font-family))))
   "Face for flymake Error."
   :group 'flymake)
 
 (defface diagnostics-warn
-  `(
-    (((background dark))
+  `((((background dark))
      :foreground "#f0883e"
-     :family ,nerd-icons-font-family)
+     ,@(when my/use-nerd-icons-p
+         `(:family ,nerd-icons-font-family)))
     (((background light))
      :foreground "#bf8803"
-     :family ,nerd-icons-font-family))
+     ,@(when my/use-nerd-icons-p
+         `(:family ,nerd-icons-font-family))))
   "Face for flymake Warn."
   :group 'flymake)
 
 (defface diagnostics-info
   `((((background dark))
      :foreground "#75beff"
-     :family ,nerd-icons-font-family)
+     ,@(when my/use-nerd-icons-p
+         `(:family ,nerd-icons-font-family)))
     (((background light))
      :foreground "#1155ff"
-     :family ,nerd-icons-font-family))
+     ,@(when my/use-nerd-icons-p
+         `(:family ,nerd-icons-font-family))))
   "Face for flymake Info."
   :group 'flymake)
 
@@ -148,12 +158,13 @@
       flymake-indicator-type 'margins
       flymake-autoresize-margins t
       flymake-margin-indicators-string
-      ;; `((error "​​​​󰅙​​​​" diagnostics-error)
-      ;;   (warning "​​ " diagnostics-warn)
-      ;;   (note "​​​​​​​" diagnostics-info))
-      `((error ,(concat "󰅙" "\u200A") diagnostics-error)
-        (warning ,(concat "" "\u200A") diagnostics-warn)
-        (note ,(concat "" "\u200A") diagnostics-info))
+      (if my/use-nerd-icons-p
+          `((error ,(concat (my/nerd-icon-glyph "󰅙" "E") "\u200A") diagnostics-error)
+            (warning ,(concat (my/nerd-icon-glyph "" "W") "\u200A") diagnostics-warn)
+            (note ,(concat (my/nerd-icon-glyph "" "N") "\u200A") diagnostics-info))
+        `((error ,(concat "E" "\u200A") diagnostics-error)
+          (warning ,(concat "W" "\u200A") diagnostics-warn)
+          (note ,(concat "N" "\u200A") diagnostics-info)))
       flymake-show-diagnostics-at-end-of-line t)
 
 (defun my/flymake-apply-margin-indicators ()
@@ -287,13 +298,13 @@
 (defvar my/flymake-fancy-background-ratio 0.18
   "Blend ratio of severity foreground color into the default background.")
 
-(defvar my/flymake-fancy-error-icon ""
+(defvar my/flymake-fancy-error-icon (my/nerd-icon-glyph "" "E")
   "Icon used for Flymake error diagnostics.")
 
-(defvar my/flymake-fancy-warning-icon ""
+(defvar my/flymake-fancy-warning-icon (my/nerd-icon-glyph "" "W")
   "Icon used for Flymake warning diagnostics.")
 
-(defvar my/flymake-fancy-note-icon ""
+(defvar my/flymake-fancy-note-icon (my/nerd-icon-glyph "" "N")
   "Icon used for Flymake note diagnostics.")
 
 (defvar my/flymake-fancy-theme-hooks-installed nil
@@ -552,7 +563,7 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
     (concat indent
             (my/flymake--guide-prefix diag show-guide)
             (propertize " " 'face chip-face)
-            (propertize icon 'face chip-strong-face)
+            (my/append-face icon chip-strong-face)
             (propertize my/flymake-fancy-icon-text-gap 'face chip-face)
             (propertize body 'face chip-face)
             (propertize my/flymake-fancy-text-right-padding 'face chip-face))))
@@ -585,8 +596,9 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
 ;;; Icons
 
 (with-eval-after-load 'treemacs
-  (require 'treemacs-nerd-icons)
-  (treemacs-load-theme "nerd-icons"))
+  (when my/use-nerd-icons-p
+    (require 'treemacs-nerd-icons)
+    (treemacs-load-theme "nerd-icons")))
 
 (with-eval-after-load 'all-the-icons
   (load (my/emacs-path "self-develop/all-the-icons-diy.el")))
@@ -1069,7 +1081,7 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
   ("y" avy-copy-line)
   ("Y" avy-copy-region))
 
-(defhydra hydra-zoom (global-map "<f2>")
+(defhydra hydra-zoom (global-map "C-c z")
   "Zoom."
   ("g" text-scale-increase "in")
   ("l" text-scale-decrease "out")
@@ -1227,7 +1239,8 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
   (with-eval-after-load 'kind-icon
     (setq corfu-margin-formatters '(kind-icon-margin-formatter)))
   (with-eval-after-load 'nerd-icons-corfu
-    (setq corfu-margin-formatters '(nerd-icons-corfu-formatter)))
+    (when my/use-nerd-icons-p
+      (setq corfu-margin-formatters '(nerd-icons-corfu-formatter))))
   )
 
 (defun yas-setup-capf ()
@@ -1347,6 +1360,18 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
            aggressive-indent
            orderless))
   (require feature))
+
+(defun my/marginalia-safe-file-owner (original attributes)
+  "Call ORIGINAL with ATTRIBUTES without failing on invalid Windows GIDs."
+  (condition-case nil
+      (funcall original attributes)
+    (error nil)))
+
+(when (and windows-system-p
+           (not (advice-member-p #'my/marginalia-safe-file-owner
+                                 'marginalia--file-owner)))
+  (advice-add 'marginalia--file-owner
+              :around #'my/marginalia-safe-file-owner))
 
 ;; (setq-default completion-styles '(basic partial-completion orderless))
 (setq-default completion-styles '(flex partial-completion orderless basic))
@@ -1752,12 +1777,17 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
 (dirvish-override-dired-mode)
 
 (with-eval-after-load 'dirvish
-  (setq dirvish-attributes '(vc-state nerd-icons git-msg file-size subtree-state collapse file-time)
-        dirvish-side-attributes '(vc-state nerd-icons subtree-state collapse)
+  (setq dirvish-attributes (if my/use-nerd-icons-p
+                               '(vc-state nerd-icons git-msg file-size subtree-state collapse file-time)
+                             '(vc-state git-msg file-size subtree-state collapse file-time))
+        dirvish-side-attributes (if my/use-nerd-icons-p
+                                    '(vc-state nerd-icons subtree-state collapse)
+                                  '(vc-state subtree-state collapse))
         )
   (keymap-set dirvish-mode-map "TAB" #'dirvish-toggle-subtree))
 
-(unless (bound-and-true-p dirvish-override-dired-mode)
+(when (and my/use-nerd-icons-p
+           (not (bound-and-true-p dirvish-override-dired-mode)))
   (add-hook 'dired-mode-hook 'nerd-icons-dired-mode))
 
 ;;; Chinese
@@ -2090,8 +2120,7 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
    'org-roam-mode-hook
    (lambda ()
      (word-wrap-whitespace-mode)))
-  (setq org-roam-database-connector 'sqlite-builtin
-        org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag))
+  (setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag))
         org-roam-capture-templates
         '(("d"
            "default"
@@ -2469,6 +2498,7 @@ Possible values: 'math (default) or 'all.")
 
 ;;; Mode line
 (require 'segment-line)
+(setq segment-line-enable-icons my/use-nerd-icons-p)
 (segment-line-mode 1)
 
 (require 'ligature)
@@ -2513,7 +2543,7 @@ Possible values: 'math (default) or 'all.")
 
 ;;; Themes
 (require 'color-theme-sanityinc-tomorrow)
-(require 'rose-pine)
+(require 'ashen)
 (require 'gruber-darker-theme)
 (require 'catppuccin-theme)
 (require 'init-theme)
@@ -2563,7 +2593,12 @@ Possible values: 'math (default) or 'all.")
      #'(lambda ()
          (setup-display-graphic nil nil 6 17 my/theme-preset 105)))))
 
-(org-roam-db-autosync-mode)
+;; NeoEmacs may expose `sqlite-available-p' while being built without SQLite.
+;; Starting autosync without a back-end aborts the remainder of this init file.
+(when (and (fboundp 'sqlite-available-p)
+           (sqlite-available-p))
+  (setq org-roam-database-connector 'sqlite-builtin)
+  (org-roam-db-autosync-mode))
 
 (require 'lexdb-ldoce)
 (require 'lexdb-oald)

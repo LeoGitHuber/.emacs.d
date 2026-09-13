@@ -31,7 +31,7 @@
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory)
       load-prefer-newer t)
 
-(load custom-file)
+(load custom-file 'noerror 'nomessage)
 
 (when (not non-android-p)
   (setopt tool-bar-position 'bottom)
@@ -54,6 +54,9 @@
                    "site-lisp/lsp-mode/scripts"
                    "site-lisp/lsp-mode/docs"
                    "site-lisp/vertico/extensions"
+                   "site-lisp/magit/lisp"
+                   "site-lisp/with-editor/lisp"
+                   "site-lisp/transient/lisp"
                    "site-lisp/themes/themes"
                    "site-lisp/pdf-tools/lisp")))
   (add-to-list 'load-path path))
@@ -87,509 +90,7 @@
       ;; package-quickstart nil
       nobreak-char-display nil)
 
-;;; GC / Performance
-;; (add-hook
-;;  'emacs-startup-hook
-;;  (lambda ()
-;;    (setq gc-cons-threshold better-gc-cons-threshold
-;;          gc-cons-percentage 0.1)))
-
-;; (add-hook 'minibuffer-setup-hook #'gc-minibuffer-setup-hook)
-
-;; (add-hook 'minibuffer-exit-hook #'gc-minibuffer-exit-hook)
-
-;;; Diagnostics / icons
-(with-eval-after-load 'flycheck
-  (add-hook 'flycheck-mode-hook #'(lambda ()
-                                    (flycheck-set-indication-mode 'left-margin))))
-
-(require 'nerd-icons)
-(require 'nerd-icons-corfu)
-;; (require 'kind-icon)
-
-(setq nerd-icons-font-family
-      (or (my/detect-nerd-icons-font-family)
-          "Symbols Nerd Font Mono"))
-
-(defvar my/use-nerd-icons-p
-  (my/nerd-icons-font-available-p)
-  "Whether a usable Nerd Font is available for icon UI.")
-
-(defface diagnostics-error
-  `((((background dark))
-     :foreground "#f85149"
-     ,@(when my/use-nerd-icons-p
-         `(:family ,nerd-icons-font-family)))
-    (((background light))
-     :foreground "#cb2431"
-     ,@(when my/use-nerd-icons-p
-         `(:family ,nerd-icons-font-family))))
-  "Face for flymake Error."
-  :group 'flymake)
-
-(defface diagnostics-warn
-  `((((background dark))
-     :foreground "#f0883e"
-     ,@(when my/use-nerd-icons-p
-         `(:family ,nerd-icons-font-family)))
-    (((background light))
-     :foreground "#bf8803"
-     ,@(when my/use-nerd-icons-p
-         `(:family ,nerd-icons-font-family))))
-  "Face for flymake Warn."
-  :group 'flymake)
-
-(defface diagnostics-info
-  `((((background dark))
-     :foreground "#75beff"
-     ,@(when my/use-nerd-icons-p
-         `(:family ,nerd-icons-font-family)))
-    (((background light))
-     :foreground "#1155ff"
-     ,@(when my/use-nerd-icons-p
-         `(:family ,nerd-icons-font-family))))
-  "Face for flymake Info."
-  :group 'flymake)
-
-(require 'flymake)
-(require 'color)
-
-(setq flymake-no-changes-timeout 0.5
-      flymake-indicator-type 'margins
-      flymake-autoresize-margins t
-      flymake-margin-indicators-string
-      (if my/use-nerd-icons-p
-          `((error ,(concat (my/nerd-icon-glyph "󰅙" "E") "\u200A") diagnostics-error)
-            (warning ,(concat (my/nerd-icon-glyph "" "W") "\u200A") diagnostics-warn)
-            (note ,(concat (my/nerd-icon-glyph "" "N") "\u200A") diagnostics-info))
-        `((error ,(concat "E" "\u200A") diagnostics-error)
-          (warning ,(concat "W" "\u200A") diagnostics-warn)
-          (note ,(concat "N" "\u200A") diagnostics-info)))
-      flymake-show-diagnostics-at-end-of-line t)
-
-(defun my/flymake-apply-margin-indicators ()
-  "Sync custom Flymake margin icons into diagnostic type properties."
-  (put 'flymake-error 'flymake-margin-string
-       (alist-get 'error flymake-margin-indicators-string))
-  (put 'flymake-warning 'flymake-margin-string
-       (alist-get 'warning flymake-margin-indicators-string))
-  (put 'flymake-note 'flymake-margin-string
-       (alist-get 'note flymake-margin-indicators-string)))
-
-(my/flymake-apply-margin-indicators)
-
-(dolist (hook '(prog-mode-hook))
-  (add-hook hook 'flymake-mode))
-
-(add-hook 'flymake-mode-hook #'my/flymake-apply-margin-indicators)
-
-(require 'diff-hl)
-(require 'diff-hl-dired)
-(require 'diff-hl-flydiff)
-(require 'diff-hl-margin)
-
-;; Keep VCS change markers visible across GUI and terminal frames without
-;; competing with the current Flymake left-margin indicators.
-(setq diff-hl-side 'left)
-(when (fboundp 'set-fringe-style)
-  (set-fringe-style '(2 . nil)))
-(setq diff-hl-bmp-max-width 2)
-(setq diff-hl-highlight-function #'diff-hl-highlight-on-fringe
-      diff-hl-highlight-reference-function #'diff-hl-highlight-on-fringe
-      diff-hl-draw-borders nil)
-
-(defun my/diff-hl-setup-display-backend ()
-  "Use fringe highlights in GUI frames and right-margin highlights in terminals."
-  (if (display-graphic-p)
-      (progn
-        (when (bound-and-true-p diff-hl-margin-local-mode)
-          (diff-hl-margin-local-mode -1))
-        (setq-local diff-hl-side 'left
-                    diff-hl-highlight-function #'diff-hl-highlight-on-fringe
-                    diff-hl-highlight-reference-function #'diff-hl-highlight-on-fringe)
-        (when (fboundp 'set-fringe-style)
-          (set-fringe-style '(2 . nil))))
-    (when (and (bound-and-true-p diff-hl-margin-local-mode)
-               (not (eq diff-hl-side 'right)))
-      (diff-hl-margin-local-mode -1))
-    (setq-local diff-hl-side 'right)
-    (unless (bound-and-true-p diff-hl-margin-local-mode)
-      (diff-hl-margin-local-mode 1))))
-
-(add-hook 'diff-hl-mode-on-hook #'my/diff-hl-setup-display-backend)
-(add-hook 'diff-hl-dired-mode-on-hook #'my/diff-hl-setup-display-backend)
-
-(dolist (face '(diff-hl-insert
-                diff-hl-delete
-                diff-hl-change
-                diff-hl-reference-insert
-                diff-hl-reference-delete
-                diff-hl-reference-change))
-  (set-face-attribute face nil :background nil :box nil))
-
-(global-diff-hl-mode 1)
-(diff-hl-flydiff-mode 1)
-
-(with-eval-after-load 'dired
-  (add-hook 'dired-mode-hook #'diff-hl-dired-mode-unless-remote))
-
-(defvar my/flymake-fancy-max-width 88
-  "Maximum width for custom Flymake fancy inline diagnostics.")
-
-(defface my/flymake-fancy-prefix-face
-  '((t :inherit shadow :height 1.0))
-  "Face for prefix text in custom Flymake fancy diagnostics."
-  :group 'flymake)
-
-(defface my/flymake-fancy-error-face
-  '((t :inherit default :height 0.9 :box nil))
-  "Base face for Flymake fancy error chips."
-  :group 'flymake)
-
-(defface my/flymake-fancy-warning-face
-  '((t :inherit default :height 0.9 :box nil))
-  "Base face for Flymake fancy warning chips."
-  :group 'flymake)
-
-(defface my/flymake-fancy-note-face
-  '((t :inherit default :height 0.9 :box nil))
-  "Base face for Flymake fancy note chips."
-  :group 'flymake)
-
-(defface my/flymake-fancy-error-strong-face
-  '((t :inherit my/flymake-fancy-error-face :weight semibold))
-  "Strong face for Flymake fancy error icons."
-  :group 'flymake)
-
-(defface my/flymake-fancy-warning-strong-face
-  '((t :inherit my/flymake-fancy-warning-face :weight semibold))
-  "Strong face for Flymake fancy warning icons."
-  :group 'flymake)
-
-(defface my/flymake-fancy-note-strong-face
-  '((t :inherit my/flymake-fancy-note-face :weight semibold))
-  "Strong face for Flymake fancy note icons."
-  :group 'flymake)
-
-(defface my/flymake-fancy-error-guide-face
-  '((t :inherit my/flymake-fancy-prefix-face))
-  "Guide face for Flymake fancy error diagnostics."
-  :group 'flymake)
-
-(defface my/flymake-fancy-warning-guide-face
-  '((t :inherit my/flymake-fancy-prefix-face))
-  "Guide face for Flymake fancy warning diagnostics."
-  :group 'flymake)
-
-(defface my/flymake-fancy-note-guide-face
-  '((t :inherit my/flymake-fancy-prefix-face))
-  "Guide face for Flymake fancy note diagnostics."
-  :group 'flymake)
-
-(defvar my/flymake-fancy-guide "╰──▶ "
-  "Guide prefix used by custom Flymake fancy diagnostics.")
-
-(defvar my/flymake-fancy-icon-text-gap "  "
-  "Spacing inserted between the severity icon and diagnostic text.")
-
-(defvar my/flymake-fancy-text-right-padding " "
-  "Padding appended after diagnostic text in custom Flymake fancy lines.")
-
-(defvar my/flymake-fancy-background-ratio 0.18
-  "Blend ratio of severity foreground color into the default background.")
-
-(defvar my/flymake-fancy-error-icon (my/nerd-icon-glyph "" "E")
-  "Icon used for Flymake error diagnostics.")
-
-(defvar my/flymake-fancy-warning-icon (my/nerd-icon-glyph "" "W")
-  "Icon used for Flymake warning diagnostics.")
-
-(defvar my/flymake-fancy-note-icon (my/nerd-icon-glyph "" "N")
-  "Icon used for Flymake note diagnostics.")
-
-(defvar my/flymake-fancy-theme-hooks-installed nil
-  "Non-nil when Flymake fancy theme refresh hooks are installed.")
-
-(defun my/flymake--category (diag)
-  "Return Flymake category symbol for DIAG."
-  (or (flymake--lookup-type-property
-       (flymake-diagnostic-type diag)
-       'flymake-category)
-      'flymake-note))
-
-(defun my/flymake--face-color (face attribute &optional fallback)
-  "Return FACE ATTRIBUTE as a concrete color string, or FALLBACK."
-  (if (facep face)
-      (let ((value (face-attribute face attribute nil t)))
-        (if (or (not value)
-                (eq value 'unspecified)
-                (eq value 'unspecified-fg)
-                (eq value 'unspecified-bg))
-            fallback
-          value))
-    fallback))
-
-(defun my/flymake--level (diag)
-  "Return normalized severity level for DIAG."
-  (pcase (my/flymake--category diag)
-    ('flymake-error 'error)
-    ('flymake-warning 'warning)
-    (_ 'info)))
-
-(defun my/flymake--theme-foreground (level)
-  "Return theme foreground color for severity LEVEL."
-  (or
-   (pcase level
-     ('error
-      (or (my/flymake--face-color 'flymake-error :foreground)
-          (my/flymake--face-color 'error :foreground)
-          (my/flymake--face-color 'font-lock-warning-face :foreground)))
-     ('warning
-      (or (my/flymake--face-color 'flymake-warning :foreground)
-          (my/flymake--face-color 'warning :foreground)
-          (my/flymake--face-color 'font-lock-type-face :foreground)))
-     (_
-      (or (my/flymake--face-color 'flymake-note :foreground)
-          (my/flymake--face-color 'success :foreground)
-          (my/flymake--face-color 'link :foreground)
-          (my/flymake--face-color 'font-lock-function-name-face :foreground))))
-   (pcase level
-     ('error "#ff6c6b")
-     ('warning "#ECBE7B")
-     (_ "#98be65"))))
-
-(defun my/flymake--default-background ()
-  "Return current default background color."
-  (let ((color (my/flymake--face-color 'default :background)))
-    (if (or (not color) (eq color 'unspecified))
-        (if (eq (frame-parameter nil 'background-mode) 'light)
-            "#ffffff"
-          "#000000")
-      color)))
-
-(defun my/flymake--blend-colors (fg bg alpha)
-  "Blend FG into BG using ALPHA and return a hex color."
-  (let* ((fg-rgb (or (color-name-to-rgb fg) '(1.0 1.0 1.0)))
-         (bg-rgb (or (color-name-to-rgb bg) '(0.0 0.0 0.0)))
-         (mixed
-          (cl-mapcar (lambda (f b)
-                       (+ (* alpha f) (* (- 1 alpha) b)))
-                     fg-rgb bg-rgb)))
-    (color-rgb-to-hex (nth 0 mixed) (nth 1 mixed) (nth 2 mixed) 2)))
-
-(defun my/flymake--severity (diag)
-  "Return normalized severity symbol for DIAG."
-  (pcase (my/flymake--level diag)
-    ('error 'error)
-    ('warning 'warning)
-    (_ 'note)))
-
-(defun my/flymake--chip-face (severity)
-  "Return Flymake fancy chip face for SEVERITY."
-  (pcase severity
-    ('error 'my/flymake-fancy-error-face)
-    ('warning 'my/flymake-fancy-warning-face)
-    (_ 'my/flymake-fancy-note-face)))
-
-(defun my/flymake--chip-strong-face (severity)
-  "Return Flymake fancy strong chip face for SEVERITY."
-  (pcase severity
-    ('error 'my/flymake-fancy-error-strong-face)
-    ('warning 'my/flymake-fancy-warning-strong-face)
-    (_ 'my/flymake-fancy-note-strong-face)))
-
-(defun my/flymake--guide-face-symbol (severity)
-  "Return Flymake fancy guide face for SEVERITY."
-  (pcase severity
-    ('error 'my/flymake-fancy-error-guide-face)
-    ('warning 'my/flymake-fancy-warning-guide-face)
-    (_ 'my/flymake-fancy-note-guide-face)))
-
-(defun my/flymake-refresh-fancy-theme (&optional _theme)
-  "Refresh Flymake fancy faces from the current theme."
-  (interactive)
-  (let* ((default-bg (my/flymake--default-background))
-         (shadow-fg (or (my/flymake--face-color 'shadow :foreground)
-                        (my/flymake--face-color 'mode-line-inactive :foreground)
-                        (my/flymake--face-color 'default :foreground)))
-         (error-fg (my/flymake--theme-foreground 'error))
-         (warning-fg (my/flymake--theme-foreground 'warning))
-         (note-fg (my/flymake--theme-foreground 'info))
-         (error-bg (my/flymake--blend-colors error-fg default-bg my/flymake-fancy-background-ratio))
-         (warning-bg (my/flymake--blend-colors warning-fg default-bg my/flymake-fancy-background-ratio))
-         (note-bg (my/flymake--blend-colors note-fg default-bg my/flymake-fancy-background-ratio)))
-    (set-face-attribute 'my/flymake-fancy-prefix-face nil
-                        :inherit 'shadow
-                        :foreground shadow-fg
-                        :height 1.0
-                        :box nil
-                        :underline nil
-                        :overline nil
-                        :strike-through nil)
-    (dolist (spec `((my/flymake-fancy-error-face ,error-fg ,error-bg)
-                    (my/flymake-fancy-warning-face ,warning-fg ,warning-bg)
-                    (my/flymake-fancy-note-face ,note-fg ,note-bg)))
-      (pcase-let ((`(,face ,fg ,bg) spec))
-        (set-face-attribute face nil
-                            :inherit 'default
-                            :foreground fg
-                            :background bg
-                            :height 0.9
-                            :box nil
-                            :underline nil
-                            :overline nil
-                            :strike-through nil)))
-    (dolist (spec `((my/flymake-fancy-error-strong-face my/flymake-fancy-error-face)
-                    (my/flymake-fancy-warning-strong-face my/flymake-fancy-warning-face)
-                    (my/flymake-fancy-note-strong-face my/flymake-fancy-note-face)))
-      (pcase-let ((`(,face ,base-face) spec))
-        (set-face-attribute face nil
-                            :inherit base-face
-                            :weight 'semibold
-                            :box nil)))
-    (dolist (spec `((my/flymake-fancy-error-guide-face ,error-fg)
-                    (my/flymake-fancy-warning-guide-face ,warning-fg)
-                    (my/flymake-fancy-note-guide-face ,note-fg)))
-      (pcase-let ((`(,face ,fg) spec))
-        (set-face-attribute face nil
-                            :inherit 'my/flymake-fancy-prefix-face
-                            :foreground fg
-                            :box nil
-                            :underline nil
-                            :overline nil
-                            :strike-through nil)))
-    (set-face-attribute 'flymake-end-of-line-diagnostics-face nil
-                        :inherit 'default
-                        :height 0.9
-                        :box nil
-                        :foreground 'unspecified
-                        :background 'unspecified)
-    (set-face-attribute 'flymake-error-echo-at-eol nil
-                        :inherit 'error
-                        :foreground error-fg
-                        :weight 'medium
-                        :box nil)
-    (set-face-attribute 'flymake-warning-echo-at-eol nil
-                        :inherit 'warning
-                        :foreground warning-fg
-                        :weight 'medium
-                        :box nil)
-    (set-face-attribute 'flymake-note-echo-at-eol nil
-                        :inherit 'success
-                        :foreground note-fg
-                        :weight 'medium
-                        :box nil)
-    (set-face-attribute 'flymake-eol-information-face nil
-                        :inherit 'shadow
-                        :foreground shadow-fg
-                        :slant 'normal
-                        :box nil))
-  (force-mode-line-update t))
-
-(defun my/flymake--theme-refresh-hook (&rest _)
-  "Refresh Flymake fancy faces after theme changes."
-  (unless (bound-and-true-p my/theme-refresh-suppressed)
-    (my/flymake-refresh-fancy-theme)))
-
-(defun my/flymake-install-theme-hooks ()
-  "Install theme hooks used by Flymake fancy rendering."
-  (unless my/flymake-fancy-theme-hooks-installed
-    (add-hook 'enable-theme-functions #'my/flymake--theme-refresh-hook)
-    (add-hook 'disable-theme-functions #'my/flymake--theme-refresh-hook)
-    (setq my/flymake-fancy-theme-hooks-installed t)))
-
-(defun my/flymake--guide-face (diag)
-  "Return a guide face for DIAG using theme-derived severity colors."
-  (my/flymake--guide-face-symbol (my/flymake--severity diag)))
-
-(defun my/flymake--icon (diag)
-  "Return a severity icon string for DIAG."
-  (pcase (my/flymake--category diag)
-    ('flymake-error my/flymake-fancy-error-icon)
-    ('flymake-warning my/flymake-fancy-warning-icon)
-    (_ my/flymake-fancy-note-icon)))
-
-(defun my/flymake--indent (diag)
-  "Return the actual diagnostic column for DIAG."
-  (with-current-buffer (flymake-diagnostic-buffer diag)
-    (save-excursion
-      (goto-char (flymake-diagnostic-beg diag))
-      (current-column))))
-
-(defun my/flymake--guide-key (diag)
-  "Return a key identifying DIAG's guide position as `(LINE . COLUMN)'."
-  (with-current-buffer (flymake-diagnostic-buffer diag)
-    (save-excursion
-      (goto-char (flymake-diagnostic-beg diag))
-      (cons (line-number-at-pos) (current-column)))))
-
-(defun my/flymake--clean-summary (text)
-  "Normalize Flymake diagnostic TEXT into a compact single line."
-  (replace-regexp-in-string
-   "[[:space:]\n\r\t]+"
-   " "
-   (string-trim (substring-no-properties text))))
-
-(defun my/flymake--guide-prefix (diag show-guide)
-  "Return guide prefix for DIAG.
-When SHOW-GUIDE is nil, return an equally wide blank prefix."
-  (let ((guide-face (my/flymake--guide-face diag)))
-    (if show-guide
-        (propertize my/flymake-fancy-guide 'face guide-face)
-      (propertize (make-string (string-width my/flymake-fancy-guide) ?\s)
-                  'face guide-face))))
-
-(defun my/flymake--overlay-guide-column (line diag)
-  "Overlay a vertical guide for DIAG onto rendered LINE."
-  (let* ((column (my/flymake--indent diag))
-         (guide-face (my/flymake--guide-face diag))
-         (line (copy-sequence line)))
-    (when (<= (length line) column)
-      (setq line (concat line (make-string (1+ (- column (length line))) ?\s))))
-    (concat (substring line 0 column)
-            (propertize "│" 'face guide-face)
-            (substring line (1+ column)))))
-
-(defun my/flymake--render-inline-line (diag summarize-fn &optional show-guide)
-  "Render DIAG using SUMMARIZE-FN as a lightweight fancy line.
-When SHOW-GUIDE is non-nil, render the guide arrow prefix."
-  (let* ((severity (my/flymake--severity diag))
-         (chip-face (my/flymake--chip-face severity))
-         (chip-strong-face (my/flymake--chip-strong-face severity))
-         (indent (make-string (my/flymake--indent diag) ?\s))
-         (icon (my/flymake--icon diag))
-         (summary (my/flymake--clean-summary (funcall summarize-fn diag)))
-         (body (truncate-string-to-width summary my/flymake-fancy-max-width nil nil "…")))
-    (concat indent
-            (my/flymake--guide-prefix diag show-guide)
-            (propertize " " 'face chip-face)
-            (my/append-face icon chip-strong-face)
-            (propertize my/flymake-fancy-icon-text-gap 'face chip-face)
-            (propertize body 'face chip-face)
-            (propertize my/flymake-fancy-text-right-padding 'face chip-face))))
-
-(defun my/flymake--eol-draw-fancy (diags summarize-fn)
-  "Render DIAGS with SUMMARIZE-FN using a lightweight inline style."
-  (let ((sorted (cl-sort (copy-sequence diags) #'> :key #'flymake-diagnostic-beg))
-        (previous-key nil)
-        (lines nil))
-    (dolist (diag sorted)
-      (let* ((guide-key (my/flymake--guide-key diag))
-             (show-guide (not (equal guide-key previous-key))))
-        (when show-guide
-          (setq lines (mapcar (lambda (line)
-                                (my/flymake--overlay-guide-column line diag))
-                              lines)))
-        (push (my/flymake--render-inline-line diag summarize-fn show-guide) lines)
-        (setq previous-key guide-key)))
-    (concat
-     " \n"
-     (string-join (nreverse lines) "\n"))))
-
-(defalias 'flymake--eol-draw-fancy #'my/flymake--eol-draw-fancy)
-
-(my/flymake-install-theme-hooks)
-(my/flymake-refresh-fancy-theme)
+(require 'init-diagnostics)
 
 (require 'project)
 
@@ -661,26 +162,8 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
 (setq global-auto-revert-non-file-buffers t
       auto-revert-interval 1)
 (require 'hl-line)
-(setq hl-line-sticky-flag nil
-      hl-line-overlay nil)
-
-(global-hl-line-mode)
-
-(dolist (hook
-         '(eshell-mode-hook
-           shell-mode-hook
-           term-mode-hook
-           messages-buffer-mode-hook
-           eat-mode-hook
-           org-mode-hook
-           markdown-mode-hook
-           markdown-view-mode-hook
-           nov-mode-hook
-           tex-mode-hook
-           TeX-mode-hook
-           LaTeX-mode-hook))
-  (add-hook hook (lambda ()
-                   (setq-local global-hl-line-mode nil))))
+(setq hl-line-sticky-flag nil)
+(require 'init-editing)
 
 (setq electric-pair-inhibit-predicate 'electric-pair-conservative-inhibit
       scroll-preserve-screen-position t
@@ -752,19 +235,6 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
 (auto-save-visited-mode -1)
 (super-save-mode 1)
 
-(defun enable-buffer-local-trailing-whitespace-cleanup ()
-  "Use the built-in save hook to clean trailing whitespace in this buffer."
-  (delete-trailing-whitespace-mode 1))
-
-(dolist (hook '(text-mode-hook
-                conf-mode-hook
-                markdown-mode-hook
-                yaml-ts-mode-hook
-                toml-ts-mode-hook
-                json-ts-mode-hook
-                emacs-lisp-mode-hook))
-  (add-hook hook #'enable-buffer-local-trailing-whitespace-cleanup))
-
 (dolist (hook '(TeX-mode-hook dired-mode-hook markdown-mode-hook markdown-view-mode-hook))
   (add-hook hook #'(lambda ()
                      (setq truncate-lines t))))
@@ -783,7 +253,8 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
   (add-to-list 'recentf-exclude no-littering-var-directory)
   (add-to-list 'recentf-exclude no-littering-etc-directory))
 
-(require 'saveplace-pdf-view)
+(with-eval-after-load 'pdf-view
+  (require 'saveplace-pdf-view))
 
 (save-place-mode t)
 
@@ -1204,8 +675,6 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
 
 (yas-global-mode 1)
 
-(yas-minor-mode-on)
-
 (with-eval-after-load 'tempel
   (defun tempel-setup-capf ()
     (setq-local completion-at-point-functions
@@ -1225,7 +694,7 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
         corfu-cycle t
         ;; corfu-quit-no-match 'separator  ;; t
         corfu-auto-prefix 2
-        corfu-auto-delay 0
+        corfu-auto-delay 0.1
         corfu-preview-current t
         corfu-on-exact-match 'show
         ;; corfu-quit-no-match t
@@ -1273,7 +742,7 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
 (setq yas-prompt-functions '(yas-no-prompt))
 
 (require 'eglot)
-(require 'dape)
+(autoload 'dape "dape" nil t)
 (require 'apheleia)
 
 (defconst my/verilog-format-command "verible-verilog-format"
@@ -1331,7 +800,7 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
   ;; (add-to-list 'eglot-server-programs `((LaTeX-mode latex-mode tex-mode) . ("texlab")))
   (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
   (setq project-vc-extra-root-markers '("Cargo.toml" ".dir-locals.el" "build.mill"))
-  (setq eglot-send-changes-idle-time 0
+  (setq eglot-send-changes-idle-time 0.2
         eglot-code-action-indications '(eglot-hint))
   )
 
@@ -1374,7 +843,11 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
               :around #'my/marginalia-safe-file-owner))
 
 ;; (setq-default completion-styles '(basic partial-completion orderless))
-(setq-default completion-styles '(flex partial-completion orderless basic))
+(setq-default completion-styles '(orderless flex basic))
+(setf (alist-get 'file completion-category-overrides)
+      '((styles partial-completion basic))
+      (alist-get 'eglot completion-category-overrides)
+      '((styles flex basic)))
 
 (require 'wgrep)
 (setq consult-ripgrep-args
@@ -1607,6 +1080,7 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
                              python
                              ruby
                              rust
+                             scala
                              toml
                              tsx
                              typescript
@@ -1642,17 +1116,13 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
 
 (dolist (entry
          `(("\\.pdf\\'" . my/open-pdf)
-           ("\\.ya?ml\\'" . yaml-ts-mode)
-           ("\\.lua\\'" . lua-ts-mode)
-           ("\\.scala\\'" . scala-ts-mode)
-           ("\\.sbt\\'" . scala-ts-mode)
-           ("\\.sc\\'" . scala-ts-mode)
-           ("\\.mill\\'" . scala-ts-mode)
+           ("\\.scala\\'" . my/scala-mode)
+           ("\\.sbt\\'" . my/scala-mode)
+           ("\\.sc\\'" . my/scala-mode)
+           ("\\.mill\\'" . my/scala-mode)
            ("\\.kdl\\'" . kdl-mode)
            ("\\.do\\'" . tcl-mode)
            ("\\.xdc\\'" . tcl-mode)
-           ("\\.ts\\'" . typescript-ts-mode)
-           ("\\.tsx\\'" . typescript-ts-mode)
            ("\\.\\(?:md\\|markdown\\|mkd\\|mdown\\|mkdn\\|mdwn\\)\\'" . markdown-mode)
            ("README\\.md\\'" . gfm-mode)))
   (add-to-list 'auto-mode-alist entry))
@@ -1916,8 +1386,10 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
 
 
 ;;; Reading / Documents
-(dolist (feature '(eldoc-box eldoc-mouse calibredb nov shrface etaf))
+(dolist (feature '(eldoc-box eldoc-mouse shrface))
   (require feature))
+(autoload 'calibredb "calibredb" nil t)
+(autoload 'nov-mode "nov" nil t)
 
 (unless windows-system-p
   (require 'nov-xwidget nil t))
@@ -2026,8 +1498,7 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
    (setq-local time-stamp-active t
                time-stamp-start "#\\+MODIFIED: [ \t]*"
                time-stamp-end "$"
-               time-stamp-format "\[%Y-%m-%d %3a %H:%M\]"
-               company-backends '(company-files company-keywords))
+               time-stamp-format "\[%Y-%m-%d %3a %H:%M\]")
    (electric-indent-local-mode)
    (org-appear-mode)
    (org-cdlatex-mode)
@@ -2091,29 +1562,24 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
 
 (setq denote-directory "~/Documents/Personal/denote")
 
-(require 'org-noter)
+(autoload 'org-noter "org-noter" nil t)
 
 (with-eval-after-load 'org-noter
   (setq org-noter-notes-search-path `(,denote-directory)
         org-noter-auto-save-last-location t))
 
-(dolist (path (mapcar #'my/emacs-path
-                      '("site-lisp/with-editor/lisp"
-                        "site-lisp/magit/lisp")))
-  (add-to-list 'load-path path))
-(my/refresh-elisp-flymake-byte-compile-load-path)
-
-(load (my/emacs-path "site-lisp/transient/lisp/transient.el"))
-
-(require 'magit)
-(require 'org-roam)
+(autoload 'magit-status "magit" nil t)
+(autoload 'magit-dispatch "magit" nil t)
+(autoload 'magit-file-dispatch "magit" nil t)
+(autoload 'org-roam-node-find "org-roam" nil t)
+(autoload 'org-roam-capture "org-roam" nil t)
+(autoload 'org-roam-buffer-toggle "org-roam" nil t)
 
 (keymap-global-set "C-c n n" 'org-noter)
 
 (keymap-global-set "C-c n f" 'org-roam-node-find)
 
-(setq org-roam-db-gc-threshold most-positive-fixnum
-      org-roam-mode-sections '(org-roam-backlinks-section org-roam-reflinks-section org-roam-unlinked-references-section))
+(setq org-roam-mode-sections '(org-roam-backlinks-section org-roam-reflinks-section org-roam-unlinked-references-section))
 
 (with-eval-after-load 'org-roam
   (add-hook
@@ -2155,7 +1621,7 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
            :unnarrowed t))))
 
 ;;; LaTeX node
-(load (my/emacs-path "lisp/latex-node.el"))
+(autoload 'latex-node-find-file "latex-node" nil t)
 
 ;;; LaTeX
 ;; On demand loading, leads to faster startup time.
@@ -2173,324 +1639,16 @@ When SHOW-GUIDE is non-nil, render the guide arrow prefix."
   (citar-denote-mode))
 
 
+;; Register AUCTeX file modes now; load previews and folding on first use.
 (require 'auctex)
-(require 'cdlatex)
-(require 'tex-fold)
-(require 'font-latex)
-(require 'tex-bar)
-(require 'preview)
-(require 'color)
-
-(defconst my-latexmk-config-files '(".latexmkrc" "latexmkrc" ".latexmk")
-  "Project-local Latexmk configuration filenames.")
-
-(defconst my-latexmk-auto-read-config-files '(".latexmkrc" "latexmkrc")
-  "Latexmk configuration filenames read automatically from the command directory.")
-
-(defun my-latexmk--command-directory ()
-  "Return the directory where AUCTeX will run Latexmk."
-  (file-name-as-directory
-   (expand-file-name
-    (or (when (fboundp 'TeX-master-directory)
-          (ignore-errors (TeX-master-directory)))
-        default-directory))))
-
-(defun my-latexmk--project-root (&optional directory)
-  "Return the project root for DIRECTORY, or nil outside a project."
-  (let ((default-directory (file-name-as-directory
-                            (expand-file-name (or directory default-directory)))))
-    (when-let* ((project (and (fboundp 'project-current)
-                              (project-current nil))))
-      (cond
-       ((fboundp 'project-root) (project-root project))
-       ((fboundp 'project-roots) (car (project-roots project)))))))
-
-(defun my-latexmk--config-in-directory (directory)
-  "Return a Latexmk config file in DIRECTORY, or nil."
-  (catch 'config
-    (dolist (name my-latexmk-config-files)
-      (let ((file (expand-file-name name directory)))
-        (when (file-regular-p file)
-          (throw 'config file))))
-    nil))
-
-(defun my-latexmk--locate-config ()
-  "Return the nearest project-local Latexmk config for the current TeX buffer."
-  (let* ((start-dir (my-latexmk--command-directory))
-         (project-root (when-let* ((root (my-latexmk--project-root start-dir)))
-                         (file-name-as-directory (expand-file-name root))))
-         (home-dir (file-name-as-directory (expand-file-name "~")))
-         (stop-dir (or project-root home-dir))
-         (dir start-dir))
-    (catch 'config
-      (while dir
-        (when-let* ((config (my-latexmk--config-in-directory dir)))
-          (throw 'config config))
-        (let ((parent (file-name-directory (directory-file-name dir))))
-          (if (or (and stop-dir (file-equal-p dir stop-dir))
-                  (null parent)
-                  (file-equal-p parent dir))
-              (throw 'config nil)
-            (setq dir (file-name-as-directory parent))))))))
-
-(defun my-latexmk-options ()
-  "Use a project Latexmk config when present, otherwise use AUCTeX defaults."
-  (if-let* ((config (my-latexmk--locate-config)))
-      (let ((config-dir (file-name-as-directory (file-name-directory config))))
-        (if (and (member (file-name-nondirectory config)
-                         my-latexmk-auto-read-config-files)
-                 (file-equal-p config-dir (my-latexmk--command-directory)))
-            ""
-          (concat "-r " (shell-quote-argument config))))
-    (replace-regexp-in-string "\\`[ \t\n]+" ""
-                              (TeX-command-expand "%(latexmk-out)"))))
-
-(with-eval-after-load 'tex
-  (setq TeX-auto-save t
-        TeX-parse-self t
-        TeX-fold-auto t
-        cdlatex-paired-parens "$[{("
-        TeX-save-query nil
-        tex-suscript-height-ratio 0.8)
-  (setq preview-scale-function 1.3)
-  (custom-set-variables
-   '(preview-LaTeX-command
-     '("%`%l --output-format=dvi \"\\nonstopmode\\nofiles\\PassOptionsToPackage{"
-       ("," . preview-required-option-list)
-       "}{preview}\\AtBeginDocument{\\ifx\\ifPreview\\undefined"
-       preview-default-preamble
-       "\\fi}\"%' \"\\detokenize{\" %(t-filename-only) \"}\"")))
-  (setq preview-image-type 'dvi*
-        preview-dvi*-command #'preview-dvisvgm-command
-        preview-dvi*-image-type 'svg)
-  (defun my-preview-force-default-face (ov &rest _)
-    "Make SVG `currentColor' resolve from `default' face, not font-lock faces."
-    (when (eq (overlay-get ov 'preview-state) 'active)
-      (overlay-put ov 'face 'default)))
-  (advice-add 'preview-toggle :after #'my-preview-force-default-face)
-  (if (boundp 'preview-dvi*-command)
-      (setq preview-dvi*-image-type 'svg
-            preview-dvi*-command
-            (lambda ()
-              (preview-dvisvgm-command
-               "dvisvgm --no-fonts --currentcolor %d --page=- --output=\"%m/prev%3p.svg\"")))
-    (setq preview-dvipng-image-type 'svg
-          preview-dvipng-command
-          (lambda ()
-            (preview-dvisvgm-command
-             "dvisvgm --no-fonts --currentcolor %d --page=- --output=\"%m/prev%3p.svg\""))))
-  (setq-default TeX-master t
-                TeX-engine 'luatex
-                TeX-command-extra-options "-synctex=1 -shell-escape")
-  (if windows-system-p
-      (add-to-list 'TeX-view-program-selection '(output-pdf "Sioyek"))
-    (add-to-list 'TeX-view-program-selection '(output-pdf "Okular")))
-  (with-eval-after-load 'eaf
-    (add-to-list 'TeX-view-program-list '("eaf" eaf-pdf-synctex-forward-view))
-    (add-to-list 'TeX-view-program-selection '(output-pdf "eaf")))
-  (add-to-list
-   'TeX-command-list
-   '("XeLaTeX" "%`xelatex -shell-escape --syntex=1%(mode)%' %t" TeX-run-TeX nil t))
-  (add-to-list 'TeX-expand-list '("%(my-latexmk-options)" my-latexmk-options))
-  (setcdr
-   (assoc "LaTeXMk" TeX-command-list)
-   '("latexmk -pvc -view=none %(my-latexmk-options) %(file-line-error) %(output-dir) %`%(extraopts) %S%(mode)%' %t"
-     TeX-run-TeX
-     nil
-     (LaTeX-mode docTeX-mode)
-     :help "Run LaTeXMk"))
-  (add-to-list 'texmathp-tex-commands1 '("lstlisting" env-off)))
-
-(with-eval-after-load 'tex-fold
-  (setq TeX-fold-macro-spec-list
-        (mapcar
-         (lambda (x)
-           (if (equal (cadr x) '("item"))
-               '(("[1]||•" . (1 . 0)) ("item"))
-             x))
-         TeX-fold-macro-spec-list))
-  (defun my-tex-fold--prefix-like-title (prefix title)
-    "Return PREFIX+TITLE, where PREFIX uses the same face as TITLE."
-    (let* ((face (or (get-text-property 0 'face title)
-                     (get-text-property 0 'font-lock-face title)))
-           (pfx
-            (if face
-                (propertize prefix 'face face)
-              prefix)))
-      (concat pfx title)))
-  (defun my-tex-fold-section (title)
-    (my-tex-fold--prefix-like-title "§ " title))
-  (defun my-tex-fold-subsection (title)
-    (my-tex-fold--prefix-like-title "§§ " title))
-  (defun my-tex-fold-subsubsection (title)
-    (my-tex-fold--prefix-like-title "§§§ " title))
-  (defun my-tex-fold-paragraph (title)
-    (my-tex-fold--prefix-like-title "¶ " title))
-  ;; 放到表头，覆盖默认规则
-  (dolist (spec
-           '((my-tex-fold-section ("section" "section*"))
-             (my-tex-fold-subsection ("subsection" "subsection*"))
-             (my-tex-fold-subsubsection ("subsubsection" "subsubsection*"))
-             (my-tex-fold-paragraph ("paragraph" "paragraph*"))
-             ("~" ("textasciitilde"))
-             ("^" ("textasciicircum"))
-             ("\\" ("textbackslash"))
-             ("|" ("textbar"))
-             (" " (";"))
-             (" " ("quad"))
-             ("  " ("qquad"))))
-    (push spec LaTeX-fold-macro-spec-list))
-  (dolist (x
-           '((("∧" . 0)
-              ("land"))
-             (("∨" . 0)
-              ("lor"))
-             (1 ("textnormal" "mathrm"))
-             ))
-    (add-to-list 'LaTeX-fold-math-spec-list x))
-  (dolist (x
-           '((("╭•────▶" "╰•────▶")
-              ("itemize"))
-             (("╭≣────▶" "╰≣────▶")
-              ("enumerate"))
-             (("╭⌁────▶" "╰⌁────▶")
-              ("description"))
-             (("↱" "↳")
-              ("equation" "equation*"))
-             (("≡" "≡")
-              ("align" "align*" "aligned"))
-             (("Σ" "Σ")
-              ("gather" "gather*"))
-             (("⋯" "⋯")
-              ("multline" "multline*"))))
-    (add-to-list 'TeX-fold-begin-end-spec-list x))
-  (defvar my/TeX-fold-clearpage-string
-    "────────────────────────────────  clearpage  ────────────────────────────────")
-  (defun my/TeX-fold--macro-face ()
-    "取当前宏（\\...）开头处的 face，用来给占位符上色。"
-    (let* ((beg
-            (ignore-errors
-              (TeX-find-macro-start)))  ; AUCTeX 的宏起点定位
-           (pos (or beg (point))))
-      (or (get-text-property pos 'face)
-          (get-text-property pos 'font-lock-face)
-          'font-lock-keyword-face)))
-  (defun my/TeX-fold-clearpage (&rest _args)
-    (propertize my/TeX-fold-clearpage-string 'face (my/TeX-fold--macro-face)))
-  (add-to-list 'LaTeX-fold-macro-spec-list '(my/TeX-fold-clearpage ("clearpage")))
-  (defvar my-tex-fold-empty-braces-scope 'math
-    "Scope for folding empty braces after control words.
-Possible values: 'math (default) or 'all.")
-  (defun my-tex-fold--in-math-p (pos)
-    "Non-nil if POS is in TeX math mode."
-    (save-excursion
-      (goto-char pos)
-      (texmathp)))
-  (defun my-tex-fold--already-folded-p (beg end)
-    "Check whether region already has our TeX-fold terminator overlay."
-    (cl-some
-     (lambda (ov)
-       (and (eq (overlay-get ov 'category) 'TeX-fold)
-            (overlay-get ov 'my-tex-fold-terminator)))
-     (overlays-in beg end)))
-  (defun my-tex-fold--zero-overlay (beg end)
-    "Hide region [BEG, END) with a TeX-fold overlay displaying zero width."
-    (unless (or (>= beg end)
-                (my-tex-fold--already-folded-p beg end))
-      (let* ((priority (TeX-overlay-prioritize beg end))
-             (ov (make-overlay beg end (current-buffer) t nil)))
-        (overlay-put ov 'category 'TeX-fold)
-        (overlay-put ov 'priority priority)
-        (overlay-put ov 'evaporate t)
-        (overlay-put ov 'my-tex-fold-terminator t)
-        ;; Zero-width placeholder (looks like “gone”)
-        (overlay-put ov 'TeX-fold-display-string-spec "\u200B")
-        (TeX-fold-hide-item ov)
-        ov)))
-  (defun my-tex-fold-fold-terminators (&optional beg end)
-    "Fold empty {} and terminator whitespace *in math* after TeX-fold runs."
-    (interactive)
-    (when (bound-and-true-p TeX-fold-mode)
-      (save-excursion
-        (let ((beg (or beg (point-min)))
-              (end (or end (point-max))))
-          ;; 1) Fold empty {} right after control words: \foo{}
-          ;;    Default: only in math (safer). Set `my-tex-fold-empty-braces-scope` to 'all if you want everywhere.
-          (goto-char beg)
-          (while (re-search-forward "\\\\[A-Za-z@]+\\({}\\)" end t)
-            (let ((b (match-beginning 1))
-                  (e (match-end 1)))
-              (when (or (eq my-tex-fold-empty-braces-scope 'all)
-                        (my-tex-fold--in-math-p b))
-                (my-tex-fold--zero-overlay b e))))
-          ;; 2a) Same-line terminator whitespace (NO newline):
-          ;;     \cmd<space/tab><letter>  (letter would otherwise extend control word)
-          (goto-char beg)
-          (while (re-search-forward "\\\\[A-Za-z@]+\\([ \t]+\\)\\([A-Za-z@]\\)" end t)
-            (let ((b (match-beginning 1))
-                  (e (match-end 1)))
-              (when (my-tex-fold--in-math-p b)
-                (my-tex-fold--zero-overlay b e))))
-          ;; 2b) Multi-line: keep the newline, fold indentation only:
-          ;;     \cmd\n[ \t]+<letter>  -> hide only the spaces after \n
-          (goto-char beg)
-          (while (re-search-forward "\\\\[A-Za-z@]+\\(\n[ \t]+\\)\\([A-Za-z@]\\)" end t)
-            (let* ((grp-b (match-beginning 1))
-                   (grp-e (match-end 1))
-                   (indent-b (1+ grp-b)) ;; skip the newline itself
-                   (indent-e grp-e))
-              (when (and (< indent-b indent-e)
-                         (my-tex-fold--in-math-p grp-b))
-                (my-tex-fold--zero-overlay indent-b indent-e))))))))
-  (defun my-tex-fold--after-fold (&rest _)
-    (my-tex-fold-fold-terminators (point-min)
-                                  (point-max)))
-  ;; Make it work for both buffer-fold and region-fold
-  (advice-add 'TeX-fold-buffer :after #'my-tex-fold--after-fold)
-  (advice-add 'TeX-fold-region :after #'my-tex-fold--after-fold))
-
-(with-eval-after-load 'font-latex
-  (setq font-latex-fontify-sectioning 1.2)
-  (font-latex-update-sectioning-faces))
-
-(with-eval-after-load 'tex-mode
-  (dolist (pair
-           '(("\\land" . ?∧)
-             ("\\lor" . ?∨)
-             ))
-    (add-to-list 'tex--prettify-symbols-alist pair)))
-
-(dolist (hook '(LaTeX-mode-hook TeX-mode-hook tex-mode-hook))
-  (add-hook
-   hook
-   (lambda ()
-     (setq-local TeX-command-default "LaTeXMk" ;; "XeLaTeX"
-                 )
-     (setq TeX-electric-math t)
-     (font-latex-add-keywords '(("CJKunderline" "{")) 'underline-command)
-     (electric-indent-local-mode -1)
-     (TeX-PDF-mode-on)
-     (LaTeX-math-mode 1)
-     (TeX-fold-mode 1)
-     (turn-on-cdlatex)
-     (turn-on-reftex)
-     ;; (visual-line-mode)
-     ;; (outline-minor-mode)
-     ;; (olivetti-mode)
-     ;; (mixed-pitch-mode)
-     ;; (face-remap-add-relative 'font-latex-superscript-face '(:height 0.8))
-     ;; (face-remap-add-relative 'font-latex-subscript-face '(:height 0.8))
-     (run-with-idle-timer 0 nil
-                          (lambda (buf)
-                            (when (buffer-live-p buf)
-                              (with-current-buffer buf
-                                (font-lock-ensure) ; 先确保字体化
-                                )))
-                          (current-buffer)))))
-
-(keymap-set outline-minor-mode-map "C-<tab>" 'outline-toggle-children)
-
-
+;; This source checkout may not contain generated auctex-autoloads.el.
+;; Clear built-in aliases before registering the AUCTeX entry points.
+(TeX--alias-overlapped-modes)
+(autoload 'TeX-tex-mode "init-tex" nil t)
+(autoload 'plain-TeX-mode "init-tex" nil t)
+(autoload 'LaTeX-mode "init-tex" nil t)
+(autoload 'docTeX-mode "init-tex" nil t)
+(autoload 'Texinfo-mode "init-tex" nil t)
 
 ;;; ============================================================================
 ;;; 08 UI Themes and Platform
@@ -2595,14 +1753,11 @@ Possible values: 'math (default) or 'all.")
 
 ;; NeoEmacs may expose `sqlite-available-p' while being built without SQLite.
 ;; Starting autosync without a back-end aborts the remainder of this init file.
-(when (and (fboundp 'sqlite-available-p)
-           (sqlite-available-p))
-  (setq org-roam-database-connector 'sqlite-builtin)
-  (org-roam-db-autosync-mode))
-
-(require 'lexdb-ldoce)
-(require 'lexdb-oald)
-(require 'lexdb-ode)
+(with-eval-after-load 'org-roam
+  (when (and (fboundp 'sqlite-available-p)
+             (sqlite-available-p))
+    (setq org-roam-database-connector 'sqlite-builtin)
+    (org-roam-db-autosync-mode 1)))
 
 (setq lexdb-dictionaries
       '((:id
@@ -2615,9 +1770,21 @@ Possible values: 'math (default) or 'all.")
         (:id oald :type oald :name "牛津双解" :db-file "~/dicts/OALD4_EC.db" :priority 2)
         (:id ode :type ode :name "牛津英语" :db-file "~/dicts/ODE_Living_Online.db" :priority 3)))
 
-(lexdb-init)
+(defvar my/lexdb-initialized nil
+  "Non-nil after dictionary adapters have been initialized.")
 
-(keymap-global-set "C-c d" 'lexdb-search)
+(defun my/lexdb-search ()
+  "Load dictionary adapters on the first lookup."
+  (interactive)
+  (unless my/lexdb-initialized
+    (require 'lexdb-ldoce)
+    (require 'lexdb-oald)
+    (require 'lexdb-ode)
+    (lexdb-init)
+    (setq my/lexdb-initialized t))
+  (call-interactively #'lexdb-search))
+
+(keymap-global-set "C-c d" #'my/lexdb-search)
 
 
 (provide 'init)

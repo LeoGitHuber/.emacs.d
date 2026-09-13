@@ -1,0 +1,3 @@
+# Use LF when saving files in editors that support EditorConfig.
+[*]
+end_of_line = lf

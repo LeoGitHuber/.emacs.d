@@ -1,2 +1,25 @@
 * Emacs Configuration
 This is a fine-tuned Emacs configuration. It's fast enough to boot up and powerful enough to work.
+
+* 当前结构
+- =early-init.el=：启动期设置、窗口默认值与 LF 默认值。
+- =init.el=：日常功能入口，保留现有八个分类。
+- =lisp/init-func.el=：公共辅助函数、Meow、Eglot、字体。
+- =lisp/init-editing.el=：行高亮、尾随空白、Scala 语法回退、大文件保护。
+- =lisp/init-diagnostics.el=：Flymake 与 diff-hl 外观。
+- =lisp/init-tex.el=：首次使用 AUCTeX LaTeX 模式时加载的格式化、折叠、预览。
+- =lisp/init-startup.el=、=lisp/init-theme.el=：启动页与主题。
+- =archive/legacy/=：已退出启动流程的旧配置，保留供查阅。
+
+* 检查与维护
+配置按 Windows 上的 GNU Emacs 32.0.50 和 NeoEmacs 31.1 检查。
+从本目录执行：
+#+begin_src sh
+emacs --batch -Q -l tests/run-config-tests.el
+neomacs --batch -Q -l tests/run-config-tests.el
+#+end_src
+
+测试使用临时状态目录，跳过真实笔记库同步。它覆盖启动和常用模式 hook，
+不代替 GUI 外观、真实 LSP 服务、LaTeX 编译及数据库查询的交互检查。
+
+详细改进、归档依据和新特性说明见 [[file:docs/config-review-2026-09.md][配置检查记录]]。

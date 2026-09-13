@@ -31,3 +31,6 @@ rime/sync/
 *.neoc
 /.cache/
 /etc/
+/eshell/
+/org-persist/
+/auto-save-list/

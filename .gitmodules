@@ -640,3 +640,6 @@
 [submodule "site-lisp/jarchive"]
 	path = site-lisp/jarchive
 	url = https://git.sr.ht/~dannyfreeman/jarchive
+[submodule "site-lisp/doric-themes"]
+	path = site-lisp/doric-themes
+	url = https://github.com/protesilaos/doric-themes.git

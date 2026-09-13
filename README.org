@@ -6,7 +6,7 @@ This is a fine-tuned Emacs configuration. It's fast enough to boot up and powerf
 - =init.el=：日常功能入口，保留现有八个分类。
 - =lisp/init-func.el=：公共辅助函数、Meow、Eglot、字体。
 - =lisp/init-editing.el=：行高亮、尾随空白、Scala 语法回退、大文件保护。
-- =lisp/init-diagnostics.el=：Flymake 与 diff-hl 外观。
+- =lisp/init-diagnostics.el=：Flymake 内置行尾显示、边栏图标与 diff-hl 外观。
 - =lisp/init-tex.el=：首次使用 AUCTeX LaTeX 模式时加载的格式化、折叠、预览。
 - =lisp/init-startup.el=、=lisp/init-theme.el=：启动页与主题。
 - =archive/legacy/=：已退出启动流程的旧配置，保留供查阅。

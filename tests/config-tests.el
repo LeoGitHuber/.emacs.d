@@ -99,18 +99,169 @@
       (my/scala-mode)
       (should (eq chosen 'treesit)))))
 
-(ert-deftest config-flymake-renderer-is-reversible ()
-  (unwind-protect
-      (progn
-        (my/flymake-fancy-mode -1)
-        (should (fboundp 'flymake--eol-draw-fancy))
-        (should-not (advice-member-p #'my/flymake--eol-draw-fancy
-                                     'flymake--eol-draw-fancy))
-        (my/flymake-fancy-mode 1)
-        (should my/flymake-fancy-mode)
-        (should (advice-member-p #'my/flymake--eol-draw-fancy
-                                 'flymake--eol-draw-fancy)))
-    (my/flymake-fancy-mode 1)))
+(defun config-test-flymake-backend (report-fn &rest _)
+  "Report two diagnostics on one line without launching a subprocess."
+  ;; Use a named backend, as real backends do.  Capturing these diagnostics in
+  ;; an anonymous backend creates a cycle when Flymake stores the backend in
+  ;; each diagnostic; NeoEmacs cannot handle that test fixture.
+  (funcall report-fn
+           (list (flymake-make-diagnostic
+                  (current-buffer) 1 4 :error
+                  '("checker" "E42" "First error\nDetailed explanation"))
+                 (flymake-make-diagnostic
+                  (current-buffer) 5 10 :warning "Second warning"))))
+
+;; This backend only returns fixed test data; it never evaluates buffer text.
+(put 'config-test-flymake-backend 'flymake-always-safe t)
+
+(defun config-test-flymake-margin-overlays ()
+  "Return diagnostic overlays that currently display a margin icon."
+  (cl-remove-if-not
+   (lambda (ov)
+     (let ((icon (overlay-get ov 'before-string)))
+       (and (overlay-get ov 'flymake-diagnostic)
+            (stringp icon) (> (length icon) 0)
+            (equal (car-safe (get-text-property 0 'display icon))
+                   '(margin left-margin)))))
+   (overlays-in (point-min) (point-max))))
+
+(ert-deftest config-flymake-renders-native-eol-diagnostics ()
+  ;; Exercise reporting and real overlays: an installed renderer can still be
+  ;; bypassed if the configured display style does not select it.
+  (let ((flymake-start-on-flymake-mode nil)
+        (flymake-no-changes-timeout nil))
+    (with-temp-buffer
+      (insert "bad value\n")
+      (setq-local flymake-diagnostic-functions '(config-test-flymake-backend))
+      (unwind-protect
+          (progn
+            (flymake-mode 1)
+            (flymake-start)
+            (should (= (length (flymake-diagnostics)) 2))
+            (let ((icons (config-test-flymake-margin-overlays)))
+              (should (= (length icons) 1))
+              (should (eq (flymake-diagnostic-type
+                           (overlay-get (car icons) 'flymake-diagnostic))
+                          :error))
+              (let* ((carrier (overlay-get (car icons) 'before-string))
+                     (glyph (cadr (get-text-property 0 'display carrier))))
+                ;; The padding must resolve to a text font, not the icon font.
+                (should (equal (face-attribute-merged-with
+                                :family 'unspecified
+                                (get-text-property 1 'face glyph))
+                               (face-attribute 'default :family nil t)))
+                (should (keymapp (get-text-property 0 'keymap glyph)))))
+            (let* ((eol-overlays
+                    (cl-remove-if-not
+                     (lambda (ov) (overlay-get ov 'flymake--eol-overlay))
+                     (overlays-in (point-min) (point-max))))
+                   (display (overlay-get (car eol-overlays) 'display)))
+              (should (= (length eol-overlays) 1))
+              (should (stringp display))
+              (should (string-match-p "First error" display))
+              (should (string-match-p "Second warning" display))
+              (should-not (string-match-p "Detailed explanation" display))
+              (should (= (cl-count ?\n display) 1)))
+            ;; Full messages remain available even when inline text is short.
+            (should (cl-some
+                     (lambda (diag)
+                       (string-match-p "Detailed explanation"
+                                       (flymake-diagnostic-text diag)))
+                     (flymake-diagnostics)))
+            (should (equal (buffer-string) "bad value\n"))
+            (should-not (advice-member-p 'my/flymake--eol-draw-fancy
+                                         'flymake--eol-draw-fancy)))
+        (flymake-mode -1)))))
+
+(defvar-local config-test-flymake-error-report nil)
+(defvar-local config-test-flymake-warning-report nil)
+
+(defun config-test-flymake-error-backend (report-fn &rest _)
+  "Report an error independently of the warning backend."
+  (setq config-test-flymake-error-report report-fn)
+  (funcall report-fn
+           (list (flymake-make-diagnostic (current-buffer) 1 4 :error "Error"))))
+
+(defun config-test-flymake-warning-backend (report-fn &rest _)
+  "Report a warning and a note on separate lines."
+  (setq config-test-flymake-warning-report report-fn)
+  (funcall report-fn
+           (list (flymake-make-diagnostic (current-buffer) 5 10 :warning "Warning")
+                 (flymake-make-diagnostic (current-buffer) 11 15 :note "Note"))))
+
+(put 'config-test-flymake-error-backend 'flymake-always-safe t)
+(put 'config-test-flymake-warning-backend 'flymake-always-safe t)
+
+(ert-deftest config-flymake-promotes-remaining-margin-icon ()
+  (let ((flymake-start-on-flymake-mode nil)
+        (flymake-no-changes-timeout nil))
+    (with-temp-buffer
+      (insert "bad value\nnext line\n")
+      (setq-local flymake-diagnostic-functions
+                  '(config-test-flymake-error-backend
+                    config-test-flymake-warning-backend))
+      (unwind-protect
+          (progn
+            (flymake-mode 1)
+            (flymake-start)
+            (should (= (length (flymake-diagnostics)) 3))
+            (should (= (length (config-test-flymake-margin-overlays)) 2))
+            ;; Only the error backend reports again; the warning overlay is
+            ;; reused, so its previously hidden icon must be restored.
+            (funcall config-test-flymake-error-report nil
+                     :region (cons (point-min) (point-max)))
+            (should (= (length (flymake-diagnostics)) 2))
+            (let ((icons (config-test-flymake-margin-overlays)))
+              (should (= (length icons) 2))
+              (should (cl-some
+                       (lambda (ov)
+                         (eq (flymake-diagnostic-type
+                              (overlay-get ov 'flymake-diagnostic)) :warning))
+                       icons)))
+            (funcall config-test-flymake-warning-report nil
+                     :region (cons (point-min) (point-max)))
+            (should-not (config-test-flymake-margin-overlays)))
+        (flymake-mode -1))
+      (should-not (memq #'flymake-after-change-function after-change-functions)))))
+
+(ert-deftest config-flymake-regroups-icons-after-line-edits ()
+  (let ((flymake-start-on-flymake-mode nil)
+        (flymake-no-changes-timeout nil))
+    (with-temp-buffer
+      (insert "bad value\n")
+      (setq-local flymake-diagnostic-functions '(config-test-flymake-backend))
+      (unwind-protect
+          (progn
+            (flymake-mode 1)
+            (flymake-start)
+            (should (= (length (config-test-flymake-margin-overlays)) 1))
+            (goto-char 4)
+            (insert "\n")
+            (should (= (length (config-test-flymake-margin-overlays)) 2))
+            (delete-region 4 5)
+            (should (= (length (config-test-flymake-margin-overlays)) 1))
+            (should (= (length (flymake-diagnostics)) 2)))
+        (flymake-mode -1)))))
+
+(ert-deftest config-flymake-keeps-margin-icons-and-theme-faces ()
+  (my/flymake-refresh-theme)
+  (should (= (face-attribute
+              (my/flymake-inline-face 'flymake-end-of-line-diagnostics-face)
+              :height) 0.9))
+  (dolist (spec '((flymake-error error flymake-error-echo-at-eol)
+                  (flymake-warning warning flymake-warning-echo-at-eol)
+                  (flymake-note note flymake-note-echo-at-eol)))
+    (should (equal (get (car spec) 'flymake-margin-string)
+                   (alist-get (cadr spec) flymake-margin-indicators-string)))
+    ;; Keep two columns for Nerd Font glyphs without an unsupported U+200A.
+    (let ((icon (car (get (car spec) 'flymake-margin-string))))
+      (should (= (length icon) 2))
+      (should (= (aref icon 1) ?\s))
+      (should (= (string-width icon) 2)))
+    (let ((face (my/flymake-inline-face (caddr spec))))
+      (should (facep face))
+      (should (stringp (face-attribute face :foreground)))
+      (should (eq (face-attribute face :weight) 'medium)))))
 
 (ert-deftest config-org-workflow-still-initializes ()
   (with-temp-buffer

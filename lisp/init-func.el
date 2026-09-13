@@ -652,8 +652,8 @@ use `cm/autoloads-file' as TARGET."
                           :box nil))
     (when (fboundp 'segment-line-refresh-faces)
       (segment-line-refresh-faces))
-    (when (fboundp 'my/flymake-refresh-fancy-theme)
-      (my/flymake-refresh-fancy-theme))))
+    (when (fboundp 'my/flymake-refresh-theme)
+      (my/flymake-refresh-theme))))
 
 (provide 'init-func)
 ;;; init-func.el ends here.

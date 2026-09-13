@@ -2,7 +2,7 @@
 
 2026-09-13 根据当前 `early-init.el → init.el` 的加载关系整理。
 
-此目录不在 `load-path` 中，也不参与启动。累计 24 个旧文件按原路径保留，另有 `helpers.el` 保存旧函数片段。移动前后核对过 SHA-256，文件内容未改写。
+此目录不在 `load-path` 中，也不参与启动。累计 24 个旧文件按原路径保留，另有 `helpers.el` 和 `flymake-fancy.el` 保存旧函数片段。24 个完整文件移动前后核对过 SHA-256，文件内容未改写。
 
 - `config.el`：旧的第二套入口，仍引用已经不存在的 `init-meow.el`、`init-dired.el`、`init-eaf.el`。
 - `lisp/init-base.el`、`init-gc.el`：旧基础设置、另一套保存与 GC 策略。
@@ -12,6 +12,7 @@
 - `lisp/init-abandoned.el`：原有弃用设置备忘。
 - `lisp/init-pdump.el`：旧 dump 实验脚本，按源码表单猜测加载顺序，不适合作为当前双运行时的启动入口。
 - `helpers.el`：从当前 `init-func.el` 移出的未引用 LSP booster helper、重复 GC helper、旧字体实现。
+- `flymake-fancy.el`：未使用的自定义 fancy 渲染、相关主题处理与 Flycheck 设置片段；保留原始函数文本，单色主题覆盖以注释保存。当前配置使用 Flymake 内置行尾显示，已解除对内部渲染函数的覆盖。
 
 这里的文件用来查阅与恢复特定片段，不是一套可以整体重新加载的配置。恢复时先确认对应行为没有在当前入口中重复定义。当前使用的 `init-func.el`、`init-startup.el` 和 `init-theme.el` 仍在根目录的 `lisp/` 下。
 

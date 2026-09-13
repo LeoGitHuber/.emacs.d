@@ -21,7 +21,7 @@
 | Corfu 与 Eglot 的发送延迟都为 0 | 改为 0.1 秒／0.2 秒 | 合并快速输入期间的连续请求 |
 | 多种补全风格混用，Orderless 常被前面的 flex 截获 | 通用候选用 Orderless，Eglot 候选用内置 flex，文件用 partial-completion | 保留 Corfu／Vertico，按候选类型匹配 |
 | 文件扩展名直接指向 TS 模式，绕过语法可用性判断；TSX 指向 TypeScript 模式 | YAML、Lua、TS、TSX 交给 treesit-auto；Scala 增加语法探测与经典模式回退 | 缺少语法时可回退或按原策略提示安装 |
-| `defalias` 覆盖 Flymake 内部渲染函数 | 改为可开关的 advice，保留原函数并检测已有接口 | `M-x my/flymake-fancy-mode` 可以在自定义／内置渲染之间切换 |
+| 定制 Flymake 内部 fancy 渲染，但实际使用普通行尾显示 | 归档未使用的渲染与相关主题代码，改用内置显示；兼容新版 `flymake-inline-diagnostics` | 保留当前行尾外观、边栏图标和主题配色，减少内部接口依赖 |
 | 自动加载更新命令引用不存在的旧目录 | `update-all-autoloads` 调用当前 `generate-autoloads` | 更新命令不再改变工作目录或访问旧路径 |
 | `custom.el` 不存在就中断启动 | 允许该可选文件不存在 | 新检出可以启动 |
 | XeLaTeX 的 SyncTeX 参数拼为 `--syntex=1` | 改为 `-synctex=1` | 修正反向定位参数 |
@@ -55,13 +55,13 @@
 
 ## 验证方式与限制
 
-回归脚本：`tests/run-config-tests.el` 和 `tests/config-tests.el`。覆盖完整配置加载、保留 GC 默认值与文件处理器、LF、延迟加载入口、Markdown 空格、格式化职责、Scala 语法回退、Flymake 开关、Org／LaTeX 模式以及主要键位。
+回归脚本：`tests/run-config-tests.el` 和 `tests/config-tests.el`。覆盖完整配置加载、保留 GC 默认值与文件处理器、LF、延迟加载入口、Markdown 空格、格式化职责、Scala 语法回退、Flymake 实际诊断渲染与主题、Org／LaTeX 模式以及主要键位。
 
 测试使用临时历史目录，并抑制真实 Org-roam 数据库同步。批处理时间仅用于定位启动工作量，不代表 GUI 冷启动耗时。真实窗口中的字体、child frame、LSP 服务响应、Verible 格式化、LaTeX 编译和字典查询需在正常会话中使用验证。
 
 更改在重启后完整生效。重启前保存正在编辑的内容；不要在已有完整会话中反复 `eval-buffer` 整份 `init.el` 来衡量启动性能。
 
-### 本次运行结果
+### GC 清理后的运行结果
 
 | 运行时 | MPS | 结果 | 批处理初始化时间 | 初始化后已加载 feature |
 |---|---|---|---|---|
@@ -69,3 +69,5 @@
 | NeoEmacs 31.1 | 未启用 | 16／16 通过 | 13.312 秒 | 465 |
 
 以上是本次环境的一次批处理观测，不是 GUI 性能基准，也不是两个运行时的性能排名。两个运行时都通过了首次 LaTeX 模式加载、延迟包加载、Org 编辑、LF 和格式化行为检查。`git diff --check` 通过。第三方包仍有原有的过时宏／类型与 lexical-binding 提示，未批量改写这些依赖。
+
+后续 Flymake 专项精简与兼容性验证见 [Flymake 检查记录](flymake-review-2026-09.md)。

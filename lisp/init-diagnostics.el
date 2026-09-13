@@ -122,11 +122,12 @@
 ;; Keep VCS change markers visible across GUI and terminal frames without
 ;; competing with the current Flymake left-margin indicators.
 (setq diff-hl-side 'left)
+;; Use theme backgrounds as solid color bars in the left fringe.
 (when (fboundp 'set-fringe-style)
-  (set-fringe-style '(2 . nil)))
-(setq diff-hl-bmp-max-width 2)
-(setq diff-hl-highlight-function #'diff-hl-highlight-on-fringe
-      diff-hl-highlight-reference-function #'diff-hl-highlight-on-fringe
+  (set-fringe-style '(8 . nil)))
+(setq diff-hl-highlight-function #'diff-hl-highlight-on-fringe-flat
+      diff-hl-highlight-reference-function #'diff-hl-highlight-on-fringe-flat
+      diff-hl-fringe-flat-bmp 'diff-hl-bmp-empty
       diff-hl-draw-borders nil)
 
 (defun my/diff-hl-setup-display-backend ()
@@ -136,10 +137,10 @@
         (when (bound-and-true-p diff-hl-margin-local-mode)
           (diff-hl-margin-local-mode -1))
         (setq-local diff-hl-side 'left
-                    diff-hl-highlight-function #'diff-hl-highlight-on-fringe
-                    diff-hl-highlight-reference-function #'diff-hl-highlight-on-fringe)
+                    diff-hl-highlight-function #'diff-hl-highlight-on-fringe-flat
+                    diff-hl-highlight-reference-function #'diff-hl-highlight-on-fringe-flat)
         (when (fboundp 'set-fringe-style)
-          (set-fringe-style '(2 . nil))))
+          (set-fringe-style '(8 . nil))))
     (when (and (bound-and-true-p diff-hl-margin-local-mode)
                (not (eq diff-hl-side 'right)))
       (diff-hl-margin-local-mode -1))
@@ -149,14 +150,6 @@
 
 (add-hook 'diff-hl-mode-on-hook #'my/diff-hl-setup-display-backend)
 (add-hook 'diff-hl-dired-mode-on-hook #'my/diff-hl-setup-display-backend)
-
-(dolist (face '(diff-hl-insert
-                diff-hl-delete
-                diff-hl-change
-                diff-hl-reference-insert
-                diff-hl-reference-delete
-                diff-hl-reference-change))
-  (set-face-attribute face nil :background nil :box nil))
 
 (global-diff-hl-mode 1)
 (diff-hl-flydiff-mode 1)

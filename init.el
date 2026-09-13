@@ -1704,6 +1704,7 @@
 (require 'ashen)
 (require 'gruber-darker-theme)
 (require 'catppuccin-theme)
+(require 'doric-themes)
 (require 'init-theme)
 
 (with-eval-after-load 'citre

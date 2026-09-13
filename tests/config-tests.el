@@ -17,7 +17,8 @@
     (should (commandp command))))
 
 (ert-deftest config-active-files-have-valid-syntax-and-lf ()
-  (dolist (file (append '("init.el" "early-init.el")
+  (dolist (file (append '("init.el" "early-init.el"
+                         "site-lisp/segment-line/segment-line.el")
                        (directory-files "lisp" t "\\.el\\'")))
     (with-temp-buffer
       (insert-file-contents-literally file)
@@ -292,5 +293,78 @@
   (dolist (entry load-history)
     (when (stringp (car entry))
       (should-not (string-match-p "/archive/legacy/" (car entry))))))
+
+(ert-deftest config-diff-hl-fringe-uses-solid-background-bars ()
+  (with-temp-buffer
+    (insert "added\nchanged\ndeleted\n")
+    (let ((diff-hl-fallback-to-margin nil)
+          (diff-hl-side 'left))
+      (dolist (highlight (list (default-value 'diff-hl-highlight-function)
+                              (default-value 'diff-hl-highlight-reference-function)))
+        (dolist (type '(insert change delete))
+          (let ((overlay (make-overlay (point-min) (point-min))))
+            (funcall highlight overlay type 'empty)
+            (let ((display (get-text-property
+                            0 'display (overlay-get overlay 'before-string))))
+              (should (equal display
+                             `((left-fringe diff-hl-bmp-empty
+                                            ,(intern (format "diff-hl-%s" type)))))))
+            (delete-overlay overlay)))))))
+
+(ert-deftest config-theme-presets-do-not-leak-colors ()
+  (my/ensure-modus-themes)
+  (let ((original-themes (copy-sequence custom-enabled-themes))
+        (user-settings (copy-tree (get 'user 'theme-settings)))
+        (color-icons nerd-icons-color-icons)
+        (palette-overrides (copy-tree modus-themes-common-palette-overrides)))
+    (unwind-protect
+        (dolist (theme '(doric-walnut doric-marble modus-vivendi modus-operandi))
+          (my/apply-theme-preset theme)
+          (let* ((faces '(default mode-line mode-line-active mode-line-inactive
+                         diff-hl-insert diff-hl-change diff-hl-delete))
+                 (baseline (mapcar #'face-all-attributes faces)))
+            (dolist (preset '(matrix gits))
+              (my/apply-theme-preset preset)
+              (should (equal (get 'user 'theme-settings) user-settings))
+              (should (equal modus-themes-common-palette-overrides palette-overrides))
+              (my/apply-theme-preset theme)
+              (should (equal custom-enabled-themes (list theme)))
+              (should (eq nerd-icons-color-icons color-icons))
+              (should (equal (mapcar #'face-all-attributes faces) baseline)))
+            (dolist (face '(segment-line-chip-muted segment-line-chip-accent
+                            segment-line-chip-subtle segment-line-chip-warning
+                            segment-line-chip-error segment-line-state-normal
+                            segment-line-state-insert))
+              (should (eq (face-attribute face :inherit) 'mode-line-active))
+              (let* ((foreground (segment-line--face-color face :foreground))
+                     (background (segment-line--face-color 'mode-line-active :background))
+                     (alpha (if (eq (face-attribute face :weight) 'bold)
+                                segment-line-state-tint-alpha
+                              segment-line-chip-tint-alpha)))
+                (should (equal (face-attribute face :background)
+                               (segment-line--blend foreground background alpha)))))
+            (should (equal (face-attribute 'segment-line-inactive :background nil t)
+                           (face-attribute 'mode-line-inactive :background nil t)))
+            (should (equal (face-attribute 'segment-line-chip-error :foreground nil t)
+                           (segment-line--face-color
+                            'error :foreground
+                            (segment-line--face-color 'mode-line-active :foreground))))))
+      (my/disable-active-themes)
+      (mapc #'enable-theme (reverse original-themes))
+      (my/run-theme-dependent-refresh))))
+
+(ert-deftest config-segment-line-icons-keep-font-without-fixed-colors ()
+  (require 'nerd-icons)
+  (with-temp-buffer
+    (setq buffer-file-name "example.el")
+    (cl-letf (((symbol-function 'segment-line--icons-available-p) (lambda () t)))
+      (let* ((icon (segment-line--icon-for-buffer))
+             (font-face (get-text-property 0 'face icon))
+             (chip (segment-line--chip icon 'segment-line-inactive 0)))
+        (should (stringp (plist-get font-face :family)))
+        (should-not (plist-get font-face :inherit))
+        (should-not (plist-get font-face :foreground))
+        (should (member font-face (get-text-property 0 'face chip)))
+        (should (memq 'segment-line-inactive (get-text-property 0 'face chip)))))))
 
 ;;; config-tests.el ends here

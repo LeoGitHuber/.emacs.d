@@ -123,80 +123,67 @@
   :group 'segment-line)
 
 (defface segment-line-chip-muted
-  '((((background dark)) :inherit mode-line :background "#313244" :foreground "#cdd6f4" :box nil)
-    (((background light)) :inherit mode-line :background "#dce0e8" :foreground "#4c4f69" :box nil))
+  '((t :inherit mode-line-active :box nil))
   "Muted chip face."
   :group 'segment-line)
 
 (defface segment-line-chip-accent
-  '((((background dark)) :inherit mode-line :background "#45475a" :foreground "#f5e0dc" :weight semibold :box nil)
-    (((background light)) :inherit mode-line :background "#bcc0cc" :foreground "#1e66f5" :weight semibold :box nil))
+  '((t :inherit mode-line-active :weight semibold :box nil))
   "Accent chip face."
   :group 'segment-line)
 
 (defface segment-line-chip-subtle
-  '((((background dark)) :inherit mode-line :background "#1e1e2e" :foreground "#a6adc8" :box nil)
-    (((background light)) :inherit mode-line :background "#eff1f5" :foreground "#6c6f85" :box nil))
+  '((t :inherit mode-line-active :box nil))
   "Subtle chip face."
   :group 'segment-line)
 
 (defface segment-line-chip-note
-  '((((background dark)) :inherit mode-line :background "#24304a" :foreground "#89b4fa" :box nil)
-    (((background light)) :inherit mode-line :background "#dce7f7" :foreground "#1d4ed8" :box nil))
+  '((t :inherit mode-line-active :box nil))
   "Informational chip face."
   :group 'segment-line)
 
 (defface segment-line-chip-success
-  '((((background dark)) :inherit mode-line :background "#1d3b2f" :foreground "#a6e3a1" :box nil)
-    (((background light)) :inherit mode-line :background "#d8f3dc" :foreground "#2d6a4f" :box nil))
+  '((t :inherit mode-line-active :box nil))
   "Success chip face."
   :group 'segment-line)
 
 (defface segment-line-chip-warning
-  '((((background dark)) :inherit mode-line :background "#433015" :foreground "#f9e2af" :box nil)
-    (((background light)) :inherit mode-line :background "#fef3c7" :foreground "#92400e" :box nil))
+  '((t :inherit mode-line-active :box nil))
   "Warning chip face."
   :group 'segment-line)
 
 (defface segment-line-chip-error
-  '((((background dark)) :inherit mode-line :background "#492020" :foreground "#f38ba8" :box nil)
-    (((background light)) :inherit mode-line :background "#fee2e2" :foreground "#b91c1c" :box nil))
+  '((t :inherit mode-line-active :box nil))
   "Error chip face."
   :group 'segment-line)
 
 (defface segment-line-state-normal
-  '((((background dark)) :inherit mode-line :background "#1f3a5f" :foreground "#89b4fa" :weight bold :box nil)
-    (((background light)) :inherit mode-line :background "#dbeafe" :foreground "#1d4ed8" :weight bold :box nil))
+  '((t :inherit mode-line-active :weight bold :box nil))
   "Normal-state chip face."
   :group 'segment-line)
 
 (defface segment-line-state-insert
-  '((((background dark)) :inherit mode-line :background "#18352a" :foreground "#a6e3a1" :weight bold :box nil)
-    (((background light)) :inherit mode-line :background "#dcfce7" :foreground "#15803d" :weight bold :box nil))
+  '((t :inherit mode-line-active :weight bold :box nil))
   "Insert-state chip face."
   :group 'segment-line)
 
 (defface segment-line-state-motion
-  '((((background dark)) :inherit mode-line :background "#3f2e17" :foreground "#f9e2af" :weight bold :box nil)
-    (((background light)) :inherit mode-line :background "#fef3c7" :foreground "#a16207" :weight bold :box nil))
+  '((t :inherit mode-line-active :weight bold :box nil))
   "Motion-state chip face."
   :group 'segment-line)
 
 (defface segment-line-state-visual
-  '((((background dark)) :inherit mode-line :background "#40294a" :foreground "#f5c2e7" :weight bold :box nil)
-    (((background light)) :inherit mode-line :background "#f3e8ff" :foreground "#9333ea" :weight bold :box nil))
+  '((t :inherit mode-line-active :weight bold :box nil))
   "Visual-state chip face."
   :group 'segment-line)
 
 (defface segment-line-state-replace
-  '((((background dark)) :inherit mode-line :background "#4b2424" :foreground "#f38ba8" :weight bold :box nil)
-    (((background light)) :inherit mode-line :background "#fee2e2" :foreground "#dc2626" :weight bold :box nil))
+  '((t :inherit mode-line-active :weight bold :box nil))
   "Replace-state chip face."
   :group 'segment-line)
 
 (defface segment-line-state-command
-  '((((background dark)) :inherit mode-line :background "#2d3148" :foreground "#cba6f7" :weight bold :box nil)
-    (((background light)) :inherit mode-line :background "#ede9fe" :foreground "#7c3aed" :weight bold :box nil))
+  '((t :inherit mode-line-active :weight bold :box nil))
   "Command-state chip face."
   :group 'segment-line)
 
@@ -241,169 +228,49 @@
       value)))
 
 (defun segment-line--blend (fg bg alpha)
-  "Blend FG into BG using ALPHA and return a hex color."
-  (let* ((fg-rgb (or (color-name-to-rgb fg) '(1.0 1.0 1.0)))
-         (bg-rgb (or (color-name-to-rgb bg) '(0.0 0.0 0.0)))
-         (mixed (cl-mapcar (lambda (f b)
-                             (+ (* alpha f) (* (- 1 alpha) b)))
-                           fg-rgb bg-rgb)))
-    (color-rgb-to-hex (nth 0 mixed) (nth 1 mixed) (nth 2 mixed) 2)))
-
-(defun segment-line--theme-palette ()
-  "Return a palette derived from the current theme faces."
-  (let* ((default-bg (or (segment-line--face-color 'default :background)
-                         (if (eq (frame-parameter nil 'background-mode) 'light)
-                             "#ffffff"
-                           "#000000")))
-         (default-fg (or (segment-line--face-color 'default :foreground)
-                         (if (eq (frame-parameter nil 'background-mode) 'light)
-                             "#000000"
-                           "#ffffff")))
-         (mode-line-bg (or (segment-line--face-color 'mode-line :background)
-                           default-bg))
-         (mode-line-fg (or (segment-line--face-color 'mode-line :foreground)
-                           default-fg))
-         (mode-line-inactive-bg
-          (or (segment-line--face-color 'mode-line-inactive :background)
-              (segment-line--blend default-bg mode-line-bg 0.65)))
-         (mode-line-inactive-fg
-          (or (segment-line--face-color 'mode-line-inactive :foreground)
-              (segment-line--face-color 'shadow :foreground)
-              (segment-line--blend default-fg mode-line-bg 0.45)))
-         (shadow-fg
-          (or (segment-line--face-color 'shadow :foreground)
-              mode-line-inactive-fg
-              mode-line-fg))
-         (accent-fg
-          (or (segment-line--face-color 'mode-line-emphasis :foreground)
-              (segment-line--face-color 'link :foreground)
-              (segment-line--face-color 'font-lock-keyword-face :foreground)
-              mode-line-fg))
-         (note-fg
-          (or (segment-line--face-color 'link :foreground)
-              (segment-line--face-color 'font-lock-function-name-face :foreground)
-              accent-fg))
-         (success-fg
-          (or (segment-line--face-color 'success :foreground)
-              (segment-line--face-color 'font-lock-string-face :foreground)
-              note-fg))
-         (warning-fg
-          (or (segment-line--face-color 'warning :foreground)
-              (segment-line--face-color 'font-lock-type-face :foreground)
-              success-fg))
-         (error-fg
-          (or (segment-line--face-color 'error :foreground)
-              (segment-line--face-color 'font-lock-warning-face :foreground)
-              warning-fg))
-         (visual-fg
-          (or (segment-line--face-color 'font-lock-keyword-face :foreground)
-              (segment-line--face-color 'region :foreground)
-              accent-fg))
-         (command-fg
-          (or (segment-line--face-color 'font-lock-builtin-face :foreground)
-              visual-fg)))
-    (list :mode-line-bg mode-line-bg
-          :mode-line-fg mode-line-fg
-          :inactive-bg mode-line-inactive-bg
-          :inactive-fg mode-line-inactive-fg
-          :shadow-fg shadow-fg
-          :accent-fg accent-fg
-          :note-fg note-fg
-          :success-fg success-fg
-          :warning-fg warning-fg
-          :error-fg error-fg
-          :visual-fg visual-fg
-          :command-fg command-fg)))
-
-(defun segment-line--apply-chip-face (face fg bg &optional weight)
-  "Apply derived chip FACE using FG, BG, and optional WEIGHT."
-  (set-face-attribute face nil
-                      :inherit 'mode-line
-                      :foreground fg
-                      :background bg
-                      :weight (or weight 'normal)
-                      :box nil))
+  "Blend FG into BG using ALPHA; inherit the background if colors are unknown."
+  (let ((fg-rgb (and fg (color-name-to-rgb fg)))
+        (bg-rgb (and bg (color-name-to-rgb bg))))
+    (if (and fg-rgb bg-rgb)
+        (apply #'color-rgb-to-hex
+               (append (cl-mapcar (lambda (f b) (+ (* alpha f) (* (- 1 alpha) b)))
+                                 fg-rgb bg-rgb)
+                       '(2)))
+      'unspecified)))
 
 (defun segment-line-refresh-faces (&optional _theme)
-  "Recompute Segment Line faces from the current theme."
+  "Tint chips using the theme's active mode-line and semantic colors."
   (interactive)
-  (let* ((palette (segment-line--theme-palette))
-         (mode-line-bg (plist-get palette :mode-line-bg))
-         (mode-line-fg (plist-get palette :mode-line-fg))
-         (inactive-bg (plist-get palette :inactive-bg))
-         (inactive-fg (plist-get palette :inactive-fg))
-         (shadow-fg (plist-get palette :shadow-fg))
-         (accent-fg (plist-get palette :accent-fg))
-         (note-fg (plist-get palette :note-fg))
-         (success-fg (plist-get palette :success-fg))
-         (warning-fg (plist-get palette :warning-fg))
-         (error-fg (plist-get palette :error-fg))
-         (visual-fg (plist-get palette :visual-fg))
-         (command-fg (plist-get palette :command-fg)))
-    (segment-line--apply-chip-face
-     'segment-line-chip-muted
-     mode-line-fg
-     (segment-line--blend mode-line-fg mode-line-bg 0.08))
-    (segment-line--apply-chip-face
-     'segment-line-chip-accent
-     accent-fg
-     (segment-line--blend accent-fg mode-line-bg segment-line-chip-tint-alpha)
-     'semibold)
-    (segment-line--apply-chip-face
-     'segment-line-chip-subtle
-     shadow-fg
-     inactive-bg)
-    (segment-line--apply-chip-face
-     'segment-line-chip-note
-     note-fg
-     (segment-line--blend note-fg mode-line-bg segment-line-chip-tint-alpha))
-    (segment-line--apply-chip-face
-     'segment-line-chip-success
-     success-fg
-     (segment-line--blend success-fg mode-line-bg segment-line-chip-tint-alpha))
-    (segment-line--apply-chip-face
-     'segment-line-chip-warning
-     warning-fg
-     (segment-line--blend warning-fg mode-line-bg segment-line-chip-tint-alpha))
-    (segment-line--apply-chip-face
-     'segment-line-chip-error
-     error-fg
-     (segment-line--blend error-fg mode-line-bg segment-line-chip-tint-alpha))
-    (segment-line--apply-chip-face
-     'segment-line-state-normal
-     note-fg
-     (segment-line--blend note-fg mode-line-bg segment-line-state-tint-alpha)
-     'bold)
-    (segment-line--apply-chip-face
-     'segment-line-state-insert
-     success-fg
-     (segment-line--blend success-fg mode-line-bg segment-line-state-tint-alpha)
-     'bold)
-    (segment-line--apply-chip-face
-     'segment-line-state-motion
-     warning-fg
-     (segment-line--blend warning-fg mode-line-bg segment-line-state-tint-alpha)
-     'bold)
-    (segment-line--apply-chip-face
-     'segment-line-state-visual
-     visual-fg
-     (segment-line--blend visual-fg mode-line-bg segment-line-state-tint-alpha)
-     'bold)
-    (segment-line--apply-chip-face
-     'segment-line-state-replace
-     error-fg
-     (segment-line--blend error-fg mode-line-bg segment-line-state-tint-alpha)
-     'bold)
-    (segment-line--apply-chip-face
-     'segment-line-state-command
-     command-fg
-     (segment-line--blend command-fg mode-line-bg segment-line-state-tint-alpha)
-     'bold)
-    (set-face-attribute 'segment-line-inactive nil
-                        :inherit 'mode-line-inactive
-                        :foreground inactive-fg
-                        :background inactive-bg
-                        :box nil))
+  (let ((foreground (segment-line--face-color 'mode-line-active :foreground))
+        (background (segment-line--face-color 'mode-line-active :background)))
+    (dolist (entry '((segment-line-chip-muted mode-line-active normal)
+                     (segment-line-chip-accent mode-line-active semibold)
+                     (segment-line-chip-subtle mode-line-active normal)
+                     (segment-line-chip-note link normal)
+                     (segment-line-chip-success success normal)
+                     (segment-line-chip-warning warning normal)
+                     (segment-line-chip-error error normal)
+                     (segment-line-state-normal link bold)
+                     (segment-line-state-insert success bold)
+                     (segment-line-state-motion warning bold)
+                     (segment-line-state-visual font-lock-keyword-face bold)
+                     (segment-line-state-replace error bold)
+                     (segment-line-state-command font-lock-builtin-face bold)))
+      (let* ((color (segment-line--face-color (nth 1 entry) :foreground foreground))
+             (alpha (if (eq (nth 2 entry) 'bold)
+                        segment-line-state-tint-alpha
+                      segment-line-chip-tint-alpha)))
+        (set-face-attribute (nth 0 entry) nil
+                          :inherit 'mode-line-active
+                          :foreground (or color 'unspecified)
+                          :background (segment-line--blend color background alpha)
+                          :weight (nth 2 entry)
+                          :box nil))))
+  (set-face-attribute 'segment-line-inactive nil
+                      :inherit 'mode-line-inactive
+                      :foreground 'unspecified :background 'unspecified
+                      :weight 'unspecified
+                      :box nil)
   (force-mode-line-update t))
 
 (defun segment-line--theme-refresh-hook (&rest _)
@@ -512,7 +379,7 @@ Otherwise return VALUE itself."
            (text (and text (format "%s" text)))
            (face (or (plist-get component :face)
                      (if (segment-line--active-p)
-                         'mode-line
+                         'mode-line-active
                        'segment-line-inactive)))
            (prefix (or (plist-get component :prefix) ""))
            (suffix (or (plist-get component :suffix) ""))
@@ -567,9 +434,9 @@ Prefer `nerd-icons' when available."
         (cond
          ((buffer-file-name)
           (nerd-icons-icon-for-file (file-name-nondirectory (buffer-file-name))
-                                    :height 0.9 :v-adjust 0.0))
+                                    :height 0.9 :v-adjust 0.0 :face nil))
          (t
-          (nerd-icons-icon-for-mode major-mode :height 0.9 :v-adjust 0.0)))
+          (nerd-icons-icon-for-mode major-mode :height 0.9 :v-adjust 0.0 :face nil)))
       (error nil))))
 
 (defun segment-line--project-name ()

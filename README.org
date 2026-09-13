@@ -11,6 +11,14 @@ This is a fine-tuned Emacs configuration. It's fast enough to boot up and powerf
 - =lisp/init-startup.el=、=lisp/init-theme.el=：启动页与主题。
 - =archive/legacy/=：已退出启动流程的旧配置，保留供查阅。
 
+* 主题切换
+使用 =M-x my/apply-theme-preset= 选择主题，先关闭旧主题再应用新主题。
+支持 Doric、Modus 等已安装主题，也支持 =gits=、=matrix=、=circadian= 和 =default= 预设。
+
+状态栏保留彩色分段，从主题的 =mode-line-active= 背景及状态颜色生成配色；
+非活动窗口继承 =mode-line-inactive=。diff-hl 使用内置空位图，只显示主题的纯色背景条。
+GITS、Matrix 的覆盖色随预设一起关闭，避免影响随后选择的主题。
+
 * 检查与维护
 配置按 Windows 上的 GNU Emacs 32.0.50 和 NeoEmacs 31.1 检查。
 从本目录执行：

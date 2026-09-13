@@ -5,7 +5,7 @@
 ;;; Code:
 
 (defvar my/theme-preset
-  (if (eq system-type 'windows-nt) 'modus-vivendi 'circadian)
+  (if (eq system-type 'windows-nt) 'doric-walnut 'circadian)
   "Theme preset applied to GUI frames.")
 
 (defconst my/modus-themes-directory
@@ -228,10 +228,14 @@ The `default' entry means disabling all enabled custom themes.")
   (when (fboundp 'my/flymake-refresh-theme)
     (my/flymake-refresh-theme)))
 
+;; Preset overrides belong to removable themes, never the persistent user theme.
+(deftheme my-gits "Extra faces for the GITS preset.")
+(deftheme my-matrix "Extra faces for the Matrix preset.")
+
 (defun my/apply-gits-theme-faces ()
   "Apply the extra face overrides used by the emacs-solo GITS preset."
   (custom-theme-set-faces
-   'user
+   'my-gits
    '(change-log-acknowledgment ((t (:foreground "#00e5ff"))))
    '(change-log-date ((t (:foreground "#00cc77"))))
    '(change-log-name ((t (:foreground "#ffaa00"))))
@@ -266,14 +270,15 @@ The `default' entry means disabling all enabled custom themes.")
 (defun my/apply-gits-theme ()
   "Apply the emacs-solo GITS theme preset."
   (my/ensure-modus-themes)
-  (setq modus-themes-italic-constructs t
-        modus-themes-bold-constructs t
-        modus-themes-mixed-fonts nil
-        modus-themes-prompts '(bold intense)
-        modus-themes-common-palette-overrides my/gits-modus-palette)
   (my/disable-active-themes)
-  (load-theme 'modus-vivendi t)
-  (my/apply-gits-theme-faces))
+  (let ((modus-themes-italic-constructs t)
+        (modus-themes-bold-constructs t)
+        (modus-themes-mixed-fonts nil)
+        (modus-themes-prompts '(bold intense))
+        (modus-themes-common-palette-overrides my/gits-modus-palette))
+    (load-theme 'modus-vivendi t))
+  (my/apply-gits-theme-faces)
+  (enable-theme 'my-gits))
 
 (defun my/apply-matrix-theme-faces ()
   "Apply the extra face overrides used by the emacs-solo Matrix preset."
@@ -294,7 +299,7 @@ The `default' entry means disabling all enabled custom themes.")
         (fg-faint "#005a00")
         (fg-quiet "#003b00"))
     (custom-theme-set-faces
-     'user
+     'my-matrix
      `(default ((t (:background ,bg :foreground ,fg))))
      `(cursor ((t (:background ,fg))))
      `(fringe ((t (:background ,bg :foreground ,fg-faint))))
@@ -451,12 +456,12 @@ The `default' entry means disabling all enabled custom themes.")
      `(diff-indicator-added ((t (:foreground ,fg :weight bold))))
      `(diff-indicator-removed ((t (:foreground ,fg-bright :weight bold))))
      `(diff-indicator-changed ((t (:foreground ,fg-soft :weight bold))))
-     `(diff-hl-insert ((t (:foreground ,fg :background nil))))
-     `(diff-hl-delete ((t (:foreground ,fg-bright :background nil))))
-     `(diff-hl-change ((t (:foreground ,fg-soft :background nil))))
-     `(diff-hl-reference-insert ((t (:foreground ,fg :background nil))))
-     `(diff-hl-reference-delete ((t (:foreground ,fg-bright :background nil))))
-     `(diff-hl-reference-change ((t (:foreground ,fg-soft :background nil))))
+     `(diff-hl-insert ((t (:foreground ,fg :background ,bg-pop))))
+     `(diff-hl-delete ((t (:foreground ,fg-bright :background ,bg-warn))))
+     `(diff-hl-change ((t (:foreground ,fg-soft :background ,bg-select))))
+     `(diff-hl-reference-insert ((t (:foreground ,fg :background ,bg-pop))))
+     `(diff-hl-reference-delete ((t (:foreground ,fg-bright :background ,bg-warn))))
+     `(diff-hl-reference-change ((t (:foreground ,fg-soft :background ,bg-select))))
      `(diff-hl-margin-insert ((t (:foreground ,fg :background nil))))
      `(diff-hl-margin-delete ((t (:foreground ,fg-bright :background nil))))
      `(diff-hl-margin-change ((t (:foreground ,fg-soft :background nil))))
@@ -612,49 +617,33 @@ The `default' entry means disabling all enabled custom themes.")
      `(newsticker-feed-face ((t (:foreground ,fg-bright :height 1.2 :weight bold))))
      `(newsticker-treeview-face ((t (:foreground ,fg))))
      `(newsticker-treeview-selection-face ((t (:background ,bg-select :foreground ,fg-bright)))))
-    (custom-theme-set-faces
-     'user
-     `(segment-line-chip-muted ((t (:background ,bg-pop :foreground ,fg-soft :box nil :weight medium))))
-     `(segment-line-chip-accent ((t (:background ,bg-select :foreground ,fg :box nil :weight semibold))))
-     `(segment-line-chip-subtle ((t (:background ,bg-alt :foreground ,fg-dim :box nil :weight medium))))
-     `(segment-line-chip-note ((t (:background ,bg-pop :foreground ,fg-soft :box nil :weight medium))))
-     `(segment-line-chip-success ((t (:background ,bg-select :foreground ,fg :box nil :weight semibold))))
-     `(segment-line-chip-warning ((t (:background ,bg-warn :foreground ,fg-mid :box nil :weight bold))))
-     `(segment-line-chip-error ((t (:background ,bg-warn-strong :foreground ,fg-bright :box nil :weight bold))))
-     `(segment-line-state-normal ((t (:background ,bg-select :foreground ,fg-soft :box nil :weight bold))))
-     `(segment-line-state-insert ((t (:background ,bg-select :foreground ,fg :box nil :weight bold))))
-     `(segment-line-state-motion ((t (:background ,bg-warn :foreground ,fg-mid :box nil :weight bold))))
-     `(segment-line-state-visual ((t (:background ,bg-strong :foreground ,fg-bright :box nil :weight bold))))
-     `(segment-line-state-replace ((t (:background ,bg-warn-strong :foreground ,fg-bright :box nil :weight bold))))
-     `(segment-line-state-command ((t (:background ,bg-pop :foreground ,fg-soft :box nil :weight bold))))
-     `(segment-line-inactive ((t (:background ,bg-alt :foreground ,fg-faint :box nil :weight normal)))))
     (dolist (face '(nerd-icons-green nerd-icons-lgreen nerd-icons-dgreen))
       (custom-theme-set-faces
-       'user
+       'my-matrix
        `(,face ((t (:foreground ,fg))))))
     (dolist (face '(nerd-icons-red nerd-icons-lred nerd-icons-dred nerd-icons-red-alt
                     nerd-icons-orange nerd-icons-lorange nerd-icons-dorange
                     nerd-icons-pink nerd-icons-lpink nerd-icons-dpink))
       (custom-theme-set-faces
-       'user
+       'my-matrix
        `(,face ((t (:foreground ,fg-bright))))))
     (dolist (face '(nerd-icons-yellow nerd-icons-lyellow nerd-icons-dyellow
                     nerd-icons-maroon nerd-icons-lmaroon nerd-icons-dmaroon))
       (custom-theme-set-faces
-       'user
+       'my-matrix
        `(,face ((t (:foreground ,fg-mid))))))
     (dolist (face '(nerd-icons-blue nerd-icons-blue-alt nerd-icons-lblue nerd-icons-dblue
                     nerd-icons-purple nerd-icons-purple-alt nerd-icons-lpurple nerd-icons-dpurple
                     nerd-icons-cyan nerd-icons-cyan-alt nerd-icons-lcyan nerd-icons-dcyan))
       (custom-theme-set-faces
-       'user
+       'my-matrix
        `(,face ((t (:foreground ,fg-soft))))))
     (dolist (face '(nerd-icons-silver nerd-icons-lsilver nerd-icons-dsilver))
       (custom-theme-set-faces
-       'user
+       'my-matrix
        `(,face ((t (:foreground ,fg-dim))))))
     (when (boundp 'nerd-icons-color-icons)
-      (setq nerd-icons-color-icons nil))
+      (custom-theme-set-variables 'my-matrix '(nerd-icons-color-icons nil)))
     (dolist (face '(company-tooltip company-tooltip-selection company-tooltip-search
                     company-tooltip-search-selection company-tooltip-common
                     company-tooltip-common-selection company-tooltip-annotation
@@ -662,10 +651,10 @@ The `default' entry means disabling all enabled custom themes.")
                     company-preview company-preview-common company-scrollbar-bg
                     company-scrollbar-fg))
       (custom-theme-set-faces
-       'user
+       'my-matrix
        `(,face ((t (:background ,bg-alt :foreground ,fg))))))
     (custom-theme-set-faces
-     'user
+     'my-matrix
      `(company-tooltip-selection ((t (:background ,bg-select :foreground ,fg-bright))))
      `(company-tooltip-common ((t (:foreground ,fg-bright :weight bold))))
      `(company-tooltip-common-selection ((t (:foreground ,fg-bright :weight bold))))
@@ -678,10 +667,10 @@ The `default' entry means disabling all enabled custom themes.")
                     acm-backend-ctags-annotation-face
                     acm-backend-yas-extra-info-face))
       (custom-theme-set-faces
-       'user
+       'my-matrix
        `(,face ((t (:background ,bg-alt :foreground ,fg :box nil))))))
     (custom-theme-set-faces
-     'user
+     'my-matrix
      `(acm-frame-select-face ((t (:background ,bg-select :foreground ,fg-bright :weight semibold))))
      `(acm-frame-border-face ((t (:background ,fg-quiet :foreground ,fg-quiet))))
      `(acm-filter-face ((t (:foreground ,fg-bright :weight bold))))
@@ -704,10 +693,10 @@ The `default' entry means disabling all enabled custom themes.")
                     lsp-treemacs-file-hint
                     lsp-treemacs-file-warn))
       (custom-theme-set-faces
-       'user
+       'my-matrix
        `(,face ((t (:foreground ,fg :weight semibold))))))
     (custom-theme-set-faces
-     'user
+     'my-matrix
      `(lsp-bridge-diagnostics-error-face ((t (:foreground ,fg-bright :weight bold))))
      `(lsp-bridge-diagnostics-warning-face ((t (:foreground ,fg-mid :weight bold))))
      `(lsp-bridge-diagnostics-info-face ((t (:foreground ,fg :weight semibold))))
@@ -723,7 +712,7 @@ The `default' entry means disabling all enabled custom themes.")
                     lsp-face-highlight-write lsp-face-rename
                     eglot-highlight-symbol-face))
       (custom-theme-set-faces
-       'user
+       'my-matrix
        `(,face ((t (:background ,bg-select :foreground ,fg-bright :weight semibold))))))
     (dolist (face '(lsp-face-semhl-constant lsp-face-semhl-variable
                     lsp-face-semhl-function lsp-face-semhl-method
@@ -765,10 +754,10 @@ The `default' entry means disabling all enabled custom themes.")
                     lsp-bridge-semantic-tokens-comment-face
                     lsp-bridge-semantic-tokens-global-scope-face))
       (custom-theme-set-faces
-       'user
+       'my-matrix
        `(,face ((t (:foreground ,fg-mid))))))
     (custom-theme-set-faces
-     'user
+     'my-matrix
      `(lsp-face-semhl-keyword ((t (:foreground ,fg-soft :weight semibold))))
      `(lsp-face-semhl-function ((t (:foreground ,fg :weight bold))))
      `(lsp-face-semhl-method ((t (:foreground ,fg :weight bold))))
@@ -839,28 +828,36 @@ The `default' entry means disabling all enabled custom themes.")
                     paren-face-match paren-face-mismatch paren-face-no-match
                     yas-field-highlight-face))
       (custom-theme-set-faces
-       'user
+       'my-matrix
        `(,face ((t (:background ,bg-select :foreground ,fg-bright :weight semibold))))))
     (custom-theme-set-faces
-     'user
+     'my-matrix
      `(rainbow-delimiters-unmatched-face ((t (:foreground ,fg-bright :weight bold :underline (:color ,fg-bright :style wave)))))
      `(yas-field-highlight-face ((t (:background ,bg-select :foreground ,fg-bright :box (:line-width -1 :color ,fg-quiet))))))))
 
 (defun my/apply-matrix-theme ()
   "Apply the emacs-solo Matrix theme preset."
   (my/ensure-modus-themes)
-  (setq modus-themes-italic-constructs t
-        modus-themes-bold-constructs t
-        modus-themes-mixed-fonts nil
-        modus-themes-prompts '(bold intense)
-        modus-themes-common-palette-overrides my/matrix-modus-palette)
   (my/disable-active-themes)
-  (load-theme 'modus-vivendi t)
-  (my/apply-matrix-theme-faces))
+  (let ((modus-themes-italic-constructs t)
+        (modus-themes-bold-constructs t)
+        (modus-themes-mixed-fonts nil)
+        (modus-themes-prompts '(bold intense))
+        (modus-themes-common-palette-overrides my/matrix-modus-palette))
+    (load-theme 'modus-vivendi t))
+  (my/apply-matrix-theme-faces)
+  (enable-theme 'my-matrix))
 
 (defun my/apply-theme-preset (theme-preset &optional defer-refresh)
   "Apply THEME-PRESET to the current frame set.
+Disable previous themes before applying the selected preset or theme.
 When DEFER-REFRESH is non-nil, skip the final dependent UI refresh."
+  (interactive
+   (list (intern (completing-read
+                  "Theme or preset: "
+                  (append '(default gits matrix circadian)
+                          (custom-available-themes))
+                  nil t nil nil (symbol-name my/theme-preset)))))
   (let ((my/theme-refresh-suppressed t))
     (pcase theme-preset
       ('default

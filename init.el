@@ -901,7 +901,9 @@
   (dolist (hook '(term-mode-hook minibuffer-mode-hook))
     (add-hook hook #'puni-disable-puni-mode)))
 
-;;; Visual Replacement
+;;; Native replacement preview
+(when (boundp 'query-replace-show-preview)
+  (setq query-replace-show-preview 'both))
 (keymap-global-set "C-c r" 'replace-regexp)
 
 (require 'hideshow)

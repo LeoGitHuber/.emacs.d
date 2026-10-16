@@ -199,9 +199,6 @@
 [submodule "site-lisp/nov-xwidget"]
 	path = site-lisp/nov-xwidget
 	url = https://github.com/chenyanming/nov-xwidget.git
-[submodule "site-lisp/visual-regexp.el"]
-	path = site-lisp/visual-regexp.el
-	url = https://github.com/benma/visual-regexp.el.git
 [submodule "site-lisp/meow"]
 	path = site-lisp/meow
 	url = https://github.com/meow-edit/meow.git

@@ -72,9 +72,13 @@
   (put (car spec) 'flymake-margin-string
        (alist-get (cdr spec) flymake-margin-indicators-string)))
 
-;; New Flymake uses `eol'; `t' is only valid for the older option.
+;; Expand the current line with native guides; keep other lines compact.
 (if (boundp 'flymake-inline-diagnostics)
-    (setq flymake-inline-diagnostics 'eol)
+    (progn
+      (setq flymake-inline-diagnostics
+            '((current-line . fancy) (t . short)))
+      (setf (alist-get :inline-fancy flymake-diagnostic-format-alist)
+            '(origin code message)))
   (setq flymake-show-diagnostics-at-end-of-line t))
 
 (defun my/flymake-refresh-margin-icons (&rest _)
@@ -193,19 +197,26 @@
 
 (defun my/flymake-inline-face (face)
   "Resolve FACE to the name used by this Flymake version."
-  (or (get face 'face-alias) face))
+  (or (get face 'face-alias)
+      (and (facep face) face)
+      (alist-get face '((flymake-inline-annotation-face . flymake-end-of-line-diagnostics-face)
+                        (flymake-error-inline . flymake-error-echo-at-eol)
+                        (flymake-warning-inline . flymake-warning-echo-at-eol)
+                        (flymake-note-inline . flymake-note-echo-at-eol)))
+      face))
 
 (defun my/flymake-refresh-theme (&optional _theme)
   "Keep built-in diagnostic text consistent with the current theme."
   (interactive)
-  (set-face-attribute (my/flymake-inline-face 'flymake-end-of-line-diagnostics-face)
+  (set-face-attribute (my/flymake-inline-face 'flymake-inline-annotation-face)
                       nil :inherit 'default :height 0.9 :box nil
                       :foreground 'unspecified :background 'unspecified)
-  (dolist (spec '((flymake-error-echo-at-eol error error)
-                  (flymake-warning-echo-at-eol warning warning)
-                  (flymake-note-echo-at-eol success info)))
+  (dolist (spec '((flymake-error-inline error error)
+                  (flymake-warning-inline warning warning)
+                  (flymake-note-inline success info)))
     (set-face-attribute (my/flymake-inline-face (car spec)) nil
-                        :inherit (cadr spec)
+                        :inherit (list (my/flymake-inline-face 'flymake-inline-annotation-face)
+                                       (cadr spec))
                         :foreground (my/flymake--theme-foreground (caddr spec))
                         :weight 'medium :box nil))
   (set-face-attribute 'flymake-eol-information-face nil

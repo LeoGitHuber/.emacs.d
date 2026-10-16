@@ -4,8 +4,13 @@
 
 ;;; Code:
 
+;; Emacs 32 can scale decoration thickness along with the text size.
+(setq underline-line-scaling-flag t
+      overline-line-scaling-flag t
+      strike-through-line-scaling-flag t)
+
 (defvar my/theme-preset
-  (if (eq system-type 'windows-nt) 'doric-walnut 'circadian)
+  (if (eq system-type 'windows-nt) 'sanityinc-tomorrow-bright 'circadian)
   "Theme preset applied to GUI frames.")
 
 (defconst my/modus-themes-directory

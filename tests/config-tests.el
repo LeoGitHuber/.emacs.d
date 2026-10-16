@@ -126,7 +126,7 @@
                    '(margin left-margin)))))
    (overlays-in (point-min) (point-max))))
 
-(ert-deftest config-flymake-renders-native-eol-diagnostics ()
+(ert-deftest config-flymake-renders-native-inline-diagnostics ()
   ;; Exercise reporting and real overlays: an installed renderer can still be
   ;; bypassed if the configured display style does not select it.
   (let ((flymake-start-on-flymake-mode nil)
@@ -152,6 +152,9 @@
                                 (get-text-property 1 'face glyph))
                                (face-attribute 'default :family nil t)))
                 (should (keymapp (get-text-property 0 'keymap glyph)))))
+            (when (boundp 'flymake-inline-diagnostics)
+              (goto-char 1)
+              (flymake--update-current-eol-overlay))
             (let* ((eol-overlays
                     (cl-remove-if-not
                      (lambda (ov) (overlay-get ov 'flymake--eol-overlay))
@@ -161,8 +164,30 @@
               (should (stringp display))
               (should (string-match-p "First error" display))
               (should (string-match-p "Second warning" display))
-              (should-not (string-match-p "Detailed explanation" display))
-              (should (= (cl-count ?\n display) 1)))
+              (if (boundp 'flymake-inline-diagnostics)
+                  (progn
+                    ;; The current line expands all messages and their origin/code.
+                    (should (string-match-p "Detailed explanation" display))
+                    (should (string-match-p "checker" display))
+                    (should (string-match-p "E42" display))
+                    (should (> (cl-count ?\n display) 1))
+                    ;; Moving off the line restores the most severe summary.
+                    (goto-char (point-max))
+                    (flymake--update-current-eol-overlay)
+                    (setq display (overlay-get (car eol-overlays) 'display))
+                    (should (string-match-p "First error" display))
+                    (should (string-match-p "(1 more)" display))
+                    (should-not (string-match-p "Second warning" display))
+                    (should-not (string-match-p "Detailed explanation" display))
+                    (should (= (cl-count ?\n display) 1))
+                    ;; Returning to the line expands it again, without new reports.
+                    (goto-char 5)
+                    (flymake--update-current-eol-overlay)
+                    (setq display (overlay-get (car eol-overlays) 'display))
+                    (should (string-match-p "Second warning" display))
+                    (should (string-match-p "Detailed explanation" display)))
+                (should-not (string-match-p "Detailed explanation" display))
+                (should (= (cl-count ?\n display) 1))))
             ;; Full messages remain available even when inline text is short.
             (should (cl-some
                      (lambda (diag)

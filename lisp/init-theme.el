@@ -231,7 +231,9 @@ The `default' entry means disabling all enabled custom themes.")
   (when (fboundp 'segment-line-refresh-faces)
     (segment-line-refresh-faces))
   (when (fboundp 'my/flymake-refresh-theme)
-    (my/flymake-refresh-theme)))
+    (my/flymake-refresh-theme))
+  (when (fboundp 'my/navigation-refresh-faces)
+    (my/navigation-refresh-faces)))
 
 ;; Preset overrides belong to removable themes, never the persistent user theme.
 (deftheme my-gits "Extra faces for the GITS preset.")

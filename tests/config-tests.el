@@ -2,6 +2,7 @@
 
 (require 'ert)
 (require 'cl-lib)
+(load (expand-file-name "tests/navigation-tests.el" user-emacs-directory) nil t)
 
 (ert-deftest config-startup-keeps-gc-defaults-and-handlers ()
   (should (= gc-cons-threshold config-test-original-gc))
@@ -336,6 +337,19 @@
                                             ,(intern (format "diff-hl-%s" type)))))))
             (delete-overlay overlay)))))))
 
+(ert-deftest config-navigation-dividers-survive-theme-preferences ()
+  "A theme's custom variable must not remove the sidebar/output boundary."
+  (let ((original-themes (copy-sequence custom-enabled-themes)))
+    (unwind-protect
+        (progn
+          (my/apply-theme-preset 'sanityinc-tomorrow-bright)
+          (should window-divider-mode)
+          (should (= (frame-parameter nil 'bottom-divider-width) 1))
+          (should (= (frame-parameter nil 'right-divider-width) 1)))
+      (my/disable-active-themes)
+      (mapc #'enable-theme (reverse original-themes))
+      (my/run-theme-dependent-refresh))))
+
 (ert-deftest config-theme-presets-do-not-leak-colors ()
   (my/ensure-modus-themes)
   (let ((original-themes (copy-sequence custom-enabled-themes))
@@ -345,8 +359,12 @@
     (unwind-protect
         (dolist (theme '(doric-walnut doric-marble modus-vivendi modus-operandi))
           (my/apply-theme-preset theme)
+          (should window-divider-mode)
           (let* ((faces '(default mode-line mode-line-active mode-line-inactive
-                         diff-hl-insert diff-hl-change diff-hl-delete))
+                         diff-hl-insert diff-hl-change diff-hl-delete
+                         tab-bar tab-bar-tab tab-bar-tab-inactive
+                         tab-line tab-line-tab tab-line-tab-current
+                         tab-line-tab-inactive tab-line-highlight))
                  (baseline (mapcar #'face-all-attributes faces)))
             (dolist (preset '(matrix gits))
               (my/apply-theme-preset preset)

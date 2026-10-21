@@ -565,12 +565,13 @@
     ╭──────────────────────╯ ╭──────────────────────╯
        _v_ vertical            _j_ down
        _h_ horizontal          _k_ up
-       _V_ even vertical       _J_ swap down
-       _H_ even horizontal     _K_ swap up
-       _s_ swap                _L_ swap right
+       _V_ split/focus right   _J_ swap down
+       _H_ split/focus below   _K_ swap up
+       _s_ swap                _L_ transpose
     ╰──────────────────────╮ _l_ right
-       _D_lt   _d_lt all         _o_nly this
-       _B_ur   _b_ur all         _a_ce  this
+       _D_ close window        _o_nly this
+       _d_ close file/window   _B_ balance
+       _b_ bury buffer         _a_ce swap
        _m_inimize              _z_en
        _q_uit                  _f_ullscreen
     "
@@ -594,7 +595,7 @@
   ("V" split-window-right-and-focus)
   ("H" split-window-below-and-focus)
   ("d" kill-buffer-and-window)
-  ("b" kill-buffer-and-window)
+  ("b" bury-buffer)
   ("L" transpose-frame)
   ("K" buf-move-up)
   ("J" buf-move-down)
@@ -799,7 +800,6 @@
    '((scala-mode scala-ts-mode) . ("metals-emacs")))
   ;; (add-to-list 'eglot-server-programs `((LaTeX-mode latex-mode tex-mode) . ("texlab")))
   (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
-  (setq project-vc-extra-root-markers '("Cargo.toml" ".dir-locals.el" "build.mill"))
   (setq eglot-send-changes-idle-time 0.2
         eglot-code-action-indications '(eglot-hint))
   )
@@ -927,7 +927,7 @@
 
 (setq hs-set-up-overlay 'hideshow-folded-overlay-fn)
 
-(keymap-set hs-minor-mode-map "C-<tab>" 'hs-toggle-hiding)
+(keymap-set hs-minor-mode-map "C-c @ TAB" #'hs-toggle-hiding)
 
 (require 'mwim)
 
@@ -1001,16 +1001,11 @@
 
 (keymap-global-set "C-x l" 'consult-line)
 
-;; `consult-buffer' 同时展示 buffer 和虚拟 file source：
-;; - `B SPC' 仅看当前 project 的 buffers
-;; - `F SPC' 仅看当前 project 的 files/recent files
-;; - `p SPC' 同时看当前 project 相关 source（buffers/files/roots）
+;; Workspace file filtering and the global C-x B entry live in init-navigation.
 (keymap-global-set "C-x b" 'consult-buffer)
 
 (with-eval-after-load 'consult
-  (consult-customize consult-buffer :preview-key '(:debounce 0.4 "M-."))
-  (setq consult-project-function
-        (lambda (may-prompt) (or (vc-root-dir) (consult--default-project-function may-prompt)))))
+  (consult-customize consult-buffer :preview-key '(:debounce 0.4 "M-.")))
 
 ;; (add-to-list 'display-buffer-alist
 ;;              '((category . xref-jump)
@@ -1251,12 +1246,10 @@
 (with-eval-after-load 'dirvish
   (setq dirvish-attributes (if my/use-nerd-icons-p
                                '(vc-state nerd-icons git-msg file-size subtree-state collapse file-time)
-                             '(vc-state git-msg file-size subtree-state collapse file-time))
-        dirvish-side-attributes (if my/use-nerd-icons-p
-                                    '(vc-state nerd-icons subtree-state collapse)
-                                  '(vc-state subtree-state collapse))
-        )
+                             '(vc-state git-msg file-size subtree-state collapse file-time)))
   (keymap-set dirvish-mode-map "TAB" #'dirvish-toggle-subtree))
+
+(require 'init-navigation)
 
 (when (and my/use-nerd-icons-p
            (not (bound-and-true-p dirvish-override-dired-mode)))

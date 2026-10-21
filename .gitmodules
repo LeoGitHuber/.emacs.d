@@ -640,3 +640,6 @@
 [submodule "site-lisp/doric-themes"]
 	path = site-lisp/doric-themes
 	url = https://github.com/protesilaos/doric-themes.git
+[submodule "site-lisp/tabspaces"]
+	path = site-lisp/tabspaces
+	url = https://codeberg.org/mclear-tools/tabspaces.git

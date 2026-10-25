@@ -527,7 +527,7 @@
 	path = site-lisp/scala-ts-mode
 	url = https://github.com/KaranAhlawat/scala-ts-mode.git
 [submodule "site-lisp/ETML"]
-	path = site-lisp/ETML
+	path = archive/legacy/ETML
 	url = https://github.com/Kinneyzhang/ETML.git
 [submodule "site-lisp/emacs-kp"]
 	path = site-lisp/emacs-kp
@@ -564,7 +564,7 @@
 	url = https://github.com/Fuco1/justify-kp.git
 [submodule "site-lisp/etaf"]
 	path = site-lisp/etaf
-	url = https://github.com/Kinneyzhang/etaf.git
+	url = https://github.com/emacs-taf/etaf.git
 [submodule "site-lisp/gruber-darker-theme"]
 	path = site-lisp/gruber-darker-theme
 	url = https://github.com/Eason0210/gruber-darker-theme.git
@@ -643,3 +643,24 @@
 [submodule "site-lisp/tabspaces"]
 	path = site-lisp/tabspaces
 	url = https://codeberg.org/mclear-tools/tabspaces.git
+[submodule "site-lisp/markdown-ts-appear"]
+	path = site-lisp/markdown-ts-appear
+	url = https://github.com/Thysrael/markdown-ts-appear.git
+[submodule "site-lisp/ecss"]
+	path = site-lisp/ecss
+	url = https://github.com/emacs-taf/ecss.git
+[submodule "site-lisp/ebox"]
+	path = site-lisp/ebox
+	url = https://github.com/emacs-taf/ebox.git
+[submodule "site-lisp/etaf-ui"]
+	path = site-lisp/etaf-ui
+	url = https://github.com/emacs-taf/etaf-ui.git
+[submodule "site-lisp/etaf-manual"]
+	path = site-lisp/etaf-manual
+	url = https://github.com/emacs-taf/etaf-manual.git
+[submodule "site-lisp/latex-to-svg"]
+	path = site-lisp/latex-to-svg
+	url = https://github.com/alberti42/latex-to-svg.git
+[submodule "site-lisp/latex-to-svg-backend"]
+	path = site-lisp/latex-to-svg-backend
+	url = https://github.com/alberti42/latex-to-svg-backend.git

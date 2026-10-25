@@ -73,6 +73,11 @@ With PROMPT, ask for a project if no context is available."
       consult-project-function #'my/workspace-root
       popper-group-function #'my/workspace-root)
 (global-tab-line-mode -1)
+;; Desktop restores buffer-local modes after init, including old tab lines.
+;; Ignore the old entries on restore and omit this mode from future saves.
+(with-eval-after-load 'desktop
+  (add-to-list 'desktop-minor-mode-handlers '(tab-line-mode . ignore))
+  (add-to-list 'desktop-minor-mode-table '(tab-line-mode nil)))
 
 (defconst my/navigation-padding
   " "

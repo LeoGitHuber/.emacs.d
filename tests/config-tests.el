@@ -11,10 +11,14 @@
     (should (member handler file-name-handler-alist))))
 
 (ert-deftest config-heavy-features-load-on-demand ()
-  (dolist (feature '(org-roam magit dape lexdb init-tex nov calibredb))
+  (dolist (feature '(org-roam magit dape lexdb init-tex nov calibredb
+                    markdown-mode markdown-ts-appear latex-to-svg-for-markdown
+                    latex-to-svg-frontend latex-to-svg-backend
+                    etaf etaf-ui etaf-manual))
     (should-not (memq feature config-test-startup-features)))
   (dolist (command '(magit-status dape org-noter org-roam-node-find
-                    nov-mode calibredb latex-node-find-file))
+                    nov-mode calibredb latex-node-find-file etaf-manual-open
+                    etaf-manual-lookup markdown-ts-appear-mode))
     (should (commandp command))))
 
 (ert-deftest config-active-files-have-valid-syntax-and-lf ()
@@ -46,6 +50,86 @@
     (run-hooks 'before-save-hook)
     (should (equal (buffer-string) "first  \nsecond\n"))
     (should-not (bound-and-true-p delete-trailing-whitespace-mode))))
+
+(ert-deftest config-treesit-migration-includes-companion-grammars ()
+  ;; Bulk installation does not expand recipe dependencies on its own.
+  (dolist (lang treesit-auto-langs)
+    (let ((recipe (cl-find lang treesit-auto-recipe-list
+                           :key #'treesit-auto-recipe-lang)))
+      (should recipe)
+      (dolist (dependency (ensure-list (treesit-auto-recipe-requires recipe)))
+        (should (memq dependency treesit-auto-langs)))))
+  (dolist (lang '(markdown markdown-inline go gomod gowork javascript jsdoc qmljs systemverilog))
+    (should (memq lang treesit-auto-langs)))
+  ;; verilog-ts-mode loads the symbol tree_sitter_systemverilog.
+  (should-not (memq 'verilog treesit-auto-langs)))
+
+(ert-deftest config-javascript-ts-parses-documentation ()
+  (skip-unless (treesit-ready-p '(javascript jsdoc) t))
+  (with-temp-buffer
+    (insert "/** @param {number} n - A number. */\nfunction twice(n) { return n * 2; }\n")
+    (js-ts-mode)
+    (font-lock-ensure)
+    (should (eq major-mode 'js-ts-mode))
+    (should (memq 'javascript (mapcar #'treesit-parser-language (treesit-parser-list))))
+    ;; Embedded comment parsers carry a tag and are omitted by the default list.
+    (should (treesit-parser-list nil 'jsdoc t))))
+
+(ert-deftest config-markdown-without-grammars-keeps-classic-mode ()
+  (let ((treesit-auto-install nil))
+    (cl-letf (((symbol-function 'treesit-ready-p) (lambda (&rest _) nil)))
+      (dolist (file '("notes.md" "README.md"))
+        (with-temp-buffer
+          (setq buffer-file-name (expand-file-name file config-test-sandbox))
+          (insert "# Still editable before installing grammars\n")
+          (set-auto-mode)
+          (should (memq major-mode '(markdown-mode gfm-mode)))
+          (should-not (bound-and-true-p markdown-ts-appear-mode)))))))
+
+(ert-deftest config-markdown-ts-visits-render-without-changing-source ()
+  (skip-unless (and (fboundp 'markdown-ts-mode)
+                    (treesit-ready-p '(markdown markdown-inline) t)))
+  (dolist (file '("notes.md" "README.md"))
+    (with-temp-buffer
+      (setq buffer-file-name (expand-file-name file config-test-sandbox))
+      (let ((source "# Heading\n\nSome **bold** text.  \nNext line.\n"))
+        (insert source)
+        (set-auto-mode)
+        (should (eq major-mode 'markdown-ts-mode))
+        (should markdown-ts-appear-mode)
+        (should markdown-ts-hide-markup)
+        (font-lock-ensure)
+        (should (treesit-parser-list))
+        (should-not (my/hl-line-buffer-p (current-buffer)))
+        (should-not (bound-and-true-p delete-trailing-whitespace-mode))
+        (run-hooks 'before-save-hook)
+        (should (equal (buffer-substring-no-properties (point-min) (point-max))
+                       source))
+        (markdown-ts-appear-mode -1)))))
+
+(ert-deftest config-etaf-manual-loads-and-core-renders ()
+  (require 'etaf-manual)
+  ;; The archived ETML checkout also provides `etaf'; it must never win.
+  (should (file-in-directory-p (symbol-file 'etaf-define-component)
+                              (expand-file-name "site-lisp/etaf" user-emacs-directory)))
+  (let* ((session (etaf-manual-reader-create))
+         (state (etaf-manual-reader-state session)))
+    (should (equal (plist-get state :language) "zh-CN"))
+    (should (> (plist-get state :chapters) 0)))
+  (with-temp-buffer
+    (etaf-manual-reader-mode)
+    (should-not meow-mode)
+    (should-not (my/hl-line-buffer-p (current-buffer)))
+    (should (eq (key-binding (kbd "]")) #'etaf-manual-reader-next-chapter-command)))
+  (with-temp-buffer
+    (unwind-protect
+        (progn
+          (etaf-mount (current-buffer)
+                      (etaf-node 'text nil (list "ETAF smoke test")))
+          (etaf-runtime-flush (etaf-runtime-for-buffer (current-buffer)))
+          (should (string-match-p "ETAF smoke test" (buffer-string))))
+      (when (etaf-runtime-for-buffer (current-buffer))
+        (etaf-unmount (etaf-runtime-for-buffer (current-buffer)))))))
 
 (ert-deftest config-text-cleans-trailing-whitespace ()
   (with-temp-buffer

@@ -2,6 +2,40 @@
 
 (require 'ert)
 (require 'init-navigation)
+(require 'desktop)
+
+(ert-deftest config-navigation-desktop-restore-keeps-one-tab-row ()
+  "Old sessions must not turn the per-buffer tab line back on after init."
+  (let* ((file (make-temp-file "navigation-desktop-" nil ".txt" "fixture\n"))
+         (desktop-io-file-version 208)
+         (super-save-mode nil))
+    (unwind-protect
+        (save-window-excursion
+          ;; Use the same restoration entry point as an existing desktop file.
+          (cl-progv '(desktop-buffer-ok-count desktop-buffer-fail-count
+                      desktop-first-buffer) '(0 0 nil)
+            (desktop-create-buffer 208 file (file-name-nondirectory file)
+                                   'text-mode '(tab-line-mode visual-line-mode)
+                                   1 '(nil nil) nil nil nil))
+          (with-current-buffer (get-file-buffer file)
+            (should visual-line-mode)
+            (should-not global-tab-line-mode)
+            (should-not tab-line-mode)
+            (should-not tab-line-format)
+            (should (memq 'my/tab-bar-format-files tab-bar-format))))
+      (when-let* ((buffer (get-file-buffer file))) (kill-buffer buffer))
+      (delete-file file))))
+
+(ert-deftest config-navigation-desktop-save-omits-per-buffer-tab-mode ()
+  "New sessions must not save tab-line mode, even when enabled manually."
+  (with-temp-buffer
+    (text-mode)
+    (visual-line-mode 1)
+    (tab-line-mode 1)
+    (let* ((desktop-io-file-version 208)
+           (modes (nth 4 (desktop-buffer-info (current-buffer)))))
+      (should (memq 'visual-line-mode modes))
+      (should-not (memq 'tab-line-mode modes)))))
 
 (ert-deftest config-navigation-long-labels-keep-distinguishing-tails ()
   (let ((buffers (mapcar #'generate-new-buffer

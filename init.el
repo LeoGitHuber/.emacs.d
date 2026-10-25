@@ -662,9 +662,21 @@
 
 ;;; Completion / LSP
 
-(require 'markdown-mode)
+;; Retain the classic modes for packages that require their API and for fallback.
+(autoload 'markdown-mode "markdown-mode" nil t)
+(autoload 'gfm-mode "markdown-mode" nil t)
+(with-eval-after-load 'markdown-mode
+  (define-key markdown-mode-map (kbd "C-c C-e") #'markdown-do))
 
-(define-key markdown-mode-map (kbd "C-c C-e") #'markdown-do)
+;; init-treesit selects the native mode when its grammars are available.
+(autoload 'markdown-ts-appear-mode "markdown-ts-appear" nil t)
+(setq markdown-ts-appear-link-icon "↗"
+      markdown-ts-appear-image-icon "▧"
+      markdown-ts-appear-enable-math-preview t
+      markdown-ts-appear-math-renderer 'latex-to-svg
+      latex-to-svg-backend-cache-directory
+      (expand-file-name "latex-to-svg/" no-littering-var-directory))
+(add-hook 'markdown-ts-mode-hook #'markdown-ts-appear-mode)
 
 (add-to-list 'load-path (my/emacs-path "site-lisp/corfu/extensions"))
 (my/refresh-elisp-flymake-byte-compile-load-path)
@@ -1062,30 +1074,7 @@
 (require 'yuck-mode)
 
 (when (treesit-available-p)
-  (require 'treesit-auto)
-  (setq treesit-font-lock-level 4
-        treesit-auto-install 'prompt
-        treesit-auto-langs '(bash
-                             c
-                             cpp
-                             css
-                             go
-                             java
-                             javascript
-                             json
-                             lua
-                             python
-                             ruby
-                             rust
-                             scala
-                             toml
-                             tsx
-                             typescript
-                             yaml
-                             verilog))
-  (treesit-auto-add-to-auto-mode-alist treesit-auto-langs)
-  (global-treesit-auto-mode 1)
-  (require 'qml-ts-mode))
+  (require 'init-treesit))
 
 (defun my/open-pdf-with-external-app ()
   "Open the current PDF with the system's external PDF application."
@@ -1435,6 +1424,15 @@
 ;;; ============================================================================
 ;;; 07 Knowledge Management
 ;;; ============================================================================
+
+;;; ETAF: load the framework only when opening its interactive reference manual.
+(autoload 'etaf-manual-open "etaf-manual" nil t)
+(autoload 'etaf-manual-lookup "etaf-manual" nil t)
+(setq etaf-manual-language "zh-CN"
+      etaf-manual-reader-position-file
+      (expand-file-name "etaf-manual-position.eld" no-littering-var-directory))
+;; Let the application own its keys, including Escape and text-input controls.
+(add-hook 'etaf-manual-reader-mode-hook (lambda () (meow-mode -1)))
 
 ;;; Org
 (dolist (path

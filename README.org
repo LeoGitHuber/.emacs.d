@@ -8,6 +8,7 @@ This is a fine-tuned Emacs configuration. It's fast enough to boot up and powerf
 - =lisp/init-editing.el=：行高亮、尾随空白、Scala 语法回退、大文件保护。
 - =lisp/init-diagnostics.el=：Flymake 内置行尾显示、边栏图标与 diff-hl 外观。
 - =lisp/init-navigation.el=：Dirvish 侧边树、原生文件 tab、Tabspaces 工作区与搜索范围。
+- =lisp/init-treesit.el=：语言语法库清单、缺失提示与迁移后的批量安装入口。
 - =lisp/init-tex.el=：首次使用 AUCTeX LaTeX 模式时加载的格式化、折叠、预览。
 - =lisp/init-startup.el=、=lisp/init-theme.el=：启动页与主题。
 - =archive/legacy/=：已退出启动流程的旧配置，保留供查阅。
@@ -48,7 +49,8 @@ This is a fine-tuned Emacs configuration. It's fast enough to boot up and powerf
 若其他窗口或工作区也使用同一个 buffer，关闭也会影响它们。
 
 工作区隔离目前用于本次 Emacs 会话；跨启动的 buffer 恢复仍由原有 Desktop 配置负责，
-没有同时启用 Tabspaces 的会话保存与自动恢复。第三方子模块保持上游源码，
+没有同时启用 Tabspaces 的会话保存与自动恢复。Desktop 不再保存或恢复旧的
+=tab-line-mode=，避免重新出现第二排同名文件标签。第三方子模块保持上游源码，
 NeoEmacs/Windows 的 Dirvish 临时 buffer 名称兼容修正在 =init-navigation.el= 中。
 逐场景发现、修改后的复查和版本差异见
 [[file:docs/navigation-visual-review-2026-10.org][导航界面审美评审]]。
@@ -61,12 +63,102 @@ NeoEmacs/Windows 的 Dirvish 临时 buffer 名称兼容修正在 =init-navigatio
 非活动窗口继承 =mode-line-inactive=。diff-hl 使用内置空位图，只显示主题的纯色背景条。
 GITS、Matrix 的覆盖色随预设一起关闭，避免影响随后选择的主题。
 
+* Tree-sitter 迁移与安装
+配置和语法库是两部分：Git submodule 提供 Elisp 包，语言语法库则要编译成
+=.dll= / =.so= / =.dylib=，保存在被 Git 忽略的 =tree-sitter/= 中。
+只克隆配置或初始化子模块不会安装这些语法库；换操作系统、CPU 架构或不兼容的
+Tree-sitter ABI 时应重新编译，不要直接搬用旧机器的二进制文件。
+
+** 准备工具链
+使用支持 Tree-sitter 的 GNU Emacs，可用 =M-: (treesit-available-p)= 检查，
+应返回 =t=。另外需要 Git、C/C++ 编译器，并确保 Git 能正常访问 GitHub。
+
+- Windows：安装 [[https://www.msys2.org/][MSYS2]]，在 *MSYS2 UCRT64* 终端执行：
+  #+begin_src sh
+  pacman -S --needed mingw-w64-ucrt-x86_64-gcc
+  #+end_src
+  此命令用于 x86_64 Windows。将 =<MSYS2安装目录>\ucrt64\bin= 加到 Windows
+  PATH，排在 Cygwin 前面，随后重新启动 Emacs。本机目录是
+  =D:\App\msys64\ucrt64\bin=，迁移时换成新机器的路径。
+  不要使用 Cygwin 的 GCC，也不要只加入 MSYS2 的 =usr\bin=。
+- Debian/Ubuntu：=sudo apt install git build-essential=。
+- macOS：=xcode-select --install= 安装命令行开发工具。
+
+** 安装和日常使用
+迁移完成、子模块初始化后，执行：
+#+begin_example
+M-x my/treesit-install-grammars
+#+end_example
+命令先检查工具链，再调用已有的 =treesit-auto-install-all=，最终仍由 Emacs
+内置的 =treesit-install-language-grammar= 下载和编译。内置模式提供的经过测试的
+语法库版本优先使用。已可用的库会跳过；完成后报告仍缺失的语言，网络或编译失败
+可以修复后重跑，详细错误见 =*Warnings*= 和 =*Messages*=。
+装好后重新打开对应文件即可。
+
+清单集中在 =lisp/init-treesit.el= 的 =treesit-auto-langs=，目前共 25 份语法库：
+Bash、C/C++、CSS、Go、HTML、Java、JavaScript、JSON、Lua、Markdown、Python、QML、Ruby、Rust、
+Scala、SystemVerilog/Verilog、TOML、TypeScript/TSX 和 YAML。
+其中 Markdown 安装 =markdown=、=markdown-inline= 两个库；Go 同时安装
+=go=、=gomod=、=gowork=；JavaScript 还需 =jsdoc= 解析文档注释；
+QML 的库名为 =qmljs=，Verilog 为 =systemverilog=。
+只需要部分语言时可缩减该清单，但应保留同一语言的配套库。
+
+不会在每次启动时自动安装整套语法库。日常仍保留 =treesit-auto-install 'prompt=，
+打开相关文件且库缺失时提示安装。已有语法库的升级不会由批量补装命令强制执行；
+需要重编某个库时可使用 =M-x treesit-install-language-grammar=。
+若 Emacs 已加载旧 DLL，先关闭该 Emacs 再进行替换。
+这些操作只负责语法解析；Eglot 的语言服务器是另外安装的工具。
+
+根目录的 [[file:tree-sitter-module/README][tree-sitter-module]] 是另一个上游构建工具，提供 =build.sh=、
+=batch.sh= 和 =langman.py=。它维护的通用清单与本配置不同，例如没有 QML，
+Verilog 配方也不是当前模式使用的 =systemverilog=。本配置的日常补装统一使用上面的
+Emacs 命令，以便采用内置模式指定的语法版本和完整的配套库。
+
+* Markdown 与 ETAF
+这两个包及 ETAF 所需的 =ecss=、=ebox=、=etaf-ui=、=etaf-manual= 都通过
+=site-lisp/= 下的 Git submodule 管理，不再另装 ELPA 副本。
+这些子模块在本机配置为 LF 检出。新机器初始化时也应禁用 Git 的 CRLF 转换：
+#+begin_src sh
+git -c core.autocrlf=false -c core.eol=lf submodule update --init --recursive
+#+end_src
+后续更新也应保持这几个子模块的本地 =core.autocrlf=false=、=core.eol=lf= 设置。
+ETAF 手册会按 LF 解析 Markdown，CRLF 检出会触发“代码块未闭合”错误。
+
+** Markdown：阅读时渲染，编辑时显示源码
+打开 =.md=（包括 =README.md=）自动使用 GNU Emacs 内置的 =markdown-ts-mode=，
+并开启 [[https://github.com/Thysrael/markdown-ts-appear][markdown-ts-appear]]。光标进入元素时显示对应源码，离开后恢复渲染；
+标题、链接、引用、代码块和表格由包的默认设置处理。用
+=M-x markdown-ts-appear-mode= 可以临时切换。硬换行所需的行尾两个空格会保留。
+数学公式预览已开启，通过 =latex-to-svg= 和 =latex-to-svg-backend= 两个子模块，
+调用本机 TeX Live 的 =latex= 与 =dvisvgm= 生成 SVG；缓存位于 =var/latex-to-svg/=。
+行内 =$...$= 和独立公式 =$$...$$= 都会预览，光标进入公式后显示源码供编辑。
+只有 Markdown 自动启用此后端，Org 和 AUCTeX 继续沿用原来的预览配置。
+Mermaid 渲染仍未启用。
+
+迁移后按上面的 Tree-sitter 安装步骤补齐 =markdown=、=markdown-inline=。
+两份库均未安装且未选择安装时，使用原来的 =markdown-mode= / =gfm-mode=。
+若只装了一份，应重新运行批量安装命令补齐；装好后重新打开文件。
+经典 =markdown-mode= 已改成按需加载，保留是因为仓库里的 =lsp-mode=、=lsp-ui=、
+=lsp-bridge=、=lspce=、=blink-search= 仍依赖它；Jupyter 也会可选调用它。
+
+** ETAF：中文交互手册与组件示例
+[[https://github.com/emacs-taf/etaf][ETAF]] 是用 Elisp 构建文本界面的框架。运行 =M-x etaf-manual-open= 打开
+官方中文手册，点击目录或示例的运行按钮即可体验；=M-x etaf-manual-lookup=
+查询 API。手册内 =i= 跳转、=/= 搜索、=[= / =]= 切换章节、=t= 切换配色、=q= 关闭。
+手册使用自己的按键和输入控件，Meow 不再抢占这些操作。
+
+框架仅在使用时加载，阅读位置保存在 =var/etaf-manual-position.eld=。
+原 =site-lisp/ETML= 是同一项目的旧版，包含重名的 =etaf.el=，会遮蔽新版；
+现保留为 =archive/legacy/ETML= 子模块，不进入加载路径。
+
+论坛介绍：[[https://emacs-china.org/t/makedown-ts-appear-treesitter-markdown/32038][markdown-ts-appear]]、
+[[https://emacs-china.org/t/etaf-emacs/32121][ETAF]]。
+
 * 检查与维护
-配置按 Windows 上的 GNU Emacs 32.0.50 和 NeoEmacs 31.1 检查。
+后续配置以 Windows 上的 GNU Emacs 为验证目标，不再测试或处理 NeoEmacs 兼容问题。
 从本目录执行：
 #+begin_src sh
 emacs --batch -Q -l tests/run-config-tests.el
-neomacs --batch -Q -l tests/run-config-tests.el
 #+end_src
 
 测试使用临时状态目录，跳过真实笔记库同步。它覆盖启动和常用模式 hook，

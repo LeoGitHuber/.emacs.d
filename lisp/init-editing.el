@@ -15,7 +15,9 @@
              (bound-and-true-p cursor-face-highlight-mode)
              (derived-mode-p 'eshell-mode 'shell-mode 'term-mode 'eat-mode
                              'messages-buffer-mode 'org-mode 'markdown-mode
-                             'markdown-view-mode 'nov-mode 'tex-mode
+                             'markdown-view-mode 'markdown-ts-mode
+                             'markdown-ts-view-mode 'etaf-manual-reader-mode
+                             'nov-mode 'tex-mode
                              'TeX-mode 'LaTeX-mode)))))
 
 ;; Emacs 31 provides a public buffer predicate for the global mode.
@@ -25,7 +27,8 @@
 
 (defun enable-buffer-local-trailing-whitespace-cleanup ()
   "Clean trailing whitespace except where it has Markdown semantics."
-  (unless (derived-mode-p 'markdown-mode 'markdown-view-mode)
+  (unless (derived-mode-p 'markdown-mode 'markdown-view-mode
+                          'markdown-ts-mode 'markdown-ts-view-mode)
     (delete-trailing-whitespace-mode 1)))
 
 (dolist (hook '(text-mode-hook conf-mode-hook yaml-ts-mode-hook
